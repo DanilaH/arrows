@@ -2,15 +2,23 @@
 
 ## Current milestone
 
+Version 0.4.0 / Android versionCode 8 adds live light/dark themes, an accessible settings dialog on Home/gameplay, persisted independent sound/vibration and RU/EN preferences, and original bounded UI/board/life/hint/victory/award cues. Theme/language changes preserve current attempt, camera, errors, receipt ownership and mode. Separate preference storage cannot overwrite progress. Native system-bar icons follow the theme; physical-device feel remains unverified. See `STAGE_D_PRESENTATION.md`.
+
+Previous trophy milestone:
+
 Version 0.3.3 / Android versionCode 7 keeps the rich versioned monthly trophy art and large viewer, but removes future-collection browsing at the user’s request. Collection only exposes months backed by the installed daily catalogue; the sole 2026 year is a plain label. The frozen reserve of 240 compositions for 2026–2045 remains in source, with no player route into art-only future years. Actual daily tasks still cover all 365 dates of 2026; campaign remains the initial 20-level chapter. See `TROPHY_CATALOG_V2.md` for the current contract.
 
 Save schema 2 adds an earned-design binding map. Pre-update awarded cups retain their original v1 design; new awards atomically bind v2 IDs. Do not edit a published style library to reinterpret existing trophies. Keep the writer/receipt ordering and separate campaign/date ownership intact.
 
 Stage C navigation/records remain: Collection at current level 10, daily at 20, independent attempts/cameras, and three explicitly adapted local medals. League is still open. The temporary control-board review link is on Home and must be removed for release.
 
-D–E remain: themes/sound/settings, native placements/cadence/live earning, dashboard delivery, physical-phone feel/performance/process-kill evidence, release signing and RuStore package. Keep attaching authentic GIFs for visible changes.
+D–E remain: native placements/cadence/live earning, dashboard delivery, physical-phone sound/haptics/system-bar/feel/performance/process-kill evidence, release bank, signing and RuStore package. Keep attaching authentic GIFs for visible changes.
 
 ## Verification
+
+Current 0.4.0: strict typecheck/build and 61 unit tests pass. New settings tests cover hydration races/deadlines, independent persistence, failures/retry and feedback gates; ten browser cases cover real WebAudio cancellation, themes, language, retained attempts and layout. The full 56-case browser suite passes on the presentation implementation; the final ten-case settings rerun also passes, including focus restoration after Home is translated. Exact native artifact/CI evidence follows separately.
+
+Historical 0.3.3:
 
 Current visibility correction: strict typecheck/build, 53 unit tests, all 14 relevant browser cases on phone/desktop and `android:sync` pass locally. [CI 42621244791](https://github.com/DanilaH/arrows/actions/runs/42621244791) passed both jobs on source `9a87bfce9f6859d6f5274840e361fb2a0d7c5ba7`, including all 46 browser cases and Android `assembleDebug`. APK 0.3.3 (7): 10,169,565 bytes; SHA-256 `ac652e9c47283e1201df86e4aad5e61a540fc0b7c6c5a7f827c1a4fd1804c31f`. Every embedded web payload file, shared analytics contract and recorded GIF runtime match. Evidence: `verification/TROPHY_VISIBILITY_BUILD_2026-11-09.json`. The documentation-only follow-up does not alter this runtime.
 
@@ -54,7 +62,7 @@ First CI run `42587117226` failed before native compilation because setup-androi
 
 ## Next work: D and physical acceptance
 
-1. Implement both themes, persisted sound/haptic/language preferences and meaningful UI/board feedback. Do not claim exact original sound without listening/comparing.
+1. Verify 0.4.0 on a named Android device: both themes/insets, system bars, sound/loudness/audio focus, independent vibration switches, return from interruptions and update persistence. Do not claim exact original sound.
 2. Complete native ad placements/interstitial cadence and verify genuine earned delivery, interruption and dashboard events on an exact Android artifact.
 3. Preserve schema 2 migration, per-date identity, combined writer/receipt ordering and reserved rights. Keep stage C local record policies explicit; League remains open.
 4. E: curate the larger bank, extend dated coverage, final identity/icon/splash, production signing and RuStore materials/disclosures.

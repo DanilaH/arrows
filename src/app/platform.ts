@@ -4,7 +4,8 @@ import { GameplayActivityCoordinator, installDocumentVisibilityBlocker } from '@
 import { installNativeLifecycle } from './nativeLifecycle';
 import { createAnalytics } from '../platform/analytics';
 import { createAds } from '../platform/ads';
-import { createHaptics } from '../platform/haptics';
+import { createFeedback } from '../platform/feedback';
+import { SettingsStore } from './settings';
 import { createStorage } from '../platform/storage';
 
 export function createPlatformRuntime(onBack: () => boolean = () => false) {
@@ -19,19 +20,20 @@ export function createPlatformRuntime(onBack: () => boolean = () => false) {
     : () => undefined;
   const analytics = createAnalytics();
   const ads = createAds(activity, analytics);
-  const haptics = createHaptics();
   const storage = createStorage();
-  haptics.setBlocked(activity.isBlocked());
-  const removeFeedbackBlocker = activity.onBlockedChange((blocked) => haptics.setBlocked(blocked));
+  const settings = new SettingsStore(storage, navigator.language);
+  const feedback = createFeedback(activity, settings);
+  const blur = (): void => activity.setBlocked('window-blur', true), focus = (): void => activity.setBlocked('window-blur', false);
+  if (!native) { window.addEventListener('blur', blur); window.addEventListener('focus', focus); }
   return {
     activity,
-    analytics, ads, haptics, storage,
+    analytics, ads, feedback, storage, settings,
     kind: native ? 'android' : 'browser',
     destroy() {
       ads.destroy();
       analytics.destroy();
-      removeFeedbackBlocker();
-      haptics.destroy();
+      if (!native) { window.removeEventListener('blur', blur); window.removeEventListener('focus', focus); }
+      feedback.destroy(); settings.destroy();
       removeVisibility();
       removeNative();
       activity.setGameplayDesired(false);

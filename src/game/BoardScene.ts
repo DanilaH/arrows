@@ -1,4 +1,6 @@
 import Phaser from 'phaser';
+import { boardPalettes } from '../app/theme';
+import type { GameTheme } from '../app/settings';
 import { stepDampedMotion } from '@danilah/mini-games-kit/feel';
 import { controlScenes } from '../content/controlScenes';
 import { Board, type MoveResult } from '../domain/board';
@@ -7,7 +9,7 @@ import { BoardCamera, type Rect } from '../input/camera';
 import type { ViewState } from '../progression/save';
 
 export const GAME_PRESENTABLE_EVENT = 'arrows:scene-authored';
-const colors = { arrow: 0xb4bcfa, exit: 0x6767ff, error: 0xff526d, dot: 0x3e425b, guide: 0x41455f };
+
 interface Flight { path: MeasuredPath; travelled: number; speed: number; age: number; }
 interface DotPulse { point: Point; motion: { x: number; v: number }; }
 export interface SceneOptions { ready(scene: BoardScene): void; dirty(): void; move(result: MoveResult): void; }
@@ -23,6 +25,13 @@ export class BoardScene extends Phaser.Scene {
   public clock = 0;
   public frames = 0;
   public playArea: Rect = { x: 0, y: 0, width: 1, height: 1 };
+  private colors: { arrow: number; exit: number; error: number; dot: number; guide: number } = boardPalettes.dark;
+  private theme: GameTheme = 'dark';
+  public setTheme(theme: GameTheme): void {
+    if (this.theme === theme) return; this.theme = theme;
+    this.colors = boardPalettes[theme]; this.stableDirty = true;
+    if (this.dots) { this.drawDots(); this.changed(); }
+  }
   private world!: Phaser.GameObjects.Container;
   private stable!: Phaser.GameObjects.Graphics;
   private dots!: Phaser.GameObjects.Graphics;
@@ -139,7 +148,7 @@ export class BoardScene extends Phaser.Scene {
     this.preview = null; this.stableDirty = true; this.changed(); this.options.move(result);
   }
   private drawDots(): void {
-    this.dots.clear().fillStyle(colors.dot, 1);
+    this.dots.clear().fillStyle(this.colors.dot, 1);
     for (const point of this.board.level.mask) this.dots.fillCircle(point.x, point.y, .07);
   }
   private stroke(layer: Phaser.GameObjects.Graphics, path: readonly Point[], color: number, width: number, arrowhead: boolean): void {
@@ -165,11 +174,11 @@ export class BoardScene extends Phaser.Scene {
       const path = this.paths.get(arrow.id)!;
       if (this.guides || arrow.id === this.preview) {
         const head = arrow.path.at(-1)!;
-        this.guidesLayer.lineStyle(Math.max(.035, .7 / this.boardCamera.scale), colors.guide, 1);
+        this.guidesLayer.lineStyle(Math.max(.035, .7 / this.boardCamera.scale), this.colors.guide, 1);
         this.guidesLayer.lineBetween(head.x, head.y, head.x + path.direction.x * 150, head.y + path.direction.y * 150);
       }
       const visible = ease < 1 ? extractPath(path, 0, path.length * ease) : arrow.path;
-      this.stroke(this.stable, visible, arrow.id === this.preview || arrow.id === this.hintTarget ? colors.exit : this.board.isError(arrow.id) ? colors.error : colors.arrow, stroke * (arrow.id === this.hintTarget ? 1.65 : 1), ease > .6);
+      this.stroke(this.stable, visible, arrow.id === this.preview || arrow.id === this.hintTarget ? this.colors.exit : this.board.isError(arrow.id) ? this.colors.error : this.colors.arrow, stroke * (arrow.id === this.hintTarget ? 1.65 : 1), ease > .6);
     }
   }
   private excite(point: Point, impulse: number): void {
@@ -214,7 +223,7 @@ export class BoardScene extends Phaser.Scene {
       const view = this.playArea;
       const leftView = dir.x > 0 ? tail.x > view.x + view.width + 30 : dir.x < 0 ? tail.x < view.x - 30 : dir.y > 0 ? tail.y > view.y + view.height + 30 : tail.y < view.y - 30;
       if (flight.travelled >= flight.path.length && leftView) { this.flights.splice(i, 1); continue; }
-      this.stroke(this.active, path, colors.exit, stroke, true);
+      this.stroke(this.active, path, this.colors.exit, stroke, true);
     }
     if (this.board.complete && this.flights.length === 0 && this.victoryAt < 0) this.victoryAt = this.clock;
     if (this.victoryAt >= 0) {
@@ -227,9 +236,9 @@ export class BoardScene extends Phaser.Scene {
       stepDampedMotion(pulse.motion, dt / 1000, { angularFrequency: 24, damping: 9 });
       if (Math.abs(pulse.motion.x) < .008 && Math.abs(pulse.motion.v) < .1) { this.pulses.delete(key); continue; }
       const strength = Math.min(1, Math.abs(pulse.motion.x) * 2);
-      this.reactiveDots.fillStyle(colors.exit, strength).fillCircle(pulse.point.x, pulse.point.y, .07 + Math.max(0, pulse.motion.x) * .18);
+      this.reactiveDots.fillStyle(this.colors.exit, strength).fillCircle(pulse.point.x, pulse.point.y, .07 + Math.max(0, pulse.motion.x) * .18);
     }
     this.overlay.clear();
-    if (!this.reducedMotion && this.errorUntil > this.clock) this.overlay.fillStyle(colors.error, .065 * (this.errorUntil - this.clock) / 230).fillRect(0, 0, this.scale.width, this.scale.height);
+    if (!this.reducedMotion && this.errorUntil > this.clock) this.overlay.fillStyle(this.colors.error, .065 * (this.errorUntil - this.clock) / 230).fillRect(0, 0, this.scale.width, this.scale.height);
   }
 }

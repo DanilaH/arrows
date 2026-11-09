@@ -40,7 +40,14 @@ public class ArrowsFeedbackPlugin extends Plugin {
         } catch (RuntimeException error) { call.reject("Haptics unavailable"); }
     }); }
     @PluginMethod public void cancel(PluginCall call) { handler.post(() -> {
-        generation = Math.max(generation, call.getLong("generation", generation)); stop(); call.resolve();
+        long epoch = call.getLong("generation", generation);
+        if (epoch >= generation) {
+            generation = epoch;
+            // JS generations invalidate earlier requests. A wall-clock cutoff here would
+            // also reject a fresh UI pulse issued immediately after this cancellation.
+            Vibrator v = vibrator(); if (v != null) v.cancel();
+        }
+        call.resolve();
     }); }
     private void stop() { stoppedAt = System.currentTimeMillis(); Vibrator v = vibrator(); if (v != null) v.cancel(); }
     @Override protected void handleOnPause() { foreground = false; stop(); }

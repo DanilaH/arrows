@@ -19,7 +19,7 @@
             <button id="restart" class="circle" type="button" aria-label="Restart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8a8 8 0 1 1-1 7M5 3v6h6"/></svg></button>
           </div>
           <div class="heading"><h1 id="app-title">Стрелки</h1><span id="difficulty"></span></div>
-          <div class="top-spacer"></div>
+          <div class="top-spacer"><button id="game-settings" class="circle settings-button" type="button" aria-label="Settings"></button></div>
         </div>
         <div id="hearts" aria-label="Lives: 3"><span>♥</span><span>♥</span><span>♥</span></div>
         <div id="board-progress" role="progressbar" aria-label="Board progress" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><div id="progress-fill"></div></div>
@@ -33,6 +33,7 @@
       </footer>
       <aside id="save-status" hidden role="status"><span id="save-message"></span><button id="save-retry" type="button"></button><button id="session-play" type="button" hidden></button></aside>
       <dialog id="trophy-viewer" aria-labelledby="trophy-viewer-title"></dialog>
+      <dialog id="settings-dialog" aria-labelledby="settings-title"></dialog>
       <dialog id="game-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
       <section id="startup-preload" data-state="idle" aria-hidden="true">
         <div class="startup-card">

@@ -3,7 +3,9 @@ import { getBackingStoreSize, getRenderPixelRatio } from '@danilah/mini-games-ki
 import { destroyRenderer } from '@danilah/mini-games-kit/phaser';
 import { createStartupPreloadDomView, StartupPreloadController } from '@danilah/mini-games-kit/startup';
 import './style.css';
+import './themes.css';
 import { copy, normalizeGameLanguage } from './app/language';
+import { applyTheme } from './app/theme';
 import { createPlatformRuntime } from './app/platform';
 import { getStartupSnapshot, startupTimeline } from './app/startup';
 import { getInitialGameSize, installViewportRuntime } from './app/viewport';
@@ -56,7 +58,7 @@ const cleanup = (): void => {
 try {
   let handleBack = (): boolean => false;
   const platform = createPlatformRuntime(() => handleBack());
-  reportReady = () => platform.analytics.track('app_ready', { language });
+  reportReady = () => platform.analytics.track('app_ready', { language: platform.settings.state.language });
   disposers.push(() => platform.destroy());
   startupTimeline.mark('platformReady');
   const size = getInitialGameSize();
@@ -71,7 +73,7 @@ try {
     dirty: requestRender,
     move: () => undefined,
     ready(activeScene) {
-      const surface = installGameSurface(activeScene, platform, language);
+      const surface = installGameSurface(activeScene, platform, platform.settings.state.language);
       handleBack = () => surface.onBack();
       disposers.push(() => surface.destroy());
     },
@@ -80,7 +82,9 @@ try {
     type: Phaser.AUTO,
     parent: 'game-root',
     width: backing.width, height: backing.height,
-    backgroundColor: '#1e1e2c',
+    transparent: true,
+    backgroundColor: '#00000000',
+    audio: { noAudio: true },
     scene: [scene],
     scale: { mode: Phaser.Scale.NONE, zoom: 1 / ratio },
     callbacks: {
@@ -98,6 +102,10 @@ try {
     },
   });
   const activeGame = game;
+  disposers.push(platform.settings.subscribe(() => {
+    const settings = platform.settings.state; applyTheme(settings.theme); scene.setTheme(settings.theme);
+    document.documentElement.lang = settings.language; document.title = copy[settings.language].title;
+  }));
   disposers.push(() => destroyRenderer(activeGame));
   const settle = (): void => {
     if (firstFrame && (platform.activity.isBlocked() || !scene.hasMotion())) activeGame.loop.sleep();

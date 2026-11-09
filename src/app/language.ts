@@ -4,6 +4,7 @@ export const normalizeGameLanguage = (value: string | undefined): GameLanguage =
 
 export const copy = {
   ru: {
+    settings: 'Настройки', appearance: 'Оформление', darkTheme: 'Тёмная', lightTheme: 'Светлая', feedback: 'Звук и отклик', sounds: 'Звуки', vibrations: 'Вибрация', language: 'Язык', soundDescription: 'Стрелки, ошибки и победы', vibrationDescription: 'Короткий отклик на действия', previewSound: 'Проверить звук', settingsSaved: 'Настройки сохранены', savingSettings: 'Сохраняем…', loadingSettings: 'Загружаем настройки…', settingsSaveError: 'Не удалось сохранить настройки', retrySettings: 'Повторить', boardProgress: 'Прогресс поля',
     title: 'Стрелки', status: 'Нажимай на свободные стрелки',
     loading: 'Загрузка', preparing: 'Подготавливаем игру…',
     failed: 'Не удалось запустить игру', retry: 'Перезапустите приложение.',
@@ -40,6 +41,7 @@ export const copy = {
     teach_zoom: 'Приблизь поле двумя пальцами. Одним пальцем можно двигать его',
   },
   en: {
+    settings: 'Settings', appearance: 'Appearance', darkTheme: 'Dark', lightTheme: 'Light', feedback: 'Sound & feedback', sounds: 'Sounds', vibrations: 'Vibration', language: 'Language', soundDescription: 'Arrows, mistakes and victories', vibrationDescription: 'Brief feedback for your actions', previewSound: 'Preview sound', settingsSaved: 'Settings saved', savingSettings: 'Saving…', loadingSettings: 'Loading settings…', settingsSaveError: 'Could not save settings', retrySettings: 'Retry', boardProgress: 'Board progress',
     title: 'Arrows', status: 'Tap the arrows with a clear exit',
     loading: 'Loading', preparing: 'Preparing the game…',
     failed: 'Could not start the game', retry: 'Restart the application.',

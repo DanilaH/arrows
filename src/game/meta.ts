@@ -3,20 +3,22 @@ import { collectionOpen, challengeOpen, collectionStats, medals, earnedAwards } 
 import { calendarDate, localDate, monthDates } from '../progression/calendar';
 import { dailyCatalog, dailyMonths, dailyDates } from '../content/daily';
 import { trophy } from './trophies';
+import { settingsIcon } from './settings';
 import { copy, type GameLanguage } from '../app/language';
 
 export type AppScreen = 'home' | 'collection' | 'calendar' | 'game';
 const badge = (key: string): string => `<svg viewBox="0 0 72 84" aria-hidden="true"><path d="m20 51-3 27 19-9 19 9-3-27"/><circle cx="36" cy="32" r="25"/><path d="${key === 'legend' ? 'm21 34 6-12 9 10 9-10 6 12-5 9H26Z' : key === 'perfect' ? 'm23 32 9 9 18-19' : 'M39 15c9 13-4 13 4 24 2-6 7-8 7-8 4 18-23 23-26 8-2-8 8-15 8-15-2 10 3 11 3 11-3-9 6-12 4-20Z'}"/></svg>`;
 
 export function installMetaSurface(progress: ProgressStore, language: GameLanguage, options: {
-  blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; controls(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;
+  blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; controls(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;
 }) {
-  const root = document.querySelector<HTMLElement>('#meta-screen')!, shell = document.querySelector<HTMLElement>('#game-shell')!, text = copy[language];
-  const locale = language === 'ru' ? 'ru-RU' : 'en-US';
-  const monthFormat = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric', timeZone: 'UTC' });
-  const monthNameFormat = new Intl.DateTimeFormat(locale, { month: 'long', timeZone: 'UTC' });
-  const dayFormat = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', timeZone: 'UTC' });
-  const shortDate = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', timeZone: 'UTC' });
+  const root = document.querySelector<HTMLElement>('#meta-screen')!, shell = document.querySelector<HTMLElement>('#game-shell')!;
+  let text = copy[language];
+  let locale = language === 'ru' ? 'ru-RU' : 'en-US';
+  let monthFormat = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric', timeZone: 'UTC' });
+  let monthNameFormat = new Intl.DateTimeFormat(locale, { month: 'long', timeZone: 'UTC' });
+  let dayFormat = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', timeZone: 'UTC' });
+  let shortDate = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', timeZone: 'UTC' });
   let screen: AppScreen = 'home', alive = true, ready = false, busy = false, revision = 0;
   let month = dailyMonths.includes(localDate().slice(0, 7)) ? localDate().slice(0, 7) : dailyMonths[0]!;
   let selected = dailyDates.filter(d => d <= localDate()).at(-1) ?? dailyDates[0]!;
@@ -37,7 +39,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       return `<polyline points="${v.path.map(p => `${p.x},${p.y}`).join(' ')}"/><path d="M${h.x - dx * size - dy * size / 2} ${h.y - dy * size + dx * size / 2}L${h.x} ${h.y}L${h.x - dx * size + dy * size / 2} ${h.y - dy * size - dx * size / 2}"/>`;
     }).join('');
     const difficulty = a.level.difficulty === 'normal' ? '' : a.level.difficulty === 'hard' ? 'Hard' : 'Nightmare';
-    return `<div class="home-layout"><header class="home-heading"><h1 id="menu-title" tabindex="-1">${text.title}</h1><span class="streak-chip">${text.streakShort} ${stats.current}</span></header>
+    return `<div class="home-layout"><header class="home-heading"><h1 id="menu-title" tabindex="-1">${text.title}</h1><div class="home-tools"><span class="streak-chip">${text.streakShort} ${stats.current}</span><button id="home-settings" type="button" class="circle settings-button" aria-label="${text.settings}">${settingsIcon}</button></div></header>
       <section class="home-current"><p class="eyebrow">${text.level} ${save.index + 1}</p><span class="home-difficulty">${difficulty}</span>
       <svg class="home-board" viewBox="-1 -1 ${a.level.width + 1} ${a.level.height + 1}" aria-hidden="true">${paths || '<circle cx="4" cy="6" r="2"/>'}</svg>
       <button id="home-play" class="primary" type="button" ${!ready || busy ? 'disabled' : ''}>${a.started ? text.resume : text.play}<span aria-hidden="true"> →</span></button>
@@ -120,6 +122,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   const click = (event: MouseEvent): void => {
     const target = (event.target as HTMLElement).closest<HTMLButtonElement>('button'); if (!target || target.disabled || busy) return;
     if (target.dataset.nav === 'back') back();
+    else if (target.id === 'home-settings') options.settings();
     else if (target.id === 'home-controls') options.controls();
     else if (target.id === 'home-play') options.enterCampaign();
     else if (target.id === 'home-collection') {
@@ -137,6 +140,13 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   root.addEventListener('click', click); root.addEventListener('change', changeYear);
   trophyDialog.addEventListener('click', viewerClick); trophyDialog.addEventListener('cancel', viewerCancel); show('home');
   return { get screen() { return screen; }, get revision() { return revision; }, refresh, show, back, closeTrophy,
+    setLanguage(value: GameLanguage): void {
+      language = value; text = copy[value]; locale = value === 'ru' ? 'ru-RU' : 'en-US';
+      monthFormat = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric', timeZone: 'UTC' });
+      monthNameFormat = new Intl.DateTimeFormat(locale, { month: 'long', timeZone: 'UTC' });
+      dayFormat = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', timeZone: 'UTC' });
+      shortDate = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', timeZone: 'UTC' }); refresh();
+    },
     ready(): void { ready = true; refresh(); },
     destroy(): void { alive = false; closeTrophy(); root.removeEventListener('click', click); root.removeEventListener('change', changeYear); trophyDialog.removeEventListener('click', viewerClick); trophyDialog.removeEventListener('cancel', viewerCancel); trophyDialog.replaceChildren(); root.replaceChildren(); },
   };

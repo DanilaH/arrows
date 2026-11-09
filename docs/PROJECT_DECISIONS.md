@@ -39,7 +39,7 @@ Implementation moved the native transport/dependency work forward using the exis
 
 ## Assets, language and native identity
 
-RU/EN copy now covers the Stage A game surface/dialogs. Complete campaign localization, both themes and sound remain later work; the native haptic cues need phone tuning. System fonts/procedural geometry avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.3.3 / Android versionCode 7 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
+RU/EN copy now covers the implemented menus, calendar, dialogs, settings and gameplay. Both themes and original short sound cues are connected in 0.4.0; native sound/haptic feel still needs phone tuning. System fonts/procedural geometry avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.4.0 / Android versionCode 8 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
 
 ## Open decisions before corresponding features
 
@@ -80,3 +80,13 @@ An additive schema-2 map binds earned trophy versions/IDs. Existing confirmed aw
 ## Future reward visibility correction, 2026-11-09
 
 The user asked to remove browsing of future trophy collections. Version 0.3.3 exposes only months backed by the installed daily catalogue (currently the twelve months of 2026). The art-only reserve for 2027–2045 stays frozen in source without a player preview route. A lone installed year is a plain label, not a selector. Large artwork inspection remains available from the real calendar. This supersedes the earlier decision to expose future artwork previews; ownership, earned-design bindings and playable date gates are unchanged.
+
+## Stage D presentation and preferences, 2026-11-09
+
+Version 0.4.0 implements both themes, live RU/EN selection, independent sound/vibration preferences, bounded original feedback and a settings dialog reachable from Home/gameplay. The separate `arrows.settings.v1` document never shares the gameplay writer/key. A 1.5 s optional hydration deadline avoids gating readiness; late reads cannot override choices. Invalid/future preference data is preserved until an explicit edit/retry. Failed writes retain the session choice and expose retry.
+
+Default appearance stays dark, language initially follows the device and sound/vibration default on. Switching language/theme does not restart attempts or recreate the renderer. Only fully covered RU/EN are offered. Published trophy art/bindings and the hidden future reserve are unchanged.
+
+Original procedural pluck/glass cues are our own sound direction, not verified reference audio. The pinned kit OneShotPlayer owns one lazy AudioContext, at most six sources and a 90 ms cold-resume deadline. Named groups replace/rate-limit; bounded gains prevent worst-case clipping. No sound event is durably queued. Menu/dialog/settings permit UI feedback; background/ads and browser focus loss permit none. Native App lifecycle, document visibility, ad blockers and AudioContext interruptions gate/cancel feedback; native haptics also cancel independently on pause. No Phaser audio context or continuous audio loop is needed.
+
+Capacitor 8.6.0's bundled SystemBars applies theme-appropriate icons; native EdgeToEdge and CSS inset handling keep the body theme behind the bars. Exact-device system bars, loudness, haptic feel, audio focus, interruption and process-kill acceptance remain required. Native advertising cadence/live earned delivery and dashboard evidence are the next D package.

@@ -6,6 +6,7 @@ const config: CapacitorConfig = {
   webDir: 'dist',
   backgroundColor: '#1e1e2c',
   android: { path: 'native/android' },
+  plugins: { SystemBars: { style: 'DARK', insetsHandling: 'css', initialViewportFitValueHint: 'cover' } },
 };
 
 export default config;

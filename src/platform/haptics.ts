@@ -12,6 +12,7 @@ export function createHaptics() {
   let disposed = false;
   const cancel = (): void => { generation += 1; void native?.cancel({ generation }).catch(() => undefined); };
   return {
+    cancel,
     setEnabled(value: boolean): void { enabled = value; if (!value) cancel(); },
     setBlocked(value: boolean): void { blocked = value; if (value) cancel(); },
     pulse(cue: HapticCue): void {
