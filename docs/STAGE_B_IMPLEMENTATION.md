@@ -47,7 +47,7 @@ The shared TS/native analytics schema now includes first/repeated errors and sep
 - Added UI scenarios cover interrupted victory, one-time Next, partial-state restoration, separate control boards, free refill/mark retention, unavailable rewarded, restart, zoom/rotation, semantic guide tutorial, contextual Hint, invalid-save preservation and write-failure retry.
 - Model tests cover the whole chapter with an independent oracle, ordinary-write/reward races, duplicate receipt/ack recovery, late-attempt reservation, ambiguous persistence, frozen recovery and an abandoned slow initial read.
 - Delivery GIFs come from normal touch interactions in the actual production browser build. Capture script: `tools/capture-stage-b-gifs.mjs`. No forced gameplay state or fake reward is used for the recordings. They are not phone performance evidence.
-- Native compilation/artifact evidence is recorded separately after CI finishes.
+- CI [42600519336](https://github.com/DanilaH/arrows/actions/runs/42600519336) passed both web and Android jobs on `bf3285acdd6457f30ae1ae70daac942229d542f2`. Debug APK: 9,758,477 bytes, SHA-256 `dd5ac5c4133a215533742c6ba5feca7eb9861460c074f9e3dbb23631ebde3cb7`. Downloaded artifact ZIP matched its digest; every embedded web payload file and the shared analytics contract matched the locally recorded build. See `verification/STAGE_B_BUILD_2026-11-09.json`.
 
 ## Next work
 

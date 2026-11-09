@@ -1,0 +1,22 @@
+{
+  "source_commit": "bf3285acdd6457f30ae1ae70daac942229d542f2",
+  "ci_run": 42600519336,
+  "ci_url": "https://github.com/DanilaH/arrows/actions/runs/42600519336",
+  "ci_jobs": {
+    "web": "success",
+    "android": "success"
+  },
+  "artifact_id": 13665572842,
+  "archive_sha256": "9725be55a40e919cb1d36609d3b1c918cb2745276eb7d744563dc37bffc81244",
+  "apk_file": "Arrows-0.2.0-debug.apk",
+  "apk_bytes": 9758477,
+  "apk_sha256": "dd5ac5c4133a215533742c6ba5feca7eb9861460c074f9e3dbb23631ebde3cb7",
+  "matched_web_payload_files": [
+    "assets/index-B3O6ths6.js",
+    "assets/index-CvRdGnDA.css",
+    "assets/web-DNtNQ0Aq.js",
+    "index.html"
+  ],
+  "shared_analytics_contract_matches": true,
+  "limits": "Build and embedded-payload checks; not physical-device lifecycle, FPS, live ads or dashboard delivery evidence."
+}

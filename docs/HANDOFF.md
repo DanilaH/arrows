@@ -10,7 +10,7 @@ Home/Collection/daily and calendar are next (C). Full themes/sound/settings, int
 
 ## Verification
 
-Current B: strict typecheck, production build, 39 unit tests, all 32 browser scenarios and `android:sync` pass locally. Added independent validation covers all 20 campaign fields in three removal orders. Native CI/artifact evidence follows separately. See `STAGE_B_IMPLEMENTATION.md`.
+Current B: strict typecheck, production build, 39 unit tests, all 32 browser scenarios and `android:sync` pass locally. Added independent validation covers all 20 campaign fields in three removal orders. CI [42600519336](https://github.com/DanilaH/arrows/actions/runs/42600519336) passed both jobs on source `bf3285acdd6457f30ae1ae70daac942229d542f2`. APK 0.2.0 (3): 9,758,477 bytes; SHA-256 `dd5ac5c4133a215533742c6ba5feca7eb9861460c074f9e3dbb23631ebde3cb7`. Its embedded web payload and analytics contract match local `dist`. Evidence: `verification/STAGE_B_BUILD_2026-11-09.json`. The subsequent capture-tool/evidence update does not change that runtime payload. See `STAGE_B_IMPLEMENTATION.md`.
 
 Historical A evidence:
 

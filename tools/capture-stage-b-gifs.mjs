@@ -48,11 +48,14 @@ try {
     await prelude({ page, tap, solve });
     const start = Math.max(0, (Date.now() - epoch) / 1000 - .15);
     await page.waitForTimeout(450); await action({ page, tap, solve, ready, canExit }); await page.waitForTimeout(900);
-    const duration = (Date.now() - epoch) / 1000 - start, state = await page.locator('#game-shell').evaluate(s => ({ ...s.dataset }));
+    const duration = (Date.now() - epoch) / 1000 - start + .35, state = await page.locator('#game-shell').evaluate(s => ({ ...s.dataset }));
     const video = page.video(); await context.close(); const input = await video.path(), target = resolve(output, name + '.gif');
+    // Recorder PTS can have a different origin than Node wall time. Anchor the clip at the actual video end.
+    const videoDuration = Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', input], { encoding: 'utf8' }));
+    const videoStart = Math.max(0, videoDuration - duration);
     const filter = 'fps=18,scale=360:-2:flags=lanczos,split[a][b];[a]palettegen=max_colors=96:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=3';
-    execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', String(start), '-t', String(duration), '-i', input, '-vf', filter, '-loop', '0', target]);
-    records.push({ name, file: target, start, duration, endingState: state });
+    execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', String(videoStart), '-t', String(duration), '-i', input, '-vf', filter, '-loop', '0', target]);
+    records.push({ name, file: target, video: input, start: videoStart, duration, endingState: state });
   }
   await capture('arrows-campaign', async () => {}, async ({ page, tap, ready }) => {
     for (const a of levels[0].arrows) { await tap(a); await page.waitForTimeout(450); }
@@ -72,6 +75,7 @@ try {
   }, async ({ page, tap, canExit }) => {
     const blocked = levels[4].arrows.filter(a => !canExit(a, levels[4].arrows)).slice(0, 3); if (blocked.length !== 3) throw Error('Not enough blockers');
     for (const a of blocked) { await tap(a); await page.waitForTimeout(400); }
+    await expect(page.locator('[data-action=free-continue]')).toBeVisible(); await page.waitForTimeout(800);
     await page.locator('[data-action=free-continue]').click(); await page.waitForTimeout(650);
     await tap(blocked[0]); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '3');
   });
