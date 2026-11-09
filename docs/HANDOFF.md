@@ -21,7 +21,9 @@ Scope review on 2026-11-09 expanded `KIT_REUSE.md` to the full production map. T
 
 ## Repository delivery
 
-Prepared branch: `codex/native-platform`. The connected repository `DanilaH/arrows` is empty (GitHub API: size 0, no branches/workflow runs). Automatic approval review rejected the attempted first push to `main`, stating that repository use did not explicitly authorize publishing to the main branch. A safer feature-branch CLI push failed for missing Git transport credentials; the connected GitHub Git-tree API returns 409 for the empty repository, so it cannot create that separate branch before initialization. No remote code or CI result is claimed. The local committed source is preserved for review; the first `main` initialization needs explicit user authorization before retrying the rejected action.
+The user explicitly authorized initialization, main-branch writes and routine repository work on 2026-11-09. `DanilaH/arrows` is initialized and full source is published in `main` at `61749a610cc7079e9643df48fabd7ebbc7f92858`; its tree SHA `46bd617a4378510fbdbd16e5cebbae501bc61265` exactly matches the locally checked source. There is no remaining permission blocker for routine repository work.
+
+First CI run `42587117226` started. Its Android job failed during SDK setup because setup-android's default `tools` package no longer exists; Java compilation had not started. The workflow now requests `platform-tools` explicitly and pins Ubuntu 24.04 instead of following ubuntu-latest. Native verification will be recorded after the corrected run finishes.
 
 ## Next work: stage A
 
