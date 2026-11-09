@@ -1,0 +1,106 @@
+{
+  "source_commit": "9ba1f03d16e5eb6551f8aeea4debbbf0fcf3beb4",
+  "source_tree": "6931c1086c38c48cec9ad057df32050a31659ecd",
+  "ci_run": 42643783152,
+  "ci_url": "https://github.com/DanilaH/arrows/actions/runs/42643783152",
+  "ci_jobs": {
+    "android": "success",
+    "web": "success"
+  },
+  "artifact_id": 13687255350,
+  "archive_sha256": "a9a404f03b5e6cfc69f3dabca8ef0878d60acced54862151811fecaae242b786",
+  "apk_file": "Arrows-0.6.0-debug.apk",
+  "apk_bytes": 10359121,
+  "apk_sha256": "91b5b7e9805fd00cc66392598eec5268f5238257adc84c1c123df36264729eae",
+  "manifest": {
+    "package": "com.danilah.arrows",
+    "versionName": "0.6.0",
+    "versionCode": 10
+  },
+  "matched_web_payload_files": [
+    "assets/index-B8guaVmo.js",
+    "assets/index-D6p4D7Ma.css",
+    "assets/web-CTMe77qD.js",
+    "index.html"
+  ],
+  "analytics_contract_matches": true,
+  "native_config_matches": true,
+  "test_harness_absent_from_apk": true,
+  "gif_runtime_matches_apk": true,
+  "ts_unit_tests": 74,
+  "browser_cases_ci": 68,
+  "browser_application_cases": 62,
+  "browser_test_harness_cases": 6,
+  "browser_local_first_full_run": {
+    "passed": 67,
+    "failed": 1,
+    "failure": "Existing phone control-board case exceeded startup 5-second expectation under concurrent local build/test work; isolated rerun passed."
+  },
+  "browser_local_control_rerun_passed": true,
+  "native_jvm_tests_ci": [
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ],
+  "native_test_artifact_id": 13687180839,
+  "native_test_archive_sha256": "04082d1cf7f9aae588b57861cd833367693294f8de0777b871b582a852e0987c",
+  "campaign_levels": 120,
+  "campaign_arrows": 3717,
+  "original_twenty_fingerprints_match": true,
+  "physical_device_verified": false,
+  "human_difficulty_playtested": false,
+  "real_sdk_earned_verified": false,
+  "appmetrica_dashboard_delivery_verified": false,
+  "gif_provenance": "Actual production browser, RU, 390x844. The genuine unedited 19-win Stage C playthrough migrates normally; c20 and c21 are then earned entirely by ordinary touch input. No fake wins/rewards or pixel edits. Not physical-device evidence.",
+  "gif_entry": "assets/index-B8guaVmo.js",
+  "gif_entry_sha256": "c3f641b6725e37cae32b58782b83ca666b199afc38754b704a1c203c3b464a12",
+  "gifs": [
+    {
+      "file": "arrows-beyond-20.gif",
+      "sha256": "41041646181c324ba3b8862a7792de35d3396255642b1219b3548f5be1b021de",
+      "recorded_frames": 64,
+      "recorded_duration_ms": 5965
+    },
+    {
+      "file": "arrows-new-bent-fields.gif",
+      "sha256": "c2a777aa7a57f4686fd1c7a7a4dbc24c515bdb5163a4fca609eb636597125283",
+      "recorded_frames": 94,
+      "recorded_duration_ms": 7250
+    }
+  ],
+  "additional_browser_qa": {
+    "provenance": "Isolated synthetic save fixtures for QA only; never used in delivery GIFs.",
+    "phoneEmulation": "390x844 DPR2",
+    "reviewedFields": [
+      "c21",
+      "c22",
+      "c23",
+      "c24",
+      "c25",
+      "c26",
+      "c27",
+      "c28",
+      "c29",
+      "c30",
+      "c31",
+      "c32",
+      "c33",
+      "c34",
+      "c35",
+      "c36",
+      "c37",
+      "c38",
+      "c39",
+      "c40"
+    ],
+    "fullClear": {
+      "level": "c50",
+      "arrows": 77,
+      "lives": 3
+    }
+  }
+}
