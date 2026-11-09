@@ -16,6 +16,8 @@ Current Stage A local verification: 28 unit tests, strict typecheck, production 
 
 Playable artifact: `Arrows-0.1.0-debug.apk`, 9,727,229 bytes, SHA-256 `a1051511aab1ed2b0f22fd22ce78aaa44df6c7f8dc437da85cf8427b5fff2254`. GitHub artifact `arrows-debug`, ID `13661669838`. Downloaded archive matched its expected digest; every embedded web payload file matched local `dist`, the shared native analytics contract matched, plugin class descriptors and official demo ad unit strings were present. These are payload/build checks, not live SDK or physical-device acceptance. The APK was also made available as a user-facing download.
 
+The user requested GIFs for visible changes on 2026-11-09; this is a standing delivery preference in `AGENTS.md`. The current delivery includes three short recordings of actual production-browser gameplay: bent extraction/reactive dots, blocked-arrow feedback with repeated taps costing only one life, and Nightmare pinch/pan without phantom moves. These are Chromium mobile-emulation recordings, not physical-phone evidence. Reproduce with `npm run build`, then `node tools/capture-stage-a-gifs.mjs <output-directory>` (requires installed Playwright Chromium and ffmpeg). The script records normal UI/touch interactions and writes a provenance manifest. Keep generated GIFs/videos outside Git and attach the GIFs to the user-facing delivery.
+
 Historical initialization evidence:
 
 - Local `npm run check` after native platform integration: typecheck, 15 unit tests, production build pass.

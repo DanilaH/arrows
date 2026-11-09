@@ -11,4 +11,5 @@ Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the
 - Use real native ads only after a separate integration. Rewarded dismissal is not an earned receipt. Do not simulate monetization or fake account/purchase controls in production.
 - Run `npm run check` and relevant browser checks. Native changes additionally need `npm run android:sync` and Android build/device evidence appropriate to the change.
 - Update handoff and decisions when behavior or verification changes. Browser success is not Android hardware performance evidence.
+- For visibly changed motion, feedback, transitions or gestures, include short GIFs recorded from the actual current build in the delivery. Show enough before/action/after to judge the change; keep framing readable and state browser versus physical-device provenance. Text-only/internal changes do not need GIFs. Preserve this user preference in subsequent handoffs.
 - Keep signed artifacts, keystores, local SDK paths, node_modules, dist and copied native web assets out of Git.
