@@ -1,0 +1,88 @@
+{
+  "source_commit": "4e0d060dad7ee2683c8f32aa912f8e04aba1d78d",
+  "ci_run": 42665600126,
+  "ci_url": "https://github.com/DanilaH/arrows/actions/runs/42665600126",
+  "ci_jobs": {
+    "web": "success",
+    "android": "success"
+  },
+  "artifacts": [
+    {
+      "id": 13697295655,
+      "name": "arrows-debug",
+      "bytes": 9486858,
+      "digest": "sha256:b5e8e4cd51b316affa45434a893e5e39a016b17eb33978a80e82e594af4b033e",
+      "local_name": "arrows-0.7.0-debug.zip"
+    },
+    {
+      "id": 13696192393,
+      "name": "native-unit-results",
+      "bytes": 1353,
+      "digest": "sha256:6081439d3d1611b853ab8967c4afc36204c33ca5f2c987de5604e34c3aa58fa8",
+      "local_name": "arrows-0.7.0-native-tests.zip"
+    }
+  ],
+  "apk_file": "Arrows-0.7.0-debug.apk",
+  "apk_bytes": 10130189,
+  "apk_sha256": "84693a2fa9d521b2b3bda74758993e0ab3e6fd9dfd9a3df862a14b96e4af9e97",
+  "manifest": {
+    "package": "com.danilah.arrows",
+    "versionName": "0.7.0",
+    "versionCode": 11
+  },
+  "matched_web_payload_files": [
+    "assets/index-BlsbsRHp.js",
+    "assets/index-isWaQows.css",
+    "assets/web-Hnw4SFdo.js",
+    "brand-mark.svg",
+    "favicon.svg",
+    "index.html"
+  ],
+  "analytics_contract_matches": true,
+  "native_config_matches": true,
+  "compiled_native_vectors_and_layers_match": [
+    "drawable/arrows_mark.xml",
+    "drawable/arrows_mark_monochrome.xml",
+    "drawable/arrows_splash_mark.xml",
+    "drawable/arrows_icon_background.xml",
+    "mipmap-anydpi/ic_launcher.xml",
+    "mipmap-anydpi/ic_launcher_round.xml",
+    "mipmap-anydpi-v26/ic_launcher.xml",
+    "mipmap-anydpi-v26/ic_launcher_round.xml"
+  ],
+  "capacitor_default_art_absent": true,
+  "control_catalogue_and_harnesses_absent": true,
+  "gif_runtime_matches_apk": true,
+  "ts_unit_tests": 74,
+  "browser_cases_local": 72,
+  "browser_cases_ci": 72,
+  "browser_ordinary_application_cases": 54,
+  "browser_isolated_real_control_cases": 12,
+  "browser_isolated_ad_cases": 6,
+  "native_jvm_tests_ci": [
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ],
+  "physical_device_verified": false,
+  "real_sdk_earned_verified": false,
+  "appmetrica_dashboard_delivery_verified": false,
+  "gif_provenance": "Actual production-browser UI, 390x844 RU, fresh storage, ordinary touch gameplay. JavaScript asset delivery is held for 900 ms for readability, only in the capture route. Not native launch/performance evidence. No fake wins/rewards or edited pixels.",
+  "gif_entry": "assets/index-BlsbsRHp.js",
+  "gif_entry_sha256": "5eb2d7cc12234ae51cc57ad2be4f6bc806495c74af2f0a72622f748b1c15a4f9",
+  "gif_sha256": "92a2cbe568e96842e87aca562ad5c2981b7f3dcfe7ec90864bd0de2b3e31745b",
+  "icon_sha256": "6d4615212f5cccc9f03f745b43267a4ef2f820c6346085891d26b234657fe8dc",
+  "icon_dimensions": [
+    512,
+    512
+  ],
+  "icon_opaque": true,
+  "known_limits": [
+    "Native launcher masks, API-24/25 gradients and OS launch transition need a named-device check.",
+    "The GIF deliberately delays browser JavaScript delivery for readability; it is not native launch timing."
+  ]
+}

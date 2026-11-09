@@ -28,7 +28,7 @@ D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, 
 
 ## Verification
 
-Current 0.7.0: strict typecheck/build and all 74 TS tests pass; generated brand resources and production-catalogue exclusion are checked during build. Full browser/native artifact results are recorded in the identity milestone evidence after the run.
+Current 0.7.0: strict typecheck/build and all 74 TS tests pass; generated brand resources and production-catalogue exclusion are checked during build. All 72 browser cases pass locally (54 ordinary app, twelve isolated real-rendering control cases, six isolated ad cases). [CI 42665600126](https://github.com/DanilaH/arrows/actions/runs/42665600126) passed both jobs on source `4e0d060dad7ee2683c8f32aa912f8e04aba1d78d`, including all 74 TS tests, all 72 browser cases, five JVM tests and Android assembly. APK 0.7.0 (11): 10,130,189 bytes; SHA-256 `84693a2fa9d521b2b3bda74758993e0ab3e6fd9dfd9a3df862a14b96e4af9e97`. Archive digests, manifest, every embedded web file, native configuration/schema, eight compiled native vector/adaptive resources (including generated gradient resources) and the captured GIF runtime match. Default Capacitor art and review catalogue/harnesses are absent. Icon export is an opaque 512×512 PNG of the same canonical SVG. Evidence: `verification/STAGE_E_IDENTITY_BUILD_2026-11-09.json`. This is browser/build evidence; native launcher/launch appearance still needs a named device. The documentation-only follow-up changes no application payload.
 
 Historical 0.6.0:
 
