@@ -20,7 +20,7 @@ D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, 
 
 ## Verification
 
-Current 0.5.0: 71 TS tests and five pure-Java journal tests pass, along with strict typecheck/build, six isolated browser UI integration cases and fourteen actual progression cases. The full 62-case browser suite also passes (56 application cases and six isolated integration-harness cases). Exact native artifact/CI evidence follows separately.
+Current 0.5.0: strict typecheck/build, 71 TS tests, five native JVM journal tests and the full 62-case browser suite pass locally (56 application cases, six isolated UI integration cases). `android:sync` passes. [CI 42639056598](https://github.com/DanilaH/arrows/actions/runs/42639056598) passed both jobs on source `9118df4e3d3d404c39f667f14300769b1230df06`: 71 TS tests, all 62 browser cases, five native JVM tests through Gradle and Android `assembleDebug`. APK 0.5.0 (9): 10,183,133 bytes; SHA-256 `a6077e01bd90b56278fb06a2b60d86216658d34ac341f5e5660b6470c9d18f15`. Both downloaded archive digests were checked; native test XML has zero failures/errors/skips. All embedded web files, native configuration, shared analytics schema and recorded GIF entry match the checked build. The isolated test harness is absent from the APK. Evidence: `verification/STAGE_D_MONETIZATION_BUILD_2026-11-09.json`. The following documentation-only update has the same application runtime. This does not establish real-device SDK fill/earned behavior or AppMetrica dashboard delivery.
 
 Historical 0.4.0:
 

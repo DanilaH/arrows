@@ -1,0 +1,51 @@
+{
+  "source_commit": "9118df4e3d3d404c39f667f14300769b1230df06",
+  "ci_run": 42639056598,
+  "ci_url": "https://github.com/DanilaH/arrows/actions/runs/42639056598",
+  "artifact_id": 13684313366,
+  "archive_sha256": "590636662e39b861d6e357a608ff0b16dd6cdc14e3fb2a1126d6edaab83eda2b",
+  "apk_file": "Arrows-0.5.0-debug.apk",
+  "apk_bytes": 10183133,
+  "apk_sha256": "a6077e01bd90b56278fb06a2b60d86216658d34ac341f5e5660b6470c9d18f15",
+  "matched_web_payload_files": [
+    "assets/index-Bfp--_QY.js",
+    "assets/index-D6p4D7Ma.css",
+    "assets/web-DprFqll5.js",
+    "index.html"
+  ],
+  "analytics_contract_matches": true,
+  "native_config_matches": true,
+  "test_harness_absent_from_apk": true,
+  "gif_runtime_matches_apk": true,
+  "ts_unit_tests": 71,
+  "native_jvm_tests_local": 5,
+  "native_jvm_tests_ci": [
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ],
+  "native_test_artifact_id": 13684478146,
+  "native_test_archive_sha256": "d311e6240e173b2f509fd140a4cea356ce974f7e5b54e6973af3634bf3403e13",
+  "browser_cases_local": 62,
+  "browser_application_cases": 56,
+  "browser_test_harness_cases": 6,
+  "physical_device_verified": false,
+  "real_sdk_earned_verified": false,
+  "appmetrica_dashboard_delivery_verified": false,
+  "gif_provenance": "Actual production browser UI, 390x844 RU. Unedited genuine 19-level playthrough export, normal touch input. Shows the unavailable-video path, not a real ad or SDK earned proof. No injected wins, receipts or fabricated rewards.",
+  "gif_entry": "assets/index-Bfp--_QY.js",
+  "gif_entry_sha256": "7c71c581b4a45e6cd1c560d7d0ea206e27cdce6daa2fecbc733d6ef6d6681023",
+  "gif_sha256": "4b16491d213457d136e0e1e2c4659fa56419cd9dadd11425a9cb020739a081d7",
+  "gif_receipts_before": 0,
+  "gif_receipts_after": 0,
+  "gif_attempt_preserved": true,
+  "ci_jobs": {
+    "android": "success",
+    "web": "success"
+  },
+  "browser_cases_ci": 62
+}
