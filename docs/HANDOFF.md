@@ -12,7 +12,7 @@ D–E remain: themes/sound/settings, native placements/cadence/live earning, das
 
 ## Verification
 
-Current trophy art: strict typecheck/build, 53 unit tests, the full 46 browser cases and a final 14-case preview/navigation rerun pass. Catalogue/legacy-award identity checks and `android:sync` pass. Native CI/artifact evidence follows separately. See `TROPHY_CATALOG_V2.md`.
+Current trophy art: strict typecheck/build, 53 unit tests, the full 46 browser cases and a final 14-case preview/navigation rerun pass. Catalogue/legacy-award identity checks and `android:sync` pass. [CI 42612344212](https://github.com/DanilaH/arrows/actions/runs/42612344212) passed both jobs on source `9c7b585e8b2736875a8471697cf8b6954864f476`, including all 46 browser cases and native `assembleDebug`. APK 0.3.2 (6): 10,169,845 bytes; SHA-256 `0055fd1e0f96ae0568d48ea6bc7b13001169cb7c4d79fb7c81bee5803b88e938`. Embedded web code/analytics contract and both recorded GIF runtimes match. Evidence: `verification/TROPHY_V2_BUILD_2026-11-09.json`. The subsequent documentation-only evidence update has the same runtime payload. See `TROPHY_CATALOG_V2.md`.
 
 Historical year expansion evidence:
 

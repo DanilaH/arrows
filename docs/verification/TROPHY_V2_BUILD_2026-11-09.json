@@ -1,0 +1,53 @@
+{
+  "source_commit": "9c7b585e8b2736875a8471697cf8b6954864f476",
+  "ci_run": 42612344212,
+  "ci_url": "https://github.com/DanilaH/arrows/actions/runs/42612344212",
+  "artifact_id": 13670313490,
+  "archive_sha256": "f399582ad8a3d8323c451959d06f7958fd85c34179654b3aefae047507a62fce",
+  "apk_file": "Arrows-0.3.2-debug.apk",
+  "apk_bytes": 10169845,
+  "apk_sha256": "0055fd1e0f96ae0568d48ea6bc7b13001169cb7c4d79fb7c81bee5803b88e938",
+  "matched_web_payload_files": [
+    "assets/index-B0oe8-Yd.css",
+    "assets/index-CoVR-jaQ.js",
+    "assets/web-fxWz52KP.js",
+    "index.html"
+  ],
+  "gif_runtime_matches_apk": true,
+  "unit_tests": 53,
+  "browser_cases_local": 46,
+  "fixed_dates": 365,
+  "monthly_trophy_designs": 240,
+  "trophy_years": {
+    "first": 2026,
+    "last": 2045
+  },
+  "physical_device_verified": false,
+  "shared_analytics_contract_matches": true,
+  "ci_jobs": {
+    "web": "success",
+    "android": "success"
+  },
+  "browser_cases_ci": 46,
+  "gif_provenance": "Actual production browser UI, RU, 390x844, timestamped page screenshots. Unedited genuine 19-level Stage C playthrough is upgraded normally. Reward appearance is explicitly labelled as preview. No wins/cups/receipts are fabricated; ownership is asserted unchanged. Not physical-phone evidence.",
+  "gif_entry": "assets/index-CoVR-jaQ.js",
+  "gif_entry_sha256": "c19f567beda803f93031a882135f98b95910b56a1bb347dca6600ad7b8e27055",
+  "gif_recordings": [
+    {
+      "file": "arrows-trophies-2026.gif",
+      "sha256": "5c17d56661f03571673d685847edfcf241fd129fb63fb6d622d460dc34d7fce7",
+      "source_frames": 36,
+      "source_duration_ms": 4433,
+      "owned_before": [],
+      "owned_after": []
+    },
+    {
+      "file": "arrows-future-trophies.gif",
+      "sha256": "6b06041eb93c8af46392aa36efe6344c0e6eb3a9107f32b5fdb7c72bace5f0de",
+      "source_frames": 22,
+      "source_duration_ms": 3493,
+      "owned_before": [],
+      "owned_after": []
+    }
+  ]
+}

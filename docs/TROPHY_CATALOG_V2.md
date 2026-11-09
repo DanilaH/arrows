@@ -31,7 +31,8 @@ Previewing years, inspecting artwork or rendering an after-earning appearance ne
 - Strict typecheck/build and 53 unit tests pass. Checks cover the whole frozen catalogue, reproducible parameters, 240 distinct compositions, twelve distinct bowl silhouettes per year, version/identity validation and separate SVG definition scopes.
 - The full 46-case browser suite passes across phone/desktop. The final attachment/forward-year polish also passes all 14 targeted navigation/preview cases. Preview ownership stays unchanged and future years expose no invented tasks.
 - Existing whole-month model checks verify v2 binding commit/reload, deterministic v1 migration and rejection of unknown awarded designs, alongside the earlier date/reward/save invariants.
-- `android:sync` passes. Native CI/artifact evidence follows separately.
+- `android:sync` and both jobs in [CI 42612344212](https://github.com/DanilaH/arrows/actions/runs/42612344212) pass on source `9c7b585e8b2736875a8471697cf8b6954864f476`, including all 46 browser cases and Android `assembleDebug`.
+- APK 0.3.2 (6): 10,169,845 bytes; SHA-256 `0055fd1e0f96ae0568d48ea6bc7b13001169cb7c4d79fb7c81bee5803b88e938`. The downloaded archive digest was checked; all embedded web payload files and the native analytics contract match source/build. Both GIFs use that exact entry payload. Evidence: `verification/TROPHY_V2_BUILD_2026-11-09.json`. This documentation-only follow-up does not alter the verified runtime.
 - User GIFs capture the real production browser UI using the unedited genuine 19-level Stage C playthrough export. Full-size unowned art is explicitly labelled as a preview; ownership is asserted unchanged. Capture tool: `tools/capture-trophy-gifs.mjs`.
 
 This does not establish physical Android frame pacing, live ad SDK behavior or final store readiness. D–E remain on the product roadmap.
