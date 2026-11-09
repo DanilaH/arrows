@@ -161,20 +161,16 @@ progress::-moz-progress-bar { background: #9398f1; border-radius: 8px; }
 .month-trophy strong { font-size: 12px; line-height: 18px; min-height: 18px; }
 .month-trophy small { font-size: 10px; line-height: 16px; min-height: 16px; margin: 3px 0 10px; }
 .month-trophy b { position: absolute; right: 9px; top: 5px; font-size: 18px; }
-.month-trophy.future { opacity: .65; }
 .trophy-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .trophy-year { margin: 0; }
 #trophy-year { min-height: 40px; padding: 8px 28px 8px 14px; border-radius: 14px; border: 1px solid #444c67; background: #292f46; color: #c1c9ed; font: inherit; font-size: 14px; cursor: pointer; }
-.future-collection-note { margin: -8px 0 18px; color: #8f9aba; font-size: 12px; line-height: 1.5; }
 .month-trophy { border: 1px solid #3a425b; background: linear-gradient(150deg, #30364b, #242b3e); box-shadow: inset 0 1px 0 #ffffff06; padding: 10px 7px 13px; }
-.month-trophy.future { opacity: 1; }
 .month-trophy.earned { border-color: #8a744c; background: linear-gradient(150deg, #3e3b42, #2b2c3d); }
 .month-trophy .trophy { width: 100%; max-width: 100px; height: 116px; }
 .month-trophy .trophy-legacy { max-width: 72px; height: 116px; }
 .month-trophy strong { color: #c5c9e1; font-weight: 550; }
 .month-trophy small { color: #8f9ab9; }
 .month-trophy.earned small { color: #dec18c; }
-.future-progress { display: block; height: 4px; }
 .trophy-inspect { display: inline-flex; align-items: center; flex-direction: column; padding: 0 22px; background: transparent; }
 .month-award .trophy-rich { width: 148px; height: 170px; }
 .trophy-inspect > span { font-size: 11px; color: #9aa7ce; border-bottom: 1px dotted #6e7a9f; line-height: 1.7; margin-top: 2px; }

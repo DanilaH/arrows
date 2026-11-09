@@ -39,7 +39,7 @@ Implementation moved the native transport/dependency work forward using the exis
 
 ## Assets, language and native identity
 
-RU/EN copy now covers the Stage A game surface/dialogs. Complete campaign localization, both themes and sound remain later work; the native haptic cues need phone tuning. System fonts/procedural geometry avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.3.2 / Android versionCode 6 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
+RU/EN copy now covers the Stage A game surface/dialogs. Complete campaign localization, both themes and sound remain later work; the native haptic cues need phone tuning. System fonts/procedural geometry avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.3.3 / Android versionCode 7 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
 
 ## Open decisions before corresponding features
 
@@ -76,3 +76,7 @@ Fields are generated/validated offline from a numeric YYYYMMDD seed, silhouette/
 The user explicitly approved richer/more varied reward artwork with a large future reserve. The frozen v2 catalogue covers 240 month/year designs for 2026–2045. It combines curated compatible silhouettes, handles, stems, pedestals, surface patterns, seasonal emblems and material/gem palettes. No raster asset service or runtime per-player randomness is required.
 
 An additive schema-2 map binds earned trophy versions/IDs. Existing confirmed awards without that map migrate to their original v1 visuals; newly earned cups bind v2 in the same authoritative win transaction. Published art/style versions are immutable. Viewing a future collection or after-earning appearance is explicitly a preview and grants nothing. The puzzle catalogue remains 2026; future years do not expose fictional playable tasks.
+
+## Future reward visibility correction, 2026-11-09
+
+The user asked to remove browsing of future trophy collections. Version 0.3.3 exposes only months backed by the installed daily catalogue (currently the twelve months of 2026). The art-only reserve for 2027–2045 stays frozen in source without a player preview route. A lone installed year is a plain label, not a selector. Large artwork inspection remains available from the real calendar. This supersedes the earlier decision to expose future artwork previews; ownership, earned-design bindings and playable date gates are unchanged.

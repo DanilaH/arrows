@@ -2,7 +2,7 @@
 
 ## Current milestone
 
-Version 0.3.2 / Android versionCode 6 adds rich versioned monthly trophy art: a frozen catalogue of 240 distinct compositions for 2026–2045, a Collection year selector and a large trophy viewer. Future years are explicitly artwork previews with no fake Play action. Actual daily tasks still cover all 365 dates of 2026; campaign remains the initial 20-level chapter. See `TROPHY_CATALOG_V2.md` for the current contract.
+Version 0.3.3 / Android versionCode 7 keeps the rich versioned monthly trophy art and large viewer, but removes future-collection browsing at the user’s request. Collection only exposes months backed by the installed daily catalogue; the sole 2026 year is a plain label. The frozen reserve of 240 compositions for 2026–2045 remains in source, with no player route into art-only future years. Actual daily tasks still cover all 365 dates of 2026; campaign remains the initial 20-level chapter. See `TROPHY_CATALOG_V2.md` for the current contract.
 
 Save schema 2 adds an earned-design binding map. Pre-update awarded cups retain their original v1 design; new awards atomically bind v2 IDs. Do not edit a published style library to reinterpret existing trophies. Keep the writer/receipt ordering and separate campaign/date ownership intact.
 
@@ -12,7 +12,9 @@ D–E remain: themes/sound/settings, native placements/cadence/live earning, das
 
 ## Verification
 
-Current trophy art: strict typecheck/build, 53 unit tests, the full 46 browser cases and a final 14-case preview/navigation rerun pass. Catalogue/legacy-award identity checks and `android:sync` pass. [CI 42612344212](https://github.com/DanilaH/arrows/actions/runs/42612344212) passed both jobs on source `9c7b585e8b2736875a8471697cf8b6954864f476`, including all 46 browser cases and native `assembleDebug`. APK 0.3.2 (6): 10,169,845 bytes; SHA-256 `0055fd1e0f96ae0568d48ea6bc7b13001169cb7c4d79fb7c81bee5803b88e938`. Embedded web code/analytics contract and both recorded GIF runtimes match. Evidence: `verification/TROPHY_V2_BUILD_2026-11-09.json`. The subsequent documentation-only evidence update has the same runtime payload. See `TROPHY_CATALOG_V2.md`.
+Current visibility correction: strict typecheck/build, 53 unit tests, all 14 relevant browser cases on phone/desktop and `android:sync` pass locally. CI and exact 0.3.3 APK evidence follow separately.
+
+Historical 0.3.2 trophy art: strict typecheck/build, 53 unit tests, the full 46 browser cases and a final 14-case preview/navigation rerun pass. Catalogue/legacy-award identity checks and `android:sync` pass. [CI 42612344212](https://github.com/DanilaH/arrows/actions/runs/42612344212) passed both jobs on source `9c7b585e8b2736875a8471697cf8b6954864f476`, including all 46 browser cases and native `assembleDebug`. APK 0.3.2 (6): 10,169,845 bytes; SHA-256 `0055fd1e0f96ae0568d48ea6bc7b13001169cb7c4d79fb7c81bee5803b88e938`. Embedded web code/analytics contract and both recorded GIF runtimes match. Evidence: `verification/TROPHY_V2_BUILD_2026-11-09.json`. The subsequent documentation-only evidence update has the same runtime payload. See `TROPHY_CATALOG_V2.md`.
 
 Historical year expansion evidence:
 

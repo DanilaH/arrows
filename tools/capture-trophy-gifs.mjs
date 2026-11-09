@@ -10,11 +10,11 @@ const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'previe
 const browser = await chromium.launch({ headless: true }), records = [];
 try {
   for (let i = 0; i < 60; i++) { try { if ((await fetch('http://127.0.0.1:4189')).ok) break; } catch {} if (i === 59) throw Error('Preview unavailable'); await new Promise(r => setTimeout(r, 100)); }
-  async function record(name, year, action) {
+  async function record(name, action) {
     const context = await browser.newContext({ storageState: storage, viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, locale: 'ru-RU' });
     const page = await context.newPage(); await page.goto('http://127.0.0.1:4189');
     await page.locator('#game-shell[data-status=ready][data-progress=ready]').waitFor(); await page.locator('#home-collection').click();
-    await page.locator('#trophy-year').selectOption(year);
+    await expect(page.locator('#trophy-year')).toHaveCount(0); await expect(page.locator('.month-trophy')).toHaveCount(12);
     await page.locator('#meta-screen').evaluate(root => { root.scrollTop += root.querySelector('.trophy-heading').getBoundingClientRect().top - 14; });
     await page.waitForTimeout(450);
     const initial = await page.evaluate(() => JSON.parse(localStorage.getItem('arrows.progress.v1')).cups);
@@ -32,13 +32,9 @@ try {
     execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', resolve(dir, 'frames.txt'), '-vf', filter, '-loop', '0', target]);
     records.push({ name, file: target, frames: frames.length, duration_ms: frames.at(-1).at - frames[0].at, owned_before: initial, owned_after: after }); await context.close();
   }
-  await record('arrows-trophies-2026', '2026', async page => {
+  await record('arrows-current-trophies', async page => {
     await page.locator('#meta-screen').evaluate(root => root.scrollBy({ top: 270, behavior: 'smooth' })); await page.waitForTimeout(900);
     await page.locator('[data-month="2026-11"]').click(); await page.waitForTimeout(650); await page.locator('#view-trophy').click(); await expect(page.locator('#trophy-viewer')).toBeVisible(); await page.waitForTimeout(400);
-  });
-  await record('arrows-future-trophies', '2027', async page => {
-    await page.locator('#trophy-year').selectOption('2028'); await page.waitForTimeout(850);
-    await page.locator('[data-month="2028-05"]').click(); await expect(page.locator('#trophy-viewer')).toBeVisible(); await page.waitForTimeout(450);
   });
   const html = await readFile('dist/index.html', 'utf8'), entry = html.match(/src="\.\/([^\"]+\.js)"/)[1];
   await writeFile(resolve(output, 'capture-manifest.json'), JSON.stringify({ sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),

@@ -1,4 +1,4 @@
-# Trophy art v2 — 0.3.2 (6)
+# Trophy art v2 — 0.3.3 (7)
 
 User request, 2026-11-09: make monthly rewards substantially richer and more varied, with a generous future reserve and good artwork.
 
@@ -12,7 +12,7 @@ The artistic libraries and generated v2 parameters are immutable after publicati
 
 ## UI
 
-Collection has a year selector covering the frozen catalogue. Installed 2026 months open their real calendars as before. Other years explicitly say they are future collection previews. Their cards open a large artwork viewer, show that puzzles are not yet available and offer no fake Play action.
+The user removed future collection browsing after reviewing 0.3.2. In 0.3.3 Collection only exposes months from the installed daily catalogue, currently all twelve months of 2026. Its single year is a plain label; a selector is only needed when multiple years of real daily content exist. The reserve for 2027–2045 stays frozen in source and has no preview route. Collection cards open their real calendars as before.
 
 The calendar's trophy is inspectable. The large viewer shows the exact month/year, an owned state or an explicit appearance-after-earning label, and the real progress/rule when that calendar exists. Open Month routes to the actual calendar. Close, Escape and native Back dismiss the viewer, restoring the parent screen. Its independent activity blocker does not release the menu/background blockers.
 
@@ -24,9 +24,13 @@ Save schema stays 2, with an additive `trophyDesigns` map. On loading a pre-v2 s
 
 A newly earned monthly cup saves its v2 ID/version in the same authoritative transaction as the final daily move and cup award. Duplicate awards do not choose a new design. A present but missing/conflicting/unknown binding is rejected instead of guessing a replacement. Campaign/daily attempts, history, receipt ledger and reward reservations remain unchanged.
 
-Previewing years, inspecting artwork or rendering an after-earning appearance never modifies trophy ownership. Future month artwork is deterministic and shared by all users with the same frozen style/catalogue. Actual daily content remains the 365 fixed dates of 2026, with normal date and level-20 gates.
+Inspecting artwork or rendering an after-earning appearance never modifies trophy ownership. Future month artwork is deterministic and shared by all users with the same frozen style/catalogue. Actual daily content remains the 365 fixed dates of 2026, with normal date and level-20 gates.
 
 ## Verification
+
+Visibility correction 0.3.3: strict typecheck/build, 53 unit tests, all 14 relevant browser cases and `android:sync` pass locally. The browser regression asserts that only the twelve installed months appear, no future-year selector exists, reload preserves that boundary, and current-calendar inspection closes/restores focus without issuing awards. Native CI/artifact evidence follows separately.
+
+Historical 0.3.2 art verification:
 
 - Strict typecheck/build and 53 unit tests pass. Checks cover the whole frozen catalogue, reproducible parameters, 240 distinct compositions, twelve distinct bowl silhouettes per year, version/identity validation and separate SVG definition scopes.
 - The full 46-case browser suite passes across phone/desktop. The final attachment/forward-year polish also passes all 14 targeted navigation/preview cases. Preview ownership stays unchanged and future years expose no invented tasks.
