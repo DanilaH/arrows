@@ -1,6 +1,6 @@
 # Stage C — navigation, records and daily, 2026-11-09
 
-Version 0.3.0 / Android versionCode 4. Home, Collection, the dated daily catalog and monthly trophies are implemented. Open League parity and D–E remain required; this is not the store release.
+Historical 0.3.0 / Android versionCode 4 implementation record. The current whole-year expansion is documented in `DAILY_YEAR_2026.md`. Home, Collection, the dated daily catalog and monthly trophies are implemented. Open League parity and D–E remain required; this is not the store release.
 
 ## Navigation and UI
 

@@ -153,3 +153,12 @@ progress::-moz-progress-bar { background: #9398f1; border-radius: 8px; }
   .meta-header { margin-bottom: 16px; }
   .month-award .trophy { height: 80px; }
 }
+.trophy-year { color: #757f9f; font-size: 14px; margin-left: 7px; font-weight: 400; }
+.trophy-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.month-trophy { position: relative; flex-direction: column; gap: 6px; padding: 12px 8px; text-align: center; min-width: 0; }
+.month-trophy .trophy { width: 72px; height: 84px; }
+.month-trophy span { width: 100%; }
+.month-trophy strong { font-size: 12px; line-height: 18px; min-height: 18px; }
+.month-trophy small { font-size: 10px; line-height: 16px; min-height: 16px; margin: 3px 0 10px; }
+.month-trophy b { position: absolute; right: 9px; top: 5px; font-size: 18px; }
+.month-trophy.future { opacity: .65; }

@@ -1,6 +1,6 @@
 import fields from './daily.json' with { type: 'json' };
 import type { Level } from '../domain/board';
-export const DAILY_CATALOG_VERSION = 1;
+export const DAILY_CATALOG_VERSION = 2;
 /** Fixed offline-owned dates. Saved attempts retain embedded original geometry. */
 export const dailyCatalog = fields as Record<string, Level>;
 export const dailyDates = Object.keys(dailyCatalog).sort();

@@ -1,4 +1,6 @@
 import { expect, it } from 'vitest';
+import { createHash } from 'node:crypto';
+import previousFields from '../fixtures/daily-v1-hashes.json';
 import type { StorageAdapter } from '@danilah/mini-games-kit/platform';
 import { campaign } from '../../src/content/campaign';
 import { dailyCatalog, dailyDates, dailyMonths } from '../../src/content/daily';
@@ -25,7 +27,8 @@ async function solve(store: ProgressStore, expected: string) {
   }
 }
 it('validates the entire fixed daily catalog and its full promised months', () => {
-  expect(dailyDates).toHaveLength(61); expect(dailyMonths).toEqual(['2026-11', '2026-12']);
+  expect(dailyDates).toHaveLength(365); expect(dailyMonths).toEqual(Array.from({ length: 12 }, (_, i) => `2026-${String(i + 1).padStart(2, '0')}`));
+  expect(dailyDates[0]).toBe('2026-01-01'); expect(dailyDates.at(-1)).toBe('2026-12-31');
   for (const month of dailyMonths) expect(monthDates(month).every(date => dailyCatalog[date]?.id === 'd' + date.replaceAll('-', ''))).toBe(true);
   for (const level of Object.values(dailyCatalog)) {
     validateLevel(level);
@@ -78,7 +81,7 @@ it('unlocks at current levels 10/20 and rejects future or out-of-catalog dates',
   expect(collectionOpen(store.state)).toBe(false); expect(challengeOpen(store.state)).toBe(false); expect(await store.openDaily('2026-11-01')).toBeUndefined();
   rows.set(SAVE_KEY, JSON.stringify(unlocked())); await store.recover();
   expect(collectionOpen(store.state)).toBe(true); expect(challengeOpen(store.state)).toBe(true);
-  expect(await store.openDaily('2026-11-10')).toBeUndefined(); expect(await store.openDaily('2026-10-31')).toBeUndefined(); expect(await store.openDaily('2026-11-09')).toBeTruthy();
+  expect(await store.openDaily('2026-11-10')).toBeUndefined(); expect(await store.openDaily('2025-12-31')).toBeUndefined(); expect(await store.openDaily('2026-01-01')).toBeTruthy(); expect(await store.openDaily('2026-11-09')).toBeTruthy();
 });
 it('commits a daily win once on its selected date across midnight, restarts and a month rollover', async () => {
   const { storage, rows } = memory(); rows.set(SAVE_KEY, JSON.stringify(unlocked()));
@@ -112,4 +115,23 @@ it('computes explicit records and medals from real wins and resets only the cons
 it('rejects forged cups or duplicate facts rather than manufacturing achievements', () => {
   const save = freshSave(); save.cups.push('2026-11'); expect(() => decodeSave(save)).toThrow('trophy'); save.cups = [];
   save.facts.push({ kind: 'win', attempt: 'none', mode: 'campaign', localDate: '2026-11-09', at: 1 }); expect(() => decodeSave(save)).toThrow('Unconfirmed');
+});
+
+it('preserves every shipped November/December field exactly while adding the rest of 2026', () => {
+  expect(Object.keys(previousFields)).toHaveLength(61);
+  for (const [date, hash] of Object.entries(previousFields)) expect(createHash('sha256').update(JSON.stringify(dailyCatalog[date])).digest('hex'), date).toBe(hash);
+});
+it('upgrades the 0.3 daily catalog without losing attempts, views, completed days or earned rights', async () => {
+  const { storage, rows } = memory(); rows.set(SAVE_KEY, JSON.stringify(unlocked()));
+  const store = new ProgressStore(storage, () => new Date(2026, 10, 9)); await store.load();
+  const completed = (await store.openDaily('2026-11-01'))!; await solve(store, completed);
+  const pending = (await store.openDaily('2026-11-09'))!, a = store.findAttempt(pending)!.saved;
+  const free = new Board(a.level, pending, a.board).hint()!;
+  await store.move(pending, free); await store.presentation(pending, { guides: true, view: { centerX: 4, centerY: 5, zoom: 2 } });
+  await store.commitReward({ id: 'old-catalog-reward', schema: 1, attempt: pending, mode: 'daily', placement: 'hint' });
+  const old = { ...store.state, dailyCatalogVersion: 1 }; rows.set(SAVE_KEY, JSON.stringify(old));
+  const restored = new ProgressStore(storage); await restored.load();
+  expect(restored.available).toBe(true); expect(restored.state).toEqual({ ...old, dailyCatalogVersion: 2 });
+  expect(await restored.openDaily('2026-11-09')).toBe(pending);
+  expect(await restored.commitReward({ id: 'old-catalog-reward', schema: 1, attempt: pending, mode: 'daily', placement: 'hint' })).toBe('already-applied');
 });

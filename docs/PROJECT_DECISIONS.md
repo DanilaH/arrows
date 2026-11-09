@@ -39,7 +39,7 @@ Implementation moved the native transport/dependency work forward using the exis
 
 ## Assets, language and native identity
 
-RU/EN copy now covers the Stage A game surface/dialogs. Complete campaign localization, both themes and sound remain later work; the native haptic cues need phone tuning. System fonts/procedural geometry avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.3.0 / Android versionCode 4 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
+RU/EN copy now covers the Stage A game surface/dialogs. Complete campaign localization, both themes and sound remain later work; the native haptic cues need phone tuning. System fonts/procedural geometry avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.3.1 / Android versionCode 5 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
 
 ## Open decisions before corresponding features
 
@@ -59,8 +59,14 @@ The save schema has no earlier shipped gameplay version to migrate. Started atte
 
 ## Stage C policies and explicit adaptations
 
-The installed daily archive is 2026-11-01 through 2026-12-31, with fixed date IDs and eight own silhouette families. Only local dates at or before today can start; future/unsupported dates are never rerolled. A monthly trophy requires every provided date in that full month. Clock changes do not duplicate confirmed wins/cups.
+The installed daily archive is now 2026-01-01 through 2026-12-31 (expanded by explicit user request on 2026-11-09), with fixed date IDs and eight own silhouette families. Only local dates at or before today can start; future/unsupported dates are never rerolled. A monthly trophy requires every provided date in that full month. Clock changes do not duplicate confirmed wins/cups.
 
 Collection opens at current level 10, Challenge at 20. Three local records use consecutive local win dates, consecutive wins since the 0.3 restart journal, and maximum wins per local date. Home shows the current day streak, not its historic best. Three local medals use 20 campaign wins / 10 error-free wins / 10 consecutive wins. These thresholds and statistic rules explicitly adapt the unknown reference policies. League's three medals remain unimplemented, with no fake competitors or placeholder league UI.
 
 Schema 2 migrates shipped v1 at the same key, preserving accepted moves/identity/geometry and the receipt ledger. Prior win local dates are frozen using the upgrading timezone; missing restart history is not invented. New raw facts capture their local date at commit. Native Back and HUD Back follow screen parents; asynchronous opens cannot override newer navigation.
+
+## Whole-year expansion, 2026-11-09
+
+The user requested all of 2026’s rewards/content. Version 0.3.1 adds January–October without changing any shipped November/December field. Daily catalog version 1→2 is a compatible schema-2 upgrade preserving all accepted state. The calendar has 365 tasks and 12 actual month-specific SVG trophy designs, shown in a compact grid. Past dates are open after the existing level-20 gate; future dates remain date-gated.
+
+Fields are generated/validated offline from a numeric YYYYMMDD seed, silhouette/size and difficulty policy, then shipped as fixed coordinates. A selected date/catalog version is shared by all users, not personalized or rerolled per device. Eight base silhouette families provide varied arrow layouts; there is no claim of 365 separately authored silhouettes or adaptive difficulty. Local device time governs availability only.

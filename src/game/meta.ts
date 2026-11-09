@@ -2,15 +2,10 @@ import type { ProgressStore } from '../progression/save';
 import { collectionOpen, challengeOpen, collectionStats, medals, earnedAwards } from '../progression/collection';
 import { calendarDate, localDate, monthDates } from '../progression/calendar';
 import { dailyCatalog, dailyMonths, dailyDates } from '../content/daily';
+import { trophy } from './trophies';
 import { copy, type GameLanguage } from '../app/language';
 
 export type AppScreen = 'home' | 'collection' | 'calendar' | 'game';
-/** Own SVG artwork. Month-specific engraving is part of each promised trophy. */
-export function trophy(month: string, earned = false): string {
-  const december = month.endsWith('-12');
-  const engraving = december ? '<path d="M50 29v24m-10-18 20 13m-20 0 20-13"/>' : '<path d="M43 49c-2-12 8-18 15-19-1 10-3 17-15 19Zm0 0 11-14"/>';
-  return `<svg class="trophy ${earned ? 'earned' : ''}" viewBox="0 0 100 110" aria-hidden="true"><path class="cup-handle" d="M29 23H15v11c0 15 13 20 22 20m34-31h14v11c0 15-13 20-22 20"/><path class="cup-body" d="M27 17h46l-4 28c-2 13-10 20-19 20s-17-7-19-20Z"/><path class="cup-base" d="M50 65v19m-16 7h32l4 8H30Zm6-7h20"/><g class="cup-engraving">${engraving}</g></svg>`;
-}
 const badge = (key: string): string => `<svg viewBox="0 0 72 84" aria-hidden="true"><path d="m20 51-3 27 19-9 19 9-3-27"/><circle cx="36" cy="32" r="25"/><path d="${key === 'legend' ? 'm21 34 6-12 9 10 9-10 6 12-5 9H26Z' : key === 'perfect' ? 'm23 32 9 9 18-19' : 'M39 15c9 13-4 13 4 24 2-6 7-8 7-8 4 18-23 23-26 8-2-8 8-15 8-15-2 10 3 11 3 11-3-9 6-12 4-20Z'}"/></svg>`;
 
 export function installMetaSurface(progress: ProgressStore, language: GameLanguage, options: {
@@ -19,6 +14,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   const root = document.querySelector<HTMLElement>('#meta-screen')!, shell = document.querySelector<HTMLElement>('#game-shell')!, text = copy[language];
   const locale = language === 'ru' ? 'ru-RU' : 'en-US';
   const monthFormat = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric', timeZone: 'UTC' });
+  const monthNameFormat = new Intl.DateTimeFormat(locale, { month: 'long', timeZone: 'UTC' });
   const dayFormat = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', timeZone: 'UTC' });
   const shortDate = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', timeZone: 'UTC' });
   let screen: AppScreen = 'home', alive = true, ready = false, busy = false, revision = 0;
@@ -52,9 +48,9 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     return title(text.collection) + `<div class="meta-content"><section class="record-grid">${records.map(([label, value, date]) => `<article><span>${label}</span><strong>${value}</strong><small>${dateLabel(date)}</small></article>`).join('')}</section>
       <details class="record-rules"><summary>${text.recordRules}</summary><p>${text.recordRulesText}</p></details>
       <h2>${text.achievements}</h2><section class="medal-grid">${medals(save).map(m => `<article class="medal ${m.earned ? 'earned' : ''}" data-medal="${m.id}" data-earned="${m.earned}">${badge(m.id)}<h3>${text[`${m.id}Name` as keyof typeof text]}</h3><p>${text[`${m.id}Rule` as keyof typeof text]}</p><progress value="${Math.min(m.target, m.progress)}" max="${m.target}"></progress><small>${Math.min(m.target, m.progress)} / ${m.target}</small></article>`).join('')}</section>
-      <h2>${text.challengeTrophies}</h2><div class="trophy-list">${dailyMonths.map(m => {
+      <h2>${text.challengeTrophies} <span class="trophy-year">2026</span></h2><div class="trophy-list">${dailyMonths.map(m => {
         const dates = monthDates(m), done = dates.filter(d => save.dailyWins[d]).length, earned = save.cups.includes(m);
-        return `<button class="month-trophy ${earned ? 'earned' : ''}" type="button" data-month="${m}" ${!challengeOpen(save) ? 'disabled' : ''}>${trophy(m, earned)}<span><strong>${monthFormat.format(calendarDate(m + '-01'))}</strong><small>${earned ? text.cupEarned : `${done} / ${dates.length} · ${text.daysDone}`}</small><progress value="${done}" max="${dates.length}"></progress></span><b aria-hidden="true">${earned ? '✓' : '›'}</b></button>`;
+        return `<button class="month-trophy ${earned ? 'earned' : ''} ${m > localDate().slice(0, 7) ? 'future' : ''}" type="button" data-month="${m}" aria-label="${monthFormat.format(calendarDate(m + '-01'))}: ${done} / ${dates.length}" ${!challengeOpen(save) ? 'disabled' : ''}>${trophy(m, earned)}<span><strong>${monthNameFormat.format(calendarDate(m + '-01'))}</strong><small>${earned ? text.cupEarned : `${done} / ${dates.length}`}</small><progress value="${done}" max="${dates.length}"></progress></span><b aria-hidden="true">${earned ? '✓' : ''}</b></button>`;
       }).join('')}</div></div>`;
   };
   const calendar = (): string => {

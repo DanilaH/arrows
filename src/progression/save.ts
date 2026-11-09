@@ -60,6 +60,7 @@ function attempt(value: unknown): SavedAttempt {
 export function decodeSave(value: unknown): GameSave {
   let s = record(value);
   if (s.schema === 1) s = { ...s, schema: 2, dailyCatalogVersion: DAILY_CATALOG_VERSION, dailyWins: {}, cups: [], facts: [], seenAwards: [], collectionSeen: false };
+  if (s.schema === 2 && s.dailyCatalogVersion === 1) s = { ...s, dailyCatalogVersion: DAILY_CATALOG_VERSION };
   if (s.schema !== 2 || !integer(s.revision) || s.catalogVersion !== CATALOG_VERSION || !integer(s.index, campaign.length - 1) || !Array.isArray(s.wins)) throw Error('Unsupported save');
   const wins = s.wins.map(v => {
     const w = record(v);

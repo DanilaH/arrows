@@ -2,13 +2,17 @@
 
 ## Current milestone
 
-Stage C source is ready: version 0.3.0 / Android versionCode 4. Home/Continue, Collection (three explicit local records/medals), separate daily/calendar and monthly trophies are connected to the single authoritative save writer. There are 20 own campaign fields plus 61 fixed November/December daily fields. Schema v1 from 0.2 migrates to v2 without changing accepted campaign state or its reward ledger. `STAGE_C_IMPLEMENTATION.md` is the current detailed contract.
+Version 0.3.1 / Android versionCode 5 expands daily to the entire 2026 year: 365 fixed tasks (14,532 arrows) and 12 distinct monthly trophies in a compact grid. All 61 shipped November/December fields are fingerprint-identical; save schema 2 upgrades daily catalog version 1→2 while retaining attempts/history/receipts/cups. See `DAILY_YEAR_2026.md` for the current policy and evidence.
 
-Collection unlocks at current level 10, daily at 20. Campaign and each daily date own independent attempts/cameras. Parent Back routing is implemented. League medals remain open and are not imitated. Three local medal thresholds/record rules are explicitly documented adaptations, not reference parity. Full 100-level bank/curation remains E.
+Stage C navigation/records remain connected: Home/Continue, Collection at current level 10 and daily at 20. Campaign and every date retain independent attempts/cameras. The three local medals/record rules remain explicit adaptations; League is still open. The 20-level campaign remains the initial chapter, not the larger release bank.
 
-D–E remain: themes/sound/settings, native ad placements/cadence/live earning, dashboard delivery, phone feel/performance/process-kill evidence, release signing and RuStore package. The user requested GIFs for visible changes; keep attaching authentic current-build recordings. The temporary control-board link is now on Home and must be removed for release.
+D–E remain: themes/sound/settings, native ad placements/cadence/live earning, dashboard delivery, phone feel/performance/process-kill evidence, signing and RuStore package. Keep attaching authentic GIFs for visible changes. The temporary control-board link is on Home and must be removed for release.
 
 ## Verification
+
+Current year expansion: strict typecheck/build, 50 unit tests, independent validation of all 365 dates, original-61 fingerprint regression and `android:sync` pass. Browser/CI/artifact evidence follows separately. See `DAILY_YEAR_2026.md`.
+
+Historical 0.3 evidence:
 
 Current C: strict typecheck/build, 48 unit tests, all 42 browser cases (plus targeted parent-navigation rerun), independent validation of the full 61-day catalog and `android:sync` pass. CI [42604407637](https://github.com/DanilaH/arrows/actions/runs/42604407637) passed both jobs on source `4edd27fe30c14fe2da3ab5ab0945f5563d12f2a3`. APK 0.3.0 (4): 9,832,101 bytes; SHA-256 `f7ad4218b791022eae1dd5c26382bf03be665a6168a1e41cf772c3f30b663534`. Its embedded web code, analytics schema and recorded GIF runtime match. Evidence: `verification/STAGE_C_BUILD_2026-11-09.json`. Subsequent capture-tool/evidence updates do not change this payload. See `STAGE_C_IMPLEMENTATION.md`.
 

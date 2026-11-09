@@ -94,3 +94,23 @@ test('adapts home and calendar to short landscape, enlarged text and return navi
   expect(await page.locator('#meta-screen').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
   await expect(page.locator('#home-play')).toBeInViewport();
 });
+
+test('shows all twelve monthly rewards and lets the player resume a January archive puzzle', async ({ page }, info) => {
+  await unlocked(page); await page.locator('#home-collection').click();
+  await expect(page.locator('.month-trophy')).toHaveCount(12);
+  await expect(page.locator('[data-month="2026-02"]')).toContainText('0 / 28');
+  await page.locator('[data-month="2026-01"]').click();
+  await expect(page.locator('[data-date="2026-01-01"]')).toBeEnabled();
+  await expect(page.locator('[data-shift="-1"]')).toBeDisabled();
+  await page.locator('[data-date="2026-01-01"]').click(); await page.locator('#start-daily').click(); await page.waitForTimeout(450);
+  const id = await page.locator('#game-shell').getAttribute('data-attempt');
+  const level = dailyCatalog['2026-01-01']!, board = new Board(level, 'oracle');
+  await tapArrow(page, board.remaining.find(a => canExit(a, board.remaining))!);
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(level.arrows.length - 1));
+  await page.locator('#choose-field').click(); await page.locator('[data-nav=back]').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'collection');
+  await page.screenshot({ path: info.outputPath('year-rewards.png') });
+  await page.locator('[data-month="2026-01"]').click(); await page.locator('#start-daily').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt', id!);
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(level.arrows.length - 1));
+});
