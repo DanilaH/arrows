@@ -41,11 +41,19 @@ export class Board {
   private readonly removed = new Set<string>();
   private readonly errors = new Set<string>();
   private lives = 3;
-  public constructor(public readonly level: Level, public readonly attemptId: string) {}
+  public constructor(public readonly level: Level, public readonly attemptId: string, state?: Attempt) {
+    if (state) {
+      for (const id of state.removed) this.removed.add(id);
+      for (const id of state.errors) this.errors.add(id);
+      this.lives = state.lives;
+    }
+  }
   public get remaining(): Arrow[] { return this.level.arrows.filter(arrow => !this.removed.has(arrow.id)); }
   public get hearts(): number { return this.lives; }
   public get complete(): boolean { return this.removed.size === this.level.arrows.length; }
   public isError(id: string): boolean { return this.errors.has(id); }
+  public refill(): void { this.lives = 3; }
+  public hint(): string | null { return this.remaining.find(arrow => canExit(arrow, this.remaining))?.id ?? null; }
   public snapshot(): Attempt {
     return { id: this.attemptId, levelId: this.level.id, contentVersion: this.level.contentVersion, removed: [...this.removed], errors: [...this.errors], lives: this.lives };
   }

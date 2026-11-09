@@ -12,6 +12,7 @@ async function tap(page: Page, p: Point, phone: boolean) {
 }
 async function choose(page: Page, index: number) {
   await page.locator('#choose-field').click();
+  await page.locator('[data-action=controls]').click();
   await expect(page.locator('#game-dialog')).toBeVisible();
   await page.locator('#dialog-content button').nth(index).click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-level', controlScenes[index]!.id);
@@ -22,6 +23,7 @@ test('keeps red-arrow errors stable and accepts newly unblocked arrows during fl
   await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
   await page.waitForTimeout(450);
+  await choose(page, 0);
   const error = await screenPoint(page, { x: 2.5, y: 2 });
   const phone = testInfo.project.name === 'phone';
   for (let i = 0; i < 4; i++) await tap(page, error, phone);
@@ -38,6 +40,7 @@ test('cancels held and dragged selections, then keeps the first UI tap functiona
   await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
   await page.waitForTimeout(450);
+  await choose(page, 0);
   const p = await screenPoint(page, { x: 2.5, y: 2 });
   await page.mouse.move(p.x, p.y); await page.mouse.down();
   await page.waitForTimeout(350);

@@ -2,15 +2,17 @@
 
 ## Current milestone
 
-First playable Stage A implementation is complete in source, version 0.1.0 / Android versionCode 2. Four fixed own fields contain 6/6/68/188 arrows, including bent extraction, a Hard flower and a dense Nightmare butterfly. Rules, arc-length movement, hold/cancel, pan/pinch, guides, lives/errors, reactive dots and idle rendering are connected to the actual game surface. Details, fixture counts and verification: `STAGE_A_IMPLEMENTATION.md`.
+Stage B source implementation is ready: version 0.2.0 / Android versionCode 3. The first own chapter has 20 fixed fields, semantic onboarding, Hard at 6/12/18 and Nightmare at 20. Moves, wins, position, errors/lives, view/guides, tutorials, free refill and earned rights now use one coordinated authoritative save writer. The existing native earned inbox is connected to that writer; browser video unavailability grants nothing. See `STAGE_B_IMPLEMENTATION.md` for policies, boundaries and complete evidence.
 
-Native platform infrastructure remains connected: Yandex Mobile Ads/AppMetrica, shared analytics schema, earned receipt journal, atomic native storage seam and cancellable haptics. The surface sends `app_ready` and one in-memory `level_start` on the first accepted action of a control attempt, with mode `control`; full durable campaign telemetry belongs to B. Advertising awaits real placements and a coordinated reward writer. Native phone haptic quality is unverified.
+The four Stage A control fields remain accessible separately through Pause → Control boards and cannot overwrite campaign progress. This review entry is temporary for development builds. The chapter has an explicit end; the 100-level release-bank target is unchanged.
 
-Campaign/daily, Hint/free and rewarded continuation, durable game save schemas, final sound/haptic tuning, full telemetry/cadence, release signing and store packaging remain unimplemented. Current controls are in-memory attempts; reload or field selection starts them fresh. The full agreed product is unchanged. Stage A's physical phone feel/performance acceptance remains open.
-
-Scope review on 2026-11-09 expanded `KIT_REUSE.md` to the full production map. The follow-up reused existing project integrations in code instead of stopping at that map. Implement gameplay event/reward boundaries during B and complete placement/device acceptance during D–E. Keep the baseline free of banners as specified; open account/purchase decisions remain open.
+Home/Collection/daily and calendar are next (C). Full themes/sound/settings, interstitial cadence/real placements, phone haptic and performance acceptance, actual SDK earning/dashboard delivery, release signing and RuStore packaging remain D–E. Current GIFs are production-browser recordings, not physical-device evidence. The user explicitly requested GIFs for visible changes; keep this delivery preference.
 
 ## Verification
+
+Current B: strict typecheck, production build, 39 unit tests, all 32 browser scenarios and `android:sync` pass locally. Added independent validation covers all 20 campaign fields in three removal orders. Native CI/artifact evidence follows separately. See `STAGE_B_IMPLEMENTATION.md`.
+
+Historical A evidence:
 
 Current Stage A local verification: 28 unit tests, strict typecheck, production build and `android:sync` pass. The full 16-scenario browser run passed after viewport clipping; two additional idle/repeated-entry scenarios and targeted gesture/resize checks pass on the latest source. CI [42594630773](https://github.com/DanilaH/arrows/actions/runs/42594630773) passed on source `aa40b47de64ffd2125c7247d40ce5e769f606acc`: all 28 unit tests, all 18 browser scenarios and native `assembleDebug`. Historical bootstrap evidence below remains separate.
 
@@ -30,16 +32,16 @@ Historical initialization evidence:
 
 ## Repository delivery
 
-The user explicitly authorized initialization, main-branch writes and routine repository work on 2026-11-09. `DanilaH/arrows` is initialized and full source is published in `main` at `61749a610cc7079e9643df48fabd7ebbc7f92858`; its tree SHA `46bd617a4378510fbdbd16e5cebbae501bc61265` exactly matches the locally checked source. There is no remaining permission blocker for routine repository work.
+The user explicitly authorized initialization, main-branch writes and routine repository work on 2026-11-09. `DanilaH/arrows` was initialized and bootstrap source was published in `main` at `61749a610cc7079e9643df48fabd7ebbc7f92858`; its tree SHA `46bd617a4378510fbdbd16e5cebbae501bc61265` exactly matches the locally checked source. There is no remaining permission blocker for routine repository work.
 
 First CI run `42587117226` failed before native compilation because setup-android's default `tools` package no longer exists, and before browser acceptance because Playwright does not support the runner's new Ubuntu 26.04 image. The corrected workflow requests `platform-tools` explicitly and pins Ubuntu 24.04. Corrected run `42587270211` passed both jobs and produced the debug artifact. The following documentation-only evidence update does not change that verified payload.
 
-## Next work: Stage A phone acceptance, then B
+## Next work: C and physical acceptance
 
-1. Playable APK 0.1.0 (2) is built and verified; see `verification/STAGE_A_BUILD_2026-11-09.json`. Install it on a named physical Android and record gesture, audio-independent haptic, active/idle frame pacing and repeated-entry behavior for all four fixtures. Do not infer phone 60 FPS from browser tests.
-2. Tune extraction/head/line/dot response against the original clips. V06 is downloaded/hashed and targeted frames at 34.9–35.9 s / 86 s were inspected; other source roles remain in `research/ARROWS_VIDEO_SOURCES_2026-11-09.json`. No new full audio review is claimed.
-3. B: implement one coordinated authoritative save writer, validating/migrating attempt state and restoration after interruption. Preserve separate campaign/daily identities; presentation never owns confirmed moves.
-4. Add the real campaign/tutorial, lives continuation, current-state Hint and once-per-attempt gameplay events. Install reward commit only when effect+dedup is durable and tied to the correct attempt.
-5. Keep C–E and all open parity questions on the agreed plan. These four fixtures are a feel/performance checkpoint, not the production campaign bank.
+1. Continue with real Home/Continue routing, Collection and Challenge calendar/daily, preserving separate per-date identities. Open medal/League rules must remain explicit.
+2. Keep the complete product scope in the replication spec; do not treat the first 20 generated/validated fields as a phone-playtested release bank.
+3. Install the exact current APK on a named physical Android and record touch/zoom, haptic response, active/idle frame pacing and process-kill restoration. Browser checks do not establish phone 60 FPS.
+4. D–E: final sound/themes/settings, live rewarded receipts and interstitial cadence, dashboard delivery, selected release bank, signing and RuStore materials.
+5. Preserve save/reward ordering and the v1 ledger when adding navigation/daily. Reserved late rights never silently move to another attempt.
 
-See `KIT_REUSE.md` for connected versus selected modules and `PROJECT_DECISIONS.md` for open policies. Do not restart research or silently narrow the agreed product to the bootstrap.
+See `KIT_REUSE.md` for connected versus selected modules and `PROJECT_DECISIONS.md` for open policies.

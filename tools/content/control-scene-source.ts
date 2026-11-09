@@ -2,7 +2,7 @@ import { occupiedCells, measurePath, rayHitsPath, type Arrow, type Point } from 
 import { validateLevel, type Level } from '../../src/domain/board';
 
 const points = (values: readonly (readonly [number, number])[]): Point[] => values.map(([x, y]) => ({ x, y }));
-function hand(id: string, paths: readonly (readonly (readonly [number, number])[])[]): Level {
+export function hand(id: string, paths: readonly (readonly (readonly [number, number])[])[]): Level {
   const arrows = paths.map((path, i) => ({ id: `${id}-${i}`, path: points(path) }));
   const mask = new Map<string, Point>();
   for (const arrow of arrows) for (const p of occupiedCells(arrow.path)) mask.set(`${p.x},${p.y}`, p);
@@ -27,7 +27,7 @@ const directions: readonly Point[] = [{ x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y
 
 /** Reverse construction: a newly accepted arrow can exit past all previously accepted arrows.
  * Reverse insertion order is therefore a completion witness, independent validation still runs. */
-function silhouette(id: string, width: number, height: number, seed: number, inside: (x: number, y: number) => boolean, difficulty: 'hard' | 'nightmare'): Level {
+export function silhouette(id: string, width: number, height: number, seed: number, inside: (x: number, y: number) => boolean, difficulty: Level['difficulty']): Level {
   const rng = random(seed), mask: Point[] = [], occupied = new Set<string>(), arrows: Arrow[] = [];
   const key = (p: Point): string => `${p.x},${p.y}`;
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) if (inside(x, y)) mask.push({ x, y });

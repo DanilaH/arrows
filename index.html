@@ -10,6 +10,7 @@
   <body>
     <main id="game-shell" data-status="starting">
       <div id="game-root" tabindex="0" role="application" aria-label="Arrow puzzle"></div>
+      <div id="tutorial-pointer" hidden aria-hidden="true"></div>
       <header id="game-header">
         <div class="top-row">
           <div class="top-actions">
@@ -25,9 +26,11 @@
       <footer id="game-footer">
         <section id="win" hidden><strong id="win-title"></strong><button id="next" class="primary" type="button"></button></section>
         <p id="app-status"></p>
+        <button id="hint" class="hint-button" type="button" hidden></button>
         <button id="guides" class="circle" type="button" aria-pressed="false" aria-label="Show exit directions">#</button>
         <span id="field-name"></span>
       </footer>
+      <aside id="save-status" hidden role="status"><span id="save-message"></span><button id="save-retry" type="button"></button><button id="session-play" type="button" hidden></button></aside>
       <dialog id="game-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
       <section id="startup-preload" data-state="idle" aria-hidden="true">
         <div class="startup-card">

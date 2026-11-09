@@ -51,7 +51,7 @@ test('uses Russian copy and survives reload', async ({ browser }) => {
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4173/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
-  await expect(page.locator('#app-title')).toHaveText('Стрелки');
+  await expect(page.locator('#app-title')).toHaveText('Уровень 1');
   await page.reload();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
   await expect(page.locator('canvas')).toHaveCount(1);

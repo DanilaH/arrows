@@ -1,145 +1,268 @@
+import { campaign, tutorialFor } from '../content/campaign';
 import { controlScenes } from '../content/controlScenes';
 import { distanceToPath, type Point } from '../domain/geometry';
 import { BoardGestures } from '../input/gestures';
 import { copy, type GameLanguage } from '../app/language';
 import type { createPlatformRuntime } from '../app/platform';
+import { ProgressStore, type SaveChange } from '../progression/save';
 import type { BoardScene } from './BoardScene';
 
 type Platform = ReturnType<typeof createPlatformRuntime>;
 export function installGameSurface(scene: BoardScene, platform: Platform, language: GameLanguage) {
   const text = copy[language], root = document.querySelector<HTMLElement>('#game-root')!;
-  const shell = document.querySelector<HTMLElement>('#game-shell')!;
-  const dialog = document.querySelector<HTMLDialogElement>('#game-dialog')!;
-  const content = document.querySelector<HTMLElement>('#dialog-content')!;
-  const status = document.querySelector<HTMLElement>('#app-status')!;
-  const listeners: Array<() => void> = [];
-  let holdTimer: ReturnType<typeof setTimeout> | undefined;
-  let modal: 'levels' | 'restart' | 'lost' | null = null;
-  let lastAttempt = '', started = false;
+  const shell = document.querySelector<HTMLElement>('#game-shell')!, dialog = document.querySelector<HTMLDialogElement>('#game-dialog')!;
+  const content = document.querySelector<HTMLElement>('#dialog-content')!, status = document.querySelector<HTMLElement>('#app-status')!;
+  const hintButton = document.querySelector<HTMLButtonElement>('#hint')!, pointer = document.querySelector<HTMLElement>('#tutorial-pointer')!;
+  const warning = document.querySelector<HTMLElement>('#save-status')!, retry = document.querySelector<HTMLButtonElement>('#save-retry')!;
+  const sessionPlay = document.querySelector<HTMLButtonElement>('#session-play')!;
+  const progress = new ProgressStore(platform.storage), listeners: Array<() => void> = [];
+  let alive = true, loaded = false, loadSlow = false, control = false, requestingAd = false, lastStarted = false;
+  const requestedRewards = new Set<string>();
+  let holdTimer: ReturnType<typeof setTimeout> | undefined, cameraTimer: ReturnType<typeof setTimeout> | undefined;
+  let modal: 'pause' | 'controls' | 'restart' | 'lost' | 'hint' | null = null;
+  let notice = '', idleMs = 0, pendingTime = 0, lastTime = performance.now(), wasActive = false, lastFlush = lastTime;
+  let lastSaveError: string | null = null;
   const names = [text.straightName, text.bentName, text.hardName, text.nightmareName];
-  document.querySelector('#choose-field')!.setAttribute('aria-label', text.chooseField);
-  document.querySelector('#restart')!.setAttribute('aria-label', text.restart);
-  document.querySelector('#guides')!.setAttribute('aria-label', text.guides);
-  document.querySelector('#win-title')!.textContent = text.win;
+  const tutorial = (): string | null => {
+    const step = !control && tutorialFor(progress.state.index); return step && !progress.state.tutorials.includes(step) ? step : null;
+  };
+  const sample = (): void => {
+    const now = performance.now(), delta = Math.max(0, Math.min(1000, now - lastTime)); lastTime = now;
+    if (wasActive) { pendingTime += delta; if (!tutorial()) idleMs += delta; }
+    wasActive = loaded && !control && !requestingAd && !platform.activity.isBlocked() && !scene.board.complete && scene.board.hearts > 0;
+  };
+  const takeTime = (): number => { sample(); const time = Math.round(pendingTime); pendingTime = 0; return time; };
+  const run = (task: Promise<unknown>): void => { void task.catch(() => { if (alive) { notice = text.saveFailed; sync(); } }); };
+  const saveView = (): void => {
+    if (!loaded || control || !alive || progress.uncertain) return;
+    run(progress.presentation(scene.board.attemptId, { view: scene.boardCamera.snapshot(), guides: scene.guides }, takeTime()));
+  };
+  const scheduleView = (): void => {
+    if (cameraTimer !== undefined) clearTimeout(cameraTimer);
+    cameraTimer = setTimeout(() => { cameraTimer = undefined; saveView(); }, 400);
+  };
+  const finishTutorial = (step: string): void => {
+    if (control || tutorial() !== step) return;
+    run(progress.tutorial(step).then(changed => { if (changed) platform.analytics.track('tutorial_step', { step, outcome: 'completed' }); }));
+  };
   const point = (event: PointerEvent | WheelEvent): Point => ({ x: event.clientX, y: event.clientY });
   const inBoard = (p: Point): boolean => {
-    const view = scene.playArea;
-    return p.x >= view.x && p.y >= view.y && p.x <= view.x + view.width && p.y <= view.y + view.height;
-  };
-  const distance = (id: string, p: Point): number => {
-    const arrow = scene.board.remaining.find(a => a.id === id); if (!arrow) return Infinity;
-    return distanceToPath(scene.boardCamera.world(p), arrow.path) * scene.boardCamera.scale;
+    const v = scene.playArea; return p.x >= v.x && p.y >= v.y && p.x <= v.x + v.width && p.y <= v.y + v.height;
   };
   const gestures = new BoardGestures({
     hit(p) {
-      if (!inBoard(p) || platform.activity.isBlocked() || scene.board.hearts === 0 || scene.board.complete) return null;
+      if (!inBoard(p) || requestingAd || platform.activity.isBlocked() || progress.uncertain || scene.board.hearts === 0 || scene.board.complete) return null;
       const world = scene.boardCamera.world(p);
-      const candidates = scene.board.remaining.map(a => ({ id: a.id, distance: distanceToPath(world, a.path) * scene.boardCamera.scale })).filter(a => a.distance <= 11)
-        .sort((a, b) => a.distance - b.distance || a.id.localeCompare(b.id));
+      const candidates = scene.board.remaining.map(a => ({ id: a.id, distance: distanceToPath(world, a.path) * scene.boardCamera.scale }))
+        .filter(a => a.distance <= 11).sort((a, b) => a.distance - b.distance || a.id.localeCompare(b.id));
       if (candidates[1] && candidates[1].distance - candidates[0]!.distance < 1.5) return null;
       return candidates[0]?.id ?? null;
     },
-    contains: (id, p) => inBoard(p) && distance(id, p) <= 13,
+    contains(id, p) {
+      const arrow = scene.board.remaining.find(a => a.id === id);
+      return !!arrow && inBoard(p) && distanceToPath(scene.boardCamera.world(p), arrow.path) * scene.boardCamera.scale <= 13;
+    },
     activate(id) {
-      if (platform.activity.isBlocked()) return;
-      const result = scene.activate(id); if (result.kind === 'ignored') return;
-      if (!started) {
-        started = true;
-        platform.analytics.track('level_start', { mode: 'control', level_id: scene.board.level.id, content_version: scene.board.level.contentVersion, attempt: scene.board.attemptId, resumed: false });
-      }
-      platform.activity.setGameplayDesired(!scene.board.complete);
-      platform.haptics.pulse(result.kind === 'error' ? 'error' : 'remove');
+      if (requestingAd || platform.activity.isBlocked()) return;
+      if (control) { const result = scene.activate(id); if (result.kind !== 'ignored') platform.haptics.pulse(result.kind === 'error' ? 'error' : 'remove'); return; }
+      const expected = scene.board.attemptId;
+      run(progress.move(expected, id, takeTime()));
     },
     preview: id => scene.setPreview(id),
-    pan: (dx, dy) => scene.pan(dx, dy),
-    pinch: (previous, current, ratio) => scene.zoom(previous, current, ratio),
+    pan: (dx, dy) => { scene.pan(dx, dy); scheduleView(); },
+    pinch: (previous, current, ratio) => { scene.zoom(previous, current, ratio); scheduleView(); if (Math.abs(ratio - 1) > .01) finishTutorial('zoom'); },
   });
-  const cancel = (): void => {
-    if (holdTimer !== undefined) clearTimeout(holdTimer);
-    holdTimer = undefined; gestures.cancel();
-  };
-  const close = (): void => {
-    modal = null; dialog.close(); platform.activity.setBlocked('dialog', false); root.focus({ preventScroll: true });
+  const cancel = (): void => { if (holdTimer !== undefined) clearTimeout(holdTimer); holdTimer = undefined; gestures.cancel(); };
+  const close = (): void => { modal = null; dialog.close(); platform.activity.setBlocked('dialog', false); root.focus({ preventScroll: true }); };
+  const enterCampaign = (): void => { control = false; notice = ''; idleMs = 0; scene.loadAttempt(progress.board, progress.state.campaign.view, progress.state.campaign.guides, progress.state.campaign.hint); sync(); };
+  const requestReward = async (placement: 'hint' | 'lives'): Promise<void> => {
+    const attempt = scene.board.attemptId; requestingAd = true; close();
+    const requestKey = `${attempt}:${placement}`; requestedRewards.add(requestKey);
+    if (placement === 'hint') platform.analytics.track('hint_request', { attempt });
+    const outcome = await platform.ads.show({ kind: 'rewarded', placement, attempt, mode: 'campaign' });
+    if (!alive) return;
+    requestingAd = false;
+    if (!outcome.shown) { notice = text.videoUnavailable; requestedRewards.delete(requestKey); }
+    sync();
   };
   const open = (kind: NonNullable<typeof modal>): void => {
-    cancel(); modal = kind; platform.activity.setBlocked('dialog', true); content.replaceChildren();
+    cancel(); saveView(); modal = kind; platform.activity.setBlocked('dialog', true); content.replaceChildren();
     const title = document.createElement('h2'); title.id = 'dialog-title';
-    title.textContent = kind === 'levels' ? text.chooseField : kind === 'lost' ? text.noLives : text.restartQuestion;
+    title.textContent = kind === 'pause' ? `${text.level} ${progress.state.index + 1}` : kind === 'controls' ? text.chooseField : kind === 'lost' ? text.noLives : kind === 'hint' ? text.hintTitle : text.restartQuestion;
     content.append(title);
-    const button = (label: string, action: () => void, primary = false): void => {
-      const element = document.createElement('button'); element.type = 'button'; element.textContent = label;
-      if (primary) element.className = 'primary';
-      element.addEventListener('click', action); content.append(element);
+    const button = (key: string, label: string, action: () => void, primary = false): void => {
+      const el = document.createElement('button'); el.type = 'button'; el.dataset.action = key; el.textContent = label;
+      if (primary) el.className = 'primary'; el.addEventListener('click', action); content.append(el);
     };
-    if (kind === 'levels') {
-      for (let index = 0; index < controlScenes.length; index++) button(names[index]!, () => { close(); scene.loadLevel(index); }, index === scene.selected);
-    } else button(text.restart, () => { close(); scene.loadLevel(scene.selected); }, true);
-    button(kind === 'lost' ? text.chooseField : text.cancel, () => kind === 'lost' ? open('levels') : close());
+    const paragraph = (value: string): void => { const p = document.createElement('p'); p.textContent = value; content.append(p); };
+    if (kind === 'pause') {
+      paragraph(control ? text.controlMode : `${text.chapter}: ${progress.state.wins.length} / ${campaign.length}`);
+      button('resume', text.resume, close, true);
+      if (control) button('campaign', text.toCampaign, () => { close(); enterCampaign(); });
+      button('controls', text.controlFields, () => open('controls'));
+    } else if (kind === 'controls') {
+      for (let index = 0; index < controlScenes.length; index++) button(`field-${index}`, names[index]!, () => { close(); saveView(); control = true; idleMs = 0; scene.loadLevel(index); sync(); }, index === scene.selected && control);
+      button('campaign', text.toCampaign, () => { close(); enterCampaign(); });
+    } else if (kind === 'restart') {
+      button('confirm-restart', text.restart, () => {
+        close(); if (control) scene.loadLevel(scene.selected);
+        else {
+          const a = scene.board; run(progress.restart(a.attemptId).then(changed => { if (changed) platform.analytics.track('level_restart', { mode: 'campaign', level_id: a.level.id, attempt: a.attemptId }); }));
+        }
+      }, true);
+      button('cancel', text.cancel, close);
+    } else if (kind === 'lost') {
+      if (!control && !progress.state.campaign.freeUsed) button('free-continue', text.freeContinue, () => {
+        const attempt = scene.board.attemptId; run(progress.continueFree(attempt).then(changed => { if (changed) platform.analytics.track('continue_applied', { attempt, source: 'free' }); }));
+      }, true);
+      else if (!control) { paragraph(text.rewardedContinue); button('rewarded-continue', text.watchVideo, () => run(requestReward('lives')), true); }
+      button('restart', text.restart, () => open('restart'), control);
+      button('pause', text.pause, () => open('pause'));
+      if (notice) paragraph(notice);
+    } else {
+      paragraph(text.hintExplanation); button('watch-hint', text.watchVideo, () => run(requestReward('hint')), true); button('cancel', text.cancel, close);
+    }
     if (!dialog.open) dialog.showModal();
   };
   const sync = (): void => {
-    const board = scene.board;
-    if (lastAttempt !== board.attemptId) { lastAttempt = board.attemptId; started = false; }
-    document.querySelector('#field-name')!.textContent = names[scene.selected]!;
+    if (!alive) return;
+    const board = scene.board, a = progress.state.campaign, remaining = board.remaining.length;
+    document.querySelector('#app-title')!.textContent = control ? text.title : `${text.level} ${progress.state.index + 1}`;
+    document.querySelector('#field-name')!.textContent = control ? names[scene.selected]! : `${progress.state.index + 1} / ${campaign.length}`;
     document.querySelector('#difficulty')!.textContent = board.level.difficulty === 'normal' ? '' : board.level.difficulty === 'hard' ? 'Hard' : 'Nightmare';
-    const hearts = document.querySelector<HTMLElement>('#hearts')!;
-    hearts.setAttribute('aria-label', `${text.lives}: ${board.hearts}`);
+    const hearts = document.querySelector<HTMLElement>('#hearts')!; hearts.setAttribute('aria-label', `${text.lives}: ${board.hearts}`);
     Array.from(hearts.children).forEach((heart, i) => heart.classList.toggle('empty', i >= board.hearts));
-    const remaining = board.remaining.length;
     document.querySelector<HTMLElement>('#progress-fill')!.style.transform = `scaleX(${1 - remaining / board.level.arrows.length})`;
-    document.querySelector<HTMLElement>('#board-progress')!.setAttribute('aria-valuenow', String(board.level.arrows.length - remaining));
-    document.querySelector<HTMLElement>('#board-progress')!.setAttribute('aria-valuemax', String(board.level.arrows.length));
-    shell.dataset.level = board.level.id; shell.dataset.remaining = String(remaining); shell.dataset.lives = String(board.hearts);
-    shell.dataset.attempt = board.attemptId; shell.dataset.state = board.complete ? 'complete' : board.hearts === 0 ? 'lost' : 'playing';
+    document.querySelector('#board-progress')!.setAttribute('aria-valuenow', String(board.level.arrows.length - remaining));
+    document.querySelector('#board-progress')!.setAttribute('aria-valuemax', String(board.level.arrows.length));
+    Object.assign(shell.dataset, { mode: control ? 'control' : 'campaign', level: board.level.id, remaining: String(remaining), lives: String(board.hearts), attempt: board.attemptId,
+      state: board.complete ? 'complete' : board.hearts === 0 ? 'lost' : 'playing', progress: loaded ? 'ready' : 'loading', save: progress.uncertain ? 'uncertain' : progress.available ? 'available' : 'session-only' });
     root.dataset.camera = JSON.stringify({ x: scene.boardCamera.x, y: scene.boardCamera.y, scale: scene.boardCamera.scale });
     document.querySelector('#guides')!.setAttribute('aria-pressed', String(scene.guides));
+    document.querySelector<HTMLElement>('#guides')!.hidden = board.complete;
     document.querySelector<HTMLElement>('#win')!.hidden = !scene.finished;
-    document.querySelector<HTMLButtonElement>('#next')!.textContent = scene.selected === controlScenes.length - 1 ? text.chooseField : text.next;
-    status.textContent = remaining === board.level.arrows.length ? (scene.selected < 2 ? text.tapTip : text.zoomTip) : '';
-    if (board.hearts === 0 && modal === null) open('lost');
+    const exhausted = !control && progress.state.index === campaign.length - 1;
+    document.querySelector('#win-title')!.textContent = exhausted ? text.chapterComplete : text.win;
+    document.querySelector<HTMLButtonElement>('#next')!.textContent = control ? text.chooseField : exhausted ? text.completed : text.next;
+    document.querySelector<HTMLButtonElement>('#next')!.disabled = exhausted;
+    document.querySelector<HTMLButtonElement>('#restart')!.disabled = !control && board.complete;
+    const step = tutorial();
+    status.textContent = !loaded ? text.restoring : notice || (step ? text[`teach_${step}` as keyof typeof text] : control && remaining === board.level.arrows.length ? text.zoomTip : '');
+    hintButton.hidden = !loaded || control || board.complete || board.hearts === 0 || !!step || idleMs < 12000 || a.hint !== null;
+    hintButton.disabled = requestingAd || !progress.available || progress.uncertain;
+    warning.hidden = progress.error === null && !loadSlow;
+    document.querySelector('#save-message')!.textContent = loadSlow ? text.restoring : progress.error === 'load' ? text.sessionOnly : progress.error === 'uncertain' ? text.saveUncertain : text.saveFailed;
+    retry.hidden = loadSlow; sessionPlay.hidden = !loadSlow;
+    retry.textContent = text.retrySave;
+    pointer.hidden = step !== 'tap' || board.complete || modal !== null;
+    if (!pointer.hidden) {
+      const arrow = board.remaining.find(v => v.id === board.hint());
+      if (arrow) { const p = scene.boardCamera.screen(arrow.path.at(-1)!); pointer.style.left = `${p.x}px`; pointer.style.top = `${p.y}px`; }
+    }
+    platform.activity.setGameplayDesired(loaded && !board.complete && board.hearts > 0);
+    if (modal === 'lost' && board.hearts > 0) close();
+    if (loaded && board.hearts === 0 && modal === null && !requestingAd) open('lost');
   };
+  const onChange = (event: SaveChange): void => {
+    if (!alive) return;
+    if (progress.error !== lastSaveError) {
+      lastSaveError = progress.error;
+      if (lastSaveError) platform.analytics.track('save_error', { operation: lastSaveError === 'load' ? 'load' : 'write', reason: lastSaveError });
+    }
+    const a = progress.state.campaign;
+    if (!control) {
+      const oldStarted = lastStarted;
+      if (scene.board.attemptId !== a.board.id || event.kind === 'load') {
+        cancel(); idleMs = 0; pendingTime = 0; notice = ''; scene.loadAttempt(progress.board, a.view, a.guides, a.hint);
+      } else {
+        scene.acceptBoard(progress.board, event.result);
+        if (scene.guides !== a.guides) scene.setGuides(a.guides);
+        if (scene.hintTarget !== a.hint) { scene.setHint(a.hint); scheduleView(); }
+      }
+      lastStarted = a.started;
+      if (event.kind === 'load' && a.started && !scene.board.complete) platform.analytics.track('level_resume', { mode: 'campaign', level_id: a.level.id, attempt: a.board.id });
+      if (event.kind === 'move' && event.result?.kind !== 'ignored') {
+        if (!oldStarted) platform.analytics.track('level_start', { mode: 'campaign', level_id: a.level.id, content_version: a.level.contentVersion, attempt: a.board.id, resumed: false });
+        platform.haptics.pulse(event.result?.kind === 'error' ? 'error' : 'remove');
+        if (event.result?.kind === 'error') platform.analytics.track('level_error', { mode: 'campaign', level_id: a.level.id, attempt: a.board.id, first: event.result.first, lives: a.board.lives });
+        if (event.result?.kind === 'removed') {
+          idleMs = 0; notice = ''; const step = tutorial(); if (step && ['tap', 'turns', 'blockers'].includes(step)) finishTutorial(step);
+          if (event.result.complete) platform.analytics.track('level_complete', { mode: 'campaign', level_id: a.level.id, attempt: a.board.id, active_ms: a.activeMs, mistakes: a.board.errors.length, first_clear: true });
+        }
+      }
+    }
+    sync();
+  };
+  listeners.push(progress.subscribe(onChange));
+  platform.activity.setBlocked('save-load', true);
+  const slowLoad = setTimeout(() => { if (!loaded && alive) { loadSlow = true; sync(); } }, 4000);
+  const finishLoad = (): void => {
+    clearTimeout(slowLoad); if (!alive || loaded) return; loaded = true; loadSlow = false;
+    platform.activity.setBlocked('save-load', false);
+    platform.ads.installRewardCommit(async receipt => {
+      const result = await progress.commitReward(receipt);
+      if (result === 'applied') {
+        const applied = !progress.state.reservedRewards.some(r => r.id === receipt.id);
+        if (applied) {
+          const recovered = !requestedRewards.delete(`${receipt.attempt}:${receipt.placement}`);
+          platform.analytics.track('ad_reward_granted', { placement: receipt.placement, attempt: receipt.attempt, recovered });
+          if (receipt.placement === 'hint') platform.analytics.track('hint_applied', { attempt: receipt.attempt, recovered });
+          else platform.analytics.track('continue_applied', { attempt: receipt.attempt, source: 'rewarded' });
+        }
+      }
+      return result;
+    });
+    sync();
+  };
+  void progress.load().then(finishLoad);
   const on = <Event extends keyof HTMLElementEventMap>(target: HTMLElement, name: Event, handler: (event: HTMLElementEventMap[Event]) => void, options?: AddEventListenerOptions): void => {
     target.addEventListener(name, handler, options); listeners.push(() => target.removeEventListener(name, handler, options));
   };
   on(root, 'pointerdown', event => {
     if (event.button !== 0 || !inBoard(point(event)) || platform.activity.isBlocked()) return;
-    event.preventDefault(); root.setPointerCapture(event.pointerId);
-    gestures.down(event.pointerId, point(event), performance.now());
-    if (holdTimer !== undefined) clearTimeout(holdTimer);
-    holdTimer = setTimeout(() => { holdTimer = undefined; gestures.hold(performance.now()); }, 305);
+    event.preventDefault(); root.setPointerCapture(event.pointerId); gestures.down(event.pointerId, point(event), performance.now());
+    if (holdTimer !== undefined) clearTimeout(holdTimer); holdTimer = setTimeout(() => { holdTimer = undefined; gestures.hold(performance.now()); }, 305);
   });
   on(root, 'pointermove', event => gestures.move(event.pointerId, point(event)));
-  on(root, 'pointerup', event => {
-    if (holdTimer !== undefined) clearTimeout(holdTimer);
-    gestures.up(event.pointerId, point(event));
-    if (root.hasPointerCapture(event.pointerId)) root.releasePointerCapture(event.pointerId);
-  });
-  on(root, 'pointercancel', cancel);
-  on(root, 'lostpointercapture', event => { if (gestures.hasPointer(event.pointerId)) cancel(); });
+  on(root, 'pointerup', event => { if (holdTimer !== undefined) clearTimeout(holdTimer); gestures.up(event.pointerId, point(event)); if (root.hasPointerCapture(event.pointerId)) root.releasePointerCapture(event.pointerId); });
+  on(root, 'pointercancel', cancel); on(root, 'lostpointercapture', event => { if (gestures.hasPointer(event.pointerId)) cancel(); });
   on(root, 'wheel', event => {
     if (!inBoard(point(event)) || platform.activity.isBlocked()) return;
-    event.preventDefault(); cancel(); scene.zoom(point(event), point(event), Math.exp(-event.deltaY * .0015));
+    event.preventDefault(); cancel(); scene.zoom(point(event), point(event), Math.exp(-event.deltaY * .0015)); scheduleView(); finishTutorial('zoom');
   }, { passive: false });
-  on(document.querySelector<HTMLElement>('#choose-field')!, 'click', () => open('levels'));
+  on(document.querySelector<HTMLElement>('#choose-field')!, 'click', () => open('pause'));
   on(document.querySelector<HTMLElement>('#restart')!, 'click', () => open('restart'));
-  on(document.querySelector<HTMLElement>('#guides')!, 'click', () => { cancel(); scene.setGuides(!scene.guides); });
-  on(document.querySelector<HTMLElement>('#next')!, 'click', () => {
-    cancel(); if (scene.selected === controlScenes.length - 1) open('levels'); else scene.loadLevel(scene.selected + 1);
-  });
-  on(dialog, 'cancel', event => { event.preventDefault(); if (modal !== 'lost') close(); });
-  const blocked = platform.activity.onBlockedChange(value => { if (value) cancel(); }); listeners.push(blocked);
-  const removeState = scene.subscribe(sync); listeners.push(removeState);
-  const observer = new ResizeObserver(() => { cancel(); scene.layout(); });
+  on(document.querySelector<HTMLElement>('#guides')!, 'click', () => { cancel(); scene.setGuides(!scene.guides); if (!control) { saveView(); finishTutorial('guides'); } });
+  on(document.querySelector<HTMLElement>('#next')!, 'click', () => { cancel(); if (control) open('controls'); else run(progress.next(scene.board.attemptId)); });
+  on(hintButton, 'click', () => open('hint'));
+  on(retry, 'click', () => { retry.disabled = true; run(progress.recover().finally(() => { retry.disabled = false; notice = ''; sync(); })); });
+  sessionPlay.textContent = text.sessionPlay;
+  on(sessionPlay, 'click', () => { progress.startSessionOnly(); finishLoad(); });
+  on(dialog, 'cancel', event => { event.preventDefault(); if (modal === 'lost') open('pause'); else close(); sync(); });
+  listeners.push(platform.activity.onBlockedChange(value => { sample(); if (value) { cancel(); saveView(); } }));
+  listeners.push(scene.subscribe(sync));
+  const observer = new ResizeObserver(() => { cancel(); scene.layout(); scheduleView(); });
   observer.observe(document.querySelector('#game-header')!); observer.observe(document.querySelector('#game-footer')!);
   listeners.push(() => observer.disconnect());
-  const blur = (): void => cancel(); window.addEventListener('blur', blur); listeners.push(() => window.removeEventListener('blur', blur));
+  const blur = (): void => { cancel(); saveView(); }; window.addEventListener('blur', blur); listeners.push(() => window.removeEventListener('blur', blur));
+  const hide = (): void => { saveView(); }; window.addEventListener('pagehide', hide); listeners.push(() => window.removeEventListener('pagehide', hide));
+  const timer = setInterval(() => {
+    sample(); sync();
+    if (loaded && performance.now() - lastFlush > 15000 && pendingTime > 0) { lastFlush = performance.now(); saveView(); }
+  }, 250);
+  document.querySelector('#choose-field')!.setAttribute('aria-label', text.pause);
+  document.querySelector('#restart')!.setAttribute('aria-label', text.restart);
+  document.querySelector('#guides')!.setAttribute('aria-label', text.guides);
+  hintButton.textContent = text.hint;
   sync();
   return {
-    onBack(): boolean { if (modal && modal !== 'lost') close(); else open('levels'); return true; },
-    cancel,
+    onBack(): boolean { if (modal && modal !== 'lost') close(); else open('pause'); sync(); return true; }, cancel,
     destroy(): void {
-      cancel(); for (const remove of listeners.reverse()) remove();
-      dialog.close(); platform.activity.setBlocked('dialog', false); content.replaceChildren();
+      saveView(); alive = false; cancel(); clearInterval(timer); clearTimeout(slowLoad); if (cameraTimer !== undefined) clearTimeout(cameraTimer);
+      for (const remove of listeners.reverse()) remove();
+      dialog.close(); platform.activity.setBlocked('dialog', false); platform.activity.setBlocked('save-load', false); content.replaceChildren();
+      // The final accepted write is allowed to settle; no later receipt can mutate a disposed store.
+      void progress.flush().finally(() => progress.destroy());
     },
   };
 }

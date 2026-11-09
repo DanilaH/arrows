@@ -14,5 +14,7 @@
   "save_error": {"operation":"string","reason":"string"},
   "ad_event": {"format":"string","phase":"string"},
   "ad_reward_granted": {"placement":"string","attempt":"string","recovered":"boolean"},
-  "language_change": {"language":"string"}
+  "language_change": {"language":"string"},
+  "level_error": {"mode":"string","level_id":"string","attempt":"string","first":"boolean","lives":"number"},
+  "level_resume": {"mode":"string","level_id":"string","attempt":"string"}
 }

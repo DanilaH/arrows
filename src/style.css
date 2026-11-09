@@ -5,6 +5,7 @@ html, body { overflow: hidden; overscroll-behavior: none; background: #1e1e2c; c
 button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; border: 0; }
 button:focus-visible, #game-root:focus-visible { outline: 2px solid #a7a8ff; outline-offset: 4px; }
 button:active { transform: scale(.94); }
+button:disabled { cursor: default; opacity: .55; transform: none; }
 #game-shell { position: relative; }
 #game-root { position: absolute; inset: 0; touch-action: none; outline: none; }
 #game-root canvas { display: block; }
@@ -25,6 +26,13 @@ h1 { margin: 0; font-size: 14px; line-height: 1.3; font-weight: 550; color: #999
 #game-footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px max(18px, env(safe-area-inset-right)) calc(16px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); text-align: center; pointer-events: none; }
 #game-footer button { pointer-events: auto; }
 #app-status { min-height: 22px; margin: 0 0 12px; font-size: 12px; color: #9298bc; line-height: 1.6; }
+#app-status { max-width: 390px; margin-left: auto; margin-right: auto; text-wrap: balance; }
+.hint-button { min-height: 44px; padding: 10px 22px; margin-right: 12px; border-radius: 24px; background: #353952; color: #bfc5ff; vertical-align: middle; }
+#tutorial-pointer { position: absolute; width: 34px; height: 34px; border: 2px solid #a6a6ff; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); animation: point-pulse 1.2s ease-out 3; }
+@keyframes point-pulse { 50% { box-shadow: 0 0 0 10px #9292ff14; } }
+#save-status { position: absolute; top: 128px; left: 16px; right: 16px; margin: auto; max-width: 440px; padding: 12px 14px; border-radius: 14px; background: #393344; color: #eed7ce; font-size: 12px; line-height: 1.5; display: flex; gap: 10px; align-items: center; }
+#save-retry, #session-play { min-height: 44px; background: #554c65; border-radius: 20px; padding: 8px 12px; flex-shrink: 0; }
+#dialog-content p { margin: 0 0 12px; text-align: center; color: #a5accf; font-size: 14px; line-height: 1.6; text-wrap: balance; }
 #field-name { display: block; font-size: 11px; color: #666d93; margin-top: 10px; }
 #guides { font-size: 27px; font-weight: 650; }
 #guides[aria-pressed='true'] { background: #6767ff; color: #f2f1ff; }
@@ -54,4 +62,4 @@ h1 { margin: 0; font-size: 14px; line-height: 1.3; font-weight: 550; color: #999
   #app-status { margin-bottom: 6px; min-height: 16px; font-size: 11px; }
   #field-name { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { #progress-fill { transition: none; } }
+@media (prefers-reduced-motion: reduce) { #progress-fill { transition: none; } #tutorial-pointer { animation: none; } }

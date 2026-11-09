@@ -1,4 +1,5 @@
 import type { Point } from '../domain/geometry';
+import type { ViewState } from '../progression/save';
 export interface Rect { x: number; y: number; width: number; height: number; }
 export class BoardCamera {
   public x = 0; public y = 0; public scale = 1;
@@ -7,6 +8,16 @@ export class BoardCamera {
   public constructor(private readonly width: number, private readonly height: number) {}
   public screen(p: Point): Point { return { x: this.x + p.x * this.scale, y: this.y + p.y * this.scale }; }
   public world(p: Point): Point { return { x: (p.x - this.x) / this.scale, y: (p.y - this.y) / this.scale }; }
+  public snapshot(): ViewState {
+    const center = this.world({ x: this.view.x + this.view.width / 2, y: this.view.y + this.view.height / 2 });
+    return { centerX: center.x, centerY: center.y, zoom: this.scale / this.minScale };
+  }
+  public restore(view: ViewState): void {
+    this.scale = Math.max(this.minScale, Math.min(this.maxScale, this.minScale * view.zoom));
+    this.x = this.view.x + this.view.width / 2 - view.centerX * this.scale;
+    this.y = this.view.y + this.view.height / 2 - view.centerY * this.scale; this.clamp();
+  }
+  public focus(point: Point): ViewState { return { centerX: point.x, centerY: point.y, zoom: Math.max(this.scale, Math.min(26, this.maxScale)) / this.minScale }; }
   public layout(view: Rect, reset = false): void {
     const oldCenter = this.world({ x: this.view.x + this.view.width / 2, y: this.view.y + this.view.height / 2 });
     const oldRelative = this.scale / this.minScale;

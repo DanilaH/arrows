@@ -4,6 +4,7 @@ import { controlScenes } from '../content/controlScenes';
 import { Board, type MoveResult } from '../domain/board';
 import { extractPath, measurePath, pointAt, type Arrow, type MeasuredPath, type Point } from '../domain/geometry';
 import { BoardCamera, type Rect } from '../input/camera';
+import type { ViewState } from '../progression/save';
 
 export const GAME_PRESENTABLE_EVENT = 'arrows:scene-authored';
 const colors = { arrow: 0xb4bcfa, exit: 0x6767ff, error: 0xff526d, dot: 0x3e425b, guide: 0x41455f };
@@ -18,6 +19,7 @@ export class BoardScene extends Phaser.Scene {
   public selected = 0;
   public guides = false;
   public preview: string | null = null;
+  public hintTarget: string | null = null;
   public clock = 0;
   public frames = 0;
   public playArea: Rect = { x: 0, y: 0, width: 1, height: 1 };
@@ -41,6 +43,7 @@ export class BoardScene extends Phaser.Scene {
   private heightCss = 1;
   private readonly listeners = new Set<() => void>();
   private stableDirty = true;
+  private focusMotion: { from: ViewState; to: ViewState; elapsed: number } | null = null;
   private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   public constructor(private readonly options: SceneOptions) { super('board'); }
   public create(): void {
@@ -61,13 +64,37 @@ export class BoardScene extends Phaser.Scene {
   private changed(): void { for (const listener of this.listeners) listener(); this.options.dirty(); }
   public loadLevel(index: number): void {
     const level = controlScenes[index]; if (!level) return;
-    this.selected = index; this.board = new Board(level, crypto.randomUUID());
+    this.selected = index; this.loadAttempt(new Board(level, crypto.randomUUID()));
+  }
+  public loadAttempt(board: Board, view: ViewState | null = null, guides = false, hint: string | null = null): void {
+    const level = board.level; this.board = board; this.guides = guides; this.hintTarget = null; this.focusMotion = null;
     this.boardCamera = new BoardCamera(level.width, level.height);
     this.paths = new Map(level.arrows.map(a => [a.id, measurePath(a.path)]));
     this.dotMask = new Map(level.mask.map(p => [`${p.x},${p.y}`, p]));
     this.flights.length = 0; this.pulses.clear(); this.preview = null;
     this.entry = this.clock - (this.reducedMotion ? 500 : 0); this.errorUntil = -1; this.victoryAt = -1; this.victoryCursor = 0; this.announcedWin = false;
-    this.stableDirty = true; this.layout(true); this.drawDots(); this.changed();
+    this.stableDirty = true; this.layout(true);
+    if (view) { this.boardCamera.restore(view); this.transform(); }
+    this.drawDots(); this.setHint(hint); this.changed();
+  }
+  public acceptBoard(board: Board, result?: MoveResult): void {
+    this.board = board;
+    if (result && result.kind !== 'ignored') this.presentMove(result);
+    this.stableDirty = true; this.changed();
+  }
+  public setHint(id: string | null, focus = true): void {
+    if (this.hintTarget === id) return;
+    this.hintTarget = id;
+    const arrow = this.board.remaining.find(a => a.id === id);
+    if (arrow && focus) {
+      const head = arrow.path.at(-1)!, screen = this.boardCamera.screen(head), v = this.playArea;
+      if (screen.x < 36 || screen.x > v.width - 36 || screen.y < v.y + 36 || screen.y > v.y + v.height - 36 || this.boardCamera.scale < 15) {
+        const to = this.boardCamera.focus(head);
+        if (this.reducedMotion) { this.boardCamera.restore(to); this.transform(); }
+        else this.focusMotion = { from: this.boardCamera.snapshot(), to, elapsed: 0 };
+      }
+    }
+    this.stableDirty = true; this.changed();
   }
   public get finished(): boolean { return this.announcedWin; }
   private measureView(): Rect {
@@ -92,21 +119,24 @@ export class BoardScene extends Phaser.Scene {
     const ratio = 1 / this.scale.zoom, camera = this.boardCamera;
     this.world.setPosition(camera.x * ratio, camera.y * ratio).setScale(camera.scale * ratio);
   }
-  public pan(dx: number, dy: number): void { this.boardCamera.pan(dx, dy); this.transform(); this.changed(); }
+  public pan(dx: number, dy: number): void { this.focusMotion = null; this.boardCamera.pan(dx, dy); this.transform(); this.changed(); }
   public zoom(previous: Point, current: Point, ratio: number): void {
-    this.boardCamera.zoom(previous, current, ratio); this.transform(); this.stableDirty = true; this.changed();
+    this.focusMotion = null; this.boardCamera.zoom(previous, current, ratio); this.transform(); this.stableDirty = true; this.changed();
   }
   public setPreview(id: string | null): void { if (id === this.preview) return; this.preview = id; this.stableDirty = true; this.changed(); }
   public setGuides(value: boolean): void { this.guides = value; this.stableDirty = true; this.changed(); }
   public activate(id: string): MoveResult {
     const result = this.board.activate(id);
     if (result.kind === 'ignored') return result;
+    this.presentMove(result); return result;
+  }
+  private presentMove(result: Exclude<MoveResult, { kind: 'ignored' }>): void {
     if (result.kind === 'removed') {
-      this.flights.push({ path: this.paths.get(id)!, travelled: 0, speed: Math.max(22, 950 / this.boardCamera.scale), age: 0 });
+      this.flights.push({ path: this.paths.get(result.arrow.id)!, travelled: 0, speed: Math.max(22, 950 / this.boardCamera.scale), age: 0 });
     } else {
       this.errorUntil = this.clock + 230; this.excite(result.arrow.path.at(-1)!, 12);
     }
-    this.preview = null; this.stableDirty = true; this.changed(); this.options.move(result); return result;
+    this.preview = null; this.stableDirty = true; this.changed(); this.options.move(result);
   }
   private drawDots(): void {
     this.dots.clear().fillStyle(colors.dot, 1);
@@ -139,7 +169,7 @@ export class BoardScene extends Phaser.Scene {
         this.guidesLayer.lineBetween(head.x, head.y, head.x + path.direction.x * 150, head.y + path.direction.y * 150);
       }
       const visible = ease < 1 ? extractPath(path, 0, path.length * ease) : arrow.path;
-      this.stroke(this.stable, visible, arrow.id === this.preview ? colors.exit : this.board.isError(arrow.id) ? colors.error : colors.arrow, stroke, ease > .6);
+      this.stroke(this.stable, visible, arrow.id === this.preview || arrow.id === this.hintTarget ? colors.exit : this.board.isError(arrow.id) ? colors.error : colors.arrow, stroke * (arrow.id === this.hintTarget ? 1.65 : 1), ease > .6);
     }
   }
   private excite(point: Point, impulse: number): void {
@@ -157,12 +187,19 @@ export class BoardScene extends Phaser.Scene {
     }
   }
   public hasMotion(): boolean {
-    return this.clock - this.entry < 400 || this.flights.length > 0 || this.pulses.size > 0 || this.errorUntil > this.clock ||
+    return this.focusMotion !== null || this.clock - this.entry < 400 || this.flights.length > 0 || this.pulses.size > 0 || this.errorUntil > this.clock ||
       this.victoryAt >= 0 && this.clock - this.victoryAt < (this.reducedMotion ? 150 : 1200);
   }
   public update(_time: number, delta: number): void {
     this.frames += 1;
     const dt = Math.min(40, Math.max(0, delta)); this.clock += dt;
+    if (this.focusMotion) {
+      const f = this.focusMotion; f.elapsed += dt; const t = 1 - (1 - Math.min(1, f.elapsed / 320)) ** 3;
+      this.boardCamera.restore({ centerX: f.from.centerX + (f.to.centerX - f.from.centerX) * t,
+        centerY: f.from.centerY + (f.to.centerY - f.from.centerY) * t, zoom: f.from.zoom + (f.to.zoom - f.from.zoom) * t });
+      this.transform(); this.stableDirty = true;
+      if (f.elapsed >= 320) { this.focusMotion = null; this.changed(); }
+    }
     if (this.clock - this.entry < 420) this.stableDirty = true;
     if (this.stableDirty) this.drawStable();
     this.active.clear(); const stroke = Math.max(.1, 1.7 / this.boardCamera.scale);

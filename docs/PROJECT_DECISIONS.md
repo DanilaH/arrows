@@ -2,7 +2,7 @@
 
 ## Product and scope
 
-The supplied replication spec is the target. Stage A now has a first playable implementation: four fixed own control scenes (6/6/68/188 arrows), correct extraction and blocker rules, input/camera, dots, errors and idle rendering. Local model/browser verification is recorded in `STAGE_A_IMPLEMENTATION.md`. Physical Android feel/performance acceptance remains open; the campaign bank and full product parity are not complete.
+The supplied replication spec is the target. Stage B now implements a 20-level own chapter and durable game/reward authority; see `STAGE_B_IMPLEMENTATION.md`. The larger release bank and C–E remain required. Historical Stage A baseline: four fixed own control scenes (6/6/68/188 arrows), correct extraction and blocker rules, input/camera, dots, errors and idle rendering. Local model/browser verification is recorded in `STAGE_A_IMPLEMENTATION.md`. Physical Android feel/performance acceptance remains open; the campaign bank and full product parity are not complete.
 
 Scope clarification, 2026-11-09: the game-kit review covers the complete built Android game preparing for RuStore, not only the modules needed to draw the first scene. `KIT_REUSE.md` now maps advertising, analytics, saves, feedback, progression, UI, diagnostics, native release and store packaging to reusable code/recipes, consumer work and evidence. Stage A remains the next implementation milestone; the full release scope is not deferred out of the project.
 
@@ -29,7 +29,7 @@ Stage A keeps the board camera in CSS/world coordinates and maps its container t
 
 ## Durability and ads
 
-Initialization has no save schema or fake save. Define validated contentVersion, attempt identity, removed/error-marked arrows, lives, camera, per-date daily state and reward ledger during stage B. Select native durable storage and a coordinated writer before advertising rewards. Do not treat Web Storage or a queue as an atomic native receipt implementation.
+Stage B now owns validated schema v1, immutable saved level geometry, attempt/content identity, removals/errors/lives, camera, separate daily map and the effect+receipt ledger through one coordinated writer. Native storage was selected and is connected before reward commit. Do not treat Web Storage or a queue as an atomic native receipt implementation.
 
 Native SDK infrastructure is now added, adapted from Road Lines at `180d5b1`: Yandex Mobile Ads/AppMetrica, haptics, native atomic storage and durable earned inbox. `NATIVE_PLATFORM.md` records scope and provenance. Accounts, purchases and banners are not implemented. The spec's cadence and free-continue policy are explicitly project assumptions, not measured original behavior.
 
@@ -39,7 +39,7 @@ Implementation moved the native transport/dependency work forward using the exis
 
 ## Assets, language and native identity
 
-RU/EN copy now covers the Stage A game surface/dialogs. Complete campaign localization, both themes and sound remain later work; the native haptic cues need phone tuning. System fonts/procedural geometry avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.1.0 / Android versionCode 2 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
+RU/EN copy now covers the Stage A game surface/dialogs. Complete campaign localization, both themes and sound remain later work; the native haptic cues need phone tuning. System fonts/procedural geometry avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.2.0 / Android versionCode 3 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
 
 ## Open decisions before corresponding features
 
@@ -48,3 +48,11 @@ RU/EN copy now covers the Stage A game surface/dialogs. Complete campaign locali
 - Exact collection records/medals, League, account/purchase scope; no invented UI implementations.
 - Game save codecs/migrations and reward writer coordination above the native storage adapter; back-stack behavior.
 - Real sound reference, gradient-arrow trigger, self-blocking ambiguity and exact gesture tuning.
+
+## Stage B policy decisions
+
+The first chapter contains 20 fixed own tasks (Hard 6/12/18, Nightmare 20) and ends explicitly. The full bank remains stage E. Active Hint idle is 12 seconds excluding required tutorials/background/dialogs/ads; camera movement does not reset it. Free refill is once per attempt; restart resets that eligibility. These remain project policies.
+
+A late earned right for an ineligible/retired attempt is durably reserved under its original identity rather than applied to the next task. Reservations and receipt IDs are retained without arbitrary trimming; a future explicit recovery/support policy must honor them. Invalid/future progress is preserved verbatim in storage and opens an explicitly unsaved session. Only unsafe camera metadata is automatically repaired. A failed write is resolved by authoritative readback or gates mutations until recovery.
+
+The save schema has no earlier shipped gameplay version to migrate. Started attempts embed their original immutable geometry so a later generator update cannot reroll them. Attempt events are best-effort after durable state, not an exactly-once telemetry outbox.
