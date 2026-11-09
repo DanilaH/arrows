@@ -7,7 +7,8 @@ import { copy, normalizeGameLanguage } from './app/language';
 import { createPlatformRuntime } from './app/platform';
 import { getStartupSnapshot, startupTimeline } from './app/startup';
 import { getInitialGameSize, installViewportRuntime } from './app/viewport';
-import { BootstrapScene, GAME_PRESENTABLE_EVENT } from './game/BootstrapScene';
+import { BoardScene, GAME_PRESENTABLE_EVENT } from './game/BoardScene';
+import { installGameSurface } from './game/surface';
 
 const language = normalizeGameLanguage(navigator.language);
 const text = copy[language];
@@ -53,20 +54,34 @@ const cleanup = (): void => {
 };
 
 try {
-  const platform = createPlatformRuntime();
+  let handleBack = (): boolean => false;
+  const platform = createPlatformRuntime(() => handleBack());
   reportReady = () => platform.analytics.track('app_ready', { language });
   disposers.push(() => platform.destroy());
   startupTimeline.mark('platformReady');
   const size = getInitialGameSize();
   const ratio = getRenderPixelRatio(2);
   const backing = getBackingStoreSize(size.width, size.height, ratio);
-  let renderQueued = false;
-  const game = new Phaser.Game({
+  let game: Phaser.Game | undefined;
+  const requestRender = (): void => {
+    if (!alive || !game || !firstFrame || platform.activity.isBlocked()) return;
+    game.loop.wake();
+  };
+  const scene = new BoardScene({
+    dirty: requestRender,
+    move: () => undefined,
+    ready(activeScene) {
+      const surface = installGameSurface(activeScene, platform, language);
+      handleBack = () => surface.onBack();
+      disposers.push(() => surface.destroy());
+    },
+  });
+  game = new Phaser.Game({
     type: Phaser.AUTO,
     parent: 'game-root',
     width: backing.width, height: backing.height,
     backgroundColor: '#1e1e2c',
-    scene: [BootstrapScene],
+    scene: [scene],
     scale: { mode: Phaser.Scale.NONE, zoom: 1 / ratio },
     callbacks: {
       preBoot(bootingGame) {
@@ -74,41 +89,34 @@ try {
           bootingGame.events.once(Phaser.Core.Events.POST_RENDER, () => {
             firstFrame = true;
             startupTimeline.mark('gamePresentable');
-            shell.dataset.scene = 'bootstrap';
+            shell.dataset.scene = 'board';
             preload.complete();
-            bootingGame.loop.sleep();
+
           });
         });
       },
     },
   });
-  disposers.push(() => destroyRenderer(game));
-
-  // This scene has no animation. Stage A must wake while motion is active and
-  // sleep only after its final frame, preserving this dirty-paint boundary.
-  const requestRender = (): void => {
-    if (!alive || !firstFrame || platform.activity.isBlocked()) return;
-    if (!renderQueued) {
-      renderQueued = true;
-      game.events.once(Phaser.Core.Events.POST_RENDER, () => {
-        renderQueued = false;
-        game.loop.sleep();
-      });
-    }
-    game.loop.wake();
+  const activeGame = game;
+  disposers.push(() => destroyRenderer(activeGame));
+  const settle = (): void => {
+    if (firstFrame && (platform.activity.isBlocked() || !scene.hasMotion())) activeGame.loop.sleep();
   };
+  activeGame.events.on(Phaser.Core.Events.POST_RENDER, settle);
+  disposers.push(() => activeGame.events.off(Phaser.Core.Events.POST_RENDER, settle));
+
   const applyBlocked = (blocked: boolean): void => {
-    if (!game.isBooted) return;
-    game.sound.mute = blocked;
-    game.input.enabled = !blocked;
+    if (!activeGame.isBooted) return;
+    activeGame.sound.mute = blocked;
+    activeGame.input.enabled = !blocked;
     if (!firstFrame) return;
-    if (blocked) game.loop.sleep();
+    if (blocked) activeGame.loop.sleep();
     else requestRender();
   };
   const removeBlocked = platform.activity.onBlockedChange(applyBlocked);
   disposers.push(removeBlocked);
-  game.events.once(Phaser.Core.Events.READY, () => applyBlocked(platform.activity.isBlocked()));
-  const viewport = installViewportRuntime(game, requestRender);
+  activeGame.events.once(Phaser.Core.Events.READY, () => applyBlocked(platform.activity.isBlocked()));
+  const viewport = installViewportRuntime(activeGame, requestRender);
   disposers.push(() => viewport.destroy());
   if (import.meta.env.DEV) {
     void import('./app/debug').then(({ installDebugPanel }) => {

@@ -2,7 +2,7 @@
   "schema": 1,
   "folder_url": "https://drive.google.com/drive/folders/1Zw5hOmrq3N1CNFfMH610RiPgjeYAmbf6",
   "listing_checked_on": "2026-11-09",
-  "verification": "Folder listing and file metadata only; MP4 bytes were not downloaded, playback was not inspected, hashes have not been computed in this session.",
+  "verification": "Folder listing verified for eight files. V06 bytes downloaded, ffprobe metadata verified and selected visual frames inspected on 2026-11-09; other files are not newly inspected or hashed. See STAGE_A_IMPLEMENTATION.md.",
   "files": [
     {
       "code": "V06",
@@ -13,7 +13,16 @@
       "size_bytes": 74608971,
       "modified_time": "2026-11-08T15:56:25.793Z",
       "role": "primary_reference",
-      "sha256": null
+      "sha256": "c32f1f98a37753eba07901e337948e5fb2673c747020bfa6a328602bec954dff",
+      "visual_checks_seconds": [
+        34.9,
+        35.1,
+        35.3,
+        35.5,
+        35.7,
+        35.9,
+        86
+      ]
     },
     {
       "code": "V11",

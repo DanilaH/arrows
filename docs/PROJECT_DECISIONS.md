@@ -2,7 +2,7 @@
 
 ## Product and scope
 
-The supplied replication spec is the target. Current work initializes the repository only. No gameplay, level bank or parity is declared complete. The next milestone is stage A: four fixed control scenes (straight, bent, Hard silhouette, dense Nightmare), correct extraction, input, camera, dots, errors and measured resources.
+The supplied replication spec is the target. Stage A now has a first playable implementation: four fixed own control scenes (6/6/68/188 arrows), correct extraction and blocker rules, input/camera, dots, errors and idle rendering. Local model/browser verification is recorded in `STAGE_A_IMPLEMENTATION.md`. Physical Android feel/performance acceptance remains open; the campaign bank and full product parity are not complete.
 
 Scope clarification, 2026-11-09: the game-kit review covers the complete built Android game preparing for RuStore, not only the modules needed to draw the first scene. `KIT_REUSE.md` now maps advertising, analytics, saves, feedback, progression, UI, diagnostics, native release and store packaging to reusable code/recipes, consumer work and evidence. Stage A remains the next implementation milestone; the full release scope is not deferred out of the project.
 
@@ -23,7 +23,9 @@ Use Phaser 4.2.1 from the reviewed kit baseline. Cap DPR at 2; Phaser 4 physical
 
 First readiness follows scene creation, first `POST_RENDER`, removal of the loading shell and an uncovered browser paint. A background blocker does not prevent that first frame, but disables input/mutes sound and prevents ongoing render work. Browser visibility and native background remain independent. An old native getState response cannot override a newer appStateChange event. Late listener handles are removed after disposal.
 
-Back currently minimizes the app because only the root bootstrap surface exists. Before real menus/gameplay, route Back through the navigation stack and save the active attempt. This is not a finished navigation system.
+Back now delegates to the game surface: close the current dialog or open field selection. Domain input cancels on blockers, blur/capture loss and resize. Main-game Home/campaign routing and saving before navigation belong to B–C.
+
+Stage A keeps the board camera in CSS/world coordinates and maps its container through the capped physical DPR. Use the Phaser camera viewport (with matching scroll offset) to clip world geometry at the measured HUD/footer bounds. Phaser 4 GeometryMask is Canvas-only; no WebGL mask filter/offscreen texture is needed for a rectangular play area. Input uses the same play-area bounds.
 
 ## Durability and ads
 
@@ -37,11 +39,11 @@ Implementation moved the native transport/dependency work forward using the exis
 
 ## Assets, language and native identity
 
-RU/EN copy covers the initial shell. Complete game localization, both themes, sound and haptics remain later work. System fonts and a procedural mark avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.0.1 / Android versionCode 1 are initialization values; establish final store identity before publishing.
+RU/EN copy now covers the Stage A game surface/dialogs. Complete campaign localization, both themes and sound remain later work; the native haptic cues need phone tuning. System fonts/procedural geometry avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.1.0 / Android versionCode 2 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
 
 ## Open decisions before corresponding features
 
-- Fixed sizes/arrow-segment-dot counts for the four control scenes; target phone and recording conditions.
+- Four control scene sizes/counts are fixed in `STAGE_A_IMPLEMENTATION.md`; target phone and recording conditions remain to be recorded.
 - Level authoring/generation, selection criteria and bank exhaustion behavior.
 - Exact collection records/medals, League, account/purchase scope; no invented UI implementations.
 - Game save codecs/migrations and reward writer coordination above the native storage adapter; back-stack behavior.

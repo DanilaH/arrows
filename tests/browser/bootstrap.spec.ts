@@ -15,7 +15,7 @@ test('renders without external services and idles after its first frame', async 
   });
   await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
-  await expect(page.locator('#game-shell')).toHaveAttribute('data-scene', 'bootstrap');
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-scene', 'board');
   await expect(page.locator('#startup-preload')).toBeHidden();
   await expect(page.locator('#debug-root')).toBeHidden();
   await expect(page.locator('canvas')).toBeVisible();

@@ -7,16 +7,14 @@ import { createAds } from '../platform/ads';
 import { createHaptics } from '../platform/haptics';
 import { createStorage } from '../platform/storage';
 
-export function createPlatformRuntime() {
+export function createPlatformRuntime(onBack: () => boolean = () => false) {
   // The bootstrap surface is not gameplay. Stage A will own gameplayDesired.
   const activity = new GameplayActivityCoordinator(() => undefined, () => undefined);
   const removeVisibility = installDocumentVisibilityBlocker(activity);
   const native = Capacitor.isNativePlatform();
   const removeNative = native
     ? installNativeLifecycle(activity, App, () => {
-      // Only one root screen exists at init. Replace with navigation-stack Back
-      // before adding gameplay, dialogs, campaign or Challenge.
-      void App.minimizeApp().catch(console.warn);
+      if (!onBack()) void App.minimizeApp().catch(console.warn);
     })
     : () => undefined;
   const analytics = createAnalytics();

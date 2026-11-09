@@ -9,8 +9,26 @@
   </head>
   <body>
     <main id="game-shell" data-status="starting">
-      <div id="game-root" aria-hidden="true"></div>
-      <div id="boot-caption"><h1 id="app-title">Стрелки</h1><p id="app-status">Сцена инициализации</p></div>
+      <div id="game-root" tabindex="0" role="application" aria-label="Arrow puzzle"></div>
+      <header id="game-header">
+        <div class="top-row">
+          <div class="top-actions">
+            <button id="choose-field" class="circle" type="button" aria-label="Choose a board"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+            <button id="restart" class="circle" type="button" aria-label="Restart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8a8 8 0 1 1-1 7M5 3v6h6"/></svg></button>
+          </div>
+          <div class="heading"><h1 id="app-title">Стрелки</h1><span id="difficulty"></span></div>
+          <div class="top-spacer"></div>
+        </div>
+        <div id="hearts" aria-label="Lives: 3"><span>♥</span><span>♥</span><span>♥</span></div>
+        <div id="board-progress" role="progressbar" aria-label="Board progress" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><div id="progress-fill"></div></div>
+      </header>
+      <footer id="game-footer">
+        <section id="win" hidden><strong id="win-title"></strong><button id="next" class="primary" type="button"></button></section>
+        <p id="app-status"></p>
+        <button id="guides" class="circle" type="button" aria-pressed="false" aria-label="Show exit directions">#</button>
+        <span id="field-name"></span>
+      </footer>
+      <dialog id="game-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
       <section id="startup-preload" data-state="idle" aria-hidden="true">
         <div class="startup-card">
           <strong id="startup-preload-heading">Загрузка</strong>

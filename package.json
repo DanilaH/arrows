@@ -1,6 +1,6 @@
 {
   "name": "arrows",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -15,7 +15,8 @@
     "preview": "vite preview",
     "check": "npm run typecheck && npm test && npm run build",
     "android:sync": "npm run build && node tools/prepare-native.mjs && cap sync android",
-    "android:open": "cap open android"
+    "android:open": "cap open android",
+    "content:controls": "vite build --ssr tools/content/control-scene-source.ts --outDir .test-output/control-source && node tools/content/write-control-scenes.mjs"
   },
   "dependencies": {
     "@capacitor/android": "8.6.0",

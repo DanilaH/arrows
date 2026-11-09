@@ -2,15 +2,19 @@
 
 ## Current milestone
 
-Initialization complete in source: generated/adapted game-kit baseline, pinned dependencies and lockfile, strict TS/Vite/Phaser, Capacitor Android shell, browser/native lifecycle, responsive DPR-capped startup mark, idle renderer, production/debug separation, unit/browser tests and CI.
+First playable Stage A implementation is complete in source, version 0.1.0 / Android versionCode 2. Four fixed own fields contain 6/6/68/188 arrows, including bent extraction, a Hard flower and a dense Nightmare butterfly. Rules, arc-length movement, hold/cancel, pan/pinch, guides, lives/errors, reactive dots and idle rendering are connected to the actual game surface. Details, fixture counts and verification: `STAGE_A_IMPLEMENTATION.md`.
 
-Native platform infrastructure is now connected: Yandex Mobile Ads/AppMetrica SDK dependencies and native plugins, shared analytics schema, earned receipt journal, atomic native storage seam and cancellable haptics. Source provenance, configuration and exact boundaries: `NATIVE_PLATFORM.md`. The shell sends only `app_ready`; advertising awaits real game placements and a coordinated reward writer.
+Native platform infrastructure remains connected: Yandex Mobile Ads/AppMetrica, shared analytics schema, earned receipt journal, atomic native storage seam and cancellable haptics. The surface sends `app_ready` and one in-memory `level_start` on the first accepted action of a control attempt, with mode `control`; full durable campaign telemetry belongs to B. Advertising awaits real placements and a coordinated reward writer. Native phone haptic quality is unverified.
 
-There is no playable level yet. Campaign, gesture automaton, extraction, dots, Hint, progression, game save schemas, sound, final haptic tuning, gameplay ad cadence/events, release signing and store packaging remain unimplemented. The full agreed product is unchanged.
+Campaign/daily, Hint/free and rewarded continuation, durable game save schemas, final sound/haptic tuning, full telemetry/cadence, release signing and store packaging remain unimplemented. Current controls are in-memory attempts; reload or field selection starts them fresh. The full agreed product is unchanged. Stage A's physical phone feel/performance acceptance remains open.
 
 Scope review on 2026-11-09 expanded `KIT_REUSE.md` to the full production map. The follow-up reused existing project integrations in code instead of stopping at that map. Implement gameplay event/reward boundaries during B and complete placement/device acceptance during D–E. Keep the baseline free of banners as specified; open account/purchase decisions remain open.
 
 ## Verification
+
+Current Stage A local verification: 28 unit tests, strict typecheck, production build and `android:sync` pass. The full 16-scenario browser run passed after viewport clipping; two additional idle/repeated-entry scenarios and targeted gesture/resize checks pass on the latest source. The current CI suite contains 18 browser scenarios. Native compilation for this exact playable payload will be recorded after its run; historical bootstrap evidence below does not establish it.
+
+Historical initialization evidence:
 
 - Local `npm run check` after native platform integration: typecheck, 15 unit tests, production build pass.
 - Local `npm run test:browser`: 8 checks pass across phone/desktop Chromium profiles: real render, readiness, no external service requests, DPR cap, idle RAF, resize, Russian copy, reload and denied storage at startup.
@@ -26,13 +30,12 @@ The user explicitly authorized initialization, main-branch writes and routine re
 
 First CI run `42587117226` failed before native compilation because setup-android's default `tools` package no longer exists, and before browser acceptance because Playwright does not support the runner's new Ubuntu 26.04 image. The corrected workflow requests `platform-tools` explicitly and pins Ubuntu 24.04. Corrected run `42587270211` passed both jobs and produced the debug artifact. The following documentation-only evidence update does not change that verified payload.
 
-## Next work: stage A
+## Next work: Stage A phone acceptance, then B
 
-1. Use the [source folder](https://drive.google.com/drive/folders/1Zw5hOmrq3N1CNFfMH610RiPgjeYAmbf6), supplied again on 2026-11-09. Drive listing confirms all eight MP4 files; `research/ARROWS_VIDEO_SOURCES_2026-11-09.json` records their actual IDs/URLs/sizes and primary/comparison roles. Download and inspect selected frames/segments for comparison at stage A. This listing check is not a new playback/audio review or a recovery of the older SHA-256 manifest.
-2. Define four fixed control scenes with recorded arrow, segment and dot counts, including a dense Nightmare stress scene.
-3. Implement independent domain geometry/validation and arc-length extraction; reference spec sections 3–4.
-4. Implement arrow selection, hold/cancel, pan/pinch and explicit CSS/backing/world transforms; kit DOM activation is not the board automaton.
-5. Add dirty stable/active layers, reactive mask dots and error marks. Wake for active animation, sleep after all motion owners finish their last frame.
-6. Compare with source and measure on one named Android before scaling content and screens.
+1. Complete the exact playable APK build in CI. Install it on a named physical Android and record gesture, audio-independent haptic, active/idle frame pacing and repeated-entry behavior for all four fixtures. Do not infer phone 60 FPS from browser tests.
+2. Tune extraction/head/line/dot response against the original clips. V06 is downloaded/hashed and targeted frames at 34.9–35.9 s / 86 s were inspected; other source roles remain in `research/ARROWS_VIDEO_SOURCES_2026-11-09.json`. No new full audio review is claimed.
+3. B: implement one coordinated authoritative save writer, validating/migrating attempt state and restoration after interruption. Preserve separate campaign/daily identities; presentation never owns confirmed moves.
+4. Add the real campaign/tutorial, lives continuation, current-state Hint and once-per-attempt gameplay events. Install reward commit only when effect+dedup is durable and tied to the correct attempt.
+5. Keep C–E and all open parity questions on the agreed plan. These four fixtures are a feel/performance checkpoint, not the production campaign bank.
 
 See `KIT_REUSE.md` for connected versus selected modules and `PROJECT_DECISIONS.md` for open policies. Do not restart research or silently narrow the agreed product to the bootstrap.
