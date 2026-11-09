@@ -41,23 +41,36 @@ async function capture(name, storage, setup, action) {
   const context = await browser.newContext({ ...options, ...(storage ? { storageState: storage } : {}), recordVideo: { dir: output, size: options.viewport } });
   const page = await context.newPage(); await page.goto('http://127.0.0.1:4189'); await ready(page);
   await setup(page); await page.waitForTimeout(450);
-  const start = Date.now(); await page.waitForTimeout(450); await action(page); await page.waitForTimeout(950);
-  const duration = (Date.now() - start) / 1000 + .35, video = page.video();
+  // Explicit screenshots retain short DOM-only menu changes even while the game renderer sleeps.
+  const framesDir = resolve(output, `${name}-frames`); await mkdir(framesDir, { recursive: true });
+  const frames = []; let recording = true;
+  const frameLoop = (async () => {
+    while (recording) {
+      const stamp = Date.now(), filename = `${String(frames.length).padStart(4, '0')}.png`;
+      await page.screenshot({ path: resolve(framesDir, filename), type: 'png' }); frames.push({ filename, stamp });
+      await page.waitForTimeout(Math.max(0, 65 - (Date.now() - stamp)));
+    }
+  })();
+  await page.waitForTimeout(600); await action(page); await page.waitForTimeout(950);
+  recording = false; await frameLoop;
+  const duration = (frames.at(-1).stamp - frames[0].stamp) / 1000, video = page.video();
   const ending = await page.evaluate(() => { const s = JSON.parse(localStorage.getItem('arrows.progress.v1')); return s && { index: s.index, wins: s.wins.length, dailyWins: Object.keys(s.dailyWins), cups: s.cups, screen: document.querySelector('#game-shell').dataset.screen }; });
   await context.close(); const input = await video.path(), target = resolve(output, name + '.gif');
-  const full = Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', input], { encoding: 'utf8' }));
-  const videoStart = Math.max(0, full - duration), filter = 'fps=18,scale=360:-2:flags=lanczos,split[a][b];[a]palettegen=max_colors=96:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=3';
-  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', String(videoStart), '-t', String(duration), '-i', input, '-vf', filter, '-loop', '0', target]);
-  records.push({ name, file: target, video: input, duration, videoStart, ending });
+  const list = frames.map((frame, i) => `file '${frame.filename}'\nduration ${Math.max(.02, ((frames[i + 1]?.stamp ?? frame.stamp + 65) - frame.stamp) / 1000)}`).join('\n') + `\nfile '${frames.at(-1).filename}'\n`;
+  const listPath = resolve(framesDir, 'frames.txt'); await writeFile(listPath, list);
+  const filter = 'fps=18,scale=360:-2:flags=lanczos,split[a][b];[a]palettegen=max_colors=96:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=3';
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', listPath, '-vf', filter, '-loop', '0', target]);
+  records.push({ name, file: target, video: input, duration, frameMode: 'timestamped actual page screenshots', ending });
 }
 try {
   for (let i = 0; i < 60; i++) { try { if ((await fetch('http://127.0.0.1:4189')).ok) break; } catch {} if (i === 59) throw Error('Preview unavailable'); await new Promise(r => setTimeout(r, 100)); }
   await capture('arrows-home', null, async () => {}, async page => {
     await page.locator('#home-play').click(); await page.waitForTimeout(550); await tap(page, fields[0].arrows[0]);
     await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '2'); await page.waitForTimeout(600);
-    await page.locator('#choose-field').click(); await page.waitForTimeout(650); await page.locator('#home-play').click();
+    await page.locator('#choose-field').click(); await page.waitForTimeout(1100); await page.locator('#home-play').click();
     await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '2');
   });
+  if (process.argv[3] !== 'home') {
   // Earn the unlock through normal touch gameplay. The exported storage is never edited or synthesized.
   const prepared = await browser.newContext(options), page = await prepared.newPage();
   await page.goto('http://127.0.0.1:4189'); await ready(page); await page.locator('#home-play').click();
@@ -83,6 +96,7 @@ try {
     await removeUntil(page, daily[day]); await expect(page.locator('#win')).toBeVisible(); await page.waitForTimeout(650);
     await page.locator('#next').click(); await expect(page.locator(`[data-date="${day}"]`)).toHaveClass(/done/);
   });
+  }
   const assetHashes = {};
   for (const name of await readdir('dist/assets')) assetHashes[name] = createHash('sha256').update(await readFile(`dist/assets/${name}`)).digest('hex');
   await writeFile(resolve(output, 'capture-manifest.json'), JSON.stringify({ sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),

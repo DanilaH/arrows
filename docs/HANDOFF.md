@@ -10,7 +10,7 @@ D–E remain: themes/sound/settings, native ad placements/cadence/live earning, 
 
 ## Verification
 
-Current C: strict typecheck/build, 48 unit tests, all 42 browser cases (plus targeted parent-navigation rerun), independent validation of the full 61-day catalog and `android:sync` pass. Native CI/artifact evidence follows separately. See `STAGE_C_IMPLEMENTATION.md`.
+Current C: strict typecheck/build, 48 unit tests, all 42 browser cases (plus targeted parent-navigation rerun), independent validation of the full 61-day catalog and `android:sync` pass. CI [42604407637](https://github.com/DanilaH/arrows/actions/runs/42604407637) passed both jobs on source `4edd27fe30c14fe2da3ab5ab0945f5563d12f2a3`. APK 0.3.0 (4): 9,832,101 bytes; SHA-256 `f7ad4218b791022eae1dd5c26382bf03be665a6168a1e41cf772c3f30b663534`. Its embedded web code, analytics schema and recorded GIF runtime match. Evidence: `verification/STAGE_C_BUILD_2026-11-09.json`. Subsequent capture-tool/evidence updates do not change this payload. See `STAGE_C_IMPLEMENTATION.md`.
 
 Historical B evidence:
 

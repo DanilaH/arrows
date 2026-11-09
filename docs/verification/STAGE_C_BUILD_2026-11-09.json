@@ -1,0 +1,29 @@
+{
+  "source_commit": "4edd27fe30c14fe2da3ab5ab0945f5563d12f2a3",
+  "ci_run": 42604407637,
+  "ci_url": "https://github.com/DanilaH/arrows/actions/runs/42604407637",
+  "ci_jobs": {
+    "web": "success",
+    "android": "success"
+  },
+  "artifact_id": 13668280014,
+  "archive_sha256": "e1570fb6ac6096d1f0d8ab53a09c2b2b77360cfe207227ba243efd392133b5f2",
+  "apk_file": "Arrows-0.3.0-debug.apk",
+  "apk_bytes": 9832101,
+  "apk_sha256": "f7ad4218b791022eae1dd5c26382bf03be665a6168a1e41cf772c3f30b663534",
+  "matched_web_payload_files": [
+    "assets/index-DX6GfJt_.js",
+    "assets/index-ZxEDME3K.css",
+    "assets/web-DpzpTJ5o.js",
+    "index.html"
+  ],
+  "native_generated_helper_bytes": {
+    "cordova.js": 0,
+    "cordova_plugins.js": 0
+  },
+  "shared_analytics_contract_matches": true,
+  "gif_runtime_asset_matches_apk": true,
+  "unit_tests": 48,
+  "browser_scenarios": 42,
+  "limits": "Build/payload and browser evidence; physical Android lifecycle/frame pacing, genuine ads and dashboard delivery remain unverified."
+}
