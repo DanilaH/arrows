@@ -16,14 +16,15 @@ Scope review on 2026-11-09 expanded `KIT_REUSE.md` to the full production map. T
 - Local `npm run test:browser`: 8 checks pass across phone/desktop Chromium profiles: real render, readiness, no external service requests, DPR cap, idle RAF, resize, Russian copy, reload and denied storage at startup.
 - `cap add android` and sync generated the native project and connected @capacitor/app.
 - Follow-up `npm run android:sync` passes with the shared native analytics contract and SDK/plugin source.
-- Local host has Java 17 and no configured Android SDK. An actual `./gradlew --no-daemon assembleDebug` attempt stopped while downloading Gradle (`Network is unreachable`); native compilation is not confirmed. Android CI targets JDK 21 / SDK 36.
+- Local host has Java 17 and no configured Android SDK; its Gradle attempt stopped during download (`Network is unreachable`). Native compilation is now confirmed in GitHub CI on JDK 21 / SDK 36: run [42587270211](https://github.com/DanilaH/arrows/actions/runs/42587270211), source `f06236518d89b0d2a4e2cef99745b57a58c40949`, both web and Android jobs passed. `:app:compileDebugJavaWithJavac` and `assembleDebug` succeeded with the real SDK dependencies.
+- CI uploaded `arrows-bootstrap-debug`, artifact ID `13660066108`, ZIP size 9,049,055 bytes, archive digest `sha256:a73b796d2d0d0f0f7dc3e04764427c74b62d2958415c525419121e26884c3961`. This is the artifact archive digest, not the embedded APK hash. It contains the debug shell APK and is not a signed production game release.
 - These are bootstrap checks. No phone FPS, native advertising, sound or gameplay parity has been measured.
 
 ## Repository delivery
 
 The user explicitly authorized initialization, main-branch writes and routine repository work on 2026-11-09. `DanilaH/arrows` is initialized and full source is published in `main` at `61749a610cc7079e9643df48fabd7ebbc7f92858`; its tree SHA `46bd617a4378510fbdbd16e5cebbae501bc61265` exactly matches the locally checked source. There is no remaining permission blocker for routine repository work.
 
-First CI run `42587117226` started. Its Android job failed during SDK setup because setup-android's default `tools` package no longer exists; Java compilation had not started. The workflow now requests `platform-tools` explicitly and pins Ubuntu 24.04 instead of following ubuntu-latest. Native verification will be recorded after the corrected run finishes.
+First CI run `42587117226` failed before native compilation because setup-android's default `tools` package no longer exists, and before browser acceptance because Playwright does not support the runner's new Ubuntu 26.04 image. The corrected workflow requests `platform-tools` explicitly and pins Ubuntu 24.04. Corrected run `42587270211` passed both jobs and produced the debug artifact. The following documentation-only evidence update does not change that verified payload.
 
 ## Next work: stage A
 
