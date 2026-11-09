@@ -28,7 +28,7 @@ First CI run `42587117226` failed before native compilation because setup-androi
 
 ## Next work: stage A
 
-1. Recover video access/frames for actual comparison; the supplied Markdown reports are preserved, while source videos/JSON manifest are not checked in.
+1. Use the [source folder](https://drive.google.com/drive/folders/1Zw5hOmrq3N1CNFfMH610RiPgjeYAmbf6), supplied again on 2026-11-09. Drive listing confirms all eight MP4 files; `research/ARROWS_VIDEO_SOURCES_2026-11-09.json` records their actual IDs/URLs/sizes and primary/comparison roles. Download and inspect selected frames/segments for comparison at stage A. This listing check is not a new playback/audio review or a recovery of the older SHA-256 manifest.
 2. Define four fixed control scenes with recorded arrow, segment and dot counts, including a dense Nightmare stress scene.
 3. Implement independent domain geometry/validation and arc-length extraction; reference spec sections 3–4.
 4. Implement arrow selection, hold/cancel, pan/pinch and explicit CSS/backing/world transforms; kit DOM activation is not the board automaton.

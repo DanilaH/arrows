@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "folder_url": "https://drive.google.com/drive/folders/1Zw5hOmrq3N1CNFfMH610RiPgjeYAmbf6",
+  "listing_checked_on": "2026-11-09",
+  "verification": "Folder listing and file metadata only; MP4 bytes were not downloaded, playback was not inspected, hashes have not been computed in this session.",
+  "files": [
+    {
+      "code": "V06",
+      "name": "video_2026-11-08_20-55-06.mp4",
+      "drive_file_id": "1-Kvn7EGTSmeIvluKaJdsbNOR4byLclvy",
+      "url": "https://drive.google.com/file/d/1-Kvn7EGTSmeIvluKaJdsbNOR4byLclvy/view?usp=drivesdk",
+      "mime_type": "video/mp4",
+      "size_bytes": 74608971,
+      "modified_time": "2026-11-08T15:56:25.793Z",
+      "role": "primary_reference",
+      "sha256": null
+    },
+    {
+      "code": "V11",
+      "name": "video_2026-11-08_20-55-11.mp4",
+      "drive_file_id": "11eWHcCulpsj1bK2uaCI9bvI0NToNXOUI",
+      "url": "https://drive.google.com/file/d/11eWHcCulpsj1bK2uaCI9bvI0NToNXOUI/view?usp=drivesdk",
+      "mime_type": "video/mp4",
+      "size_bytes": 24126743,
+      "modified_time": "2026-11-08T15:55:42.678Z",
+      "role": "primary_reference",
+      "sha256": null
+    },
+    {
+      "code": "V15",
+      "name": "video_2026-11-08_20-55-15.mp4",
+      "drive_file_id": "1D7xe-e7ijAI0iJ73X-AsEaHabRH7DiFY",
+      "url": "https://drive.google.com/file/d/1D7xe-e7ijAI0iJ73X-AsEaHabRH7DiFY/view?usp=drivesdk",
+      "mime_type": "video/mp4",
+      "size_bytes": 30825303,
+      "modified_time": "2026-11-08T15:55:50.832Z",
+      "role": "primary_reference",
+      "sha256": null
+    },
+    {
+      "code": "V19",
+      "name": "video_2026-11-08_20-55-19.mp4",
+      "drive_file_id": "1xyGrhlBbZ38VLaugqQnBuq4WH1LygEMq",
+      "url": "https://drive.google.com/file/d/1xyGrhlBbZ38VLaugqQnBuq4WH1LygEMq/view?usp=drivesdk",
+      "mime_type": "video/mp4",
+      "size_bytes": 167173741,
+      "modified_time": "2026-11-08T15:58:01.594Z",
+      "role": "primary_reference",
+      "sha256": null
+    },
+    {
+      "code": "V22",
+      "name": "video_2026-11-08_20-55-22.mp4",
+      "drive_file_id": "1UeqX-z2Tv3JalFbXMnln5V7GpxLrkzPe",
+      "url": "https://drive.google.com/file/d/1UeqX-z2Tv3JalFbXMnln5V7GpxLrkzPe/view?usp=drivesdk",
+      "mime_type": "video/mp4",
+      "size_bytes": 127710059,
+      "modified_time": "2026-11-08T15:57:30.127Z",
+      "role": "primary_reference",
+      "sha256": null
+    },
+    {
+      "code": "V25",
+      "name": "video_2026-11-08_20-55-25.mp4",
+      "drive_file_id": "199qCdzyozVwxsMIzb0ZFG--m_2BGNr85",
+      "url": "https://drive.google.com/file/d/199qCdzyozVwxsMIzb0ZFG--m_2BGNr85/view?usp=drivesdk",
+      "mime_type": "video/mp4",
+      "size_bytes": 71709988,
+      "modified_time": "2026-11-08T15:56:40.597Z",
+      "role": "comparison_only",
+      "sha256": null
+    },
+    {
+      "code": "V28",
+      "name": "video_2026-11-08_20-55-28.mp4",
+      "drive_file_id": "1jkAOyg3b9ft_ZPF68L2vIX4HXiex3y5I",
+      "url": "https://drive.google.com/file/d/1jkAOyg3b9ft_ZPF68L2vIX4HXiex3y5I/view?usp=drivesdk",
+      "mime_type": "video/mp4",
+      "size_bytes": 52232025,
+      "modified_time": "2026-11-08T15:56:24.213Z",
+      "role": "comparison_only",
+      "sha256": null
+    },
+    {
+      "code": "V31",
+      "name": "video_2026-11-08_20-55-31.mp4",
+      "drive_file_id": "1VRwwZmqfvlaE0scqPTZfTSw_J_Rtck30",
+      "url": "https://drive.google.com/file/d/1VRwwZmqfvlaE0scqPTZfTSw_J_Rtck30/view?usp=drivesdk",
+      "mime_type": "video/mp4",
+      "size_bytes": 28651227,
+      "modified_time": "2026-11-08T15:56:04.199Z",
+      "role": "comparison_only",
+      "sha256": null
+    }
+  ]
+}
