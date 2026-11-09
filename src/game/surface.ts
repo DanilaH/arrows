@@ -8,6 +8,9 @@ import { ProgressStore, type SaveChange } from '../progression/save';
 import { Board } from '../domain/board';
 import { installMetaSurface } from './meta';
 import { installSettingsSurface, settingsIcon } from './settings';
+import { installAdSurface } from './adSurface';
+import { createAdTransition } from '../platform/adTransition';
+import { interstitialReason } from '../progression/adCadence';
 import { localDate } from '../progression/calendar';
 import { earnedAwards } from '../progression/collection';
 import type { BoardScene } from './BoardScene';
@@ -30,7 +33,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const requestedRewards = new Set<string>();
   let holdTimer: ReturnType<typeof setTimeout> | undefined, cameraTimer: ReturnType<typeof setTimeout> | undefined;
   let modal: 'pause' | 'controls' | 'restart' | 'lost' | 'hint' | null = null;
-  let notice = '', idleMs = 0, pendingTime = 0, lastTime = performance.now(), wasActive = false, lastFlush = lastTime;
+  let notice = '', idleMs = 0, pendingTime = 0, pendingAdTime = 0, lastTime = performance.now(), wasActive = false, lastFlush = lastTime;
   let lastSaveError: string | null = null;
   let knownAwards = new Set<string>(), knownIndex = -1;
   let names = [text.straightName, text.bentName, text.hardName, text.nightmareName];
@@ -39,14 +42,14 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   };
   const sample = (): void => {
     const now = performance.now(), delta = Math.max(0, Math.min(1000, now - lastTime)); lastTime = now;
-    if (wasActive) { pendingTime += delta; if (!tutorial()) idleMs += delta; }
+    if (wasActive) { pendingTime += delta; if (!tutorial()) { idleMs += delta; pendingAdTime += delta; } }
     wasActive = loaded && meta.screen === 'game' && !control && !requestingAd && !platform.activity.isBlocked() && !scene.board.complete && scene.board.hearts > 0;
   };
-  const takeTime = (): number => { sample(); const time = Math.round(pendingTime); pendingTime = 0; return time; };
+  const takeTime = (): [number, number] => { sample(); const times: [number, number] = [Math.round(pendingTime), Math.round(pendingAdTime)]; pendingTime = 0; pendingAdTime = 0; return times; };
   const run = (task: Promise<unknown>): void => { void task.catch(() => { if (alive) { notice = text.saveFailed; sync(); } }); };
   const saveView = (): void => {
     if (!loaded || meta.screen !== 'game' || control || !alive || progress.uncertain) return;
-    run(progress.presentation(scene.board.attemptId, { view: scene.boardCamera.snapshot(), guides: scene.guides }, takeTime()));
+    run(progress.presentation(scene.board.attemptId, { view: scene.boardCamera.snapshot(), guides: scene.guides }, ...takeTime()));
   };
   const scheduleView = (): void => {
     if (cameraTimer !== undefined) clearTimeout(cameraTimer);
@@ -77,7 +80,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       if (requestingAd || platform.activity.isBlocked()) return;
       if (control) { const result = scene.activate(id); if (result.kind !== 'ignored') platform.feedback.play(result.kind === 'error' ? 'error' : 'remove'); return; }
       const expected = scene.board.attemptId;
-      run(progress.move(expected, id, takeTime()));
+      run(progress.move(expected, id, ...takeTime()));
     },
     preview: id => scene.setPreview(id),
     pan: (dx, dy) => { scene.pan(dx, dy); scheduleView(); },
@@ -86,7 +89,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const cancel = (): void => { if (holdTimer !== undefined) clearTimeout(holdTimer); holdTimer = undefined; gestures.cancel(); };
   const close = (): void => { modal = null; dialog.close(); platform.activity.setBlocked('dialog', false); root.focus({ preventScroll: true }); };
   const loadActive = (): void => {
-    cancel(); pendingTime = 0; wasActive = false; idleMs = 0; notice = '';
+    cancel(); pendingTime = 0; pendingAdTime = 0; wasActive = false; freshWinAttempt = ''; idleMs = 0; notice = '';
     const a = active(); celebratedAttempt = a.board.removed.length === a.level.arrows.length ? a.board.id : ''; pendingAward = false; scene.loadAttempt(activeBoard(), a.view, a.guides, a.hint); scheduleView(); sync();
   };
   const enterCampaign = (): void => { const intent = meta.revision; run((async () => {
@@ -98,7 +101,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const leaveGame = (): void => {
     cancel(); saveView(); if (cameraTimer !== undefined) clearTimeout(cameraTimer); cameraTimer = undefined;
     if (!control && active().started) platform.analytics.track('level_exit', { mode: gameMode(), level_id: active().level.id, attempt: active().board.id, active_ms: active().activeMs });
-    pendingTime = 0; wasActive = false;
+    pendingTime = 0; pendingAdTime = 0; wasActive = false; freshWinAttempt = '';
   };
   const meta = installMetaSurface(progress, language, {
     blocked: value => platform.activity.setBlocked('menu', value),
@@ -114,17 +117,41 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     },
   });
   const settingsSurface = installSettingsSurface(platform.settings, platform.activity, platform.feedback, () => { cancel(); saveView(); });
-  let celebratedAttempt = '', pendingAward = false;
-  const backToMenu = (): void => { close(); if (activeDate && !control) meta.show('calendar', activeDate); else meta.show('home'); sync(); };
+  let celebratedAttempt = '', pendingAward = false, freshWinAttempt = '';
+  const backToMenu = (): void => { if (requestingAd || transition.busy) return; close(); if (activeDate && !control) meta.show('calendar', activeDate); else meta.show('home'); sync(); };
+  let rewardIntent = 0, lastPreload = -Infinity, pendingRewardKey = '';
+  const cancelAd = (): void => {
+    if (platform.ads.state.phase !== 'idle') { platform.ads.cancel(); return; }
+    rewardIntent++; requestedRewards.delete(pendingRewardKey); pendingRewardKey = ''; requestingAd = false; adSurface.endPreparation(); sync();
+  };
+  const adSurface = installAdSurface(platform.ads, () => language, cancelAd);
+  const transition = createAdTransition(platform.activity, () => sync(), () => { notice = text.saveFailed; sync(); });
   const requestReward = async (placement: 'hint' | 'lives'): Promise<void> => {
-    const attempt = scene.board.attemptId; requestingAd = true; close();
-    const requestKey = `${attempt}:${placement}`; requestedRewards.add(requestKey);
+    if (requestingAd || transition.busy || !progress.available || progress.uncertain) return;
+    const intent = ++rewardIntent, attempt = scene.board.attemptId, mode = gameMode(); requestingAd = true; close(); adSurface.prepare();
+    const requestKey = `${attempt}:${placement}`; requestedRewards.add(requestKey); pendingRewardKey = requestKey;
     if (placement === 'hint') platform.analytics.track('hint_request', { attempt });
-    const outcome = await platform.ads.show({ kind: 'rewarded', placement, attempt, mode: gameMode() });
-    if (!alive) return;
-    requestingAd = false;
-    if (!outcome.shown) { notice = text.videoUnavailable; requestedRewards.delete(requestKey); }
-    sync();
+    try {
+      await progress.postponeAds(); if (!alive || rewardIntent !== intent) return;
+      const outcome = await platform.ads.show({ kind: 'rewarded', placement, attempt, mode });
+      if (!alive || rewardIntent !== intent) return;
+      if (!outcome.shown) { notice = outcome.outcome === 'cancelled' ? text.videoCancelled : text.videoUnavailable; requestedRewards.delete(requestKey); }
+      else if (!progress.state.receipts.includes(outcome.requestId ?? '')) notice = outcome.earned ? text.rewardPending : text.videoClosed;
+      if (!outcome.earned) requestedRewards.delete(requestKey);
+    } finally { if (alive && rewardIntent === intent) { requestingAd = false; pendingRewardKey = ''; adSurface.endPreparation(); sync(); } }
+  };
+  const advanceWin = (): void => {
+    if (control) { open('controls'); return; }
+    if (!scene.board.complete || !scene.finished || requestingAd || transition.busy) return;
+    const attempt = scene.board.attemptId, date = activeDate, mode = gameMode(), levelId = scene.board.level.id, freshWin = freshWinAttempt === scene.board.attemptId; freshWinAttempt = "";
+    transition.start(async () => {
+      cancel(); saveView(); await progress.flush();
+      const reason = !freshWin ? 'restored_result' : platform.kind !== 'android' ? 'unsupported' : !progress.available || progress.uncertain ? 'save_unavailable' : interstitialReason(progress.state.adCadence, progress.confirmedWins);
+      platform.analytics.track('ad_opportunity', { reason, attempt, mode, level_id: levelId });
+      return reason === 'eligible' && !!await progress.consumeInterstitial(attempt);
+    }, () => platform.ads.show({ kind: 'interstitial', placement: 'continue', attempt, mode }), async () => {
+      if (date) meta.show('calendar', date); else await progress.next(attempt);
+    });
   };
   const open = (kind: NonNullable<typeof modal>): void => {
     cancel(); saveView(); modal = kind; platform.activity.setBlocked('dialog', true); content.replaceChildren();
@@ -189,7 +216,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const exhausted = !control && !activeDate && progress.state.index === campaign.length - 1;
     document.querySelector('#win-title')!.textContent = exhausted ? text.chapterComplete : activeDate ? text.dailyWin : text.win;
     document.querySelector<HTMLButtonElement>('#next')!.textContent = control ? text.chooseField : activeDate ? text.toCalendar : exhausted ? text.completed : text.next;
-    document.querySelector<HTMLButtonElement>('#next')!.disabled = exhausted;
+    document.querySelector<HTMLButtonElement>('#next')!.disabled = exhausted || transition.busy || requestingAd;
     document.querySelector<HTMLButtonElement>('#restart')!.disabled = !control && board.complete;
     const step = tutorial();
     status.textContent = !loaded ? text.restoring : notice || (step ? text[`teach_${step}` as keyof typeof text] : control && remaining === board.level.arrows.length ? text.zoomTip : '');
@@ -239,6 +266,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
         if (event.result?.kind === 'removed') {
           if (scene.board.attemptId === moved.board.id) { idleMs = 0; notice = ''; const step = tutorial(); if (step && ['tap', 'turns', 'blockers'].includes(step)) finishTutorial(step); }
           if (event.result.complete) {
+            if (meta.screen === 'game' && scene.board.attemptId === moved.board.id) freshWinAttempt = moved.board.id;
             platform.analytics.track('level_complete', { mode: owner.mode, level_id: moved.level.id, attempt: moved.board.id, active_ms: moved.activeMs, mistakes: moved.board.errors.length, first_clear: true });
             if (owner.date) platform.analytics.track('daily_complete', { date: owner.date, attempt: moved.board.id });
           }
@@ -263,10 +291,12 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     platform.activity.setBlocked('save-load', false);
     platform.ads.installRewardCommit(async receipt => {
       const result = await progress.commitReward(receipt);
+      const recovered = !requestedRewards.delete(`${receipt.attempt}:${receipt.placement}`);
       if (result === 'applied') {
         const applied = !progress.state.reservedRewards.some(r => r.id === receipt.id);
+        if (!applied) platform.analytics.track('ad_reward_reserved', { placement: receipt.placement, attempt: receipt.attempt });
         if (applied) {
-          const recovered = !requestedRewards.delete(`${receipt.attempt}:${receipt.placement}`);
+          if (receipt.attempt === scene.board.attemptId) notice = '';
           platform.analytics.track('ad_reward_granted', { placement: receipt.placement, attempt: receipt.attempt, recovered });
           if (receipt.placement === 'hint') platform.analytics.track('hint_applied', { attempt: receipt.attempt, recovered });
           else platform.analytics.track('continue_applied', { attempt: receipt.attempt, source: 'rewarded' });
@@ -295,7 +325,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   on(document.querySelector<HTMLElement>('#choose-field')!, 'click', backToMenu);
   on(document.querySelector<HTMLElement>('#restart')!, 'click', () => open('restart'));
   on(document.querySelector<HTMLElement>('#guides')!, 'click', () => { cancel(); scene.setGuides(!scene.guides); if (!control) { saveView(); finishTutorial('guides'); } });
-  on(document.querySelector<HTMLElement>('#next')!, 'click', () => { cancel(); if (control) open('controls'); else if (activeDate) meta.show('calendar', activeDate); else run(progress.next(scene.board.attemptId)); });
+  on(document.querySelector<HTMLElement>('#next')!, 'click', advanceWin);
   on(hintButton, 'click', () => open('hint'));
   on(retry, 'click', () => { retry.disabled = true; run(progress.recover().finally(() => { retry.disabled = false; notice = ''; sync(); })); });
   sessionPlay.textContent = text.sessionPlay;
@@ -312,11 +342,12 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const hide = (): void => { saveView(); }; window.addEventListener('pagehide', hide); listeners.push(() => window.removeEventListener('pagehide', hide));
   const timer = setInterval(() => {
     sample(); sync();
+    if (loaded && !control && meta.screen === 'game' && !platform.activity.isBlocked() && progress.confirmedWins >= 4 && progress.state.adCadence.activeMs + pendingAdTime >= 120000 && performance.now() - lastPreload >= 30000) { lastPreload = performance.now(); void platform.ads.prepareInterstitial(); }
     if (calendarDay !== localDate()) { calendarDay = localDate(); meta.refresh(); }
     if (loaded && performance.now() - lastFlush > 15000 && pendingTime > 0) { lastFlush = performance.now(); saveView(); }
   }, 250);
   document.querySelector('#game-settings')!.innerHTML = settingsIcon;
-  on(document.querySelector<HTMLElement>('#game-settings')!, 'click', () => settingsSurface.open());
+  on(document.querySelector<HTMLElement>('#game-settings')!, 'click', () => { if (!requestingAd && !transition.busy) settingsSurface.open(); });
   const localize = (): void => {
     document.querySelector('#game-settings')!.setAttribute('aria-label', text.settings);
     document.querySelector('#game-root')!.setAttribute('aria-label', text.title);
@@ -337,10 +368,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   }));
   sync();
   return {
-    onBack(): boolean { if (settingsSurface.close()) return true; if (meta.closeTrophy()) return true; if (modal) { close(); sync(); return true; } if (meta.screen === 'home') return false; if (meta.screen === 'game') backToMenu(); else meta.back(); return true; }, cancel,
+    onBack(): boolean { if (requestingAd || platform.ads.state.phase !== 'idle') { cancelAd(); return true; } if (transition.busy) return true; if (settingsSurface.close()) return true; if (meta.closeTrophy()) return true; if (modal) { close(); sync(); return true; } if (meta.screen === 'home') return false; if (meta.screen === 'game') backToMenu(); else meta.back(); return true; }, cancel,
     destroy(): void {
       saveView(); alive = false; cancel(); clearInterval(timer); clearTimeout(slowLoad); if (cameraTimer !== undefined) clearTimeout(cameraTimer);
-      for (const remove of listeners.reverse()) remove(); settingsSurface.destroy(); meta.destroy(); platform.activity.setBlocked('menu', false);
+      for (const remove of listeners.reverse()) remove(); transition.destroy(); adSurface.destroy(); settingsSurface.destroy(); meta.destroy(); platform.activity.setBlocked('menu', false);
       dialog.close(); platform.activity.setBlocked('dialog', false); platform.activity.setBlocked('save-load', false); content.replaceChildren();
       // The final accepted write is allowed to settle; no later receipt can mutate a disposed store.
       void progress.flush().finally(() => progress.destroy());

@@ -24,6 +24,8 @@ jobs:
           name: browser-failures
           path: test-results/
   android:
+    env:
+      APPMETRICA_DEBUG_API_KEY: ${{ secrets.APPMETRICA_DEBUG_API_KEY }}
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -45,10 +47,16 @@ jobs:
         with:
           path: ~/.android/debug.keystore
           key: arrows-debug-signing-v1
-      - run: ./gradlew --no-daemon assembleDebug
+      - run: ./gradlew --no-daemon testDebugUnitTest assembleDebug
         working-directory: native/android
       - uses: actions/upload-artifact@v4
         with:
           name: arrows-debug
           path: native/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-unit-results
+          path: native/android/app/build/test-results/testDebugUnitTest/
           retention-days: 7

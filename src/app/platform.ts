@@ -20,6 +20,7 @@ export function createPlatformRuntime(onBack: () => boolean = () => false) {
     : () => undefined;
   const analytics = createAnalytics();
   const ads = createAds(activity, analytics);
+  const flushAnalytics = (): void => analytics.flush(); window.addEventListener('pagehide', flushAnalytics);
   const storage = createStorage();
   const settings = new SettingsStore(storage, navigator.language);
   const feedback = createFeedback(activity, settings);
@@ -30,6 +31,7 @@ export function createPlatformRuntime(onBack: () => boolean = () => false) {
     analytics, ads, feedback, storage, settings,
     kind: native ? 'android' : 'browser',
     destroy() {
+      window.removeEventListener('pagehide', flushAnalytics);
       ads.destroy();
       analytics.destroy();
       if (!native) { window.removeEventListener('blur', blur); window.removeEventListener('focus', focus); }

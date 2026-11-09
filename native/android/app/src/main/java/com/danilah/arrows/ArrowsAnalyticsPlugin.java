@@ -21,6 +21,14 @@ public class ArrowsAnalyticsPlugin extends Plugin {
             contract = new JSONObject(new String(out.toByteArray(), StandardCharsets.UTF_8));
         } catch (Exception ignored) { /* Invalid/missing contract disables transport. */ }
     }
+    @PluginMethod public void status(PluginCall call) {
+        JSObject result = new JSObject(); result.put("enabled", ArrowsApplication.analyticsEnabled);
+        result.put("configured", !BuildConfig.ANALYTICS_API_KEY.isEmpty()); result.put("contractEvents", contract.length()); call.resolve(result);
+    }
+    @PluginMethod public void flush(PluginCall call) {
+        if (ArrowsApplication.analyticsEnabled) { try { AppMetrica.sendEventsBuffer(); } catch (RuntimeException ignored) {} }
+        call.resolve();
+    }
     @PluginMethod public void report(PluginCall call) {
         String name = call.getString("event", "");
         JSObject params = call.getObject("params", new JSObject());
@@ -34,10 +42,11 @@ public class ArrowsAnalyticsPlugin extends Plugin {
                 : "number".equals(type) && value instanceof Number && Double.isFinite(((Number)value).doubleValue());
             if (!valid) { call.reject("Invalid event parameter"); return; }
         }
+        JSObject result = new JSObject(); result.put("accepted", false); result.put("disabled", !ArrowsApplication.analyticsEnabled);
         if (ArrowsApplication.analyticsEnabled) {
-            try { AppMetrica.reportEvent(name, params.toString()); }
+            try { AppMetrica.reportEvent(name, params.toString()); result.put("accepted", true); }
             catch (RuntimeException ignored) { /* Never a gameplay dependency. */ }
         }
-        call.resolve();
+        call.resolve(result);
     }
 }

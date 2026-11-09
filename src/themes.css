@@ -115,3 +115,13 @@ select:focus-visible { outline: 2px solid var(--accent-focus); outline-offset: 3
   --debug-bg: #eff1f7;
   --progress-bg: #dfe4f0;
 }
+
+#ad-dialog { background: var(--surface); color: var(--ink); border: 1px solid var(--border); border-radius: 26px; padding: 30px 24px 24px; width: min(340px, calc(100vw - 36px)); max-height: calc(100dvh - 36px); overflow: auto; text-align: center; }
+#ad-dialog::backdrop { background: var(--backdrop); }
+#ad-dialog h2 { font-size: 20px; font-weight: 550; margin: 20px 0 10px; }
+#ad-dialog p { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 0 0 18px; }
+#ad-cancel { width: 100%; min-height: 44px; background: var(--surface-soft); color: var(--ink); border-radius: 22px; }
+.ad-spinner { margin: auto; width: 38px; height: 38px; border: 3px solid var(--border); border-top-color: var(--accent-soft); border-radius: 50%; }
+.ad-loading .ad-spinner { animation: ad-spin 800ms linear 18; }
+@keyframes ad-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ad-loading .ad-spinner { animation: none; } }

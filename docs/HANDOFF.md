@@ -2,6 +2,10 @@
 
 ## Current milestone
 
+Version 0.5.0 / Android versionCode 9 connects explicit after-win interstitial transitions, durable active-time/two-win/first-six protection, visible cancellable rewarded loading, foreground-safe continuation, queued native earned receipts and correlated ad/analytics events. Original effect+dedup and exact-ack authority remains in ProgressStore. See `STAGE_D_MONETIZATION.md` for policy and failure contracts. Default APK is test ads; real SDK fill/earned behavior and AppMetrica dashboard delivery are not yet established.
+
+Previous presentation milestone:
+
 Version 0.4.0 / Android versionCode 8 adds live light/dark themes, an accessible settings dialog on Home/gameplay, persisted independent sound/vibration and RU/EN preferences, and original bounded UI/board/life/hint/victory/award cues. Theme/language changes preserve current attempt, camera, errors, receipt ownership and mode. Separate preference storage cannot overwrite progress. Native system-bar icons follow the theme; physical-device feel remains unverified. See `STAGE_D_PRESENTATION.md`.
 
 Previous trophy milestone:
@@ -12,9 +16,13 @@ Save schema 2 adds an earned-design binding map. Pre-update awarded cups retain 
 
 Stage C navigation/records remain: Collection at current level 10, daily at 20, independent attempts/cameras, and three explicitly adapted local medals. League is still open. The temporary control-board review link is on Home and must be removed for release.
 
-D–E remain: native placements/cadence/live earning, dashboard delivery, physical-phone sound/haptics/system-bar/feel/performance/process-kill evidence, release bank, signing and RuStore package. Keep attaching authentic GIFs for visible changes.
+D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, physical-phone sound/haptics/system-bar/feel/performance/process-kill evidence, release bank, signing and RuStore package. Keep attaching authentic GIFs for visible changes.
 
 ## Verification
+
+Current 0.5.0: 71 TS tests and five pure-Java journal tests pass, along with strict typecheck/build, six isolated browser UI integration cases and fourteen actual progression cases. The full 62-case browser suite also passes (56 application cases and six isolated integration-harness cases). Exact native artifact/CI evidence follows separately.
+
+Historical 0.4.0:
 
 Current 0.4.0: strict typecheck/build, 61 unit tests, the full 56-case browser suite and final ten-case settings/focus-return rerun pass locally. `android:sync` passes. [CI 42625659830](https://github.com/DanilaH/arrows/actions/runs/42625659830) passed both jobs on source `361b3a657a485cdccbf240ca16581b920eaf2ed2`: 61 unit tests, all 56 browser cases and Android `assembleDebug`. APK 0.4.0 (8): 10,177,341 bytes; SHA-256 `278c1e402d476287bf40504f0d615bb89b709160cc7a95af7a36d82d02af0e87`. Archive digest, every embedded web file, shared analytics contract, native SystemBars configuration and both GIF runtime payloads match. Evidence: `verification/STAGE_D_PRESENTATION_BUILD_2026-11-09.json`. The capture-tool/evidence-only follow-up has the same application runtime. Physical-phone sound, haptics, bars and performance acceptance remain open.
 
@@ -63,7 +71,7 @@ First CI run `42587117226` failed before native compilation because setup-androi
 ## Next work: D and physical acceptance
 
 1. Verify 0.4.0 on a named Android device: both themes/insets, system bars, sound/loudness/audio focus, independent vibration switches, return from interruptions and update persistence. Do not claim exact original sound.
-2. Complete native ad placements/interstitial cadence and verify genuine earned delivery, interruption and dashboard events on an exact Android artifact.
+2. Accept 0.5.0 native advertising on an exact Android artifact: genuine SDK earned delivery, interruption/process restoration, both dismissal/foreground orders and matching AppMetrica dashboard events. Configure a separate APPMETRICA_DEBUG_API_KEY through repository secrets for that run.
 3. Preserve schema 2 migration, per-date identity, combined writer/receipt ordering and reserved rights. Keep stage C local record policies explicit; League remains open.
 4. E: curate the larger bank, extend dated coverage, final identity/icon/splash, production signing and RuStore materials/disclosures.
 5. Measure named-device touch/zoom, frame pacing, haptics and process-kill restoration. Browser checks/GIFs do not establish phone performance.

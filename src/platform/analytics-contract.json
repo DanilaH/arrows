@@ -1,22 +1,117 @@
 {
-  "app_ready": {"language":"string"},
-  "runtime_error": {"operation":"string","reason":"string"},
-  "level_start": {"mode":"string","level_id":"string","content_version":"number","attempt":"string","resumed":"boolean"},
-  "level_complete": {"mode":"string","level_id":"string","attempt":"string","active_ms":"number","mistakes":"number","first_clear":"boolean"},
-  "level_restart": {"mode":"string","level_id":"string","attempt":"string"},
-  "level_exit": {"mode":"string","level_id":"string","attempt":"string","active_ms":"number"},
-  "tutorial_step": {"step":"string","outcome":"string"},
-  "hint_request": {"attempt":"string"},
-  "hint_applied": {"attempt":"string","recovered":"boolean"},
-  "continue_applied": {"attempt":"string","source":"string"},
-  "daily_complete": {"date":"string","attempt":"string"},
-  "collection_unlock": {"item":"string"},
-  "save_error": {"operation":"string","reason":"string"},
-  "ad_event": {"format":"string","phase":"string"},
-  "ad_reward_granted": {"placement":"string","attempt":"string","recovered":"boolean"},
-  "language_change": {"language":"string"},
-  "level_error": {"mode":"string","level_id":"string","attempt":"string","first":"boolean","lives":"number"},
-  "level_resume": {"mode":"string","level_id":"string","attempt":"string"},
-  "screen_view": {"screen":"string"},
-  "daily_open": {"date":"string","attempt":"string","resumed":"boolean"}
+  "app_ready": {
+    "language": "string"
+  },
+  "runtime_error": {
+    "operation": "string",
+    "reason": "string"
+  },
+  "level_start": {
+    "mode": "string",
+    "level_id": "string",
+    "content_version": "number",
+    "attempt": "string",
+    "resumed": "boolean"
+  },
+  "level_complete": {
+    "mode": "string",
+    "level_id": "string",
+    "attempt": "string",
+    "active_ms": "number",
+    "mistakes": "number",
+    "first_clear": "boolean"
+  },
+  "level_restart": {
+    "mode": "string",
+    "level_id": "string",
+    "attempt": "string"
+  },
+  "level_exit": {
+    "mode": "string",
+    "level_id": "string",
+    "attempt": "string",
+    "active_ms": "number"
+  },
+  "tutorial_step": {
+    "step": "string",
+    "outcome": "string"
+  },
+  "hint_request": {
+    "attempt": "string"
+  },
+  "hint_applied": {
+    "attempt": "string",
+    "recovered": "boolean"
+  },
+  "continue_applied": {
+    "attempt": "string",
+    "source": "string"
+  },
+  "daily_complete": {
+    "date": "string",
+    "attempt": "string"
+  },
+  "collection_unlock": {
+    "item": "string"
+  },
+  "save_error": {
+    "operation": "string",
+    "reason": "string"
+  },
+  "ad_event": {
+    "format": "string",
+    "phase": "string",
+    "request_id": "string",
+    "placement": "string",
+    "attempt": "string",
+    "mode": "string"
+  },
+  "ad_reward_granted": {
+    "placement": "string",
+    "attempt": "string",
+    "recovered": "boolean"
+  },
+  "language_change": {
+    "language": "string"
+  },
+  "level_error": {
+    "mode": "string",
+    "level_id": "string",
+    "attempt": "string",
+    "first": "boolean",
+    "lives": "number"
+  },
+  "level_resume": {
+    "mode": "string",
+    "level_id": "string",
+    "attempt": "string"
+  },
+  "screen_view": {
+    "screen": "string"
+  },
+  "daily_open": {
+    "date": "string",
+    "attempt": "string",
+    "resumed": "boolean"
+  },
+  "ad_result": {
+    "format": "string",
+    "placement": "string",
+    "attempt": "string",
+    "mode": "string",
+    "request_id": "string",
+    "shown": "boolean",
+    "outcome": "string",
+    "earned": "boolean"
+  },
+  "ad_opportunity": {
+    "reason": "string",
+    "attempt": "string",
+    "mode": "string",
+    "level_id": "string"
+  },
+  "ad_reward_reserved": {
+    "placement": "string",
+    "attempt": "string"
+  }
 }

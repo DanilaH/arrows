@@ -19,7 +19,7 @@ public class ArrowsAdsPlugin extends Plugin {
     private final Handler handler = new Handler(Looper.getMainLooper());
     private boolean ready, destroyed, background, preparing;
     private int preloadGeneration;
-    private long retryAt;
+    private long retryAt, rewardRetryAt;
     private InterstitialAdLoader interLoader;
     private RewardedAdLoader rewardLoader;
     private InterstitialAd interstitial;
@@ -29,10 +29,11 @@ public class ArrowsAdsPlugin extends Plugin {
     private static final class Session {
         final PluginCall call;
         final String kind, placement, attempt, mode;
-        final String id = UUID.randomUUID().toString();
+        final String id;
+        Runnable timeout;
         boolean invoked, shown, earned;
-        Session(PluginCall call, String kind, String placement, String attempt, String mode) {
-            this.call = call; this.kind = kind; this.placement = placement; this.attempt = attempt; this.mode = mode;
+        Session(PluginCall call, String kind, String placement, String attempt, String mode, String requestId) {
+            this.call = call; this.kind = kind; this.placement = placement; this.attempt = attempt; this.mode = mode; this.id = requestId.isEmpty() ? UUID.randomUUID().toString() : requestId;
         }
     }
     @Override public void load() {
@@ -57,8 +58,14 @@ public class ArrowsAdsPlugin extends Plugin {
         if (destroyed) return;
         JSObject e = new JSObject(); e.put("kind", kind); e.put("phase", phase); notifyListeners("adEvent", e);
     }
+    private void event(Session s, String phase) {
+        if (destroyed) return;
+        JSObject e = new JSObject(); e.put("kind", s.kind); e.put("phase", phase); e.put("requestId", s.id);
+        e.put("placement", s.placement); e.put("attempt", s.attempt); e.put("mode", s.mode); notifyListeners("adEvent", e);
+    }
     @PluginMethod public void status(PluginCall call) { handler.post(() -> {
         JSObject result = new JSObject(); result.put("ready", ready); result.put("mode", BuildConfig.AD_MODE);
+        result.put("active", session == null ? "idle" : session.shown ? "shown" : session.invoked ? "invoked" : "loading");
         result.put("rewarded", available("rewarded")); result.put("interstitial", available("interstitial")); call.resolve(result);
     }); }
     @PluginMethod public void prepareInterstitial(PluginCall call) { handler.post(() -> {
@@ -69,7 +76,7 @@ public class ArrowsAdsPlugin extends Plugin {
         Runnable timeout = () -> {
             if (!preparing || generation != preloadGeneration) return;
             preparing = false; preloadGeneration++; retryAt = SystemClock.elapsedRealtime() + 30000;
-            interLoader.cancelLoading(); event("interstitial", "load_error");
+            interLoader.cancelLoading(); event("interstitial", "load_timeout");
         };
         handler.postDelayed(timeout, 15000);
         try {
@@ -88,69 +95,69 @@ public class ArrowsAdsPlugin extends Plugin {
     }); }
     @PluginMethod public void show(PluginCall call) { handler.post(() -> {
         String kind = call.getString("kind", ""), placement = call.getString("placement", "");
-        String attempt = call.getString("attempt", ""), mode = call.getString("mode", "");
-        if ((!kind.equals("interstitial") && !kind.equals("rewarded")) ||
+        String attempt = call.getString("attempt", ""), mode = call.getString("mode", ""), requestId = call.getString("requestId", "");
+        if ((!requestId.isEmpty() && !requestId.matches("[a-zA-Z0-9_-]{1,100}")) || (!kind.equals("interstitial") && !kind.equals("rewarded")) ||
             !attempt.matches("[a-zA-Z0-9_-]{1,100}") || (!mode.equals("campaign") && !mode.equals("daily")) ||
             (kind.equals("rewarded") ? !placement.equals("hint") && !placement.equals("lives") : !placement.equals("continue"))) {
             call.reject("Invalid ad request"); return;
         }
-        if (!available(kind) || session != null || background || !getActivity().hasWindowFocus()) { resolve(call, false, "unavailable"); return; }
-        try { if (journal.pending() != null) { resolve(call, false, "unavailable"); return; } }
+        if (!available(kind) || session != null || background || !getActivity().hasWindowFocus() || kind.equals("rewarded") && SystemClock.elapsedRealtime() < rewardRetryAt) { resolve(call, false, "unavailable"); return; }
+        try { if (journal.pending().length() > 0) { resolve(call, false, "unavailable"); return; } }
         catch (Exception error) { resolve(call, false, "unavailable"); return; }
-        Session s = new Session(call, kind, placement, attempt, mode); session = s;
+        Session s = new Session(call, kind, placement, attempt, mode, requestId); session = s;
         try {
             if (kind.equals("interstitial")) {
                 if (interstitial == null) { finish(s, "unavailable"); return; }
                 interstitial.setAdEventListener(new InterstitialAdEventListener() {
                     public void onAdShown() { shown(s); }
-                    public void onAdFailedToShow(@NonNull AdError error) { if (session == s) { event(kind, "show_error"); finish(s, "error"); } }
-                    public void onAdDismissed() { if (session == s) { event(kind, "dismiss"); finish(s, "dismissed"); } }
+                    public void onAdFailedToShow(@NonNull AdError error) { if (session == s) { event(s, "show_error"); finish(s, "error"); } }
+                    public void onAdDismissed() { if (session == s) { event(s, "dismiss"); finish(s, "dismissed"); } }
                     public void onAdClicked() {}
-                    public void onAdImpression(@Nullable ImpressionData data) { if (session == s) event(kind, "impression"); }
+                    public void onAdImpression(@Nullable ImpressionData data) { if (session == s) event(s, "impression"); }
                 });
-                s.invoked = true; interstitial.show(getActivity());
+                s.invoked = true; event(s, "invoke"); interstitial.show(getActivity());
             } else {
-                event(kind, "request");
-                handler.postDelayed(() -> { if (session == s && !s.invoked) finish(s, "unavailable"); }, 15000);
+                event(s, "request");
+                s.timeout = () -> { if (session == s && !s.invoked) { rewardRetryAt = SystemClock.elapsedRealtime() + 30000; event(s, "load_timeout"); finish(s, "unavailable"); } };
+                handler.postDelayed(s.timeout, 15000);
                 rewardLoader.loadAd(new AdRequest.Builder(unit(kind)).build(), new RewardedAdLoadListener() {
                     public void onAdLoaded(@NonNull RewardedAd ad) {
                         if (session != s || destroyed) { ad.setAdEventListener(null); return; }
                         if (background || !getActivity().hasWindowFocus()) { ad.setAdEventListener(null); finish(s, "cancelled"); return; }
-                        rewarded = ad; event(kind, "loaded"); displayRewarded(s);
+                        rewarded = ad; event(s, "loaded"); displayRewarded(s);
                     }
                     public void onAdFailedToLoad(@NonNull AdRequestError error) {
-                        if (session == s) { event(kind, "load_error"); finish(s, "error"); }
+                        if (session == s) { rewardRetryAt = SystemClock.elapsedRealtime() + 30000; event(s, "load_error"); finish(s, "error"); }
                     }
                 });
             }
-        } catch (RuntimeException error) { event(kind, "show_error"); finish(s, "error"); }
+        } catch (RuntimeException error) { event(s, "show_error"); finish(s, "error"); }
     }); }
-    private void shown(Session s) { if (session == s) { s.shown = true; event(s.kind, "show"); } }
+    private void shown(Session s) { if (session == s) { s.shown = true; event(s, "show"); } }
     private void displayRewarded(Session s) {
         rewarded.setAdEventListener(new RewardedAdEventListener() {
             public void onAdShown() { shown(s); }
-            public void onAdFailedToShow(@NonNull AdError error) { if (session == s) { event(s.kind, "show_error"); finish(s, "error"); } }
-            public void onAdDismissed() { if (session == s) { event(s.kind, "dismiss"); finish(s, "dismissed"); } }
+            public void onAdFailedToShow(@NonNull AdError error) { if (session == s) { event(s, "show_error"); finish(s, "error"); } }
+            public void onAdDismissed() { if (session == s) { event(s, "dismiss"); finish(s, "dismissed"); } }
             public void onAdClicked() {}
-            public void onAdImpression(@Nullable ImpressionData data) { if (session == s) event(s.kind, "impression"); }
+            public void onAdImpression(@Nullable ImpressionData data) { if (session == s) event(s, "impression"); }
             public void onRewarded(@NonNull Reward reward) {
-                if (session != s || s.earned) return;
+                if (!s.invoked || s.earned) return;
                 s.earned = true;
                 try {
                     JSONObject receipt = new JSONObject(); receipt.put("schema", 1); receipt.put("id", s.id);
                     receipt.put("placement", s.placement); receipt.put("attempt", s.attempt); receipt.put("mode", s.mode);
-                    journal.record(receipt); event(s.kind, "earned");
-                } catch (Exception error) { event(s.kind, "receipt_pending"); }
+                    journal.record(receipt); event(s, "earned");
+                } catch (Exception error) { event(s, "receipt_pending"); }
             }
         });
-        s.invoked = true;
+        s.invoked = true; if (s.timeout != null) handler.removeCallbacks(s.timeout); event(s, "invoke");
         try { rewarded.show(getActivity()); }
-        catch (RuntimeException error) { event(s.kind, "show_error"); finish(s, "error"); }
+        catch (RuntimeException error) { event(s, "show_error"); finish(s, "error"); }
     }
     @PluginMethod public void pending(PluginCall call) { handler.post(() -> {
         try {
-            JSONObject receipt = journal.pending(); JSArray receipts = new JSArray(); if (receipt != null) receipts.put(receipt);
-            JSObject result = new JSObject(); result.put("receipts", receipts); call.resolve(result);
+            JSObject result = new JSObject(); result.put("receipts", journal.pending()); call.resolve(result);
         } catch (Exception error) { call.reject("Earned receipt storage unavailable"); }
     }); }
     @PluginMethod public void acknowledge(PluginCall call) { handler.post(() -> {
@@ -159,7 +166,8 @@ public class ArrowsAdsPlugin extends Plugin {
     }); }
     @PluginMethod public void cancelPending(PluginCall call) { handler.post(() -> {
         // Never guess that a displayed SDK screen has closed.
-        if (session != null && !session.invoked) finish(session, "cancelled");
+        String requestId = call.getString("requestId", "");
+        if (session != null && !session.invoked && (requestId.isEmpty() || session.id.equals(requestId))) finish(session, "cancelled");
         call.resolve();
     }); }
     private void resolve(PluginCall call, boolean shown, String outcome) {
@@ -167,11 +175,12 @@ public class ArrowsAdsPlugin extends Plugin {
     }
     private void finish(Session s, String outcome) {
         if (session != s) return;
-        session = null;
+        session = null; if (s.timeout != null) handler.removeCallbacks(s.timeout);
+        if (outcome.equals("cancelled") || outcome.equals("unavailable")) event(s, outcome);
         if (rewarded != null) { rewarded.setAdEventListener(null); rewarded = null; }
         if (rewardLoader != null && !s.invoked && s.kind.equals("rewarded")) rewardLoader.cancelLoading();
         if (interstitial != null && s.kind.equals("interstitial")) { interstitial.setAdEventListener(null); interstitial = null; }
-        resolve(s.call, s.shown, outcome);
+        JSObject result = new JSObject(); result.put("shown", s.shown); result.put("outcome", outcome); result.put("earned", s.earned); result.put("requestId", s.id); s.call.resolve(result);
     }
     @Override protected void handleOnPause() { background = true; if (session != null && !session.invoked) finish(session, "cancelled"); }
     @Override protected void handleOnResume() { background = false; }

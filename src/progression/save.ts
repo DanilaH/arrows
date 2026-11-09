@@ -6,6 +6,7 @@ import { legacyTrophyBinding, trophyBinding, validTrophyBinding } from '../conte
 import type { TrophyBinding } from '../domain/trophy';
 import { Board, canExit, validateLevel, type Attempt, type Level, type MoveResult } from '../domain/board';
 import { parseReceipt, type EarnedReceipt } from '../platform/ads';
+import { decodeAdCadence, deferAds, freshAdCadence, interstitialReason, type AdCadence } from './adCadence';
 
 export const SAVE_KEY = 'arrows.progress.v1';
 export interface ViewState { centerX: number; centerY: number; zoom: number; }
@@ -21,6 +22,7 @@ export interface GameSave {
   receipts: string[]; reservedRewards: EarnedReceipt[];
   dailyCatalogVersion: number; dailyWins: Record<string, Win>; cups: string[]; facts: RunFact[]; seenAwards: string[]; collectionSeen: boolean;
   trophyDesigns: Record<string, TrophyBinding>;
+  adCadence: AdCadence;
 }
 export interface SaveChange { kind: 'load' | 'state' | 'move'; result?: MoveResult; attempt?: string; mode?: 'campaign' | 'daily'; date?: string; startedNow?: boolean; }
 export const freshAttempt = (level: Level, id = crypto.randomUUID()): SavedAttempt => ({
@@ -28,7 +30,7 @@ export const freshAttempt = (level: Level, id = crypto.randomUUID()): SavedAttem
   continuations: 0, hint: null, started: false, activeMs: 0,
 });
 export const freshSave = (): GameSave => ({ schema: 2, revision: 0, catalogVersion: CATALOG_VERSION, index: 0,
-  campaign: freshAttempt(campaign[0]!), daily: {}, wins: [], tutorials: [], receipts: [], reservedRewards: [], dailyCatalogVersion: DAILY_CATALOG_VERSION, dailyWins: {}, cups: [], facts: [], seenAwards: [], collectionSeen: false, trophyDesigns: {} });
+  campaign: freshAttempt(campaign[0]!), daily: {}, wins: [], tutorials: [], receipts: [], reservedRewards: [], dailyCatalogVersion: DAILY_CATALOG_VERSION, dailyWins: {}, cups: [], facts: [], seenAwards: [], collectionSeen: false, trophyDesigns: {}, adCadence: freshAdCadence() });
 const record = (v: unknown): Record<string, unknown> => {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw Error('Invalid save object');
   return v as Record<string, unknown>;
@@ -116,7 +118,8 @@ export function decodeSave(value: unknown): GameSave {
   if (Object.entries(trophyDesigns).some(([month, binding]) => !cups.includes(month) || !validTrophyBinding(month, binding)) ||
       cups.some(month => !Object.hasOwn(trophyDesigns, month))) throw Error('Invalid awarded trophy design');
   const seenAwards = strings(s.seenAwards);
-  return { ...s, campaign: current, wins, daily, receipts, tutorials, reservedRewards, dailyWins, cups, facts, seenAwards, trophyDesigns } as GameSave;
+  const adCadence = decodeAdCadence(s.adCadence, wins.length + Object.keys(dailyWins).length);
+  return { ...s, campaign: current, wins, daily, receipts, tutorials, reservedRewards, dailyWins, cups, facts, seenAwards, trophyDesigns, adCadence } as GameSave;
 }
 
 /** Every mutation derives from the latest committed state inside ONE queue, including camera and SDK receipts. */
@@ -186,13 +189,14 @@ export class ProgressStore {
       this.state = loaded; this.available = true; this.uncertain = false; this.error = null; this.emit({ kind: 'load' });
     });
   }
-  public move(expected: string, arrow: string, activeMs = 0): Promise<MoveResult | undefined> {
+  public move(expected: string, arrow: string, activeMs = 0, adActiveMs = activeMs): Promise<MoveResult | undefined> {
     return this.update(next => {
       const target = this.findAttempt(expected, next); if (!target) return null;
       const a = target.saved, startedNow = !a.started;
       const board = new Board(a.level, a.board.id, a.board), result = board.activate(arrow);
       if (result.kind === 'ignored') return null;
       a.started = true; a.activeMs += Math.max(0, Math.round(activeMs)); a.board = board.snapshot();
+      next.adCadence.activeMs += Math.max(0, Math.round(adActiveMs));
       if (result.kind === 'removed') {
         if (a.hint === arrow) a.hint = null;
         if (board.complete) {
@@ -211,11 +215,22 @@ export class ProgressStore {
       return { value: result, event: { kind: 'move', result, attempt: expected, mode: target.mode, ...(target.date ? { date: target.date } : {}), startedNow } };
     });
   }
-  public presentation(expected: string, fields: Partial<Pick<SavedAttempt, 'view' | 'guides'>>, activeMs = 0): Promise<void | undefined> {
+  public presentation(expected: string, fields: Partial<Pick<SavedAttempt, 'view' | 'guides'>>, activeMs = 0, adActiveMs = activeMs): Promise<void | undefined> {
     return this.update(next => {
       const target = this.findAttempt(expected, next); if (!target) return null;
-      Object.assign(target.saved, fields); target.saved.activeMs += Math.max(0, Math.round(activeMs)); return { value: undefined };
+      Object.assign(target.saved, fields); target.saved.activeMs += Math.max(0, Math.round(activeMs)); next.adCadence.activeMs += Math.max(0, Math.round(adActiveMs)); return { value: undefined };
     });
+  }
+  public get confirmedWins(): number { return this.state.wins.length + Object.keys(this.state.dailyWins).length; }
+  public consumeInterstitial(expected: string): Promise<boolean | undefined> {
+    return this.update(next => {
+      const owner = this.findAttempt(expected, next), wins = next.wins.length + Object.keys(next.dailyWins).length;
+      if (!owner || !new Board(owner.saved.level, expected, owner.saved.board).complete || interstitialReason(next.adCadence, wins) !== 'eligible') return null;
+      deferAds(next.adCadence, wins); return { value: true };
+    }, true);
+  }
+  public postponeAds(): Promise<boolean | undefined> {
+    return this.update(next => { deferAds(next.adCadence, next.wins.length + Object.keys(next.dailyWins).length); return { value: true }; }, true);
   }
   public tutorial(step: string): Promise<boolean | undefined> {
     return this.update(next => { if (next.tutorials.includes(step)) return null; next.tutorials.push(step); return { value: true }; });

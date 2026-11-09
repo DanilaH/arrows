@@ -115,6 +115,13 @@ describe('earned receipt and native service boundaries', () => {
 });
 
 describe('analytics and native storage', () => {
+  it('distinguishes SDK acceptance from disabled or failed transport without claiming delivery', async () => {
+    const report = vi.fn().mockResolvedValueOnce({ accepted: true, disabled: false }).mockResolvedValueOnce({ accepted: false, disabled: true }).mockRejectedValueOnce(Error('SDK error'));
+    const analytics = createAnalytics({ report });
+    for (let i = 0; i < 3; i++) analytics.track('app_ready', { language: 'ru' });
+    for (let i = 0; i < 8; i++) await Promise.resolve();
+    expect(analytics.snapshot()).toMatchObject({ accepted: 1, disabled: 1, failed: 1, outstanding: 0 }); analytics.destroy();
+  });
   it('rejects event/parameter drift, oversized strings, non-finite numbers and raw save fields', () => {
     expect(validEvent('app_ready', { language: 'ru' })).toBe(true);
     expect(validEvent('app_ready', { language: 'ru', save: '{}' })).toBe(false);
@@ -146,5 +153,34 @@ describe('analytics and native storage', () => {
     expect(await storage.getItem('campaign')).toBe('{"revision":4}');
     await expect(storage.setItem('campaign', '{"revision":5}')).rejects.toThrow('Write failed');
     expect(await storage.getItem('campaign')).toBe('{"revision":4}');
+  });
+});
+
+describe('late and unavailable advertising services', () => {
+  it('processes a receipt arriving after the observation deadline without issuing a second pending RPC', async () => {
+    const s = setup(), query = deferred<{ receipts: unknown[] }>(), commit = vi.fn(async () => 'applied' as const);
+    s.bridge.pending.mockReturnValue(query.promise); s.ads.installRewardCommit(commit);
+    await vi.advanceTimersByTimeAsync(2100); await s.ads.recover(); expect(s.bridge.pending).toHaveBeenCalledOnce();
+    expect(s.activity.isBlocked()).toBe(false); query.resolve({ receipts: [receipt] });
+    for (let i = 0; i < 15; i++) await Promise.resolve();
+    expect(commit).toHaveBeenCalledOnce(); expect(s.bridge.acknowledge).toHaveBeenCalledWith({ id: receipt.id }); s.ads.destroy();
+  });
+  it('continues to commit later receipts when one acknowledgement never returns, keeping one RPC per id', async () => {
+    const s = setup(), ack = deferred<void>(), applied = new Set<string>();
+    const second = { ...receipt, id: 'earned-2' };
+    s.bridge.pending.mockResolvedValue({ receipts: [receipt, second] }); s.bridge.acknowledge.mockImplementation(({ id }) => id === receipt.id ? ack.promise : Promise.resolve());
+    s.ads.installRewardCommit(async r => { const duplicate = applied.has(r.id); applied.add(r.id); return duplicate ? 'already-applied' : 'applied'; });
+    await vi.advanceTimersByTimeAsync(2200); expect([...applied]).toEqual([receipt.id, second.id]);
+    void s.ads.recover(); await vi.advanceTimersByTimeAsync(2200);
+    expect(s.bridge.acknowledge.mock.calls.filter(([r]) => r.id === receipt.id)).toHaveLength(1); expect(applied.size).toBe(2); expect(s.activity.isBlocked()).toBe(false); s.ads.destroy();
+  });
+  it('scopes loading cancellation and ignores stale show callbacks from another request', async () => {
+    const s = setup(); const pending = s.ads.show({ kind: 'interstitial', placement: 'continue', attempt: 'a', mode: 'campaign' });
+    const requestId = s.ads.state.requestId!;
+    s.event({ kind: 'interstitial', phase: 'invoke', requestId: 'old-request' }); expect(s.ads.state.phase).toBe('loading');
+    s.ads.cancel(); expect(s.bridge.cancelPending).toHaveBeenCalledWith({ requestId }); await Promise.resolve(); await Promise.resolve();
+    s.event({ kind: 'interstitial', phase: 'invoke', requestId }); expect(s.ads.state.phase).toBe('invoked');
+    s.ads.cancel(); expect(s.bridge.cancelPending).toHaveBeenCalledOnce();
+    s.show.resolve({ shown: true, outcome: 'dismissed' }); await pending; expect(s.ads.state.phase).toBe('idle'); s.ads.destroy();
   });
 });

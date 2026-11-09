@@ -60,6 +60,10 @@ try {
   const platform = createPlatformRuntime(() => handleBack());
   reportReady = () => platform.analytics.track('app_ready', { language: platform.settings.state.language });
   disposers.push(() => platform.destroy());
+  const runtimeError = (): void => platform.analytics.track('runtime_error', { operation: 'javascript', reason: 'uncaught_exception' });
+  const rejected = (): void => platform.analytics.track('runtime_error', { operation: 'javascript', reason: 'unhandled_rejection' });
+  window.addEventListener('error', runtimeError); window.addEventListener('unhandledrejection', rejected);
+  disposers.push(() => { window.removeEventListener('error', runtimeError); window.removeEventListener('unhandledrejection', rejected); });
   startupTimeline.mark('platformReady');
   const size = getInitialGameSize();
   const ratio = getRenderPixelRatio(2);
