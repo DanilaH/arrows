@@ -28,7 +28,7 @@ Inspecting artwork or rendering an after-earning appearance never modifies troph
 
 ## Verification
 
-Visibility correction 0.3.3: strict typecheck/build, 53 unit tests, all 14 relevant browser cases and `android:sync` pass locally. The browser regression asserts that only the twelve installed months appear, no future-year selector exists, reload preserves that boundary, and current-calendar inspection closes/restores focus without issuing awards. Native CI/artifact evidence follows separately.
+Visibility correction 0.3.3: strict typecheck/build, 53 unit tests, all 14 relevant browser cases and `android:sync` pass locally. The browser regression asserts that only the twelve installed months appear, no future-year selector exists, reload preserves that boundary, and current-calendar inspection closes/restores focus without issuing awards. Both jobs in [CI 42621244791](https://github.com/DanilaH/arrows/actions/runs/42621244791) pass on source `9a87bfce9f6859d6f5274840e361fb2a0d7c5ba7`, including all 46 browser cases and native `assembleDebug`. APK 0.3.3 (7) is 10,169,565 bytes, SHA-256 `ac652e9c47283e1201df86e4aad5e61a540fc0b7c6c5a7f827c1a4fd1804c31f`; all embedded web files, analytics contract and the current GIF runtime match. Evidence: `verification/TROPHY_VISIBILITY_BUILD_2026-11-09.json`.
 
 Historical 0.3.2 art verification:
 

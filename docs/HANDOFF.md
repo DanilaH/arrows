@@ -12,7 +12,7 @@ D–E remain: themes/sound/settings, native placements/cadence/live earning, das
 
 ## Verification
 
-Current visibility correction: strict typecheck/build, 53 unit tests, all 14 relevant browser cases on phone/desktop and `android:sync` pass locally. CI and exact 0.3.3 APK evidence follow separately.
+Current visibility correction: strict typecheck/build, 53 unit tests, all 14 relevant browser cases on phone/desktop and `android:sync` pass locally. [CI 42621244791](https://github.com/DanilaH/arrows/actions/runs/42621244791) passed both jobs on source `9a87bfce9f6859d6f5274840e361fb2a0d7c5ba7`, including all 46 browser cases and Android `assembleDebug`. APK 0.3.3 (7): 10,169,565 bytes; SHA-256 `ac652e9c47283e1201df86e4aad5e61a540fc0b7c6c5a7f827c1a4fd1804c31f`. Every embedded web payload file, shared analytics contract and recorded GIF runtime match. Evidence: `verification/TROPHY_VISIBILITY_BUILD_2026-11-09.json`. The documentation-only follow-up does not alter this runtime.
 
 Historical 0.3.2 trophy art: strict typecheck/build, 53 unit tests, the full 46 browser cases and a final 14-case preview/navigation rerun pass. Catalogue/legacy-award identity checks and `android:sync` pass. [CI 42612344212](https://github.com/DanilaH/arrows/actions/runs/42612344212) passed both jobs on source `9c7b585e8b2736875a8471697cf8b6954864f476`, including all 46 browser cases and native `assembleDebug`. APK 0.3.2 (6): 10,169,845 bytes; SHA-256 `0055fd1e0f96ae0568d48ea6bc7b13001169cb7c4d79fb7c81bee5803b88e938`. Embedded web code/analytics contract and both recorded GIF runtimes match. Evidence: `verification/TROPHY_V2_BUILD_2026-11-09.json`. The subsequent documentation-only evidence update has the same runtime payload. See `TROPHY_CATALOG_V2.md`.
 
