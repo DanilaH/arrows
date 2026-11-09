@@ -28,7 +28,9 @@ Save schema stays 2 at the same key. The decoder upgrades `dailyCatalogVersion: 
 - Strict typecheck/build, 50 unit tests and `android:sync` pass.
 - The full 365-day catalog passes geometric/solvability validation and an independent integer-cell dependency oracle. All 61 original fields match their pinned fingerprints.
 - Existing midnight/month rollover, February/leap-century, exact-date receipt, duplicate-cup and clock rollback checks remain. The new migration scenario preserves a completed day, a partial day/view and an already-earned receipt.
-- Browser coverage adds all-12 reward visibility and a real January puzzle action/return/resume on phone and desktop, alongside the prior navigation/gesture/save cases. Final CI/artifact evidence follows separately.
+- Browser coverage adds all-12 reward visibility and a real January puzzle action/return/resume on phone and desktop, alongside the prior navigation/gesture/save cases. All 44 browser cases pass locally and in CI. [CI 42608044200](https://github.com/DanilaH/arrows/actions/runs/42608044200) passed web and Android jobs on `c2f36ab5810c7be3cd84b5edf65ddc0a4320d01c`. APK 0.3.1 (5): 10,155,221 bytes; SHA-256 `3c7a1988085cc9cc786667f46ecd9a136dabc8aa2c468aeebea375d9203a403c`. The artifact ZIP matched its digest; embedded web code, shared analytics contract and GIF runtime match. See `verification/DAILY_YEAR_BUILD_2026-11-09.json`.
 - The delivery GIF shows actual production-browser UI and the January archive. It reuses an unedited genuine 19-level playthrough export from 0.3 and lets normal save migration upgrade it. No fake wins or trophies are inserted. Capture: `tools/capture-year-gif.mjs`.
 
 The catalog is technically validated, not a claim of individually curated difficulty or physical-phone performance acceptance. Themes/sound/native platform completion and release work remain on D–E. Catalog coverage beyond 2026 is still explicit future work.
+
+Capture follow-up uses a full-frame 128-colour palette so static HUD heart colours survive GIF encoding. This capture/evidence-only update changes no runtime code in the verified APK.

@@ -1,0 +1,29 @@
+{
+  "source_commit": "c2f36ab5810c7be3cd84b5edf65ddc0a4320d01c",
+  "ci_run": 42608044200,
+  "ci_url": "https://github.com/DanilaH/arrows/actions/runs/42608044200",
+  "artifact_id": 13667904457,
+  "archive_sha256": "668389ada70e256839a899f22964fb29692c305bf5c2a793d9a98263131b8296",
+  "apk_file": "Arrows-0.3.1-debug.apk",
+  "apk_bytes": 10155221,
+  "apk_sha256": "3c7a1988085cc9cc786667f46ecd9a136dabc8aa2c468aeebea375d9203a403c",
+  "matched_web_payload_files": [
+    "assets/index-CQBEA53E.css",
+    "assets/index-Dg6bj5gI.js",
+    "assets/web-tCqSk5hR.js",
+    "index.html"
+  ],
+  "shared_analytics_contract_matches": true,
+  "gif_runtime_matches_apk": true,
+  "unit_tests": 50,
+  "browser_cases_local": 44,
+  "fixed_dates": 365,
+  "monthly_trophies": 12,
+  "old_61_fingerprints_unchanged": true,
+  "physical_device_verified": false,
+  "ci_jobs": {
+    "web": "success",
+    "android": "success"
+  },
+  "browser_cases_ci": 44
+}

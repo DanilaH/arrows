@@ -10,7 +10,7 @@ D–E remain: themes/sound/settings, native ad placements/cadence/live earning, 
 
 ## Verification
 
-Current year expansion: strict typecheck/build, 50 unit tests, independent validation of all 365 dates, original-61 fingerprint regression and `android:sync` pass. Browser/CI/artifact evidence follows separately. See `DAILY_YEAR_2026.md`.
+Current year expansion: strict typecheck/build, 50 unit tests, independent validation of all 365 dates, original-61 fingerprint regression and `android:sync` pass. All 44 browser cases pass locally and in CI. [CI 42608044200](https://github.com/DanilaH/arrows/actions/runs/42608044200) passed both jobs on source `c2f36ab5810c7be3cd84b5edf65ddc0a4320d01c`. APK 0.3.1 (5): 10,155,221 bytes; SHA-256 `3c7a1988085cc9cc786667f46ecd9a136dabc8aa2c468aeebea375d9203a403c`. Embedded web code/schema and recorded GIF runtime match. Evidence: `verification/DAILY_YEAR_BUILD_2026-11-09.json`. The capture/evidence follow-up does not alter that payload. See `DAILY_YEAR_2026.md`.
 
 Historical 0.3 evidence:
 
