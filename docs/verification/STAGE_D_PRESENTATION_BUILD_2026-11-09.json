@@ -1,0 +1,61 @@
+{
+  "source_commit": "361b3a657a485cdccbf240ca16581b920eaf2ed2",
+  "ci_run": 42625659830,
+  "ci_url": "https://github.com/DanilaH/arrows/actions/runs/42625659830",
+  "artifact_id": 13678996063,
+  "archive_sha256": "1d1c5c54920895f703a9a896d5ab742e96270b7ec893a01649e64215564ffc1c",
+  "apk_file": "Arrows-0.4.0-debug.apk",
+  "apk_bytes": 10177341,
+  "apk_sha256": "278c1e402d476287bf40504f0d615bb89b709160cc7a95af7a36d82d02af0e87",
+  "matched_web_payload_files": [
+    "assets/index-C5T-37CQ.js",
+    "assets/index-kwSYh5y0.css",
+    "assets/web-CnELbtv4.js",
+    "index.html"
+  ],
+  "shared_analytics_contract_matches": true,
+  "native_config_matches": true,
+  "gif_runtime_matches_apk": true,
+  "unit_tests": 61,
+  "browser_cases_local": 56,
+  "browser_cases_final_targeted": 10,
+  "settings_schema": 1,
+  "gameplay_schema": 2,
+  "physical_device_verified": false,
+  "phone_audio_haptic_feel_verified": false,
+  "gif_provenance": "Actual production browser UI, RU/EN, 390x844, timestamped page screenshots. Fresh sessions, normal UI and genuine touch play only; no seeded wins, cups or receipts. GIFs are silent and are not physical-phone evidence.",
+  "gif_entry": "assets/index-C5T-37CQ.js",
+  "gif_entry_sha256": "6d374e9cffd414c098a35e7e2a2b7910f876d341e155ae3c337bfb473ae3becf",
+  "gif_recorder_sha256": "987603589d4303b8126ef451d36e644bfcf5163ca77dde98ddc9baa8fea64aa5",
+  "gif_recordings": [
+    {
+      "name": "arrows-themes-settings",
+      "frames": 62,
+      "duration_ms": 4243,
+      "save_present_before": false,
+      "save_present_after": false,
+      "wins_before": 0,
+      "wins_after": 0,
+      "cups_before": [],
+      "cups_after": [],
+      "sha256": "b9c8d7e3c5cfbaaf2a36f9ee9df17a2a9c02f358aab0cbc853612568fc8d9dd0"
+    },
+    {
+      "name": "arrows-theme-gameplay",
+      "frames": 68,
+      "duration_ms": 5855,
+      "save_present_before": true,
+      "save_present_after": true,
+      "wins_before": 0,
+      "wins_after": 1,
+      "cups_before": [],
+      "cups_after": [],
+      "sha256": "4c928f84981439f245d345d699981b7ba8e07eb345a438c3fd05f15773a57ec5"
+    }
+  ],
+  "ci_jobs": {
+    "web": "success",
+    "android": "success"
+  },
+  "browser_cases_ci": 56
+}

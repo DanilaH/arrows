@@ -16,7 +16,7 @@ D–E remain: native placements/cadence/live earning, dashboard delivery, physic
 
 ## Verification
 
-Current 0.4.0: strict typecheck/build and 61 unit tests pass. New settings tests cover hydration races/deadlines, independent persistence, failures/retry and feedback gates; ten browser cases cover real WebAudio cancellation, themes, language, retained attempts and layout. The full 56-case browser suite passes on the presentation implementation; the final ten-case settings rerun also passes, including focus restoration after Home is translated. Exact native artifact/CI evidence follows separately.
+Current 0.4.0: strict typecheck/build, 61 unit tests, the full 56-case browser suite and final ten-case settings/focus-return rerun pass locally. `android:sync` passes. [CI 42625659830](https://github.com/DanilaH/arrows/actions/runs/42625659830) passed both jobs on source `361b3a657a485cdccbf240ca16581b920eaf2ed2`: 61 unit tests, all 56 browser cases and Android `assembleDebug`. APK 0.4.0 (8): 10,177,341 bytes; SHA-256 `278c1e402d476287bf40504f0d615bb89b709160cc7a95af7a36d82d02af0e87`. Archive digest, every embedded web file, shared analytics contract, native SystemBars configuration and both GIF runtime payloads match. Evidence: `verification/STAGE_D_PRESENTATION_BUILD_2026-11-09.json`. The capture-tool/evidence-only follow-up has the same application runtime. Physical-phone sound, haptics, bars and performance acceptance remain open.
 
 Historical 0.3.3:
 

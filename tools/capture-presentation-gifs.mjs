@@ -24,7 +24,7 @@ try {
     const list = frames.map((f, i) => `file '${f.file}'\nduration ${Math.max(.02, ((frames[i + 1]?.at ?? f.at + 65) - f.at) / 1000)}`).join('\n') + `\nfile '${frames.at(-1).file}'\n`;
     await writeFile(resolve(dir, 'frames.txt'), list); const target = resolve(output, name + '.gif');
     execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', resolve(dir, 'frames.txt'), '-vf', 'fps=18,scale=390:-2:flags=lanczos,split[a][b];[a]palettegen=max_colors=256:stats_mode=full[p];[b][p]paletteuse=dither=sierra2_4a:diff_mode=rectangle', '-loop', '0', target]);
-    records.push({ name, frames: frames.length, duration_ms: frames.at(-1).at - frames[0].at, wins_before: initial.wins.length, wins_after: after.wins.length, cups_before: initial.cups, cups_after: after.cups }); await context.close();
+    records.push({ name, frames: frames.length, duration_ms: frames.at(-1).at - frames[0].at, save_present_before: initial !== null, save_present_after: after !== null, wins_before: initial?.wins.length ?? 0, wins_after: after?.wins.length ?? 0, cups_before: initial?.cups ?? [], cups_after: after?.cups ?? [] }); await context.close();
   }
   await record('arrows-themes-settings', async () => {}, async page => {
     await page.locator('#home-settings').click(); await page.waitForTimeout(650); await page.locator('#theme-light').click(); await page.waitForTimeout(700);
@@ -40,6 +40,6 @@ try {
     await tap(page, 1); await page.waitForTimeout(350); await tap(page, 2); await expect(page.locator('#win')).toBeVisible();
   });
   const html = await readFile('dist/index.html', 'utf8'), entry = html.match(/src="\.\/([^\"]+\.js)"/)[1];
-  await writeFile(resolve(output, 'capture-manifest.json'), JSON.stringify({ sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), provenance: 'Actual production browser UI, RU/EN, 390x844, timestamped page screenshots. Fresh sessions, normal UI and genuine touch play only; no seeded wins, cups or receipts. GIFs are silent and are not physical-phone evidence.', entry, entry_sha256: createHash('sha256').update(await readFile(`dist/${entry}`)).digest('hex'), records }, null, 2));
+  await writeFile(resolve(output, 'capture-manifest.json'), JSON.stringify({ sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), recorder_sha256: createHash('sha256').update(await readFile('tools/capture-presentation-gifs.mjs')).digest('hex'), provenance: 'Actual production browser UI, RU/EN, 390x844, timestamped page screenshots. Fresh sessions, normal UI and genuine touch play only; no seeded wins, cups or receipts. GIFs are silent and are not physical-phone evidence.', entry, entry_sha256: createHash('sha256').update(await readFile(`dist/${entry}`)).digest('hex'), records }, null, 2));
   console.info(records);
 } finally { await browser.close(); server.kill('SIGTERM'); }
