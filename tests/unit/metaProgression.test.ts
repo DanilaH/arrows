@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import previousFields from '../fixtures/daily-v1-hashes.json';
 import type { StorageAdapter } from '@danilah/mini-games-kit/platform';
 import { campaign } from '../../src/content/campaign';
+import { trophyBinding, legacyTrophyBinding } from '../../src/content/trophies';
 import { dailyCatalog, dailyDates, dailyMonths } from '../../src/content/daily';
 import { Board, canExit, validateLevel } from '../../src/domain/board';
 import { decodeSave, freshAttempt, freshSave, ProgressStore, SAVE_KEY } from '../../src/progression/save';
@@ -96,9 +97,14 @@ it('awards a full-month cup exactly once and retains it when the clock moves bac
   const { storage, rows } = memory(); rows.set(SAVE_KEY, JSON.stringify(unlocked())); let now = new Date(2026, 11, 31);
   const store = new ProgressStore(storage, () => now); await store.load();
   for (const date of monthDates('2026-11')) { const expected = (await store.openDaily(date))!; await solve(store, expected); }
-  expect(store.state.cups).toEqual(['2026-11']); now = new Date(2026, 10, 1);
+  expect(store.state.cups).toEqual(['2026-11']); expect(store.state.trophyDesigns['2026-11']).toEqual(trophyBinding('2026-11')); now = new Date(2026, 10, 1);
   const expected = (await store.openDaily('2026-11-01'))!; await solve(store, expected); expect(store.state.cups).toEqual(['2026-11']);
   const restored = new ProgressStore(storage); await restored.load(); expect(restored.state.cups).toEqual(['2026-11']);
+  expect(restored.state.trophyDesigns['2026-11']).toEqual(trophyBinding('2026-11'));
+  const legacy = structuredClone(restored.state) as unknown as Record<string, unknown>; delete legacy.trophyDesigns;
+  const migrated = decodeSave(legacy); expect(migrated.trophyDesigns['2026-11']).toEqual(legacyTrophyBinding('2026-11'));
+  expect(migrated.cups).toEqual(restored.state.cups);
+  expect(() => decodeSave({ ...migrated, trophyDesigns: { '2026-11': { version: 99, id: 'bogus' } } })).toThrow('design');
 }, 15000);
 it('computes explicit records and medals from real wins and resets only the consecutive-win run on restart', () => {
   const save = freshSave(); save.wins = [];

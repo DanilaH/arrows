@@ -3,13 +3,14 @@ import { collectionOpen, challengeOpen, collectionStats, medals, earnedAwards } 
 import { calendarDate, localDate, monthDates } from '../progression/calendar';
 import { dailyCatalog, dailyMonths, dailyDates } from '../content/daily';
 import { trophy } from './trophies';
+import { trophyYears } from '../content/trophies';
 import { copy, type GameLanguage } from '../app/language';
 
 export type AppScreen = 'home' | 'collection' | 'calendar' | 'game';
 const badge = (key: string): string => `<svg viewBox="0 0 72 84" aria-hidden="true"><path d="m20 51-3 27 19-9 19 9-3-27"/><circle cx="36" cy="32" r="25"/><path d="${key === 'legend' ? 'm21 34 6-12 9 10 9-10 6 12-5 9H26Z' : key === 'perfect' ? 'm23 32 9 9 18-19' : 'M39 15c9 13-4 13 4 24 2-6 7-8 7-8 4 18-23 23-26 8-2-8 8-15 8-15-2 10 3 11 3 11-3-9 6-12 4-20Z'}"/></svg>`;
 
 export function installMetaSurface(progress: ProgressStore, language: GameLanguage, options: {
-  blocked(value: boolean): void; visited(screen: AppScreen): void; controls(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;
+  blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; controls(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;
 }) {
   const root = document.querySelector<HTMLElement>('#meta-screen')!, shell = document.querySelector<HTMLElement>('#game-shell')!, text = copy[language];
   const locale = language === 'ru' ? 'ru-RU' : 'en-US';
@@ -21,7 +22,10 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   let month = dailyMonths.includes(localDate().slice(0, 7)) ? localDate().slice(0, 7) : dailyMonths[0]!;
   let selected = dailyDates.filter(d => d <= localDate()).at(-1) ?? dailyDates[0]!;
   let calendarParent: 'home' | 'collection' = 'home';
-  let calendarNotice = '';
+  const installedYears = [...new Set(dailyMonths.map(key => key.slice(0, 4)))];
+  let calendarNotice = '', collectionYear = installedYears.includes(localDate().slice(0, 4)) ? localDate().slice(0, 4) : installedYears.at(-1)!;
+  const trophyDialog = document.querySelector<HTMLDialogElement>('#trophy-viewer')!;
+  let trophyFocus: HTMLElement | null = null;
   const scroll = new Map<AppScreen, number>();
   const dateLabel = (key: string): string => key ? shortDate.format(calendarDate(key)) : '—';
   const title = (value: string): string => `<header class="meta-header"><button class="circle" type="button" data-nav="back" aria-label="${text.back}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><h1 id="menu-title" tabindex="-1">${value}</h1><span class="meta-header-spacer"></span></header>`;
@@ -48,9 +52,11 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     return title(text.collection) + `<div class="meta-content"><section class="record-grid">${records.map(([label, value, date]) => `<article><span>${label}</span><strong>${value}</strong><small>${dateLabel(date)}</small></article>`).join('')}</section>
       <details class="record-rules"><summary>${text.recordRules}</summary><p>${text.recordRulesText}</p></details>
       <h2>${text.achievements}</h2><section class="medal-grid">${medals(save).map(m => `<article class="medal ${m.earned ? 'earned' : ''}" data-medal="${m.id}" data-earned="${m.earned}">${badge(m.id)}<h3>${text[`${m.id}Name` as keyof typeof text]}</h3><p>${text[`${m.id}Rule` as keyof typeof text]}</p><progress value="${Math.min(m.target, m.progress)}" max="${m.target}"></progress><small>${Math.min(m.target, m.progress)} / ${m.target}</small></article>`).join('')}</section>
-      <h2>${text.challengeTrophies} <span class="trophy-year">2026</span></h2><div class="trophy-list">${dailyMonths.map(m => {
-        const dates = monthDates(m), done = dates.filter(d => save.dailyWins[d]).length, earned = save.cups.includes(m);
-        return `<button class="month-trophy ${earned ? 'earned' : ''} ${m > localDate().slice(0, 7) ? 'future' : ''}" type="button" data-month="${m}" aria-label="${monthFormat.format(calendarDate(m + '-01'))}: ${done} / ${dates.length}" ${!challengeOpen(save) ? 'disabled' : ''}>${trophy(m, earned)}<span><strong>${monthNameFormat.format(calendarDate(m + '-01'))}</strong><small>${earned ? text.cupEarned : `${done} / ${dates.length}`}</small><progress value="${done}" max="${dates.length}"></progress></span><b aria-hidden="true">${earned ? '✓' : ''}</b></button>`;
+      <h2 class="trophy-heading">${text.challengeTrophies}<label class="trophy-year"><select id="trophy-year" aria-label="${text.collectionYear}">${trophyYears.map(y => `<option value="${y}" ${y === collectionYear ? 'selected' : ''}>${y}</option>`).join('')}</select></label></h2>
+      ${!installedYears.includes(collectionYear) ? `<p class="future-collection-note">${text.futureCollection}</p>` : ''}
+      <div class="trophy-list">${Array.from({ length: 12 }, (_, i) => `${collectionYear}-${String(i + 1).padStart(2, '0')}`).map(m => {
+        const dates = monthDates(m), done = dates.filter(d => save.dailyWins[d]).length, earned = save.cups.includes(m), installed = dailyMonths.includes(m);
+        return `<button class="month-trophy ${earned ? 'earned' : ''} ${m > localDate().slice(0, 7) ? 'future' : ''}" type="button" data-month="${m}" aria-label="${monthFormat.format(calendarDate(m + '-01'))}: ${installed ? `${done} / ${dates.length}` : text.preview}" ${!challengeOpen(save) ? 'disabled' : ''}>${trophy(m, earned, { ...(earned ? { binding: save.trophyDesigns[m]! } : {}), scope: 'collection' })}<span><strong>${monthNameFormat.format(calendarDate(m + '-01'))}</strong><small>${earned ? text.cupEarned : installed ? `${done} / ${dates.length}` : text.preview}</small>${installed ? `<progress value="${done}" max="${dates.length}"></progress>` : '<span class="future-progress"></span>'}</span><b aria-hidden="true">${earned ? '✓' : ''}</b></button>`;
       }).join('')}</div></div>`;
   };
   const calendar = (): string => {
@@ -60,7 +66,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     const week = Array.from({ length: 7 }, (_, i) => new Intl.DateTimeFormat(locale, { weekday: 'short', timeZone: 'UTC' }).format(calendarDate(`2026-11-${String(2 + i).padStart(2, '0')}`)));
     const current = save.daily[selected], completed = !!save.dailyWins[selected], allowed = selected <= today && !!dailyCatalog[selected] && challengeOpen(save);
     const difficulty = dailyCatalog[selected]?.difficulty;
-    return title(text.challenge) + `<div class="meta-content calendar-content"><section class="month-award">${trophy(month, save.cups.includes(month))}<p>${done} / ${dates.length} · ${text.daysDone}</p><small>${text.cupRule}</small></section>
+    return title(text.challenge) + `<div class="meta-content calendar-content"><section class="month-award"><button id="view-trophy" class="trophy-inspect" type="button" aria-label="${text.inspectTrophy}">${trophy(month, save.cups.includes(month), { ...(save.cups.includes(month) ? { binding: save.trophyDesigns[month]! } : {}), scope: 'calendar' })}<span>${text.inspectTrophy}</span></button><p>${done} / ${dates.length} · ${text.daysDone}</p><small>${text.cupRule}</small></section>
       <div class="month-heading"><button class="circle" type="button" data-shift="-1" aria-label="${text.previousMonth}" ${index <= 0 ? 'disabled' : ''}>‹</button><h2>${monthFormat.format(calendarDate(month + '-01'))}</h2><button class="circle" type="button" data-shift="1" aria-label="${text.nextMonth}" ${index >= dailyMonths.length - 1 ? 'disabled' : ''}>›</button></div>
       <div class="weekdays" aria-hidden="true">${week.map(d => `<span>${d}</span>`).join('')}</div>
       <div class="calendar-grid" role="group" aria-label="${monthFormat.format(calendarDate(month + '-01'))}">${'<span></span>'.repeat(firstWeekday)}${dates.map(date => `<button type="button" class="calendar-day ${save.dailyWins[date] ? 'done' : ''} ${date === today ? 'today' : ''}" data-date="${date}" aria-label="${dayFormat.format(calendarDate(date))}${save.dailyWins[date] ? ', ' + text.dayCompleted : ''}" aria-pressed="${date === selected}" ${date > today ? 'disabled' : ''}>${Number(date.slice(-2))}${save.dailyWins[date] ? '<small aria-hidden="true">✓</small>' : ''}</button>`).join('')}</div>
@@ -85,6 +91,33 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     if (screen !== 'game') { refresh(); root.scrollTop = scroll.get(screen) ?? 0; root.querySelector<HTMLElement>('h1')?.focus({ preventScroll: true }); }
   };
   const back = (): void => show(screen === 'calendar' ? calendarParent : 'home');
+  const closeTrophy = (): boolean => {
+    if (!trophyDialog.open) return false;
+    trophyDialog.close(); options.previewBlocked(false);
+    if (trophyFocus?.isConnected) trophyFocus.focus({ preventScroll: true });
+    return true;
+  };
+  const openTrophy = (key: string): void => {
+    trophyFocus = document.activeElement as HTMLElement | null;
+    const save = progress.state, owned = save.cups.includes(key), installed = dailyMonths.includes(key), done = monthDates(key).filter(d => save.dailyWins[d]).length;
+    trophyDialog.innerHTML = `<header class="trophy-viewer-heading"><h2 id="trophy-viewer-title">${monthFormat.format(calendarDate(key + '-01'))}</h2><button class="circle" type="button" data-close-trophy aria-label="${text.close}">×</button></header>
+      <span class="trophy-preview-label">${owned ? text.cupEarned : text.rewardPreview}</span>
+      <div class="trophy-portrait">${trophy(key, true, { ...(owned ? { binding: save.trophyDesigns[key]! } : {}), scope: 'viewer' })}</div>
+      <p>${installed ? `${done} / ${monthDates(key).length} · ${text.daysDone}` : text.futureTrophyInfo}</p>
+      ${installed ? `<p class="trophy-rule">${text.cupRule}</p><button class="primary" type="button" data-open-month="${key}">${text.openMonth}</button>` : ''}`;
+    options.previewBlocked(true); if (!trophyDialog.open) trophyDialog.showModal();
+  };
+  const viewerClick = (event: MouseEvent): void => {
+    const button = (event.target as Element).closest<HTMLButtonElement>('button'); if (!button) return;
+    if (button.hasAttribute('data-close-trophy')) closeTrophy();
+    if (button.dataset.openMonth) { month = button.dataset.openMonth; closeTrophy(); show('calendar'); }
+  };
+  const viewerCancel = (event: Event): void => { event.preventDefault(); closeTrophy(); };
+  const changeYear = (event: Event): void => {
+    const target = event.target as HTMLSelectElement;
+    if (target.id !== 'trophy-year' || !trophyYears.includes(target.value)) return;
+    collectionYear = target.value; refresh(); root.querySelector<HTMLElement>('#trophy-year')?.focus({ preventScroll: true });
+  };
   const click = (event: MouseEvent): void => {
     const target = (event.target as HTMLElement).closest<HTMLButtonElement>('button'); if (!target || target.disabled || busy) return;
     if (target.dataset.nav === 'back') back();
@@ -93,7 +126,8 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     else if (target.id === 'home-collection') {
       show('collection'); void progress.markCollectionSeen(earnedAwards(progress.state)).catch(() => refresh());
     } else if (target.id === 'home-calendar') show('calendar');
-    else if (target.dataset.month) { month = target.dataset.month; show('calendar'); }
+    else if (target.dataset.month) { if (dailyMonths.includes(target.dataset.month)) { month = target.dataset.month; show('calendar'); } else openTrophy(target.dataset.month); }
+    else if (target.id === 'view-trophy') openTrophy(month);
     else if (target.dataset.shift) { month = dailyMonths[dailyMonths.indexOf(month) + Number(target.dataset.shift)]!; calendarNotice = ''; refresh(); }
     else if (target.dataset.date) { selected = target.dataset.date; calendarNotice = ''; refresh(); }
     else if (target.id === 'start-daily') {
@@ -101,9 +135,10 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       void options.enterDaily(selected).catch(() => { calendarNotice = text.dailyUnavailable; }).finally(() => { busy = false; refresh(); });
     }
   };
-  root.addEventListener('click', click); show('home');
-  return { get screen() { return screen; }, get revision() { return revision; }, refresh, show, back,
+  root.addEventListener('click', click); root.addEventListener('change', changeYear);
+  trophyDialog.addEventListener('click', viewerClick); trophyDialog.addEventListener('cancel', viewerCancel); show('home');
+  return { get screen() { return screen; }, get revision() { return revision; }, refresh, show, back, closeTrophy,
     ready(): void { ready = true; refresh(); },
-    destroy(): void { alive = false; root.removeEventListener('click', click); root.replaceChildren(); },
+    destroy(): void { alive = false; closeTrophy(); root.removeEventListener('click', click); root.removeEventListener('change', changeYear); trophyDialog.removeEventListener('click', viewerClick); trophyDialog.removeEventListener('cancel', viewerCancel); trophyDialog.replaceChildren(); root.replaceChildren(); },
   };
 }

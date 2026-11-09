@@ -2,13 +2,19 @@
 
 ## Current milestone
 
-Version 0.3.1 / Android versionCode 5 expands daily to the entire 2026 year: 365 fixed tasks (14,532 arrows) and 12 distinct monthly trophies in a compact grid. All 61 shipped November/December fields are fingerprint-identical; save schema 2 upgrades daily catalog version 1→2 while retaining attempts/history/receipts/cups. See `DAILY_YEAR_2026.md` for the current policy and evidence.
+Version 0.3.2 / Android versionCode 6 adds rich versioned monthly trophy art: a frozen catalogue of 240 distinct compositions for 2026–2045, a Collection year selector and a large trophy viewer. Future years are explicitly artwork previews with no fake Play action. Actual daily tasks still cover all 365 dates of 2026; campaign remains the initial 20-level chapter. See `TROPHY_CATALOG_V2.md` for the current contract.
 
-Stage C navigation/records remain connected: Home/Continue, Collection at current level 10 and daily at 20. Campaign and every date retain independent attempts/cameras. The three local medals/record rules remain explicit adaptations; League is still open. The 20-level campaign remains the initial chapter, not the larger release bank.
+Save schema 2 adds an earned-design binding map. Pre-update awarded cups retain their original v1 design; new awards atomically bind v2 IDs. Do not edit a published style library to reinterpret existing trophies. Keep the writer/receipt ordering and separate campaign/date ownership intact.
 
-D–E remain: themes/sound/settings, native ad placements/cadence/live earning, dashboard delivery, phone feel/performance/process-kill evidence, signing and RuStore package. Keep attaching authentic GIFs for visible changes. The temporary control-board link is on Home and must be removed for release.
+Stage C navigation/records remain: Collection at current level 10, daily at 20, independent attempts/cameras, and three explicitly adapted local medals. League is still open. The temporary control-board review link is on Home and must be removed for release.
+
+D–E remain: themes/sound/settings, native placements/cadence/live earning, dashboard delivery, physical-phone feel/performance/process-kill evidence, release signing and RuStore package. Keep attaching authentic GIFs for visible changes.
 
 ## Verification
+
+Current trophy art: strict typecheck/build, 53 unit tests, the full 46 browser cases and a final 14-case preview/navigation rerun pass. Catalogue/legacy-award identity checks and `android:sync` pass. Native CI/artifact evidence follows separately. See `TROPHY_CATALOG_V2.md`.
+
+Historical year expansion evidence:
 
 Current year expansion: strict typecheck/build, 50 unit tests, independent validation of all 365 dates, original-61 fingerprint regression and `android:sync` pass. All 44 browser cases pass locally and in CI. [CI 42608044200](https://github.com/DanilaH/arrows/actions/runs/42608044200) passed both jobs on source `c2f36ab5810c7be3cd84b5edf65ddc0a4320d01c`. APK 0.3.1 (5): 10,155,221 bytes; SHA-256 `3c7a1988085cc9cc786667f46ecd9a136dabc8aa2c468aeebea375d9203a403c`. Embedded web code/schema and recorded GIF runtime match. Evidence: `verification/DAILY_YEAR_BUILD_2026-11-09.json`. The capture/evidence follow-up does not alter that payload. See `DAILY_YEAR_2026.md`.
 

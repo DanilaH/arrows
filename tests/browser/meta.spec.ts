@@ -114,3 +114,21 @@ test('shows all twelve monthly rewards and lets the player resume a January arch
   await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt', id!);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(level.arrows.length - 1));
 });
+
+test('previews a distinct future collection and a large trophy without granting a reward or inventing future tasks', async ({ page }, info) => {
+  await unlocked(page); await page.locator('#home-collection').click();
+  const current = await page.locator('[data-month="2026-01"] .trophy').getAttribute('data-design');
+  await page.locator('#trophy-year').selectOption('2027');
+  await expect(page.locator('.future-collection-note')).toBeVisible();
+  const future = await page.locator('[data-month="2027-01"] .trophy').getAttribute('data-design'); expect(future).not.toBe(current);
+  await page.locator('[data-month="2027-01"]').click(); await expect(page.locator('#trophy-viewer')).toBeVisible();
+  await expect(page.locator('[data-open-month]')).toHaveCount(0); await page.waitForTimeout(350);
+  await page.screenshot({ path: info.outputPath('future-trophy.png') });
+  await page.keyboard.press('Escape'); await expect(page.locator('#trophy-viewer')).not.toBeVisible();
+  await page.locator('#trophy-year').selectOption('2045'); await expect(page.locator('.month-trophy')).toHaveCount(12);
+  await page.locator('#trophy-year').selectOption('2026'); await page.locator('[data-month="2026-11"]').click();
+  await page.locator('#view-trophy').click(); await expect(page.locator('[data-open-month="2026-11"]')).toBeVisible();
+  await page.locator('[data-open-month]').click(); await expect(page.locator('#trophy-viewer')).not.toBeVisible();
+  const save = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), SAVE_KEY);
+  expect(save.cups).toEqual([]); expect(save.dailyWins).toEqual({}); expect(save.trophyDesigns).toEqual({});
+});

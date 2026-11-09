@@ -1,6 +1,6 @@
 {
   "name": "arrows",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "type": "module",
   "engines": {
@@ -18,7 +18,8 @@
     "android:open": "cap open android",
     "content:controls": "vite build --ssr tools/content/control-scene-source.ts --outDir .test-output/control-source && node tools/content/write-control-scenes.mjs",
     "content:campaign": "vite build --ssr tools/content/campaign-source.ts --outDir .test-output/campaign-source && node tools/content/write-campaign.mjs",
-    "content:daily": "vite build --ssr tools/content/daily-source.ts --outDir .test-output/daily-source && node tools/content/write-daily.mjs"
+    "content:daily": "vite build --ssr tools/content/daily-source.ts --outDir .test-output/daily-source && node tools/content/write-daily.mjs",
+    "content:trophies": "vite build --ssr src/domain/trophy.ts --outDir .test-output/trophy-source && node tools/content/write-trophies.mjs"
   },
   "dependencies": {
     "@capacitor/android": "8.6.0",

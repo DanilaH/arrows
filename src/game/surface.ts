@@ -99,7 +99,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     pendingTime = 0; wasActive = false;
   };
   const meta = installMetaSurface(progress, language, {
-    blocked: value => platform.activity.setBlocked('menu', value), leaveGame, enterCampaign,
+    blocked: value => platform.activity.setBlocked('menu', value),
+    previewBlocked: value => platform.activity.setBlocked('trophy-preview', value), leaveGame, enterCampaign,
     visited: screen => platform.analytics.track('screen_view', { screen }),
     controls: () => open('controls'),
     async enterDaily(date) {
@@ -307,7 +308,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   hintButton.textContent = text.hint;
   sync();
   return {
-    onBack(): boolean { if (modal) { close(); sync(); return true; } if (meta.screen === 'home') return false; if (meta.screen === 'game') backToMenu(); else meta.back(); return true; }, cancel,
+    onBack(): boolean { if (meta.closeTrophy()) return true; if (modal) { close(); sync(); return true; } if (meta.screen === 'home') return false; if (meta.screen === 'game') backToMenu(); else meta.back(); return true; }, cancel,
     destroy(): void {
       saveView(); alive = false; cancel(); clearInterval(timer); clearTimeout(slowLoad); if (cameraTimer !== undefined) clearTimeout(cameraTimer);
       for (const remove of listeners.reverse()) remove(); meta.destroy(); platform.activity.setBlocked('menu', false);
