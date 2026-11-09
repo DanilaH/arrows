@@ -1,0 +1,1605 @@
+{
+  "policy": "Four deterministic candidates per new level; structural scoring, not player-tested difficulty.",
+  "levels": [
+    {
+      "number": 21,
+      "family": "crescent",
+      "pace": "breather",
+      "seed": 935711,
+      "metrics": {
+        "arrows": 6,
+        "dots": 95,
+        "coverage": 0.7368421052631579,
+        "initialFree": 5,
+        "depth": 2,
+        "edges": 1,
+        "meanLength": 10.666666666666666,
+        "meanBends": 5.166666666666667
+      }
+    },
+    {
+      "number": 22,
+      "family": "infinity",
+      "pace": "normal",
+      "seed": 928789,
+      "metrics": {
+        "arrows": 23,
+        "dots": 233,
+        "coverage": 0.8454935622317596,
+        "initialFree": 16,
+        "depth": 4,
+        "edges": 12,
+        "meanLength": 7.565217391304348,
+        "meanBends": 2.9565217391304346
+      }
+    },
+    {
+      "number": 23,
+      "family": "ring",
+      "pace": "hard",
+      "seed": 937705,
+      "metrics": {
+        "arrows": 37,
+        "dots": 670,
+        "coverage": 0.5865671641791045,
+        "initialFree": 23,
+        "depth": 5,
+        "edges": 30,
+        "meanLength": 9.621621621621621,
+        "meanBends": 3.810810810810811
+      }
+    },
+    {
+      "number": 24,
+      "family": "shield",
+      "pace": "normal",
+      "seed": 914945,
+      "metrics": {
+        "arrows": 20,
+        "dots": 367,
+        "coverage": 0.5422343324250681,
+        "initialFree": 12,
+        "depth": 7,
+        "edges": 17,
+        "meanLength": 8.95,
+        "meanBends": 2.75
+      }
+    },
+    {
+      "number": 25,
+      "family": "star",
+      "pace": "breather",
+      "seed": 915942,
+      "metrics": {
+        "arrows": 11,
+        "dots": 114,
+        "coverage": 0.8859649122807017,
+        "initialFree": 8,
+        "depth": 4,
+        "edges": 6,
+        "meanLength": 8.181818181818182,
+        "meanBends": 3.727272727272727
+      }
+    },
+    {
+      "number": 26,
+      "family": "wave",
+      "pace": "normal",
+      "seed": 940696,
+      "metrics": {
+        "arrows": 23,
+        "dots": 241,
+        "coverage": 0.8506224066390041,
+        "initialFree": 15,
+        "depth": 6,
+        "edges": 22,
+        "meanLength": 7.913043478260869,
+        "meanBends": 3.391304347826087
+      }
+    },
+    {
+      "number": 27,
+      "family": "flower",
+      "pace": "hard",
+      "seed": 917936,
+      "metrics": {
+        "arrows": 39,
+        "dots": 613,
+        "coverage": 0.6867862969004894,
+        "initialFree": 26,
+        "depth": 6,
+        "edges": 31,
+        "meanLength": 9.794871794871796,
+        "meanBends": 3.2564102564102564
+      }
+    },
+    {
+      "number": 28,
+      "family": "anchor",
+      "pace": "normal",
+      "seed": 942690,
+      "metrics": {
+        "arrows": 16,
+        "dots": 170,
+        "coverage": 0.8764705882352941,
+        "initialFree": 11,
+        "depth": 5,
+        "edges": 14,
+        "meanLength": 8.3125,
+        "meanBends": 3.625
+      }
+    },
+    {
+      "number": 29,
+      "family": "gear",
+      "pace": "normal",
+      "seed": 919930,
+      "metrics": {
+        "arrows": 25,
+        "dots": 310,
+        "coverage": 0.8032258064516129,
+        "initialFree": 18,
+        "depth": 6,
+        "edges": 13,
+        "meanLength": 8.96,
+        "meanBends": 3.36
+      }
+    },
+    {
+      "number": 30,
+      "family": "hourglass",
+      "pace": "nightmare",
+      "seed": 944684,
+      "metrics": {
+        "arrows": 72,
+        "dots": 1097,
+        "coverage": 0.6390154968094804,
+        "initialFree": 44,
+        "depth": 9,
+        "edges": 91,
+        "meanLength": 8.73611111111111,
+        "meanBends": 2.9166666666666665
+      }
+    },
+    {
+      "number": 31,
+      "family": "droplet",
+      "pace": "breather",
+      "seed": 929843,
+      "metrics": {
+        "arrows": 14,
+        "dots": 200,
+        "coverage": 0.72,
+        "initialFree": 7,
+        "depth": 4,
+        "edges": 11,
+        "meanLength": 9.285714285714286,
+        "meanBends": 3.642857142857143
+      }
+    },
+    {
+      "number": 32,
+      "family": "leaf",
+      "pace": "normal",
+      "seed": 922921,
+      "metrics": {
+        "arrows": 32,
+        "dots": 409,
+        "coverage": 0.7506112469437652,
+        "initialFree": 19,
+        "depth": 7,
+        "edges": 22,
+        "meanLength": 8.59375,
+        "meanBends": 3.4375
+      }
+    },
+    {
+      "number": 33,
+      "family": "lightning",
+      "pace": "hard",
+      "seed": 939756,
+      "metrics": {
+        "arrows": 25,
+        "dots": 315,
+        "coverage": 0.8031746031746032,
+        "initialFree": 16,
+        "depth": 6,
+        "edges": 24,
+        "meanLength": 9.12,
+        "meanBends": 3.56
+      }
+    },
+    {
+      "number": 34,
+      "family": "butterfly",
+      "pace": "normal",
+      "seed": 948672,
+      "metrics": {
+        "arrows": 35,
+        "dots": 511,
+        "coverage": 0.6360078277886497,
+        "initialFree": 23,
+        "depth": 8,
+        "edges": 35,
+        "meanLength": 8.285714285714286,
+        "meanBends": 2.8285714285714287
+      }
+    },
+    {
+      "number": 35,
+      "family": "diamond",
+      "pace": "breather",
+      "seed": 933831,
+      "metrics": {
+        "arrows": 18,
+        "dots": 181,
+        "coverage": 0.8121546961325967,
+        "initialFree": 12,
+        "depth": 5,
+        "edges": 12,
+        "meanLength": 7.166666666666667,
+        "meanBends": 2.7222222222222223
+      }
+    },
+    {
+      "number": 36,
+      "family": "heart",
+      "pace": "normal",
+      "seed": 934828,
+      "metrics": {
+        "arrows": 24,
+        "dots": 376,
+        "coverage": 0.6622340425531915,
+        "initialFree": 15,
+        "depth": 6,
+        "edges": 23,
+        "meanLength": 9.375,
+        "meanBends": 3.5
+      }
+    },
+    {
+      "number": 37,
+      "family": "hexagon",
+      "pace": "hard",
+      "seed": 935825,
+      "metrics": {
+        "arrows": 38,
+        "dots": 903,
+        "coverage": 0.49280177187153934,
+        "initialFree": 21,
+        "depth": 8,
+        "edges": 38,
+        "meanLength": 10.710526315789474,
+        "meanBends": 3.3684210526315788
+      }
+    },
+    {
+      "number": 38,
+      "family": "cross",
+      "pace": "normal",
+      "seed": 936822,
+      "metrics": {
+        "arrows": 31,
+        "dots": 397,
+        "coverage": 0.707808564231738,
+        "initialFree": 17,
+        "depth": 7,
+        "edges": 30,
+        "meanLength": 8.064516129032258,
+        "meanBends": 2.6129032258064515
+      }
+    },
+    {
+      "number": 39,
+      "family": "crown",
+      "pace": "normal",
+      "seed": 929900,
+      "metrics": {
+        "arrows": 29,
+        "dots": 380,
+        "coverage": 0.7394736842105263,
+        "initialFree": 19,
+        "depth": 6,
+        "edges": 20,
+        "meanLength": 8.689655172413794,
+        "meanBends": 2.689655172413793
+      }
+    },
+    {
+      "number": 40,
+      "family": "key",
+      "pace": "nightmare",
+      "seed": 938816,
+      "metrics": {
+        "arrows": 45,
+        "dots": 531,
+        "coverage": 0.751412429378531,
+        "initialFree": 30,
+        "depth": 6,
+        "edges": 37,
+        "meanLength": 7.866666666666666,
+        "meanBends": 2.688888888888889
+      }
+    },
+    {
+      "number": 41,
+      "family": "hourglass",
+      "pace": "breather",
+      "seed": 955651,
+      "metrics": {
+        "arrows": 19,
+        "dots": 213,
+        "coverage": 0.8262910798122066,
+        "initialFree": 15,
+        "depth": 4,
+        "edges": 6,
+        "meanLength": 8.263157894736842,
+        "meanBends": 3.8947368421052633
+      }
+    },
+    {
+      "number": 42,
+      "family": "droplet",
+      "pace": "normal",
+      "seed": 956648,
+      "metrics": {
+        "arrows": 28,
+        "dots": 480,
+        "coverage": 0.6395833333333333,
+        "initialFree": 13,
+        "depth": 7,
+        "edges": 34,
+        "meanLength": 9.964285714285714,
+        "meanBends": 3.357142857142857
+      }
+    },
+    {
+      "number": 43,
+      "family": "leaf",
+      "pace": "hard",
+      "seed": 933888,
+      "metrics": {
+        "arrows": 47,
+        "dots": 847,
+        "coverage": 0.5395513577331759,
+        "initialFree": 30,
+        "depth": 8,
+        "edges": 40,
+        "meanLength": 8.72340425531915,
+        "meanBends": 3.425531914893617
+      }
+    },
+    {
+      "number": 44,
+      "family": "lightning",
+      "pace": "normal",
+      "seed": 950723,
+      "metrics": {
+        "arrows": 15,
+        "dots": 197,
+        "coverage": 0.8426395939086294,
+        "initialFree": 10,
+        "depth": 4,
+        "edges": 5,
+        "meanLength": 10.066666666666666,
+        "meanBends": 3.933333333333333
+      }
+    },
+    {
+      "number": 45,
+      "family": "butterfly",
+      "pace": "breather",
+      "seed": 943801,
+      "metrics": {
+        "arrows": 18,
+        "dots": 315,
+        "coverage": 0.6698412698412698,
+        "initialFree": 14,
+        "depth": 4,
+        "edges": 6,
+        "meanLength": 10.722222222222221,
+        "meanBends": 4.111111111111111
+      }
+    },
+    {
+      "number": 46,
+      "family": "diamond",
+      "pace": "normal",
+      "seed": 952717,
+      "metrics": {
+        "arrows": 31,
+        "dots": 421,
+        "coverage": 0.7292161520190024,
+        "initialFree": 22,
+        "depth": 6,
+        "edges": 24,
+        "meanLength": 8.903225806451612,
+        "meanBends": 3.3548387096774195
+      }
+    },
+    {
+      "number": 47,
+      "family": "heart",
+      "pace": "hard",
+      "seed": 937876,
+      "metrics": {
+        "arrows": 43,
+        "dots": 792,
+        "coverage": 0.601010101010101,
+        "initialFree": 23,
+        "depth": 7,
+        "edges": 48,
+        "meanLength": 10.069767441860465,
+        "meanBends": 3.395348837209302
+      }
+    },
+    {
+      "number": 48,
+      "family": "hexagon",
+      "pace": "normal",
+      "seed": 938873,
+      "metrics": {
+        "arrows": 32,
+        "dots": 575,
+        "coverage": 0.6452173913043479,
+        "initialFree": 17,
+        "depth": 6,
+        "edges": 29,
+        "meanLength": 10.59375,
+        "meanBends": 3.5
+      }
+    },
+    {
+      "number": 49,
+      "family": "cross",
+      "pace": "normal",
+      "seed": 955708,
+      "metrics": {
+        "arrows": 28,
+        "dots": 437,
+        "coverage": 0.7322654462242563,
+        "initialFree": 16,
+        "depth": 6,
+        "edges": 22,
+        "meanLength": 10.428571428571429,
+        "meanBends": 3.6785714285714284
+      }
+    },
+    {
+      "number": 50,
+      "family": "crown",
+      "pace": "nightmare",
+      "seed": 940867,
+      "metrics": {
+        "arrows": 77,
+        "dots": 1377,
+        "coverage": 0.5693536673928831,
+        "initialFree": 43,
+        "depth": 9,
+        "edges": 98,
+        "meanLength": 9.181818181818182,
+        "meanBends": 3.168831168831169
+      }
+    },
+    {
+      "number": 51,
+      "family": "key",
+      "pace": "breather",
+      "seed": 949783,
+      "metrics": {
+        "arrows": 7,
+        "dots": 59,
+        "coverage": 0.8983050847457628,
+        "initialFree": 5,
+        "depth": 3,
+        "edges": 3,
+        "meanLength": 6.571428571428571,
+        "meanBends": 2
+      }
+    },
+    {
+      "number": 52,
+      "family": "crescent",
+      "pace": "normal",
+      "seed": 950780,
+      "metrics": {
+        "arrows": 28,
+        "dots": 324,
+        "coverage": 0.8641975308641975,
+        "initialFree": 22,
+        "depth": 5,
+        "edges": 18,
+        "meanLength": 9,
+        "meanBends": 3.25
+      }
+    },
+    {
+      "number": 53,
+      "family": "infinity",
+      "pace": "hard",
+      "seed": 959696,
+      "metrics": {
+        "arrows": 35,
+        "dots": 469,
+        "coverage": 0.7334754797441365,
+        "initialFree": 22,
+        "depth": 6,
+        "edges": 25,
+        "meanLength": 8.82857142857143,
+        "meanBends": 3.6285714285714286
+      }
+    },
+    {
+      "number": 54,
+      "family": "ring",
+      "pace": "normal",
+      "seed": 960693,
+      "metrics": {
+        "arrows": 29,
+        "dots": 526,
+        "coverage": 0.6444866920152091,
+        "initialFree": 19,
+        "depth": 7,
+        "edges": 18,
+        "meanLength": 10.689655172413794,
+        "meanBends": 3.3448275862068964
+      }
+    },
+    {
+      "number": 55,
+      "family": "shield",
+      "pace": "breather",
+      "seed": 953771,
+      "metrics": {
+        "arrows": 10,
+        "dots": 157,
+        "coverage": 0.7579617834394905,
+        "initialFree": 5,
+        "depth": 4,
+        "edges": 7,
+        "meanLength": 10.9,
+        "meanBends": 3.5
+      }
+    },
+    {
+      "number": 56,
+      "family": "star",
+      "pace": "normal",
+      "seed": 946849,
+      "metrics": {
+        "arrows": 32,
+        "dots": 385,
+        "coverage": 0.7714285714285715,
+        "initialFree": 24,
+        "depth": 5,
+        "edges": 21,
+        "meanLength": 8.28125,
+        "meanBends": 3.09375
+      }
+    },
+    {
+      "number": 57,
+      "family": "wave",
+      "pace": "hard",
+      "seed": 971603,
+      "metrics": {
+        "arrows": 35,
+        "dots": 477,
+        "coverage": 0.7253668763102725,
+        "initialFree": 22,
+        "depth": 7,
+        "edges": 33,
+        "meanLength": 8.885714285714286,
+        "meanBends": 2.8
+      }
+    },
+    {
+      "number": 58,
+      "family": "flower",
+      "pace": "normal",
+      "seed": 964681,
+      "metrics": {
+        "arrows": 29,
+        "dots": 475,
+        "coverage": 0.6189473684210526,
+        "initialFree": 19,
+        "depth": 7,
+        "edges": 17,
+        "meanLength": 9.137931034482758,
+        "meanBends": 3.6551724137931036
+      }
+    },
+    {
+      "number": 59,
+      "family": "anchor",
+      "pace": "normal",
+      "seed": 965678,
+      "metrics": {
+        "arrows": 17,
+        "dots": 241,
+        "coverage": 0.7427385892116183,
+        "initialFree": 11,
+        "depth": 6,
+        "edges": 14,
+        "meanLength": 9.529411764705882,
+        "meanBends": 3.764705882352941
+      }
+    },
+    {
+      "number": 60,
+      "family": "gear",
+      "pace": "nightmare",
+      "seed": 966675,
+      "metrics": {
+        "arrows": 63,
+        "dots": 1086,
+        "coverage": 0.6215469613259669,
+        "initialFree": 42,
+        "depth": 7,
+        "edges": 50,
+        "meanLength": 9.714285714285714,
+        "meanBends": 3.5714285714285716
+      }
+    },
+    {
+      "number": 61,
+      "family": "crown",
+      "pace": "breather",
+      "seed": 967672,
+      "metrics": {
+        "arrows": 14,
+        "dots": 180,
+        "coverage": 0.8222222222222222,
+        "initialFree": 10,
+        "depth": 4,
+        "edges": 7,
+        "meanLength": 9.571428571428571,
+        "meanBends": 2.7857142857142856
+      }
+    },
+    {
+      "number": 62,
+      "family": "key",
+      "pace": "normal",
+      "seed": 952831,
+      "metrics": {
+        "arrows": 16,
+        "dots": 141,
+        "coverage": 0.7872340425531915,
+        "initialFree": 13,
+        "depth": 4,
+        "edges": 6,
+        "meanLength": 5.9375,
+        "meanBends": 2.5
+      }
+    },
+    {
+      "number": 63,
+      "family": "crescent",
+      "pace": "hard",
+      "seed": 953828,
+      "metrics": {
+        "arrows": 35,
+        "dots": 460,
+        "coverage": 0.7108695652173913,
+        "initialFree": 23,
+        "depth": 7,
+        "edges": 30,
+        "meanLength": 8.342857142857143,
+        "meanBends": 2.857142857142857
+      }
+    },
+    {
+      "number": 64,
+      "family": "infinity",
+      "pace": "normal",
+      "seed": 962744,
+      "metrics": {
+        "arrows": 17,
+        "dots": 233,
+        "coverage": 0.7682403433476395,
+        "initialFree": 13,
+        "depth": 4,
+        "edges": 8,
+        "meanLength": 9.529411764705882,
+        "meanBends": 3.5294117647058822
+      }
+    },
+    {
+      "number": 65,
+      "family": "ring",
+      "pace": "breather",
+      "seed": 963741,
+      "metrics": {
+        "arrows": 15,
+        "dots": 198,
+        "coverage": 0.7323232323232324,
+        "initialFree": 9,
+        "depth": 4,
+        "edges": 11,
+        "meanLength": 8.666666666666666,
+        "meanBends": 2.933333333333333
+      }
+    },
+    {
+      "number": 66,
+      "family": "shield",
+      "pace": "normal",
+      "seed": 964738,
+      "metrics": {
+        "arrows": 24,
+        "dots": 367,
+        "coverage": 0.7057220708446866,
+        "initialFree": 15,
+        "depth": 4,
+        "edges": 19,
+        "meanLength": 9.791666666666666,
+        "meanBends": 3.5
+      }
+    },
+    {
+      "number": 67,
+      "family": "star",
+      "pace": "hard",
+      "seed": 965735,
+      "metrics": {
+        "arrows": 44,
+        "dots": 543,
+        "coverage": 0.7458563535911602,
+        "initialFree": 27,
+        "depth": 9,
+        "edges": 51,
+        "meanLength": 8.204545454545455,
+        "meanBends": 2.5
+      }
+    },
+    {
+      "number": 68,
+      "family": "wave",
+      "pace": "normal",
+      "seed": 958813,
+      "metrics": {
+        "arrows": 22,
+        "dots": 241,
+        "coverage": 0.8506224066390041,
+        "initialFree": 16,
+        "depth": 4,
+        "edges": 9,
+        "meanLength": 8.318181818181818,
+        "meanBends": 3.227272727272727
+      }
+    },
+    {
+      "number": 69,
+      "family": "flower",
+      "pace": "normal",
+      "seed": 975648,
+      "metrics": {
+        "arrows": 23,
+        "dots": 311,
+        "coverage": 0.8038585209003215,
+        "initialFree": 14,
+        "depth": 6,
+        "edges": 15,
+        "meanLength": 9.869565217391305,
+        "meanBends": 3.5652173913043477
+      }
+    },
+    {
+      "number": 70,
+      "family": "anchor",
+      "pace": "nightmare",
+      "seed": 984564,
+      "metrics": {
+        "arrows": 54,
+        "dots": 632,
+        "coverage": 0.7484177215189873,
+        "initialFree": 38,
+        "depth": 8,
+        "edges": 42,
+        "meanLength": 7.7592592592592595,
+        "meanBends": 2.888888888888889
+      }
+    },
+    {
+      "number": 71,
+      "family": "gear",
+      "pace": "breather",
+      "seed": 961804,
+      "metrics": {
+        "arrows": 18,
+        "dots": 216,
+        "coverage": 0.8611111111111112,
+        "initialFree": 14,
+        "depth": 3,
+        "edges": 7,
+        "meanLength": 9.333333333333334,
+        "meanBends": 3.1666666666666665
+      }
+    },
+    {
+      "number": 72,
+      "family": "hourglass",
+      "pace": "normal",
+      "seed": 962801,
+      "metrics": {
+        "arrows": 34,
+        "dots": 363,
+        "coverage": 0.7988980716253443,
+        "initialFree": 23,
+        "depth": 5,
+        "edges": 22,
+        "meanLength": 7.529411764705882,
+        "meanBends": 2.5294117647058822
+      }
+    },
+    {
+      "number": 73,
+      "family": "droplet",
+      "pace": "hard",
+      "seed": 979636,
+      "metrics": {
+        "arrows": 42,
+        "dots": 873,
+        "coverage": 0.5349369988545246,
+        "initialFree": 23,
+        "depth": 7,
+        "edges": 53,
+        "meanLength": 10.119047619047619,
+        "meanBends": 3.1904761904761907
+      }
+    },
+    {
+      "number": 74,
+      "family": "leaf",
+      "pace": "normal",
+      "seed": 964795,
+      "metrics": {
+        "arrows": 25,
+        "dots": 409,
+        "coverage": 0.6748166259168704,
+        "initialFree": 16,
+        "depth": 5,
+        "edges": 17,
+        "meanLength": 10.04,
+        "meanBends": 3.24
+      }
+    },
+    {
+      "number": 75,
+      "family": "lightning",
+      "pace": "breather",
+      "seed": 973711,
+      "metrics": {
+        "arrows": 10,
+        "dots": 101,
+        "coverage": 0.9108910891089109,
+        "initialFree": 9,
+        "depth": 2,
+        "edges": 1,
+        "meanLength": 8.2,
+        "meanBends": 3.7
+      }
+    },
+    {
+      "number": 76,
+      "family": "butterfly",
+      "pace": "normal",
+      "seed": 990546,
+      "metrics": {
+        "arrows": 33,
+        "dots": 511,
+        "coverage": 0.6614481409001957,
+        "initialFree": 21,
+        "depth": 7,
+        "edges": 22,
+        "meanLength": 9.242424242424242,
+        "meanBends": 3.272727272727273
+      }
+    },
+    {
+      "number": 77,
+      "family": "diamond",
+      "pace": "hard",
+      "seed": 983624,
+      "metrics": {
+        "arrows": 44,
+        "dots": 757,
+        "coverage": 0.6129458388375165,
+        "initialFree": 27,
+        "depth": 9,
+        "edges": 50,
+        "meanLength": 9.545454545454545,
+        "meanBends": 3.340909090909091
+      }
+    },
+    {
+      "number": 78,
+      "family": "heart",
+      "pace": "normal",
+      "seed": 992540,
+      "metrics": {
+        "arrows": 22,
+        "dots": 376,
+        "coverage": 0.6063829787234043,
+        "initialFree": 13,
+        "depth": 7,
+        "edges": 23,
+        "meanLength": 9.363636363636363,
+        "meanBends": 2.8636363636363638
+      }
+    },
+    {
+      "number": 79,
+      "family": "hexagon",
+      "pace": "normal",
+      "seed": 993537,
+      "metrics": {
+        "arrows": 24,
+        "dots": 495,
+        "coverage": 0.5696969696969697,
+        "initialFree": 14,
+        "depth": 8,
+        "edges": 25,
+        "meanLength": 10.75,
+        "meanBends": 3.875
+      }
+    },
+    {
+      "number": 80,
+      "family": "cross",
+      "pace": "nightmare",
+      "seed": 994534,
+      "metrics": {
+        "arrows": 70,
+        "dots": 1437,
+        "coverage": 0.524008350730689,
+        "initialFree": 42,
+        "depth": 9,
+        "edges": 96,
+        "meanLength": 9.757142857142858,
+        "meanBends": 2.9
+      }
+    },
+    {
+      "number": 81,
+      "family": "anchor",
+      "pace": "breather",
+      "seed": 971774,
+      "metrics": {
+        "arrows": 7,
+        "dots": 65,
+        "coverage": 0.8461538461538461,
+        "initialFree": 6,
+        "depth": 2,
+        "edges": 1,
+        "meanLength": 6.857142857142857,
+        "meanBends": 2.857142857142857
+      }
+    },
+    {
+      "number": 82,
+      "family": "gear",
+      "pace": "normal",
+      "seed": 972771,
+      "metrics": {
+        "arrows": 25,
+        "dots": 420,
+        "coverage": 0.6142857142857143,
+        "initialFree": 18,
+        "depth": 6,
+        "edges": 16,
+        "meanLength": 9.32,
+        "meanBends": 3.28
+      }
+    },
+    {
+      "number": 83,
+      "family": "hourglass",
+      "pace": "hard",
+      "seed": 989606,
+      "metrics": {
+        "arrows": 44,
+        "dots": 637,
+        "coverage": 0.6357927786499215,
+        "initialFree": 30,
+        "depth": 8,
+        "edges": 42,
+        "meanLength": 8.204545454545455,
+        "meanBends": 2.6818181818181817
+      }
+    },
+    {
+      "number": 84,
+      "family": "droplet",
+      "pace": "normal",
+      "seed": 982684,
+      "metrics": {
+        "arrows": 29,
+        "dots": 480,
+        "coverage": 0.5791666666666667,
+        "initialFree": 18,
+        "depth": 6,
+        "edges": 31,
+        "meanLength": 8.586206896551724,
+        "meanBends": 2.6206896551724137
+      }
+    },
+    {
+      "number": 85,
+      "family": "leaf",
+      "pace": "breather",
+      "seed": 975762,
+      "metrics": {
+        "arrows": 14,
+        "dots": 163,
+        "coverage": 0.803680981595092,
+        "initialFree": 8,
+        "depth": 4,
+        "edges": 12,
+        "meanLength": 8.357142857142858,
+        "meanBends": 3.0714285714285716
+      }
+    },
+    {
+      "number": 86,
+      "family": "lightning",
+      "pace": "normal",
+      "seed": 992597,
+      "metrics": {
+        "arrows": 18,
+        "dots": 197,
+        "coverage": 0.868020304568528,
+        "initialFree": 13,
+        "depth": 3,
+        "edges": 6,
+        "meanLength": 8.5,
+        "meanBends": 3.0555555555555554
+      }
+    },
+    {
+      "number": 87,
+      "family": "butterfly",
+      "pace": "hard",
+      "seed": 977756,
+      "metrics": {
+        "arrows": 60,
+        "dots": 887,
+        "coverage": 0.6640360766629086,
+        "initialFree": 38,
+        "depth": 9,
+        "edges": 59,
+        "meanLength": 8.816666666666666,
+        "meanBends": 3.05
+      }
+    },
+    {
+      "number": 88,
+      "family": "diamond",
+      "pace": "normal",
+      "seed": 986672,
+      "metrics": {
+        "arrows": 26,
+        "dots": 421,
+        "coverage": 0.5771971496437055,
+        "initialFree": 18,
+        "depth": 7,
+        "edges": 17,
+        "meanLength": 8.346153846153847,
+        "meanBends": 3.3846153846153846
+      }
+    },
+    {
+      "number": 89,
+      "family": "heart",
+      "pace": "normal",
+      "seed": 995588,
+      "metrics": {
+        "arrows": 28,
+        "dots": 433,
+        "coverage": 0.7182448036951501,
+        "initialFree": 21,
+        "depth": 6,
+        "edges": 26,
+        "meanLength": 10.107142857142858,
+        "meanBends": 3
+      }
+    },
+    {
+      "number": 90,
+      "family": "hexagon",
+      "pace": "nightmare",
+      "seed": 996585,
+      "metrics": {
+        "arrows": 48,
+        "dots": 1503,
+        "coverage": 0.3772455089820359,
+        "initialFree": 19,
+        "depth": 12,
+        "edges": 74,
+        "meanLength": 10.8125,
+        "meanBends": 3.25
+      }
+    },
+    {
+      "number": 91,
+      "family": "cross",
+      "pace": "breather",
+      "seed": 997582,
+      "metrics": {
+        "arrows": 15,
+        "dots": 179,
+        "coverage": 0.7821229050279329,
+        "initialFree": 10,
+        "depth": 4,
+        "edges": 14,
+        "meanLength": 8.333333333333334,
+        "meanBends": 3.3333333333333335
+      }
+    },
+    {
+      "number": 92,
+      "family": "crown",
+      "pace": "normal",
+      "seed": 998579,
+      "metrics": {
+        "arrows": 35,
+        "dots": 522,
+        "coverage": 0.7088122605363985,
+        "initialFree": 20,
+        "depth": 7,
+        "edges": 34,
+        "meanLength": 9.571428571428571,
+        "meanBends": 3.257142857142857
+      }
+    },
+    {
+      "number": 93,
+      "family": "key",
+      "pace": "hard",
+      "seed": 983738,
+      "metrics": {
+        "arrows": 28,
+        "dots": 317,
+        "coverage": 0.7476340694006309,
+        "initialFree": 20,
+        "depth": 5,
+        "edges": 11,
+        "meanLength": 7.464285714285714,
+        "meanBends": 2.5
+      }
+    },
+    {
+      "number": 94,
+      "family": "crescent",
+      "pace": "normal",
+      "seed": 984735,
+      "metrics": {
+        "arrows": 24,
+        "dots": 324,
+        "coverage": 0.7345679012345679,
+        "initialFree": 16,
+        "depth": 4,
+        "edges": 18,
+        "meanLength": 8.916666666666666,
+        "meanBends": 3.375
+      }
+    },
+    {
+      "number": 95,
+      "family": "infinity",
+      "pace": "breather",
+      "seed": 985732,
+      "metrics": {
+        "arrows": 14,
+        "dots": 137,
+        "coverage": 0.7737226277372263,
+        "initialFree": 10,
+        "depth": 4,
+        "edges": 4,
+        "meanLength": 6.571428571428571,
+        "meanBends": 2.2142857142857144
+      }
+    },
+    {
+      "number": 96,
+      "family": "ring",
+      "pace": "normal",
+      "seed": 1010486,
+      "metrics": {
+        "arrows": 31,
+        "dots": 526,
+        "coverage": 0.6349809885931559,
+        "initialFree": 17,
+        "depth": 6,
+        "edges": 27,
+        "meanLength": 9.774193548387096,
+        "meanBends": 3.2580645161290325
+      }
+    },
+    {
+      "number": 97,
+      "family": "shield",
+      "pace": "hard",
+      "seed": 1003564,
+      "metrics": {
+        "arrows": 44,
+        "dots": 771,
+        "coverage": 0.6523994811932555,
+        "initialFree": 21,
+        "depth": 9,
+        "edges": 62,
+        "meanLength": 10.431818181818182,
+        "meanBends": 3.4545454545454546
+      }
+    },
+    {
+      "number": 98,
+      "family": "star",
+      "pace": "normal",
+      "seed": 1012480,
+      "metrics": {
+        "arrows": 29,
+        "dots": 385,
+        "coverage": 0.7584415584415585,
+        "initialFree": 17,
+        "depth": 5,
+        "edges": 27,
+        "meanLength": 9.068965517241379,
+        "meanBends": 2.8620689655172415
+      }
+    },
+    {
+      "number": 99,
+      "family": "wave",
+      "pace": "normal",
+      "seed": 1013477,
+      "metrics": {
+        "arrows": 31,
+        "dots": 373,
+        "coverage": 0.7882037533512064,
+        "initialFree": 21,
+        "depth": 5,
+        "edges": 30,
+        "meanLength": 8.483870967741936,
+        "meanBends": 2.7419354838709675
+      }
+    },
+    {
+      "number": 100,
+      "family": "flower",
+      "pace": "nightmare",
+      "seed": 990717,
+      "metrics": {
+        "arrows": 63,
+        "dots": 1209,
+        "coverage": 0.5947063688999172,
+        "initialFree": 32,
+        "depth": 7,
+        "edges": 82,
+        "meanLength": 10.412698412698413,
+        "meanBends": 3.3333333333333335
+      }
+    },
+    {
+      "number": 101,
+      "family": "hexagon",
+      "pace": "breather",
+      "seed": 999633,
+      "metrics": {
+        "arrows": 19,
+        "dots": 287,
+        "coverage": 0.735191637630662,
+        "initialFree": 11,
+        "depth": 5,
+        "edges": 18,
+        "meanLength": 10.105263157894736,
+        "meanBends": 3.526315789473684
+      }
+    },
+    {
+      "number": 102,
+      "family": "cross",
+      "pace": "normal",
+      "seed": 1000630,
+      "metrics": {
+        "arrows": 24,
+        "dots": 333,
+        "coverage": 0.7447447447447447,
+        "initialFree": 18,
+        "depth": 5,
+        "edges": 10,
+        "meanLength": 9.333333333333334,
+        "meanBends": 3.7916666666666665
+      }
+    },
+    {
+      "number": 103,
+      "family": "crown",
+      "pace": "hard",
+      "seed": 1001627,
+      "metrics": {
+        "arrows": 52,
+        "dots": 770,
+        "coverage": 0.7012987012987013,
+        "initialFree": 30,
+        "depth": 7,
+        "edges": 63,
+        "meanLength": 9.384615384615385,
+        "meanBends": 3.1153846153846154
+      }
+    },
+    {
+      "number": 104,
+      "family": "key",
+      "pace": "normal",
+      "seed": 1002624,
+      "metrics": {
+        "arrows": 12,
+        "dots": 141,
+        "coverage": 0.8156028368794326,
+        "initialFree": 7,
+        "depth": 5,
+        "edges": 7,
+        "meanLength": 8.583333333333334,
+        "meanBends": 3.75
+      }
+    },
+    {
+      "number": 105,
+      "family": "crescent",
+      "pace": "breather",
+      "seed": 1003621,
+      "metrics": {
+        "arrows": 16,
+        "dots": 146,
+        "coverage": 0.8287671232876712,
+        "initialFree": 13,
+        "depth": 4,
+        "edges": 5,
+        "meanLength": 6.5625,
+        "meanBends": 2.75
+      }
+    },
+    {
+      "number": 106,
+      "family": "infinity",
+      "pace": "normal",
+      "seed": 1004618,
+      "metrics": {
+        "arrows": 19,
+        "dots": 233,
+        "coverage": 0.7424892703862661,
+        "initialFree": 11,
+        "depth": 6,
+        "edges": 19,
+        "meanLength": 8.105263157894736,
+        "meanBends": 2.263157894736842
+      }
+    },
+    {
+      "number": 107,
+      "family": "ring",
+      "pace": "hard",
+      "seed": 1005615,
+      "metrics": {
+        "arrows": 45,
+        "dots": 842,
+        "coverage": 0.5617577197149644,
+        "initialFree": 26,
+        "depth": 8,
+        "edges": 60,
+        "meanLength": 9.511111111111111,
+        "meanBends": 3.311111111111111
+      }
+    },
+    {
+      "number": 108,
+      "family": "shield",
+      "pace": "normal",
+      "seed": 1006612,
+      "metrics": {
+        "arrows": 24,
+        "dots": 367,
+        "coverage": 0.6457765667574932,
+        "initialFree": 13,
+        "depth": 8,
+        "edges": 24,
+        "meanLength": 8.875,
+        "meanBends": 2.7916666666666665
+      }
+    },
+    {
+      "number": 109,
+      "family": "star",
+      "pace": "normal",
+      "seed": 999690,
+      "metrics": {
+        "arrows": 22,
+        "dots": 248,
+        "coverage": 0.7379032258064516,
+        "initialFree": 12,
+        "depth": 6,
+        "edges": 20,
+        "meanLength": 7.318181818181818,
+        "meanBends": 3.227272727272727
+      }
+    },
+    {
+      "number": 110,
+      "family": "wave",
+      "pace": "nightmare",
+      "seed": 1016525,
+      "metrics": {
+        "arrows": 70,
+        "dots": 1001,
+        "coverage": 0.7282717282717283,
+        "initialFree": 48,
+        "depth": 10,
+        "edges": 63,
+        "meanLength": 9.414285714285715,
+        "meanBends": 3.0285714285714285
+      }
+    },
+    {
+      "number": 111,
+      "family": "flower",
+      "pace": "breather",
+      "seed": 1009603,
+      "metrics": {
+        "arrows": 11,
+        "dots": 146,
+        "coverage": 0.8424657534246576,
+        "initialFree": 8,
+        "depth": 4,
+        "edges": 8,
+        "meanLength": 10.181818181818182,
+        "meanBends": 3.4545454545454546
+      }
+    },
+    {
+      "number": 112,
+      "family": "anchor",
+      "pace": "normal",
+      "seed": 1026438,
+      "metrics": {
+        "arrows": 14,
+        "dots": 192,
+        "coverage": 0.7760416666666666,
+        "initialFree": 10,
+        "depth": 4,
+        "edges": 6,
+        "meanLength": 9.642857142857142,
+        "meanBends": 3.642857142857143
+      }
+    },
+    {
+      "number": 113,
+      "family": "gear",
+      "pace": "hard",
+      "seed": 1011597,
+      "metrics": {
+        "arrows": 40,
+        "dots": 600,
+        "coverage": 0.6666666666666666,
+        "initialFree": 25,
+        "depth": 7,
+        "edges": 39,
+        "meanLength": 9,
+        "meanBends": 3.075
+      }
+    },
+    {
+      "number": 114,
+      "family": "hourglass",
+      "pace": "normal",
+      "seed": 1012594,
+      "metrics": {
+        "arrows": 32,
+        "dots": 363,
+        "coverage": 0.8126721763085399,
+        "initialFree": 22,
+        "depth": 7,
+        "edges": 26,
+        "meanLength": 8.21875,
+        "meanBends": 3.03125
+      }
+    },
+    {
+      "number": 115,
+      "family": "droplet",
+      "pace": "breather",
+      "seed": 1013591,
+      "metrics": {
+        "arrows": 11,
+        "dots": 166,
+        "coverage": 0.6927710843373494,
+        "initialFree": 7,
+        "depth": 4,
+        "edges": 9,
+        "meanLength": 9.454545454545455,
+        "meanBends": 3.6363636363636362
+      }
+    },
+    {
+      "number": 116,
+      "family": "leaf",
+      "pace": "normal",
+      "seed": 1014588,
+      "metrics": {
+        "arrows": 26,
+        "dots": 409,
+        "coverage": 0.6943765281173594,
+        "initialFree": 19,
+        "depth": 6,
+        "edges": 22,
+        "meanLength": 9.923076923076923,
+        "meanBends": 3.423076923076923
+      }
+    },
+    {
+      "number": 117,
+      "family": "lightning",
+      "pace": "hard",
+      "seed": 1023504,
+      "metrics": {
+        "arrows": 20,
+        "dots": 293,
+        "coverage": 0.7474402730375427,
+        "initialFree": 14,
+        "depth": 4,
+        "edges": 10,
+        "meanLength": 9.95,
+        "meanBends": 4
+      }
+    },
+    {
+      "number": 118,
+      "family": "butterfly",
+      "pace": "normal",
+      "seed": 1008663,
+      "metrics": {
+        "arrows": 31,
+        "dots": 511,
+        "coverage": 0.6908023483365949,
+        "initialFree": 18,
+        "depth": 6,
+        "edges": 32,
+        "meanLength": 10.387096774193548,
+        "meanBends": 3.5483870967741935
+      }
+    },
+    {
+      "number": 119,
+      "family": "diamond",
+      "pace": "normal",
+      "seed": 1009660,
+      "metrics": {
+        "arrows": 29,
+        "dots": 365,
+        "coverage": 0.7753424657534247,
+        "initialFree": 19,
+        "depth": 6,
+        "edges": 21,
+        "meanLength": 8.758620689655173,
+        "meanBends": 2.7241379310344827
+      }
+    },
+    {
+      "number": 120,
+      "family": "heart",
+      "pace": "nightmare",
+      "seed": 1026495,
+      "metrics": {
+        "arrows": 54,
+        "dots": 1145,
+        "coverage": 0.4585152838427948,
+        "initialFree": 35,
+        "depth": 7,
+        "edges": 53,
+        "meanLength": 8.722222222222221,
+        "meanBends": 3.2777777777777777
+      }
+    }
+  ]
+}

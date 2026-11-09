@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+import originalChapter from '../fixtures/campaign-v1-hashes.json';
 import { describe, expect, it } from 'vitest';
 import type { StorageAdapter } from '@danilah/mini-games-kit/platform';
 import { dailyCatalog } from '../../src/content/daily';
@@ -23,34 +25,77 @@ async function solve(store: ProgressStore) {
   while (!store.board.complete) { const board = store.board; await store.move(board.attemptId, board.hint()!); }
 }
 
-describe('fixed first chapter', () => {
-  it('has twenty legal distinct boards, independently removable in multiple orders', () => {
-    expect(campaign).toHaveLength(20); expect(new Set(campaign.map(l => l.id)).size).toBe(20);
+describe('fixed selected campaign bank', () => {
+  it('preserves the twenty published fields byte-for-byte and has no repeated field geometry', () => {
+    for (const level of campaign.slice(0, 20)) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(originalChapter[level.id as keyof typeof originalChapter]);
+    const fingerprints = campaign.map(l => JSON.stringify({ mask: l.mask, paths: l.arrows.map(a => a.path) }));
+    expect(new Set(fingerprints).size).toBe(120);
+  });
+  it('has 120 legal distinct boards, independently removable in multiple orders', () => {
+    expect(campaign).toHaveLength(120); expect(new Set(campaign.map(l => l.id)).size).toBe(120);
     expect(campaign[5]!.difficulty).toBe('hard'); expect(campaign[19]!.difficulty).toBe('nightmare');
-    for (const level of campaign) for (let order = 0; order < 3; order++) {
+    for (const level of campaign) {
+      const occupied = new Map<string, string>();
+      for (const arrow of level.arrows) for (let j = 1; j < arrow.path.length; j++) {
+        const a = arrow.path[j - 1]!, b = arrow.path[j]!, length = Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
+        for (let k = 0; k <= length; k++) occupied.set(`${a.x + Math.sign(b.x - a.x) * k},${a.y + Math.sign(b.y - a.y) * k}`, arrow.id);
+      }
+      const dependencies = new Map(level.arrows.map(arrow => {
+        const head = arrow.path.at(-1)!, before = arrow.path.at(-2)!, blockers = new Set<string>();
+        const dx = Math.sign(head.x - before.x), dy = Math.sign(head.y - before.y);
+        for (let x = head.x + dx, y = head.y + dy; x >= 0 && y >= 0 && x < level.width && y < level.height; x += dx, y += dy) {
+          const blocker = occupied.get(`${x},${y}`); if (blocker) blockers.add(blocker);
+        }
+        return [arrow.id, blockers];
+      }));
+      for (let order = 0; order < 3; order++) {
       const board = new Board(level, 'independent');
       while (!board.complete) {
-        const remaining = board.remaining;
-        const possible = remaining.filter(arrow => {
-          const head = arrow.path.at(-1)!, before = arrow.path.at(-2)!;
-          const dx = Math.sign(head.x - before.x), dy = Math.sign(head.y - before.y);
-          const occupied = new Set<string>();
-          for (const other of remaining) if (other !== arrow) for (let j = 1; j < other.path.length; j++) {
-            const a = other.path[j - 1]!, b = other.path[j]!, length = Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
-            for (let k = 0; k <= length; k++) occupied.add(`${a.x + Math.sign(b.x - a.x) * k},${a.y + Math.sign(b.y - a.y) * k}`);
-          }
-          for (let x = head.x + dx, y = head.y + dy; x >= 0 && y >= 0 && x < level.width && y < level.height; x += dx, y += dy) if (occupied.has(`${x},${y}`)) return false;
-          return true;
-        });
+        const remaining = board.remaining, ids = new Set(remaining.map(a => a.id));
+        const possible = remaining.filter(a => ![...dependencies.get(a.id)!].some(id => ids.has(id)));
+        expect(remaining.filter(a => canExit(a, remaining)).map(a => a.id), level.id).toEqual(possible.map(a => a.id));
         expect(possible.length, level.id).toBeGreaterThan(0);
         const chosen = possible[order === 0 ? 0 : order === 1 ? possible.length - 1 : Math.floor(possible.length / 2)]!;
         expect(board.activate(chosen.id).kind).toBe('removed');
+      }
       }
     }
   });
 });
 
 describe('authoritative progression writer', () => {
+  it('upgrades a completed original bank and advances into c21 once without reissuing wins or moving earned rights', async () => {
+    const { storage, rows } = memory(), state = seed(19);
+    const oldBoard = new Board(state.campaign.level, state.campaign.board.id);
+    while (!oldBoard.complete) oldBoard.activate(oldBoard.hint()!);
+    state.campaign.board = oldBoard.snapshot(); state.campaign.started = true; state.catalogVersion = 1;
+    state.wins.push({ attempt: oldBoard.attemptId, levelId: 'c20', activeMs: 12000, completedAt: 40000, mistakes: 0 });
+    state.daily['2026-11-09'] = freshAttempt(dailyCatalog['2026-11-09']!);
+    state.receipts = ['existing-right']; state.reservedRewards = [receipt('old-retired', 'hint', 'existing-right')];
+    rows.set(SAVE_KEY, JSON.stringify(state));
+    const store = new ProgressStore(storage); await store.load();
+    expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(2);
+    expect(store.state.campaign).toEqual(state.campaign); expect(store.state.wins).toHaveLength(20);
+    expect(store.state.daily).toEqual(state.daily); expect(store.state.reservedRewards).toEqual(state.reservedRewards);
+    await Promise.all([store.next(oldBoard.attemptId), store.next(oldBoard.attemptId)]);
+    expect(store.state.index).toBe(20); expect(store.board.level.id).toBe('c21'); expect(store.state.wins).toHaveLength(20);
+    await store.commitReward(receipt(oldBoard.attemptId, 'lives', 'late-c20'));
+    expect(store.state.campaign.continuations).toBe(0); expect(store.state.reservedRewards).toHaveLength(2);
+    const restored = new ProgressStore(storage); await restored.load(); expect(restored.state).toEqual(store.state);
+  });
+  it('preserves a partial v1 campaign, embedded field, marks, camera, ledger and cadence through catalogue upgrade', async () => {
+    const state = seed(5), board = new Board(state.campaign.level, state.campaign.board.id);
+    const blocked = board.remaining.find(a => !canExit(a, board.remaining))!;
+    board.activate(blocked.id); board.activate(board.hint()!);
+    state.campaign.board = board.snapshot(); state.campaign.started = true;
+    state.campaign.view = { centerX: 9, centerY: 14, zoom: 2.3 }; state.campaign.guides = true;
+    state.catalogVersion = 1; state.adCadence.activeMs = 123456; state.receipts = ['confirmed-receipt'];
+    const decoded = decodeSave(state);
+    expect(decoded.campaign).toEqual(state.campaign); expect(decoded.receipts).toEqual(state.receipts);
+    expect(decoded.adCadence).toEqual(state.adCadence); expect(decoded.catalogVersion).toBe(2);
+    expect(() => decodeSave({ ...state, catalogVersion: 3 })).toThrow('Unsupported save');
+    const schema1 = { ...state, schema: 1 }; expect(decodeSave(schema1).campaign).toEqual(state.campaign);
+  });
   it('restores an accepted move during flight, errors, guides and viewport without rerolling identity', async () => {
     const { storage, rows } = memory(), state = seed(2); rows.set(SAVE_KEY, JSON.stringify(state));
     const store = new ProgressStore(storage); await store.load(); const expected = store.board.attemptId;
@@ -69,9 +114,9 @@ describe('authoritative progression writer', () => {
     expect(restored.board.complete).toBe(true);
     await Promise.all([restored.next(done), restored.next(done)]); expect(restored.state.index).toBe(1);
     expect(restored.state.wins).toHaveLength(1); expect(restored.board.complete).toBe(false);
-    rows.set(SAVE_KEY, JSON.stringify(seed(19))); const last = new ProgressStore(storage); await last.load(); await solve(last);
-    expect(await last.next(last.board.attemptId)).toBeUndefined(); expect(last.state.wins).toHaveLength(20);
-    expect(decodeSave(JSON.parse(rows.get(SAVE_KEY)!)).index).toBe(19);
+    rows.set(SAVE_KEY, JSON.stringify(seed(campaign.length - 1))); const last = new ProgressStore(storage); await last.load(); await solve(last);
+    expect(await last.next(last.board.attemptId)).toBeUndefined(); expect(last.state.wins).toHaveLength(campaign.length);
+    expect(decodeSave(JSON.parse(rows.get(SAVE_KEY)!)).index).toBe(campaign.length - 1);
   });
   it('preserves marks through one free refill and idempotent earned lives; restart creates a fresh identity', async () => {
     const { storage, rows } = memory(); rows.set(SAVE_KEY, JSON.stringify(seed(5)));

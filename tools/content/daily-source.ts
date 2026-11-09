@@ -1,4 +1,4 @@
-import { shape } from './campaign-source';
+import { shape } from './silhouettes';
 import { silhouette } from './control-scene-source';
 import { validateLevel, type Level } from '../../src/domain/board';
 import { monthDates } from '../../src/progression/calendar';

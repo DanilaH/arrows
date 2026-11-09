@@ -2,6 +2,7 @@ import type { ProgressStore } from '../progression/save';
 import { collectionOpen, challengeOpen, collectionStats, medals, earnedAwards } from '../progression/collection';
 import { calendarDate, localDate, monthDates } from '../progression/calendar';
 import { dailyCatalog, dailyMonths, dailyDates } from '../content/daily';
+import { campaign } from '../content/campaign';
 import { trophy } from './trophies';
 import { settingsIcon } from './settings';
 import { copy, type GameLanguage } from '../app/language';
@@ -43,7 +44,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       <section class="home-current"><p class="eyebrow">${text.level} ${save.index + 1}</p><span class="home-difficulty">${difficulty}</span>
       <svg class="home-board" viewBox="-1 -1 ${a.level.width + 1} ${a.level.height + 1}" aria-hidden="true">${paths || '<circle cx="4" cy="6" r="2"/>'}</svg>
       <button id="home-play" class="primary" type="button" ${!ready || busy ? 'disabled' : ''}>${a.started ? text.resume : text.play}<span aria-hidden="true"> →</span></button>
-      <p class="home-progress">${text.chapter}: ${save.wins.length} / 20</p></section>
+      <p class="home-progress">${text.chapter}: ${save.wins.length} / ${campaign.length}</p></section>
       <nav class="home-destinations"><button id="home-collection" type="button" ${!ready || !unlocked ? 'disabled' : ''}><span class="nav-symbol">◇</span><span>${text.collection}<small>${unlocked ? text.recordsAndAwards : text.unlock10}</small></span>${newAward ? '<i class="new-dot"></i>' : ''}</button>
       <button id="home-calendar" type="button" ${!ready || !challenge ? 'disabled' : ''}><span class="nav-symbol">▦</span><span>${text.challenge}<small>${challenge ? dayFormat.format(calendarDate(selected)) : text.unlock20}</small></span></button></nav><button id="home-controls" class="review-link" type="button">${text.controlFields}</button></div>`;
   };

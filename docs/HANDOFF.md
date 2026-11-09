@@ -2,6 +2,10 @@
 
 ## Current milestone
 
+Version 0.6.0 / Android versionCode 10 expands the fixed campaign from 20 to 120 fields (3,717 arrows), preserving every original field. New fields rotate twenty silhouette families with short/normal/Hard/Nightmare pacing, longer bent paths and offline structural selection. Catalogue 1→2 upgrades are append-only; completed c20 continues into c21 explicitly, partial attempts and all daily/award/receipt state remain authoritative. Home now derives total progress from the installed bank. See `STAGE_E_CAMPAIGN_BANK.md`. Device playtesting still needs to establish actual difficulty and phone feel.
+
+Previous advertising milestone:
+
 Version 0.5.0 / Android versionCode 9 connects explicit after-win interstitial transitions, durable active-time/two-win/first-six protection, visible cancellable rewarded loading, foreground-safe continuation, queued native earned receipts and correlated ad/analytics events. Original effect+dedup and exact-ack authority remains in ProgressStore. See `STAGE_D_MONETIZATION.md` for policy and failure contracts. Default APK is test ads; real SDK fill/earned behavior and AppMetrica dashboard delivery are not yet established.
 
 Previous presentation milestone:
@@ -16,9 +20,13 @@ Save schema 2 adds an earned-design binding map. Pre-update awarded cups retain 
 
 Stage C navigation/records remain: Collection at current level 10, daily at 20, independent attempts/cameras, and three explicitly adapted local medals. League is still open. The temporary control-board review link is on Home and must be removed for release.
 
-D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, physical-phone sound/haptics/system-bar/feel/performance/process-kill evidence, release bank, signing and RuStore package. Keep attaching authentic GIFs for visible changes.
+D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, physical-phone sound/haptics/system-bar/feel/performance/process-kill evidence, human bank playtesting, final icon/splash, signing and RuStore package. Keep attaching authentic GIFs for visible changes.
 
 ## Verification
+
+Current 0.6.0: strict typecheck/build and 74 TS tests pass locally. All 120 fields are independently removed in three orders, and each legal-choice set is compared with the game model. Original twenty field fingerprints, partial-save upgrades, completed-c20 continuation, exact-once c21 creation and c120 exhaustion pass. Offline content-tool typecheck and `android:sync` pass. Browser/CI/artifact evidence is recorded after the current run.
+
+Historical 0.5.0:
 
 Current 0.5.0: strict typecheck/build, 71 TS tests, five native JVM journal tests and the full 62-case browser suite pass locally (56 application cases, six isolated UI integration cases). `android:sync` passes. [CI 42639056598](https://github.com/DanilaH/arrows/actions/runs/42639056598) passed both jobs on source `9118df4e3d3d404c39f667f14300769b1230df06`: 71 TS tests, all 62 browser cases, five native JVM tests through Gradle and Android `assembleDebug`. APK 0.5.0 (9): 10,183,133 bytes; SHA-256 `a6077e01bd90b56278fb06a2b60d86216658d34ac341f5e5660b6470c9d18f15`. Both downloaded archive digests were checked; native test XML has zero failures/errors/skips. All embedded web files, native configuration, shared analytics schema and recorded GIF entry match the checked build. The isolated test harness is absent from the APK. Evidence: `verification/STAGE_D_MONETIZATION_BUILD_2026-11-09.json`. The following documentation-only update has the same application runtime. This does not establish real-device SDK fill/earned behavior or AppMetrica dashboard delivery.
 
@@ -73,7 +81,7 @@ First CI run `42587117226` failed before native compilation because setup-androi
 1. Verify 0.4.0 on a named Android device: both themes/insets, system bars, sound/loudness/audio focus, independent vibration switches, return from interruptions and update persistence. Do not claim exact original sound.
 2. Accept 0.5.0 native advertising on an exact Android artifact: genuine SDK earned delivery, interruption/process restoration, both dismissal/foreground orders and matching AppMetrica dashboard events. Configure a separate APPMETRICA_DEBUG_API_KEY through repository secrets for that run.
 3. Preserve schema 2 migration, per-date identity, combined writer/receipt ordering and reserved rights. Keep stage C local record policies explicit; League remains open.
-4. E: curate the larger bank, extend dated coverage, final identity/icon/splash, production signing and RuStore materials/disclosures.
+4. E: playtest the installed 120-field bank, extend dated coverage deliberately, final identity/icon/splash, production signing and RuStore materials/disclosures.
 5. Measure named-device touch/zoom, frame pacing, haptics and process-kill restoration. Browser checks/GIFs do not establish phone performance.
 
 See `KIT_REUSE.md`, `PROJECT_DECISIONS.md` and the replication spec for full scope.
