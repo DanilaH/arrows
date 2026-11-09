@@ -1,3 +1,4 @@
+import { openControlReview } from './helpers/controlReview';
 import { expect, test, type Page } from '@playwright/test';
 import { campaign } from '../../src/content/campaign';
 import { canExit } from '../../src/domain/board';
@@ -17,14 +18,14 @@ async function clickArrow(page: Page, arrow: { path: readonly { x: number; y: nu
 async function persisted(page: Page, revision: number) {
   await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').revision ?? -1, SAVE_KEY)).toBeGreaterThan(revision);
 }
-async function seed(page: Page, index: number) {
+async function seed(page: Page, index: number, review = false) {
   const state = freshSave(); state.index = index; state.campaign = freshAttempt(campaign[index]!);
   state.wins = campaign.slice(0, index).map((l, i) => ({ attempt: `past-${i}`, levelId: l.id, activeMs: 100, completedAt: 1000 + i, mistakes: 0 }));
   await page.addInitScript(({ key, state }) => {
     const marker = `seed-${state.campaign.board.id}`;
     if (!sessionStorage.getItem(marker)) { localStorage.setItem(key, JSON.stringify(state)); sessionStorage.setItem(marker, '1'); }
   }, { key: SAVE_KEY, state });
-  await page.goto('/'); await ready(page);
+  if (review) await openControlReview(page); else await page.goto('/'); await ready(page);
 }
 
 test('teaches by successful action, saves victory during the last flight and advances only once', async ({ page }) => {
@@ -44,7 +45,7 @@ test('teaches by successful action, saves victory during the last flight and adv
 });
 
 test('restores a partial board, marks and guides, while control boards leave campaign progress intact', async ({ page }) => {
-  await seed(page, 2); const level = campaign[2]!, blocked = level.arrows.find(a => !canExit(a, level.arrows))!, free = level.arrows.find(a => canExit(a, level.arrows))!;
+  await seed(page, 2, true); const level = campaign[2]!, blocked = level.arrows.find(a => !canExit(a, level.arrows))!, free = level.arrows.find(a => canExit(a, level.arrows))!;
   const attempt = await page.locator('#game-shell').getAttribute('data-attempt');
   await clickArrow(page, blocked); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2');
   await clickArrow(page, free); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '5');

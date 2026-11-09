@@ -11,7 +11,7 @@ export type AppScreen = 'home' | 'collection' | 'calendar' | 'game';
 const badge = (key: string): string => `<svg viewBox="0 0 72 84" aria-hidden="true"><path d="m20 51-3 27 19-9 19 9-3-27"/><circle cx="36" cy="32" r="25"/><path d="${key === 'legend' ? 'm21 34 6-12 9 10 9-10 6 12-5 9H26Z' : key === 'perfect' ? 'm23 32 9 9 18-19' : 'M39 15c9 13-4 13 4 24 2-6 7-8 7-8 4 18-23 23-26 8-2-8 8-15 8-15-2 10 3 11 3 11-3-9 6-12 4-20Z'}"/></svg>`;
 
 export function installMetaSurface(progress: ProgressStore, language: GameLanguage, options: {
-  blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; controls(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;
+  blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; controls?(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;
 }) {
   const root = document.querySelector<HTMLElement>('#meta-screen')!, shell = document.querySelector<HTMLElement>('#game-shell')!;
   let text = copy[language];
@@ -46,7 +46,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       <button id="home-play" class="primary" type="button" ${!ready || busy ? 'disabled' : ''}>${a.started ? text.resume : text.play}<span aria-hidden="true"> →</span></button>
       <p class="home-progress">${text.chapter}: ${save.wins.length} / ${campaign.length}</p></section>
       <nav class="home-destinations"><button id="home-collection" type="button" ${!ready || !unlocked ? 'disabled' : ''}><span class="nav-symbol">◇</span><span>${text.collection}<small>${unlocked ? text.recordsAndAwards : text.unlock10}</small></span>${newAward ? '<i class="new-dot"></i>' : ''}</button>
-      <button id="home-calendar" type="button" ${!ready || !challenge ? 'disabled' : ''}><span class="nav-symbol">▦</span><span>${text.challenge}<small>${challenge ? dayFormat.format(calendarDate(selected)) : text.unlock20}</small></span></button></nav><button id="home-controls" class="review-link" type="button">${text.controlFields}</button></div>`;
+      <button id="home-calendar" type="button" ${!ready || !challenge ? 'disabled' : ''}><span class="nav-symbol">▦</span><span>${text.challenge}<small>${challenge ? dayFormat.format(calendarDate(selected)) : text.unlock20}</small></span></button></nav>${options.controls ? `<button id="home-controls" class="review-link" type="button">${text.controlFields}</button>` : ''}</div>`;
   };
   const collection = (): string => {
     const save = progress.state, stats = collectionStats(save);
@@ -124,7 +124,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     const target = (event.target as HTMLElement).closest<HTMLButtonElement>('button'); if (!target || target.disabled || busy) return;
     if (target.dataset.nav === 'back') back();
     else if (target.id === 'home-settings') options.settings();
-    else if (target.id === 'home-controls') options.controls();
+    else if (target.id === 'home-controls') options.controls?.();
     else if (target.id === 'home-play') options.enterCampaign();
     else if (target.id === 'home-collection') {
       show('collection'); void progress.markCollectionSeen(earnedAwards(progress.state)).catch(() => refresh());

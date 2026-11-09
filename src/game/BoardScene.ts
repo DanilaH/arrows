@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { boardPalettes } from '../app/theme';
 import type { GameTheme } from '../app/settings';
 import { stepDampedMotion } from '@danilah/mini-games-kit/feel';
-import { controlScenes } from '../content/controlScenes';
+import { campaign } from '../content/campaign';
 import { Board, type MoveResult } from '../domain/board';
 import { extractPath, measurePath, pointAt, type Arrow, type MeasuredPath, type Point } from '../domain/geometry';
 import { BoardCamera, type Rect } from '../input/camera';
@@ -16,9 +16,8 @@ export interface SceneOptions { ready(scene: BoardScene): void; dirty(): void; m
 
 /** Stable geometry is rebuilt on state/camera changes; only active flights/dots animate. */
 export class BoardScene extends Phaser.Scene {
-  public board = new Board(controlScenes[0]!, crypto.randomUUID());
+  public board = new Board(campaign[0]!, crypto.randomUUID());
   public boardCamera = new BoardCamera(this.board.level.width, this.board.level.height);
-  public selected = 0;
   public guides = false;
   public preview: string | null = null;
   public hintTarget: string | null = null;
@@ -60,7 +59,7 @@ export class BoardScene extends Phaser.Scene {
     this.reactiveDots = this.add.graphics(); this.active = this.add.graphics();
     this.world = this.add.container(0, 0, [this.dots, this.guidesLayer, this.stable, this.reactiveDots, this.active]);
     this.overlay = this.add.graphics();
-    this.loadLevel(0);
+    this.loadAttempt(this.board);
     const resized = (): void => this.layout(false);
     this.scale.on(Phaser.Scale.Events.RESIZE, resized);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -71,10 +70,6 @@ export class BoardScene extends Phaser.Scene {
   }
   public subscribe(listener: () => void): () => void { this.listeners.add(listener); return () => this.listeners.delete(listener); }
   private changed(): void { for (const listener of this.listeners) listener(); this.options.dirty(); }
-  public loadLevel(index: number): void {
-    const level = controlScenes[index]; if (!level) return;
-    this.selected = index; this.loadAttempt(new Board(level, crypto.randomUUID()));
-  }
   public loadAttempt(board: Board, view: ViewState | null = null, guides = false, hint: string | null = null): void {
     const level = board.level; this.board = board; this.guides = guides; this.hintTarget = null; this.focusMotion = null;
     this.boardCamera = new BoardCamera(level.width, level.height);

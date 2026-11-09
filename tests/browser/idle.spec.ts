@@ -1,3 +1,4 @@
+import { openControlReview } from './helpers/controlReview';
 import { test, expect } from '@playwright/test';
 import { controlScenes } from '../../src/content/controlScenes';
 import { canExit } from '../../src/domain/board';
@@ -9,7 +10,7 @@ test('settles after animation and repeated scene changes without a permanent fra
     window.requestAnimationFrame = callback => original(time => { count++; callback(time); });
     Object.defineProperty(window, '__boardFrameCount', { get: () => count });
   });
-  await page.goto('/');
+  await openControlReview(page);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
   await page.locator('#home-play').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');

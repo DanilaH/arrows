@@ -1,6 +1,6 @@
 {
   "name": "arrows",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -8,10 +8,12 @@
   },
   "scripts": {
     "dev": "vite --mode development",
+    "brand:generate": "node tools/brand/generate.mjs",
+    "brand:check": "node tools/brand/generate.mjs --check",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:browser": "playwright test",
-    "build": "tsc --noEmit && vite build",
+    "build": "node tools/brand/generate.mjs --check && tsc --noEmit && vite build && node tools/verify-production.mjs",
     "preview": "vite preview",
     "check": "npm run typecheck && npm test && npm run build",
     "android:sync": "npm run build && node tools/prepare-native.mjs && cap sync android",

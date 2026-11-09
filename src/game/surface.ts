@@ -1,11 +1,10 @@
 import { campaign, tutorialFor } from '../content/campaign';
-import { controlScenes } from '../content/controlScenes';
 import { distanceToPath, type Point } from '../domain/geometry';
 import { BoardGestures } from '../input/gestures';
 import { copy, type GameLanguage } from '../app/language';
 import type { createPlatformRuntime } from '../app/platform';
 import { ProgressStore, type SaveChange } from '../progression/save';
-import { Board } from '../domain/board';
+import { Board, type Level } from '../domain/board';
 import { installMetaSurface } from './meta';
 import { installSettingsSurface, settingsIcon } from './settings';
 import { installAdSurface } from './adSurface';
@@ -16,7 +15,7 @@ import { earnedAwards } from '../progression/collection';
 import type { BoardScene } from './BoardScene';
 
 type Platform = ReturnType<typeof createPlatformRuntime>;
-export function installGameSurface(scene: BoardScene, platform: Platform, language: GameLanguage) {
+export function installGameSurface(scene: BoardScene, platform: Platform, language: GameLanguage, reviewFields: readonly Level[] = []) {
   let text = copy[language];
   const root = document.querySelector<HTMLElement>('#game-root')!;
   const shell = document.querySelector<HTMLElement>('#game-shell')!, dialog = document.querySelector<HTMLDialogElement>('#game-dialog')!;
@@ -26,6 +25,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const sessionPlay = document.querySelector<HTMLButtonElement>('#session-play')!;
   const progress = new ProgressStore(platform.storage), listeners: Array<() => void> = [];
   let alive = true, loaded = false, loadSlow = false, control = false, requestingAd = false;
+  let selectedControl = 0;
+  const loadControl = (index: number): void => { const level = reviewFields[index]; if (!level) return; selectedControl = index; scene.loadAttempt(new Board(level, crypto.randomUUID())); };
   let activeDate: string | null = null, calendarDay = localDate();
   const active = () => activeDate ? progress.state.daily[activeDate]! : progress.state.campaign;
   const gameMode = () => activeDate ? 'daily' as const : 'campaign' as const;
@@ -107,7 +108,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     blocked: value => platform.activity.setBlocked('menu', value),
     previewBlocked: value => platform.activity.setBlocked('trophy-preview', value), leaveGame, enterCampaign,
     visited: screen => platform.analytics.track('screen_view', { screen }),
-    controls: () => open('controls'), settings: () => settingsSurface.open(),
+    ...(reviewFields.length ? { controls: () => open('controls') } : {}), settings: () => settingsSurface.open(),
     async enterDaily(date) {
       const intent = meta.revision;
       await progress.flush(); const attempt = await progress.openDaily(date); if (!attempt || !alive) throw Error('Daily unavailable');
@@ -154,6 +155,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     });
   };
   const open = (kind: NonNullable<typeof modal>): void => {
+    if (kind === 'controls' && !reviewFields.length) return;
     cancel(); saveView(); modal = kind; platform.activity.setBlocked('dialog', true); content.replaceChildren();
     const title = document.createElement('h2'); title.id = 'dialog-title';
     title.textContent = kind === 'pause' ? `${text.level} ${progress.state.index + 1}` : kind === 'controls' ? text.chooseField : kind === 'lost' ? text.noLives : kind === 'hint' ? text.hintTitle : text.restartQuestion;
@@ -168,13 +170,13 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       button('home', activeDate ? text.challenge : text.home, backToMenu);
       button('resume', text.resume, close, true);
       if (control) button('campaign', text.toCampaign, () => { close(); enterCampaign(); });
-      button('controls', text.controlFields, () => open('controls'));
+      if (reviewFields.length) button('controls', text.controlFields, () => open('controls'));
     } else if (kind === 'controls') {
-      for (let index = 0; index < controlScenes.length; index++) button(`field-${index}`, names[index]!, () => { close(); saveView(); control = true; idleMs = 0; meta.show('game'); scene.loadLevel(index); sync(); }, index === scene.selected && control);
+      for (let index = 0; index < reviewFields.length; index++) button(`field-${index}`, names[index]!, () => { close(); saveView(); control = true; idleMs = 0; meta.show('game'); loadControl(index); sync(); }, index === selectedControl && control);
       button('campaign', text.toCampaign, () => { close(); enterCampaign(); });
     } else if (kind === 'restart') {
       button('confirm-restart', text.restart, () => {
-        close(); if (control) scene.loadLevel(scene.selected);
+        close(); if (control) loadControl(selectedControl);
         else {
           const a = scene.board, mode = gameMode(); run(progress.restart(a.attemptId).then(changed => { if (changed) platform.analytics.track('level_restart', { mode, level_id: a.level.id, attempt: a.attemptId }); }));
         }
@@ -200,7 +202,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       celebratedAttempt = board.attemptId; platform.feedback.play(pendingAward ? 'award' : 'win'); pendingAward = false;
     }
     document.querySelector('#app-title')!.textContent = control ? text.title : activeDate ? text.challenge : `${text.level} ${progress.state.index + 1}`;
-    document.querySelector('#field-name')!.textContent = control ? names[scene.selected]! : activeDate ? new Intl.DateTimeFormat(language, { day: 'numeric', month: 'long', timeZone: 'UTC' }).format(new Date(activeDate + 'T12:00:00Z')) : `${progress.state.index + 1} / ${campaign.length}`;
+    document.querySelector('#field-name')!.textContent = control ? names[selectedControl]! : activeDate ? new Intl.DateTimeFormat(language, { day: 'numeric', month: 'long', timeZone: 'UTC' }).format(new Date(activeDate + 'T12:00:00Z')) : `${progress.state.index + 1} / ${campaign.length}`;
     document.querySelector('#difficulty')!.textContent = board.level.difficulty === 'normal' ? '' : board.level.difficulty === 'hard' ? 'Hard' : 'Nightmare';
     const hearts = document.querySelector<HTMLElement>('#hearts')!; hearts.setAttribute('aria-label', `${text.lives}: ${board.hearts}`);
     Array.from(hearts.children).forEach((heart, i) => heart.classList.toggle('empty', i >= board.hearts));

@@ -1,3 +1,4 @@
+import { openControlReview } from './helpers/controlReview';
 import { expect, test, type Page } from '@playwright/test';
 import { controlScenes } from '../../src/content/controlScenes';
 import { Board, canExit } from '../../src/domain/board';
@@ -20,7 +21,7 @@ async function choose(page: Page, index: number) {
 }
 
 test('keeps red-arrow errors stable and accepts newly unblocked arrows during flight', async ({ page }, testInfo) => {
-  await page.goto('/');
+  await openControlReview(page);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
   await page.locator('#home-play').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
@@ -39,7 +40,7 @@ test('keeps red-arrow errors stable and accepts newly unblocked arrows during fl
 });
 
 test('cancels held and dragged selections, then keeps the first UI tap functional', async ({ page }) => {
-  await page.goto('/');
+  await openControlReview(page);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
   await page.locator('#home-play').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
@@ -60,7 +61,7 @@ test('cancels held and dragged selections, then keeps the first UI tap functiona
 });
 
 test('zooms without a phantom tap and repaints after a sleeping-board resize', async ({ page }, testInfo) => {
-  await page.goto('/');
+  await openControlReview(page);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
   await page.locator('#home-play').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
@@ -89,7 +90,7 @@ test('zooms without a phantom tap and repaints after a sleeping-board resize', a
 test('clears every control board through actual pointer input and leaves one idle renderer', async ({ page }, testInfo) => {
   test.setTimeout(120000);
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
-  await page.goto('/');
+  await openControlReview(page);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
   await page.locator('#home-play').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');

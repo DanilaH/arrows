@@ -2,6 +2,10 @@
 
 ## Current milestone
 
+Version 0.7.0 / Android versionCode 11 replaces Capacitor launcher/splash art with a shared project-owned bent-arrow mark, adaptive/monochrome/legacy vector icons and matching initial HTML/native launch surfaces. The normal application exposes no control-board review route and excludes the control catalogue from its bundle. Review-only render/gesture tests use an isolated in-memory entry. Readiness still follows first render/uncovered paint; there is no new SDK dependency or minimum brand hold. See `STAGE_E_IDENTITY.md`. Native masks/launch transitions remain device acceptance, not browser proof.
+
+Previous campaign milestone:
+
 Version 0.6.0 / Android versionCode 10 expands the fixed campaign from 20 to 120 fields (3,717 arrows), preserving every original field. New fields rotate twenty silhouette families with short/normal/Hard/Nightmare pacing, longer bent paths and offline structural selection. Catalogue 1→2 upgrades are append-only; completed c20 continues into c21 explicitly, partial attempts and all daily/award/receipt state remain authoritative. Home now derives total progress from the installed bank. See `STAGE_E_CAMPAIGN_BANK.md`. Device playtesting still needs to establish actual difficulty and phone feel.
 
 Previous advertising milestone:
@@ -18,11 +22,15 @@ Version 0.3.3 / Android versionCode 7 keeps the rich versioned monthly trophy ar
 
 Save schema 2 adds an earned-design binding map. Pre-update awarded cups retain their original v1 design; new awards atomically bind v2 IDs. Do not edit a published style library to reinterpret existing trophies. Keep the writer/receipt ordering and separate campaign/date ownership intact.
 
-Stage C navigation/records remain: Collection at current level 10, daily at 20, independent attempts/cameras, and three explicitly adapted local medals. League is still open. The temporary control-board review link is on Home and must be removed for release.
+Stage C navigation/records remain: Collection at current level 10, daily at 20, independent attempts/cameras, and three explicitly adapted local medals. League is still open. The control-board review link has been removed from the normal application; its catalogue is supplied only by isolated test fixtures.
 
-D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, physical-phone sound/haptics/system-bar/feel/performance/process-kill evidence, human bank playtesting, final icon/splash, signing and RuStore package. Keep attaching authentic GIFs for visible changes.
+D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, physical-phone sound/haptics/system-bar/feel/performance/process-kill evidence, human bank playtesting, physical native-icon/splash acceptance, signing and RuStore package. Keep attaching authentic GIFs for visible changes.
 
 ## Verification
+
+Current 0.7.0: strict typecheck/build and all 74 TS tests pass; generated brand resources and production-catalogue exclusion are checked during build. Full browser/native artifact results are recorded in the identity milestone evidence after the run.
+
+Historical 0.6.0:
 
 Current 0.6.0: strict typecheck/build and 74 TS tests pass locally. All 120 fields are independently removed in three orders, and each legal-choice set is compared with the game model. Original twenty field fingerprints, partial-save upgrades, completed-c20 continuation, exact-once c21 creation and c120 exhaustion pass. Offline content-tool typecheck and `android:sync` pass. The first local full browser run passed 67/68 cases with one five-second startup deadline in an existing control-board case; its isolated rerun passed. [CI 42643783152](https://github.com/DanilaH/arrows/actions/runs/42643783152) passed both jobs on source `9ba1f03d16e5eb6551f8aeea4debbbf0fcf3beb4`: all 74 TS tests, all 68 browser cases (62 application / six isolated harness), five JVM tests and Android assembly. APK 0.6.0 (10): 10,359,121 bytes; SHA-256 `91b5b7e9805fd00cc66392598eec5268f5238257adc84c1c123df36264729eae`. Archive/test digests, manifest identity, every embedded web file, native configuration, analytics schema and both genuine GIF runtimes match. An additional isolated browser QA pass reviewed all twenty new silhouette families and cleared c50's 77 arrows with touch input and no errors; its synthetic starting fixtures are never used for delivery GIFs. Evidence: `verification/STAGE_E_CAMPAIGN_BUILD_2026-11-09.json`. The documentation-only follow-up changes no application payload.
 
@@ -81,7 +89,7 @@ First CI run `42587117226` failed before native compilation because setup-androi
 1. Verify 0.4.0 on a named Android device: both themes/insets, system bars, sound/loudness/audio focus, independent vibration switches, return from interruptions and update persistence. Do not claim exact original sound.
 2. Accept 0.5.0 native advertising on an exact Android artifact: genuine SDK earned delivery, interruption/process restoration, both dismissal/foreground orders and matching AppMetrica dashboard events. Configure a separate APPMETRICA_DEBUG_API_KEY through repository secrets for that run.
 3. Preserve schema 2 migration, per-date identity, combined writer/receipt ordering and reserved rights. Keep stage C local record policies explicit; League remains open.
-4. E: playtest the installed 120-field bank, extend dated coverage deliberately, final identity/icon/splash, production signing and RuStore materials/disclosures.
+4. E: playtest the installed 120-field bank, extend dated coverage deliberately, accept final icon/splash on-device, production signing and RuStore materials/disclosures.
 5. Measure named-device touch/zoom, frame pacing, haptics and process-kill restoration. Browser checks/GIFs do not establish phone performance.
 
 See `KIT_REUSE.md`, `PROJECT_DECISIONS.md` and the replication spec for full scope.

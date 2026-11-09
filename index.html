@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#1e1e2c" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>Стрелки</title>
   </head>
   <body>
@@ -36,8 +37,9 @@
       <dialog id="settings-dialog" aria-labelledby="settings-title"></dialog>
       <dialog id="ad-dialog" aria-labelledby="ad-title" aria-describedby="ad-description"></dialog>
       <dialog id="game-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
-      <section id="startup-preload" data-state="idle" aria-hidden="true">
+      <section id="startup-preload" data-state="visible" aria-hidden="false">
         <div class="startup-card">
+          <img class="startup-mark" src="/brand-mark.svg" width="288" height="288" alt="" aria-hidden="true" />
           <strong id="startup-preload-heading">Загрузка</strong>
           <span id="startup-preload-status">Подготавливаем игру…</span>
           <div id="startup-preload-progress-bar" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="startup-preload-progress-fill"></div></div>
