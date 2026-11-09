@@ -1,0 +1,24 @@
+{
+  "source": "aa40b47de64ffd2125c7247d40ce5e769f606acc",
+  "run": 42594630773,
+  "apk_name": "Arrows-0.1.0-debug.apk",
+  "apk_bytes": 9727229,
+  "apk_sha256": "a1051511aab1ed2b0f22fd22ce78aaa44df6c7f8dc437da85cf8427b5fff2254",
+  "archive_sha256": "a5ceef14096d922195528a2c6704c1ef9fc5e297d0efd05020f75b6bfa6ff0a9",
+  "web_payload_files_equal": [
+    "assets/public/index.html",
+    "assets/public/assets/web-CQbwNGyS.js",
+    "assets/public/assets/index-NRjGy4Im.js",
+    "assets/public/assets/index-Cj2B8qaQ.css"
+  ],
+  "analytics_contract_equal": true,
+  "native_plugin_class_descriptors_present": true,
+  "test_ad_unit_strings_present": true,
+  "github_artifact_id": 13661669838,
+  "tests": {
+    "unit": 28,
+    "browser": 18,
+    "native_assemble_debug": "passed"
+  },
+  "physical_device_acceptance": "pending"
+}

@@ -12,7 +12,9 @@ Scope review on 2026-11-09 expanded `KIT_REUSE.md` to the full production map. T
 
 ## Verification
 
-Current Stage A local verification: 28 unit tests, strict typecheck, production build and `android:sync` pass. The full 16-scenario browser run passed after viewport clipping; two additional idle/repeated-entry scenarios and targeted gesture/resize checks pass on the latest source. The current CI suite contains 18 browser scenarios. Native compilation for this exact playable payload will be recorded after its run; historical bootstrap evidence below does not establish it.
+Current Stage A local verification: 28 unit tests, strict typecheck, production build and `android:sync` pass. The full 16-scenario browser run passed after viewport clipping; two additional idle/repeated-entry scenarios and targeted gesture/resize checks pass on the latest source. CI [42594630773](https://github.com/DanilaH/arrows/actions/runs/42594630773) passed on source `aa40b47de64ffd2125c7247d40ce5e769f606acc`: all 28 unit tests, all 18 browser scenarios and native `assembleDebug`. Historical bootstrap evidence below remains separate.
+
+Playable artifact: `Arrows-0.1.0-debug.apk`, 9,727,229 bytes, SHA-256 `a1051511aab1ed2b0f22fd22ce78aaa44df6c7f8dc437da85cf8427b5fff2254`. GitHub artifact `arrows-debug`, ID `13661669838`. Downloaded archive matched its expected digest; every embedded web payload file matched local `dist`, the shared native analytics contract matched, plugin class descriptors and official demo ad unit strings were present. These are payload/build checks, not live SDK or physical-device acceptance. The APK was also made available as a user-facing download.
 
 Historical initialization evidence:
 
@@ -32,7 +34,7 @@ First CI run `42587117226` failed before native compilation because setup-androi
 
 ## Next work: Stage A phone acceptance, then B
 
-1. Complete the exact playable APK build in CI. Install it on a named physical Android and record gesture, audio-independent haptic, active/idle frame pacing and repeated-entry behavior for all four fixtures. Do not infer phone 60 FPS from browser tests.
+1. Playable APK 0.1.0 (2) is built and verified; see `verification/STAGE_A_BUILD_2026-11-09.json`. Install it on a named physical Android and record gesture, audio-independent haptic, active/idle frame pacing and repeated-entry behavior for all four fixtures. Do not infer phone 60 FPS from browser tests.
 2. Tune extraction/head/line/dot response against the original clips. V06 is downloaded/hashed and targeted frames at 34.9–35.9 s / 86 s were inspected; other source roles remain in `research/ARROWS_VIDEO_SOURCES_2026-11-09.json`. No new full audio review is claimed.
 3. B: implement one coordinated authoritative save writer, validating/migrating attempt state and restoration after interruption. Preserve separate campaign/daily identities; presentation never owns confirmed moves.
 4. Add the real campaign/tutorial, lives continuation, current-state Hint and once-per-attempt gameplay events. Install reward commit only when effect+dedup is durable and tied to the correct attempt.

@@ -21,7 +21,7 @@ npm run android:sync          # build + sync web assets/native plugins
 npm run android:open          # Android Studio
 ```
 
-Для Android: JDK 21, Android SDK platform 36 / build-tools 36.0.0. Из `native/android` выполнить `./gradlew assembleDebug` после `npm run android:sync`. В CI отдельный Android job собирает debug shell; это не релизный APK игры. `com.danilah.arrows` — исходный application ID, подлежит фиксации до публикации. Секреты и release keystore не входят в репозиторий.
+Для Android: JDK 21, Android SDK platform 36 / build-tools 36.0.0. Из `native/android` выполнить `./gradlew assembleDebug` после `npm run android:sync`. В CI отдельный Android job собирает debug APK игровых контрольных полей; это не стор-релиз. `com.danilah.arrows` — исходный application ID, подлежит фиксации до публикации. Секреты и release keystore не входят в репозиторий.
 
 ## Основа
 

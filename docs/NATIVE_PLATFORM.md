@@ -4,7 +4,7 @@ Source inspected: `DanilaH/road-lines@180d5b1dc4de2687da670a3b6cfc140a0a8fa156`,
 
 ## Connected code
 
-- `src/app/platform.ts` constructs analytics, ads, haptics and storage synchronously alongside existing lifecycle wiring. Rendering never waits for an SDK response. The initial shell reports `app_ready` after its uncovered first paint.
+- `src/app/platform.ts` constructs analytics, ads, haptics and storage synchronously alongside existing lifecycle wiring. Rendering never waits for an SDK response. The game reports `app_ready` after its uncovered first paint; control attempts report `level_start` on their first accepted action.
 - `ArrowsAdsPlugin` integrates Yandex Mobile Ads 8.6.0 rewarded/interstitials, main-thread sessions, bounded loads, explicit shows and dismissal. Interstitial preload has separate ownership from an active show. Only earned SDK callbacks create receipts. No timeout resumes under a possibly displayed ad; after `show()` is invoked, native dismissal/error/destruction owns settlement. A missing terminal SDK callback after invocation therefore remains a device-test risk, not an invented dismissal.
 - `RewardJournal` persists exact receipt ID, attempt, mode and Hint/lives placement in an AtomicFile under no-backup storage. Failed writes retain the exact receipt process-wide for a later recovery query; JS receives nothing until disk readback succeeds. Process termination during a failed disk write cannot guarantee recovery; test disk-failure behavior separately from successful durable delivery. Wrong-ID acknowledgement is rejected.
 - `createAds().installRewardCommit()` connects the kit's `DurableReceiptQueue` to a future game writer. That writer must durably apply effect+dedup to the correct attempt. Before it exists, the shell offers no rewarded opportunity and never acknowledges a pending award. Recovery/ack failures do not block ordinary navigation; polling and unresolved calls are bounded. Display outcomes alone never grant a reward.
@@ -30,7 +30,7 @@ Signing remains a separate release requirement. This change neither generates pr
 
 ## Remaining consumer work and evidence
 
-The shell still has no playable level. Stage B must implement save schemas/the coordinated writer and then install the earned commit function; navigation, ad cadence, Hint/lives UI and gameplay event emission belong to the real game. Sound, final haptic tuning, full progression and store assets remain on the existing plan.
+Stage A now has four playable control fields; see `STAGE_A_IMPLEMENTATION.md`. Stage B must implement save schemas/the coordinated writer and then install the earned commit function; navigation, ad cadence, Hint/lives UI and gameplay event emission belong to the real game. Sound, final haptic tuning, full progression and store assets remain on the existing plan.
 
 Verification completed: local typecheck, 15 unit tests, production build, Capacitor sync and 8 browser checks; GitHub CI [42587270211](https://github.com/DanilaH/arrows/actions/runs/42587270211) passed web and actual native `assembleDebug` on source `f062365`. Tests of TS adapters prove bounded RPCs, independent blockers, failed commits/acks and stale delivery. Compilation proves the native sources work with the pinned SDK APIs. Neither establishes SDK inventory, actual earned delivery, phone vibration, crash dashboard data, release shrinking or update migration. Artifact details and device-verification limits are recorded in `HANDOFF.md`.
 

@@ -37,8 +37,8 @@ Flight speed, dot spring profile, head/line dimensions, new field masks and entr
 
 - `npm run check`: 28 unit tests, strict typecheck and production build pass. A separate integer-cell ray oracle agrees with the domain blocker model and completes all four fields without losing lives.
 - Full browser run: 16 scenarios across Pixel 7 emulation and desktop, including every arrow on every fixture (536 accepted removals across both profiles), hold cancellation, first UI tap after a captured gesture, real CDP two-finger pinch, resize/reload and independent startup checks. After the clipping fix the full run passed again.
-- Added idle/repeated-entry checks; targeted gesture/resize/idle reruns pass on the latest source. The complete current suite contains 18 scenarios and will run in CI. Final CI result is recorded in HANDOFF.
-- `npm run android:sync` passes. Native assembly for this exact web payload is the next CI gate; previous bootstrap compilation is not reused as its evidence.
+- Added idle/repeated-entry checks; targeted gesture/resize/idle reruns pass on the latest source. The complete 18-scenario suite passed in CI on source `aa40b47`; final evidence is recorded in HANDOFF.
+- `npm run android:sync` passes. Native `assembleDebug` passed in CI run `42594630773` for this exact web payload; previous bootstrap compilation is not reused as its evidence. The downloaded APK payload matches local `dist` byte-for-byte; its identity/checks are in `verification/STAGE_A_BUILD_2026-11-09.json`.
 - Reviewed full-resolution portrait fixtures and zoomed short-landscape captures. Found and fixed world geometry overlapping HUD after rotation; current captures show clipping at the measured gameplay bounds.
 
 Browser emulation is not a physical-device FPS/heat/feel measurement. No sustained hardware 60 FPS, native SDK inventory, AppMetrica dashboard delivery or subjective sound/haptic parity is claimed. Stage A remains pending phone acceptance before scaling content.
