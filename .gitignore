@@ -1,0 +1,15 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.log
+.env.local
+.env.*.local
+.DS_Store
+*.keystore
+*.jks
+native/android/local.properties
+native/android/.gradle/
+native/android/**/build/
+native/android/app/src/main/assets/arrows-analytics-contract.json

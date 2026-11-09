@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#1e1e2c" />
+    <title>Стрелки</title>
+  </head>
+  <body>
+    <main id="game-shell" data-status="starting">
+      <div id="game-root" aria-hidden="true"></div>
+      <div id="boot-caption"><h1 id="app-title">Стрелки</h1><p id="app-status">Сцена инициализации</p></div>
+      <section id="startup-preload" data-state="idle" aria-hidden="true">
+        <div class="startup-card">
+          <strong id="startup-preload-heading">Загрузка</strong>
+          <span id="startup-preload-status">Подготавливаем игру…</span>
+          <div id="startup-preload-progress-bar" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="startup-preload-progress-fill"></div></div>
+          <span id="startup-preload-progress-percent">00%</span>
+        </div>
+      </section>
+      <aside id="debug-root" hidden></aside>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
