@@ -16,5 +16,7 @@
   "ad_reward_granted": {"placement":"string","attempt":"string","recovered":"boolean"},
   "language_change": {"language":"string"},
   "level_error": {"mode":"string","level_id":"string","attempt":"string","first":"boolean","lives":"number"},
-  "level_resume": {"mode":"string","level_id":"string","attempt":"string"}
+  "level_resume": {"mode":"string","level_id":"string","attempt":"string"},
+  "screen_view": {"screen":"string"},
+  "daily_open": {"date":"string","attempt":"string","resumed":"boolean"}
 }

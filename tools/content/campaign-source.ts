@@ -8,7 +8,7 @@ const first: Level[] = [
   hand('c04', [[[1, 3], [1, 1], [5, 1]], [[7, 4], [7, 0]], [[5, 6], [2, 6], [2, 4]], [[4, 9], [7, 9], [7, 6]], [[1, 10], [1, 12], [6, 12]], [[8, 11], [8, 7]]]),
 ];
 const kinds = ['diamond', 'flower', 'heart', 'ring', 'star', 'leaf', 'cross', 'butterfly'] as const;
-function shape(kind: typeof kinds[number], width: number, height: number): (x: number, y: number) => boolean {
+export function shape(kind: typeof kinds[number], width: number, height: number): (x: number, y: number) => boolean {
   return (x, y) => {
     const a = (x - (width - 1) / 2) / ((width - 2) / 2), b = (y - (height - 1) / 2) / ((height - 2) / 2);
     const radius = Math.hypot(a, b), angle = Math.atan2(b, a);

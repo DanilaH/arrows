@@ -1,5 +1,7 @@
 import { JsonStorageRepository, type ReceiptCommitResult, type StorageAdapter } from '@danilah/mini-games-kit/platform';
 import { campaign, CATALOG_VERSION } from '../content/campaign';
+import { dailyCatalog, dailyMonths, DAILY_CATALOG_VERSION } from '../content/daily';
+import { localDate, validDate, monthDates } from './calendar';
 import { Board, canExit, validateLevel, type Attempt, type Level, type MoveResult } from '../domain/board';
 import { parseReceipt, type EarnedReceipt } from '../platform/ads';
 
@@ -9,19 +11,21 @@ export interface SavedAttempt {
   level: Level; board: Attempt; view: ViewState | null; guides: boolean; freeUsed: boolean;
   continuations: number; hint: string | null; started: boolean; activeMs: number;
 }
-export interface Win { attempt: string; levelId: string; completedAt: number; activeMs: number; mistakes: number; }
+export interface Win { attempt: string; levelId: string; completedAt: number; activeMs: number; mistakes: number; localDate?: string; }
+export interface RunFact { kind: 'win' | 'restart'; attempt: string; mode: 'campaign' | 'daily'; localDate: string; at: number; }
 export interface GameSave {
-  schema: 1; revision: number; catalogVersion: number; index: number; campaign: SavedAttempt;
+  schema: 2; revision: number; catalogVersion: number; index: number; campaign: SavedAttempt;
   daily: Record<string, SavedAttempt>; wins: Win[]; tutorials: string[];
   receipts: string[]; reservedRewards: EarnedReceipt[];
+  dailyCatalogVersion: number; dailyWins: Record<string, Win>; cups: string[]; facts: RunFact[]; seenAwards: string[]; collectionSeen: boolean;
 }
-export interface SaveChange { kind: 'load' | 'state' | 'move'; result?: MoveResult; }
+export interface SaveChange { kind: 'load' | 'state' | 'move'; result?: MoveResult; attempt?: string; mode?: 'campaign' | 'daily'; date?: string; startedNow?: boolean; }
 export const freshAttempt = (level: Level, id = crypto.randomUUID()): SavedAttempt => ({
   level, board: new Board(level, id).snapshot(), view: null, guides: false, freeUsed: false,
   continuations: 0, hint: null, started: false, activeMs: 0,
 });
-export const freshSave = (): GameSave => ({ schema: 1, revision: 0, catalogVersion: CATALOG_VERSION, index: 0,
-  campaign: freshAttempt(campaign[0]!), daily: {}, wins: [], tutorials: [], receipts: [], reservedRewards: [] });
+export const freshSave = (): GameSave => ({ schema: 2, revision: 0, catalogVersion: CATALOG_VERSION, index: 0,
+  campaign: freshAttempt(campaign[0]!), daily: {}, wins: [], tutorials: [], receipts: [], reservedRewards: [], dailyCatalogVersion: DAILY_CATALOG_VERSION, dailyWins: {}, cups: [], facts: [], seenAwards: [], collectionSeen: false });
 const record = (v: unknown): Record<string, unknown> => {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw Error('Invalid save object');
   return v as Record<string, unknown>;
@@ -52,28 +56,58 @@ function attempt(value: unknown): SavedAttempt {
   }
   return { ...s, level, board: { ...b, removed, errors }, view } as unknown as SavedAttempt;
 }
-/** No older progress schema shipped. Unknown schemas/catalogs fail closed without overwriting them. */
+/** Schema 1 is the shipped 0.2 save. Migrate without changing attempt IDs, geometry, receipts or accepted moves. */
 export function decodeSave(value: unknown): GameSave {
-  const s = record(value);
-  if (s.schema !== 1 || !integer(s.revision) || s.catalogVersion !== CATALOG_VERSION || !integer(s.index, campaign.length - 1) || !Array.isArray(s.wins)) throw Error('Unsupported save');
+  let s = record(value);
+  if (s.schema === 1) s = { ...s, schema: 2, dailyCatalogVersion: DAILY_CATALOG_VERSION, dailyWins: {}, cups: [], facts: [], seenAwards: [], collectionSeen: false };
+  if (s.schema !== 2 || !integer(s.revision) || s.catalogVersion !== CATALOG_VERSION || !integer(s.index, campaign.length - 1) || !Array.isArray(s.wins)) throw Error('Unsupported save');
   const wins = s.wins.map(v => {
     const w = record(v);
     if (!id(w.attempt) || !id(w.levelId) || !integer(w.completedAt) || !integer(w.activeMs) || !integer(w.mistakes)) throw Error('Invalid history');
-    return w as unknown as Win;
+    if (w.localDate !== undefined && !validDate(w.localDate)) throw Error('Invalid win date');
+    return { ...w, localDate: w.localDate ?? localDate(new Date(w.completedAt)) } as unknown as Win;
   });
   if (new Set(wins.map(w => w.attempt)).size !== wins.length || wins.some((w, i) => w.levelId !== campaign[i]?.id)) throw Error('Invalid campaign history');
   const current = attempt(s.campaign);
   if (current.level.id !== campaign[s.index]!.id || wins.length !== s.index + (new Board(current.level, current.board.id, current.board).complete ? 1 : 0) ||
       (wins.length > s.index && wins.at(-1)?.attempt !== current.board.id)) throw Error('Invalid campaign position');
   const daily = Object.fromEntries(Object.entries(record(s.daily)).map(([date, a]) => {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || new Date(date).toISOString().slice(0, 10) !== date) throw Error('Invalid daily date');
-    return [date, attempt(a)];
+    if (!validDate(date) || !dailyCatalog[date]) throw Error('Invalid daily date');
+    const current = attempt(a); if (current.level.id !== dailyCatalog[date]!.id) throw Error('Wrong daily field');
+    return [date, current];
   }));
   const receipts = strings(s.receipts), tutorials = strings(s.tutorials);
   if (!Array.isArray(s.reservedRewards)) throw Error('Invalid reward reservations');
   const reservedRewards = s.reservedRewards.map(parseReceipt);
   if (reservedRewards.some(r => !receipts.includes(r.id)) || new Set(reservedRewards.map(r => r.id)).size !== reservedRewards.length) throw Error('Invalid reward ledger');
-  return { ...s, campaign: current, wins, daily, receipts, tutorials, reservedRewards } as GameSave;
+  if (s.dailyCatalogVersion !== DAILY_CATALOG_VERSION || typeof s.collectionSeen !== 'boolean' || !Array.isArray(s.facts)) throw Error('Invalid meta save');
+  const dailyWins = Object.fromEntries(Object.entries(record(s.dailyWins)).map(([date, value]) => {
+    const w = record(value), a = daily[date];
+    if (!a || !new Board(a.level, a.board.id, a.board).complete || w.attempt !== a.board.id || w.levelId !== a.level.id ||
+        !integer(w.completedAt) || !integer(w.activeMs) || !integer(w.mistakes) || !validDate(w.localDate)) throw Error('Invalid daily win');
+    return [date, w as unknown as Win];
+  }));
+  if (Object.entries(daily).some(([date, a]) => new Board(a.level, a.board.id, a.board).complete && !dailyWins[date])) throw Error('Missing daily win');
+  const allIds = [current.board.id, ...Object.values(daily).map(a => a.board.id)];
+  if (new Set(allIds).size !== allIds.length) throw Error('Duplicate attempt ownership');
+  const facts = s.facts.map(value => {
+    const f = record(value);
+    if (!['win', 'restart'].includes(f.kind as string) || !['campaign', 'daily'].includes(f.mode as string) || !id(f.attempt) || !validDate(f.localDate) || !integer(f.at)) throw Error('Invalid run fact');
+    return f as unknown as RunFact;
+  });
+  const factIds = new Set<string>();
+  for (const fact of facts) {
+    if (factIds.has(fact.attempt)) throw Error('Duplicate run fact');
+    factIds.add(fact.attempt);
+    if (fact.kind === 'win') {
+      const win = fact.mode === 'campaign' ? wins.find(w => w.attempt === fact.attempt) : Object.values(dailyWins).find(w => w.attempt === fact.attempt);
+      if (!win || win.completedAt !== fact.at || win.localDate !== fact.localDate) throw Error('Unconfirmed win fact');
+    }
+  }
+  const cups = s.cups;
+  if (!Array.isArray(cups) || !cups.every(m => typeof m === 'string' && dailyMonths.includes(m) && monthDates(m).every(d => dailyWins[d])) || new Set(cups).size !== cups.length) throw Error('Invalid trophy');
+  const seenAwards = strings(s.seenAwards);
+  return { ...s, campaign: current, wins, daily, receipts, tutorials, reservedRewards, dailyWins, cups, facts, seenAwards } as GameSave;
 }
 
 /** Every mutation derives from the latest committed state inside ONE queue, including camera and SDK receipts. */
@@ -87,10 +121,15 @@ export class ProgressStore {
   private readonly repository: JsonStorageRepository<GameSave>;
   private alive = true;
   private loadEpoch = 0;
-  public constructor(private readonly storage: StorageAdapter) {
+  public constructor(private readonly storage: StorageAdapter, private readonly now: () => Date = () => new Date()) {
     this.repository = new JsonStorageRepository({ storage, key: SAVE_KEY, createDefault: freshSave, codec: { decode: decodeSave } });
   }
   public get board(): Board { const a = this.state.campaign; return new Board(a.level, a.board.id, a.board); }
+  public findAttempt(expected: string, state = this.state): { saved: SavedAttempt; mode: 'campaign' | 'daily'; date?: string } | null {
+    if (state.campaign.board.id === expected) return { saved: state.campaign, mode: 'campaign' };
+    const entry = Object.entries(state.daily).find(([, a]) => a.board.id === expected);
+    return entry ? { saved: entry[1], mode: 'daily', date: entry[0] } : null;
+  }
   public subscribe(fn: (event: SaveChange) => void): () => void { this.listeners.add(fn); return () => this.listeners.delete(fn); }
   private emit(event: SaveChange): void { if (this.alive) for (const fn of this.listeners) fn(event); }
   public async load(): Promise<void> {
@@ -114,7 +153,7 @@ export class ProgressStore {
         const raw = await this.storage.getItem(SAVE_KEY);
         if (raw === JSON.stringify(candidate)) { this.error = null; return; }
         // A failed write may still have committed. Only authoritative readback can settle it.
-        if (raw === null && this.state.revision === 0 || raw === JSON.stringify(this.state)) {
+        if (raw === null && this.state.revision === 0 || raw !== null && JSON.stringify(decodeSave(JSON.parse(raw))) === JSON.stringify(this.state)) {
           this.error = 'write'; this.emit({ kind: 'state' }); throw Error('Confirmed failed save');
         }
       } catch (error) { if (this.error === 'write') throw error; }
@@ -140,22 +179,31 @@ export class ProgressStore {
   }
   public move(expected: string, arrow: string, activeMs = 0): Promise<MoveResult | undefined> {
     return this.update(next => {
-      const a = next.campaign; if (a.board.id !== expected) return null;
+      const target = this.findAttempt(expected, next); if (!target) return null;
+      const a = target.saved, startedNow = !a.started;
       const board = new Board(a.level, a.board.id, a.board), result = board.activate(arrow);
       if (result.kind === 'ignored') return null;
       a.started = true; a.activeMs += Math.max(0, Math.round(activeMs)); a.board = board.snapshot();
       if (result.kind === 'removed') {
         if (a.hint === arrow) a.hint = null;
-        if (board.complete && !next.wins.some(w => w.attempt === a.board.id)) next.wins.push({ attempt: a.board.id, levelId: a.level.id,
-          completedAt: Date.now(), activeMs: a.activeMs, mistakes: a.board.errors.length });
+        if (board.complete) {
+          const now = this.now(), win: Win = { attempt: a.board.id, levelId: a.level.id, completedAt: now.getTime(), localDate: localDate(now), activeMs: a.activeMs, mistakes: a.board.errors.length };
+          if (target.mode === 'campaign') next.wins.push(win);
+          else {
+            next.dailyWins[target.date!] = win;
+            const month = target.date!.slice(0, 7);
+            if (!next.cups.includes(month) && monthDates(month).every(d => next.dailyWins[d])) next.cups.push(month);
+          }
+          next.facts.push({ kind: 'win', attempt: a.board.id, mode: target.mode, localDate: win.localDate!, at: win.completedAt });
+        }
       }
-      return { value: result, event: { kind: 'move', result } };
+      return { value: result, event: { kind: 'move', result, attempt: expected, mode: target.mode, ...(target.date ? { date: target.date } : {}), startedNow } };
     });
   }
   public presentation(expected: string, fields: Partial<Pick<SavedAttempt, 'view' | 'guides'>>, activeMs = 0): Promise<void | undefined> {
     return this.update(next => {
-      if (next.campaign.board.id !== expected) return null;
-      Object.assign(next.campaign, fields); next.campaign.activeMs += Math.max(0, Math.round(activeMs)); return { value: undefined };
+      const target = this.findAttempt(expected, next); if (!target) return null;
+      Object.assign(target.saved, fields); target.saved.activeMs += Math.max(0, Math.round(activeMs)); return { value: undefined };
     });
   }
   public tutorial(step: string): Promise<boolean | undefined> {
@@ -163,8 +211,12 @@ export class ProgressStore {
   }
   public restart(expected: string): Promise<boolean | undefined> {
     return this.update(next => {
-      if (next.campaign.board.id !== expected || this.board.complete) return null;
-      next.campaign = freshAttempt(next.campaign.level); return { value: true };
+      const target = this.findAttempt(expected, next); if (!target || new Board(target.saved.level, expected, target.saved.board).complete) return null;
+      const old = target.saved;
+      if (old.started) next.facts.push({ kind: 'restart', attempt: expected, mode: target.mode, localDate: localDate(this.now()), at: this.now().getTime() });
+      const fresh = freshAttempt(old.level);
+      if (target.mode === 'campaign') next.campaign = fresh; else next.daily[target.date!] = fresh;
+      return { value: true };
     });
   }
   public next(expected: string): Promise<boolean | undefined> {
@@ -175,8 +227,22 @@ export class ProgressStore {
   }
   public continueFree(expected: string): Promise<boolean | undefined> {
     return this.update(next => {
-      const a = next.campaign; if (a.board.id !== expected || a.freeUsed || a.board.lives !== 0) return null;
+      const a = this.findAttempt(expected, next)?.saved; if (!a || a.freeUsed || a.board.lives !== 0) return null;
       a.freeUsed = true; a.continuations++; a.board = { ...a.board, lives: 3 }; return { value: true };
+    });
+  }
+  public openDaily(date: string): Promise<string | undefined> {
+    return this.update(next => {
+      if (next.index < 19 || !validDate(date) || !dailyCatalog[date] || date > localDate(this.now())) return null;
+      next.daily[date] ??= freshAttempt(dailyCatalog[date]!);
+      return { value: next.daily[date]!.board.id };
+    });
+  }
+  public markCollectionSeen(awards: string[]): Promise<void | undefined> {
+    return this.update(next => {
+      const fresh = awards.filter(key => !next.seenAwards.includes(key));
+      if (next.collectionSeen && !fresh.length) return null;
+      next.collectionSeen = true; next.seenAwards.push(...fresh); return { value: undefined };
     });
   }
   public async commitReward(receipt: EarnedReceipt): Promise<ReceiptCommitResult> {

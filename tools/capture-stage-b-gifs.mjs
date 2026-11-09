@@ -44,7 +44,7 @@ try {
       }
       await expect(page.locator('#win')).toBeVisible(); await page.locator('#next').click(); await ready();
     };
-    await page.goto('http://127.0.0.1:4189'); await ready();
+    await page.goto('http://127.0.0.1:4189'); await page.locator('#home-play').click(); await ready();
     await prelude({ page, tap, solve });
     const start = Math.max(0, (Date.now() - epoch) / 1000 - .15);
     await page.waitForTimeout(450); await action({ page, tap, solve, ready, canExit }); await page.waitForTimeout(900);
@@ -65,7 +65,7 @@ try {
   await capture('arrows-restore', async ({ solve }) => { await solve(0); await solve(1); }, async ({ page, tap, ready, canExit }) => {
     const level = levels[2], blocked = level.arrows.find(a => !canExit(a, level.arrows)), free = level.arrows.find(a => canExit(a, level.arrows));
     await tap(blocked); await page.waitForTimeout(450); await tap(free); await page.waitForTimeout(450);
-    await page.locator('#guides').click(); await page.waitForTimeout(450); await page.reload(); await ready();
+    await page.locator('#guides').click(); await page.waitForTimeout(450); await page.reload(); await page.locator('#home-play').click(); await ready();
     await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '5');
     await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2');
     await expect(page.locator('#guides')).toHaveAttribute('aria-pressed', 'true');

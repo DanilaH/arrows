@@ -15,6 +15,8 @@ test('renders without external services and idles after its first frame', async 
   });
   await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
+  await page.locator('#home-play').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-scene', 'board');
   await expect(page.locator('#startup-preload')).toBeHidden();
   await expect(page.locator('#debug-root')).toBeHidden();
@@ -37,6 +39,8 @@ test('renders without external services and idles after its first frame', async 
 test('repaints a sleeping renderer after portrait and short-landscape resize', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
+  await page.locator('#home-play').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
   for (const viewport of [{ width: 360, height: 780 }, { width: 780, height: 360 }, { width: 412, height: 915 }]) {
     await page.setViewportSize(viewport);
     await expect.poll(async () => page.locator('canvas').evaluate((canvas) => Math.round(canvas.getBoundingClientRect().width))).toBe(viewport.width);
@@ -51,9 +55,13 @@ test('uses Russian copy and survives reload', async ({ browser }) => {
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4173/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
+  await page.locator('#home-play').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
   await expect(page.locator('#app-title')).toHaveText('Уровень 1');
   await page.reload();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
+  await page.locator('#home-play').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
   await expect(page.locator('canvas')).toHaveCount(1);
   await context.close();
 });
@@ -64,5 +72,7 @@ test('does not let unavailable browser storage block the first visible frame', a
   }));
   await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
+  await page.locator('#home-play').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
   await expect(page.locator('canvas')).toBeVisible();
 });

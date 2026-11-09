@@ -12,7 +12,7 @@ async function tap(page: Page, p: Point, phone: boolean) {
 }
 async function choose(page: Page, index: number) {
   await page.locator('#choose-field').click();
-  await page.locator('[data-action=controls]').click();
+  await page.locator('#home-controls').click();
   await expect(page.locator('#game-dialog')).toBeVisible();
   await page.locator('#dialog-content button').nth(index).click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-level', controlScenes[index]!.id);
@@ -22,6 +22,8 @@ async function choose(page: Page, index: number) {
 test('keeps red-arrow errors stable and accepts newly unblocked arrows during flight', async ({ page }, testInfo) => {
   await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
+  await page.locator('#home-play').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
   await page.waitForTimeout(450);
   await choose(page, 0);
   const error = await screenPoint(page, { x: 2.5, y: 2 });
@@ -39,6 +41,8 @@ test('keeps red-arrow errors stable and accepts newly unblocked arrows during fl
 test('cancels held and dragged selections, then keeps the first UI tap functional', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
+  await page.locator('#home-play').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
   await page.waitForTimeout(450);
   await choose(page, 0);
   const p = await screenPoint(page, { x: 2.5, y: 2 });
@@ -58,6 +62,8 @@ test('cancels held and dragged selections, then keeps the first UI tap functiona
 test('zooms without a phantom tap and repaints after a sleeping-board resize', async ({ page }, testInfo) => {
   await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
+  await page.locator('#home-play').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
   await choose(page, 3);
   const before = JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);
   const center = await screenPoint(page, { x: 23, y: 27 });
@@ -85,6 +91,8 @@ test('clears every control board through actual pointer input and leaves one idl
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
+  await page.locator('#home-play').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
   for (let index = 0; index < controlScenes.length; index++) {
     await choose(page, index);
     const level = controlScenes[index]!, board = new Board(level, 'oracle-ui');

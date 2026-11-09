@@ -11,9 +11,11 @@ test('settles after animation and repeated scene changes without a permanent fra
   });
   await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
+  await page.locator('#home-play').click();
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
   for (let index = 0; index < 8; index++) {
     await page.locator('#choose-field').click();
-    await page.locator('[data-action=controls]').click();
+    await page.locator('#home-controls').click();
     await page.locator('#dialog-content button').nth(index % 4).click();
   }
   const level = controlScenes[3]!;

@@ -2,7 +2,7 @@
 
 ## Product and scope
 
-The supplied replication spec is the target. Stage B now implements a 20-level own chapter and durable game/reward authority; see `STAGE_B_IMPLEMENTATION.md`. The larger release bank and C–E remain required. Historical Stage A baseline: four fixed own control scenes (6/6/68/188 arrows), correct extraction and blocker rules, input/camera, dots, errors and idle rendering. Local model/browser verification is recorded in `STAGE_A_IMPLEMENTATION.md`. Physical Android feel/performance acceptance remains open; the campaign bank and full product parity are not complete.
+The supplied replication spec is the target. Stage C adds Home/Collection/daily on top of the 20-level chapter and durable game/reward authority; see `STAGE_C_IMPLEMENTATION.md`. The larger release bank and C–E remain required. Historical Stage A baseline: four fixed own control scenes (6/6/68/188 arrows), correct extraction and blocker rules, input/camera, dots, errors and idle rendering. Local model/browser verification is recorded in `STAGE_A_IMPLEMENTATION.md`. Physical Android feel/performance acceptance remains open; the campaign bank and full product parity are not complete.
 
 Scope clarification, 2026-11-09: the game-kit review covers the complete built Android game preparing for RuStore, not only the modules needed to draw the first scene. `KIT_REUSE.md` now maps advertising, analytics, saves, feedback, progression, UI, diagnostics, native release and store packaging to reusable code/recipes, consumer work and evidence. Stage A remains the next implementation milestone; the full release scope is not deferred out of the project.
 
@@ -39,7 +39,7 @@ Implementation moved the native transport/dependency work forward using the exis
 
 ## Assets, language and native identity
 
-RU/EN copy now covers the Stage A game surface/dialogs. Complete campaign localization, both themes and sound remain later work; the native haptic cues need phone tuning. System fonts/procedural geometry avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.2.0 / Android versionCode 3 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
+RU/EN copy now covers the Stage A game surface/dialogs. Complete campaign localization, both themes and sound remain later work; the native haptic cues need phone tuning. System fonts/procedural geometry avoid network assets. Native icons/splash are still Capacitor defaults and must be replaced for release. `com.danilah.arrows`, app name Стрелки, version 0.3.0 / Android versionCode 4 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
 
 ## Open decisions before corresponding features
 
@@ -56,3 +56,11 @@ The first chapter contains 20 fixed own tasks (Hard 6/12/18, Nightmare 20) and e
 A late earned right for an ineligible/retired attempt is durably reserved under its original identity rather than applied to the next task. Reservations and receipt IDs are retained without arbitrary trimming; a future explicit recovery/support policy must honor them. Invalid/future progress is preserved verbatim in storage and opens an explicitly unsaved session. Only unsafe camera metadata is automatically repaired. A failed write is resolved by authoritative readback or gates mutations until recovery.
 
 The save schema has no earlier shipped gameplay version to migrate. Started attempts embed their original immutable geometry so a later generator update cannot reroll them. Attempt events are best-effort after durable state, not an exactly-once telemetry outbox.
+
+## Stage C policies and explicit adaptations
+
+The installed daily archive is 2026-11-01 through 2026-12-31, with fixed date IDs and eight own silhouette families. Only local dates at or before today can start; future/unsupported dates are never rerolled. A monthly trophy requires every provided date in that full month. Clock changes do not duplicate confirmed wins/cups.
+
+Collection opens at current level 10, Challenge at 20. Three local records use consecutive local win dates, consecutive wins since the 0.3 restart journal, and maximum wins per local date. Home shows the current day streak, not its historic best. Three local medals use 20 campaign wins / 10 error-free wins / 10 consecutive wins. These thresholds and statistic rules explicitly adapt the unknown reference policies. League's three medals remain unimplemented, with no fake competitors or placeholder league UI.
+
+Schema 2 migrates shipped v1 at the same key, preserving accepted moves/identity/geometry and the receipt ledger. Prior win local dates are frozen using the upgrading timezone; missing restart history is not invented. New raw facts capture their local date at commit. Native Back and HUD Back follow screen parents; asynchronous opens cannot override newer navigation.

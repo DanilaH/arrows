@@ -22,9 +22,10 @@ try {
     const page = await context.newPage();
     await page.goto(base);
     await page.locator('#game-shell[data-status="ready"]').waitFor();
+    await page.locator('#home-play').click();
     {
       await page.locator('#choose-field').click();
-      await page.locator('[data-action=controls]').click();
+      await page.locator('#home-controls').click();
       await page.locator('#dialog-content button').nth(index).click();
     }
     await page.waitForTimeout(600);

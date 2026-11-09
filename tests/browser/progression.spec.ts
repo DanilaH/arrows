@@ -3,9 +3,10 @@ import { campaign } from '../../src/content/campaign';
 import { canExit } from '../../src/domain/board';
 import { freshAttempt, freshSave, SAVE_KEY } from '../../src/progression/save';
 
-async function ready(page: Page) {
+async function ready(page: Page, play = true) {
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-progress', 'ready');
+  if (play) { await page.locator('#home-play').click(); await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game'); }
   await page.waitForTimeout(450);
 }
 async function clickArrow(page: Page, arrow: { path: readonly { x: number; y: number }[] }) {
@@ -34,10 +35,9 @@ test('teaches by successful action, saves victory during the last flight and adv
     await clickArrow(page, arrow);
     await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(level.arrows.length - i - 1));
   }
-  await page.reload(); await ready(page);
-  await expect(page.locator('#game-shell')).toHaveAttribute('data-state', 'complete');
-  await expect(page.locator('#win')).toBeVisible(); await expect(page.locator('#tutorial-pointer')).toBeHidden();
-  await page.locator('#next').dblclick();
+  await page.reload(); await ready(page, false);
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'home');
+  await page.locator('#home-play').dblclick();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-level', 'c02');
   expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key)!).wins.length, SAVE_KEY)).toBe(1);
   await page.reload(); await ready(page); await expect(page.locator('#game-shell')).toHaveAttribute('data-level', 'c02');
@@ -54,9 +54,9 @@ test('restores a partial board, marks and guides, while control boards leave cam
   await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '5');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2');
   await expect(page.locator('#guides')).toHaveAttribute('aria-pressed', 'true');
-  await page.locator('#choose-field').click(); await page.locator('[data-action=controls]').click(); await page.locator('[data-action=field-3]').click();
+  await page.locator('#choose-field').click(); await page.locator('#home-controls').click(); await page.locator('[data-action=field-3]').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-mode', 'control');
-  await page.locator('#choose-field').click(); await page.locator('[data-action=campaign]').click();
+  await page.locator('#choose-field').click(); await page.locator('#home-play').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt', attempt!);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '5');
 });
@@ -111,7 +111,7 @@ test('keeps hints contextual, excludes pause time and never grants from an unava
   test.setTimeout(30000);
   await seed(page, 4);
   await page.locator('#choose-field').click(); await page.waitForTimeout(1500);
-  await expect(page.locator('#hint')).toBeHidden(); await page.locator('[data-action=resume]').click();
+  await expect(page.locator('#hint')).toBeHidden(); await page.locator('#home-play').click();
   await expect(page.locator('#hint')).toBeVisible({ timeout: 14500 });
   const before = await page.locator('#game-shell').getAttribute('data-remaining');
   await page.locator('#hint').click(); await expect(page.locator('#dialog-content')).toContainText(/highlight|выделим/);

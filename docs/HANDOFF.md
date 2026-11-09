@@ -2,13 +2,17 @@
 
 ## Current milestone
 
-Stage B source implementation is ready: version 0.2.0 / Android versionCode 3. The first own chapter has 20 fixed fields, semantic onboarding, Hard at 6/12/18 and Nightmare at 20. Moves, wins, position, errors/lives, view/guides, tutorials, free refill and earned rights now use one coordinated authoritative save writer. The existing native earned inbox is connected to that writer; browser video unavailability grants nothing. See `STAGE_B_IMPLEMENTATION.md` for policies, boundaries and complete evidence.
+Stage C source is ready: version 0.3.0 / Android versionCode 4. Home/Continue, Collection (three explicit local records/medals), separate daily/calendar and monthly trophies are connected to the single authoritative save writer. There are 20 own campaign fields plus 61 fixed November/December daily fields. Schema v1 from 0.2 migrates to v2 without changing accepted campaign state or its reward ledger. `STAGE_C_IMPLEMENTATION.md` is the current detailed contract.
 
-The four Stage A control fields remain accessible separately through Pause → Control boards and cannot overwrite campaign progress. This review entry is temporary for development builds. The chapter has an explicit end; the 100-level release-bank target is unchanged.
+Collection unlocks at current level 10, daily at 20. Campaign and each daily date own independent attempts/cameras. Parent Back routing is implemented. League medals remain open and are not imitated. Three local medal thresholds/record rules are explicitly documented adaptations, not reference parity. Full 100-level bank/curation remains E.
 
-Home/Collection/daily and calendar are next (C). Full themes/sound/settings, interstitial cadence/real placements, phone haptic and performance acceptance, actual SDK earning/dashboard delivery, release signing and RuStore packaging remain D–E. Current GIFs are production-browser recordings, not physical-device evidence. The user explicitly requested GIFs for visible changes; keep this delivery preference.
+D–E remain: themes/sound/settings, native ad placements/cadence/live earning, dashboard delivery, phone feel/performance/process-kill evidence, release signing and RuStore package. The user requested GIFs for visible changes; keep attaching authentic current-build recordings. The temporary control-board link is now on Home and must be removed for release.
 
 ## Verification
+
+Current C: strict typecheck/build, 48 unit tests, all 42 browser cases (plus targeted parent-navigation rerun), independent validation of the full 61-day catalog and `android:sync` pass. Native CI/artifact evidence follows separately. See `STAGE_C_IMPLEMENTATION.md`.
+
+Historical B evidence:
 
 Current B: strict typecheck, production build, 39 unit tests, all 32 browser scenarios and `android:sync` pass locally. Added independent validation covers all 20 campaign fields in three removal orders. CI [42600519336](https://github.com/DanilaH/arrows/actions/runs/42600519336) passed both jobs on source `bf3285acdd6457f30ae1ae70daac942229d542f2`. APK 0.2.0 (3): 9,758,477 bytes; SHA-256 `dd5ac5c4133a215533742c6ba5feca7eb9861460c074f9e3dbb23631ebde3cb7`. Its embedded web payload and analytics contract match local `dist`. Evidence: `verification/STAGE_B_BUILD_2026-11-09.json`. The subsequent capture-tool/evidence update does not change that runtime payload. See `STAGE_B_IMPLEMENTATION.md`.
 
@@ -36,12 +40,12 @@ The user explicitly authorized initialization, main-branch writes and routine re
 
 First CI run `42587117226` failed before native compilation because setup-android's default `tools` package no longer exists, and before browser acceptance because Playwright does not support the runner's new Ubuntu 26.04 image. The corrected workflow requests `platform-tools` explicitly and pins Ubuntu 24.04. Corrected run `42587270211` passed both jobs and produced the debug artifact. The following documentation-only evidence update does not change that verified payload.
 
-## Next work: C and physical acceptance
+## Next work: D and physical acceptance
 
-1. Continue with real Home/Continue routing, Collection and Challenge calendar/daily, preserving separate per-date identities. Open medal/League rules must remain explicit.
-2. Keep the complete product scope in the replication spec; do not treat the first 20 generated/validated fields as a phone-playtested release bank.
-3. Install the exact current APK on a named physical Android and record touch/zoom, haptic response, active/idle frame pacing and process-kill restoration. Browser checks do not establish phone 60 FPS.
-4. D–E: final sound/themes/settings, live rewarded receipts and interstitial cadence, dashboard delivery, selected release bank, signing and RuStore materials.
-5. Preserve save/reward ordering and the v1 ledger when adding navigation/daily. Reserved late rights never silently move to another attempt.
+1. Implement both themes, persisted sound/haptic/language preferences and meaningful UI/board feedback. Do not claim exact original sound without listening/comparing.
+2. Complete native ad placements/interstitial cadence and verify genuine earned delivery, interruption and dashboard events on an exact Android artifact.
+3. Preserve schema 2 migration, per-date identity, combined writer/receipt ordering and reserved rights. Keep stage C local record policies explicit; League remains open.
+4. E: curate the larger bank, extend dated coverage, final identity/icon/splash, production signing and RuStore materials/disclosures.
+5. Measure named-device touch/zoom, frame pacing, haptics and process-kill restoration. Browser checks/GIFs do not establish phone performance.
 
-See `KIT_REUSE.md` for connected versus selected modules and `PROJECT_DECISIONS.md` for open policies.
+See `KIT_REUSE.md`, `PROJECT_DECISIONS.md` and the replication spec for full scope.

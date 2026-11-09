@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { StorageAdapter } from '@danilah/mini-games-kit/platform';
+import { dailyCatalog } from '../../src/content/daily';
 import { campaign } from '../../src/content/campaign';
 import { Board, canExit } from '../../src/domain/board';
 import { decodeSave, freshAttempt, freshSave, ProgressStore, SAVE_KEY } from '../../src/progression/save';
@@ -90,7 +91,7 @@ describe('authoritative progression writer', () => {
     expect(store.state.campaign.board.errors).toEqual([]);
   });
   it('serializes ordinary changes with receipts, chooses a current legal hint and keeps daily independent', async () => {
-    const { storage, rows } = memory(), state = seed(2); state.daily['2026-11-09'] = freshAttempt(campaign[3]!); rows.set(SAVE_KEY, JSON.stringify(state));
+    const { storage, rows } = memory(), state = seed(2); state.daily['2026-11-09'] = freshAttempt(dailyCatalog['2026-11-09']!); rows.set(SAVE_KEY, JSON.stringify(state));
     const store = new ProgressStore(storage); await store.load(); const expected = store.board.attemptId, arrow = store.board.hint()!;
     await Promise.all([store.move(expected, arrow), store.commitReward(receipt(expected)), store.presentation(expected, { guides: true })]);
     expect(store.state.campaign.hint).not.toBe(arrow); expect(store.board.remaining.some(a => a.id === store.state.campaign.hint && canExit(a, store.board.remaining))).toBe(true);
