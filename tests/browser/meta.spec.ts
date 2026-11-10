@@ -64,7 +64,7 @@ test('keeps two daily dates and campaign state independent through mode changes 
   await page.locator('[data-date="2026-11-08"]').click(); await page.locator('#start-daily').click();
   await expect(page.locator('#game-shell')).not.toHaveAttribute('data-attempt', id!); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '3');
   await page.locator('#choose-field').click(); await page.locator('[data-nav=back]').click(); await page.locator('#home-play').click();
-  await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt', campaignId!); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '182');
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt', campaignId!); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(campaign[19]!.arrows.length));
   await page.reload(); await ready(page); await openDaily(page, '2026-11-09');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt', id!); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2');
   await expect(page.locator('#guides')).toHaveAttribute('aria-pressed', 'true');

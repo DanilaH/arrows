@@ -1,3 +1,6 @@
+import legacyCampaign from '../fixtures/campaign-pre-polish.json';
+import tailFingerprints from '../fixtures/campaign-tail-v2-hashes.json';
+import type { Level } from '../../src/domain/board';
 import { createHash } from 'node:crypto';
 import originalChapter from '../fixtures/campaign-v1-hashes.json';
 import { describe, expect, it } from 'vitest';
@@ -26,10 +29,20 @@ async function solve(store: ProgressStore) {
 }
 
 describe('fixed selected campaign bank', () => {
-  it('preserves the twenty published fields byte-for-byte and has no repeated field geometry', () => {
-    for (const level of campaign.slice(0, 20)) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(originalChapter[level.id as keyof typeof originalChapter]);
+  it('pins the immutable legacy opening, preserves the published tail and keeps every fresh field distinct', () => {
+    for (const level of legacyCampaign) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(originalChapter[level.id as keyof typeof originalChapter]);
+    for (const level of campaign.slice(20)) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(tailFingerprints[level.id as keyof typeof tailFingerprints]);
+    expect(campaign.slice(0, 20).every(l => l.contentVersion === 2)).toBe(true);
     const fingerprints = campaign.map(l => JSON.stringify({ mask: l.mask, paths: l.arrows.map(a => a.path) }));
     expect(new Set(fingerprints).size).toBe(120);
+  });
+  it('introduces bends and nearby blockers from the first board', () => {
+    for (const level of campaign.slice(0, 4)) {
+      expect(level.arrows.every(a => a.path.length >= 4)).toBe(true);
+      expect(level.arrows.filter(a => !canExit(a, level.arrows)).length).toBeGreaterThan(0);
+      const lengths = level.arrows.flatMap(a => a.path.slice(1).map((p, i) => Math.abs(p.x - a.path[i]!.x) + Math.abs(p.y - a.path[i]!.y)));
+      expect(lengths.reduce((a, b) => a + b, 0) / (level.width * level.height)).toBeGreaterThan(.35);
+    }
   });
   it('has 120 legal distinct boards, independently removable in multiple orders', () => {
     expect(campaign).toHaveLength(120); expect(new Set(campaign.map(l => l.id)).size).toBe(120);
@@ -65,7 +78,7 @@ describe('fixed selected campaign bank', () => {
 
 describe('authoritative progression writer', () => {
   it('upgrades a completed original bank and advances into c21 once without reissuing wins or moving earned rights', async () => {
-    const { storage, rows } = memory(), state = seed(19);
+    const { storage, rows } = memory(), state = seed(19); state.campaign = freshAttempt(legacyCampaign[19] as Level);
     const oldBoard = new Board(state.campaign.level, state.campaign.board.id);
     while (!oldBoard.complete) oldBoard.activate(oldBoard.hint()!);
     state.campaign.board = oldBoard.snapshot(); state.campaign.started = true; state.catalogVersion = 1;
@@ -74,7 +87,7 @@ describe('authoritative progression writer', () => {
     state.receipts = ['existing-right']; state.reservedRewards = [receipt('old-retired', 'hint', 'existing-right')];
     rows.set(SAVE_KEY, JSON.stringify(state));
     const store = new ProgressStore(storage); await store.load();
-    expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(2);
+    expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(3);
     expect(store.state.campaign).toEqual(state.campaign); expect(store.state.wins).toHaveLength(20);
     expect(store.state.daily).toEqual(state.daily); expect(store.state.reservedRewards).toEqual(state.reservedRewards);
     await Promise.all([store.next(oldBoard.attemptId), store.next(oldBoard.attemptId)]);
@@ -83,17 +96,17 @@ describe('authoritative progression writer', () => {
     expect(store.state.campaign.continuations).toBe(0); expect(store.state.reservedRewards).toHaveLength(2);
     const restored = new ProgressStore(storage); await restored.load(); expect(restored.state).toEqual(store.state);
   });
-  it('preserves a partial v1 campaign, embedded field, marks, camera, ledger and cadence through catalogue upgrade', async () => {
-    const state = seed(5), board = new Board(state.campaign.level, state.campaign.board.id);
+  it('preserves a partial catalogue-2 campaign, embedded field, marks, camera, ledger and cadence through catalogue upgrade', async () => {
+    const state = seed(5); state.campaign = freshAttempt(legacyCampaign[5] as Level); const board = new Board(state.campaign.level, state.campaign.board.id);
     const blocked = board.remaining.find(a => !canExit(a, board.remaining))!;
     board.activate(blocked.id); board.activate(board.hint()!);
     state.campaign.board = board.snapshot(); state.campaign.started = true;
     state.campaign.view = { centerX: 9, centerY: 14, zoom: 2.3 }; state.campaign.guides = true;
-    state.catalogVersion = 1; state.adCadence.activeMs = 123456; state.receipts = ['confirmed-receipt'];
+    state.catalogVersion = 2; state.adCadence.activeMs = 123456; state.receipts = ['confirmed-receipt'];
     const decoded = decodeSave(state);
     expect(decoded.campaign).toEqual(state.campaign); expect(decoded.receipts).toEqual(state.receipts);
-    expect(decoded.adCadence).toEqual(state.adCadence); expect(decoded.catalogVersion).toBe(2);
-    expect(() => decodeSave({ ...state, catalogVersion: 3 })).toThrow('Unsupported save');
+    expect(decoded.adCadence).toEqual(state.adCadence); expect(decoded.catalogVersion).toBe(3);
+    expect(() => decodeSave({ ...state, catalogVersion: 4 })).toThrow('Unsupported save');
     const schema1 = { ...state, schema: 1 }; expect(decodeSave(schema1).campaign).toEqual(state.campaign);
   });
   it('restores an accepted move during flight, errors, guides and viewport without rerolling identity', async () => {

@@ -1,6 +1,6 @@
 {
   "name": "arrows",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -19,6 +19,7 @@
     "android:sync": "npm run build && node tools/prepare-native.mjs && cap sync android",
     "android:open": "cap open android",
     "content:controls": "vite build --ssr tools/content/control-scene-source.ts --outDir .test-output/control-source && node tools/content/write-control-scenes.mjs",
+    "content:opening": "vite build --ssr tools/content/opening-source.ts --outDir .test-output/opening-source && node tools/content/write-opening.mjs",
     "content:campaign": "vite build --ssr tools/content/campaign-source.ts --outDir .test-output/campaign-source && node tools/content/write-campaign.mjs",
     "content:daily": "vite build --ssr tools/content/daily-source.ts --outDir .test-output/daily-source && node tools/content/write-daily.mjs",
     "content:trophies": "vite build --ssr src/domain/trophy.ts --outDir .test-output/trophy-source && node tools/content/write-trophies.mjs"

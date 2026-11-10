@@ -1,3 +1,4 @@
+import type { UiMotion } from './uiMotion';
 import type { ProgressStore } from '../progression/save';
 import { collectionOpen, challengeOpen, collectionStats, medals, earnedAwards } from '../progression/collection';
 import { calendarDate, localDate, monthDates } from '../progression/calendar';
@@ -11,7 +12,7 @@ export type AppScreen = 'home' | 'collection' | 'calendar' | 'game';
 const badge = (key: string): string => `<svg viewBox="0 0 72 84" aria-hidden="true"><path d="m20 51-3 27 19-9 19 9-3-27"/><circle cx="36" cy="32" r="25"/><path d="${key === 'legend' ? 'm21 34 6-12 9 10 9-10 6 12-5 9H26Z' : key === 'perfect' ? 'm23 32 9 9 18-19' : 'M39 15c9 13-4 13 4 24 2-6 7-8 7-8 4 18-23 23-26 8-2-8 8-15 8-15-2 10 3 11 3 11-3-9 6-12 4-20Z'}"/></svg>`;
 
 export function installMetaSurface(progress: ProgressStore, language: GameLanguage, options: {
-  blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; controls?(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;
+  motion: UiMotion; blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; controls?(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;
 }) {
   const root = document.querySelector<HTMLElement>('#meta-screen')!, shell = document.querySelector<HTMLElement>('#game-shell')!;
   let text = copy[language];
@@ -41,12 +42,12 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     }).join('');
     const difficulty = a.level.difficulty === 'normal' ? '' : a.level.difficulty === 'hard' ? 'Hard' : 'Nightmare';
     return `<div class="home-layout"><header class="home-heading"><h1 id="menu-title" tabindex="-1">${text.title}</h1><div class="home-tools"><span class="streak-chip">${text.streakShort} ${stats.current}</span><button id="home-settings" type="button" class="circle settings-button" aria-label="${text.settings}">${settingsIcon}</button></div></header>
-      <section class="home-current"><p class="eyebrow">${text.level} ${save.index + 1}</p><span class="home-difficulty">${difficulty}</span>
+      <section class="home-current"><div class="campaign-heading"><div><p class="eyebrow">${text.campaign}</p><h2>${text.level} ${save.index + 1}</h2></div><span class="home-difficulty" ${difficulty ? '' : 'hidden'}>${difficulty}</span></div>
       <svg class="home-board" viewBox="-1 -1 ${a.level.width + 1} ${a.level.height + 1}" aria-hidden="true">${paths || '<circle cx="4" cy="6" r="2"/>'}</svg>
-      <button id="home-play" class="primary" type="button" ${!ready || busy ? 'disabled' : ''}>${a.started ? text.resume : text.play}<span aria-hidden="true"> →</span></button>
-      <p class="home-progress">${text.chapter}: ${save.wins.length} / ${campaign.length}</p></section>
-      <nav class="home-destinations"><button id="home-collection" type="button" ${!ready || !unlocked ? 'disabled' : ''}><span class="nav-symbol">◇</span><span>${text.collection}<small>${unlocked ? text.recordsAndAwards : text.unlock10}</small></span>${newAward ? '<i class="new-dot"></i>' : ''}</button>
-      <button id="home-calendar" type="button" ${!ready || !challenge ? 'disabled' : ''}><span class="nav-symbol">▦</span><span>${text.challenge}<small>${challenge ? dayFormat.format(calendarDate(selected)) : text.unlock20}</small></span></button></nav>${options.controls ? `<button id="home-controls" class="review-link" type="button">${text.controlFields}</button>` : ''}</div>`;
+      <button id="home-play" class="primary home-play" type="button" ${!ready || busy ? 'disabled' : ''}>${a.started ? text.resume : text.play}<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></button>
+      <div class="campaign-completion"><div class="home-progress-track" aria-hidden="true"><i style="width:${save.wins.length / campaign.length * 100}%"></i></div><p class="home-progress">${text.chapter}: ${save.wins.length} / ${campaign.length}</p></div></section>
+      <nav class="home-destinations"><button id="home-collection" class="portal-card" type="button" ${!ready || !unlocked ? 'disabled' : ''}><img class="portal-art" src="${import.meta.env.BASE_URL}ui/collection-v1.webp" alt="" width="256" height="256" decoding="async"/><span class="portal-copy"><strong class="portal-title">${text.collection}</strong><small>${unlocked ? text.recordsAndAwards : text.unlock10}</small></span>${newAward ? '<i class="new-dot"></i>' : ''}</button>
+      <button id="home-calendar" class="portal-card" type="button" ${!ready || !challenge ? 'disabled' : ''}><img class="portal-art" src="${import.meta.env.BASE_URL}ui/daily-v1.webp" alt="" width="256" height="256" decoding="async"/><span class="portal-copy"><strong class="portal-title">${text.challenge}</strong><small>${challenge ? dayFormat.format(calendarDate(selected)) : text.unlock20}</small></span></button></nav>${options.controls ? `<button id="home-controls" class="review-link" type="button">${text.controlFields}</button>` : ''}</div>`;
   };
   const collection = (): string => {
     const save = progress.state, stats = collectionStats(save);
@@ -83,19 +84,23 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     if (key) Array.from(root.querySelectorAll<HTMLElement>('button')).find(b => b.id === key || b.dataset.date === key || b.dataset.month === key || b.dataset.shift === key)?.focus({ preventScroll: true });
   };
   const show = (next: AppScreen, date?: string): void => {
-    revision++;
-    if (next === 'calendar' && (screen === 'home' || screen === 'collection')) calendarParent = screen;
-    scroll.set(screen, root.scrollTop);
-    if (screen === 'game' && next !== 'game') options.leaveGame();
-    screen = next; shell.dataset.screen = screen; root.hidden = screen === 'game'; options.blocked(screen !== 'game'); options.visited(screen);
-    if (date && dailyCatalog[date]) { selected = date; month = date.slice(0, 7); }
-    if (screen !== 'game') { refresh(); root.scrollTop = scroll.get(screen) ?? 0; root.querySelector<HTMLElement>('h1')?.focus({ preventScroll: true }); }
+    options.motion.swap(root, screen, next, () => {
+      revision++;
+      if (next === 'calendar' && (screen === 'home' || screen === 'collection')) calendarParent = screen;
+      scroll.set(screen, root.scrollTop);
+      if (screen === 'game' && next !== 'game') options.leaveGame();
+      screen = next; shell.dataset.screen = screen; root.hidden = screen === 'game'; options.blocked(screen !== 'game'); options.visited(screen);
+      if (date && dailyCatalog[date]) { selected = date; month = date.slice(0, 7); }
+      if (screen !== 'game') { refresh(); root.scrollTop = scroll.get(screen) ?? 0; root.querySelector<HTMLElement>('h1')?.focus({ preventScroll: true }); }
+    });
   };
   const back = (): void => show(screen === 'calendar' ? calendarParent : 'home');
   const closeTrophy = (): boolean => {
     if (!trophyDialog.open) return false;
-    trophyDialog.close(); options.previewBlocked(false);
-    if (trophyFocus?.isConnected) trophyFocus.focus({ preventScroll: true });
+    options.motion.close(trophyDialog, () => {
+      options.previewBlocked(false);
+      if (trophyFocus?.isConnected) trophyFocus.focus({ preventScroll: true });
+    });
     return true;
   };
   const openTrophy = (key: string): void => {
@@ -107,7 +112,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       <div class="trophy-portrait">${trophy(key, true, { ...(owned ? { binding: save.trophyDesigns[key]! } : {}), scope: 'viewer' })}</div>
       <p>${done} / ${monthDates(key).length} · ${text.daysDone}</p>
       <p class="trophy-rule">${text.cupRule}</p><button class="primary" type="button" data-open-month="${key}">${text.openMonth}</button>`;
-    options.previewBlocked(true); if (!trophyDialog.open) trophyDialog.showModal();
+    options.previewBlocked(true); options.motion.open(trophyDialog);
   };
   const viewerClick = (event: MouseEvent): void => {
     const button = (event.target as Element).closest<HTMLButtonElement>('button'); if (!button) return;
@@ -122,6 +127,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   };
   const click = (event: MouseEvent): void => {
     const target = (event.target as HTMLElement).closest<HTMLButtonElement>('button'); if (!target || target.disabled || busy) return;
+    if (options.motion.routeBusy) options.motion.finish();
     if (target.dataset.nav === 'back') back();
     else if (target.id === 'home-settings') options.settings();
     else if (target.id === 'home-controls') options.controls?.();
@@ -131,8 +137,8 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     } else if (target.id === 'home-calendar') show('calendar');
     else if (target.dataset.month && dailyMonths.includes(target.dataset.month)) { month = target.dataset.month; show('calendar'); }
     else if (target.id === 'view-trophy') openTrophy(month);
-    else if (target.dataset.shift) { month = dailyMonths[dailyMonths.indexOf(month) + Number(target.dataset.shift)]!; calendarNotice = ''; refresh(); }
-    else if (target.dataset.date) { selected = target.dataset.date; calendarNotice = ''; refresh(); }
+    else if (target.dataset.shift) { month = dailyMonths[dailyMonths.indexOf(month) + Number(target.dataset.shift)]!; calendarNotice = ''; refresh(); options.motion.reveal(root.querySelector('.calendar-content')!); }
+    else if (target.dataset.date) { selected = target.dataset.date; calendarNotice = ''; refresh(); options.motion.reveal(root.querySelector('.selected-day')!); }
     else if (target.id === 'start-daily') {
       busy = true; calendarNotice = ''; refresh();
       void options.enterDaily(selected).catch(() => { calendarNotice = text.dailyUnavailable; }).finally(() => { busy = false; refresh(); });

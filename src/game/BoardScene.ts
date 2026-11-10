@@ -162,7 +162,7 @@ export class BoardScene extends Phaser.Scene {
   }
   private drawStable(): void {
     this.stableDirty = false; this.stable.clear(); this.guidesLayer.clear();
-    const stroke = Math.max(.1, 1.7 / this.boardCamera.scale);
+    const stroke = Math.max(.11, 1.9 / this.boardCamera.scale);
     const amount = Math.min(1, (this.clock - this.entry) / 380);
     const ease = 1 - (1 - amount) ** 3;
     for (const arrow of this.board.remaining) {
@@ -206,7 +206,7 @@ export class BoardScene extends Phaser.Scene {
     }
     if (this.clock - this.entry < 420) this.stableDirty = true;
     if (this.stableDirty) this.drawStable();
-    this.active.clear(); const stroke = Math.max(.1, 1.7 / this.boardCamera.scale);
+    this.active.clear(); const stroke = Math.max(.11, 1.9 / this.boardCamera.scale);
     for (let i = this.flights.length - 1; i >= 0; i--) {
       const flight = this.flights[i]!, old = flight.travelled;
       flight.age += dt; flight.travelled += flight.speed * dt / 1000 * Math.min(1, .3 + flight.age / 110);

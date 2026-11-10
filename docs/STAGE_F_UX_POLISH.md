@@ -1,0 +1,13 @@
+# UI, motion and opening fields — 0.8.0
+
+The user's 2026-11-10 feedback prioritizes presentation and puzzle composition before store work.
+
+Home now frames the real remaining campaign geometry, a single primary action and exact progress. Collection and daily cards use two original generated transparent illustrations, optimized to 256px WebP (38,066 bytes combined; no network image dependency). Source prompts and original fingerprints are in `assets/ui/provenance.json`. UI text and controls remain native DOM, usable in both themes and RU/EN at narrow/short sizes.
+
+Presentation motion is finite: pointer press/release, 260ms menu/board entrance, outgoing menu fade, 210ms dialog opening and 135ms closing. Outgoing menu copies are inert, hidden from accessibility, have unique IDs and no control data attributes. Quick next navigation settles the prior transition. Gameplay input/time is gated during the incoming board transition; independent modal ownership lasts through actual close. Backgrounding/teardown settle owned motion. Reduced-motion skips movement. No permanent render loop or animation-controlled progression authority is introduced.
+
+Campaign catalogue 3 introduces contentVersion 2 for fresh c01–c20 attempts. The first four are hand composed, with multiple turns on every arrow and real blockers from c01. The following sixteen select bent, connected compositions from eight deterministic candidates; metrics/seeds are recorded in `verification/OPENING_SELECTION_V2.json`. Hard 6/12/18 and Nightmare 20 remain. The published c21–c120 fields and all daily/trophy geometry are unchanged.
+
+This explicitly supersedes the previous opening's append-only authoring constraint at the user's request. It does **not** rewrite embedded saved attempts: catalogue 1/2→3 preserves their geometry, identity, accepted moves, camera, errors, pending reward ownership and wins, including not-yet-started embedded attempts. Restart preserves that attempt's field. Newly created subsequent attempts take the current content. Schema 2 and storage key remain unchanged. Legacy opening and published-tail fingerprints are pinned in tests.
+
+Verification is recorded in HANDOFF and the associated build evidence. Capture reproduction: `npm run build`, then `node tools/capture-polish-gifs.mjs <output>`. The capture starts fresh and earns nineteen wins through actual touch before exporting unedited storage for menu demonstrations. It never injects wins, cups or gameplay state. GIFs demonstrate browser mobile emulation, not Android hardware feel or performance.

@@ -1,3 +1,4 @@
+import type { UiMotion } from './uiMotion';
 import { copy } from '../app/language';
 import type { SettingsStore } from '../app/settings';
 import type { GameplayActivityCoordinator } from '@danilah/mini-games-kit/platform';
@@ -5,7 +6,7 @@ import type { createFeedback } from '../platform/feedback';
 const closeIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>';
 export const settingsIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg>';
 const themeArt = '<svg viewBox="0 0 120 64" aria-hidden="true"><g class="swatch-dots"><circle cx="32" cy="20" r="1"/><circle cx="48" cy="20" r="1"/><circle cx="64" cy="20" r="1"/><circle cx="80" cy="20" r="1"/><circle cx="32" cy="36" r="1"/><circle cx="48" cy="36" r="1"/><circle cx="64" cy="36" r="1"/><circle cx="80" cy="36" r="1"/></g><path d="M24 47h24V20h42m-7-7 7 7-7 7M73 47h22m-6-6 6 6-6 6"/></svg>';
-export function installSettingsSurface(store: SettingsStore, activity: GameplayActivityCoordinator, feedback: ReturnType<typeof createFeedback>, beforeOpen: () => void) {
+export function installSettingsSurface(store: SettingsStore, activity: GameplayActivityCoordinator, feedback: ReturnType<typeof createFeedback>, beforeOpen: () => void, motion: UiMotion) {
   const dialog = document.querySelector<HTMLDialogElement>('#settings-dialog')!;
   let focus: HTMLElement | null = null, renderedLanguage = '';
   const render = (): void => {
@@ -31,9 +32,11 @@ export function installSettingsSurface(store: SettingsStore, activity: GameplayA
   };
   const close = (): boolean => {
     if (!dialog.open) return false;
-    dialog.close(); activity.setBlocked('settings', false);
-    const target = focus?.isConnected ? focus : focus?.id ? document.getElementById(focus.id) : null;
-    target?.focus({ preventScroll: true });
+    motion.close(dialog, () => {
+      activity.setBlocked('settings', false);
+      const target = focus?.isConnected ? focus : focus?.id ? document.getElementById(focus.id) : null;
+      target?.focus({ preventScroll: true });
+    });
     return true;
   };
   const click = (event: MouseEvent): void => {
@@ -49,7 +52,7 @@ export function installSettingsSurface(store: SettingsStore, activity: GameplayA
   dialog.addEventListener('click', click); dialog.addEventListener('change', change); dialog.addEventListener('cancel', cancel);
   const unsubscribe = store.subscribe(refresh);
   return {
-    open(): void { if (dialog.open) return; beforeOpen(); focus = document.activeElement as HTMLElement | null; activity.setBlocked('settings', true); render(); dialog.showModal(); refresh(); }, close,
+    open(): void { if (dialog.open) return; beforeOpen(); focus = document.activeElement as HTMLElement | null; activity.setBlocked('settings', true); render(); motion.open(dialog); refresh(); }, close,
     destroy(): void { close(); unsubscribe(); dialog.removeEventListener('click', click); dialog.removeEventListener('change', change); dialog.removeEventListener('cancel', cancel); dialog.replaceChildren(); },
   };
 }

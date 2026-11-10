@@ -1,0 +1,246 @@
+{
+  "policy": "Fresh attempts use version 2; every saved attempt retains its embedded geometry.",
+  "firstFour": "Own hand-composed bent/interlocking fields.",
+  "levels": [
+    {
+      "number": 5,
+      "kind": "butterfly",
+      "seed": 741034,
+      "metrics": {
+        "arrows": 11,
+        "dots": 167,
+        "coverage": 0.7904191616766467,
+        "initialFree": 9,
+        "depth": 3,
+        "edges": 4,
+        "meanLength": 11,
+        "meanBends": 4.909090909090909
+      }
+    },
+    {
+      "number": 6,
+      "kind": "flower",
+      "seed": 773707,
+      "metrics": {
+        "arrows": 29,
+        "dots": 424,
+        "coverage": 0.75,
+        "initialFree": 20,
+        "depth": 6,
+        "edges": 17,
+        "meanLength": 9.96551724137931,
+        "meanBends": 3.793103448275862
+      }
+    },
+    {
+      "number": 7,
+      "kind": "flower",
+      "seed": 782623,
+      "metrics": {
+        "arrows": 10,
+        "dots": 116,
+        "coverage": 0.8362068965517241,
+        "initialFree": 7,
+        "depth": 4,
+        "edges": 6,
+        "meanLength": 8.7,
+        "meanBends": 3.4
+      }
+    },
+    {
+      "number": 8,
+      "kind": "heart",
+      "seed": 744025,
+      "metrics": {
+        "arrows": 8,
+        "dots": 117,
+        "coverage": 0.7606837606837606,
+        "initialFree": 4,
+        "depth": 4,
+        "edges": 5,
+        "meanLength": 10.125,
+        "meanBends": 4.5
+      }
+    },
+    {
+      "number": 9,
+      "kind": "star",
+      "seed": 760860,
+      "metrics": {
+        "arrows": 10,
+        "dots": 114,
+        "coverage": 0.8771929824561403,
+        "initialFree": 8,
+        "depth": 3,
+        "edges": 3,
+        "meanLength": 9,
+        "meanBends": 4.1
+      }
+    },
+    {
+      "number": 10,
+      "kind": "leaf",
+      "seed": 730181,
+      "metrics": {
+        "arrows": 13,
+        "dots": 163,
+        "coverage": 0.8343558282208589,
+        "initialFree": 9,
+        "depth": 4,
+        "edges": 5,
+        "meanLength": 9.461538461538462,
+        "meanBends": 3.769230769230769
+      }
+    },
+    {
+      "number": 11,
+      "kind": "cross",
+      "seed": 786611,
+      "metrics": {
+        "arrows": 13,
+        "dots": 165,
+        "coverage": 0.793939393939394,
+        "initialFree": 8,
+        "depth": 5,
+        "edges": 11,
+        "meanLength": 9.076923076923077,
+        "meanBends": 3.923076923076923
+      }
+    },
+    {
+      "number": 12,
+      "kind": "diamond",
+      "seed": 732175,
+      "metrics": {
+        "arrows": 30,
+        "dots": 421,
+        "coverage": 0.6769596199524941,
+        "initialFree": 20,
+        "depth": 7,
+        "edges": 30,
+        "meanLength": 8.5,
+        "meanBends": 2.7333333333333334
+      }
+    },
+    {
+      "number": 13,
+      "kind": "butterfly",
+      "seed": 741091,
+      "metrics": {
+        "arrows": 18,
+        "dots": 261,
+        "coverage": 0.7586206896551724,
+        "initialFree": 11,
+        "depth": 5,
+        "edges": 9,
+        "meanLength": 10,
+        "meanBends": 3.7777777777777777
+      }
+    },
+    {
+      "number": 14,
+      "kind": "ring",
+      "seed": 789602,
+      "metrics": {
+        "arrows": 14,
+        "dots": 198,
+        "coverage": 0.8080808080808081,
+        "initialFree": 13,
+        "depth": 2,
+        "edges": 3,
+        "meanLength": 10.428571428571429,
+        "meanBends": 4
+      }
+    },
+    {
+      "number": 15,
+      "kind": "flower",
+      "seed": 758923,
+      "metrics": {
+        "arrows": 12,
+        "dots": 178,
+        "coverage": 0.7471910112359551,
+        "initialFree": 7,
+        "depth": 3,
+        "edges": 7,
+        "meanLength": 10.083333333333334,
+        "meanBends": 4.083333333333333
+      }
+    },
+    {
+      "number": 16,
+      "kind": "heart",
+      "seed": 759920,
+      "metrics": {
+        "arrows": 14,
+        "dots": 190,
+        "coverage": 0.7947368421052632,
+        "initialFree": 9,
+        "depth": 4,
+        "edges": 12,
+        "meanLength": 9.785714285714286,
+        "meanBends": 3.857142857142857
+      }
+    },
+    {
+      "number": 17,
+      "kind": "star",
+      "seed": 792593,
+      "metrics": {
+        "arrows": 17,
+        "dots": 175,
+        "coverage": 0.8285714285714286,
+        "initialFree": 11,
+        "depth": 5,
+        "edges": 10,
+        "meanLength": 7.529411764705882,
+        "meanBends": 3.1176470588235294
+      }
+    },
+    {
+      "number": 18,
+      "kind": "leaf",
+      "seed": 769833,
+      "metrics": {
+        "arrows": 26,
+        "dots": 467,
+        "coverage": 0.6359743040685225,
+        "initialFree": 17,
+        "depth": 7,
+        "edges": 25,
+        "meanLength": 10.423076923076923,
+        "meanBends": 3.923076923076923
+      }
+    },
+    {
+      "number": 19,
+      "kind": "cross",
+      "seed": 754992,
+      "metrics": {
+        "arrows": 18,
+        "dots": 255,
+        "coverage": 0.792156862745098,
+        "initialFree": 10,
+        "depth": 5,
+        "edges": 16,
+        "meanLength": 10.222222222222221,
+        "meanBends": 3.7777777777777777
+      }
+    },
+    {
+      "number": 20,
+      "kind": "butterfly",
+      "seed": 795584,
+      "metrics": {
+        "arrows": 87,
+        "dots": 1719,
+        "coverage": 0.5363583478766725,
+        "initialFree": 48,
+        "depth": 9,
+        "edges": 105,
+        "meanLength": 9.597701149425287,
+        "meanBends": 2.8160919540229883
+      }
+    }
+  ]
+}

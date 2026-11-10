@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-10",
+  "method": "Built-in image generation; transparent sources preserved; 256px WebP exports used by Home cards.",
+  "assets": [
+    {
+      "name": "collection",
+      "path": "public/ui/collection-v1.webp",
+      "prompt": "Use case: stylized-concept. Asset type: transparent game UI illustration, one compact collection emblem for a polished minimalist arrow puzzle. Primary request: a single beautifully crafted small trophy, warm pale champagne metal bowl, sculptural violet loop handles, faceted smoky-lavender glass pedestal, restrained ivory highlights. Premium tactile 3D product illustration with rounded geometric edges, refined and adult, not a toy, no ornate clutter. Camera: near-front three-quarter view, very slight view from above; the whole trophy centered and comfortably inside the square canvas, strong readable silhouette at 72 CSS pixels. Soft studio lighting from upper left, subtle physical occlusion on the object, no floor, no cast shadow outside the object. Palette harmonizes with midnight navy #1e1e2c, pearl-white #eeeaff, lavender #aaa0ef and violet #7863df. Transparent background with genuine alpha. No letters, digits, logos, badge borders, text, extra objects, sparkles, or starbursts. The result must be an isolated cup with a clean silhouette, generous but consistent padding, not an app screen.",
+      "originalSha256": "3262b78a2720b864e5b6e0ac8c8900ee1963168e8b56c21af3cc0d3d8c6e36d6",
+      "width": 256,
+      "height": 256,
+      "decodeBytes": 262144
+    },
+    {
+      "name": "daily",
+      "path": "public/ui/daily-v1.webp",
+      "prompt": "Use case: stylized-concept. Asset type: transparent game UI illustration, one compact daily-challenge emblem for the same premium minimalist arrow puzzle. Primary request: a single beautifully crafted small standing desktop calendar plaque, pearly ivory enamel face, softly rounded square body with smoky-lavender translucent glass side edges, two sculptural violet binder loops, and four simple inset violet square date marks. A tiny champagne accent along the lower edge. No actual numbers or lettering. Premium tactile 3D product illustration, refined and adult, not a toy. Camera: near-front three-quarter view, very slight view from above, front face legible; the whole compact calendar centered and comfortably inside a square canvas, strong silhouette at 72 CSS pixels. Soft studio lighting from upper left, restrained highlights, no floor or cast shadow outside the object. Palette harmonizes with midnight navy #1e1e2c, pearl-white #eeeaff, lavender #aaa0ef and violet #7863df. Transparent background with genuine alpha. No text, digits, logos, badge border, loose pages, clock, extra objects, sparkles or starbursts. This is one isolated UI illustration, not an app screen.",
+      "originalSha256": "1d92218a1200c9854090f6926c2bf395fc357528ae54fe8062abd3830978a353",
+      "width": 256,
+      "height": 256,
+      "decodeBytes": 262144
+    }
+  ]
+}

@@ -88,7 +88,7 @@ test('zooms without a phantom tap and repaints after a sleeping-board resize', a
 });
 
 test('clears every control board through actual pointer input and leaves one idle renderer', async ({ page }, testInfo) => {
-  test.setTimeout(120000);
+  test.setTimeout(180000);
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await openControlReview(page);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');

@@ -13,3 +13,5 @@ Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the
 - Update handoff and decisions when behavior or verification changes. Browser success is not Android hardware performance evidence.
 - For visibly changed motion, feedback, transitions or gestures, include short GIFs recorded from the actual current build in the delivery. Show enough before/action/after to judge the change; keep framing readable and state browser versus physical-device provenance. Text-only/internal changes do not need GIFs. Preserve this user preference in subsequent handoffs.
 - Keep signed artifacts, keystores, local SDK paths, node_modules, dist and copied native web assets out of Git.
+
+- The user authorized a versioned c01–c20 redesign in 0.8.0. Catalogue 3/contentVersion 2 applies only to fresh attempts; preserve every existing embedded attempt and published c21–c120/daily/trophy geometry. See `docs/STAGE_F_UX_POLISH.md`.

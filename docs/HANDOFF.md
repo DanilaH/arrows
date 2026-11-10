@@ -1,6 +1,10 @@
-# Arrows handoff — 2026-11-09
+# Arrows handoff — 2026-11-10
 
 ## Current milestone
+
+Version 0.8.0 / Android versionCode 12 addresses UI/motion/opening-field feedback. Home uses a framed live board preview and selectively generated Collection/calendar illustrations. Buttons, route changes and dialogs have bounded motion with reduced-motion/background settlement and modal blockers retained through close. Fresh c01–c20 fields use contentVersion 2: hand-composed bent/blocking openings, then selected denser silhouette candidates. Catalogue 1/2→3 preserves **all embedded existing attempts**; the published c21–c120 and daily/trophy catalogues are unchanged. See `STAGE_F_UX_POLISH.md`. Browser/build verification and native artifact evidence follow below; physical acceptance remains open.
+
+Previous identity milestone:
 
 Version 0.7.0 / Android versionCode 11 replaces Capacitor launcher/splash art with a shared project-owned bent-arrow mark, adaptive/monochrome/legacy vector icons and matching initial HTML/native launch surfaces. The normal application exposes no control-board review route and excludes the control catalogue from its bundle. Review-only render/gesture tests use an isolated in-memory entry. Readiness still follows first render/uncovered paint; there is no new SDK dependency or minimum brand hold. See `STAGE_E_IDENTITY.md`. Native masks/launch transitions remain device acceptance, not browser proof.
 

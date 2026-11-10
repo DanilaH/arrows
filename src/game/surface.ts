@@ -1,3 +1,4 @@
+import { createUiMotion } from './uiMotion';
 import { campaign, tutorialFor } from '../content/campaign';
 import { distanceToPath, type Point } from '../domain/geometry';
 import { BoardGestures } from '../input/gestures';
@@ -17,6 +18,7 @@ import type { BoardScene } from './BoardScene';
 type Platform = ReturnType<typeof createPlatformRuntime>;
 export function installGameSurface(scene: BoardScene, platform: Platform, language: GameLanguage, reviewFields: readonly Level[] = []) {
   let text = copy[language];
+  const motion = createUiMotion();
   const root = document.querySelector<HTMLElement>('#game-root')!;
   const shell = document.querySelector<HTMLElement>('#game-shell')!, dialog = document.querySelector<HTMLDialogElement>('#game-dialog')!;
   const content = document.querySelector<HTMLElement>('#dialog-content')!, status = document.querySelector<HTMLElement>('#app-status')!;
@@ -44,7 +46,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const sample = (): void => {
     const now = performance.now(), delta = Math.max(0, Math.min(1000, now - lastTime)); lastTime = now;
     if (wasActive) { pendingTime += delta; if (!tutorial()) { idleMs += delta; pendingAdTime += delta; } }
-    wasActive = loaded && meta.screen === 'game' && !control && !requestingAd && !platform.activity.isBlocked() && !scene.board.complete && scene.board.hearts > 0;
+    wasActive = loaded && meta.screen === 'game' && !control && !requestingAd && !motion.routeBusy && !platform.activity.isBlocked() && !scene.board.complete && scene.board.hearts > 0;
   };
   const takeTime = (): [number, number] => { sample(); const times: [number, number] = [Math.round(pendingTime), Math.round(pendingAdTime)]; pendingTime = 0; pendingAdTime = 0; return times; };
   const run = (task: Promise<unknown>): void => { void task.catch(() => { if (alive) { notice = text.saveFailed; sync(); } }); };
@@ -66,7 +68,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   };
   const gestures = new BoardGestures({
     hit(p) {
-      if (!inBoard(p) || requestingAd || platform.activity.isBlocked() || progress.uncertain || scene.board.hearts === 0 || scene.board.complete) return null;
+      if (!inBoard(p) || requestingAd || motion.routeBusy || platform.activity.isBlocked() || progress.uncertain || scene.board.hearts === 0 || scene.board.complete) return null;
       const world = scene.boardCamera.world(p);
       const candidates = scene.board.remaining.map(a => ({ id: a.id, distance: distanceToPath(world, a.path) * scene.boardCamera.scale }))
         .filter(a => a.distance <= 11).sort((a, b) => a.distance - b.distance || a.id.localeCompare(b.id));
@@ -78,7 +80,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       return !!arrow && inBoard(p) && distanceToPath(scene.boardCamera.world(p), arrow.path) * scene.boardCamera.scale <= 13;
     },
     activate(id) {
-      if (requestingAd || platform.activity.isBlocked()) return;
+      if (requestingAd || motion.routeBusy || platform.activity.isBlocked()) return;
       if (control) { const result = scene.activate(id); if (result.kind !== 'ignored') platform.feedback.play(result.kind === 'error' ? 'error' : 'remove'); return; }
       const expected = scene.board.attemptId;
       run(progress.move(expected, id, ...takeTime()));
@@ -88,7 +90,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     pinch: (previous, current, ratio) => { scene.zoom(previous, current, ratio); scheduleView(); if (Math.abs(ratio - 1) > .01) finishTutorial('zoom'); },
   });
   const cancel = (): void => { if (holdTimer !== undefined) clearTimeout(holdTimer); holdTimer = undefined; gestures.cancel(); };
-  const close = (): void => { modal = null; dialog.close(); platform.activity.setBlocked('dialog', false); root.focus({ preventScroll: true }); };
+  const close = (): void => { modal = null; motion.close(dialog, () => { platform.activity.setBlocked('dialog', false); root.focus({ preventScroll: true }); }); };
   const loadActive = (): void => {
     cancel(); pendingTime = 0; pendingAdTime = 0; wasActive = false; freshWinAttempt = ''; idleMs = 0; notice = '';
     const a = active(); celebratedAttempt = a.board.removed.length === a.level.arrows.length ? a.board.id : ''; pendingAward = false; scene.loadAttempt(activeBoard(), a.view, a.guides, a.hint); scheduleView(); sync();
@@ -105,6 +107,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     pendingTime = 0; pendingAdTime = 0; wasActive = false; freshWinAttempt = '';
   };
   const meta = installMetaSurface(progress, language, {
+    motion,
     blocked: value => platform.activity.setBlocked('menu', value),
     previewBlocked: value => platform.activity.setBlocked('trophy-preview', value), leaveGame, enterCampaign,
     visited: screen => platform.analytics.track('screen_view', { screen }),
@@ -117,7 +120,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       platform.analytics.track('daily_open', { date, attempt, resumed: active().started });
     },
   });
-  const settingsSurface = installSettingsSurface(platform.settings, platform.activity, platform.feedback, () => { cancel(); saveView(); });
+  const settingsSurface = installSettingsSurface(platform.settings, platform.activity, platform.feedback, () => { cancel(); saveView(); }, motion);
   let celebratedAttempt = '', pendingAward = false, freshWinAttempt = '';
   const backToMenu = (): void => { if (requestingAd || transition.busy) return; close(); if (activeDate && !control) meta.show('calendar', activeDate); else meta.show('home'); sync(); };
   let rewardIntent = 0, lastPreload = -Infinity, pendingRewardKey = '';
@@ -193,7 +196,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     } else {
       paragraph(text.hintExplanation); button('watch-hint', text.watchVideo, () => run(requestReward('hint')), true); button('cancel', text.cancel, close);
     }
-    if (!dialog.open) dialog.showModal();
+    motion.open(dialog);
   };
   const sync = (): void => {
     if (!alive) return;
@@ -313,7 +316,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     target.addEventListener(name, handler, options); listeners.push(() => target.removeEventListener(name, handler, options));
   };
   on(root, 'pointerdown', event => {
-    if (event.button !== 0 || !inBoard(point(event)) || platform.activity.isBlocked()) return;
+    if (event.button !== 0 || motion.routeBusy || !inBoard(point(event)) || platform.activity.isBlocked()) return;
     event.preventDefault(); root.setPointerCapture(event.pointerId); gestures.down(event.pointerId, point(event), performance.now());
     if (holdTimer !== undefined) clearTimeout(holdTimer); holdTimer = setTimeout(() => { holdTimer = undefined; gestures.hold(performance.now()); }, 305);
   });
@@ -321,7 +324,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   on(root, 'pointerup', event => { if (holdTimer !== undefined) clearTimeout(holdTimer); gestures.up(event.pointerId, point(event)); if (root.hasPointerCapture(event.pointerId)) root.releasePointerCapture(event.pointerId); });
   on(root, 'pointercancel', cancel); on(root, 'lostpointercapture', event => { if (gestures.hasPointer(event.pointerId)) cancel(); });
   on(root, 'wheel', event => {
-    if (!inBoard(point(event)) || platform.activity.isBlocked()) return;
+    if (motion.routeBusy || !inBoard(point(event)) || platform.activity.isBlocked()) return;
     event.preventDefault(); cancel(); scene.zoom(point(event), point(event), Math.exp(-event.deltaY * .0015)); scheduleView(); finishTutorial('zoom');
   }, { passive: false });
   on(document.querySelector<HTMLElement>('#choose-field')!, 'click', backToMenu);
@@ -373,7 +376,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     onBack(): boolean { if (requestingAd || platform.ads.state.phase !== 'idle') { cancelAd(); return true; } if (transition.busy) return true; if (settingsSurface.close()) return true; if (meta.closeTrophy()) return true; if (modal) { close(); sync(); return true; } if (meta.screen === 'home') return false; if (meta.screen === 'game') backToMenu(); else meta.back(); return true; }, cancel,
     destroy(): void {
       saveView(); alive = false; cancel(); clearInterval(timer); clearTimeout(slowLoad); if (cameraTimer !== undefined) clearTimeout(cameraTimer);
-      for (const remove of listeners.reverse()) remove(); transition.destroy(); adSurface.destroy(); settingsSurface.destroy(); meta.destroy(); platform.activity.setBlocked('menu', false);
+      for (const remove of listeners.reverse()) remove(); transition.destroy(); adSurface.destroy(); settingsSurface.destroy(); meta.destroy(); motion.destroy(); platform.activity.setBlocked('menu', false);
       dialog.close(); platform.activity.setBlocked('dialog', false); platform.activity.setBlocked('save-load', false); content.replaceChildren();
       // The final accepted write is allowed to settle; no later receipt can mutate a disposed store.
       void progress.flush().finally(() => progress.destroy());
