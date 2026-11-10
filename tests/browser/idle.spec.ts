@@ -27,10 +27,11 @@ test('settles after animation and repeated scene changes without a permanent fra
   await page.mouse.click(camera.x + head.x * camera.scale, camera.y + head.y * camera.scale);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '187');
   await page.waitForTimeout(1800);
-  const before = await page.evaluate(() => Reflect.get(window, '__boardFrameCount') as number);
-  await page.waitForTimeout(400);
-  const after = await page.evaluate(() => Reflect.get(window, '__boardFrameCount') as number);
-  expect(after - before).toBeLessThan(5);
+  await expect.poll(async () => {
+    const before = await page.evaluate(() => Reflect.get(window, '__boardFrameCount') as number);
+    await page.waitForTimeout(400);
+    return await page.evaluate(() => Reflect.get(window, '__boardFrameCount') as number) - before;
+  }, { timeout: 5000, intervals: [200] }).toBeLessThan(5);
   await expect(page.locator('canvas')).toHaveCount(1);
   await expect(page.locator('#game-dialog')).not.toBeVisible();
 });

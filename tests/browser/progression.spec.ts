@@ -115,7 +115,11 @@ test('keeps hints contextual, excludes pause time and never grants from an unava
   await expect(page.locator('#hint')).toBeHidden(); await page.locator('#home-play').click();
   await page.waitForTimeout(2200);
   await expect(page.locator('#hint')).toBeHidden();
+  const cameraBeforeHint=await page.locator('#game-root').getAttribute('data-camera'),footerBeforeHint=await page.locator('#game-footer').boundingBox();
   await expect(page.locator('#hint')).toBeVisible({ timeout: 2000 });
+  await page.waitForTimeout(200);
+  expect(await page.locator('#game-root').getAttribute('data-camera')).toBe(cameraBeforeHint);
+  expect(await page.locator('#game-footer').boundingBox()).toEqual(footerBeforeHint);
   const before = await page.locator('#game-shell').getAttribute('data-remaining');
   await expect(page.locator('#hint')).toContainText(/video|видео/i);
   await page.locator('#hint').click(); await expect(page.locator('#game-dialog')).not.toBeVisible();

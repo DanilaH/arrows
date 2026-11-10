@@ -22,9 +22,11 @@ button:active { transform: scale(.97); }
 #difficulty:empty { display: none; }
 #board-progress { height: 3px; margin-top: 4px; }
 #game-footer { max-width: 560px; margin: auto; }
-#app-status:empty { display: none; }
+/* Stable transparent text lane: tutorial completion must not shift the next tap. */
+#app-status { min-height: 4.8em; }
+#app-status:empty { display: block; }
 #game-shell[data-mode='campaign'] #field-name { display: none; }
-#guides { font-size: 24px; }
+#guides { font-size: 24px; vertical-align: middle; }
 #guides-label { font-size: 11px; color: var(--muted); margin-left: 7px; vertical-align: middle; }
 .hint-button { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 13px; border: 1px solid var(--border); background: transparent; font-size: 12px; }
 .hint-button svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
@@ -153,6 +155,7 @@ button:active { transform: scale(.97); }
 }
 @media (max-height: 500px) {
   #game-header { padding-top: calc(4px + env(safe-area-inset-top)); }
+  #app-status { min-height: 3.2em; }
   #game-footer { padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
   #meta-nav { height: calc(56px + env(safe-area-inset-bottom)); padding-top: 0; padding-bottom: env(safe-area-inset-bottom); }
   .nav-items button { min-height: 50px; gap: 3px; padding-top: 5px; }

@@ -26,10 +26,10 @@ test('keeps a compact HUD with usable buttons and one stable navigation across s
 test('reveals medal conditions by keyboard and preserves the expanded item on language refresh',async({page})=>{
   await fixture(page,19);await page.locator('#home-collection').click();
   const medal=page.locator('[data-medal=perfect]');await expect(medal.locator('p')).toBeHidden();
-  await medal.locator('summary').focus();await page.keyboard.press('Enter');await expect(medal.locator('p')).toBeVisible();
+  await medal.locator('summary').focus();await expect(medal.locator('summary')).toBeFocused();await page.keyboard.press('Enter');await expect(medal.locator('p')).toBeVisible();
   await page.locator('#home-settings').click();await page.locator('#setting-language').selectOption('ru');await page.keyboard.press('Escape');await expect(page.locator('#settings-dialog')).not.toBeVisible();
   await expect(medal.locator('p')).toBeVisible();await expect(medal.locator('p')).toContainText('Заверши');
-  await medal.locator('summary').focus();await page.keyboard.press('Enter');await expect(medal.locator('p')).toBeHidden();
+  await medal.locator('summary').focus();await expect(medal.locator('summary')).toBeFocused();await page.keyboard.press('Enter');await expect(medal.locator('p')).toBeHidden();
 });
 
 test('flies only a newly earned award to Collection and never replays it after restore',async({page})=>{
@@ -40,4 +40,17 @@ test('flies only a newly earned award to Collection and never replays it after r
   await expect(page.locator('.award-flight')).toHaveCount(1);await expect(page.locator('.award-flight')).toHaveCount(0,{timeout:1500});
   const wins=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).wins.length,SAVE_KEY);expect(wins).toBe(10);
   await page.reload();await page.locator('#home-play:enabled').waitFor();await page.waitForTimeout(750);await expect(page.locator('.award-flight')).toHaveCount(0);
+});
+
+
+test('keeps the field fixed when the first successful tap clears tutorial text',async({page})=>{
+  await page.goto('/');await page.locator('#home-play:enabled').click();await page.waitForTimeout(450);
+  const before=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),footer=await page.locator('#game-footer').boundingBox(),head=campaign[0]!.arrows[0]!.path.at(-1)!;
+  await page.mouse.click(before.x+head.x*before.scale,before.y+head.y*before.scale);
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','2');await expect(page.locator('#app-status')).toHaveText('');
+  await page.waitForTimeout(300);
+  expect(JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!)).toEqual(before);
+  expect(await page.locator('#game-footer').boundingBox()).toEqual(footer);
+  const next=campaign[0]!.arrows[1]!.path.at(-1)!;await page.mouse.click(before.x+next.x*before.scale,before.y+next.y*before.scale);
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','1');
 });

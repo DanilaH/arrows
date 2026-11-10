@@ -79,7 +79,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     const records = [[text.longest, stats.longest, stats.longestDate], [text.highest, stats.highest, stats.highestDate], [text.most, stats.most, stats.mostDate]] as const;
     return title(text.collection) + `<div class="meta-content"><section class="record-grid">${records.map(([label, value, date]) => `<article><span>${label}</span><strong>${value}</strong><small>${dateLabel(date)}</small></article>`).join('')}</section>
       <details id="record-rules" class="record-rules"><summary>${text.recordRules}</summary><p>${text.recordRulesText}</p></details>
-      <h2>${text.achievements}</h2><section class="medal-grid">${medals(save).map(m => `<details class="medal ${m.earned ? 'earned' : ''}" data-medal="${m.id}" data-earned="${m.earned}"><summary>${badge(m.id)}<h3>${text[`${m.id}Name` as keyof typeof text]}</h3></summary><p>${text[`${m.id}Rule` as keyof typeof text]}</p><progress value="${Math.min(m.target, m.progress)}" max="${m.target}"></progress><small>${Math.min(m.target, m.progress)} / ${m.target}</small></details>`).join('')}</section>
+      <h2>${text.achievements}</h2><section class="medal-grid">${medals(save).map(m => `<details class="medal ${m.earned ? 'earned' : ''}" data-medal="${m.id}" data-earned="${m.earned}"><summary id="medal-${m.id}">${badge(m.id)}<h3>${text[`${m.id}Name` as keyof typeof text]}</h3></summary><p>${text[`${m.id}Rule` as keyof typeof text]}</p><progress value="${Math.min(m.target, m.progress)}" max="${m.target}"></progress><small>${Math.min(m.target, m.progress)} / ${m.target}</small></details>`).join('')}</section>
       <h2 class="trophy-heading">${text.challengeTrophies}${installedYears.length > 1 ? `<label class="trophy-year"><select id="trophy-year" aria-label="${text.collectionYear}">${installedYears.map(y => `<option value="${y}" ${y === collectionYear ? 'selected' : ''}>${y}</option>`).join('')}</select></label>` : `<span class="trophy-year">${collectionYear}</span>`}</h2>
       <div class="trophy-list">${dailyMonths.filter(m => m.startsWith(collectionYear + '-')).map(m => {
         const dates = monthDates(m), done = dates.filter(d => save.dailyWins[d]).length, earned = save.cups.includes(m);
@@ -103,13 +103,13 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     if (!alive || screen === 'game') return;
     if (options.motion.deferRoute(refresh)) return;
     const focus = document.activeElement as HTMLElement | null;
-    const key = focus?.id || focus?.dataset.date || focus?.dataset.month || focus?.dataset.shift;
+    const key = focus && root.contains(focus) ? focus.id || focus.dataset.date || focus.dataset.month || focus.dataset.shift : '';
     const expanded = [...root.querySelectorAll<HTMLDetailsElement>('details[open]')].map(el=>el.dataset.medal || el.id);
     const oldScroll = root.scrollTop;
     root.innerHTML = screen === 'home' ? home() : screen === 'collection' ? collection() : calendar();
     for (const el of root.querySelectorAll<HTMLDetailsElement>('details')) el.open = expanded.includes(el.dataset.medal || el.id);
     refreshNav(); root.scrollTop = oldScroll;
-    if (key) Array.from(root.querySelectorAll<HTMLElement>('button')).find(b => b.id === key || b.dataset.date === key || b.dataset.month === key || b.dataset.shift === key)?.focus({ preventScroll: true });
+    if (key) Array.from(root.querySelectorAll<HTMLElement>('button,summary,[tabindex],select')).find(b => b.id === key || b.dataset.date === key || b.dataset.month === key || b.dataset.shift === key)?.focus({ preventScroll: true });
   };
   const show = (next: AppScreen, date?: string): void => {
     options.motion.swap(root, screen, next, () => {
