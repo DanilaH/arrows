@@ -5,18 +5,33 @@ import { analyzeCampaignLevel } from './campaign-analysis';
 import { validateLevel, type Level } from '../../src/domain/board';
 
 type Path = readonly (readonly [number, number])[];
-const a: Path = [[1, 2], [1, 1], [5, 1], [5, 3], [3, 3]];
-const b: Path = [[6, 2], [6, 4], [1, 4], [1, 3], [0, 3]];
-const c: Path = [[4, 5], [2, 5], [2, 7], [6, 7], [6, 6]];
-const d: Path = [[4, 8], [1, 8], [1, 10], [7, 10], [7, 5]];
-const e: Path = [[7, 3], [9, 3], [9, 0], [0, 0]];
-const f: Path = [[0, 7], [0, 11], [8, 11], [8, 5], [9, 5]];
-const woven = (id: string, width: number, height: number, paths: readonly Path[]): Level => ({ ...hand(id, paths), contentVersion: 2, width, height });
+// Own compact tiles, informed by the reference's spacing rather than recovered coordinates.
+// Adjacent paths share a one-cell gap and occupy the whole small rectangle.
+const small: readonly Path[] = [
+  [[0, 0], [5, 0], [5, 5], [0, 5]],
+  [[1, 4], [4, 4], [4, 1], [0, 1], [0, 4]],
+  [[2, 3], [3, 3], [3, 2], [1, 2], [1, 3]],
+];
+const medium: readonly Path[] = [
+  [[0, 0], [7, 0], [7, 7], [0, 7]],
+  [[1, 6], [6, 6], [6, 1], [0, 1], [0, 6]],
+  [[1, 4], [1, 2], [5, 2], [5, 5], [1, 5]],
+  [[2, 3], [4, 3], [4, 4], [2, 4]],
+];
+const tall: readonly Path[] = [
+  [[0, 0], [9, 0], [9, 11], [0, 11]],
+  [[1, 10], [8, 10], [8, 1], [0, 1], [0, 10]],
+  [[1, 8], [1, 2], [7, 2], [7, 9], [1, 9]],
+  [[2, 7], [2, 3], [6, 3], [6, 8], [2, 8]],
+  [[3, 4], [5, 4], [5, 5], [3, 5]],
+  [[3, 6], [5, 6], [5, 7], [3, 7]],
+];
+const tile = (id: string, width: number, height: number, paths: readonly Path[]): Level => ({ ...hand(id, paths), contentVersion: 3, width, height });
 const first = [
-  woven('c01', 8, 9, [b, a, c]),
-  woven('c02', 9, 12, [b, a, c, d].map(path => path.map(([x, y]) => [7 - x, y] as const))),
-  woven('c03', 11, 13, [b, a, c, d, e, f]),
-  woven('c04', 13, 11, [b, a, c, d, e, f].map(path => path.map(([x, y]) => [11 - y, x] as const))),
+  tile('c01', 6, 6, small),
+  tile('c02', 8, 8, medium.map(path => path.map(([x, y]) => [7 - x, y] as const))),
+  tile('c03', 10, 12, tall),
+  tile('c04', 12, 10, tall.map(path => path.map(([x, y]) => [11 - y, x] as const))),
 ];
 const families = ['ring', 'flower', 'heart', 'star', 'leaf', 'cross', 'diamond', 'butterfly'] as const;
 export const openingReport: object[] = [];

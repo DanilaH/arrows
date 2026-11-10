@@ -1,3 +1,5 @@
+import openingV2 from '../fixtures/campaign-opening-v2.json';
+import middleFingerprints from '../fixtures/campaign-c05-c20-v2-hashes.json';
 import legacyCampaign from '../fixtures/campaign-pre-polish.json';
 import tailFingerprints from '../fixtures/campaign-tail-v2-hashes.json';
 import type { Level } from '../../src/domain/board';
@@ -32,12 +34,14 @@ describe('fixed selected campaign bank', () => {
   it('pins the immutable legacy opening, preserves the published tail and keeps every fresh field distinct', () => {
     for (const level of legacyCampaign) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(originalChapter[level.id as keyof typeof originalChapter]);
     for (const level of campaign.slice(20)) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(tailFingerprints[level.id as keyof typeof tailFingerprints]);
-    expect(campaign.slice(0, 20).every(l => l.contentVersion === 2)).toBe(true);
+    expect(campaign.slice(0, 4).every(l => l.contentVersion === 3)).toBe(true);
+    for (const level of campaign.slice(4, 20)) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(middleFingerprints[level.id as keyof typeof middleFingerprints]);
     const fingerprints = campaign.map(l => JSON.stringify({ mask: l.mask, paths: l.arrows.map(a => a.path) }));
     expect(new Set(fingerprints).size).toBe(120);
   });
   it('introduces bends and nearby blockers from the first board', () => {
     for (const level of campaign.slice(0, 4)) {
+      expect(level.mask.length).toBe(level.width * level.height);
       expect(level.arrows.every(a => a.path.length >= 4)).toBe(true);
       expect(level.arrows.filter(a => !canExit(a, level.arrows)).length).toBeGreaterThan(0);
       const lengths = level.arrows.flatMap(a => a.path.slice(1).map((p, i) => Math.abs(p.x - a.path[i]!.x) + Math.abs(p.y - a.path[i]!.y)));
@@ -87,7 +91,7 @@ describe('authoritative progression writer', () => {
     state.receipts = ['existing-right']; state.reservedRewards = [receipt('old-retired', 'hint', 'existing-right')];
     rows.set(SAVE_KEY, JSON.stringify(state));
     const store = new ProgressStore(storage); await store.load();
-    expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(3);
+    expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(4);
     expect(store.state.campaign).toEqual(state.campaign); expect(store.state.wins).toHaveLength(20);
     expect(store.state.daily).toEqual(state.daily); expect(store.state.reservedRewards).toEqual(state.reservedRewards);
     await Promise.all([store.next(oldBoard.attemptId), store.next(oldBoard.attemptId)]);
@@ -105,9 +109,16 @@ describe('authoritative progression writer', () => {
     state.catalogVersion = 2; state.adCadence.activeMs = 123456; state.receipts = ['confirmed-receipt'];
     const decoded = decodeSave(state);
     expect(decoded.campaign).toEqual(state.campaign); expect(decoded.receipts).toEqual(state.receipts);
-    expect(decoded.adCadence).toEqual(state.adCadence); expect(decoded.catalogVersion).toBe(3);
-    expect(() => decodeSave({ ...state, catalogVersion: 4 })).toThrow('Unsupported save');
+    expect(decoded.adCadence).toEqual(state.adCadence); expect(decoded.catalogVersion).toBe(4);
+    expect(() => decodeSave({ ...state, catalogVersion: 5 })).toThrow('Unsupported save');
     const schema1 = { ...state, schema: 1 }; expect(decodeSave(schema1).campaign).toEqual(state.campaign);
+  });
+  it('retains catalogue-3 compactness revision predecessors including an unstarted embedded attempt', () => {
+    for (const started of [false, true]) {
+      const state = freshSave(); state.catalogVersion = 3; state.campaign = freshAttempt(openingV2[0] as Level); state.campaign.started = started;
+      const decoded = decodeSave(state);
+      expect(decoded.catalogVersion).toBe(4); expect(decoded.campaign).toEqual(state.campaign);
+    }
   });
   it('restores an accepted move during flight, errors, guides and viewport without rerolling identity', async () => {
     const { storage, rows } = memory(), state = seed(2); rows.set(SAVE_KEY, JSON.stringify(state));

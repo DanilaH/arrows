@@ -2,7 +2,7 @@
   "schema": 1,
   "folder_url": "https://drive.google.com/drive/folders/1Zw5hOmrq3N1CNFfMH610RiPgjeYAmbf6",
   "listing_checked_on": "2026-11-09",
-  "verification": "Folder listing verified for eight files. V06 bytes downloaded, ffprobe metadata verified and selected visual frames inspected on 2026-11-09; other files are not newly inspected or hashed. See STAGE_A_IMPLEMENTATION.md.",
+  "verification": "Folder listing verified for eight files. V06 bytes downloaded, ffprobe metadata verified and selected visual frames inspected on 2026-11-09; other files are not newly inspected or hashed. See STAGE_A_IMPLEMENTATION.md. V06 bytes re-downloaded and the same hash verified on 2026-11-10; early compact fields reviewed for 0.8.1.",
   "files": [
     {
       "code": "V06",
@@ -15,14 +15,21 @@
       "role": "primary_reference",
       "sha256": "c32f1f98a37753eba07901e337948e5fb2673c747020bfa6a328602bec954dff",
       "visual_checks_seconds": [
+        25,
+        26,
+        27,
+        33,
+        34,
         34.9,
         35.1,
         35.3,
         35.5,
         35.7,
         35.9,
+        50,
         86
-      ]
+      ],
+      "rechecked_on": "2026-11-10"
     },
     {
       "code": "V11",

@@ -39,7 +39,7 @@ Implementation moved the native transport/dependency work forward using the exis
 
 ## Assets, language and native identity
 
-RU/EN copy now covers the implemented menus, calendar, dialogs, settings and gameplay. Both themes and original short sound cues are connected in 0.4.0; native sound/haptic feel still needs phone tuning. System fonts/procedural geometry avoid network assets. Native icon/splash artwork is now project-owned and generated from a shared geometry source; exact-device acceptance remains required. `com.danilah.arrows`, app name Стрелки, version 0.8.0 / Android versionCode 12 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
+RU/EN copy now covers the implemented menus, calendar, dialogs, settings and gameplay. Both themes and original short sound cues are connected in 0.4.0; native sound/haptic feel still needs phone tuning. System fonts/procedural geometry avoid network assets. Native icon/splash artwork is now project-owned and generated from a shared geometry source; exact-device acceptance remains required. `com.danilah.arrows`, app name Стрелки, version 0.8.1 / Android versionCode 13 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
 
 ## Open decisions before corresponding features
 
@@ -118,3 +118,7 @@ Normal Home/pause no longer expose control boards, and their catalogue is absent
 0.8.0 applies generated raster art selectively to two Home destinations; all readable/control UI remains DOM. Original prompts, source fingerprints and runtime sizes are recorded. Finite UI animations settle on background and teardown, respect reduced motion, and never own domain progress. Quick navigation finishes prior visual transitions; modal blockers release only after close completes.
 
 The user explicitly requested more turns and tighter relationships in early boards. Catalogue 3 therefore introduces opening contentVersion 2 for fresh c01–c20 attempts, superseding the original twenty-field immutability constraint for future attempts. Already embedded attempts (including unstarted), receipts and wins stay unchanged. c21–c120 and daily/trophy content are frozen. The opening is independently solved and legacy/tail fingerprints remain pinned. This is composition work; real-player difficulty and exact-device feel still require playtesting.
+
+## Reference-calibrated compact opening, 2026-11-10
+
+After rewatching early V06 frames, 0.8.1 replaces only fresh c01–c04 with fully occupied small tiles (contentVersion 3) and caps small-board initial spacing at 18px. Original level 1 is straight; our own bent first field retains the user's earlier request for turns. Empty background around a small central puzzle remains part of the reference presentation; internal holes are removed. Catalogue 4 preserves all embedded attempts and receipts. c05 onward and all daily/trophy content remain frozen. See `COMPACT_OPENING_V3.md` for measured before/after and evidence.

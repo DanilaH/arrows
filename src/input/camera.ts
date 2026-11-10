@@ -22,7 +22,9 @@ export class BoardCamera {
     const oldCenter = this.world({ x: this.view.x + this.view.width / 2, y: this.view.y + this.view.height / 2 });
     const oldRelative = this.scale / this.minScale;
     this.view = view;
-    this.minScale = Math.min(30, (view.width - 40) / (this.width + 1), (view.height - 40) / (this.height + 1));
+    // Small puzzles stay small: do not inflate a handful of paths to a 30px grid.
+    const cellLimit = this.width <= 13 && this.height <= 13 ? 18 : 30;
+    this.minScale = Math.min(cellLimit, (view.width - 40) / (this.width + 1), (view.height - 40) / (this.height + 1));
     this.maxScale = Math.max(42, this.minScale * 4);
     this.scale = Math.min(this.maxScale, this.minScale * (reset ? 1 : oldRelative));
     const center = reset ? { x: (this.width - 1) / 2, y: (this.height - 1) / 2 } : oldCenter;

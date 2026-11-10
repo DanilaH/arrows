@@ -2,6 +2,10 @@
 
 ## Current milestone
 
+Version 0.8.1 / Android versionCode 13 tightens the first four fields after direct comparison with V06. Fresh contentVersion 3 uses small fully occupied tiles and the small-field camera caps initial cell spacing at 18px. At 390px width c01 is 90×90 CSS px instead of 180×180, with adjacent paths filling its rectangle. Catalogue 1/2/3→4 preserves all embedded attempts; c05 onward/daily/trophies are unchanged. See `COMPACT_OPENING_V3.md`. Tests and exact build/GIF evidence are recorded below.
+
+Previous UI milestone:
+
 Version 0.8.0 / Android versionCode 12 addresses UI/motion/opening-field feedback. Home uses a framed live board preview and selectively generated Collection/calendar illustrations. Buttons, route changes and dialogs have bounded motion with reduced-motion/background settlement and modal blockers retained through close. Fresh c01–c20 fields use contentVersion 2: hand-composed bent/blocking openings, then selected denser silhouette candidates. Catalogue 1/2→3 preserves **all embedded existing attempts**; the published c21–c120 and daily/trophy catalogues are unchanged. See `STAGE_F_UX_POLISH.md`. Browser/build verification and native artifact evidence follow below; physical acceptance remains open.
 
 Previous identity milestone:
