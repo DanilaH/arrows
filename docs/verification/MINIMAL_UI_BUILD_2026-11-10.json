@@ -1,0 +1,218 @@
+{
+  "sourceCommit": "310d9324e91ac44a0cd88de4e3e737b811cbf86b",
+  "sourceTree": "55d6aadf857c07f5cc46bbddaf278cef31fe5fa4",
+  "workflowRun": 42873215357,
+  "manifest": {
+    "versionCode": 16,
+    "versionName": "0.11.0",
+    "compileSdkVersion": 36,
+    "compileSdkVersionCodename": "16",
+    "package": "com.danilah.arrows",
+    "platformBuildVersionCode": 36,
+    "platformBuildVersionName": 16
+  },
+  "matchingWebPayloadFiles": 8,
+  "webPayload": {
+    "assets/index-DTM9AWuq.js": "40aea73b421bfb75a448e92b0a57aa6d8e0c0d72c71c69e487a8471ceb80c2b1",
+    "assets/index-Dj94QpGs.css": "86f5c474c63add0f1b74469e365b46900a5794595e03b6a68dd7e364560f5268",
+    "assets/web-DNs-_eBW.js": "1c719fd18c5df5eefcd6ae01351d6bedd22cc4a2ffd64eb1f861397ab22aec60",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "98631b468d6e7fa939e870d9b123e141b53cf2d8b8ff6f4e161fa856970f0fd8",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "nativeConfigurationMatches": true,
+  "sharedAnalyticsContractMatches": true,
+  "nativeFeedbackProfileCompiled": true,
+  "nativeTests": [
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-10T18:16:01.167Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.01"
+    },
+    {
+      "name": "com.danilah.arrows.FeedbackPatternTest",
+      "tests": "2",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-10T18:16:01.162Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.003"
+    }
+  ],
+  "capture": {
+    "sourceCommit": "310d9324e91ac44a0cd88de4e3e737b811cbf86b",
+    "provenance": "Two authentic production Chromium RU390x844 DPR2 sessions with identical application payload. Gameplay was recorded alone from fresh storage with one actual touch-earned win, after focused tests completed. Menus come from a separate fresh session with nineteen actual touch-earned wins, the once-only earned notification and real browser no-provider video-Hint failure. No fabricated progress, earned reward, ad or altered game pixels. Held-preview cancellation and ordinary pinch are real input. Not physical-device performance evidence.",
+    "assets": {
+      "assets/index-DTM9AWuq.js": "40aea73b421bfb75a448e92b0a57aa6d8e0c0d72c71c69e487a8471ceb80c2b1",
+      "assets/index-Dj94QpGs.css": "86f5c474c63add0f1b74469e365b46900a5794595e03b6a68dd7e364560f5268",
+      "assets/web-DNs-_eBW.js": "1c719fd18c5df5eefcd6ae01351d6bedd22cc4a2ffd64eb1f861397ab22aec60",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "records": [
+      {
+        "name": "arrows-minimal-gameplay",
+        "frames": 131,
+        "durationMs": 11435,
+        "audio": "Actual AudioContext output tee into MediaStreamAudioDestinationNode and MediaRecorder Opus; timestamp-aligned and muxed AAC, no added/replaced sound."
+      },
+      {
+        "name": "arrows-minimal-menus",
+        "frames": 169,
+        "durationMs": 16247,
+        "audio": null
+      }
+    ],
+    "ending": {
+      "wins": 19,
+      "index": 19,
+      "cups": [],
+      "dailyWins": {}
+    },
+    "sessions": {
+      "gameplay": {
+        "provenance": "Actual unaltered production Chromium RU390x844 DPR2. This gameplay-only recording starts fresh and earns one real win through ordinary touch. Held preview is cancelled through ordinary movement, then collision and victory are recorded. Ordinary pinch frames the compact opening. No injected progress or rewards. Actual AudioContext output, no replaced sound. Recorded alone after tests to avoid recorder contention; not physical phone performance evidence.",
+        "ending": {
+          "wins": 1,
+          "index": 0,
+          "cups": [],
+          "dailyWins": {}
+        }
+      },
+      "menus": {
+        "provenance": "Unaltered production Chromium mobile emulation RU390x844 DPR2. Fresh storage, nineteen wins earned by ordinary touch selected with independent cell-walking oracle. Ordinary pinch for gameplay framing. Menu clicks via native DOM click to avoid automation stability waits. The held preview is cancelled through ordinary touch movement. An earned medal flies to Collection on the first return. The explicitly labelled video hint opens directly after three active seconds; browser no-provider failure is shown without a fake ad or reward. No injected progression or achievements. Not physical phone evidence.",
+        "ending": {
+          "wins": 19,
+          "index": 19,
+          "cups": [],
+          "dailyWins": {}
+        }
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "name": "Arrows-0.11.0-debug.apk",
+      "bytes": 10217130,
+      "sha256": "df8aa2ac88d87fad76db3c289fd4bfc86e523764404a41a13b75ebee0f7a2d4b"
+    },
+    {
+      "name": "arrows-minimal-gameplay-sound.mp4",
+      "bytes": 154147,
+      "sha256": "bbd778475835428c91cfeaf1131c836dc254f916a1cebd6e03bc606bf190207e"
+    },
+    {
+      "name": "arrows-minimal-gameplay.gif",
+      "bytes": 237876,
+      "sha256": "a96b834756a915c3279c8f16702bdc823df7b335bde94b4a0a82c68cdd1d22b4",
+      "width": 390,
+      "height": 844,
+      "durationMs": 11500,
+      "frames": 207
+    },
+    {
+      "name": "arrows-minimal-menus.gif",
+      "bytes": 716154,
+      "sha256": "142ca0717f6c7fe687e5d2eab607795fcb7747c833c9e4cb8196a9edc6ad0e4f",
+      "width": 390,
+      "height": 844,
+      "durationMs": 16340,
+      "frames": 294
+    }
+  ],
+  "limits": [
+    "Browser mobile emulation; no physical-phone sound/vibration/performance acceptance.",
+    "The video-labelled Hint capture shows actual browser no-provider failure, with no fabricated ad or earned reward.",
+    "Default native ad configuration remains demo; live SDK earned/dashboard acceptance remains separate."
+  ],
+  "ci": {
+    "url": "https://github.com/DanilaH/arrows/actions/runs/42873215357",
+    "webJob": 130029600537,
+    "androidJob": 130029601039,
+    "web": "success",
+    "android": "success",
+    "typescriptTests": 85,
+    "browserCases": 94,
+    "nativeJvmTests": 7
+  },
+  "archives": [
+    {
+      "artifact": 13789204536,
+      "name": "arrows-debug",
+      "sha256": "433b253f249ec91fc8ab26ee3f61eb40c7a96a457aee1fe88b06325e6b8e2e9a"
+    },
+    {
+      "artifact": 13790433091,
+      "name": "native-unit-results",
+      "sha256": "cd89fa0ea819d37ee2e68575cadc401910ec723de776c40a926a11c23e0e1df4"
+    }
+  ],
+  "visualQA": [
+    {
+      "name": "phone-hud",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 59
+      }
+    },
+    {
+      "width": 320,
+      "height": 640,
+      "overflow": false
+    },
+    {
+      "width": 780,
+      "height": 360,
+      "overflow": false
+    }
+  ],
+  "contentAndProgressionUnchanged": true,
+  "localVerification": {
+    "typescriptTests": 85,
+    "finalFocusedBrowserCases": 14,
+    "finalBuild": "passed",
+    "androidSync": "passed",
+    "note": "Earlier parallel exploratory runs exposed footer recentering and keyboard focus loss; both have direct regressions and pass in the final 94-case CI. The final focused run additionally passes compact opening, stable HUD/Hint geometry, disclosure, actual earned flight/no replay and bounded idle checks. Local bulk software-rendering timeout is not physical-device performance evidence."
+  },
+  "resolvedIssues": [
+    {
+      "source": "45497fb2c5c7ec1374d5dc1b86e3fc8b4ea48f65",
+      "workflowRun": 42870934947,
+      "issue": "First removal cleared the tutorial paragraph, resized the footer and recentered the next tap. Fixed with stable transparent text lane and direction/Hint alignment."
+    },
+    {
+      "issue": "Async Collection metadata refresh could remove a focused summary between Focus and Enter. Stable summary IDs and focus restoration fix it."
+    },
+    {
+      "issue": "Fixed 1.8s idle wait was sensitive to parallel software-rendering load. Final smoke retains the same <5 RAF/400ms assertion with a bounded five-second quiescence poll."
+    }
+  ],
+  "deliveredFiles": [
+    {
+      "name": "Arrows-0.11.0-debug.apk",
+      "libraryFileId": "libfile_b7efd354bbdc81918de97f958fbbc056"
+    },
+    {
+      "name": "arrows-minimal-gameplay.gif",
+      "libraryFileId": "libfile_4ecafbbc12c48191be1efbeacfd73cbd"
+    },
+    {
+      "name": "arrows-minimal-menus.gif",
+      "libraryFileId": "libfile_33fcfe62dcf8819189d5f160a8cb1a97"
+    },
+    {
+      "name": "arrows-minimal-gameplay-sound.mp4",
+      "libraryFileId": "libfile_7d0f585e39348191aa113fac1ef423ee"
+    }
+  ]
+}
