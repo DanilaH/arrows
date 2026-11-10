@@ -1,0 +1,135 @@
+{
+  "sourceCommit": "81c1ea4e2a8a9a839858c78854d507ec428fddf4",
+  "sourceTree": "fcdd254fd2c57d6606336d321b0713afdf3ddfa6",
+  "workflowRun": 42782463349,
+  "apk": {
+    "name": "Arrows-0.8.1-debug.apk",
+    "bytes": 10171990,
+    "sha256": "3d607c7f85cad2354248c5fda70f9604095c32b4e5fc2db4cad248bf1a562af8"
+  },
+  "manifest": {
+    "versionCode": 13,
+    "versionName": "0.8.1",
+    "compileSdkVersion": 36,
+    "compileSdkVersionCodename": "16",
+    "package": "com.danilah.arrows",
+    "platformBuildVersionCode": 36,
+    "platformBuildVersionName": 16
+  },
+  "matchingWebPayloadFiles": 8,
+  "nativeConfigurationMatches": true,
+  "sharedAnalyticsContractMatches": true,
+  "nativeTests": [
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-10T08:26:20.854Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.017"
+    }
+  ],
+  "capture": {
+    "sourceCommit": "81c1ea4e2a8a9a839858c78854d507ec428fddf4",
+    "provenance": "Actual production Chromium mobile emulation, fresh storage, RU 390x844 DPR2. Three wins earned solely through ordinary touch, no injected progression or altered gameplay pixels. Not physical-phone performance evidence.",
+    "assetHashes": {
+      "assets/index-BfTuN-1-.css": "49cf872c563b2cd96ae29cc3bbfa0e3f2ae53ab5e3aa35a8ec6ae641f523c191",
+      "assets/index-Dcr_rXPl.js": "94560fa62adead549774bd8a65a8f4c99331e8d97b60d5a52a9090ae7f0b9cce",
+      "assets/web-CO1aSMgL.js": "8ea30bc84f12bf5b6ab9e317334183aab16961606dcc50d456fcd29557a911c0",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "cameras": [
+      {
+        "levelId": "c01",
+        "camera": {
+          "x": 150,
+          "y": 366.5,
+          "scale": 18
+        }
+      },
+      {
+        "levelId": "c02",
+        "camera": {
+          "x": 132,
+          "y": 340.3125,
+          "scale": 18
+        }
+      },
+      {
+        "levelId": "c03",
+        "camera": {
+          "x": 114,
+          "y": 312.5,
+          "scale": 18
+        }
+      },
+      {
+        "levelId": "c04",
+        "camera": {
+          "x": 96,
+          "y": 330.5,
+          "scale": 18
+        }
+      }
+    ],
+    "frames": 238,
+    "durationMs": 17321,
+    "file": "arrows-compact-opening.gif",
+    "wins": 3
+  },
+  "gif": {
+    "name": "arrows-compact-opening.gif",
+    "bytes": 9001018,
+    "sha256": "84090f747ae968f168db8160375109c0af9eb833fdd46a7df17fbbd36fd9314c"
+  },
+  "localVerification": {
+    "typescriptTests": 77,
+    "browserCases": 22,
+    "productionBuild": "passed",
+    "offlineContentTypecheck": "passed",
+    "androidSync": "passed"
+  },
+  "limitations": "Actual browser mobile-emulation recording and exact artifact evidence. Physical-phone touch/feel/performance and live-service acceptance remain open.",
+  "artifactArchives": [
+    {
+      "id": 13746497326,
+      "name": "native-unit-results",
+      "digest": "sha256:bacd10f669b7b619c4eaca3319964220dea9a2cb85d21449965ceba9d8cc3b09",
+      "size": 1355
+    },
+    {
+      "id": 13746417535,
+      "name": "arrows-debug",
+      "digest": "sha256:5debd5abeabcfc1c502669e85e2cc81f6c4e2f9b7e72f35d73330b94f5f3cd32",
+      "size": 9528496
+    }
+  ],
+  "reference": {
+    "code": "V06",
+    "sha256": "c32f1f98a37753eba07901e337948e5fb2673c747020bfa6a328602bec954dff",
+    "checkedOn": "2026-11-10",
+    "visualFramesSeconds": [
+      25,
+      26,
+      27,
+      33,
+      34,
+      50
+    ]
+  },
+  "ci": {
+    "conclusion": "success",
+    "typescriptTests": 77,
+    "browserCases": 80,
+    "browserScope": {
+      "ordinaryApplication": 62,
+      "isolatedRealControl": 12,
+      "isolatedAds": 6
+    },
+    "nativeTests": 5,
+    "androidAssembly": "passed"
+  }
+}
