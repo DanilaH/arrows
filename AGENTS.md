@@ -17,3 +17,5 @@ Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the
 - The user authorized a versioned c01–c20 redesign in 0.8.0. Catalogue 3/contentVersion 2 applies only to fresh attempts; preserve every existing embedded attempt and published c21–c120/daily/trophy geometry. See `docs/STAGE_F_UX_POLISH.md`.
 
 - 0.8.1 follows the user’s compact-original feedback: fresh c01–c04 use contentVersion 3, catalogue 4 preserves embedded v1/v2/v3 attempts. Keep c05 onward frozen. Small camera spacing is presentation-only; see `docs/COMPACT_OPENING_V3.md`.
+
+- Latest authorization: the user requested rebuilding c05–c120 in 0.9.0. Fresh fields use contentVersion 4/catalogue 5; c01–c04 remain v3. Earlier c05-onward freeze notes are historical. Preserve all embedded attempts, daily/trophy content and reward identities. Enforce `docs/CONTENT_BANK_V4.md` quality gates and retain authentic GIF provenance.

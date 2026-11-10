@@ -1,6 +1,7 @@
+import preDense from '../fixtures/campaign-pre-dense.json' with { type: 'json' };
 import { expect, test, type Page } from '@playwright/test';
 import { campaign } from '../../src/content/campaign';
-import { Board, canExit } from '../../src/domain/board';
+import { type Level, Board, canExit } from '../../src/domain/board';
 import { freshAttempt, freshSave, SAVE_KEY, type GameSave } from '../../src/progression/save';
 
 function at(index: number, complete = false): GameSave {
@@ -27,14 +28,15 @@ async function tap(page: Page, arrow: { path: readonly { x: number; y: number }[
 }
 
 test('upgrades completed c20 into the larger bank through explicit Continue exactly once', async ({ page }) => {
-  const old = at(19, true); old.catalogVersion = 1;
+  const old = at(19, true); old.catalogVersion = 4; old.campaign = freshAttempt(preDense.find(l => l.id === 'c20') as Level);
+  const oldBoard = new Board(old.campaign.level, old.campaign.board.id); while (!oldBoard.complete) oldBoard.activate(oldBoard.hint()!); old.campaign.board = oldBoard.snapshot(); old.campaign.started = true; old.wins[19] = { ...old.wins[19]!, attempt: oldBoard.attemptId };
   await load(page, old);
   await expect(page.locator('.home-progress')).toContainText('20 / 120');
   await expect(page.locator('#home-calendar')).toBeEnabled();
   await page.locator('#home-play').dblclick();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-level', 'c21');
   const saved = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), SAVE_KEY);
-  expect(saved.catalogVersion).toBe(4); expect(saved.wins).toHaveLength(20); expect(saved.index).toBe(20);
+  expect(saved.catalogVersion).toBe(5); expect(saved.wins).toHaveLength(20); expect(saved.index).toBe(20);
   await page.reload(); await ready(page); await page.locator('#home-play').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt', saved.campaign.board.id);
 });

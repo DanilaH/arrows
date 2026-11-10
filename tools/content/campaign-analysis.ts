@@ -37,8 +37,34 @@ export function analyzeCampaignLevel(level: Level) {
     visiting.delete(id); depths.set(id, value); return value;
   };
   const depthValue = Math.max(...level.arrows.map(a => depth(a.id)));
+  const profiles: number[][] = [];
+  for (let order = 0; order < 3; order++) {
+    const remaining = new Set(level.arrows.map(a => a.id)), samples: number[] = [];
+    while (remaining.size) {
+      const available = [...remaining].filter(id => ![...dependencies.get(id)!].some(b => remaining.has(b)));
+      if (!available.length) throw Error(`${level.id}: no legal removal`);
+      if (remaining.size >= level.arrows.length / 2) samples.push(available.length / remaining.size);
+      remaining.delete(available[order === 0 ? 0 : order === 1 ? available.length - 1 : Math.floor(available.length / 2)]!);
+    }
+    profiles.push(samples);
+  }
+  const early = profiles.flat();
+  const mean = (values: number[]): number => values.reduce((a, b) => a + b, 0) / Math.max(1, values.length);
+  const empty = new Set(mask); for (const p of cells.keys()) empty.delete(p);
+  let largestHole = 0;
+  while (empty.size) {
+    const todo = [empty.values().next().value!]; empty.delete(todo[0]!); let size = 0;
+    while (todo.length) {
+      const [x, y] = todo.pop()!.split(',').map(Number) as [number, number]; size++;
+      for (const n of [`${x+1},${y}`, `${x-1},${y}`, `${x},${y+1}`, `${x},${y-1}`]) if (empty.delete(n)) todo.push(n);
+    }
+    largestHole = Math.max(largestHole, size);
+  }
   return { arrows: level.arrows.length, dots: level.mask.length, coverage: cells.size / mask.size,
     initialFree: [...dependencies.values()].filter(v => v.size === 0).length,
     depth: depthValue, edges: [...dependencies.values()].reduce((n, v) => n + v.size, 0),
-    meanLength: length / level.arrows.length, meanBends: bends / level.arrows.length };
+    meanLength: length / level.arrows.length, meanBends: bends / level.arrows.length,
+    initialFreeFraction: [...dependencies.values()].filter(v => v.size === 0).length / level.arrows.length,
+    meanEarlyFreeFraction: mean(early), peakEarlyFreeFraction: Math.max(...early), largestHole,
+    straightFraction: level.arrows.filter(a => a.path.length === 2).length / level.arrows.length };
 }

@@ -39,7 +39,7 @@ Implementation moved the native transport/dependency work forward using the exis
 
 ## Assets, language and native identity
 
-RU/EN copy now covers the implemented menus, calendar, dialogs, settings and gameplay. Both themes and original short sound cues are connected in 0.4.0; native sound/haptic feel still needs phone tuning. System fonts/procedural geometry avoid network assets. Native icon/splash artwork is now project-owned and generated from a shared geometry source; exact-device acceptance remains required. `com.danilah.arrows`, app name Стрелки, version 0.8.1 / Android versionCode 13 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
+RU/EN copy now covers the implemented menus, calendar, dialogs, settings and gameplay. Both themes and original short sound cues are connected in 0.4.0; native sound/haptic feel still needs phone tuning. System fonts/procedural geometry avoid network assets. Native icon/splash artwork is now project-owned and generated from a shared geometry source; exact-device acceptance remains required. `com.danilah.arrows`, app name Стрелки, version 0.9.0 / Android versionCode 14 are current control-build values; establish final store identity before publishing. CI caches the standard debug key for subsequent preview updates; cache eviction can still replace that test identity, and this is not production signing.
 
 ## Open decisions before corresponding features
 
@@ -122,3 +122,9 @@ The user explicitly requested more turns and tighter relationships in early boar
 ## Reference-calibrated compact opening, 2026-11-10
 
 After rewatching early V06 frames, 0.8.1 replaces only fresh c01–c04 with fully occupied small tiles (contentVersion 3) and caps small-board initial spacing at 18px. Original level 1 is straight; our own bent first field retains the user's earlier request for turns. Empty background around a small central puzzle remains part of the reference presentation; internal holes are removed. Catalogue 4 preserves all embedded attempts and receipts. c05 onward and all daily/trophy content remain frozen. See `COMPACT_OPENING_V3.md` for measured before/after and evidence.
+
+## User-authorized dense-bank replacement, 2026-11-10
+
+After the read-only audit, the user explicitly asked to rebuild the later bank. 0.9.0 replaces only fresh c05–c120 with contentVersion 4; the first four compact fields remain v3. Catalogue 5 accepts known 1–4 without rewriting embedded geometry or receipts. Old freeze constraints are superseded for fresh campaign content, while daily/trophies remain frozen.
+
+Construction now peels paths from a filled silhouette, with orphan repair and seeded selection gates on ≥98% occupancy, small accidental holes, bends, dependency depth and initial/early-solve freedom. Breathers keep more choices and short tasks; Hard/Nightmare strengthen interleaving. Full criteria, limits and reproducibility are in `CONTENT_BANK_V4.md`. These are content-selection proxies; no human completion-time or phone performance claims follow from them.

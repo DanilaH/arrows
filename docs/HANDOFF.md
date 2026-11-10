@@ -2,6 +2,10 @@
 
 ## Current milestone
 
+Version 0.9.0 / Android versionCode 14 rebuilds fresh c05–c120 with dense contentVersion 4 after the user-authorized quality pass. All 116 silhouettes meet ≥98% fill and bounded accidental gaps; Hard/Nightmare have substantially stronger blocking and early-solve freedom gates. Twenty silhouette families and breathers remain. c01–c04 are unchanged v3; catalogue 1/2/3/4→5 preserves all embedded attempts, pending rights, daily/trophy content. The bank has 4,171 arrows. Read `CONTENT_BANK_V4.md` and `verification/CAMPAIGN_SELECTION_V4.json`. Structural metrics are not player difficulty/performance evidence.
+
+Previous compact-opening milestone:
+
 Version 0.8.1 / Android versionCode 13 tightens the first four fields after direct comparison with V06. Fresh contentVersion 3 uses small fully occupied tiles and the small-field camera caps initial cell spacing at 18px. At 390px width c01 is 90×90 CSS px instead of 180×180, with adjacent paths filling its rectangle. Catalogue 1/2/3→4 preserves all embedded attempts; c05 onward/daily/trophies are unchanged. See `COMPACT_OPENING_V3.md`. Tests and exact build/GIF evidence are recorded below.
 
 Previous UI milestone:
@@ -102,7 +106,7 @@ First CI run `42587117226` failed before native compilation because setup-androi
 
 ## Next work: content quality, D and physical acceptance
 
-The 2026-11-10 read-only bank audit found a priority content issue after the compact opening: silhouettes exist, but c05 onward is not uniformly tight/challenging. Filled-mask occupancy falls to 37.7% at c90 and 45.9% at c120; c21–c120 averages about 65% initially free arrows. c20 has 48/87 initially free and c120 35/54. Nine ordinary/Hard/Nightmare fields were visually inspected in the actual production renderer with explicit synthetic QA starting points; these are not earned-play/delivery recordings. Prior legality tests prove solvability, not content quality or player difficulty. See `verification/CAMPAIGN_QUALITY_AUDIT_2026-11-10.json`. Next content pass should remove accidental holes, strengthen interleaving/blocking and curate a deliberate difficulty rhythm while preserving intentional silhouette holes and all embedded attempts through content versions. This review changes no fields or app payload.
+The read-only sparse-bank audit (`verification/CAMPAIGN_QUALITY_AUDIT_2026-11-10.json`) is historical input to the user-requested 0.9.0 rebuild. Current selection fills all rebuilt silhouettes at least 98%, with mean initial freedom around 14% on Hard and 9.6% on Nightmare; it also gates freedom throughout three early removal profiles. Next content acceptance is actual human progression/device playtesting, not just solver success. Preserve all embedded legacy geometry through catalogue upgrades.
 
 1. Verify 0.4.0 on a named Android device: both themes/insets, system bars, sound/loudness/audio focus, independent vibration switches, return from interruptions and update persistence. Do not claim exact original sound.
 2. Accept 0.5.0 native advertising on an exact Android artifact: genuine SDK earned delivery, interruption/process restoration, both dismissal/foreground orders and matching AppMetrica dashboard events. Configure a separate APPMETRICA_DEBUG_API_KEY through repository secrets for that run.

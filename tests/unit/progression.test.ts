@@ -1,3 +1,5 @@
+import preDense from '../fixtures/campaign-pre-dense.json';
+import compactHashes from '../fixtures/compact-opening-v3-hashes.json';
 import openingV2 from '../fixtures/campaign-opening-v2.json';
 import middleFingerprints from '../fixtures/campaign-c05-c20-v2-hashes.json';
 import legacyCampaign from '../fixtures/campaign-pre-polish.json';
@@ -31,11 +33,12 @@ async function solve(store: ProgressStore) {
 }
 
 describe('fixed selected campaign bank', () => {
-  it('pins the immutable legacy opening, preserves the published tail and keeps every fresh field distinct', () => {
+  it('pins the compact opening and historical fixtures while keeping the rebuilt bank distinct', () => {
     for (const level of legacyCampaign) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(originalChapter[level.id as keyof typeof originalChapter]);
-    for (const level of campaign.slice(20)) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(tailFingerprints[level.id as keyof typeof tailFingerprints]);
+    for (const level of preDense) { const pins = Number(level.id.slice(1)) <= 20 ? middleFingerprints : tailFingerprints; expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(pins[level.id as keyof typeof pins]); }
+    for (const level of campaign.slice(0, 4)) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(compactHashes[level.id as keyof typeof compactHashes]);
     expect(campaign.slice(0, 4).every(l => l.contentVersion === 3)).toBe(true);
-    for (const level of campaign.slice(4, 20)) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(middleFingerprints[level.id as keyof typeof middleFingerprints]);
+    expect(campaign.slice(4).every(l => l.contentVersion === 4)).toBe(true);
     const fingerprints = campaign.map(l => JSON.stringify({ mask: l.mask, paths: l.arrows.map(a => a.path) }));
     expect(new Set(fingerprints).size).toBe(120);
   });
@@ -91,7 +94,7 @@ describe('authoritative progression writer', () => {
     state.receipts = ['existing-right']; state.reservedRewards = [receipt('old-retired', 'hint', 'existing-right')];
     rows.set(SAVE_KEY, JSON.stringify(state));
     const store = new ProgressStore(storage); await store.load();
-    expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(4);
+    expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(5);
     expect(store.state.campaign).toEqual(state.campaign); expect(store.state.wins).toHaveLength(20);
     expect(store.state.daily).toEqual(state.daily); expect(store.state.reservedRewards).toEqual(state.reservedRewards);
     await Promise.all([store.next(oldBoard.attemptId), store.next(oldBoard.attemptId)]);
@@ -109,15 +112,25 @@ describe('authoritative progression writer', () => {
     state.catalogVersion = 2; state.adCadence.activeMs = 123456; state.receipts = ['confirmed-receipt'];
     const decoded = decodeSave(state);
     expect(decoded.campaign).toEqual(state.campaign); expect(decoded.receipts).toEqual(state.receipts);
-    expect(decoded.adCadence).toEqual(state.adCadence); expect(decoded.catalogVersion).toBe(4);
-    expect(() => decodeSave({ ...state, catalogVersion: 5 })).toThrow('Unsupported save');
+    expect(decoded.adCadence).toEqual(state.adCadence); expect(decoded.catalogVersion).toBe(5);
+    expect(() => decodeSave({ ...state, catalogVersion: 6 })).toThrow('Unsupported save');
     const schema1 = { ...state, schema: 1 }; expect(decodeSave(schema1).campaign).toEqual(state.campaign);
   });
   it('retains catalogue-3 compactness revision predecessors including an unstarted embedded attempt', () => {
     for (const started of [false, true]) {
       const state = freshSave(); state.catalogVersion = 3; state.campaign = freshAttempt(openingV2[0] as Level); state.campaign.started = started;
       const decoded = decodeSave(state);
-      expect(decoded.catalogVersion).toBe(4); expect(decoded.campaign).toEqual(state.campaign);
+      expect(decoded.catalogVersion).toBe(5); expect(decoded.campaign).toEqual(state.campaign);
+    }
+  });
+  it('upgrades catalogue 4 without rerolling old early/late fields or pending reward identities', async () => {
+    for (const level of preDense) {
+      const state = seed(Number(level.id.slice(1)) - 1); state.catalogVersion = 4; state.campaign = freshAttempt(level as Level);
+      const board = new Board(level as Level, state.campaign.board.id); board.activate(board.hint()!); state.campaign.board = board.snapshot(); state.campaign.started = true;
+      const pending = receipt(board.attemptId); state.reservedRewards = [pending]; state.receipts = [pending.id];
+      const { rows, storage } = memory(); rows.set(SAVE_KEY, JSON.stringify(state)); const store = new ProgressStore(storage); await store.load();
+      expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(5); expect(store.state.campaign).toEqual(state.campaign); expect(store.state.reservedRewards).toEqual([pending]);
+      await store.restart(board.attemptId); expect(store.board.level).toEqual(level);
     }
   });
   it('restores an accepted move during flight, errors, guides and viewport without rerolling identity', async () => {
