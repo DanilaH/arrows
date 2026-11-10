@@ -23,3 +23,5 @@ Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the
 - Current feel pass 0.10.0 changes only presentation/feedback. Preserve `docs/FEEL_PASS.md` contact timing, route reversal, async-menu element ownership, finite celebration/idle rendering and no-replay rules. GIFs are silent; an actual-output audio video complements them. Physical haptic feel still requires a phone.
 
 - 0.11.0 follows the user-approved minimal UI plan. Hint uses three active seconds and an explicit video-labelled direct entry to cancellable loading. Keep stable bottom-nav controls outside route snapshots, compact HUD 44px targets, keyboard medal disclosure, finite preview/award motion and unchanged reward authority. See `docs/MINIMAL_UI.md`.
+
+- 0.12.0 adds finite assistance/next-field presentation. Preserve `docs/ASSISTANCE_FEEL.md`: post-dialog/ad/foreground feedback, no reward/restore replay, owned cancellable heart motion, bounded measured-path light and old/new dot handoff. Controlled SDK transport is isolated test infrastructure with explicit capture provenance; it must not enter the application payload.

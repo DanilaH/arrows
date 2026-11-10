@@ -1,0 +1,149 @@
+{
+  "browserCases": 108,
+  "typescriptTests": 85,
+  "sourceCommit": "544514b00ac892eb41be5395dbb49e8be0f5cf90",
+  "sourceTree": "2470dfdff8249d6211ee67a2c03c0db0b56ddb4b",
+  "workflowRun": 42883935878,
+  "manifest": {
+    "versionCode": 17,
+    "versionName": "0.12.0",
+    "compileSdkVersion": 36,
+    "compileSdkVersionCodename": "16",
+    "package": "com.danilah.arrows",
+    "platformBuildVersionCode": 36,
+    "platformBuildVersionName": 16
+  },
+  "matchingWebPayloadFiles": 8,
+  "webPayload": {
+    "assets/index-CEuvfZP7.css": "a853f0ec578f98856dd3c5191ccf9727ce7e0b589fefcf7230852806f1092be1",
+    "assets/index-ju-69Gsb.js": "198d94236c945858da931e97f7a652aa092e7ad7339b3d328c3aedad18b11b91",
+    "assets/web--XWNz75x.js": "b63c9c1383a83c2e1aac24ce34f612da201485d289cf0c9deea9c6a89295bdfd",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "1dfbac7f6f41017de61603eaeca21f7918f7f38ed30268ed7da2f3a224915923",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "nativeConfigurationMatches": true,
+  "sharedAnalyticsContractMatches": true,
+  "nativeFeedbackProfileCompiled": true,
+  "nativeTests": [
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-10T19:19:59.701Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.013"
+    },
+    {
+      "name": "com.danilah.arrows.FeedbackPatternTest",
+      "tests": "2",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-10T19:19:59.692Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.006"
+    }
+  ],
+  "capture": {
+    "sourceCommit": "544514b00ac892eb41be5395dbb49e8be0f5cf90",
+    "productionProvenance": "Current unmodified production build, Chromium RU390x844 DPR1 mobile emulation. Fresh storage; four wins and three distinct errors earned by ordinary touch selected with an independent cell-walking oracle. Real free continuation. Actual-output audio tee, no substituted sound. Not physical device evidence.",
+    "hintProvenance": "Separate isolated in-memory test entry, visible test/no-ad banner. Same application scene and real ProgressStore receipt commit; controlled SDK transport confirms reward without any real video. Starts with the authentic saved c05 attempt from the preceding production recording. Never included in normal build/APK.",
+    "fixtureBundleSha256": "c259ed3eb0af60942a8034fe7dfa481f30e8db5f5f805fe25e90c11f8eff0d49",
+    "assets": {
+      "assets/index-CEuvfZP7.css": "a853f0ec578f98856dd3c5191ccf9727ce7e0b589fefcf7230852806f1092be1",
+      "assets/index-ju-69Gsb.js": "198d94236c945858da931e97f7a652aa092e7ad7339b3d328c3aedad18b11b91",
+      "assets/web--XWNz75x.js": "b63c9c1383a83c2e1aac24ce34f612da201485d289cf0c9deea9c6a89295bdfd",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "records": [
+      {
+        "name": "arrows-recovery-and-transition",
+        "frames": 163,
+        "durationMs": 11337,
+        "audio": "Actual AudioContext output tee into MediaStreamAudioDestinationNode and MediaRecorder Opus; timestamp-aligned and muxed AAC, no added/replaced sound."
+      },
+      {
+        "name": "arrows-hint-test-transport",
+        "frames": 90,
+        "durationMs": 5550,
+        "audio": null
+      }
+    ],
+    "ending": {
+      "wins": 4,
+      "index": 4,
+      "lives": 3,
+      "continuations": 1
+    }
+  },
+  "archiveDigests": [
+    {
+      "name": "native-unit-results",
+      "id": 13794983625,
+      "sha256": "4596bd1f94f0b70f576cc7615cf33405ddf218fb581255f1ca552ad20769adcb",
+      "matchesApiDigest": true
+    },
+    {
+      "name": "arrows-debug",
+      "id": 13794293919,
+      "sha256": "be6608cef3d3b62680f53cf70c3f8abf44fb8727df4086bf426a16131e1b11c7",
+      "matchesApiDigest": true
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "Arrows-0.12.0-debug.apk",
+      "bytes": 10218458,
+      "sha256": "e0e30ece2505ef20f16ecd7ff285a51506f455e42dff7a775a3c1272acbbb8e3"
+    },
+    {
+      "name": "arrows-hint-test-transport.gif",
+      "bytes": 71976,
+      "sha256": "3ec2b7da03f07442ecb6848a81a017baa184f0f5ee6ff08c95b4d371ebd7f570",
+      "width": 390,
+      "height": 844,
+      "durationMs": 5670,
+      "frames": 102
+    },
+    {
+      "name": "arrows-recovery-and-transition-sound.mp4",
+      "bytes": 216242,
+      "sha256": "c7cd2a2da36910cd307b0594b6f178a9dd05c9e679df102f8bc2ee7e8f460fb9"
+    },
+    {
+      "name": "arrows-recovery-and-transition.gif",
+      "bytes": 354378,
+      "sha256": "201cc018cb313f9c9acad6ee81ec04becce34b28222b0c923a59b9b94eff212d",
+      "width": 390,
+      "height": 844,
+      "durationMs": 11450,
+      "frames": 206
+    }
+  ],
+  "limits": [
+    "Browser mobile emulation; no physical-phone sound/vibration/performance acceptance.",
+    "The Hint GIF is explicitly labelled isolated controlled SDK transport with a real game receipt commit; no real ad video or SDK-earned acceptance is claimed.",
+    "Default native ad configuration remains demo; live SDK earned/dashboard acceptance remains separate."
+  ],
+  "ci": {
+    "run": 42883935878,
+    "source": "544514b00ac892eb41be5395dbb49e8be0f5cf90",
+    "webJob": 130067185268,
+    "androidJob": 130067185913,
+    "conclusion": "success",
+    "typescriptTests": 85,
+    "browserCases": 108,
+    "nativeJvmTests": 7
+  },
+  "followup": {
+    "applicationPayloadChanged": false,
+    "localChecks": "Four Hint/reduced-motion cases pass again with explicitly persisted light settings for the desktop Hint and both narrow reduced-motion cases; strict typecheck passes.",
+    "captureExport": "First final MP4 export failed; repeated the complete recording with bounded audio padding/export duration and limited filter threads. Delivered GIF/MP4/manifest are from that successful final session."
+  }
+}

@@ -3,6 +3,7 @@ import { campaign } from '../../src/content/campaign';
 import { Board, canExit } from '../../src/domain/board';
 import { freshSave, freshAttempt, decodeSave, SAVE_KEY } from '../../src/progression/save';
 import { openAssistanceReview } from './helpers/assistanceReview';
+import { SETTINGS_KEY, defaultSettings } from '../../src/app/settings';
 
 async function observe(page: Page) {
   await page.addInitScript(() => {
@@ -51,7 +52,8 @@ for(const foregroundFirst of [true,false])test(`presents earned lives once after
   const after=await saved(page);expect(after.campaign.continuations).toBe(2);expect(after.campaign.board.errors).toEqual(before.campaign.board.errors);
 });
 
-test('traces an earned hint after return without making a move or replaying the cue',async({page})=>{
+test('traces an earned hint after return without making a move or replaying the cue',async({page},info)=>{
+  if(info.project.name==='desktop')await page.addInitScript(({key,settings})=>localStorage.setItem(key,JSON.stringify(settings)),{key:SETTINGS_KEY,settings:{...defaultSettings('en'),theme:'light'}});
   const before=await fixture(page,false);await page.locator('#hint:visible').click();
   await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'assistanceFixture').snapshot().shows)).toBe(1);
   await page.evaluate(()=>{const f=Reflect.get(window,'assistanceFixture');f.shown();f.earn();});
@@ -71,7 +73,9 @@ test('settles heart motion on background without stale replay',async({page})=>{
 });
 
 test('keeps recovery correct with reduced motion and narrow light UI',async({page})=>{
-  await page.emulateMedia({reducedMotion:'reduce',colorScheme:'light'});await page.setViewportSize({width:320,height:640});await fixture(page,true);
+  await page.emulateMedia({reducedMotion:'reduce',colorScheme:'light'});await page.setViewportSize({width:320,height:640});
+  await page.addInitScript(({key,settings})=>localStorage.setItem(key,JSON.stringify(settings)),{key:SETTINGS_KEY,settings:{...defaultSettings('en'),theme:'light'}});
+  await fixture(page,true);await expect(page.locator('html')).toHaveAttribute('data-theme','light');
   await page.locator('[data-action=free-continue]').click();await expect.poll(()=>cueCount(page,.38)).toBe(1);expect(await heartEvents(page)).toEqual([]);
   expect(await page.locator('#game-header').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
   await expect(page.locator('#hearts .empty')).toHaveCount(0);
