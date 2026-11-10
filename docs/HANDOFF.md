@@ -126,6 +126,10 @@ The user explicitly authorized initialization, main-branch writes and routine re
 
 First CI run `42587117226` failed before native compilation because setup-android's default `tools` package no longer exists, and before browser acceptance because Playwright does not support the runner's new Ubuntu 26.04 image. The corrected workflow requests `platform-tools` explicitly and pins Ubuntu 24.04. Corrected run `42587270211` passed both jobs and produced the debug artifact. The following documentation-only evidence update does not change that verified payload.
 
+## Queued visual feedback — 2026-11-10
+
+- The user dislikes the shape of the current heart glyphs in the compact HUD. Redraw the hearts in the next visual polish pass, preserving life rules, readability and the compact header. This turn records the feedback only; no heart artwork is changed.
+
 ## Next work: bank playtesting, D and physical acceptance
 
 The read-only sparse-bank audit (`verification/CAMPAIGN_QUALITY_AUDIT_2026-11-10.json`) is historical input to the user-requested 0.9.0 rebuild. Current selection fills all rebuilt silhouettes at least 98%, with mean initial freedom around 14% on Hard and 9.6% on Nightmare; it also gates freedom throughout three early removal profiles. Next content acceptance is actual human progression/device playtesting, not just solver success. Preserve all embedded legacy geometry through catalogue upgrades.
