@@ -3,6 +3,8 @@ export function createUiMotion() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const running = new Set<() => void>(), presses = new Map<number, { button: HTMLButtonElement; animation: Animation }>();
   const deferredRoutes = new Set<() => void>();
+  const refillEnds: (()=>void)[] = [];
+  const stopRefill = (): void => { for(const end of refillEnds.splice(0))end(); };
   const dialogs = new Map<HTMLDialogElement, { finish(): void; cancel(): void }>();
   let snapshotSerial = 0;
   let awardFinish: (()=>void) | undefined;
@@ -35,7 +37,7 @@ export function createUiMotion() {
     if (event.detail !== 0) return; const button = (event.target as Element).closest<HTMLButtonElement>('button');
     if (button && !button.disabled) animate(button, [{ transform: 'scale(.97)' }, { transform: 'scale(1)' }], 170);
   };
-  const settle = (): void => { blur(); routeFinish?.(); for (const finish of [...running]) finish(); };
+  const settle = (): void => { stopRefill(); blur(); routeFinish?.(); for (const finish of [...running]) finish(); };
   const visibility = (): void => { if (document.hidden) settle(); };
   document.addEventListener('pointerdown', down, true); document.addEventListener('pointerup', up, true); document.addEventListener('pointercancel', cancel, true);
   document.addEventListener('click', keyboard, true); document.addEventListener('visibilitychange', visibility); window.addEventListener('blur', blur);
@@ -92,6 +94,16 @@ export function createUiMotion() {
     },
     reveal(element: Element): void { animate(element, [{ opacity: .3, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }], 200); },
     impact(element: Element): void { animate(element,[{transform:'translateX(0)'},{transform:'translateX(-4px)',offset:.2},{transform:'translateX(3px)',offset:.45},{transform:'translateX(-2px)',offset:.7},{transform:'translateX(0)'}],180); },
+    cancelRefill: stopRefill,
+    refill(element: HTMLElement, from: number, to: number): void {
+      stopRefill();
+      const colors=getComputedStyle(document.documentElement), empty=colors.getPropertyValue('--heart-empty').trim(), full=colors.getPropertyValue('--heart').trim();
+      for(const [i,heart] of [...element.children].slice(from,to).entries()) refillEnds.push(animate(heart,[
+        {color:empty,opacity:.3,transform:'scale(.6)'},
+        {color:full,opacity:1,transform:'scale(1.25)',offset:.55},
+        {color:full,opacity:1,transform:'scale(1)'},
+      ],280,undefined,i*75));
+    },
     reward(element: Element): void {
       const emblem=element.querySelector('.win-emblem'); if(emblem)animate(emblem,[{opacity:0,transform:'scale(.25) rotate(-18deg)'},{opacity:1,transform:'scale(1.08) rotate(2deg)',offset:.65},{opacity:1,transform:'scale(1) rotate(0)'}],360);
       for(const [i,el] of [...element.querySelectorAll('strong,.win-detail,button')].entries()) animate(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],240,undefined,40+i*40);

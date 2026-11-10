@@ -15,8 +15,8 @@ import { installGameSurface } from '../game/surface';
 
 import type { Level } from '../domain/board';
 
-/** Review geometry is supplied by the isolated test entry; the normal entry supplies none. */
-export function startGame(reviewFields: readonly Level[] = []): void {
+/** Isolated tests may supply geometry/host dependencies; the normal entry uses production defaults. */
+export function startGame(reviewFields: readonly Level[] = [], platformFactory: typeof createPlatformRuntime = createPlatformRuntime): void {
   const language = normalizeGameLanguage(navigator.language);
   const text = copy[language];
   document.documentElement.lang = language;
@@ -62,7 +62,7 @@ export function startGame(reviewFields: readonly Level[] = []): void {
 
   try {
     let handleBack = (): boolean => false;
-    const platform = createPlatformRuntime(() => handleBack());
+    const platform = platformFactory(() => handleBack());
     reportReady = () => platform.analytics.track('app_ready', { language: platform.settings.state.language });
     disposers.push(() => platform.destroy());
     const runtimeError = (): void => platform.analytics.track('runtime_error', { operation: 'javascript', reason: 'uncaught_exception' });

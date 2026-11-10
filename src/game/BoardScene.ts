@@ -15,7 +15,7 @@ interface Flight { path: MeasuredPath; travelled: number; speed: number; age: nu
 interface Bump { id: string; path: MeasuredPath; timing: BumpTiming; contact: ArrowContact; started: number; impacted: boolean; }
 interface Impact { contact: ArrowContact; direction: Point; started: number; }
 interface Confetto { vx: number; vy: number; angle: number; spin: number; length: number; width: number; life: number; color: number; }
-export type SceneFeedback = { kind: 'move-start' | 'blocked-start' | 'impact' | 'exit' | 'victory' | 'win-ready'; attempt: string; };
+export type SceneFeedback = { kind: 'move-start' | 'blocked-start' | 'impact' | 'exit' | 'victory' | 'win-ready' | 'hint-ready'; attempt: string; };
 interface DotPulse { point: Point; motion: { x: number; v: number }; }
 export interface SceneOptions { ready(scene: BoardScene): void; dirty(): void; move(result: MoveResult): void; }
 
@@ -38,6 +38,9 @@ export class BoardScene extends Phaser.Scene {
   }
   private world!: Phaser.GameObjects.Container;
   private stable!: Phaser.GameObjects.Graphics;
+  private outgoing!: Phaser.GameObjects.Graphics;
+  private transitionAt = -1;
+  private hintReveal: { id: string; started: number; arrived: boolean } | null = null;
   private dots!: Phaser.GameObjects.Graphics;
   private guidesLayer!: Phaser.GameObjects.Graphics;
   private active!: Phaser.GameObjects.Graphics;
@@ -67,7 +70,7 @@ export class BoardScene extends Phaser.Scene {
   private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   public constructor(private readonly options: SceneOptions) { super('board'); }
   public create(): void {
-    this.dots = this.add.graphics(); this.guidesLayer = this.add.graphics(); this.stable = this.add.graphics();
+    this.outgoing = this.add.graphics(); this.dots = this.add.graphics(); this.guidesLayer = this.add.graphics(); this.stable = this.add.graphics();
     this.reactiveDots = this.add.graphics(); this.active = this.add.graphics();
     this.world = this.add.container(0, 0, [this.dots, this.guidesLayer, this.stable, this.reactiveDots, this.active]);
     this.overlay = this.add.graphics();
@@ -87,18 +90,23 @@ export class BoardScene extends Phaser.Scene {
   /** Navigation/background settles presentation without changing the canonical board. */
   public settlePresentation(): void {
     this.bumps.clear(); this.impacts.length = 0; this.flights.length = 0; this.pulses.clear(); this.confetti.length = 0;
+    this.hintReveal=null; this.transitionAt=-1; this.outgoing?.clear(); this.dots?.setAlpha(1);
     this.errorUntil = -1; this.focusMotion = null; this.entry = this.clock - 500;
     if (this.board.complete) { this.victoryAt = this.clock - 2200; this.victoryCursor = this.board.level.mask.length; this.announcedWin = true; }
     this.stableDirty = true; this.active?.clear(); this.overlay?.clear(); this.reactiveDots?.clear(); this.changed();
   }
   private changed(): void { for (const listener of this.listeners) listener(); this.options.dirty(); }
-  public loadAttempt(board: Board, view: ViewState | null = null, guides = false, hint: string | null = null): void {
+  public loadAttempt(board: Board, view: ViewState | null = null, guides = false, hint: string | null = null, transition = false): void {
+    const blend=transition && !this.reducedMotion && !board.complete && this.board.complete && this.board.attemptId!==board.attemptId;
+    this.outgoing.clear().setAlpha(1);
+    if(blend){const ratio=1/this.scale.zoom, old=this.boardCamera;this.outgoing.setPosition(old.x*ratio,old.y*ratio).setScale(old.scale*ratio).fillStyle(this.colors.dot,1);for(const point of this.board.level.mask)this.outgoing.fillCircle(point.x,point.y,.07);}
+    this.transitionAt=blend?this.clock:-1;this.hintReveal=null;
     const level = board.level; this.board = board; this.guides = guides; this.hintTarget = null; this.focusMotion = null;
     this.boardCamera = new BoardCamera(level.width, level.height);
     this.paths = new Map(level.arrows.map(a => [a.id, measurePath(a.path)]));
     this.dotMask = new Map(level.mask.map(p => [`${p.x},${p.y}`, p]));
     this.flights.length = 0; this.bumps.clear(); this.impacts.length = 0; this.confetti.length = 0; this.pulses.clear(); this.preview = null; this.rewardCelebration=false; this.active.clear(); this.overlay.clear(); this.reactiveDots.clear();
-    this.entry = this.clock - (this.reducedMotion || board.complete ? 500 : 0); this.errorUntil = -1; this.victoryAt = board.complete ? this.clock - 2200 : -1; this.victoryCursor = board.complete ? level.mask.length : 0; this.announcedWin = board.complete;
+    this.entry = this.clock - (this.reducedMotion || board.complete ? 500 : 0) + (blend?110:0); this.dots.setAlpha(blend?0:1); this.errorUntil = -1; this.victoryAt = board.complete ? this.clock - 2200 : -1; this.victoryCursor = board.complete ? level.mask.length : 0; this.announcedWin = board.complete;
     this.stableDirty = true; this.layout(true);
     if (view) { this.boardCamera.restore(view); this.transform(); }
     this.drawDots(); this.setHint(hint); this.changed();
@@ -109,18 +117,26 @@ export class BoardScene extends Phaser.Scene {
     this.stableDirty = true; this.changed();
   }
   public setHint(id: string | null, focus = true): void {
-    if (this.hintTarget === id) return;
-    this.hintTarget = id;
-    const arrow = this.board.remaining.find(a => a.id === id);
-    if (arrow && focus) {
-      const head = arrow.path.at(-1)!, screen = this.boardCamera.screen(head), v = this.playArea;
-      if (screen.x < 36 || screen.x > v.width - 36 || screen.y < v.y + 36 || screen.y > v.y + v.height - 36 || this.boardCamera.scale < 15) {
-        const to = this.boardCamera.focus(head);
-        if (this.reducedMotion) { this.boardCamera.restore(to); this.transform(); }
-        else this.focusMotion = { from: this.boardCamera.snapshot(), to, elapsed: 0 };
-      }
+    if(this.hintTarget===id)return;
+    this.hintTarget=id;this.hintReveal=null;
+    if(focus)this.focusHint(id);
+    this.stableDirty=true;this.changed();
+  }
+  private focusHint(id: string | null): void {
+    const arrow=this.board.remaining.find(a=>a.id===id);if(!arrow)return;
+    const head=arrow.path.at(-1)!,screen=this.boardCamera.screen(head),v=this.playArea;
+    if(screen.x<v.x+36||screen.x>v.x+v.width-36||screen.y<v.y+36||screen.y>v.y+v.height-36||this.boardCamera.scale<15){
+      const to=this.boardCamera.focus(head);
+      if(this.reducedMotion){this.boardCamera.restore(to);this.transform();}
+      else this.focusMotion={from:this.boardCamera.snapshot(),to,elapsed:0};
     }
-    this.stableDirty = true; this.changed();
+  }
+  public revealHint(id: string): void {
+    if(id!==this.hintTarget||!this.board.remaining.some(a=>a.id===id))return;
+    this.focusHint(id);
+    if(this.reducedMotion)this.feedback('hint-ready');
+    else this.hintReveal={id,started:-1,arrived:false};
+    this.stableDirty=true;this.changed();
   }
   public get finished(): boolean { return this.announcedWin; }
   private measureView(): Rect {
@@ -246,12 +262,13 @@ export class BoardScene extends Phaser.Scene {
     }
   }
   public hasMotion(): boolean {
-    return this.preview !== null && this.clock-this.previewAt<180 || this.focusMotion !== null || this.clock - this.entry < 400 || this.flights.length > 0 || this.bumps.size > 0 || this.impacts.length > 0 || this.pulses.size > 0 || this.errorUntil > this.clock ||
+    return this.transitionAt>=0 || this.hintReveal!==null || this.preview !== null && this.clock-this.previewAt<180 || this.focusMotion !== null || this.clock - this.entry < 400 || this.flights.length > 0 || this.bumps.size > 0 || this.impacts.length > 0 || this.pulses.size > 0 || this.errorUntil > this.clock ||
       this.victoryAt >= 0 && this.clock - this.victoryAt < (this.reducedMotion ? 150 : 2100);
   }
   public update(_time: number, delta: number): void {
     this.frames += 1;
     const dt = Math.min(40, Math.max(0, delta)); this.clock += dt;
+    if(this.transitionAt>=0){const age=this.clock-this.transitionAt;this.outgoing.setAlpha(Math.max(0,1-age/220));this.dots.setAlpha(Math.min(1,Math.max(0,(age-60)/160)));if(age>=240){this.outgoing.clear();this.dots.setAlpha(1);this.transitionAt=-1;}}
     if (this.focusMotion) {
       const f = this.focusMotion; f.elapsed += dt; const t = 1 - (1 - Math.min(1, f.elapsed / 320)) ** 3;
       this.boardCamera.restore({ centerX: f.from.centerX + (f.to.centerX - f.from.centerX) * t,
@@ -289,6 +306,21 @@ export class BoardScene extends Phaser.Scene {
       }
       if (sample.done) { this.bumps.delete(id); this.stableDirty = true; bumpSettled = true; continue; }
       this.stroke(this.active, extractPath(bump.path, sample.distance), this.colors.error, stroke, true);
+    }
+    if(this.hintReveal){
+      const reveal=this.hintReveal,path=this.paths.get(reveal.id),present=this.board.remaining.some(a=>a.id===reveal.id);
+      if(!path||!present||reveal.id!==this.hintTarget)this.hintReveal=null;
+      else if(!this.focusMotion){
+        if(reveal.started<0)reveal.started=this.clock;
+        const age=this.clock-reveal.started,duration=Math.max(360,Math.min(650,path.length*this.boardCamera.scale/750*1000));
+        if(age<duration){const end=path.length*Math.min(1,age/duration),band=Math.min(path.length,Math.max(1.2,path.length*.18));this.stroke(this.active,extractPath(path,Math.max(0,end-band),Math.min(band,end)),this.colors.exit,stroke*2.1,false,.85);this.excite(pointAt(path,end),3);}
+        else{
+          if(!reveal.arrived){reveal.arrived=true;this.excite(path.points.at(-1)!,9);this.feedback('hint-ready');}
+          const t=(age-duration)/240,head=path.points.at(-1)!;
+          if(t>=1)this.hintReveal=null;
+          else this.active.lineStyle(1.4/this.boardCamera.scale,this.colors.exit,1-t).strokeCircle(head.x,head.y,(5+t*14)/this.boardCamera.scale);
+        }
+      }
     }
     if (this.stableDirty) this.drawStable();
     if (bumpSettled) this.changed();

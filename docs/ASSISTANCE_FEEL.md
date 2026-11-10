@@ -1,0 +1,16 @@
+# Assistance and level handoff — 0.12.0
+
+The user approved a small presentation package after reviewing the minimal UI: custom hearts, visible recovery, an earned-Hint light pass and a softer handoff to the next field.
+
+- Three symmetric SVG hearts replace font-dependent glyphs. Filled/outlined states keep the 59px HUD and 44px control targets. Recovery pops the newly restored hearts in sequence: 280ms each, 75ms offsets, maximum 430ms. Canonical lives update before animation. New error, attempt/navigation, background and teardown settle the owned animations.
+- Life feedback waits until the loss dialog is actually closed and advertising, foreground and route blockers have released. Previously the signal was submitted while the loss dialog blocked gameplay feedback. Rewarded continuation now also waits for the dialog close before invoking the ad service; starting immediately could be rejected by its own dialog blocker.
+- A newly committed Hint waits for foreground/advertising release and any necessary camera focus, then sends one light band along the arrow's measured tail-to-head route in 360–650ms. Arrival owns the existing hint sound/haptic and a 240ms head ring. The arrow remains present; the persistent target marking survives. Restore and duplicate receipts do not replay the light pass.
+- Explicit next-level advance crossfades the completed dot silhouette out over 220ms and the new dots in over 60–220ms, with new arrow entry delayed by 110ms and a 200ms label reveal. One reusable Graphics holds outgoing dots; no per-dot object/filter. Ordinary restore/navigation does not manufacture this handoff.
+
+All effects are finite, reduced-motion aware and presentation-only. Background settles running effects. A currently requested earned reward may wait transiently for return; nothing is queued durably for replay after relaunch. The existing bounded reactive-dot pool and idle renderer own the final paint and sleep. Domain rules, content/catalogue, embedded attempts, receipt authority, save schema, advertising cadence, kit pin and native cue profiles are unchanged.
+
+## Verification and captures
+
+New browser regressions exercise actual free continuation, both foreground/dismissal orders for earned lives, duplicate receipts, Hint arrival/no auto-move, interrupted recovery, reduced motion/narrow layout and next-level authority/settlement. SDK-earned cases use an isolated in-memory entry with injected transport and the real ads/receipt/progress/game stack. Its explicit test banner identifies the absence of real video. No test route/global/transport ships in production; the production marker check enforces exclusion.
+
+`tools/capture-assistance-gifs.mjs` records a fresh production session earning four wins by touch, the c04→c05 handoff, three distinct mistakes and the actual free recovery. A second explicitly labelled recording uses the isolated test transport to demonstrate Hint presentation on that authentically earned c05 attempt. The sound MP4 captures actual Web Audio output; GIFs are silent. Chromium mobile emulation is not Android hardware evidence. Live SDK earned delivery, physical haptic feel, sound and performance still require a named phone. Exact final artifact and CI evidence are recorded after assembly.

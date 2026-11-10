@@ -2,6 +2,10 @@
 
 ## Current milestone
 
+Version 0.12.0 / Android versionCode 17 implements the approved assistance feel pass: custom vector hearts, staggered recovery after dialog/ad return, a one-shot earned-Hint light pass and completed-field/new-field handoff. The rewarded lives entry waits for its own dialog blocker to close before invoking ads. See `ASSISTANCE_FEEL.md`.
+
+Previous minimal UI milestone:
+
 Version 0.11.0 / Android versionCode 16 implements the user-approved minimal UI pass: unframed Home/result/award shelf, stable bottom navigation, 59px phone HUD with 44px controls, growing held-preview ray and restrained transitions. Hint now appears after three active seconds and enters explicit video loading directly. See `MINIMAL_UI.md`. All content, saves, receipt authority and ad cadence remain unchanged.
 
 Previous feel milestone:
@@ -47,6 +51,8 @@ Stage C navigation/records remain: Collection at current level 10, daily at 20, 
 D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, physical-phone sound/haptics/system-bar/feel/performance/process-kill evidence, human bank playtesting, physical native-icon/splash acceptance, signing and RuStore package. Keep attaching authentic GIFs for visible changes.
 
 ## Verification
+
+0.12.0 local: `npm run check` passes (85 TS tests and production build); all fourteen new assistance browser cases pass on phone/desktop emulation. Native sync, related existing regressions, CI assembly and exact artifact/capture verification follow in the final evidence record.
 
 Current 0.11.0: [CI 42873215357](https://github.com/DanilaH/arrows/actions/runs/42873215357) passes both jobs on source `310d9324e91ac44a0cd88de4e3e737b811cbf86b`: 85 TS tests, all 94 browser cases (76 ordinary application, twelve isolated real-control and six isolated ads), seven JVM tests and Android assembly. Final local typecheck/build/native sync and fourteen focused browser cases pass. Earlier 0.11 checks exposed a real footer recentering race after tutorial removal and summary focus loss during async Collection refresh; stable transparent text bounds, middle-aligned Hint/directions and stable summary IDs fix them, with direct regressions. Idle smoke checks the same quiescent RAF window within a bounded deadline; no phone performance claim follows from software-rendering timing.
 
@@ -128,7 +134,7 @@ First CI run `42587117226` failed before native compilation because setup-androi
 
 ## Queued visual feedback — 2026-11-10
 
-- The user dislikes the shape of the current heart glyphs in the compact HUD. Redraw the hearts in the next visual polish pass, preserving life rules, readability and the compact header. This turn records the feedback only; no heart artwork is changed.
+- The heart-shape feedback is implemented in 0.12.0 with project-owned SVG contours; assess the delivered visual on a phone.
 
 ## Next work: bank playtesting, D and physical acceptance
 

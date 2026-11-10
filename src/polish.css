@@ -192,3 +192,9 @@ button:active { transform: scale(.97); }
 #home-settings[aria-expanded='true']::before { content: ''; position: absolute; top: 0; width: 20px; height: 2px; border-radius: 2px; background: currentColor; }
 #meta-nav:has(#home-settings[aria-expanded='true']) [aria-current='page'] { color: var(--muted); }
 #meta-nav:has(#home-settings[aria-expanded='true']) [aria-current='page']::before { display: none; }
+
+/* Vector life indicators keep the compact HUD's existing dimensions. */
+#hearts { gap: 3px; }
+#hearts > span { display: inline-flex; width: 18px; height: 18px; align-items: center; justify-content: center; transform-origin: center; }
+#hearts svg { width: 18px; height: 18px; fill: currentColor; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; }
+#hearts .empty svg { fill: transparent; stroke-width: 1.9; }
