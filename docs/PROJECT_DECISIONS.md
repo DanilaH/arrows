@@ -128,3 +128,10 @@ After rewatching early V06 frames, 0.8.1 replaces only fresh c01–c04 with full
 After the read-only audit, the user explicitly asked to rebuild the later bank. 0.9.0 replaces only fresh c05–c120 with contentVersion 4; the first four compact fields remain v3. Catalogue 5 accepts known 1–4 without rewriting embedded geometry or receipts. Old freeze constraints are superseded for fresh campaign content, while daily/trophies remain frozen.
 
 Construction now peels paths from a filled silhouette, with orphan repair and seeded selection gates on ≥98% occupancy, small accidental holes, bends, dependency depth and initial/early-solve freedom. Breathers keep more choices and short tasks; Hard/Nightmare strengthen interleaving. Full criteria, limits and reproducibility are in `CONTENT_BANK_V4.md`. These are content-selection proxies; no human completion-time or phone performance claims follow from them.
+
+
+## User-directed feel pass, 2026-11-10
+
+0.10.0 moves blocked arrows along their measured route to the nearest blocker and reverses the same route. Contact owns impact sound/haptics and sparks; domain acceptance, first-error life cost and durable progression remain independent. Removing a blocker or activating the now-free arrow during motion must not introduce a snap, phantom impact or extra penalty. Navigation/background settles presentation and never replays a completed reward.
+
+Menu routes now stagger visible cards and carry matching Home art into destination headers. Metadata refresh is deferred through the finite transition to preserve animated element identity. Victory begins after the last exit flight, with bounded confetti/rings, a staged result and original ascending sound. Native haptics use distinct short amplitude/timing patterns with capability fallback. See `FEEL_PASS.md` for exact bounds, lifecycle contracts, recording provenance and phone-evidence limits. No content catalogue, save schema, ads policy, SDK or kit pin changes.

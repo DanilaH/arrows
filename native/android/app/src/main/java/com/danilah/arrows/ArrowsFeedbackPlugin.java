@@ -23,7 +23,8 @@ public class ArrowsFeedbackPlugin extends Plugin {
         String cue = call.getString("cue", "");
         long issued = call.getLong("issuedAt", 0L), epoch = call.getLong("generation", -1L), now = SystemClock.uptimeMillis();
         if (epoch < generation || issued <= stoppedAt || Math.abs(System.currentTimeMillis() - issued) > 250 || !foreground || now - lastPulse < 60) { call.resolve(); return; }
-        if (!cue.matches("button|remove|error|hint|life|win")) { call.reject("Invalid haptic cue"); return; }
+        FeedbackPattern pattern = FeedbackPattern.forCue(cue);
+        if (pattern == null) { call.reject("Invalid haptic cue"); return; }
         generation = epoch;
         try {
             Vibrator v = vibrator();
@@ -31,10 +32,12 @@ public class ArrowsFeedbackPlugin extends Plugin {
                 lastPulse = now;
                 AudioAttributes attributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build();
-                long duration = cue.equals("win") ? 45 : cue.equals("error") ? 25 : 12;
-                if (Build.VERSION.SDK_INT >= 26) v.vibrate(VibrationEffect.createOneShot(duration,
-                    v.hasAmplitudeControl() ? cue.equals("button") ? 100 : 180 : VibrationEffect.DEFAULT_AMPLITUDE), attributes);
-                else v.vibrate(duration, attributes);
+                if (Build.VERSION.SDK_INT >= 26) {
+                    VibrationEffect effect = v.hasAmplitudeControl()
+                        ? VibrationEffect.createWaveform(pattern.timings, pattern.amplitudes, -1)
+                        : VibrationEffect.createWaveform(pattern.timings, -1);
+                    v.vibrate(effect, attributes);
+                } else v.vibrate(pattern.timings, -1, attributes);
             }
             call.resolve();
         } catch (RuntimeException error) { call.reject("Haptics unavailable"); }

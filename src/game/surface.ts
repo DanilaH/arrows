@@ -81,7 +81,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     },
     activate(id) {
       if (requestingAd || motion.routeBusy || platform.activity.isBlocked()) return;
-      if (control) { const result = scene.activate(id); if (result.kind !== 'ignored') platform.feedback.play(result.kind === 'error' ? 'error' : 'remove'); return; }
+      if (control) { scene.activate(id); return; }
       const expected = scene.board.attemptId;
       run(progress.move(expected, id, ...takeTime()));
     },
@@ -147,6 +147,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const advanceWin = (): void => {
     if (control) { open('controls'); return; }
     if (!scene.board.complete || !scene.finished || requestingAd || transition.busy) return;
+    platform.feedback.resetGameplay();
     const attempt = scene.board.attemptId, date = activeDate, mode = gameMode(), levelId = scene.board.level.id, freshWin = freshWinAttempt === scene.board.attemptId; freshWinAttempt = "";
     transition.start(async () => {
       cancel(); saveView(); await progress.flush();
@@ -201,9 +202,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const sync = (): void => {
     if (!alive) return;
     const board = scene.board, a = active(), remaining = board.remaining.length;
-    if (scene.finished && meta.screen === 'game' && celebratedAttempt !== board.attemptId) {
-      celebratedAttempt = board.attemptId; platform.feedback.play(pendingAward ? 'award' : 'win'); pendingAward = false;
-    }
+
     document.querySelector('#app-title')!.textContent = control ? text.title : activeDate ? text.challenge : `${text.level} ${progress.state.index + 1}`;
     document.querySelector('#field-name')!.textContent = control ? names[selectedControl]! : activeDate ? new Intl.DateTimeFormat(language, { day: 'numeric', month: 'long', timeZone: 'UTC' }).format(new Date(activeDate + 'T12:00:00Z')) : `${progress.state.index + 1} / ${campaign.length}`;
     document.querySelector('#difficulty')!.textContent = board.level.difficulty === 'normal' ? '' : board.level.difficulty === 'hard' ? 'Hard' : 'Nightmare';
@@ -222,7 +221,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     document.querySelector('#win-title')!.textContent = exhausted ? text.chapterComplete : activeDate ? text.dailyWin : text.win;
     document.querySelector<HTMLButtonElement>('#next')!.textContent = control ? text.chooseField : activeDate ? text.toCalendar : exhausted ? text.completed : text.next;
     document.querySelector<HTMLButtonElement>('#next')!.disabled = exhausted || transition.busy || requestingAd;
-    document.querySelector<HTMLButtonElement>('#restart')!.disabled = !control && board.complete;
+    document.querySelector<HTMLButtonElement>('#restart')!.disabled = !control && board.complete || board.hearts === 0;
+    document.querySelector<HTMLButtonElement>('#game-settings')!.disabled = board.hearts === 0;
+    document.querySelector<HTMLButtonElement>('#guides')!.disabled = board.hearts === 0;
+    document.querySelector('#win-detail')!.textContent = board.snapshot().errors.length === 0 ? text.flawless : text.cleared;
     const step = tutorial();
     status.textContent = !loaded ? text.restoring : notice || (step ? text[`teach_${step}` as keyof typeof text] : control && remaining === board.level.arrows.length ? text.zoomTip : '');
     hintButton.hidden = !loaded || control || board.complete || board.hearts === 0 || !!step || idleMs < 12000 || a.hint !== null;
@@ -238,7 +240,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     }
     platform.activity.setGameplayDesired(loaded && meta.screen === 'game' && !board.complete && board.hearts > 0);
     if (modal === 'lost' && board.hearts > 0) close();
-    if (loaded && meta.screen === 'game' && board.hearts === 0 && modal === null && !requestingAd) open('lost');
+    if (loaded && meta.screen === 'game' && board.hearts === 0 && !scene.hasErrorMotion && modal === null && !requestingAd) open('lost');
   };
   const onChange = (event: SaveChange): void => {
     if (!alive) return;
@@ -250,7 +252,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const a = active(), previousLives = scene.board.hearts, previousHint = scene.hintTarget, sameAttempt = scene.board.attemptId === a.board.id;
     if (!control && meta.screen === 'game') {
       if (scene.board.attemptId !== a.board.id || event.kind === 'load') {
-        cancel(); idleMs = 0; pendingTime = 0; notice = ''; scene.loadAttempt(activeBoard(), a.view, a.guides, a.hint);
+        platform.feedback.resetGameplay(); cancel(); idleMs = 0; pendingTime = 0; notice = ''; scene.loadAttempt(activeBoard(), a.view, a.guides, a.hint);
       } else {
         scene.acceptBoard(activeBoard(), event.attempt === a.board.id ? event.result : undefined);
         if (scene.guides !== a.guides) scene.setGuides(a.guides);
@@ -266,7 +268,6 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       const owner = progress.findAttempt(event.attempt), moved = owner?.saved;
       if (moved && owner) {
         if (event.startedNow) platform.analytics.track('level_start', { mode: owner.mode, level_id: moved.level.id, content_version: moved.level.contentVersion, attempt: moved.board.id, resumed: false });
-        if (meta.screen === 'game' && scene.board.attemptId === moved.board.id) platform.feedback.play(event.result?.kind === 'error' ? 'error' : 'remove');
         if (event.result?.kind === 'error') platform.analytics.track('level_error', { mode: owner.mode, level_id: moved.level.id, attempt: moved.board.id, first: event.result.first, lives: moved.board.lives });
         if (event.result?.kind === 'removed') {
           if (scene.board.attemptId === moved.board.id) { idleMs = 0; notice = ''; const step = tutorial(); if (step && ['tap', 'turns', 'blockers'].includes(step)) finishTutorial(step); }
@@ -336,8 +337,18 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   sessionPlay.textContent = text.sessionPlay;
   on(sessionPlay, 'click', () => { progress.startSessionOnly(); finishLoad(); });
   on(dialog, 'cancel', event => { event.preventDefault(); if (modal === 'lost') open('pause'); else close(); sync(); });
-  listeners.push(platform.activity.onBlockedChange(value => { sample(); if (value) { cancel(); saveView(); } }));
+  listeners.push(platform.activity.onBlockedChange(value => { sample(); if (value) { cancel(); saveView(); if (scene.board.complete) { celebratedAttempt = scene.board.attemptId; pendingAward = false; } scene.settlePresentation(); } }));
+  listeners.push(platform.activity.onBlockReasonsChange(() => { if (platform.activity.getBlockReasons().some(reason => !['menu','dialog','settings','trophy-preview'].includes(reason))) motion.finish(); }));
   listeners.push(scene.subscribe(sync));
+  listeners.push(scene.subscribeFeedback(event => {
+    if (!loaded || meta.screen !== 'game' || scene.board.attemptId !== event.attempt) return;
+    if (event.kind === 'move-start') platform.feedback.play('remove');
+    else if (event.kind === 'blocked-start') platform.feedback.play('slide');
+    else if (event.kind === 'impact') { platform.feedback.play('error'); motion.impact(document.querySelector('#hearts')!); }
+    else if (event.kind === 'exit') platform.feedback.play('exit');
+    else if (event.kind === 'victory' && celebratedAttempt !== event.attempt) { celebratedAttempt = event.attempt; platform.feedback.play(pendingAward ? 'award' : 'win'); pendingAward = false; }
+    else if (event.kind === 'win-ready' && (control || freshWinAttempt === event.attempt)) motion.reward(document.querySelector('#win')!);
+  }));
   const uiClick = (event: MouseEvent): void => { const button = (event.target as Element).closest<HTMLButtonElement>('button'); if (button && !button.disabled && !button.hasAttribute('data-feedback-preview')) platform.feedback.play('button', 'ui'); };
   document.addEventListener('click', uiClick); listeners.push(() => document.removeEventListener('click', uiClick));
   const observer = new ResizeObserver(() => { cancel(); if (meta.screen === 'game') { scene.layout(); scheduleView(); } });

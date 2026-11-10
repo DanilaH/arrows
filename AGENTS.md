@@ -19,3 +19,5 @@ Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the
 - 0.8.1 follows the user’s compact-original feedback: fresh c01–c04 use contentVersion 3, catalogue 4 preserves embedded v1/v2/v3 attempts. Keep c05 onward frozen. Small camera spacing is presentation-only; see `docs/COMPACT_OPENING_V3.md`.
 
 - Latest authorization: the user requested rebuilding c05–c120 in 0.9.0. Fresh fields use contentVersion 4/catalogue 5; c01–c04 remain v3. Earlier c05-onward freeze notes are historical. Preserve all embedded attempts, daily/trophy content and reward identities. Enforce `docs/CONTENT_BANK_V4.md` quality gates and retain authentic GIF provenance.
+
+- Current feel pass 0.10.0 changes only presentation/feedback. Preserve `docs/FEEL_PASS.md` contact timing, route reversal, async-menu element ownership, finite celebration/idle rendering and no-replay rules. GIFs are silent; an actual-output audio video complements them. Physical haptic feel still requires a phone.

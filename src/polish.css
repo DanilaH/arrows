@@ -60,3 +60,22 @@ dialog[open]::backdrop { animation: dialog-shade 170ms ease-out both; }
 @media (prefers-reduced-motion: reduce) { button, .calendar-day, .home-progress-track i { transition: none; } button:active { transform: none; } dialog[open]::backdrop { animation: none; } }
 
 .play-icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.meta-header h1 { display: flex; align-items: center; justify-content: center; gap: 9px; min-width: 0; line-height: 1.2; }
+.menu-emblem { flex: 0 0 40px; width: 40px; height: 40px; object-fit: contain; }
+.shared-menu-art { display: block; }
+#win { width: min(340px, calc(100% - 36px)); padding: 22px 24px 24px; gap: 11px; border: 1px solid var(--border); border-radius: 28px; background: radial-gradient(ellipse at 50% 0, var(--hero-glow), transparent 70%), linear-gradient(145deg,var(--surface),var(--gradient-end)); box-shadow: 0 14px 36px var(--card-shadow), inset 0 1px 0 var(--sheen); pointer-events: auto; }
+#win strong { font-weight: 700; font-size: 28px; letter-spacing: -.6px; }
+.win-emblem { width: 54px; height: 54px; border-radius: 50%; background: #8372f41c; display: block; }
+.win-emblem svg { width: 100%; height: 100%; fill: none; stroke: var(--accent-soft); stroke-width: 2.4; }
+.win-emblem path { stroke: var(--heading); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.win-detail { font-size: 13px; color: var(--muted); margin-bottom: 3px; }
+#win .primary { width: 100%; border-radius: 18px; min-height: 50px; }
+@media (max-width: 360px) { .meta-header { gap: 8px; } .meta-header h1 { font-size: 17px; gap: 5px; } .menu-emblem { width: 32px; height: 32px; flex-basis: 32px; } }
+@media (max-height: 500px) and (min-width: 600px) {
+  #win { width: min(600px,calc(100% - 40px)); display: grid; grid-template-columns: 48px 1fr 150px; column-gap: 18px; row-gap: 6px; padding: 15px 18px; }
+  .win-emblem { grid-row: 1 / 3; width: 48px; height: 48px; }
+  #win strong { font-size: 22px; grid-column: 2; text-align: left; }
+  .win-detail { grid-column: 2; text-align: left; margin: 0; }
+  #win .primary { grid-column: 3; grid-row: 1 / 3; }
+}

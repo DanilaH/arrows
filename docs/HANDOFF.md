@@ -2,6 +2,10 @@
 
 ## Current milestone
 
+Version 0.10.0 / Android versionCode 15 adds route-aware blocked-arrow contact/return, impact-timed sound/haptics, shared-art staggered menu transitions and finite confetti/result celebration. Content catalogue 5 and all embedded progress remain unchanged. Read `FEEL_PASS.md`. Verification is recorded below after the current build; physical-phone sound/vibration/performance acceptance remains open.
+
+Previous dense-bank milestone:
+
 Version 0.9.0 / Android versionCode 14 rebuilds fresh c05–c120 with dense contentVersion 4 after the user-authorized quality pass. All 116 silhouettes meet ≥98% fill and bounded accidental gaps; Hard/Nightmare have substantially stronger blocking and early-solve freedom gates. Twenty silhouette families and breathers remain. c01–c04 are unchanged v3; catalogue 1/2/3/4→5 preserves all embedded attempts, pending rights, daily/trophy content. The bank has 4,171 arrows. Read `CONTENT_BANK_V4.md` and `verification/CAMPAIGN_SELECTION_V4.json`. Structural metrics are not player difficulty/performance evidence.
 
 Previous compact-opening milestone:
