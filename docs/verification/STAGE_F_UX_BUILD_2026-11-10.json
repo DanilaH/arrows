@@ -1,0 +1,118 @@
+{
+  "apk": {
+    "file": "Arrows-0.8.0-debug.apk",
+    "bytes": 10171738,
+    "sha256": "a17f81dcb8a911006fc168df9878246123127aa413320383ed83b1b268b03bc4"
+  },
+  "manifest": {
+    "versionCode": 12,
+    "versionName": "0.8.0",
+    "compileSdkVersion": 36,
+    "compileSdkVersionCodename": "16",
+    "package": "com.danilah.arrows",
+    "platformBuildVersionCode": 36,
+    "platformBuildVersionName": 16
+  },
+  "matchingWebFiles": 8,
+  "nativeTests": [
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-10T07:55:44.240Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.012"
+    }
+  ],
+  "sourceCommit": "6413e73aae6c2b723fc03c69ed7e71688fa7804a",
+  "tree": "a4fa5f2e7cb84c9a53d07423797111a193a00d48",
+  "workflowRun": 42778589321,
+  "workflowUrl": "https://github.com/DanilaH/arrows/actions/runs/42778589321",
+  "artifactArchives": [
+    {
+      "id": 13744967149,
+      "sha256": "1846e7c3f97041acf555491b89563f52e76385c25d8d3357aca3290b640a6481"
+    },
+    {
+      "id": 13745585732,
+      "sha256": "5392a9a441aecc748e464c8e2006953ff03292676c7ae81344772ee7ba2b445f"
+    }
+  ],
+  "localChecks": {
+    "typescriptTests": 75,
+    "build": "passed",
+    "androidSync": "passed",
+    "browser": "74/78 in full rerun; daily/bootstrap and route tests passed targeted rerun. Initial long control case exceeded its 120s budget; bulk case now has 180s. Full CI result is recorded separately."
+  },
+  "nativeConfigurationMatches": true,
+  "sharedAnalyticsContractMatches": true,
+  "capture": {
+    "sourceCommit": "6413e73aae6c2b723fc03c69ed7e71688fa7804a",
+    "provenance": "Actual production Chromium mobile-emulation UI, RU 390x844. Fresh storage; first nineteen campaign wins earned solely by ordinary touch. Unedited storage export retained. CDP frames, timestamped without altered pixels or synthetic rewards. Not physical-device evidence.",
+    "assetHashes": {
+      "assets/index-BfTuN-1-.css": "49cf872c563b2cd96ae29cc3bbfa0e3f2ae53ab5e3aa35a8ec6ae641f523c191",
+      "assets/index-DORNV3kf.js": "e6e062079513260a937a5859570d44dde15bb377cbd30a2628ba194b1c6125a6",
+      "assets/web-DuTLV9Ez.js": "5ee4da8c5ce9d06cbb3c43da42465f8c056a5e6a1e7fea96479183e6290e6916",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "records": [
+      {
+        "file": "arrows-bent-opening.gif",
+        "frames": 195,
+        "durationMs": 12589,
+        "ending": {
+          "wins": 2,
+          "index": 2,
+          "dailyWins": {},
+          "cups": []
+        }
+      },
+      {
+        "file": "arrows-menu-motion.gif",
+        "frames": 123,
+        "durationMs": 9187,
+        "ending": {
+          "wins": 19,
+          "index": 19,
+          "dailyWins": {},
+          "cups": []
+        }
+      }
+    ]
+  },
+  "earnedMenuStartingState": {
+    "wins": 19,
+    "index": 19,
+    "dailyWins": {},
+    "cups": []
+  },
+  "gifFiles": [
+    {
+      "file": "arrows-bent-opening.gif",
+      "bytes": 357033,
+      "sha256": "7e020f23452f769f1e573e5219f16d27a070d85452e02fc8592750c4d11520bf"
+    },
+    {
+      "file": "arrows-menu-motion.gif",
+      "bytes": 2866512,
+      "sha256": "aef66429ae3bf9ab9280646f83927dbcdff983172c1999327c2cda6234390294"
+    }
+  ],
+  "limits": "Browser mobile emulation and exact build/payload evidence. Physical Android feel/frame pacing and live ad earned/dashboard acceptance are not established.",
+  "ci": {
+    "conclusion": "success",
+    "typescriptTests": 75,
+    "browserCases": 78,
+    "browserScope": {
+      "ordinaryApplication": 60,
+      "isolatedRealControl": 12,
+      "isolatedAds": 6
+    },
+    "nativeTests": 5,
+    "androidAssembly": "passed",
+    "androidSync": "passed"
+  }
+}

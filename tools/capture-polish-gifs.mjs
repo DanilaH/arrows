@@ -22,6 +22,7 @@ function clear(arrow, remaining) {
 }
 async function solve(page, index, delay = 0) {
   const level = fields[index]; await expect(page.locator('#game-shell')).toHaveAttribute('data-level', level.id); await sleep(400);
+  if (delay) await sleep(750); // Keep the untouched composition readable before its first move.
   const removed = await page.evaluate(() => JSON.parse(localStorage.getItem('arrows.progress.v1')).campaign.board.removed);
   const remaining = level.arrows.filter(a => !removed.includes(a.id));
   while (remaining.length) {
