@@ -51,7 +51,7 @@ RU/EN copy now covers the implemented menus, calendar, dialogs, settings and gam
 
 ## Stage B policy decisions
 
-The first chapter contains 20 fixed own tasks (Hard 6/12/18, Nightmare 20) and ends explicitly. The full bank remains stage E. Active Hint idle is 12 seconds excluding required tutorials/background/dialogs/ads; camera movement does not reset it. Free refill is once per attempt; restart resets that eligibility. These remain project policies.
+The first chapter contains 20 fixed own tasks (Hard 6/12/18, Nightmare 20) and ends explicitly. The full bank remains stage E. Stage B initially used 12 active seconds for Hint; the user explicitly changed this to 3 seconds in 0.11.0, excluding required tutorials/background/dialogs/ads; camera movement does not reset it. Free refill is once per attempt; restart resets that eligibility. These remain project policies.
 
 A late earned right for an ineligible/retired attempt is durably reserved under its original identity rather than applied to the next task. Reservations and receipt IDs are retained without arbitrary trimming; a future explicit recovery/support policy must honor them. Invalid/future progress is preserved verbatim in storage and opens an explicitly unsaved session. Only unsafe camera metadata is automatically repaired. A failed write is resolved by authoritative readback or gates mutations until recovery.
 
@@ -135,3 +135,10 @@ Construction now peels paths from a filled silhouette, with orphan repair and se
 0.10.0 moves blocked arrows along their measured route to the nearest blocker and reverses the same route. Contact owns impact sound/haptics and sparks; domain acceptance, first-error life cost and durable progression remain independent. Removing a blocker or activating the now-free arrow during motion must not introduce a snap, phantom impact or extra penalty. Navigation/background settles presentation and never replays a completed reward.
 
 Menu routes now stagger visible cards and carry matching Home art into destination headers. Metadata refresh is deferred through the finite transition to preserve animated element identity. Victory begins after the last exit flight, with bounded confetti/rings, a staged result and original ascending sound. Native haptics use distinct short amplitude/timing patterns with capability fallback. See `FEEL_PASS.md` for exact bounds, lifecycle contracts, recording provenance and phone-evidence limits. No content catalogue, save schema, ads policy, SDK or kit pin changes.
+
+
+## User-approved minimal interface, 2026-11-10
+
+0.11.0 implements the agreed UI simplification: one primary Home action, persistent compact bottom navigation outside route snapshots, smaller gameplay HUD, unframed victory and award shelf, plain settings rows and contextual detail disclosure. The user explicitly requested three seconds instead of twelve for the active Hint delay and less vertical space for lives/buttons. The explicit video-labelled Hint now opens existing pre-show loading directly, removing the confirmation step. Existing rewarded authority and cadence are unchanged.
+
+Held-preview growth, small dot response, entry stroke stagger and once-per-new-earned-award travel remain finite presentation. Restores never manufacture/replay earned rewards. All embedded attempts, content catalogue 5, daily/trophy geometry, save schema and kit pin are preserved. See `MINIMAL_UI.md` for exact motion bounds, background/idle rules and verification provenance.

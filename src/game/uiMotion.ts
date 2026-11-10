@@ -5,6 +5,7 @@ export function createUiMotion() {
   const deferredRoutes = new Set<() => void>();
   const dialogs = new Map<HTMLDialogElement, { finish(): void; cancel(): void }>();
   let snapshotSerial = 0;
+  let awardFinish: (()=>void) | undefined;
   let routeFinish: (() => void) | undefined, routeBusy = false, alive = true;
   const animate = (element: Element, frames: Keyframe[], duration: number, done = (): void => {}, delay = 0): (() => void) => {
     if (!alive || reduced.matches || document.hidden || !element.animate) { done(); return () => {}; }
@@ -44,10 +45,6 @@ export function createUiMotion() {
     swap(root: HTMLElement, from: string, to: string, render: () => void): void {
       routeFinish?.();
       if (from === to || reduced.matches || document.hidden || !alive) { render(); return; }
-      const sourceArt = new Map<string, { rect: DOMRect; image: HTMLImageElement }>();
-      if (from !== 'game' && !root.hidden) for (const img of root.querySelectorAll<HTMLImageElement>('img[data-motion-key]')) {
-        const rect = img.getBoundingClientRect(); if (rect.width && rect.bottom > 0 && rect.top < innerHeight) sourceArt.set(img.dataset.motionKey!, { rect, image: img });
-      }
       let snapshot: HTMLElement | undefined;
       if (from !== 'game' && !root.hidden) {
         snapshot = root.cloneNode(true) as HTMLElement; snapshot.removeAttribute('id'); snapshot.hidden = false;
@@ -60,40 +57,31 @@ export function createUiMotion() {
           else if (value !== attr.value) el.setAttribute(attr.name, value);
         }
         snapshot.className = 'route-snapshot'; snapshot.inert = true; snapshot.setAttribute('aria-hidden', 'true');
-        const style = getComputedStyle(root); snapshot.style.padding = style.padding;
+        const style = getComputedStyle(root), rect = root.getBoundingClientRect(); snapshot.style.padding = style.padding;
+        Object.assign(snapshot.style,{left:`${rect.x}px`,top:`${rect.y}px`,width:`${rect.width}px`,height:`${rect.height}px`,right:'auto',bottom:'auto'});
         root.parentElement!.append(snapshot); snapshot.scrollTop = root.scrollTop;
       }
       render(); routeBusy = true;
       const direction = to === 'home' || from === 'calendar' && to === 'collection' ? -1 : 1;
       const target = to === 'game' ? document.querySelector<HTMLElement>('#game-root')! : root;
       const owned: (() => void)[] = [];
-      if (snapshot) owned.push(animate(snapshot, [{ opacity: 1, transform: 'translateX(0)' }, { opacity: 0, transform: `translateX(${-direction*20}px) scale(.985)` }], 230));
+      if (snapshot) owned.push(animate(snapshot, [{ opacity: 1, transform: 'translateX(0)' }, { opacity: 0, transform: `translateX(${-direction*8}px)` }], 160));
       if (to !== 'game') {
-        // Read final layout before the stagger temporarily transforms the header.
-        const destinationArt = [...root.querySelectorAll<HTMLImageElement>('img[data-motion-key]')].map(img => ({ img, rect: img.getBoundingClientRect() }));
-        const items = [...root.querySelectorAll<HTMLElement>('.home-heading,.home-current,.portal-card,.meta-header,.record-grid>article,.record-rules,.meta-content>h2,.medal,.month-trophy,.month-award,.month-heading,.calendar-grid,.selected-day')]
-          .filter(el => { const r=el.getBoundingClientRect(); return r.width>0 && r.bottom>0 && r.top<innerHeight; }).slice(0,12);
-        items.forEach((el,i) => owned.push(animate(el,[{ opacity:0,transform:`translateY(${i === 0 ? -10 : 22}px) scale(.965)` },{ opacity:1,transform:'translateY(-2px) scale(1.008)',offset:.8 },{ opacity:1,transform:'translateY(0) scale(1)' }],380,undefined,Math.min(140,i*28))));
-        for (const { img, rect: dest } of destinationArt) {
-          const source=sourceArt.get(img.dataset.motionKey!); if (!source) continue;
-          const oldVisibility=img.style.visibility, art=source.image.cloneNode(true) as HTMLImageElement;
-          art.className='shared-menu-art'; art.removeAttribute('id'); art.removeAttribute('data-motion-key'); art.setAttribute('aria-hidden','true');
-          Object.assign(art.style,{ position:'fixed',left:`${source.rect.x}px`,top:`${source.rect.y}px`,width:`${source.rect.width}px`,height:`${source.rect.height}px`,margin:'0',transformOrigin:'0 0',pointerEvents:'none',zIndex:'12',objectFit:'contain' });
-          img.style.visibility='hidden'; root.parentElement!.append(art);
-          for (const old of snapshot?.querySelectorAll<HTMLImageElement>('img') ?? []) if (old.src===source.image.src) old.style.visibility='hidden';
-          owned.push(animate(art,[{ transform:'translate(0,0) scale(1)' },{ transform:`translate(${dest.x-source.rect.x}px,${dest.y-source.rect.y}px) scale(${dest.width/source.rect.width},${dest.height/source.rect.height})` }],430,()=>{ img.style.visibility=oldVisibility; art.remove(); })); break;
-        }
+        const bounds=root.getBoundingClientRect();
+        const items=[...root.querySelectorAll<HTMLElement>('.home-heading,.campaign-heading,.home-board,#home-play,.home-progress,.meta-header,.record-grid>article,.record-rules,.meta-content>h2,.medal,.month-trophy,.month-award,.month-heading,.calendar-grid,.selected-day')]
+          .filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.bottom>bounds.top&&r.top<bounds.bottom;}).slice(0,12);
+        items.forEach((el,i)=>owned.push(animate(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],220,undefined,Math.min(64,i*18))));
       }
       let done=false, endAnimation: (()=>void)|undefined;
       const finish=():void=>{ if(done)return; done=true; snapshot?.remove(); routeBusy=false; routeFinish=undefined; for(const end of owned)end(); endAnimation?.(); const work=[...deferredRoutes]; deferredRoutes.clear(); for(const fn of work)fn(); };
       routeFinish=finish;
-      endAnimation=animate(target,to==='game' ? [{ opacity:.15,transform:'scale(.975)' },{ opacity:1,transform:'scale(1)' }] : [{ opacity:.15 },{ opacity:1,offset:.6 },{ opacity:1 }],to==='game'?300:520,finish);
+      endAnimation=animate(target,[{opacity:.3},{opacity:1}],to==='game'?220:300,finish);
     },
     open(dialog: HTMLDialogElement): void {
       dialogs.get(dialog)?.cancel(); dialogs.delete(dialog);
       if (!dialog.open) dialog.showModal();
-      for (const el of [...dialog.querySelectorAll<HTMLElement>('header,.settings-section,.settings-group,.trophy-portrait,.trophy-rule,.primary')].slice(0,6)) animate(el,[{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'translateY(0)'}],260,undefined,60);
-      animate(dialog, [{ opacity: 0, transform: 'translateY(24px) scale(.94)' }, { opacity: 1, transform: 'translateY(-2px) scale(1.006)', offset:.8 }, { opacity: 1, transform: 'translateY(0) scale(1)' }], 300);
+      for (const el of [...dialog.querySelectorAll<HTMLElement>('header,.settings-section,.settings-group,.trophy-portrait,.trophy-rule,.primary')].slice(0,6)) animate(el,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],140,undefined,35);
+      animate(dialog, [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }], 200);
     },
     close(dialog: HTMLDialogElement, after: () => void): boolean {
       if (!dialog.open) { after(); return false; }
@@ -102,11 +90,21 @@ export function createUiMotion() {
       const finish = animate(dialog, [{ opacity: 1, transform: 'translateY(0) scale(1)' }, { opacity: 0, transform: 'translateY(9px) scale(.98)' }], 135, () => { if (cancelled) return; dialogs.delete(dialog); dialog.close(); after(); });
       if (dialog.open) dialogs.set(dialog, { finish, cancel() { cancelled = true; dialogs.delete(dialog); finish(); } }); return true;
     },
-    reveal(element: Element): void { animate(element, [{ opacity: .3, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }], 260); },
+    reveal(element: Element): void { animate(element, [{ opacity: .3, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }], 200); },
     impact(element: Element): void { animate(element,[{transform:'translateX(0)'},{transform:'translateX(-4px)',offset:.2},{transform:'translateX(3px)',offset:.45},{transform:'translateX(-2px)',offset:.7},{transform:'translateX(0)'}],180); },
     reward(element: Element): void {
-      const emblem=element.querySelector('.win-emblem'); if(emblem)animate(emblem,[{opacity:0,transform:'scale(.25) rotate(-18deg)'},{opacity:1,transform:'scale(1.16) rotate(4deg)',offset:.65},{opacity:1,transform:'scale(1) rotate(0)'}],560);
-      for(const [i,el] of [...element.querySelectorAll('strong,.win-detail,button')].entries()) animate(el,[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],340,undefined,70+i*55);
+      const emblem=element.querySelector('.win-emblem'); if(emblem)animate(emblem,[{opacity:0,transform:'scale(.25) rotate(-18deg)'},{opacity:1,transform:'scale(1.08) rotate(2deg)',offset:.65},{opacity:1,transform:'scale(1) rotate(0)'}],360);
+      for(const [i,el] of [...element.querySelectorAll('strong,.win-detail,button')].entries()) animate(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],240,undefined,40+i*40);
+    },
+    award(target: HTMLElement, artwork: string): void {
+      awardFinish?.();
+      if (!alive || reduced.matches || document.hidden || !target.isConnected) return;
+      const rect=target.getBoundingClientRect(); if(!rect.width||!rect.height)return;
+      const token=document.createElement('span'), x=innerWidth/2-18, y=innerHeight*.48-18;
+      token.className='award-flight';token.setAttribute('aria-hidden','true');token.innerHTML=artwork;
+      Object.assign(token.style,{left:`${x}px`,top:`${y}px`});document.body.append(token);
+      awardFinish=animate(token,[{opacity:0,transform:'translate(0,10px) scale(.7)'},{opacity:1,transform:'translate(0,0) scale(1.25)',offset:.23},{opacity:1,transform:`translate(${(rect.x+rect.width/2-18-x)*.5}px,${rect.y+rect.height/2-18-y-30}px) scale(.85)`,offset:.7},{opacity:0,transform:`translate(${rect.x+rect.width/2-18-x}px,${rect.y+rect.height/2-18-y}px) scale(.5)`}],680,()=>{token.remove();awardFinish=undefined;});
+      animate(target,[{transform:'scale(1)'},{transform:'scale(1.18)',offset:.4},{transform:'scale(1)'}],180,undefined,570);
     },
     finish: settle,
     destroy(): void {

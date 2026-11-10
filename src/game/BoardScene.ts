@@ -51,6 +51,9 @@ export class BoardScene extends Phaser.Scene {
   private impacts: Impact[] = [];
   private confetti: Confetto[] = [];
   private readonly feedbackListeners = new Set<(event: SceneFeedback) => void>();
+  private previewAt = 0;
+  private rewardCelebration = false;
+  public setRewardCelebration(): void { this.rewardCelebration=true; }
   private entry = 0;
   private errorUntil = -1;
   private victoryAt = -1;
@@ -94,7 +97,7 @@ export class BoardScene extends Phaser.Scene {
     this.boardCamera = new BoardCamera(level.width, level.height);
     this.paths = new Map(level.arrows.map(a => [a.id, measurePath(a.path)]));
     this.dotMask = new Map(level.mask.map(p => [`${p.x},${p.y}`, p]));
-    this.flights.length = 0; this.bumps.clear(); this.impacts.length = 0; this.confetti.length = 0; this.pulses.clear(); this.preview = null; this.active.clear(); this.overlay.clear(); this.reactiveDots.clear();
+    this.flights.length = 0; this.bumps.clear(); this.impacts.length = 0; this.confetti.length = 0; this.pulses.clear(); this.preview = null; this.rewardCelebration=false; this.active.clear(); this.overlay.clear(); this.reactiveDots.clear();
     this.entry = this.clock - (this.reducedMotion || board.complete ? 500 : 0); this.errorUntil = -1; this.victoryAt = board.complete ? this.clock - 2200 : -1; this.victoryCursor = board.complete ? level.mask.length : 0; this.announcedWin = board.complete;
     this.stableDirty = true; this.layout(true);
     if (view) { this.boardCamera.restore(view); this.transform(); }
@@ -146,7 +149,7 @@ export class BoardScene extends Phaser.Scene {
   public zoom(previous: Point, current: Point, ratio: number): void {
     this.focusMotion = null; this.boardCamera.zoom(previous, current, ratio); this.transform(); this.stableDirty = true; this.changed();
   }
-  public setPreview(id: string | null): void { if (id === this.preview) return; this.preview = id; this.stableDirty = true; this.changed(); }
+  public setPreview(id: string | null): void { if (id === this.preview) return; this.preview = id; this.previewAt=this.clock; const arrow=this.board.remaining.find(a=>a.id===id); if(arrow)this.excite(arrow.path.at(-1)!,4); this.stableDirty = true; this.changed(); }
   public setGuides(value: boolean): void { this.guides = value; this.stableDirty = true; this.changed(); }
   public activate(id: string): MoveResult {
     const result = this.board.activate(id);
@@ -192,14 +195,15 @@ export class BoardScene extends Phaser.Scene {
   private drawStable(): void {
     this.stableDirty = false; this.stable.clear(); this.guidesLayer.clear();
     const stroke = Math.max(.11, 1.9 / this.boardCamera.scale);
-    const amount = Math.min(1, (this.clock - this.entry) / 380);
-    const ease = 1 - (1 - amount) ** 3;
-    for (const arrow of this.board.remaining) {
+    for (const [index,arrow] of this.board.remaining.entries()) {
+      const amount=Math.max(0,Math.min(1,(this.clock-this.entry-Math.min(90,index*8))/280)), ease=1-(1-amount)**3;
       const path = this.paths.get(arrow.id)!;
       if (this.guides || arrow.id === this.preview) {
-        const head = arrow.path.at(-1)!;
+        const head = arrow.path.at(-1)!, at=this.boardCamera.screen(head), dir=path.direction, view=this.playArea;
+        const distance=(dir.x>0?view.x+view.width-at.x:dir.x<0?at.x-view.x:dir.y>0?view.y+view.height-at.y:at.y-view.y)/this.boardCamera.scale;
+        const growth=this.reducedMotion||this.guides?1:1-(1-Math.min(1,(this.clock-this.previewAt)/160))**3;
         this.guidesLayer.lineStyle(Math.max(.035, .7 / this.boardCamera.scale), this.colors.guide, 1);
-        this.guidesLayer.lineBetween(head.x, head.y, head.x + path.direction.x * 150, head.y + path.direction.y * 150);
+        this.guidesLayer.lineBetween(head.x, head.y, head.x + path.direction.x * Math.max(0,distance)*growth, head.y + path.direction.y * Math.max(0,distance)*growth);
       }
       if (this.bumps.has(arrow.id)) continue;
       const visible = ease < 1 ? extractPath(path, 0, path.length * ease) : arrow.path;
@@ -225,7 +229,7 @@ export class BoardScene extends Phaser.Scene {
     let seed = this.board.level.mask.length*997+this.board.level.arrows.length*7919;
     const random = (): number => { seed = (Math.imul(seed,1664525)+1013904223)>>>0; return seed/4294967296; };
     const colors = [0xc0b4ff,0xffd37f,0x91e6e8,0xff91b7,0x7d7dff,0xfff0d0];
-    for (let i=0; i<(this.board.level.difficulty === 'normal' ? 72 : 96); i++) this.confetti.push({ vx: (random()-.5)*340, vy: -100-random()*200, angle: random()*Math.PI*2, spin: (random()-.5)*12, length: 4+random()*6, width: 2+random()*2, life: 1400+random()*500, color: colors[i%colors.length]! });
+    for (let i=0; i<(this.rewardCelebration || this.board.level.difficulty === 'nightmare' ? 104 : this.board.level.difficulty === 'hard' ? 80 : 48); i++) this.confetti.push({ vx: (random()-.5)*340, vy: -100-random()*200, angle: random()*Math.PI*2, spin: (random()-.5)*12, length: 4+random()*6, width: 2+random()*2, life: (this.rewardCelebration || this.board.level.difficulty !== 'normal' ? 1400 : 900)+random()*450, color: colors[i%colors.length]! });
   }
   private drawCelebration(): void {
     if (this.reducedMotion || this.victoryAt < 0) return;
@@ -242,7 +246,7 @@ export class BoardScene extends Phaser.Scene {
     }
   }
   public hasMotion(): boolean {
-    return this.focusMotion !== null || this.clock - this.entry < 400 || this.flights.length > 0 || this.bumps.size > 0 || this.impacts.length > 0 || this.pulses.size > 0 || this.errorUntil > this.clock ||
+    return this.preview !== null && this.clock-this.previewAt<180 || this.focusMotion !== null || this.clock - this.entry < 400 || this.flights.length > 0 || this.bumps.size > 0 || this.impacts.length > 0 || this.pulses.size > 0 || this.errorUntil > this.clock ||
       this.victoryAt >= 0 && this.clock - this.victoryAt < (this.reducedMotion ? 150 : 2100);
   }
   public update(_time: number, delta: number): void {
@@ -255,7 +259,7 @@ export class BoardScene extends Phaser.Scene {
       this.transform(); this.stableDirty = true;
       if (f.elapsed >= 320) { this.focusMotion = null; this.changed(); }
     }
-    if (this.clock - this.entry < 420) this.stableDirty = true;
+    if (this.clock - this.entry < 420 || this.preview !== null && this.clock-this.previewAt<180) this.stableDirty = true;
     if (this.stableDirty) this.drawStable();
     this.active.clear(); const stroke = Math.max(.11, 1.9 / this.boardCamera.scale);
     for (let i = this.flights.length - 1; i >= 0; i--) {

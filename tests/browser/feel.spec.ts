@@ -52,15 +52,16 @@ test('finishes the last collision before opening the loss modal', async ({ page 
   await expect(page.locator('#game-dialog')).toBeVisible(); await expect(page.locator('#dialog-content')).toContainText(/lives|жизн/i);
 });
 
-test('keeps shared art connected through asynchronous collection refresh and clears all transition layers', async ({ page }) => {
+test('keeps navigation connected through asynchronous collection refresh and clears all transition layers', async ({ page }) => {
   const state=freshSave(); state.index=19; state.campaign=freshAttempt(campaign[19]!);
   state.wins=campaign.slice(0,19).map((l,i)=>({attempt:`fixture-${i}`,levelId:l.id,activeMs:1000,completedAt:i*1000,localDate:'1970-01-01',mistakes:0}));
   decodeSave(state);
   await page.addInitScript(({key,state})=>localStorage.setItem(key,JSON.stringify(state)),{key:SAVE_KEY,state});
-  await page.goto('/'); await page.locator('#home-collection:enabled').click();
-  const image=await page.locator('img.menu-emblem').elementHandle(); expect(image).not.toBeNull();
-  await expect(page.locator('.shared-menu-art')).toHaveCount(1); await page.waitForTimeout(250);
-  expect(await image!.evaluate(e=>e.isConnected)).toBe(true);
+  await page.goto('/'); await page.locator('#home-collection:enabled').waitFor();
+  const tab=await page.locator('#home-collection').elementHandle();
+  await page.locator('#home-collection').click();
+  await expect(page.locator('#home-collection')).toHaveAttribute('aria-current','page');
+  await page.waitForTimeout(250); expect(await tab!.evaluate(e=>e.isConnected)).toBe(true);
   await page.waitForTimeout(450); await expect(page.locator('.shared-menu-art,.route-snapshot')).toHaveCount(0);
   expect(await page.evaluate(()=>document.getAnimations().length)).toBe(0);
   await page.locator('[data-month="2026-01"]').click(); await page.locator('[data-nav=back]').evaluate((e:HTMLButtonElement)=>e.click());

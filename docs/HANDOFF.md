@@ -2,6 +2,10 @@
 
 ## Current milestone
 
+Version 0.11.0 / Android versionCode 16 implements the user-approved minimal UI pass: unframed Home/result/award shelf, stable bottom navigation, 59px phone HUD with 44px controls, growing held-preview ray and restrained transitions. Hint now appears after three active seconds and enters explicit video loading directly. See `MINIMAL_UI.md`. All content, saves, receipt authority and ad cadence remain unchanged.
+
+Previous feel milestone:
+
 Version 0.10.0 / Android versionCode 15 adds route-aware blocked-arrow contact/return, impact-timed sound/haptics, shared-art staggered menu transitions and finite confetti/result celebration. Content catalogue 5 and all embedded progress remain unchanged. Read `FEEL_PASS.md`. Verification is recorded below; physical-phone sound/vibration/performance acceptance remains open.
 
 Previous dense-bank milestone:

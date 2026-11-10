@@ -113,10 +113,12 @@ test('keeps hints contextual, excludes pause time and never grants from an unava
   await seed(page, 4);
   await page.locator('#choose-field').click(); await page.waitForTimeout(1500);
   await expect(page.locator('#hint')).toBeHidden(); await page.locator('#home-play').click();
-  await expect(page.locator('#hint')).toBeVisible({ timeout: 14500 });
+  await page.waitForTimeout(2200);
+  await expect(page.locator('#hint')).toBeHidden();
+  await expect(page.locator('#hint')).toBeVisible({ timeout: 2000 });
   const before = await page.locator('#game-shell').getAttribute('data-remaining');
-  await page.locator('#hint').click(); await expect(page.locator('#dialog-content')).toContainText(/highlight|выделим/);
-  await page.locator('[data-action=watch-hint]').click();
+  await expect(page.locator('#hint')).toContainText(/video|видео/i);
+  await page.locator('#hint').click(); await expect(page.locator('#game-dialog')).not.toBeVisible();
   await expect(page.locator('#app-status')).toContainText(/unavailable|недоступно/);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', before!);
   expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key)!).campaign.hint, SAVE_KEY)).toBeNull();

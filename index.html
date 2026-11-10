@@ -12,6 +12,7 @@
     <main id="game-shell" data-status="starting">
       <div id="game-root" tabindex="0" role="application" aria-label="Arrow puzzle"></div>
       <section id="meta-screen" aria-label="Game menu"></section>
+      <nav id="meta-nav" hidden></nav>
       <div id="tutorial-pointer" hidden aria-hidden="true"></div>
       <header id="game-header">
         <div class="top-row">
@@ -19,17 +20,16 @@
             <button id="choose-field" class="circle" type="button" aria-label="Choose a board"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
             <button id="restart" class="circle" type="button" aria-label="Restart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8a8 8 0 1 1-1 7M5 3v6h6"/></svg></button>
           </div>
-          <div class="heading"><h1 id="app-title">Стрелки</h1><span id="difficulty"></span></div>
+          <div class="heading"><h1 id="app-title">Стрелки</h1><div class="level-status"><div id="hearts" aria-label="Lives: 3"><span>♥</span><span>♥</span><span>♥</span></div><span id="difficulty"></span></div></div>
           <div class="top-spacer"><button id="game-settings" class="circle settings-button" type="button" aria-label="Settings"></button></div>
         </div>
-        <div id="hearts" aria-label="Lives: 3"><span>♥</span><span>♥</span><span>♥</span></div>
         <div id="board-progress" role="progressbar" aria-label="Board progress" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><div id="progress-fill"></div></div>
       </header>
       <footer id="game-footer">
         <section id="win" hidden><span class="win-emblem" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="21"/><path d="m14 24 7 7 14-15"/></svg></span><strong id="win-title"></strong><span id="win-detail" class="win-detail"></span><button id="next" class="primary" type="button"></button></section>
         <p id="app-status"></p>
         <button id="hint" class="hint-button" type="button" hidden></button>
-        <button id="guides" class="circle" type="button" aria-pressed="false" aria-label="Show exit directions">#</button>
+        <button id="guides" class="circle" type="button" aria-pressed="false" aria-label="Show exit directions" aria-describedby="guides-label">#</button><span id="guides-label" hidden></span>
         <span id="field-name"></span>
       </footer>
       <aside id="save-status" hidden role="status"><span id="save-message"></span><button id="save-retry" type="button"></button><button id="session-play" type="button" hidden></button></aside>

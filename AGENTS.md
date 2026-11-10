@@ -21,3 +21,5 @@ Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the
 - Latest authorization: the user requested rebuilding c05–c120 in 0.9.0. Fresh fields use contentVersion 4/catalogue 5; c01–c04 remain v3. Earlier c05-onward freeze notes are historical. Preserve all embedded attempts, daily/trophy content and reward identities. Enforce `docs/CONTENT_BANK_V4.md` quality gates and retain authentic GIF provenance.
 
 - Current feel pass 0.10.0 changes only presentation/feedback. Preserve `docs/FEEL_PASS.md` contact timing, route reversal, async-menu element ownership, finite celebration/idle rendering and no-replay rules. GIFs are silent; an actual-output audio video complements them. Physical haptic feel still requires a phone.
+
+- 0.11.0 follows the user-approved minimal UI plan. Hint uses three active seconds and an explicit video-labelled direct entry to cancellable loading. Keep stable bottom-nav controls outside route snapshots, compact HUD 44px targets, keyboard medal disclosure, finite preview/award motion and unchanged reward authority. See `docs/MINIMAL_UI.md`.

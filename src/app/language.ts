@@ -4,6 +4,7 @@ export const normalizeGameLanguage = (value: string | undefined): GameLanguage =
 
 export const copy = {
   ru: {
+    navHome: 'Главная', navDaily: 'Календарь', navLabel: 'Разделы игры', guideShort: 'Направления', newAward: 'Новая награда',
     flawless: 'Без ошибок!', cleared: 'Путь свободен',
     adPreparing: 'Подготавливаем видео…', adLoading: 'Загружаем видео…', adOpening: 'Открываем видео…', adDescription: 'Поле и прогресс сохраняются', cancelAd: 'Отменить', videoCancelled: 'Просмотр отменён.', videoClosed: 'Видео закрыто. Награда выдаётся после подтверждения просмотра.', rewardPending: 'Подтверждаем награду…',
     settings: 'Настройки', appearance: 'Оформление', darkTheme: 'Тёмная', lightTheme: 'Светлая', feedback: 'Звук и отклик', sounds: 'Звуки', vibrations: 'Вибрация', language: 'Язык', soundDescription: 'Стрелки, ошибки и победы', vibrationDescription: 'Короткий отклик на действия', previewSound: 'Проверить звук', settingsSaved: 'Настройки сохранены', savingSettings: 'Сохраняем…', loadingSettings: 'Загружаем настройки…', settingsSaveError: 'Не удалось сохранить настройки', retrySettings: 'Повторить', boardProgress: 'Прогресс поля',
@@ -43,6 +44,7 @@ export const copy = {
     teach_zoom: 'Приблизь поле двумя пальцами. Одним пальцем можно двигать его',
   },
   en: {
+    navHome: 'Home', navDaily: 'Calendar', navLabel: 'Game sections', guideShort: 'Directions', newAward: 'New award',
     flawless: 'No mistakes!', cleared: 'Path cleared',
     adPreparing: 'Preparing video…', adLoading: 'Loading video…', adOpening: 'Opening video…', adDescription: 'Your board and progress are saved', cancelAd: 'Cancel', videoCancelled: 'Video cancelled.', videoClosed: 'Video closed. Rewards require viewing confirmation.', rewardPending: 'Confirming your reward…',
     settings: 'Settings', appearance: 'Appearance', darkTheme: 'Dark', lightTheme: 'Light', feedback: 'Sound & feedback', sounds: 'Sounds', vibrations: 'Vibration', language: 'Language', soundDescription: 'Arrows, mistakes and victories', vibrationDescription: 'Brief feedback for your actions', previewSound: 'Preview sound', settingsSaved: 'Settings saved', savingSettings: 'Saving…', loadingSettings: 'Loading settings…', settingsSaveError: 'Could not save settings', retrySettings: 'Retry', boardProgress: 'Board progress',

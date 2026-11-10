@@ -35,7 +35,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const activeBoard = () => { const a = active(); return new Board(a.level, a.board.id, a.board); };
   const requestedRewards = new Set<string>();
   let holdTimer: ReturnType<typeof setTimeout> | undefined, cameraTimer: ReturnType<typeof setTimeout> | undefined;
-  let modal: 'pause' | 'controls' | 'restart' | 'lost' | 'hint' | null = null;
+  let modal: 'pause' | 'controls' | 'restart' | 'lost' | null = null;
   let notice = '', idleMs = 0, pendingTime = 0, pendingAdTime = 0, lastTime = performance.now(), wasActive = false, lastFlush = lastTime;
   let lastSaveError: string | null = null;
   let knownAwards = new Set<string>(), knownIndex = -1;
@@ -162,7 +162,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if (kind === 'controls' && !reviewFields.length) return;
     cancel(); saveView(); modal = kind; platform.activity.setBlocked('dialog', true); content.replaceChildren();
     const title = document.createElement('h2'); title.id = 'dialog-title';
-    title.textContent = kind === 'pause' ? `${text.level} ${progress.state.index + 1}` : kind === 'controls' ? text.chooseField : kind === 'lost' ? text.noLives : kind === 'hint' ? text.hintTitle : text.restartQuestion;
+    title.textContent = kind === 'pause' ? `${text.level} ${progress.state.index + 1}` : kind === 'controls' ? text.chooseField : kind === 'lost' ? text.noLives : text.restartQuestion;
     content.append(title);
     const button = (key: string, label: string, action: () => void, primary = false): void => {
       const el = document.createElement('button'); el.type = 'button'; el.dataset.action = key; el.textContent = label;
@@ -195,7 +195,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       button('pause', text.pause, () => open('pause'));
       if (notice) paragraph(notice);
     } else {
-      paragraph(text.hintExplanation); button('watch-hint', text.watchVideo, () => run(requestReward('hint')), true); button('cancel', text.cancel, close);
+      button('cancel', text.cancel, close);
     }
     motion.open(dialog);
   };
@@ -227,7 +227,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     document.querySelector('#win-detail')!.textContent = board.snapshot().errors.length === 0 ? text.flawless : text.cleared;
     const step = tutorial();
     status.textContent = !loaded ? text.restoring : notice || (step ? text[`teach_${step}` as keyof typeof text] : control && remaining === board.level.arrows.length ? text.zoomTip : '');
-    hintButton.hidden = !loaded || control || board.complete || board.hearts === 0 || !!step || idleMs < 12000 || a.hint !== null;
+    const hintWasHidden = hintButton.hidden;
+    hintButton.hidden = !loaded || control || board.complete || board.hearts === 0 || !!step || idleMs < 3000 || a.hint !== null;
+    if (hintWasHidden && !hintButton.hidden) motion.reveal(hintButton);
+    const guideLabel=document.querySelector<HTMLElement>('#guides-label')!; guideLabel.hidden = step !== 'guides'; guideLabel.textContent=text.guideShort;
     hintButton.disabled = requestingAd || !progress.available || progress.uncertain;
     warning.hidden = progress.error === null && !loadSlow;
     document.querySelector('#save-message')!.textContent = loadSlow ? text.restoring : progress.error === 'load' ? text.sessionOnly : progress.error === 'uncertain' ? text.saveUncertain : text.saveFailed;
@@ -281,7 +284,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     }
     const awards = earnedAwards(progress.state);
     if (event.kind !== 'load' && knownIndex >= 0) {
-      for (const item of awards) if (!knownAwards.has(item)) { platform.analytics.track('collection_unlock', { item }); if (meta.screen === 'game') pendingAward = true; }
+      for (const item of awards) if (!knownAwards.has(item)) { platform.analytics.track('collection_unlock', { item }); if (meta.screen === 'game') { pendingAward = true; scene.setRewardCelebration(); meta.queueAward(); } }
       if (knownIndex < 9 && progress.state.index >= 9) platform.analytics.track('collection_unlock', { item: 'collection' });
       if (knownIndex < 19 && progress.state.index >= 19) platform.analytics.track('collection_unlock', { item: 'challenge' });
     }
@@ -332,13 +335,13 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   on(document.querySelector<HTMLElement>('#restart')!, 'click', () => open('restart'));
   on(document.querySelector<HTMLElement>('#guides')!, 'click', () => { cancel(); scene.setGuides(!scene.guides); if (!control) { saveView(); finishTutorial('guides'); } });
   on(document.querySelector<HTMLElement>('#next')!, 'click', advanceWin);
-  on(hintButton, 'click', () => open('hint'));
+  on(hintButton, 'click', () => { if (!hintButton.hidden && !hintButton.disabled && meta.screen === 'game' && !platform.activity.isBlocked() && !motion.routeBusy) run(requestReward('hint')); });
   on(retry, 'click', () => { retry.disabled = true; run(progress.recover().finally(() => { retry.disabled = false; notice = ''; sync(); })); });
   sessionPlay.textContent = text.sessionPlay;
   on(sessionPlay, 'click', () => { progress.startSessionOnly(); finishLoad(); });
   on(dialog, 'cancel', event => { event.preventDefault(); if (modal === 'lost') open('pause'); else close(); sync(); });
   listeners.push(platform.activity.onBlockedChange(value => { sample(); if (value) { cancel(); saveView(); if (scene.board.complete) { celebratedAttempt = scene.board.attemptId; pendingAward = false; } scene.settlePresentation(); } }));
-  listeners.push(platform.activity.onBlockReasonsChange(() => { if (platform.activity.getBlockReasons().some(reason => !['menu','dialog','settings','trophy-preview'].includes(reason))) motion.finish(); }));
+  listeners.push(platform.activity.onBlockReasonsChange(() => { if (platform.activity.getBlockReasons().some(reason => !['menu','dialog','settings','trophy-preview'].includes(reason))) { motion.finish(); meta.discardAward(); } }));
   listeners.push(scene.subscribe(sync));
   listeners.push(scene.subscribeFeedback(event => {
     if (!loaded || meta.screen !== 'game' || scene.board.attemptId !== event.attempt) return;
@@ -372,7 +375,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     document.querySelector('#choose-field')!.setAttribute('aria-label', text.home);
     document.querySelector('#restart')!.setAttribute('aria-label', text.restart);
     document.querySelector('#guides')!.setAttribute('aria-label', text.guides);
-    hintButton.textContent = text.hint; sessionPlay.textContent = text.sessionPlay;
+    hintButton.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 3H9c0-1 0-2-1-3Z"/></svg><span>${text.hint}</span><svg class="video-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg>`; sessionPlay.textContent = text.sessionPlay;
   };
   localize();
   listeners.push(platform.settings.subscribe(() => {
