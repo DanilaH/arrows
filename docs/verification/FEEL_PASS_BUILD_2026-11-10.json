@@ -1,0 +1,220 @@
+{
+  "sourceCommit": "3c0045efc6585a12b58f7bf9c9e753f9eece59c1",
+  "sourceTree": "63ab4fecde067b99fcfcee18c293cba225798d8e",
+  "workflowRun": 42825677737,
+  "manifest": {
+    "versionCode": 15,
+    "versionName": "0.10.0",
+    "compileSdkVersion": 36,
+    "compileSdkVersionCodename": "16",
+    "package": "com.danilah.arrows",
+    "platformBuildVersionCode": 36,
+    "platformBuildVersionName": 16
+  },
+  "matchingWebPayloadFiles": 8,
+  "webPayload": {
+    "assets/index-CO79UxMn.js": "e63874c88e101725fb58787cde75fdbda3897a47ec61def51d9c7603ef7acea1",
+    "assets/index-ZlV_7yLX.css": "4da2a63d424e8fb09c96dd409cbf9e4f46871fe402af2e9726cf4d37a993a7e1",
+    "assets/web-zpbcMZRt.js": "440fa88a3dcfe43419848037486d3d368d640bf6f7862894510cd4f473b40f16",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "c6ccd96f14ee3e9148a0b310f8849c625a897feeb8b743b8952781cf707a31dc",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "nativeConfigurationMatches": true,
+  "sharedAnalyticsContractMatches": true,
+  "nativeTests": [
+    {
+      "name": "com.danilah.arrows.FeedbackPatternTest",
+      "tests": "2",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-10T13:35:25.576Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.004"
+    },
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-10T13:35:25.583Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.014"
+    }
+  ],
+  "capture": {
+    "sourceCommit": "3c0045efc6585a12b58f7bf9c9e753f9eece59c1",
+    "provenance": "Unaltered production Chromium mobile emulation RU390x844 DPR2. Fresh storage, nineteen wins earned by ordinary touch selected with independent cell-walking oracle. Ordinary pinch for gameplay framing. Menu clicks via native DOM click to avoid automation stability waits. No injected progression or achievements. Not physical phone evidence.",
+    "assets": {
+      "assets/index-CO79UxMn.js": "e63874c88e101725fb58787cde75fdbda3897a47ec61def51d9c7603ef7acea1",
+      "assets/index-ZlV_7yLX.css": "4da2a63d424e8fb09c96dd409cbf9e4f46871fe402af2e9726cf4d37a993a7e1",
+      "assets/web-zpbcMZRt.js": "440fa88a3dcfe43419848037486d3d368d640bf6f7862894510cd4f473b40f16",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "records": [
+      {
+        "name": "arrows-feel-gameplay",
+        "frames": 128,
+        "durationMs": 8406,
+        "audio": "Actual AudioContext output tee into MediaStreamAudioDestinationNode and MediaRecorder Opus; timestamp-aligned and muxed AAC, no added/replaced sound."
+      },
+      {
+        "name": "arrows-feel-menus",
+        "frames": 140,
+        "durationMs": 10327,
+        "audio": null
+      }
+    ],
+    "ending": {
+      "wins": 19,
+      "index": 19,
+      "cups": [],
+      "dailyWins": {}
+    }
+  },
+  "artifacts": [
+    {
+      "name": "Arrows-0.10.0-debug.apk",
+      "bytes": 10215374,
+      "sha256": "577dbc563fdc297e4bdcebe99708136f8e2e8dc2400812d8527de48ab996dd4d"
+    },
+    {
+      "name": "arrows-feel-gameplay-sound.mp4",
+      "bytes": 187765,
+      "sha256": "b1547b08dfc31a5798c9cf7626116b0d1b0646256ebf3807d381de13ca2fd5d2"
+    },
+    {
+      "name": "arrows-feel-gameplay.gif",
+      "bytes": 338790,
+      "sha256": "22379d8cce88fb279cdc56733dac11a9f9c844ad0c57e58cabcd820805ab37f2",
+      "width": 390,
+      "height": 844,
+      "durationMs": 8500,
+      "frames": 153
+    },
+    {
+      "name": "arrows-feel-menus.gif",
+      "bytes": 2290632,
+      "sha256": "b722bf67740b313df48bff061002b98b6f039eb087c0f8872ef78197f048b823",
+      "width": 390,
+      "height": 844,
+      "durationMs": 10450,
+      "frames": 188
+    }
+  ],
+  "localVerification": {
+    "typescriptTests": 85,
+    "fullBrowserCases": 86,
+    "finalRouteRetestCases": 12,
+    "productionBuild": "passed",
+    "androidSync": "passed"
+  },
+  "limits": [
+    "Browser mobile emulation; no physical-phone vibration/sound/performance acceptance.",
+    "Default native ad configuration remains demo; live SDK earned/dashboard acceptance is separate."
+  ],
+  "ci": {
+    "url": "https://github.com/DanilaH/arrows/actions/runs/42825677737",
+    "webJob": 129862231507,
+    "androidJob": 129862231890,
+    "web": "success",
+    "android": "success",
+    "typescriptTests": 85,
+    "browserCases": 86,
+    "nativeJvmTests": 7
+  },
+  "archives": [
+    {
+      "artifact": 13768756898,
+      "name": "arrows-debug",
+      "sha256": "e56dc5eb5b77c479e07ad5d9e4bd94bfd174510e6e5152bb54a439af1f50c71e"
+    },
+    {
+      "artifact": 13768198179,
+      "name": "native-unit-results",
+      "sha256": "d52d9914e7a9a17f5f05e09a89d2610c3dd0d7217d4a524fc24002960df004dd"
+    }
+  ],
+  "visualQA": [
+    {
+      "name": "phone-dark",
+      "winBox": {
+        "x": 25,
+        "y": 509,
+        "width": 340,
+        "height": 246
+      },
+      "animations": 0
+    },
+    {
+      "name": "narrow-light",
+      "winBox": {
+        "x": 18,
+        "y": 305,
+        "width": 284,
+        "height": 246
+      },
+      "animations": 0
+    },
+    {
+      "name": "landscape",
+      "winBox": {
+        "x": 90,
+        "y": 220,
+        "width": 600,
+        "height": 86
+      },
+      "animations": 0
+    },
+    {
+      "name": "reduced",
+      "winBox": {
+        "x": 25,
+        "y": 509,
+        "width": 340,
+        "height": 246
+      },
+      "animations": 0
+    },
+    {
+      "name": "narrow-collection",
+      "overflow": false
+    },
+    {
+      "name": "narrow-calendar",
+      "overflow": false
+    }
+  ],
+  "backgroundInterruptionQA": {
+    "impactCount": 0,
+    "wins": 0,
+    "animations": 0,
+    "lives": "2",
+    "remaining": 0
+  },
+  "nativeFeedbackProfileCompiled": true,
+  "contentBankUnchanged": true,
+  "deliveredFiles": [
+    {
+      "name": "Arrows-0.10.0-debug.apk",
+      "libraryFileId": "libfile_5e13c58e996c819181fdfe26e41e998e"
+    },
+    {
+      "name": "arrows-feel-gameplay.gif",
+      "libraryFileId": "libfile_b84cb7215d5c81918a73ca8c4a8081e1"
+    },
+    {
+      "name": "arrows-feel-menus.gif",
+      "libraryFileId": "libfile_e264a9e039e08191852cbf4862aa13e8"
+    },
+    {
+      "name": "arrows-feel-gameplay-sound.mp4",
+      "libraryFileId": "libfile_35ceede006548191b0b6402ab659ae2c"
+    }
+  ]
+}
