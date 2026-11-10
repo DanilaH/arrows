@@ -1,0 +1,143 @@
+{
+  "sourceCommit": "6f66a340a93adb3ba5f209b5a51f54c3b7d3e42a",
+  "sourceTree": "eba3bbc88f38007735f459345711a28fe8a777c0",
+  "workflowRun": 42790495206,
+  "apk": {
+    "name": "Arrows-0.9.0-debug.apk",
+    "bytes": 10210622,
+    "sha256": "7b01d9f94f145b18cd62d234ae7fc029124dd0f224476f0722d461b568ddb970"
+  },
+  "manifest": {
+    "versionCode": 14,
+    "versionName": "0.9.0",
+    "compileSdkVersion": 36,
+    "compileSdkVersionCodename": "16",
+    "package": "com.danilah.arrows",
+    "platformBuildVersionCode": 36,
+    "platformBuildVersionName": 16
+  },
+  "matchingWebPayloadFiles": 8,
+  "nativeConfigurationMatches": true,
+  "sharedAnalyticsContractMatches": true,
+  "nativeTests": [
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-10T09:26:29Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.025"
+    }
+  ],
+  "capture": {
+    "sourceCommit": "6f66a340a93adb3ba5f209b5a51f54c3b7d3e42a",
+    "provenance": "Actual production Chromium mobile emulation RU390x844 DPR2. Fresh storage; nineteen wins earned by ordinary touch selected with an independent cell-walking oracle. Clips show genuine blocked/free dependencies and pinch. No injected progression, rewards or altered gameplay pixels. Not physical-device performance evidence.",
+    "assetHashes": {
+      "assets/index-BfTuN-1-.css": "49cf872c563b2cd96ae29cc3bbfa0e3f2ae53ab5e3aa35a8ec6ae641f523c191",
+      "assets/index-C-SW9NuQ.js": "db2e2086da516cfd072e47a400e894c8ffda5e5f0d04dcfd1e43f3ef821f78cd",
+      "assets/web-B7gmyHzy.js": "c23f540574a1452dd01ea97ff1a5154949cfc3cea354e43d3c77d1c15c88ca59",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "records": [
+      {
+        "file": "arrows-dense-early.gif",
+        "frames": 147,
+        "durationMs": 11035
+      },
+      {
+        "file": "arrows-dense-nightmare.gif",
+        "frames": 71,
+        "durationMs": 7457
+      }
+    ],
+    "ending": {
+      "wins": 19,
+      "index": 19,
+      "cups": [],
+      "dailyWins": {}
+    }
+  },
+  "gifs": [
+    {
+      "name": "arrows-dense-nightmare.gif",
+      "bytes": 599743,
+      "sha256": "3416ad6937968d6006a9f9ec8bc472f1cb8e32ce5dbf1af7192c98db3f6cb68c"
+    },
+    {
+      "name": "arrows-dense-early.gif",
+      "bytes": 321837,
+      "sha256": "1081aae3b40a9f5ac367c1b67677cb275ce2db5aae50995eb36d1101c3c48ac5"
+    }
+  ],
+  "catalogueDiagram": {
+    "name": "dense-catalog.png",
+    "bytes": 383852,
+    "sha256": "001e53f2abc20063d4c0b17b33ce990347d40a374d2ccb5a7757bec7947c9be8",
+    "campaignSha256": "9704048112fda6a2827cc5b834eb9c97490644aefb79775c33052e84dd542dcb",
+    "provenance": "Code-rendered diagram from exact current level paths; no gameplay/earned-state UI."
+  },
+  "localVerification": {
+    "typescriptTests": 81,
+    "browserCases": 22,
+    "productionBuild": "passed",
+    "offlineContentTypecheck": "passed",
+    "compactWriterBankIdentity": "passed",
+    "androidSync": "passed"
+  },
+  "visualQA": {
+    "families": 20,
+    "levels": [
+      12,
+      18,
+      20,
+      23,
+      30,
+      33,
+      40,
+      50,
+      53,
+      60,
+      63,
+      67,
+      70,
+      73,
+      80,
+      90,
+      97,
+      100,
+      110,
+      120
+    ],
+    "provenance": "Actual production renderer with explicit synthetic QA starting points, internal inspection only; never used as earned-play GIF evidence."
+  },
+  "limitations": "Structural selection, exact build evidence and actual browser-emulation recordings. Human progression/phone feel/frame pacing and live native-service acceptance remain open.",
+  "artifactArchives": [
+    {
+      "id": 13751448429,
+      "name": "native-unit-results",
+      "digest": "sha256:1622c1d350dbc574e2712a0575a020397931564ccdf5177571682da7fd33c975",
+      "size": 1348
+    },
+    {
+      "id": 13750678921,
+      "name": "arrows-debug",
+      "digest": "sha256:28941d177e092c932486689a2582e173b8a06cda804f2a439daf370e628754ad",
+      "size": 9567165
+    }
+  ],
+  "ci": {
+    "conclusion": "success",
+    "typescriptTests": 81,
+    "browserCases": 80,
+    "browserScope": {
+      "ordinaryApplication": 62,
+      "isolatedRealControl": 12,
+      "isolatedAds": 6
+    },
+    "nativeTests": 5,
+    "androidAssembly": "passed"
+  }
+}
