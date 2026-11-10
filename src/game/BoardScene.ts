@@ -313,7 +313,13 @@ export class BoardScene extends Phaser.Scene {
       else if(!this.focusMotion){
         if(reveal.started<0)reveal.started=this.clock;
         const age=this.clock-reveal.started,duration=Math.max(360,Math.min(650,path.length*this.boardCamera.scale/750*1000));
-        if(age<duration){const end=path.length*Math.min(1,age/duration),band=Math.min(path.length,Math.max(1.2,path.length*.18));this.stroke(this.active,extractPath(path,Math.max(0,end-band),Math.min(band,end)),this.colors.exit,stroke*2.1,false,.85);this.excite(pointAt(path,end),3);}
+        if(age<duration){
+          const end=path.length*Math.min(1,age/duration),band=Math.min(path.length,Math.max(1.2,path.length*.18));
+          const light=extractPath(path,Math.max(0,end-band),Math.min(band,end));
+          this.stroke(this.active,light,this.colors.exit,stroke*2.7,false,.38);
+          this.stroke(this.active,light,0xffffff,stroke*1.05,false,.95);
+          this.excite(pointAt(path,end),3);
+        }
         else{
           if(!reveal.arrived){reveal.arrived=true;this.excite(path.points.at(-1)!,9);this.feedback('hint-ready');}
           const t=(age-duration)/240,head=path.points.at(-1)!;

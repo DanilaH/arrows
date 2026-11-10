@@ -52,7 +52,7 @@ D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, 
 
 ## Verification
 
-0.12.0 local: `npm run check` passes (85 TS tests and production build); all fourteen new assistance browser cases pass on phone/desktop emulation. Native sync, related existing regressions, CI assembly and exact artifact/capture verification follow in the final evidence record.
+0.12.0 local: `npm run check` passes (85 TS tests and production build); all fourteen new assistance browser cases pass on phone/desktop emulation. Native sync and twenty-two related feel/minimal-UI/motion/idle cases also pass. CI assembly and exact artifact/capture verification follow in the final evidence record.
 
 Current 0.11.0: [CI 42873215357](https://github.com/DanilaH/arrows/actions/runs/42873215357) passes both jobs on source `310d9324e91ac44a0cd88de4e3e737b811cbf86b`: 85 TS tests, all 94 browser cases (76 ordinary application, twelve isolated real-control and six isolated ads), seven JVM tests and Android assembly. Final local typecheck/build/native sync and fourteen focused browser cases pass. Earlier 0.11 checks exposed a real footer recentering race after tutorial removal and summary focus loss during async Collection refresh; stable transparent text bounds, middle-aligned Hint/directions and stable summary IDs fix them, with direct regressions. Idle smoke checks the same quiescent RAF window within a bounded deadline; no phone performance claim follows from software-rendering timing.
 
