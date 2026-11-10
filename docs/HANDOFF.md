@@ -100,7 +100,9 @@ The user explicitly authorized initialization, main-branch writes and routine re
 
 First CI run `42587117226` failed before native compilation because setup-android's default `tools` package no longer exists, and before browser acceptance because Playwright does not support the runner's new Ubuntu 26.04 image. The corrected workflow requests `platform-tools` explicitly and pins Ubuntu 24.04. Corrected run `42587270211` passed both jobs and produced the debug artifact. The following documentation-only evidence update does not change that verified payload.
 
-## Next work: D and physical acceptance
+## Next work: content quality, D and physical acceptance
+
+The 2026-11-10 read-only bank audit found a priority content issue after the compact opening: silhouettes exist, but c05 onward is not uniformly tight/challenging. Filled-mask occupancy falls to 37.7% at c90 and 45.9% at c120; c21–c120 averages about 65% initially free arrows. c20 has 48/87 initially free and c120 35/54. Nine ordinary/Hard/Nightmare fields were visually inspected in the actual production renderer with explicit synthetic QA starting points; these are not earned-play/delivery recordings. Prior legality tests prove solvability, not content quality or player difficulty. See `verification/CAMPAIGN_QUALITY_AUDIT_2026-11-10.json`. Next content pass should remove accidental holes, strengthen interleaving/blocking and curate a deliberate difficulty rhythm while preserving intentional silhouette holes and all embedded attempts through content versions. This review changes no fields or app payload.
 
 1. Verify 0.4.0 on a named Android device: both themes/insets, system bars, sound/loudness/audio focus, independent vibration switches, return from interruptions and update persistence. Do not claim exact original sound.
 2. Accept 0.5.0 native advertising on an exact Android artifact: genuine SDK earned delivery, interruption/process restoration, both dismissal/foreground orders and matching AppMetrica dashboard events. Configure a separate APPMETRICA_DEBUG_API_KEY through repository secrets for that run.
