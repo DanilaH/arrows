@@ -377,7 +377,8 @@ export class BoardScene extends Phaser.Scene {
         this.active.lineBetween(p.x+Math.cos(angle)*near,p.y+Math.sin(angle)*near,p.x+Math.cos(angle)*far,p.y+Math.sin(angle)*far);
       }
     }
-    if (this.board.complete && this.flights.length === 0 && this.victoryAt < 0) { this.victoryAt = this.clock; this.startCelebration(); this.feedback('victory'); }
+    // An expired restored timestamp can be negative while the scene is young.
+    if (this.board.complete && !this.announcedWin && this.flights.length === 0 && this.victoryAt === -1) { this.victoryAt = this.clock; this.startCelebration(); this.feedback('victory'); }
     if (this.victoryAt >= 0) {
       const radius = Math.min(1, (this.clock-this.victoryAt)/500)*this.victoryRadius;
       while(this.victorySource && this.victoryCursor<this.victoryDots.length) {

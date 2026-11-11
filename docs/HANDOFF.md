@@ -56,7 +56,7 @@ D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, 
 
 ## Verification
 
-0.13.0 local: strict check/build and 85 TS tests pass. Thirty focused feel/minimal-UI/motion/idle/victory cases pass across phone/desktop (28 initially, then the two short-animation sampling assertions corrected to observe actual submitted keyframes and rerun). Native sync and final CI/artifact evidence follow.
+0.13.0 local: strict check/build and 85 TS tests pass. Thirty focused feel/minimal-UI/motion/idle/victory cases pass across phone/desktop (28 initially, then the two short-animation sampling assertions corrected to observe actual submitted keyframes and rerun). Native sync also passes. A later completed-final-field restore regression reproduced a negative-timestamp visual replay; the fresh/unannounced start guard fixes it. All ten final victory cases now pass on phone/desktop, including immediate quiet after interruption and completed-c120 restore. Final CI/artifact evidence follows.
 
 Historical 0.12.0:
 

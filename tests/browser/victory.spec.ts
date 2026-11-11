@@ -39,7 +39,8 @@ test('settles an interrupted celebration and never replays it after return',asyn
   await observe(page);await page.goto('/');await page.locator('#home-play:enabled').click();await page.waitForTimeout(450);await solve(page,0);await expect.poll(()=>wins(page)).toBe(1);
   await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));});
   expect(await page.locator('#win').evaluate(e=>e.getAnimations({subtree:true}).length)).toBe(0);
-  await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'));});await page.waitForTimeout(450);expect(await wins(page)).toBe(1);await idle(page);
+  await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'));});await page.waitForTimeout(450);expect(await wins(page)).toBe(1);
+  const quiet=await page.evaluate(()=>Reflect.get(window,'victoryFrames') as number);await page.waitForTimeout(350);expect(await page.evaluate(()=>Reflect.get(window,'victoryFrames') as number)-quiet).toBeLessThan(5);
   await page.locator('#choose-field').click();await page.locator('#home-play:enabled').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-level','c02');await page.waitForTimeout(600);expect(await wins(page)).toBe(1);
 });
 
@@ -56,4 +57,13 @@ test('accepts a quick next action during the short-landscape celebration',async(
   await expect(page.locator('#next')).toBeInViewport();await page.screenshot({path:info.outputPath('landscape.png')});
   await page.locator('#next').evaluate((e:HTMLButtonElement)=>e.click());await expect(page.locator('#game-shell')).toHaveAttribute('data-level','c02');await expect(page.locator('#win')).toBeHidden();
   await page.waitForTimeout(1100);expect(await page.locator('#win').evaluate(e=>e.getAnimations({subtree:true}).length)).toBe(0);await idle(page);
+});
+
+
+test('restores a completed final campaign field without restarting its visual celebration',async({page})=>{
+  await observe(page);const state=freshSave(),level=campaign.at(-1)!,attempt=freshAttempt(level);state.index=campaign.length-1;attempt.started=true;attempt.board={...attempt.board,removed:level.arrows.map(a=>a.id)};state.campaign=attempt;
+  state.wins=campaign.map((l,i)=>({attempt:i===state.index?attempt.board.id:`fixture-${i}`,levelId:l.id,activeMs:1000,completedAt:i*1000,localDate:'1970-01-01',mistakes:0}));decodeSave(state);
+  await page.addInitScript(({key,state})=>localStorage.setItem(key,JSON.stringify(state)),{key:SAVE_KEY,state});await page.goto('/');await page.locator('#home-play:enabled').click();await expect(page.locator('#win')).toBeVisible();await expect(page.locator('#next')).toBeDisabled();
+  await page.waitForTimeout(500);expect(await wins(page)).toBe(0);expect(await page.locator('#win').evaluate(e=>e.getAnimations({subtree:true}).length)).toBe(0);
+  const quiet=await page.evaluate(()=>Reflect.get(window,'victoryFrames') as number);await page.waitForTimeout(350);expect(await page.evaluate(()=>Reflect.get(window,'victoryFrames') as number)-quiet).toBeLessThan(5);
 });
