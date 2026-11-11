@@ -1,0 +1,1746 @@
+{
+  "appCommit": "6348333d01bcc17bca059025583ce472a71dca06",
+  "runtimeSourceCommit": "4dda9af446ac5dfc08b3d2be76c0b5c6dee57cdd",
+  "contentSha256": "9704048112fda6a2827cc5b834eb9c97490644aefb79775c33052e84dd542dcb",
+  "provenance": "Internal QA starting fixtures; ordinary production DOM/canvas and touch input. Late-game state is not earned; no human participants, phone performance claim or native SDK validation. ackMs includes automation/polling and is not an input-latency benchmark.",
+  "observations": [
+    {
+      "level": "c01",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 150,
+        "y": 335.703125,
+        "scale": 18
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c01-0",
+          "newFree": 1,
+          "ackMs": 37
+        },
+        {
+          "id": "c01-1",
+          "newFree": 1,
+          "ackMs": 45
+        },
+        {
+          "id": "c01-2",
+          "newFree": 0,
+          "ackMs": 31
+        }
+      ],
+      "remaining": 0,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c03",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 114,
+        "y": 281.703125,
+        "scale": 18
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c03-0",
+          "newFree": 1,
+          "ackMs": 44
+        },
+        {
+          "id": "c03-1",
+          "newFree": 1,
+          "ackMs": 13
+        },
+        {
+          "id": "c03-2",
+          "newFree": 1,
+          "ackMs": 19
+        },
+        {
+          "id": "c03-3",
+          "newFree": 2,
+          "ackMs": 16
+        },
+        {
+          "id": "c03-5",
+          "newFree": 0,
+          "ackMs": 14
+        },
+        {
+          "id": "c03-4",
+          "newFree": 0,
+          "ackMs": 19
+        }
+      ],
+      "remaining": 0,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c06",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 31.666666666666686,
+        "y": 194.03645833333334,
+        "scale": 11.666666666666666
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c06-4",
+          "newFree": 0,
+          "ackMs": 26
+        },
+        {
+          "id": "c06-0",
+          "newFree": 1,
+          "ackMs": 14
+        },
+        {
+          "id": "c06-5",
+          "newFree": 2,
+          "ackMs": 21
+        },
+        {
+          "id": "c06-7",
+          "newFree": 2,
+          "ackMs": 31
+        },
+        {
+          "id": "c06-13",
+          "newFree": 0,
+          "ackMs": 14
+        },
+        {
+          "id": "c06-2",
+          "newFree": 1,
+          "ackMs": 17
+        },
+        {
+          "id": "c06-6",
+          "newFree": 1,
+          "ackMs": 19
+        },
+        {
+          "id": "c06-9",
+          "newFree": 2,
+          "ackMs": 30
+        },
+        {
+          "id": "c06-11",
+          "newFree": 2,
+          "ackMs": 33
+        },
+        {
+          "id": "c06-15",
+          "newFree": 0,
+          "ackMs": 34
+        },
+        {
+          "id": "c06-10",
+          "newFree": 2,
+          "ackMs": 33
+        },
+        {
+          "id": "c06-16",
+          "newFree": 2,
+          "ackMs": 32
+        }
+      ],
+      "remaining": 19,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": "Приблизь поле двумя пальцами. Одним пальцем можно двигать его"
+    },
+    {
+      "level": "c12",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 31.666666666666686,
+        "y": 194.03645833333334,
+        "scale": 11.666666666666666
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c12-0",
+          "newFree": 1,
+          "ackMs": 19
+        },
+        {
+          "id": "c12-5",
+          "newFree": 1,
+          "ackMs": 15
+        },
+        {
+          "id": "c12-6",
+          "newFree": 1,
+          "ackMs": 18
+        },
+        {
+          "id": "c12-7",
+          "newFree": 1,
+          "ackMs": 14
+        },
+        {
+          "id": "c12-8",
+          "newFree": 1,
+          "ackMs": 17
+        },
+        {
+          "id": "c12-9",
+          "newFree": 0,
+          "ackMs": 46
+        },
+        {
+          "id": "c12-3",
+          "newFree": 2,
+          "ackMs": 36
+        },
+        {
+          "id": "c12-33",
+          "newFree": 1,
+          "ackMs": 33
+        },
+        {
+          "id": "c12-34",
+          "newFree": 0,
+          "ackMs": 33
+        },
+        {
+          "id": "c12-10",
+          "newFree": 2,
+          "ackMs": 35
+        },
+        {
+          "id": "c12-16",
+          "newFree": 0,
+          "ackMs": 34
+        },
+        {
+          "id": "c12-15",
+          "newFree": 0,
+          "ackMs": 31
+        }
+      ],
+      "remaining": 26,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c18",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 31.666666666666686,
+        "y": 194.03645833333334,
+        "scale": 11.666666666666666
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c18-4",
+          "newFree": 1,
+          "ackMs": 45
+        },
+        {
+          "id": "c18-6",
+          "newFree": 0,
+          "ackMs": 21
+        },
+        {
+          "id": "c18-2",
+          "newFree": 0,
+          "ackMs": 30
+        },
+        {
+          "id": "c18-3",
+          "newFree": 1,
+          "ackMs": 17
+        },
+        {
+          "id": "c18-5",
+          "newFree": 1,
+          "ackMs": 18
+        },
+        {
+          "id": "c18-7",
+          "newFree": 2,
+          "ackMs": 32
+        },
+        {
+          "id": "c18-9",
+          "newFree": 1,
+          "ackMs": 17
+        },
+        {
+          "id": "c18-10",
+          "newFree": 2,
+          "ackMs": 31
+        },
+        {
+          "id": "c18-12",
+          "newFree": 1,
+          "ackMs": 20
+        },
+        {
+          "id": "c18-13",
+          "newFree": 1,
+          "ackMs": 30
+        },
+        {
+          "id": "c18-15",
+          "newFree": 1,
+          "ackMs": 14
+        },
+        {
+          "id": "c18-16",
+          "newFree": 1,
+          "ackMs": 20
+        }
+      ],
+      "remaining": 27,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c19",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 35.90909090909091,
+        "y": 189.7940340909091,
+        "scale": 15.909090909090908
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c19-0",
+          "newFree": 1,
+          "ackMs": 16
+        },
+        {
+          "id": "c19-6",
+          "newFree": 1,
+          "ackMs": 15
+        },
+        {
+          "id": "c19-4",
+          "newFree": 0,
+          "ackMs": 16
+        },
+        {
+          "id": "c19-3",
+          "newFree": 0,
+          "ackMs": 25
+        },
+        {
+          "id": "c19-5",
+          "newFree": 1,
+          "ackMs": 25
+        },
+        {
+          "id": "c19-7",
+          "newFree": 2,
+          "ackMs": 18
+        },
+        {
+          "id": "c19-16",
+          "newFree": 0,
+          "ackMs": 14
+        },
+        {
+          "id": "c19-8",
+          "newFree": 1,
+          "ackMs": 17
+        },
+        {
+          "id": "c19-10",
+          "newFree": 1,
+          "ackMs": 16
+        },
+        {
+          "id": "c19-12",
+          "newFree": 1,
+          "ackMs": 34
+        },
+        {
+          "id": "c19-17",
+          "newFree": 0,
+          "ackMs": 33
+        },
+        {
+          "id": "c19-2",
+          "newFree": 1,
+          "ackMs": 55
+        }
+      ],
+      "remaining": 6,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c20",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 27.291666666666657,
+        "y": 183.828125,
+        "scale": 7.291666666666667
+      },
+      "policy": "max_unlock",
+      "moves": [
+        {
+          "id": "c20-3",
+          "newFree": 1,
+          "ackMs": 80
+        },
+        {
+          "id": "c20-9",
+          "newFree": 1,
+          "ackMs": 58
+        },
+        {
+          "id": "c20-12",
+          "newFree": 1,
+          "ackMs": 76
+        },
+        {
+          "id": "c20-1",
+          "newFree": 1,
+          "ackMs": 63
+        },
+        {
+          "id": "c20-13",
+          "newFree": 0,
+          "ackMs": 67
+        },
+        {
+          "id": "c20-15",
+          "newFree": 0,
+          "ackMs": 71
+        },
+        {
+          "id": "c20-14",
+          "newFree": 1,
+          "ackMs": 63
+        },
+        {
+          "id": "c20-16",
+          "newFree": 1,
+          "ackMs": 60
+        },
+        {
+          "id": "c20-17",
+          "newFree": 2,
+          "ackMs": 77
+        },
+        {
+          "id": "c20-18",
+          "newFree": 2,
+          "ackMs": 74
+        },
+        {
+          "id": "c20-32",
+          "newFree": 1,
+          "ackMs": 56
+        },
+        {
+          "id": "c20-25",
+          "newFree": 1,
+          "ackMs": 53
+        }
+      ],
+      "remaining": 124,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c20-narrow-after12",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "camera": {
+        "x": 35.38671875,
+        "y": 96.41796875,
+        "scale": 5.41796875
+      },
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c21",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 39.44444444444446,
+        "y": 186.25868055555557,
+        "scale": 19.444444444444443
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c21-2",
+          "newFree": 1,
+          "ackMs": 15
+        },
+        {
+          "id": "c21-5",
+          "newFree": 0,
+          "ackMs": 18
+        },
+        {
+          "id": "c21-0",
+          "newFree": 3,
+          "ackMs": 21
+        },
+        {
+          "id": "c21-4",
+          "newFree": 1,
+          "ackMs": 14
+        },
+        {
+          "id": "c21-7",
+          "newFree": 0,
+          "ackMs": 27
+        },
+        {
+          "id": "c21-1",
+          "newFree": 0,
+          "ackMs": 15
+        },
+        {
+          "id": "c21-6",
+          "newFree": 0,
+          "ackMs": 18
+        },
+        {
+          "id": "c21-3",
+          "newFree": 0,
+          "ackMs": 33
+        },
+        {
+          "id": "c21-8",
+          "newFree": 1,
+          "ackMs": 28
+        },
+        {
+          "id": "c21-9",
+          "newFree": 0,
+          "ackMs": 34
+        },
+        {
+          "id": "c21-10",
+          "newFree": 0,
+          "ackMs": 32
+        }
+      ],
+      "remaining": 0,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c30",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 27.291666666666657,
+        "y": 198.41145833333331,
+        "scale": 7.291666666666667
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c30-3",
+          "newFree": 1,
+          "ackMs": 47
+        },
+        {
+          "id": "c30-9",
+          "newFree": 2,
+          "ackMs": 45
+        },
+        {
+          "id": "c30-11",
+          "newFree": 1,
+          "ackMs": 19
+        },
+        {
+          "id": "c30-14",
+          "newFree": 2,
+          "ackMs": 32
+        },
+        {
+          "id": "c30-16",
+          "newFree": 1,
+          "ackMs": 34
+        },
+        {
+          "id": "c30-17",
+          "newFree": 1,
+          "ackMs": 48
+        },
+        {
+          "id": "c30-18",
+          "newFree": 0,
+          "ackMs": 52
+        },
+        {
+          "id": "c30-2",
+          "newFree": 2,
+          "ackMs": 64
+        },
+        {
+          "id": "c30-20",
+          "newFree": 1,
+          "ackMs": 49
+        },
+        {
+          "id": "c30-21",
+          "newFree": 1,
+          "ackMs": 34
+        },
+        {
+          "id": "c30-22",
+          "newFree": 1,
+          "ackMs": 35
+        },
+        {
+          "id": "c30-23",
+          "newFree": 2,
+          "ackMs": 48
+        }
+      ],
+      "remaining": 84,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c40",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 27,
+        "y": 198.703125,
+        "scale": 7
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c40-1",
+          "newFree": 1,
+          "ackMs": 20
+        },
+        {
+          "id": "c40-0",
+          "newFree": 1,
+          "ackMs": 15
+        },
+        {
+          "id": "c40-5",
+          "newFree": 2,
+          "ackMs": 26
+        },
+        {
+          "id": "c40-7",
+          "newFree": 1,
+          "ackMs": 27
+        },
+        {
+          "id": "c40-8",
+          "newFree": 1,
+          "ackMs": 15
+        },
+        {
+          "id": "c40-9",
+          "newFree": 2,
+          "ackMs": 15
+        },
+        {
+          "id": "c40-11",
+          "newFree": 1,
+          "ackMs": 19
+        },
+        {
+          "id": "c40-12",
+          "newFree": 1,
+          "ackMs": 13
+        },
+        {
+          "id": "c40-13",
+          "newFree": 2,
+          "ackMs": 15
+        },
+        {
+          "id": "c40-15",
+          "newFree": 2,
+          "ackMs": 18
+        },
+        {
+          "id": "c40-17",
+          "newFree": 2,
+          "ackMs": 20
+        },
+        {
+          "id": "c40-21",
+          "newFree": 0,
+          "ackMs": 30
+        }
+      ],
+      "remaining": 28,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c44",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 31.666666666666686,
+        "y": 194.03645833333334,
+        "scale": 11.666666666666666
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c44-4",
+          "newFree": 0,
+          "ackMs": 26
+        },
+        {
+          "id": "c44-1",
+          "newFree": 1,
+          "ackMs": 16
+        },
+        {
+          "id": "c44-7",
+          "newFree": 0,
+          "ackMs": 16
+        },
+        {
+          "id": "c44-0",
+          "newFree": 2,
+          "ackMs": 39
+        },
+        {
+          "id": "c44-13",
+          "newFree": 0,
+          "ackMs": 43
+        },
+        {
+          "id": "c44-2",
+          "newFree": 3,
+          "ackMs": 33
+        },
+        {
+          "id": "c44-11",
+          "newFree": 1,
+          "ackMs": 34
+        },
+        {
+          "id": "c44-18",
+          "newFree": 0,
+          "ackMs": 33
+        },
+        {
+          "id": "c44-6",
+          "newFree": 2,
+          "ackMs": 37
+        },
+        {
+          "id": "c44-12",
+          "newFree": 0,
+          "ackMs": 30
+        },
+        {
+          "id": "c44-9",
+          "newFree": 0,
+          "ackMs": 32
+        },
+        {
+          "id": "c44-19",
+          "newFree": 0,
+          "ackMs": 97
+        }
+      ],
+      "remaining": 8,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c45",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 35.90909090909091,
+        "y": 189.7940340909091,
+        "scale": 15.909090909090908
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c45-9",
+          "newFree": 0,
+          "ackMs": 17
+        },
+        {
+          "id": "c45-4",
+          "newFree": 0,
+          "ackMs": 48
+        },
+        {
+          "id": "c45-0",
+          "newFree": 1,
+          "ackMs": 44
+        },
+        {
+          "id": "c45-2",
+          "newFree": 0,
+          "ackMs": 34
+        },
+        {
+          "id": "c45-13",
+          "newFree": 2,
+          "ackMs": 32
+        },
+        {
+          "id": "c45-16",
+          "newFree": 0,
+          "ackMs": 35
+        },
+        {
+          "id": "c45-6",
+          "newFree": 3,
+          "ackMs": 30
+        },
+        {
+          "id": "c45-17",
+          "newFree": 1,
+          "ackMs": 33
+        },
+        {
+          "id": "c45-21",
+          "newFree": 1,
+          "ackMs": 35
+        },
+        {
+          "id": "c45-23",
+          "newFree": 1,
+          "ackMs": 39
+        },
+        {
+          "id": "c45-24",
+          "newFree": 0,
+          "ackMs": 41
+        },
+        {
+          "id": "c45-3",
+          "newFree": 0,
+          "ackMs": 47
+        }
+      ],
+      "remaining": 17,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c60",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 27.291666666666657,
+        "y": 198.41145833333331,
+        "scale": 7.291666666666667
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c60-7",
+          "newFree": 0,
+          "ackMs": 22
+        },
+        {
+          "id": "c60-4",
+          "newFree": 1,
+          "ackMs": 46
+        },
+        {
+          "id": "c60-8",
+          "newFree": 2,
+          "ackMs": 97
+        },
+        {
+          "id": "c60-9",
+          "newFree": 0,
+          "ackMs": 68
+        },
+        {
+          "id": "c60-10",
+          "newFree": 2,
+          "ackMs": 36
+        },
+        {
+          "id": "c60-11",
+          "newFree": 1,
+          "ackMs": 47
+        },
+        {
+          "id": "c60-12",
+          "newFree": 1,
+          "ackMs": 32
+        },
+        {
+          "id": "c60-13",
+          "newFree": 1,
+          "ackMs": 33
+        },
+        {
+          "id": "c60-15",
+          "newFree": 1,
+          "ackMs": 34
+        },
+        {
+          "id": "c60-16",
+          "newFree": 0,
+          "ackMs": 34
+        },
+        {
+          "id": "c60-1",
+          "newFree": 1,
+          "ackMs": 32
+        },
+        {
+          "id": "c60-17",
+          "newFree": 1,
+          "ackMs": 32
+        }
+      ],
+      "remaining": 77,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c75",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 35.90909090909091,
+        "y": 189.7940340909091,
+        "scale": 15.909090909090908
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c75-0",
+          "newFree": 1,
+          "ackMs": 17
+        },
+        {
+          "id": "c75-3",
+          "newFree": 0,
+          "ackMs": 14
+        },
+        {
+          "id": "c75-2",
+          "newFree": 1,
+          "ackMs": 17
+        },
+        {
+          "id": "c75-1",
+          "newFree": 1,
+          "ackMs": 52
+        },
+        {
+          "id": "c75-5",
+          "newFree": 1,
+          "ackMs": 30
+        },
+        {
+          "id": "c75-6",
+          "newFree": 1,
+          "ackMs": 33
+        },
+        {
+          "id": "c75-7",
+          "newFree": 0,
+          "ackMs": 33
+        },
+        {
+          "id": "c75-4",
+          "newFree": 1,
+          "ackMs": 31
+        },
+        {
+          "id": "c75-8",
+          "newFree": 0,
+          "ackMs": 36
+        }
+      ],
+      "remaining": 0,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c95",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 37.5,
+        "y": 188.203125,
+        "scale": 17.5
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c95-2",
+          "newFree": 0,
+          "ackMs": 16
+        },
+        {
+          "id": "c95-1",
+          "newFree": 2,
+          "ackMs": 17
+        },
+        {
+          "id": "c95-4",
+          "newFree": 0,
+          "ackMs": 17
+        },
+        {
+          "id": "c95-3",
+          "newFree": 2,
+          "ackMs": 17
+        },
+        {
+          "id": "c95-6",
+          "newFree": 2,
+          "ackMs": 16
+        },
+        {
+          "id": "c95-7",
+          "newFree": 0,
+          "ackMs": 33
+        },
+        {
+          "id": "c95-8",
+          "newFree": 1,
+          "ackMs": 34
+        },
+        {
+          "id": "c95-10",
+          "newFree": 0,
+          "ackMs": 33
+        },
+        {
+          "id": "c95-0",
+          "newFree": 0,
+          "ackMs": 32
+        },
+        {
+          "id": "c95-5",
+          "newFree": 0,
+          "ackMs": 34
+        },
+        {
+          "id": "c95-9",
+          "newFree": 0,
+          "ackMs": 32
+        }
+      ],
+      "remaining": 0,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c100",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 27,
+        "y": 198.703125,
+        "scale": 7
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c100-7",
+          "newFree": 0,
+          "ackMs": 53
+        },
+        {
+          "id": "c100-5",
+          "newFree": 1,
+          "ackMs": 67
+        },
+        {
+          "id": "c100-10",
+          "newFree": 1,
+          "ackMs": 50
+        },
+        {
+          "id": "c100-12",
+          "newFree": 1,
+          "ackMs": 51
+        },
+        {
+          "id": "c100-14",
+          "newFree": 2,
+          "ackMs": 63
+        },
+        {
+          "id": "c100-16",
+          "newFree": 1,
+          "ackMs": 37
+        },
+        {
+          "id": "c100-17",
+          "newFree": 0,
+          "ackMs": 49
+        },
+        {
+          "id": "c100-0",
+          "newFree": 1,
+          "ackMs": 33
+        },
+        {
+          "id": "c100-11",
+          "newFree": 2,
+          "ackMs": 64
+        },
+        {
+          "id": "c100-20",
+          "newFree": 1,
+          "ackMs": 56
+        },
+        {
+          "id": "c100-18",
+          "newFree": 2,
+          "ackMs": 46
+        },
+        {
+          "id": "c100-21",
+          "newFree": 1,
+          "ackMs": 47
+        }
+      ],
+      "remaining": 82,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c119",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 32.5,
+        "y": 193.203125,
+        "scale": 12.5
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c119-5",
+          "newFree": 0,
+          "ackMs": 19
+        },
+        {
+          "id": "c119-0",
+          "newFree": 2,
+          "ackMs": 16
+        },
+        {
+          "id": "c119-8",
+          "newFree": 1,
+          "ackMs": 31
+        },
+        {
+          "id": "c119-7",
+          "newFree": 1,
+          "ackMs": 33
+        },
+        {
+          "id": "c119-9",
+          "newFree": 0,
+          "ackMs": 34
+        },
+        {
+          "id": "c119-10",
+          "newFree": 2,
+          "ackMs": 33
+        },
+        {
+          "id": "c119-13",
+          "newFree": 0,
+          "ackMs": 33
+        },
+        {
+          "id": "c119-6",
+          "newFree": 1,
+          "ackMs": 33
+        },
+        {
+          "id": "c119-14",
+          "newFree": 0,
+          "ackMs": 32
+        },
+        {
+          "id": "c119-1",
+          "newFree": 1,
+          "ackMs": 34
+        },
+        {
+          "id": "c119-3",
+          "newFree": 2,
+          "ackMs": 36
+        },
+        {
+          "id": "c119-15",
+          "newFree": 1,
+          "ackMs": 36
+        }
+      ],
+      "remaining": 21,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c120",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 27.291666666666657,
+        "y": 198.41145833333331,
+        "scale": 7.291666666666667
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c120-0",
+          "newFree": 1,
+          "ackMs": 114
+        },
+        {
+          "id": "c120-12",
+          "newFree": 1,
+          "ackMs": 36
+        },
+        {
+          "id": "c120-13",
+          "newFree": 0,
+          "ackMs": 49
+        },
+        {
+          "id": "c120-3",
+          "newFree": 2,
+          "ackMs": 109
+        },
+        {
+          "id": "c120-15",
+          "newFree": 2,
+          "ackMs": 71
+        },
+        {
+          "id": "c120-16",
+          "newFree": 1,
+          "ackMs": 65
+        },
+        {
+          "id": "c120-18",
+          "newFree": 1,
+          "ackMs": 37
+        },
+        {
+          "id": "c120-19",
+          "newFree": 1,
+          "ackMs": 99
+        },
+        {
+          "id": "c120-20",
+          "newFree": 1,
+          "ackMs": 52
+        },
+        {
+          "id": "c120-21",
+          "newFree": 1,
+          "ackMs": 47
+        },
+        {
+          "id": "c120-22",
+          "newFree": 0,
+          "ackMs": 50
+        },
+        {
+          "id": "c120-2",
+          "newFree": 2,
+          "ackMs": 50
+        }
+      ],
+      "remaining": 85,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest.",
+      "statusAfterMoves": ""
+    },
+    {
+      "level": "c47",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 28.75,
+        "y": 196.953125,
+        "scale": 8.75
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c47-6",
+          "newFree": 0,
+          "ackMs": 39
+        },
+        {
+          "id": "c47-4",
+          "newFree": 1,
+          "ackMs": 33
+        },
+        {
+          "id": "c47-8",
+          "newFree": 1,
+          "ackMs": 32
+        },
+        {
+          "id": "c47-9",
+          "newFree": 2,
+          "ackMs": 32
+        },
+        {
+          "id": "c47-11",
+          "newFree": 0,
+          "ackMs": 47
+        },
+        {
+          "id": "c47-7",
+          "newFree": 2,
+          "ackMs": 19
+        },
+        {
+          "id": "c47-12",
+          "newFree": 1,
+          "ackMs": 32
+        },
+        {
+          "id": "c47-13",
+          "newFree": 0,
+          "ackMs": 33
+        },
+        {
+          "id": "c47-0",
+          "newFree": 1,
+          "ackMs": 33
+        },
+        {
+          "id": "c47-14",
+          "newFree": 2,
+          "ackMs": 48
+        },
+        {
+          "id": "c47-15",
+          "newFree": 0,
+          "ackMs": 51
+        },
+        {
+          "id": "c47-18",
+          "newFree": 1,
+          "ackMs": 49
+        }
+      ],
+      "statusAfterMoves": "",
+      "remaining": 52,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest."
+    },
+    {
+      "level": "c67",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 29.21052631578945,
+        "y": 196.49259868421052,
+        "scale": 9.210526315789474
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c67-1",
+          "newFree": 1,
+          "ackMs": 39
+        },
+        {
+          "id": "c67-6",
+          "newFree": 1,
+          "ackMs": 23
+        },
+        {
+          "id": "c67-7",
+          "newFree": 1,
+          "ackMs": 49
+        },
+        {
+          "id": "c67-8",
+          "newFree": 1,
+          "ackMs": 62
+        },
+        {
+          "id": "c67-3",
+          "newFree": 2,
+          "ackMs": 56
+        },
+        {
+          "id": "c67-9",
+          "newFree": 0,
+          "ackMs": 43
+        },
+        {
+          "id": "c67-0",
+          "newFree": 0,
+          "ackMs": 35
+        },
+        {
+          "id": "c67-10",
+          "newFree": 1,
+          "ackMs": 31
+        },
+        {
+          "id": "c67-11",
+          "newFree": 1,
+          "ackMs": 32
+        },
+        {
+          "id": "c67-12",
+          "newFree": 1,
+          "ackMs": 32
+        },
+        {
+          "id": "c67-13",
+          "newFree": 1,
+          "ackMs": 54
+        },
+        {
+          "id": "c67-14",
+          "newFree": 1,
+          "ackMs": 48
+        }
+      ],
+      "statusAfterMoves": "",
+      "remaining": 35,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest."
+    },
+    {
+      "level": "c107",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 28.75,
+        "y": 196.953125,
+        "scale": 8.75
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c107-8",
+          "newFree": 1,
+          "ackMs": 27
+        },
+        {
+          "id": "c107-7",
+          "newFree": 2,
+          "ackMs": 31
+        },
+        {
+          "id": "c107-16",
+          "newFree": 2,
+          "ackMs": 33
+        },
+        {
+          "id": "c107-21",
+          "newFree": 0,
+          "ackMs": 17
+        },
+        {
+          "id": "c107-9",
+          "newFree": 4,
+          "ackMs": 33
+        },
+        {
+          "id": "c107-29",
+          "newFree": 0,
+          "ackMs": 32
+        },
+        {
+          "id": "c107-11",
+          "newFree": 0,
+          "ackMs": 32
+        },
+        {
+          "id": "c107-10",
+          "newFree": 1,
+          "ackMs": 33
+        },
+        {
+          "id": "c107-14",
+          "newFree": 0,
+          "ackMs": 35
+        },
+        {
+          "id": "c107-3",
+          "newFree": 0,
+          "ackMs": 48
+        },
+        {
+          "id": "c107-1",
+          "newFree": 0,
+          "ackMs": 62
+        },
+        {
+          "id": "c107-0",
+          "newFree": 2,
+          "ackMs": 36
+        }
+      ],
+      "statusAfterMoves": "",
+      "remaining": 61,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest."
+    },
+    {
+      "level": "c117",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "camera": {
+        "x": 29.72222222222223,
+        "y": 195.9809027777778,
+        "scale": 9.722222222222221
+      },
+      "policy": "follow_blocker",
+      "moves": [
+        {
+          "id": "c117-2",
+          "newFree": 1,
+          "ackMs": 20
+        },
+        {
+          "id": "c117-3",
+          "newFree": 1,
+          "ackMs": 49
+        },
+        {
+          "id": "c117-4",
+          "newFree": 1,
+          "ackMs": 32
+        },
+        {
+          "id": "c117-5",
+          "newFree": 2,
+          "ackMs": 30
+        },
+        {
+          "id": "c117-6",
+          "newFree": 2,
+          "ackMs": 35
+        },
+        {
+          "id": "c117-8",
+          "newFree": 1,
+          "ackMs": 32
+        },
+        {
+          "id": "c117-13",
+          "newFree": 2,
+          "ackMs": 35
+        },
+        {
+          "id": "c117-15",
+          "newFree": 0,
+          "ackMs": 34
+        },
+        {
+          "id": "c117-9",
+          "newFree": 1,
+          "ackMs": 31
+        },
+        {
+          "id": "c117-12",
+          "newFree": 0,
+          "ackMs": 33
+        },
+        {
+          "id": "c117-0",
+          "newFree": 1,
+          "ackMs": 38
+        },
+        {
+          "id": "c117-16",
+          "newFree": 0,
+          "ackMs": 29
+        }
+      ],
+      "statusAfterMoves": "",
+      "remaining": 14,
+      "lives": 3,
+      "errors": [],
+      "provenance": "Internal QA starting fixture; real production rendering and ordinary touch; not an earned late-campaign capture or a human playtest."
+    }
+  ],
+  "inputProbe": {
+    "provenance": "Deliberate internal QA offset probe; not a human mis-tap rate or actual participant intent.",
+    "initialCamera": {
+      "x": 35.38671875,
+      "y": 96.41796875,
+      "scale": 5.41796875
+    },
+    "probe": {
+      "intended": "c20-0",
+      "picked": "c20-104",
+      "offset": {
+        "dx": 1.5307337294603593,
+        "dy": 3.695518130045147
+      },
+      "point": {
+        "x": 64.00729622946037,
+        "y": 338.5041118800452
+      }
+    },
+    "after": {
+      "id": "88711d92-ebf9-47b4-8545-464ad726cd70",
+      "levelId": "c20",
+      "contentVersion": 4,
+      "removed": [],
+      "errors": [
+        "c20-104"
+      ],
+      "lives": 2
+    },
+    "zoomedCamera": {
+      "x": -36.24080688764906,
+      "y": -543.0151351407167,
+      "scale": 19.99999987570369
+    },
+    "zoomedRemoved": [
+      "c20-0"
+    ],
+    "zoomedLives": 3,
+    "tutorialsAfterActualZoom": []
+  },
+  "viewSourceHashes": {
+    "src/input/camera.ts": "3c1e65532a0b948e7a6681e9fc91a4de0228a0131a9ff0bd5a7353c0dd63cac0",
+    "src/game/surface.ts": "6f44c3db990357d4f426fd275cd17449c68c5d29e247f0473f9cecb8d33bd658",
+    "src/polish.css": "1a5c405708787209cc6ffd9c08f94f19e3f6f63721394965a00c52b05eb5c1b4",
+    "src/style.css": "ced5374e29eeef9b0809883f5f1b5c0bbc3cf12b0834ef2ef61c2c93aaa86d25"
+  },
+  "reviewedLevels": 22,
+  "acceptedTouches": 244,
+  "calendarBoundaryProbe": {
+    "simulatedLocalDate": "2027-01-05",
+    "firstDate": "2026-01-01",
+    "selectedDate": "2026-01-31",
+    "monthTitle": "январь 2026 г.",
+    "screenTitle": "Ежедневная задача",
+    "selectedLabel": "31 января",
+    "provenance": "Explicit future-clock QA probe with an unlocked starting fixture; not a live 2027 session or a newly generated puzzle."
+  },
+  "auditChecks": {
+    "profileUnitTestsPassed": 21,
+    "independentSimulationTraces": 3000,
+    "acceptedModelRemovals": 104275,
+    "independentOutputReproducedByteForByte": true,
+    "humanParticipants": 0,
+    "physicalDevices": 0
+  }
+}

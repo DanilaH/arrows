@@ -2,6 +2,8 @@
 
 ## Current milestone
 
+Latest product work is an **audit-only gameplay review**, not a new app build. See `GAMEPLAY_AUDIT_2026-11-11.md`: all 120 fields / 3,000 independent order traces, 22 production-render QA fields / 244 correct touch actions, a narrow-c20 input/zoom counterexample and the 2027 calendar boundary. The bank has real branching and no universal long free-cleanup tail; c20 workload/readability and c45 breather role need human calibration. Two product proposals are SELECT/PROPOSED: nonblocking scale context/learning and an honest daily/archive boundary. Novelty/bank edits remain HOLD pending a bounded human experiment. App 0.15.0, content, saves, ads and kit pin are unchanged. No human enjoyment/retention, phone feel or live-service result is claimed.
+
 Version 0.15.0 / Android versionCode 20 completes the user-approved whole-game UI/UX review: unobscured scrollable calendar, always-visible medal progress/disclosure, compact localized daily date, quiet heading focus, direct/foreground-safe loss return and honest next/final Home preview. Read `UX_REVIEW.md` for findings, regression coverage, unchanged authority and capture provenance.
 
 Previous meta milestone:

@@ -1,0 +1,1301 @@
+{
+  "method": "Independent segment-distance arithmetic; current 11px hit radius and 1.5px ambiguity gap; 16 evenly spaced angular offsets per initially legal head. No human motor-error distribution is assumed. Zoomed view is conditional on the chosen head being visible, not a claim that all heads fit simultaneously. 320 value is a width-bound approximation unless measured in browser.",
+  "rows": [
+    {
+      "level": "c01",
+      "view": "390-measured",
+      "scale": 18,
+      "initialFreeTargets": 1,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c01",
+      "view": "320-width-bound",
+      "scale": 18,
+      "initialFreeTargets": 1,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c01",
+      "view": "zoomed-visible-target",
+      "scale": 20,
+      "initialFreeTargets": 1,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 16,
+          "counts": {
+            "intended": 16,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c06",
+      "view": "390-measured",
+      "scale": 11.666666666666666,
+      "initialFreeTargets": 5,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 80,
+          "counts": {
+            "intended": 62,
+            "ambiguous_or_miss": 18,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c06",
+      "view": "320-width-bound",
+      "scale": 9.333333333333334,
+      "initialFreeTargets": 5,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 80,
+          "counts": {
+            "intended": 75,
+            "ambiguous_or_miss": 5,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 80,
+          "counts": {
+            "intended": 53,
+            "ambiguous_or_miss": 13,
+            "other_free": 3,
+            "other_blocked": 11
+          }
+        }
+      ]
+    },
+    {
+      "level": "c06",
+      "view": "zoomed-visible-target",
+      "scale": 20,
+      "initialFreeTargets": 5,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c18",
+      "view": "390-measured",
+      "scale": 11.666666666666666,
+      "initialFreeTargets": 5,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 80,
+          "counts": {
+            "intended": 62,
+            "ambiguous_or_miss": 18,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c18",
+      "view": "320-width-bound",
+      "scale": 9.333333333333334,
+      "initialFreeTargets": 5,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 80,
+          "counts": {
+            "intended": 75,
+            "ambiguous_or_miss": 5,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 80,
+          "counts": {
+            "intended": 52,
+            "ambiguous_or_miss": 13,
+            "other_free": 3,
+            "other_blocked": 12
+          }
+        }
+      ]
+    },
+    {
+      "level": "c18",
+      "view": "zoomed-visible-target",
+      "scale": 20,
+      "initialFreeTargets": 5,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 80,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c20",
+      "view": "390-measured",
+      "scale": 7.291666666666667,
+      "initialFreeTargets": 13,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 208,
+          "counts": {
+            "intended": 208,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 208,
+          "counts": {
+            "intended": 208,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 208,
+          "counts": {
+            "intended": 148,
+            "ambiguous_or_miss": 60,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 208,
+          "counts": {
+            "intended": 109,
+            "ambiguous_or_miss": 49,
+            "other_free": 4,
+            "other_blocked": 46
+          }
+        }
+      ]
+    },
+    {
+      "level": "c20",
+      "view": "320-measured",
+      "scale": 5.41796875,
+      "initialFreeTargets": 13,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 208,
+          "counts": {
+            "intended": 208,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 208,
+          "counts": {
+            "intended": 193,
+            "ambiguous_or_miss": 15,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 208,
+          "counts": {
+            "intended": 111,
+            "ambiguous_or_miss": 54,
+            "other_free": 3,
+            "other_blocked": 40
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 208,
+          "counts": {
+            "intended": 89,
+            "ambiguous_or_miss": 39,
+            "other_free": 7,
+            "other_blocked": 73
+          }
+        }
+      ]
+    },
+    {
+      "level": "c20",
+      "view": "zoomed-visible-target",
+      "scale": 20,
+      "initialFreeTargets": 13,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 208,
+          "counts": {
+            "intended": 208,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 208,
+          "counts": {
+            "intended": 208,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 208,
+          "counts": {
+            "intended": 208,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 208,
+          "counts": {
+            "intended": 208,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c45",
+      "view": "390-measured",
+      "scale": 15.909090909090908,
+      "initialFreeTargets": 10,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c45",
+      "view": "320-width-bound",
+      "scale": 12.727272727272727,
+      "initialFreeTargets": 10,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 160,
+          "counts": {
+            "intended": 143,
+            "ambiguous_or_miss": 17,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c45",
+      "view": "zoomed-visible-target",
+      "scale": 20,
+      "initialFreeTargets": 10,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c60",
+      "view": "390-measured",
+      "scale": 7.291666666666667,
+      "initialFreeTargets": 8,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 128,
+          "counts": {
+            "intended": 128,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 128,
+          "counts": {
+            "intended": 128,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 128,
+          "counts": {
+            "intended": 108,
+            "ambiguous_or_miss": 20,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 128,
+          "counts": {
+            "intended": 86,
+            "ambiguous_or_miss": 24,
+            "other_free": 0,
+            "other_blocked": 18
+          }
+        }
+      ]
+    },
+    {
+      "level": "c60",
+      "view": "320-width-bound",
+      "scale": 5.833333333333333,
+      "initialFreeTargets": 8,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 128,
+          "counts": {
+            "intended": 128,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 128,
+          "counts": {
+            "intended": 128,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 128,
+          "counts": {
+            "intended": 94,
+            "ambiguous_or_miss": 23,
+            "other_free": 0,
+            "other_blocked": 11
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 128,
+          "counts": {
+            "intended": 78,
+            "ambiguous_or_miss": 19,
+            "other_free": 0,
+            "other_blocked": 31
+          }
+        }
+      ]
+    },
+    {
+      "level": "c60",
+      "view": "zoomed-visible-target",
+      "scale": 20,
+      "initialFreeTargets": 8,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 128,
+          "counts": {
+            "intended": 128,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 128,
+          "counts": {
+            "intended": 128,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 128,
+          "counts": {
+            "intended": 128,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 128,
+          "counts": {
+            "intended": 128,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c75",
+      "view": "390-measured",
+      "scale": 15.909090909090908,
+      "initialFreeTargets": 3,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 48,
+          "counts": {
+            "intended": 48,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 48,
+          "counts": {
+            "intended": 48,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 48,
+          "counts": {
+            "intended": 48,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 48,
+          "counts": {
+            "intended": 48,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c75",
+      "view": "320-width-bound",
+      "scale": 12.727272727272727,
+      "initialFreeTargets": 3,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 48,
+          "counts": {
+            "intended": 48,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 48,
+          "counts": {
+            "intended": 48,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 48,
+          "counts": {
+            "intended": 48,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 48,
+          "counts": {
+            "intended": 42,
+            "ambiguous_or_miss": 6,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c75",
+      "view": "zoomed-visible-target",
+      "scale": 20,
+      "initialFreeTargets": 3,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 48,
+          "counts": {
+            "intended": 48,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 48,
+          "counts": {
+            "intended": 48,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 48,
+          "counts": {
+            "intended": 48,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 48,
+          "counts": {
+            "intended": 48,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c100",
+      "view": "390-measured",
+      "scale": 7,
+      "initialFreeTargets": 10,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 160,
+          "counts": {
+            "intended": 98,
+            "ambiguous_or_miss": 62,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 160,
+          "counts": {
+            "intended": 80,
+            "ambiguous_or_miss": 40,
+            "other_free": 6,
+            "other_blocked": 34
+          }
+        }
+      ]
+    },
+    {
+      "level": "c100",
+      "view": "320-width-bound",
+      "scale": 5.6,
+      "initialFreeTargets": 10,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 160,
+          "counts": {
+            "intended": 86,
+            "ambiguous_or_miss": 40,
+            "other_free": 5,
+            "other_blocked": 29
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 160,
+          "counts": {
+            "intended": 67,
+            "ambiguous_or_miss": 29,
+            "other_free": 8,
+            "other_blocked": 56
+          }
+        }
+      ]
+    },
+    {
+      "level": "c100",
+      "view": "zoomed-visible-target",
+      "scale": 20,
+      "initialFreeTargets": 10,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": "c120",
+      "view": "390-measured",
+      "scale": 7.291666666666667,
+      "initialFreeTargets": 10,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 160,
+          "counts": {
+            "intended": 124,
+            "ambiguous_or_miss": 36,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 160,
+          "counts": {
+            "intended": 100,
+            "ambiguous_or_miss": 29,
+            "other_free": 4,
+            "other_blocked": 27
+          }
+        }
+      ]
+    },
+    {
+      "level": "c120",
+      "view": "320-width-bound",
+      "scale": 5.833333333333333,
+      "initialFreeTargets": 10,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 160,
+          "counts": {
+            "intended": 109,
+            "ambiguous_or_miss": 32,
+            "other_free": 3,
+            "other_blocked": 16
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 160,
+          "counts": {
+            "intended": 91,
+            "ambiguous_or_miss": 27,
+            "other_free": 8,
+            "other_blocked": 34
+          }
+        }
+      ]
+    },
+    {
+      "level": "c120",
+      "view": "zoomed-visible-target",
+      "scale": 20,
+      "initialFreeTargets": 10,
+      "rows": [
+        {
+          "radiusPx": 0,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 2,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 4,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        },
+        {
+          "radiusPx": 6,
+          "n": 160,
+          "counts": {
+            "intended": 160,
+            "ambiguous_or_miss": 0,
+            "other_free": 0,
+            "other_blocked": 0
+          }
+        }
+      ]
+    }
+  ]
+}
