@@ -5,8 +5,8 @@ const profiles: Record<SoundCue, { length: number; notes: readonly number[]; spa
   slide: { length: .12, notes: [340], spacing: 0 }, exit: { length: .12, notes: [1320], spacing: 0 },
   error: { length: .23, notes: [148, 110], spacing: .055 }, hint: { length: .32, notes: [740, 1109], spacing: .08 },
   life: { length: .38, notes: [523.25, 659.25, 783.99], spacing: .075 },
-  win: { length: .94, notes: [523.25, 659.25, 783.99, 1046.5, 1318.5], spacing: .075 },
-  award: { length: 1, notes: [523.25, 659.25, 783.99, 1046.5, 1318.5, 1568], spacing: .08 },
+  win: { length: .94, notes: [523.25, 659.25, 783.99, 1046.5, 1318.5], spacing: .11 },
+  award: { length: 1, notes: [523.25, 659.25, 783.99, 1046.5, 1318.5, 1568], spacing: .105 },
 };
 /** Short original plucked/glass cues. Deterministic, generated only on first use. */
 export function soundSamples(cue: SoundCue, sampleRate: number): Float32Array<ArrayBuffer> {

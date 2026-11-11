@@ -9,12 +9,14 @@ import { extractPath, measurePath, pointAt, type Arrow, type MeasuredPath, type 
 import { BoardCamera, type Rect } from '../input/camera';
 import type { ViewState } from '../progression/save';
 
+const VICTORY_MS = 2300;
+
 export const GAME_PRESENTABLE_EVENT = 'arrows:scene-authored';
 
 interface Flight { path: MeasuredPath; travelled: number; speed: number; age: number; }
 interface Bump { id: string; path: MeasuredPath; timing: BumpTiming; contact: ArrowContact; started: number; impacted: boolean; }
 interface Impact { contact: ArrowContact; direction: Point; started: number; }
-interface Confetto { vx: number; vy: number; angle: number; spin: number; length: number; width: number; life: number; color: number; }
+interface Confetto { x: number; y: number; delay: number; vx: number; vy: number; angle: number; spin: number; length: number; width: number; life: number; color: number; }
 export type SceneFeedback = { kind: 'move-start' | 'blocked-start' | 'impact' | 'exit' | 'victory' | 'win-ready' | 'hint-ready'; attempt: string; };
 interface DotPulse { point: Point; motion: { x: number; v: number }; }
 export interface SceneOptions { ready(scene: BoardScene): void; dirty(): void; move(result: MoveResult): void; }
@@ -61,6 +63,9 @@ export class BoardScene extends Phaser.Scene {
   private errorUntil = -1;
   private victoryAt = -1;
   private victoryCursor = 0;
+  private victorySource: Point | null = null;
+  private victoryDots: readonly Point[] = [];
+  private victoryRadius = 1;
   private announcedWin = false;
   private widthCss = 1;
   private heightCss = 1;
@@ -78,7 +83,7 @@ export class BoardScene extends Phaser.Scene {
     const resized = (): void => this.layout(false);
     this.scale.on(Phaser.Scale.Events.RESIZE, resized);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-      this.scale.off(Phaser.Scale.Events.RESIZE, resized); this.listeners.clear(); this.feedbackListeners.clear(); this.pulses.clear(); this.flights.length = 0; this.bumps.clear(); this.impacts.length = 0; this.confetti.length = 0;
+      this.scale.off(Phaser.Scale.Events.RESIZE, resized); this.listeners.clear(); this.feedbackListeners.clear(); this.pulses.clear(); this.flights.length = 0; this.bumps.clear(); this.impacts.length = 0; this.confetti.length = 0; this.victoryDots=[];
     });
     this.options.ready(this);
     this.game.events.emit(GAME_PRESENTABLE_EVENT);
@@ -90,9 +95,9 @@ export class BoardScene extends Phaser.Scene {
   /** Navigation/background settles presentation without changing the canonical board. */
   public settlePresentation(): void {
     this.bumps.clear(); this.impacts.length = 0; this.flights.length = 0; this.pulses.clear(); this.confetti.length = 0;
-    this.hintReveal=null; this.transitionAt=-1; this.outgoing?.clear(); this.dots?.setAlpha(1);
+    this.hintReveal=null; this.victoryDots=[]; this.transitionAt=-1; this.outgoing?.clear(); this.dots?.setAlpha(1);
     this.errorUntil = -1; this.focusMotion = null; this.entry = this.clock - 500;
-    if (this.board.complete) { this.victoryAt = this.clock - 2200; this.victoryCursor = this.board.level.mask.length; this.announcedWin = true; }
+    if (this.board.complete) { this.victoryAt = this.clock - VICTORY_MS - 1; this.victoryCursor = this.board.level.mask.length; this.announcedWin = true; }
     this.stableDirty = true; this.active?.clear(); this.overlay?.clear(); this.reactiveDots?.clear(); this.changed();
   }
   private changed(): void { for (const listener of this.listeners) listener(); this.options.dirty(); }
@@ -100,13 +105,13 @@ export class BoardScene extends Phaser.Scene {
     const blend=transition && !this.reducedMotion && !board.complete && this.board.complete && this.board.attemptId!==board.attemptId;
     this.outgoing.clear().setAlpha(1);
     if(blend){const ratio=1/this.scale.zoom, old=this.boardCamera;this.outgoing.setPosition(old.x*ratio,old.y*ratio).setScale(old.scale*ratio).fillStyle(this.colors.dot,1);for(const point of this.board.level.mask)this.outgoing.fillCircle(point.x,point.y,.07);}
-    this.transitionAt=blend?this.clock:-1;this.hintReveal=null;
+    this.transitionAt=blend?this.clock:-1;this.hintReveal=null;this.victorySource=null;this.victoryDots=[];
     const level = board.level; this.board = board; this.guides = guides; this.hintTarget = null; this.focusMotion = null;
     this.boardCamera = new BoardCamera(level.width, level.height);
     this.paths = new Map(level.arrows.map(a => [a.id, measurePath(a.path)]));
     this.dotMask = new Map(level.mask.map(p => [`${p.x},${p.y}`, p]));
     this.flights.length = 0; this.bumps.clear(); this.impacts.length = 0; this.confetti.length = 0; this.pulses.clear(); this.preview = null; this.rewardCelebration=false; this.active.clear(); this.overlay.clear(); this.reactiveDots.clear();
-    this.entry = this.clock - (this.reducedMotion || board.complete ? 500 : 0) + (blend?110:0); this.dots.setAlpha(blend?0:1); this.errorUntil = -1; this.victoryAt = board.complete ? this.clock - 2200 : -1; this.victoryCursor = board.complete ? level.mask.length : 0; this.announcedWin = board.complete;
+    this.entry = this.clock - (this.reducedMotion || board.complete ? 500 : 0) + (blend?110:0); this.dots.setAlpha(blend?0:1); this.errorUntil = -1; this.victoryAt = board.complete ? this.clock - VICTORY_MS - 1 : -1; this.victoryCursor = board.complete ? level.mask.length : 0; this.announcedWin = board.complete;
     this.stableDirty = true; this.layout(true);
     if (view) { this.boardCamera.restore(view); this.transform(); }
     this.drawDots(); this.setHint(hint); this.changed();
@@ -174,6 +179,7 @@ export class BoardScene extends Phaser.Scene {
   }
   private presentMove(result: Exclude<MoveResult, { kind: 'ignored' }>): void {
     if (result.kind === 'removed') {
+      this.victorySource = result.arrow.path.at(-1)!;
       const bump = this.bumps.get(result.arrow.id), travelled = bump ? sampleBump(bump.timing, this.clock-bump.started).distance : 0;
       this.bumps.delete(result.arrow.id);
       if (!this.reducedMotion) this.flights.push({ path: this.paths.get(result.arrow.id)!, travelled, speed: Math.max(22, 950 / this.boardCamera.scale), age: 0 });
@@ -241,29 +247,59 @@ export class BoardScene extends Phaser.Scene {
     }
   }
   private startCelebration(): void {
-    this.confetti.length = 0; if (this.reducedMotion) return;
+    this.confetti.length = 0;
+    if (this.reducedMotion) return;
+    const source = this.victorySource ?? { x: this.board.level.width / 2, y: this.board.level.height / 2 };
+    this.victorySource = source;
+    const distance = (p: Point): number => Math.hypot(p.x - source.x, p.y - source.y);
+    this.victoryDots = [...this.board.level.mask].sort((a,b) => distance(a)-distance(b));
+    this.victoryRadius = Math.max(1, distance(this.victoryDots.at(-1) ?? source));
     let seed = this.board.level.mask.length*997+this.board.level.arrows.length*7919;
     const random = (): number => { seed = (Math.imul(seed,1664525)+1013904223)>>>0; return seed/4294967296; };
-    const colors = [0xc0b4ff,0xffd37f,0x91e6e8,0xff91b7,0x7d7dff,0xfff0d0];
-    for (let i=0; i<(this.rewardCelebration || this.board.level.difficulty === 'nightmare' ? 104 : this.board.level.difficulty === 'hard' ? 80 : 48); i++) this.confetti.push({ vx: (random()-.5)*340, vy: -100-random()*200, angle: random()*Math.PI*2, spin: (random()-.5)*12, length: 4+random()*6, width: 2+random()*2, life: (this.rewardCelebration || this.board.level.difficulty !== 'normal' ? 1400 : 900)+random()*450, color: colors[i%colors.length]! });
+    const colors = [this.colors.arrow, this.colors.exit, this.theme === 'dark' ? 0xffd596 : 0xb17c2e];
+    const special = this.rewardCelebration || this.board.level.difficulty !== 'normal';
+    const spread = Math.min(155, this.playArea.width*.32);
+    for (let i=0; i<(special ? 100 : 72); i++) {
+      const side = i%2 ? -1 : 1;
+      this.confetti.push({ x: side*spread, y: 52, delay: (i%4<2 ? 0 : 155)+random()*65,
+        vx: -side*(55+random()*150)+(random()-.5)*90, vy: -160-random()*170,
+        angle: random()*Math.PI*2, spin: (random()-.5)*11, length: 4+random()*6, width: 1.8+random()*1.6,
+        life: 1400+random()*(special ? 600 : 450), color: colors[i%colors.length]! });
+    }
   }
   private drawCelebration(): void {
     if (this.reducedMotion || this.victoryAt < 0) return;
-    const age = this.clock-this.victoryAt; if (age>2000) { this.confetti.length=0; return; }
-    const ratio=1/this.scale.zoom, view=this.playArea, cx=view.x+view.width/2, cy=view.y+view.height*.46;
-    if (age<650) {
-      const t=age/650; this.overlay.lineStyle(2*ratio,this.colors.exit,(1-t)*.45).strokeCircle(cx*ratio,cy*ratio,(16+Math.sqrt(t)*100)*ratio);
-      this.overlay.lineStyle(1.2*ratio,0xffd37f,(1-t)*.65).strokeCircle(cx*ratio,cy*ratio,(10+Math.sqrt(t)*72)*ratio);
+    const age = this.clock-this.victoryAt;
+    if (age>=VICTORY_MS) { this.confetti.length=0; this.victoryDots=[]; return; }
+    const ratio=1/this.scale.zoom, view=this.playArea, cx=view.x+view.width/2, cy=view.y+view.height*.43;
+    const origin=this.victorySource ? this.boardCamera.screen(this.victorySource) : {x:cx,y:cy};
+    for(let beat=0;beat<2;beat++) {
+      const t=(age-beat*150)/680;
+      if(t<0||t>1)continue;
+      this.overlay.lineStyle((beat ? 1 : 1.8)*ratio,beat ? this.colors.arrow : this.colors.exit,(1-t)*.48)
+        .strokeCircle(origin.x*ratio,origin.y*ratio,(10+Math.sqrt(t)*(beat ? 90 : 125))*ratio);
+    }
+    // A few brief four-point glints leave plenty of empty space around the result.
+    for(let i=0;i<8;i++) {
+      const t=(age-190-i*31)/560;
+      if(t<0||t>1)continue;
+      const angle=i*Math.PI/4+.23, radius=60+(i%3)*27+t*12, size=Math.sin(t*Math.PI)*(i%2 ? 4 : 6);
+      const x=cx+Math.cos(angle)*Math.min(radius,view.width*.37), y=cy+Math.sin(angle)*radius*.7;
+      this.overlay.lineStyle(1.3*ratio,i%2 ? this.colors.arrow : this.colors.exit,Math.sin(t*Math.PI)*.8);
+      this.overlay.lineBetween((x-size)*ratio,y*ratio,(x+size)*ratio,y*ratio).lineBetween(x*ratio,(y-size)*ratio,x*ratio,(y+size)*ratio);
     }
     for (const p of this.confetti) {
-      if (age>p.life) continue; const t=age/1000, alpha=Math.min(1,(p.life-age)/400), x=cx+p.vx*t, y=cy+p.vy*t+170*t*t, a=p.angle+p.spin*t;
-      const length=p.length*(.55+.45*Math.abs(Math.cos(p.spin*t*.7)));
+      const elapsed=age-p.delay;
+      if (elapsed<0 || elapsed>p.life) continue;
+      const t=elapsed/1000, alpha=Math.min(1,elapsed/65,(p.life-elapsed)/480);
+      const x=cx+p.x+p.vx*t, y=cy+p.y+p.vy*t+175*t*t, a=p.angle+p.spin*t;
+      const length=p.length*(.5+.5*Math.abs(Math.cos(p.spin*t*.7)));
       this.overlay.lineStyle(p.width*ratio,p.color,Math.max(0,alpha)).lineBetween((x-Math.cos(a)*length/2)*ratio,(y-Math.sin(a)*length/2)*ratio,(x+Math.cos(a)*length/2)*ratio,(y+Math.sin(a)*length/2)*ratio);
     }
   }
   public hasMotion(): boolean {
     return this.transitionAt>=0 || this.hintReveal!==null || this.preview !== null && this.clock-this.previewAt<180 || this.focusMotion !== null || this.clock - this.entry < 400 || this.flights.length > 0 || this.bumps.size > 0 || this.impacts.length > 0 || this.pulses.size > 0 || this.errorUntil > this.clock ||
-      this.victoryAt >= 0 && this.clock - this.victoryAt < (this.reducedMotion ? 150 : 2100);
+      this.victoryAt >= 0 && this.clock - this.victoryAt < (this.reducedMotion ? 150 : VICTORY_MS);
   }
   public update(_time: number, delta: number): void {
     this.frames += 1;
@@ -343,8 +379,12 @@ export class BoardScene extends Phaser.Scene {
     }
     if (this.board.complete && this.flights.length === 0 && this.victoryAt < 0) { this.victoryAt = this.clock; this.startCelebration(); this.feedback('victory'); }
     if (this.victoryAt >= 0) {
-      const target = Math.min(this.board.level.mask.length, Math.floor((this.clock - this.victoryAt) / 450 * this.board.level.mask.length));
-      while (this.victoryCursor < target) this.excite(this.board.level.mask[this.victoryCursor++]!, 8);
+      const radius = Math.min(1, (this.clock-this.victoryAt)/500)*this.victoryRadius;
+      while(this.victorySource && this.victoryCursor<this.victoryDots.length) {
+        const point=this.victoryDots[this.victoryCursor]!;
+        if(Math.hypot(point.x-this.victorySource.x,point.y-this.victorySource.y)>radius)break;
+        this.victoryCursor++; this.excite(point,10);
+      }
       if (!this.announcedWin && this.clock - this.victoryAt > (this.reducedMotion ? 80 : 340)) { this.announcedWin = true; this.changed(); this.feedback('win-ready'); }
     }
     this.reactiveDots.clear();

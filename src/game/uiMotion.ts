@@ -105,7 +105,12 @@ export function createUiMotion() {
       ],280,undefined,i*75));
     },
     reward(element: Element): void {
-      const emblem=element.querySelector('.win-emblem'); if(emblem)animate(emblem,[{opacity:0,transform:'scale(.25) rotate(-18deg)'},{opacity:1,transform:'scale(1.08) rotate(2deg)',offset:.65},{opacity:1,transform:'scale(1) rotate(0)'}],360);
+      const emblem=element.querySelector('.win-emblem');
+      if(emblem)animate(emblem,[{opacity:0,transform:'scale(.5) translateY(8px)'},{opacity:1,transform:'scale(1.13) translateY(0)',offset:.6},{opacity:1,transform:'scale(1) translateY(0)'}],520);
+      const ring=element.querySelector('.win-ring'), check=element.querySelector('.win-check'), rays=element.querySelector('.win-rays');
+      if(ring)animate(ring,[{strokeDasharray:'145',strokeDashoffset:'145',opacity:0},{strokeDasharray:'145',strokeDashoffset:'0',opacity:1}],500);
+      if(check)animate(check,[{strokeDasharray:'36',strokeDashoffset:'36',opacity:0},{strokeDasharray:'36',strokeDashoffset:'0',opacity:1}],280,undefined,150);
+      if(rays)animate(rays,[{opacity:0,transform:'scale(.65)'},{opacity:1,transform:'scale(1)',offset:.35},{opacity:0,transform:'scale(1.16)'}],640,undefined,100);
       for(const [i,el] of [...element.querySelectorAll('strong,.win-detail,button')].entries()) animate(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],240,undefined,40+i*40);
     },
     award(target: HTMLElement, artwork: string): void {

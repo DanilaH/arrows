@@ -25,3 +25,5 @@ Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the
 - 0.11.0 follows the user-approved minimal UI plan. Hint uses three active seconds and an explicit video-labelled direct entry to cancellable loading. Keep stable bottom-nav controls outside route snapshots, compact HUD 44px targets, keyboard medal disclosure, finite preview/award motion and unchanged reward authority. See `docs/MINIMAL_UI.md`.
 
 - 0.12.0 adds finite assistance/next-field presentation. Preserve `docs/ASSISTANCE_FEEL.md`: post-dialog/ad/foreground feedback, no reward/restore replay, owned cancellable heart motion, bounded measured-path light and old/new dot handoff. Controlled SDK transport is isolated test infrastructure with explicit capture provenance; it must not enter the application payload.
+
+- 0.13.0 strengthens the minimal finish; preserve `docs/FINISH_POLISH.md`: last-removal radial wave, bounded palette-limited fans/glints, drawn seal, stable live result, no mandatory wait/replay and 2300ms cleanup. Unlock/calendar review proposals are separate scope.

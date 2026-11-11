@@ -147,3 +147,8 @@ Held-preview growth, small dot response, entry stroke stagger and once-per-new-e
 ## Approved assistance presentation, 2026-11-10
 
 0.12.0 implements the user's accepted custom-heart/recovery, earned-Hint light and next-field transition package. Recovery feedback follows actual dialog close and independent ad/foreground release; lives and receipt dedup remain authoritative before any animation. A dialog-close wait also fixes rewarded-lives entry being rejected while its own dialog blocker remained active. Hint arrival owns its cue; duplicate receipts and restore never replay it. Background/new attempts settle finite presentation, with no durable visual queue. See `ASSISTANCE_FEEL.md` for timing, lifecycle and explicit isolated-transport capture provenance. Content, save schema, cadence, native cue profiles and the pinned kit remain unchanged.
+
+
+## Fuller finish within the minimal design, 2026-11-11
+
+The user requested a richer victory with the existing minimalist design. 0.13.0 strengthens the single finish sequence through a last-arrow radial dot wave, two bounded palette-limited ribbon fans, sparse glints and a drawn seal. The result adds no panel or mandatory delay. Completed tutorial/restart noise is removed and its live text is no longer rewritten on every sync. Win/award note spacing follows the visual cadence; native profiles stay unchanged. State/reward/content/ads authority and no-replay/idle contracts are preserved. `FINISH_POLISH.md` separately records proposed unlock and daily-calendar arrival improvements; those proposals are not implemented or silently added to this release.

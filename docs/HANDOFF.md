@@ -1,6 +1,10 @@
-# Arrows handoff — 2026-11-10
+# Arrows handoff — 2026-11-11
 
 ## Current milestone
+
+Version 0.13.0 / Android versionCode 18 implements the requested fuller minimalist finish: radial dot wave, two restrained ribbon fans/glints, larger drawn seal and coordinated result entry. Completed tutorials/restart clutter are removed from the finish; live-result text is stable. See `FINISH_POLISH.md` for bounds, review proposals and recording provenance.
+
+Previous assistance milestone:
 
 Version 0.12.0 / Android versionCode 17 implements the approved assistance feel pass: custom vector hearts, staggered recovery after dialog/ad return, a one-shot earned-Hint light pass and completed-field/new-field handoff. The rewarded lives entry waits for its own dialog blocker to close before invoking ads. See `ASSISTANCE_FEEL.md`.
 
@@ -51,6 +55,10 @@ Stage C navigation/records remain: Collection at current level 10, daily at 20, 
 D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, physical-phone sound/haptics/system-bar/feel/performance/process-kill evidence, human bank playtesting, physical native-icon/splash acceptance, signing and RuStore package. Keep attaching authentic GIFs for visible changes.
 
 ## Verification
+
+0.13.0 local: strict check/build and 85 TS tests pass. Thirty focused feel/minimal-UI/motion/idle/victory cases pass across phone/desktop (28 initially, then the two short-animation sampling assertions corrected to observe actual submitted keyframes and rerun). Native sync and final CI/artifact evidence follow.
+
+Historical 0.12.0:
 
 0.12.0: [CI 42883935878](https://github.com/DanilaH/arrows/actions/runs/42883935878) passes both jobs on source `544514b00ac892eb41be5395dbb49e8be0f5cf90`: 85 TS tests, all 108 browser cases and seven JVM tests/Android assembly. Local `check`, native sync, fourteen new assistance cases and twenty-two related regressions pass. Four final Hint/reduced-motion cases additionally pass with explicit light-theme preferences, including 320px width. APK 0.12.0 (17): 10,218,458 bytes; SHA-256 `e0e30ece2505ef20f16ecd7ff285a51506f455e42dff7a775a3c1272acbbb8e3`. Both archive digests, manifest, all eight web payload files, native configuration/analytics and compiled feedback profile match. The production GIF and actual-output sound MP4 share this payload and show four touch-earned wins, a field handoff, three distinct mistakes and real free recovery. The separately labelled Hint GIF uses isolated controlled SDK transport with the same game/receipt authority; it is not a real video/SDK-earned claim. See `verification/ASSISTANCE_FEEL_BUILD_2026-11-10.json`. The evidence/capture/test follow-up changes no application payload. Physical-phone sound/haptics/performance and live-service/signing/store acceptance remain open.
 
