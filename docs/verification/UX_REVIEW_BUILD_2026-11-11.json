@@ -1,0 +1,311 @@
+{
+  "sourceCommit": "4dda9af446ac5dfc08b3d2be76c0b5c6dee57cdd",
+  "sourceTree": "fe1cf4f8157880a8bed1767eb48802fe5151c189",
+  "workflowRun": 43001999467,
+  "typescriptTests": 89,
+  "browserCases": 150,
+  "manifest": {
+    "versionCode": 20,
+    "versionName": "0.15.0",
+    "compileSdkVersion": 36,
+    "compileSdkVersionCodename": "16",
+    "package": "com.danilah.arrows",
+    "platformBuildVersionCode": 36,
+    "platformBuildVersionName": 16
+  },
+  "matchingWebPayloadFiles": 8,
+  "webPayload": {
+    "assets/index-91L20pjm.js": "ecd8e12ee30e09537e165d68a50d41983054c7f0e58a9d0524503befef6b6786",
+    "assets/index-KZcO7xpi.css": "70a1f46a88e6d25111ee3be513e48ec91defc5d0861d5724a71c463ea2a41347",
+    "assets/web-DDBaHYDI.js": "ff7224c5fd51402f339b4d02bd34df78a590734d3a585a6cd8eb939b9cda214f",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "c66eec5f7c0af631cdc36a4af777155be001c928b67ffc84b363448d513db510",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "nativeConfigurationMatches": true,
+  "sharedAnalyticsContractMatches": true,
+  "nativeFeedbackProfileCompiled": true,
+  "nativeTests": [
+    {
+      "name": "com.danilah.arrows.FeedbackPatternTest",
+      "tests": "2",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-11T10:16:27.292Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.004"
+    },
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-11T10:16:27.300Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.015"
+    }
+  ],
+  "capture": {
+    "sourceCommit": "4dda9af446ac5dfc08b3d2be76c0b5c6dee57cdd",
+    "provenance": "Unmodified production Chromium mobile emulation, RU, DPR1. Fresh storage. Nineteen campaign wins earned by ordinary touch chosen by an independent cell-walking oracle; real collection progress, actual Settings/theme changes, six-row August calendar and a real opened August 31 daily attempt. The loss recording uses six distinct actual blocked-arrow errors and the ordinary one free refill; its video request receives the real browser no-provider response, with no reward. MP4 contains actual AudioContext output. No injected progression, award ownership, SDK transport or production test route. Browser evidence does not establish physical-phone sound/haptics/performance.",
+    "assets": {
+      "assets/index-91L20pjm.js": "ecd8e12ee30e09537e165d68a50d41983054c7f0e58a9d0524503befef6b6786",
+      "assets/index-KZcO7xpi.css": "70a1f46a88e6d25111ee3be513e48ec91defc5d0861d5724a71c463ea2a41347",
+      "assets/web-DDBaHYDI.js": "ff7224c5fd51402f339b4d02bd34df78a590734d3a585a6cd8eb939b9cda214f",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "records": [
+      {
+        "name": "arrows-next-preview",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 123,
+        "durationMs": 6774,
+        "audio": null
+      },
+      {
+        "name": "arrows-medal-progress",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 98,
+        "durationMs": 5409,
+        "audio": null
+      },
+      {
+        "name": "arrows-small-calendar",
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "frames": 86,
+        "durationMs": 4720,
+        "audio": null
+      },
+      {
+        "name": "arrows-loss-return",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 105,
+        "durationMs": 5827,
+        "audio": "Actual AudioContext output tee into MediaStreamAudioDestinationNode and MediaRecorder Opus; timestamp-aligned and muxed AAC, no added/replaced sound."
+      }
+    ],
+    "ending": {
+      "wins": 19,
+      "index": 19,
+      "daily": [
+        "2026-08-31"
+      ],
+      "dailyWins": [],
+      "cups": [],
+      "errors": [
+        "c20-12",
+        "c20-13",
+        "c20-14",
+        "c20-15",
+        "c20-16",
+        "c20-17"
+      ],
+      "lives": 0,
+      "continuations": 1,
+      "receipts": [],
+      "seenUnlocks": [
+        "collection",
+        "calendar"
+      ]
+    }
+  },
+  "archiveDigests": [
+    {
+      "name": "arrows-debug",
+      "id": 13847355513,
+      "sha256": "af64397b7e8c10c7e11466c705e65ce2ad74a0a667576344a5e98027c4fe7050",
+      "matchesApiDigest": true
+    },
+    {
+      "name": "native-unit-results",
+      "id": 13847345397,
+      "sha256": "817199bd802c4a7407078f1f1cc5368c11bbd6cd24efb574b0fe5a05ca31d74a",
+      "matchesApiDigest": true
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "Arrows-0.15.0-debug.apk",
+      "bytes": 10222522,
+      "sha256": "6ee4a25b7a8a0fc904364037d46bad31f72575d300b6f5741d6e45af27998adf"
+    },
+    {
+      "name": "arrows-loss-return-sound.mp4",
+      "bytes": 211177,
+      "sha256": "7d3b60a6fce11955048614f4f8fd5d1dadc48e1c29ef6716c9a7f7f1b945bb11"
+    },
+    {
+      "name": "arrows-loss-return.gif",
+      "bytes": 703426,
+      "sha256": "140fb2f6072ebc313af745e5a3b065a7e2dc2cc27e7b6d55d66d6b6ed6b7b4c1",
+      "width": 390,
+      "height": 844,
+      "durationMs": 5950,
+      "frames": 107
+    },
+    {
+      "name": "arrows-medal-progress.gif",
+      "bytes": 244840,
+      "sha256": "ec733d03fec53eda8cf80f15d85ba4486243ad17383ce8a765401c4eaa7be243",
+      "width": 390,
+      "height": 844,
+      "durationMs": 5500,
+      "frames": 99
+    },
+    {
+      "name": "arrows-next-preview.gif",
+      "bytes": 457941,
+      "sha256": "3fa5a249a1821132b9158487a31c3c7e710707f3620803d5b875c158ec63df38",
+      "width": 390,
+      "height": 844,
+      "durationMs": 6890,
+      "frames": 124
+    },
+    {
+      "name": "arrows-small-calendar.gif",
+      "bytes": 78280,
+      "sha256": "9ff2612786cc7e98229ea8fe1f6dd30e6f83a33951170eb4603f786766dea60d",
+      "width": 320,
+      "height": 568,
+      "durationMs": 4780,
+      "frames": 86
+    }
+  ],
+  "limits": [
+    "Production browser mobile emulation; no physical-phone sound/haptics/performance acceptance.",
+    "Nineteen campaign wins, six distinct blocked-arrow errors and one free refill are genuinely touch-earned. One August 31 daily is opened, with zero daily wins/cups/receipts; no injected progression/rewards or controlled SDK transport.",
+    "Default native ad configuration remains demo; live SDK earned/dashboard acceptance and signing/store work remain separate."
+  ],
+  "ci": {
+    "url": "https://github.com/DanilaH/arrows/actions/runs/43001999467",
+    "runId": 43001999467,
+    "headSha": "4dda9af446ac5dfc08b3d2be76c0b5c6dee57cdd",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 130460159523,
+        "name": "android",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 130460159816,
+        "name": "web",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "typescriptTests": 89,
+    "browserCases": 150,
+    "jvmTests": 7,
+    "androidAssembly": "success",
+    "webBuildAndAndroidSync": "success"
+  },
+  "earlierSuccessfulRun": {
+    "id": 43000543563,
+    "sourceCommit": "a1cec30ed1fb87c844d8fd14f08f820f0638f179",
+    "typescriptTests": 89,
+    "browserCases": 148,
+    "jvmTests": 7,
+    "followup": "A separate 320px/125% font stress audit found the redundant Russian theme checkmark overflow. The final source removes it and adds a direct RU/EN regression, bringing the full browser suite to 150."
+  },
+  "localVerification": {
+    "strictCheck": "passed with 89 TypeScript tests",
+    "typecheck": "passed",
+    "androidSync": "passed",
+    "firstRelevantRun": {
+      "passed": 56,
+      "failed": 6,
+      "total": 62,
+      "failures": "Three new harness mistakes in each profile: too few distinct blocked arrows for a six-error fixture; a keyboard action racing settings close/focus return; storage replacement racing the old page final save."
+    },
+    "correctedFocusedCases": 14,
+    "finalSettingsAndUxCases": 26,
+    "visualAudit": {
+      "baselineAndPostPolishStateCapturesPerPass": 52,
+      "profiles": [
+        "390x844 dark RU",
+        "320x568 light RU",
+        "568x320 dark RU",
+        "390x844 light EN"
+      ],
+      "horizontalOverflow": false,
+      "calendarCoverage": "Six-row month at 320x568, 568x320, 780x360 and 390x844; first, middle and last selectable day and launch action must actually receive center hit-testing after scrolling."
+    },
+    "finalEnlargedTextAudit": [
+      {
+        "name": "ru-home",
+        "overflow": false,
+        "clips": []
+      },
+      {
+        "name": "ru-collection",
+        "overflow": false,
+        "clips": []
+      },
+      {
+        "name": "ru-calendar",
+        "overflow": false,
+        "clips": []
+      },
+      {
+        "name": "ru-trophy",
+        "overflow": false,
+        "clips": []
+      },
+      {
+        "name": "ru-settings",
+        "overflow": false,
+        "clips": []
+      },
+      {
+        "name": "en-home",
+        "overflow": false,
+        "clips": []
+      },
+      {
+        "name": "en-collection",
+        "overflow": false,
+        "clips": []
+      },
+      {
+        "name": "en-calendar",
+        "overflow": false,
+        "clips": []
+      },
+      {
+        "name": "en-trophy",
+        "overflow": false,
+        "clips": []
+      },
+      {
+        "name": "en-settings",
+        "overflow": false,
+        "clips": []
+      }
+    ]
+  },
+  "audioVerification": {
+    "actualContextOutput": true,
+    "meanDb": -37.5,
+    "peakDb": -16.5,
+    "note": "Offline signal check of the actual-output capture; not a physical-phone loudness or perception measurement."
+  }
+}
