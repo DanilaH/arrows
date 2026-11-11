@@ -1,0 +1,226 @@
+{
+  "sourceCommit": "0e2c8761c90eff0c948d9a0a6bc835369e73ae86",
+  "sourceTree": "1072fba028bb4151cb36ea5c9bc4cd60f08eac88",
+  "workflowRun": 43076701532,
+  "typescriptTests": 93,
+  "browserCases": 164,
+  "manifest": {
+    "versionCode": 21,
+    "versionName": "0.16.0",
+    "compileSdkVersion": 36,
+    "compileSdkVersionCodename": "16",
+    "package": "com.danilah.arrows",
+    "platformBuildVersionCode": 36,
+    "platformBuildVersionName": 16
+  },
+  "matchingWebPayloadFiles": 8,
+  "webPayload": {
+    "assets/index-CDR-NC41.js": "c01fd7770ecc33658c8903e1462717892b7953cd960826327b61f14f44f0b1e6",
+    "assets/index-KZcO7xpi.css": "70a1f46a88e6d25111ee3be513e48ec91defc5d0861d5724a71c463ea2a41347",
+    "assets/web-d1uIhyut.js": "16ba0e63bd40c2ec5a91c8ba7343a995ecea88ec171a4952769a82acc01a5aa3",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "8caa4c586b61b6126fc195f6331bf9f44ac000380100922ab4068828a47ac875",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "nativeConfigurationMatches": true,
+  "sharedAnalyticsContractMatches": true,
+  "nativeTests": [
+    {
+      "name": "com.danilah.arrows.FeedbackPatternTest",
+      "tests": "2",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-11T18:21:16.564Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.004"
+    },
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-11T18:21:16.573Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.011"
+    }
+  ],
+  "capture": {
+    "sourceCommit": "0e2c8761c90eff0c948d9a0a6bc835369e73ae86",
+    "provenance": "Current unmodified production Chromium mobile emulation, RU, Asia/Yekaterinburg. Fresh storage, nineteen campaign wins earned by real touch via independent cell-walking oracle, real late c20 pinch recorded. Browser clock is explicitly controlled: 2027-01-05 for new daily (four genuine legal touches), 2046-06-08 for generated trophy preview. No injected progress, cup, receipt, SDK transport or hidden production route. Future-clock previews are QA demonstrations, not actual calendar dates or earned awards. Reminder experiment is absent from production. No physical-phone performance/feel claim.",
+    "assets": {
+      "assets/index-CDR-NC41.js": "c01fd7770ecc33658c8903e1462717892b7953cd960826327b61f14f44f0b1e6",
+      "assets/index-KZcO7xpi.css": "70a1f46a88e6d25111ee3be513e48ec91defc5d0861d5724a71c463ea2a41347",
+      "assets/web-d1uIhyut.js": "16ba0e63bd40c2ec5a91c8ba7343a995ecea88ec171a4952769a82acc01a5aa3",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "records": [
+      {
+        "name": "arrows-late-zoom",
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "frames": 64,
+        "durationMs": 3478,
+        "audio": null
+      },
+      {
+        "name": "arrows-daily-2027",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 94,
+        "durationMs": 5179,
+        "audio": null
+      },
+      {
+        "name": "arrows-trophies-2046",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 77,
+        "durationMs": 4286,
+        "audio": null
+      }
+    ],
+    "ending": {
+      "wins": 19,
+      "index": 19,
+      "daily": [
+        "2027-01-05"
+      ],
+      "dailyWins": [],
+      "cups": [],
+      "receipts": [],
+      "zoomLearned": true
+    }
+  },
+  "archiveDigests": [
+    {
+      "name": "arrows-debug",
+      "id": 13881893040,
+      "sha256": "7edd29feb57db5d41437385c96081ee9c7c7e3b15c58ef3f2bf295a770e99542",
+      "matchesApiDigest": true
+    },
+    {
+      "name": "native-unit-results",
+      "id": 13882947766,
+      "sha256": "a98109b607d2374743d0491bf34360bffeeaca0ae118d9ec866de769374d7b43",
+      "matchesApiDigest": true
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "Arrows-0.16.0-debug.apk",
+      "bytes": 10224790,
+      "sha256": "ed0f02daf3a4a6f5c00402942fea8c5e36c438a51fda54e8433202d4392b413e"
+    },
+    {
+      "name": "arrows-daily-2027.gif",
+      "bytes": 319180,
+      "sha256": "1cb4549926256364f08933b37ea70b0f3788f970fdf49b55223a159c1d4e9f3a",
+      "width": 390,
+      "height": 844,
+      "durationMs": 5280,
+      "frames": 95
+    },
+    {
+      "name": "arrows-late-zoom.gif",
+      "bytes": 129265,
+      "sha256": "fbd5d18adaa293bcf352d92afda3e94453276fb4f794829996e900f51051783d",
+      "width": 320,
+      "height": 568,
+      "durationMs": 3560,
+      "frames": 64
+    },
+    {
+      "name": "arrows-trophies-2046.gif",
+      "bytes": 360974,
+      "sha256": "18459ff78dd89ea99752bb8eba1e21b4c9ca0ae7782270e8c7487066ee7df002",
+      "width": 390,
+      "height": 844,
+      "durationMs": 4390,
+      "frames": 79
+    }
+  ],
+  "limits": [
+    "Production browser mobile emulation and controlled clock; no physical-phone performance/pinch/sound/haptics acceptance.",
+    "Nineteen campaign wins and four daily moves are genuinely touch-earned. Dates 2027-01-05/2046-06-08 are explicit clock-controlled QA; no daily win/cup/receipt injection, no SDK transport substitution.",
+    "Context reminder is isolated QA only; human content comparison and live-service/signing/store acceptance remain separate.",
+    "Different debug certificate from 0.15.0 prevents in-place APK update; failed CI keystore cache is documented, not repaired or claimed stable. Save-format migration is independently tested, not an installed update claim."
+  ],
+  "debugSigner": {
+    "sameAs015": false,
+    "previous": {
+      "sha256": "57e400dc044e34feafed615d24f751874b7809463fab9dcad6e092b31dcd01c7",
+      "subject": "C=US,O=Android,CN=Android Debug"
+    },
+    "current": {
+      "sha256": "7dfb0cc578e0a72f979f42d138424c99e21888fac240b106c68c9014540d812e",
+      "subject": "C=US,O=Android,CN=Android Debug"
+    },
+    "ciCacheEvidence": "Job 130718283407: cache miss for arrows-debug-signing-v1; post-cache reports path does not exist, no cache saved. No private key was recovered; this APK cannot replace differently signed 0.15.0. Do not uninstall a real progressed installation to try this build."
+  },
+  "browserDiagnostic": {
+    "provenance": "Internal QA, real touch-earned save restored; controlled 2046-06-08 clock, Chromium CPU4x emulation is not a physical phone. Open latency includes Playwright input/route work, not pure generator latency. EN/light/125% and narrow landscape.",
+    "openMsAtCpu4x": 413.60953100000006,
+    "errors": [],
+    "observations": [
+      {
+        "screen": "game",
+        "width": 320,
+        "height": 568,
+        "header": {
+          "overflow": false,
+          "height": 59
+        },
+        "hud": "June 8"
+      },
+      {
+        "screen": "calendar",
+        "width": 320,
+        "height": 568,
+        "overflow": false,
+        "actionUnobscured": true
+      },
+      {
+        "screen": "game",
+        "width": 568,
+        "height": 320,
+        "header": {
+          "overflow": false,
+          "height": 55
+        },
+        "hud": "June 8"
+      },
+      {
+        "screen": "calendar",
+        "width": 568,
+        "height": 320,
+        "overflow": false,
+        "actionUnobscured": true
+      }
+    ]
+  },
+  "ciJobs": [
+    {
+      "id": 130718283407,
+      "name": "android",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 130718284501,
+      "name": "web",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

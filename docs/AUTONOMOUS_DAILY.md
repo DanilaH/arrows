@@ -12,6 +12,8 @@ Owner approved the combined package on 2026-11-11 after the independent gameplay
 - Genuine manual pinch/wheel scale change can complete zoom learning on any played board. A clamped/no-op wheel, restored view and Hint auto-focus do not teach it. Existing c06 lesson and other steps remain intact.
 - The optional dense-field zoom reminder exists **only as an isolated QA experiment** (`reviewOptions.scaleContext`, no player route/default switch). It uses the existing status lane, has no tutorial/timer authority, and needs observation of independent unlearned-zoom users before a production rollout. Its threshold is a prototype setting, not a research constant.
 
+**Build verification:** source `0e2c876` passes [CI 43076701532](https://github.com/DanilaH/arrows/actions/runs/43076701532): 93 unit / 164 browser / 7 JVM and Android assembly. Exact APK/capture evidence is in [AUTONOMOUS_DAILY_BUILD_2026-11-11.json](verification/AUTONOMOUS_DAILY_BUILD_2026-11-11.json). The debug certificate differs from 0.15.0 because the existing CI signing cache did not persist its key; this APK cannot update a differently signed installation. Do not delete existing player data to try it. Signing/cache repair was not part of the gameplay implementation.
+
 ## Algorithm and compatibility
 
 `src/domain/silhouette.ts` extracts the original reverse-construction algorithm and eight masks without changing them. Offline 2026 tools re-export that implementation; the audit regenerates and compares every archive field. Control scenes remain tool-only and are excluded from production.
