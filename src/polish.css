@@ -25,7 +25,7 @@ button:active { transform: scale(.97); }
 /* Stable transparent text lane: tutorial completion must not shift the next tap. */
 #app-status { min-height: 4.8em; }
 #app-status:empty { display: block; }
-#game-shell[data-mode='campaign'] #field-name { display: none; }
+#game-shell:not([data-mode='control']) #field-name { display: none; }
 #guides { font-size: 24px; vertical-align: middle; }
 #guides-label { font-size: 11px; color: var(--muted); margin-left: 7px; vertical-align: middle; }
 .hint-button { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 13px; border: 1px solid var(--border); background: transparent; font-size: 12px; }
@@ -64,6 +64,7 @@ button:active { transform: scale(.97); }
 .home-progress { font-size: 10px; color: var(--faint); margin: 12px 0 0; }
 .review-link { margin: 0 auto; padding: 0 10px; }
 .meta-header { gap: 8px; max-width: 560px; margin: 0 auto 20px; }
+#menu-title:focus { outline: none; }
 .meta-header h1 { font-size: 20px; text-align: center; line-height: 1.3; }
 .meta-content { max-width: 560px; }
 .meta-content h2 { font-size: 17px; margin: 25px 0 16px; }
@@ -82,6 +83,10 @@ button:active { transform: scale(.97); }
 .medal summary:focus-visible { outline: 2px solid var(--accent-focus); outline-offset: 3px; }
 .medal svg { width: 64px; height: 74px; }
 .medal h3 { font-size: 11px; margin: 6px 0 0; min-height: 30px; }
+.medal summary progress { margin: 8px auto 0; width: min(72px,90%); height: 3px; }
+.medal summary .medal-chevron { width: 12px; height: 12px; margin-left: 3px; vertical-align: -2px; fill: none; stroke: currentColor; stroke-width: 1.5; transition: transform 160ms ease; }
+.medal[open] .medal-chevron { transform: rotate(180deg); }
+.trophy-availability { font-size: 11px; color: var(--muted); margin: -7px 0 10px; }
 .medal p { min-height: 0; font-size: 11px; margin: 7px 0 10px; }
 .medal small { margin-top: 6px; }
 .trophy-list { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
@@ -100,11 +105,12 @@ button:active { transform: scale(.97); }
 .weekdays { margin-top: 12px; }
 .calendar-day { background: transparent; border-radius: 50%; height: 44px; }
 .calendar-day:not(:disabled):not([aria-pressed='true']):not(.done):hover { background: var(--surface-soft); }
-.selected-day { position: sticky; bottom: -18px; padding: 14px 0 12px; background: var(--bg); }
-.selected-day h3 { font-size: 16px; margin: 0 0 4px; }
-.selected-day > span { margin-bottom: 10px; font-size: 11px; }
-.selected-day .primary { width: min(240px,100%); min-height: 46px; padding: 11px 22px; }
-#calendar-notice { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.calendar-month { min-width: 0; }
+.selected-day { position: static; display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 3px 12px; align-items: center; text-align: left; padding: 16px 0 12px; background: var(--bg); }
+.selected-day h3 { grid-column: 1; font-size: 16px; margin: 0; }
+.selected-day > span { grid-column: 1; margin: 0; font-size: 11px; }
+.selected-day .primary { grid-column: 2; grid-row: 1 / 3; width: min(46vw,180px); min-height: 46px; padding: 11px 12px; font-size: 13px; }
+#calendar-notice { grid-column: 1 / -1; margin: 6px 0 0; font-size: 11px; color: var(--muted); line-height: 1.5; }
 #calendar-notice:empty { display: none; }
 
 /* One surface per dialog. */
@@ -176,14 +182,21 @@ button:active { transform: scale(.97); }
   .win-detail { display: none; }
   #win .primary { width: 150px; margin: 0; }
   .win-emblem { width: 32px; height: 32px; margin: 0; flex-shrink: 0; }
-  .calendar-content { max-width: 700px; display: block; position: relative; padding-left: 194px; min-height: 260px; }
-  .month-award { position: absolute; left: 0; top: 0; width: 170px; }
-  .month-award .trophy-rich { width: 75px; height: 85px; }
+  .calendar-content { max-width: 700px; display: grid; grid-template-columns: 160px minmax(0,1fr); grid-template-rows: 76px auto; gap: 0 20px; align-items: start; padding-left: 0; min-height: 0; }
+  .calendar-month { grid-column: 2; grid-row: 1 / 3; }
+  .month-award { position: static; width: auto; display: grid; grid-template-columns: 60px minmax(0,1fr); gap: 0 8px; align-items: center; text-align: left; }
+  .month-award .trophy-inspect { grid-column: 1; grid-row: 1 / 3; padding: 0; }
+  .month-award .trophy-inspect > span { display: none; }
+  .month-award .trophy-rich { width: 54px; height: 64px; }
+  .month-award .month-count { margin: 0; font-size: 10px; }
+  .month-award .month-progress { grid-column: 2; width: 74px; margin: 4px 0; }
   .month-award small { display: none; }
   .month-heading { margin: 0; min-height: 44px; }
   .weekdays { margin: 4px 0 8px; }
   .calendar-day { height: 32px; }
-  .selected-day { position: absolute; left: 0; top: 140px; bottom: auto; width: 170px; padding-top: 5px; }
+  .selected-day { grid-column: 1; grid-row: 2; display: block; position: static; width: auto; padding-top: 5px; text-align: center; }
+  .selected-day > span { margin: 4px 0 8px; }
+  .selected-day .primary { width: 100%; }
 
 }
 @media (prefers-reduced-motion: reduce) { button, .calendar-day { transition: none; } button:active { transform: none; } }
@@ -213,3 +226,19 @@ button:active { transform: scale(.97); }
 .month-progress > span { display: block; height: 100%; background: var(--accent-soft); transform-origin: left; }
 .month-count > span { display: inline-block; }
 @media (max-height: 500px) { .arrival-notice { bottom: calc(64px + env(safe-area-inset-bottom)); font-size: 11px; } .month-progress { width: 82px; margin: 6px auto; } }
+
+/* Short portrait screens keep actual days on the first fold; actions never cover them. */
+@media (min-height: 501px) and (max-height: 700px) {
+  .calendar-content .month-award { display: grid; grid-template-columns: 80px minmax(0,1fr); gap: 0 14px; align-items: center; text-align: left; }
+  .month-award .trophy-inspect { grid-column: 1; grid-row: 1 / 4; padding: 0; }
+  .month-award .trophy-rich { width: 68px; height: 76px; }
+  .month-award .trophy-inspect > span { font-size: 9px; text-align: center; }
+  .month-award .month-count { font-size: 11px; margin: 0; }
+  .month-award .month-progress { margin: 6px 0; }
+  .month-award > small { grid-column: 2; font-size: 10px; line-height: 1.5; }
+  .calendar-content .month-heading { margin-top: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .medal summary .medal-chevron { transition: none; } }
+
+.home-finish { max-width: 150px; color: var(--accent-soft); stroke: currentColor; }
+.home-finish circle, .home-finish path { stroke-width: 2px; }

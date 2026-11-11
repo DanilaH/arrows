@@ -2,6 +2,10 @@
 
 ## Current milestone
 
+Version 0.15.0 / Android versionCode 20 completes the user-approved whole-game UI/UX review: unobscured scrollable calendar, always-visible medal progress/disclosure, compact localized daily date, quiet heading focus, direct/foreground-safe loss return and honest next/final Home preview. Read `UX_REVIEW.md` for findings, regression coverage, unchanged authority and capture provenance.
+
+Previous meta milestone:
+
 Version 0.14.0 / Android versionCode 19 implements the user-approved meta follow-ups: once-only section disclosure on menu return, daily-cell→monthly-progress arrival, and an enabled Calendar destination after c120. Additive schema-2 `seenUnlocks` metadata does not alter availability, content or reward authority. Read `META_ARRIVALS.md` for ownership, quiet upgrade, fallback/reduced-motion and capture provenance.
 
 Previous finish milestone:
@@ -59,6 +63,10 @@ Stage C navigation/records remain: Collection at current level 10, daily at 20, 
 D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, physical-phone sound/haptics/system-bar/feel/performance/process-kill evidence, human bank playtesting, physical native-icon/splash acceptance, signing and RuStore package. Keep attaching authentic GIFs for visible changes.
 
 ## Verification
+
+0.15.0 local: strict check passes with 89 TS tests and native sync succeeds. The relevant 62-case run passes 56 and exposes only three new test-harness mistakes per profile; all fourteen corrected focused cases pass. Final full CI/artifact/capture evidence follows assembly.
+
+Historical 0.14.0:
 
 0.14.0: [CI 42990192629](https://github.com/DanilaH/arrows/actions/runs/42990192629) passes both jobs on source `d85378cf8afdc1020be11260076037c126f25d30`: 89 TS tests, all 134 browser cases and seven JVM tests/Android assembly. Local strict check/build/native sync pass, together with 54 relevant browser cases, six final lifecycle cases and six final caption/reduced-motion/end-route cases. Visual review covers 390px dark/light, 320px light/reduced motion and sticky-footer occlusion fallback. The first full CI exposed two stale c120 disabled-button assertions (132 other cases passed); updated tests exercise Calendar and return with c120 retained. APK 0.14.0 (19): 10,221,914 bytes; SHA-256 `0d765fdaf27deddb2d62a88491d67de71a856505140ad0db316fb20c80629f5c`. Both archive digests, manifest, all eight web files, native configuration/analytics and compiled feedback profile match. Three authentic production GIFs and actual-output sound MP4 share that exact payload: fresh storage, nineteen touch-earned campaign wins, both real unlock disclosures and the actual 2026-11-11 daily win after a Settings switch to light. Ending state has no cups and exactly both seen flags; there is no injected progression/reward/transport. The month-end cup fixture is internal QA only. Evidence: `verification/META_ARRIVALS_BUILD_2026-11-11.json`. The evidence-only follow-up changes no application payload. Physical-phone sound/haptics/performance and live-service/signing/store acceptance remain open.
 

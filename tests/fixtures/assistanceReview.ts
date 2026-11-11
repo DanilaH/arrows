@@ -15,6 +15,7 @@ startGame([], onBack => {
     async cancelPending() { settle?.({shown:false, outcome:'cancelled'}); },
   });
   Reflect.set(window, 'assistanceFixture', {
+    back() { return onBack?.() ?? false; },
     snapshot() { return { shows, request, blocked: base.activity.getBlockReasons(), phase: ads.state.phase }; },
     shown() { if(request)listener({...request, phase:'show'}); },
     earn() {
