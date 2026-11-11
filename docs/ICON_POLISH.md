@@ -11,3 +11,5 @@
 Validation uses production browser renders in both themes at 390px/DPR2 and narrow 320px/125% with open details, plus existing Collection/settings/UI browser regressions and the required strict check/build. Visual snapshots are internal QA. Delivery GIFs use ordinary UI interactions and a restored genuine 19-win save from the preceding production capture; they do not invent earned medals, cups, receipts or progress. Browser rendering is not physical-phone verification.
 
 The known debug-key cache/signature problem from 0.16.0 remains a separate release task. This icon change does not claim to repair installed APK update compatibility.
+
+Release verification: [CI 43084990687](https://github.com/DanilaH/arrows/actions/runs/43084990687) passes 93 unit / 164 browser / 7 JVM plus Android assembly on `4dab2207e5453e6600b815e071a213ecfc0501b2`. Local focused UI suite: 48 passed. [Exact capture/build evidence](verification/ICON_POLISH_BUILD_2026-11-12.json) records matching APK payload and unchanged grid/progress.

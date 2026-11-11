@@ -1,0 +1,206 @@
+{
+  "sourceCommit": "4dab2207e5453e6600b815e071a213ecfc0501b2",
+  "sourceTree": "45ab342475180265136567a0965d424a676f1650",
+  "version": "0.16.1",
+  "androidVersionCode": 22,
+  "localCheck": {
+    "typescriptTests": 93,
+    "strictTypecheck": true,
+    "productionBuild": true,
+    "nativeSync": true
+  },
+  "focusedBrowserCases": 48,
+  "workflowRun": 43084990687,
+  "visualReview": {
+    "baselineSource": "ec303d104d8a7fb6a59aa2c320295c9a8da1e43f",
+    "before": {
+      "provenance": "Internal visual QA with restored genuine 19-win save, no new earned claims; 390px DPR2 both themes, 320px/125% open details.",
+      "errors": [],
+      "observations": [
+        {
+          "theme": "light",
+          "medals": [
+            {
+              "width": 108.65625,
+              "height": 156
+            },
+            {
+              "width": 108.671875,
+              "height": 156
+            },
+            {
+              "width": 108.65625,
+              "height": 156
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "theme": "dark",
+          "medals": [
+            {
+              "width": 108.65625,
+              "height": 156
+            },
+            {
+              "width": 108.671875,
+              "height": 156
+            },
+            {
+              "width": 108.65625,
+              "height": 156
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    "after": {
+      "provenance": "Internal visual QA with restored genuine 19-win save, no new earned claims; 390px DPR2 both themes, 320px/125% open details.",
+      "errors": [],
+      "observations": [
+        {
+          "theme": "light",
+          "medals": [
+            {
+              "width": 108.65625,
+              "height": 156
+            },
+            {
+              "width": 108.671875,
+              "height": 156
+            },
+            {
+              "width": 108.65625,
+              "height": 156
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "theme": "dark",
+          "medals": [
+            {
+              "width": 108.65625,
+              "height": 156
+            },
+            {
+              "width": 108.671875,
+              "height": 156
+            },
+            {
+              "width": 108.65625,
+              "height": 156
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    "sameGridFootprint": true
+  },
+  "contentSaveAdCodeUnchanged": true,
+  "capture": {
+    "sourceCommit": "4dab2207e5453e6600b815e071a213ecfc0501b2",
+    "provenance": "Current unmodified production Chromium mobile emulation. Restored actual touch-earned 19-win save from 0.16.0 capture; no newly earned or fabricated award/win/receipt. Ordinary medal disclosure and Settings light/dark interactions. No SDK/test fixture entry. Browser rendering, not physical-phone evidence.",
+    "restoredSaveSha256": "23c02652216796de549922d7a6514700b2853c422d7c47ac90fae04074e25b22",
+    "assets": {
+      "assets/index-T3tkCXr6.js": "e3e5163f069ac5b660b84e93d1ee6c74dc1520277f506ab8734188e4611b4acb",
+      "assets/index-i_aHUOQA.css": "56fda8d566f60b23ff6013d88871277bc1e473730e9c5e05b49fd859f0593ba3",
+      "assets/web-yW7-XZYs.js": "bc166d4fb38a70f74442d6a28108568ac0036c4c3028dd3a8f83781b00294f39",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "frames": 94,
+    "durationMs": 5137,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "canonicalProgressUnchanged": true,
+    "errors": []
+  },
+  "gif": {
+    "name": "arrows-icon-polish.gif",
+    "bytes": 249234,
+    "sha256": "d4f1b94118eedb3b0efcf276b21af55486c38b801aadafad232ecf16ed22cd79",
+    "frames": 94,
+    "width": 390,
+    "height": 844,
+    "durationMs": 5230
+  },
+  "limits": [
+    "Production browser renders/capture are not physical-device evidence.",
+    "Existing debug-signing/cache limitation remains unresolved; this patch does not claim native in-place update compatibility.",
+    "Only requested medal icon composition and small cup/sliders were redrawn; trophy designs, rewards and canonical state remain unchanged."
+  ],
+  "androidArtifacts": [
+    {
+      "id": 13886965567,
+      "name": "native-unit-results",
+      "archiveSha256": "27e890afba644f2a4e2aa44b1799e09a86b12f52996e07fa1e35d5b7187d36cc",
+      "apiDigestMatches": true,
+      "nativeSuites": [
+        {
+          "name": "com.danilah.arrows.FeedbackPatternTest",
+          "tests": "2",
+          "skipped": "0",
+          "failures": "0",
+          "errors": "0",
+          "timestamp": "2026-11-11T19:14:11.702Z",
+          "hostname": "runnervm7aw5e",
+          "time": "0.006"
+        },
+        {
+          "name": "com.danilah.arrows.RewardJournalCoreTest",
+          "tests": "5",
+          "skipped": "0",
+          "failures": "0",
+          "errors": "0",
+          "timestamp": "2026-11-11T19:14:11.714Z",
+          "hostname": "runnervm7aw5e",
+          "time": "0.019"
+        }
+      ]
+    },
+    {
+      "id": 13886825820,
+      "name": "arrows-debug",
+      "archiveSha256": "9f39ed7fb2958ddde70a43a12974ebe2da0341dd3ff271ba3dbeba30c1b3af3a",
+      "apiDigestMatches": true,
+      "apkBytes": 10224922,
+      "apkSha256": "4a889d13b4696df87644c59cc3d3657138ccce95c05c602acca52c977b5c68cb",
+      "matchingWebPayloadFiles": [
+        "index.html",
+        "favicon.svg",
+        "brand-mark.svg",
+        "ui/daily-v1.webp",
+        "ui/collection-v1.webp",
+        "assets/index-T3tkCXr6.js",
+        "assets/web-yW7-XZYs.js",
+        "assets/index-i_aHUOQA.css"
+      ]
+    }
+  ],
+  "captureMatchesApk": true,
+  "ciJobs": [
+    {
+      "id": 130746916843,
+      "name": "web",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 130746917176,
+      "name": "android",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "ciChecks": {
+    "typescriptTests": 93,
+    "browserCases": 164,
+    "nativeJvmTests": 7,
+    "androidAssembly": true
+  }
+}
