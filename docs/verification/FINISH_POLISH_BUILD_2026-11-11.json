@@ -1,0 +1,160 @@
+{
+  "sourceCommit": "366c716263dcc37a33ef748cb1edb7dadfea01b6",
+  "sourceTree": "9c974d984e593b33ffde169eb1ed36fb954f6c85",
+  "workflowRun": 42977404951,
+  "typescriptTests": 85,
+  "browserCases": 118,
+  "manifest": {
+    "versionCode": 18,
+    "versionName": "0.13.0",
+    "compileSdkVersion": 36,
+    "compileSdkVersionCodename": "16",
+    "package": "com.danilah.arrows",
+    "platformBuildVersionCode": 36,
+    "platformBuildVersionName": 16
+  },
+  "matchingWebPayloadFiles": 8,
+  "webPayload": {
+    "assets/index-BbHTiRes.css": "28ee0d0fe405bb32e5419c3fcd75fd969489493f70473f846eea91e22fcb3252",
+    "assets/index-cNKGbuRn.js": "e595ba77b7e266041a6e56cb7621171c02eca2dd1871f957b07b88845d365049",
+    "assets/web-OWMYD9AQ.js": "d91a28e1e01548e9d4cd22d9a341ca10bfce98384f5043a7c6bb2dea0f95dde1",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "dbfb7ec73220c802c0b7ded86739ab913a200c1326b39c597a128700fb31f443",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "nativeConfigurationMatches": true,
+  "sharedAnalyticsContractMatches": true,
+  "nativeFeedbackProfileCompiled": true,
+  "nativeTests": [
+    {
+      "name": "com.danilah.arrows.FeedbackPatternTest",
+      "tests": "2",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-11T07:11:00.548Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.006"
+    },
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": "5",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-11T07:11:00.558Z",
+      "hostname": "runnervm7aw5e",
+      "time": "0.019"
+    }
+  ],
+  "capture": {
+    "sourceCommit": "366c716263dcc37a33ef748cb1edb7dadfea01b6",
+    "provenance": "Unmodified production Chromium RU390x844 DPR1 mobile emulation. Fresh storage, six error-free wins earned by ordinary touch selected with an independent cell-walking oracle. First clip records all of c01; second records the last five arrows and Hard finish on c06, after a real Settings theme switch to light. No injected progress, rewards, transport or production test route. MP4 contains actual AudioContext output, not added or replaced sound. Browser emulation is not physical-phone sound/haptics/performance evidence.",
+    "assets": {
+      "assets/index-BbHTiRes.css": "28ee0d0fe405bb32e5419c3fcd75fd969489493f70473f846eea91e22fcb3252",
+      "assets/index-cNKGbuRn.js": "e595ba77b7e266041a6e56cb7621171c02eca2dd1871f957b07b88845d365049",
+      "assets/web-OWMYD9AQ.js": "d91a28e1e01548e9d4cd22d9a341ca10bfce98384f5043a7c6bb2dea0f95dde1",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "records": [
+      {
+        "name": "arrows-victory-dark",
+        "frames": 113,
+        "durationMs": 6247,
+        "audio": "Actual AudioContext output tee into MediaStreamAudioDestinationNode and MediaRecorder Opus; timestamp-aligned and muxed AAC, no added/replaced sound."
+      },
+      {
+        "name": "arrows-victory-hard-light",
+        "frames": 103,
+        "durationMs": 5624,
+        "audio": null
+      }
+    ],
+    "ending": {
+      "wins": 6,
+      "index": 5,
+      "errors": 0,
+      "cups": [],
+      "dailyWins": {}
+    }
+  },
+  "archiveDigests": [
+    {
+      "name": "arrows-debug",
+      "id": 13836590200,
+      "sha256": "46ad8f9bdb36c717cc6d5ff001e010db7135432408714123810637451a9fb7ee",
+      "matchesApiDigest": true
+    },
+    {
+      "name": "native-unit-results",
+      "id": 13836002303,
+      "sha256": "ca4a046e4fff352d2eb3a7f2d3807e065df4e9740b51b85f8e5e30cc94c95a17",
+      "matchesApiDigest": true
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "Arrows-0.13.0-debug.apk",
+      "bytes": 10219250,
+      "sha256": "22f2891fc48bc19914f3566e11b05b52af05c11be786bd7b7ad9b7b755033073"
+    },
+    {
+      "name": "arrows-victory-dark-sound.mp4",
+      "bytes": 132918,
+      "sha256": "f8a1673ff203f38c0d937ded0561346b8375e5bcffeee5941b5e717d90682b2d"
+    },
+    {
+      "name": "arrows-victory-dark.gif",
+      "bytes": 182832,
+      "sha256": "7cbb7ba3564d16b59ddde63f2b605cc38fbb58c02c8118ca1e4a31bdbad58549",
+      "width": 390,
+      "height": 844,
+      "durationMs": 6340,
+      "frames": 114
+    },
+    {
+      "name": "arrows-victory-hard-light.gif",
+      "bytes": 205723,
+      "sha256": "f34fbe83b48d488d00f2e63972b934cc4533f4237919d045aea40519337d4fa4",
+      "width": 390,
+      "height": 844,
+      "durationMs": 5730,
+      "frames": 103
+    }
+  ],
+  "limits": [
+    "Production browser mobile emulation; no physical-phone sound/haptics/performance acceptance.",
+    "Six error-free wins are genuinely touch-earned; no injected progression/rewards or controlled SDK transport.",
+    "Default native ad configuration remains demo; live SDK earned/dashboard acceptance and signing/store work remain separate."
+  ],
+  "ci": {
+    "run": 42977404951,
+    "source": "366c716263dcc37a33ef748cb1edb7dadfea01b6",
+    "webJob": 130379587823,
+    "androidJob": 130379588259,
+    "conclusion": "success",
+    "typescriptTests": 85,
+    "browserCases": 118,
+    "nativeJvmTests": 7
+  },
+  "localVerification": {
+    "check": "85 TS tests, strict typecheck and production build passed",
+    "nativeSync": "passed",
+    "focusedBrowser": "32 unique feel/motion/minimal UI/idle/victory cases covered; the final ten victory cases all pass on both projects",
+    "metaReview": "two additional phone Collection/calendar/theme cases pass and their actual UI screenshots were inspected",
+    "reproducedRegression": {
+      "fixture": "restored completed c120 in a young scene",
+      "beforeFixFramesIn350ms": 20,
+      "afterFixFramesIn350ms": "less than 5; direct assertion, no delayed idle polling",
+      "preFixSource": "1222a73dbd2a5de85942df80e14ffd3e4ffa1e65"
+    },
+    "initialMotionAssertion": "Replaced an asynchronous sample of a short-lived SVG animation with actual browser-normalized submitted-keyframe observation; two focused reruns passed."
+  },
+  "followup": {
+    "applicationPayloadChanged": false,
+    "scope": "Exact build/capture/CI evidence and review proposals only"
+  }
+}
