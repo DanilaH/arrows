@@ -11,10 +11,15 @@ import { copy, type GameLanguage } from '../app/language';
 export type AppScreen = 'home' | 'collection' | 'calendar' | 'game';
 const navIcons = {
   home: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8M5 9v12h5v-7h4v7h5V9"/></svg>',
-  collection: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v5c0 4-2 6-5 6S7 12 7 8ZM7 5H3v3c0 3 2 4 5 4m9-7h4v3c0 3-2 4-5 4M12 14v5m-5 2h10m-9-2h8"/></svg>',
+  collection: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0V4ZM7 6H4v2a4 4 0 0 0 4 4m9-6h3v2a4 4 0 0 1-4 4M12 13v5m-3 0h6l1 3H8l1-3Z"/></svg>',
   calendar: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 10h18m-14 5h2m6 0h2m-10 3h2"/></svg>',
 };
-const badge = (key: string): string => `<svg viewBox="0 0 72 84" aria-hidden="true"><path d="m20 51-3 27 19-9 19 9-3-27"/><circle cx="36" cy="32" r="25"/><path d="${key === 'legend' ? 'm21 34 6-12 9 10 9-10 6 12-5 9H26Z' : key === 'perfect' ? 'm23 32 9 9 18-19' : 'M39 15c9 13-4 13 4 24 2-6 7-8 7-8 4 18-23 23-26 8-2-8 8-15 8-15-2 10 3 11 3 11-3-9 6-12 4-20Z'}"/></svg>`;
+const badge = (key: string): string => `<svg class="medal-icon" viewBox="0 0 72 84" aria-hidden="true" focusable="false">
+  <path class="medal-ribbon" d="m21 46-5 30 20-9 20 9-5-30"/>
+  <circle class="medal-face" cx="36" cy="31" r="24"/>
+  <circle class="medal-rim" cx="36" cy="31" r="19.5"/>
+  <path class="medal-emblem ${key === 'perfect' ? 'medal-check' : ''}" d="${key === 'legend' ? 'm23 26 7 5 6-10 6 10 7-5-3 13H26l-3-13Zm4 17h18' : key === 'perfect' ? 'm25 31 8 8 15-17' : 'M37 17c2 8 9 11 9 18a10 10 0 0 1-20 0c0-4 2-7 5-10-1 5 1 8 4 9 4-5 5-11 2-17Z'}"/>
+</svg>`;
 
 export function installMetaSurface(progress: ProgressStore, language: GameLanguage, options: {
   motion: UiMotion; canPresent(): boolean; blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; controls?(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;

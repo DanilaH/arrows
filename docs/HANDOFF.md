@@ -1,6 +1,8 @@
-# Arrows handoff — 2026-11-11
+# Arrows handoff — 2026-11-12
 
 ## Current milestone
+
+Version **0.16.1 / Android versionCode 22** polishes the user-reported Collection medal icons: balanced shared face/ribbon/rim, cleaner crown/check/flame, scoped line styling, a balanced small navigation cup and unobstructed Settings slider knobs. Read `ICON_POLISH.md`. Layout footprint, achievement identities/progress/disclosure, trophy designs, gameplay/content, saves, ads and kit pin remain unchanged. The debug-signing cache limitation below is not repaired by this visual patch.
 
 Version **0.16.0 / Android versionCode 21** implements the subsequently approved bounded package: autonomous deterministic daily tasks from 2027, local-year calendar continuation, trophy continuation after 2045 and genuine zoom learning beyond c06. Daily catalogue 1/2→3 keeps schema 2 and every embedded attempt/reward identity; all 2026/campaign/frozen trophy content stays unchanged. Read `AUTONOMOUS_DAILY.md` for algorithm/date versioning, bounded work/cache, migration, fixed ad/Hint contracts and authentic capture recipe. The optional scale reminder remains an isolated QA prototype, pending human validation; it is not enabled in production.
 

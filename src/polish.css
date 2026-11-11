@@ -81,7 +81,7 @@ button:active { transform: scale(.97); }
 .medal summary { min-height: 110px; list-style: none; cursor: pointer; border-radius: 14px; padding: 5px 1px; }
 .medal summary::-webkit-details-marker { display: none; }
 .medal summary:focus-visible { outline: 2px solid var(--accent-focus); outline-offset: 3px; }
-.medal svg { width: 64px; height: 74px; }
+.medal-icon { width: 64px; height: 74px; }
 .medal h3 { font-size: 11px; margin: 6px 0 0; min-height: 30px; }
 .medal summary progress { margin: 8px auto 0; width: min(72px,90%); height: 3px; }
 .medal summary .medal-chevron { width: 12px; height: 12px; margin-left: 3px; vertical-align: -2px; fill: none; stroke: currentColor; stroke-width: 1.5; transition: transform 160ms ease; }

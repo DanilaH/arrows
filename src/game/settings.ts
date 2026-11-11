@@ -4,7 +4,7 @@ import type { SettingsStore } from '../app/settings';
 import type { GameplayActivityCoordinator } from '@danilah/mini-games-kit/platform';
 import type { createFeedback } from '../platform/feedback';
 const closeIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>';
-export const settingsIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg>';
+export const settingsIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h2m4 0h10M4 12h10m4 0h2M4 18h2m4 0h10"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg>';
 const themeArt = (theme: string): string => `<svg viewBox="0 0 24 24" aria-hidden="true">${theme==='dark' ? '<path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z"/>' : '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/>'}</svg>`;
 export function installSettingsSurface(store: SettingsStore, activity: GameplayActivityCoordinator, feedback: ReturnType<typeof createFeedback>, beforeOpen: () => void, motion: UiMotion) {
   const dialog = document.querySelector<HTMLDialogElement>('#settings-dialog')!;

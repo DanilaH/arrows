@@ -174,6 +174,10 @@ The user subsequently approved the concrete package, explicitly replacing a 2027
 
 True late pinch/wheel scale change now records existing zoom learning. Restored camera and Hint auto-focus do not. The contextual zoom reminder is prepared only in an isolated QA fixture; a human pilot precedes enabling it. Three-second Hint, active ad clocks, lives, SDK and pinned kit remain unchanged. Campaign redesign, novelty/DDA, extra meta and advertising/reward experiments remain outside this package.
 
+## Collection icon polish, 2026-11-12
+
+The user requested cleaner icon artwork based on the Collection medal screenshot. Version 0.16.1/code 22 redraws the three medal compositions/emblems, the small navigation cup and Settings slider tracks. Existing geometry footprint, earned/unearned theme tokens, labels, rules, disclosure, progress and reward identities remain authoritative. There is no new meta, effect system, asset dependency or gameplay/content/save/ad change. See `ICON_POLISH.md` for visual QA and ordinary-UI capture provenance.
+
 ## Debug signing evidence correction, 2026-11-11
 
 The APK-v2 X.509 certificate of 0.16.0 differs from archived 0.15.0 (and 0.14.0 differs too). Completed CI job 130718283407 reports a signing-cache miss and post-cache path validation failure for `~/.android/debug.keystore`; the earlier stable-preview-update assumption is superseded. No private key recovery or signing/cache repair was performed. The debug APK is a fresh-install preview, not an in-place update for the differently signed old build; existing real installation data must not be removed as a workaround. Format migrations/receipt ownership pass independently. Durable signing and actual installation/update evidence remain release work.
