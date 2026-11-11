@@ -64,7 +64,7 @@ D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, 
 
 ## Verification
 
-0.15.0 local: strict check passes with 89 TS tests and native sync succeeds. The relevant 62-case run passes 56 and exposes only three new test-harness mistakes per profile; all fourteen corrected focused cases pass. Final full CI/artifact/capture evidence follows assembly.
+0.15.0 local: strict check passes with 89 TS tests and native sync succeeds. The relevant 62-case run passes 56 and exposes only three new test-harness mistakes per profile; all fourteen corrected focused cases pass. First full CI 43000543563 passes both jobs, all 148 browser cases and seven JVM tests/Android assembly. A subsequent 320px/125% font stress check finds a redundant Russian theme checkmark overflow; the cosmetic correction passes all ten RU/EN stress views and 26 settings/UX browser cases. Final CI/artifact/refreshed capture evidence follows assembly.
 
 Historical 0.14.0:
 

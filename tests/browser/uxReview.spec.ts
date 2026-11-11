@@ -153,3 +153,21 @@ test('previews the actual next board after a win and gives the exhausted campaig
   await page.locator('#home-play').click(); await expect(page.locator('#win')).toBeVisible(); await expect(page.locator('#game-shell')).toHaveAttribute('data-level', 'c120');
   expect((await saved(page)).campaign.board.id).toBe(final.campaign.board.id); expect((await saved(page)).wins).toHaveLength(120);
 });
+
+test('keeps both theme labels inside their buttons at 320px with 125 percent text in RU and EN', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 640 }); await seed(page); await page.locator('#home-settings').click();
+  for (const language of ['ru', 'en']) {
+    await page.locator('#setting-language').selectOption(language);
+    await expect(page.locator('#settings-title')).toHaveText(language === 'ru' ? 'Настройки' : 'Settings');
+    await page.locator('#settings-dialog').evaluate(root => {
+      const elements = [...root.querySelectorAll<HTMLElement>('h2,h3,p,span,small,strong,button,select')];
+      const sizes = elements.map(el => parseFloat(getComputedStyle(el).fontSize));
+      elements.forEach((el, i) => { el.style.fontSize = `${sizes[i]! * 1.25}px`; });
+    });
+    for (const id of ['theme-light', 'theme-dark']) {
+      expect(await page.locator('#' + id).evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
+      await page.locator('#' + id).click(); await expect(page.locator('#' + id)).toHaveAttribute('aria-pressed', 'true');
+    }
+    expect(await page.locator('#settings-dialog').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
+  }
+});

@@ -53,8 +53,6 @@
 .theme-choice { border: 1.5px solid var(--border); background: transparent; border-radius: 18px; padding: 6px; text-align: left; }
 .theme-choice[aria-pressed='true'] { border-color: var(--accent-soft); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 14%, transparent); }
 .theme-choice > span:last-child { display: flex; padding: 10px 6px 5px; font-size: 12px; justify-content: space-between; align-items: center; }
-.theme-choice i { opacity: 0; font-style: normal; font-size: 15px; color: var(--accent-soft); }
-.theme-choice[aria-pressed='true'] i { opacity: 1; }
 .theme-swatch { display: block; border-radius: 12px; overflow: hidden; background: #202333; color: #b8bff7; }
 .theme-choice.light .theme-swatch { background: #f2f4fa; color: #465477; }
 .theme-swatch svg { display: block; width: 100%; height: 72px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
