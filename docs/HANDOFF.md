@@ -60,7 +60,7 @@ D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, 
 
 ## Verification
 
-0.14.0 local: strict check/build passes with 89 TS tests. The 54-case relevant browser run passes, followed by six final lifecycle cases. Phase-specific phone visual checks and native sync pass; final CI/artifact evidence follows.
+0.14.0 local: strict check/build passes with 89 TS tests. The 54-case relevant browser run passes, followed by six final lifecycle cases. Phase-specific phone visual checks and native sync pass; the first full CI exposed only two stale c120 disabled-button assertions (132 other cases passed). The updated Calendar/reroll checks and six final focused cases pass; final CI/artifact evidence follows.
 
 Historical 0.13.0:
 

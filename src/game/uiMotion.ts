@@ -9,9 +9,9 @@ export function createUiMotion() {
   let snapshotSerial = 0;
   let arrivalFinish: (()=>void) | undefined;
   let routeFinish: (() => void) | undefined, routeBusy = false, alive = true;
-  const animate = (element: Element, frames: Keyframe[], duration: number, done = (): void => {}, delay = 0): (() => void) => {
+  const animate = (element: Element, frames: Keyframe[], duration: number, done = (): void => {}, delay = 0, easing = 'cubic-bezier(.2,.8,.2,1)'): (() => void) => {
     if (!alive || reduced.matches || document.hidden || !element.animate) { done(); return () => {}; }
-    const animation = element.animate(frames, { duration, delay, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'both' });
+    const animation = element.animate(frames, { duration, delay, easing, fill: 'both' });
     let finished = false;
     const finish = (): void => {
       if (finished) return; finished = true; clearTimeout(timer); running.delete(finish); animation.cancel(); done();
@@ -30,7 +30,7 @@ export function createUiMotion() {
     const element=document.createElement('span');element.className='arrival-notice';element.setAttribute('role','status');element.textContent=label;document.body.append(element);group.remove(element);
     if(anchor){const r=anchor.getBoundingClientRect(),opacity=anchor.style.opacity;anchor.style.opacity='0';group.own(()=>{anchor.style.opacity=opacity;});Object.assign(element.style,{left:`${r.x}px`,right:'auto',top:`${r.y-4}px`,bottom:'auto',width:`${r.width}px`,maxWidth:`${r.width}px`,margin:'0'});}
     if(reduced.matches)element.style.opacity='1';
-    else group.own(animate(element,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)',offset:.12},{opacity:1,transform:'translateY(0)',offset:.82},{opacity:0,transform:'translateY(-3px)'}],duration));
+    else group.own(animate(element,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)',offset:.12},{opacity:1,transform:'translateY(0)',offset:.82},{opacity:0,transform:'translateY(-3px)'}],duration,undefined,0,'linear'));
   };
   const releasePress = (id: number, bounce: boolean): void => {
     const press = presses.get(id); if (!press) return; presses.delete(id); press.animation.cancel();

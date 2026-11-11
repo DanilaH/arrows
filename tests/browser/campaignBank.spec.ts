@@ -60,8 +60,10 @@ test('ends explicitly at c120 with accurate totals and no silent reroll', async 
   await expect(page.locator('.home-progress')).toContainText('120 / 120');
   await page.locator('#home-play').click(); await expect(page.locator('#win')).toBeVisible();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-level', 'c120');
-  await expect(page.locator('#next')).toBeDisabled();
+  await expect(page.locator('#next')).toBeEnabled();
+  await expect(page.locator('#next')).toHaveText(/calendar|календар/i);
   await expect(page.locator('#next')).not.toContainText('20 ');
-  await page.locator('#choose-field').click(); await page.locator('#home-play').click();
+  await page.locator('#next').click(); await expect(page.locator('#game-shell')).toHaveAttribute('data-screen','calendar');
+  await page.locator('#home-tab').click(); await page.locator('#home-play').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-level', 'c120');
 });
