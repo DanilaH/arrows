@@ -30,4 +30,4 @@ startGame([], onBack => {
   const banner = document.createElement('aside'); banner.textContent='Тест подтверждения награды · без рекламы';
   banner.style.cssText='position:fixed;top:65px;left:0;right:0;text-align:center;font:11px system-ui;color:#7b9bba;pointer-events:none;z-index:20'; document.body.append(banner);
   return {...base, ads, destroy() { ads.destroy(); base.destroy(); banner.remove(); }};
-});
+}, {scaleContext: true});

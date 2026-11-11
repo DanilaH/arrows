@@ -1,4 +1,4 @@
-import { trophyCatalog, validTrophyBinding } from '../content/trophies';
+import { trophyDesign, validTrophyBinding } from '../content/trophies';
 import type { TrophyBinding } from '../domain/trophy';
 import { legacyTrophy } from './trophies-v1';
 
@@ -105,7 +105,7 @@ export function trophy(month: string, earned = false, options: TrophyRenderOptio
   const binding = options.binding;
   if (binding && !validTrophyBinding(month, binding)) throw Error('Invalid frozen trophy binding');
   if (binding?.version === 1) return legacyTrophy(month, earned);
-  const d = trophyCatalog[month]; if (!d) throw Error('Missing frozen trophy');
+  const d = trophyDesign(month);
   const scope = options.scope ?? 'art'; if (!/^[a-zA-Z0-9_-]+$/.test(scope)) throw Error('Invalid trophy instance');
   const key = `t-${month}-${scope}-${earned ? 'won' : 'goal'}`, [dark, shade, mid, light, shine] = metals[d.metal]!, gem = gems[d.gem]!;
   const metal = `url(#${key}-metal)`, rim = `url(#${key}-rim)`, jewel = `url(#${key}-gem)`;

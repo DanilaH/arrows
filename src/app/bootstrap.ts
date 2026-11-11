@@ -16,7 +16,7 @@ import { installGameSurface } from '../game/surface';
 import type { Level } from '../domain/board';
 
 /** Isolated tests may supply geometry/host dependencies; the normal entry uses production defaults. */
-export function startGame(reviewFields: readonly Level[] = [], platformFactory: typeof createPlatformRuntime = createPlatformRuntime): void {
+export function startGame(reviewFields: readonly Level[] = [], platformFactory: typeof createPlatformRuntime = createPlatformRuntime, reviewOptions: { scaleContext?: boolean } = {}): void {
   const language = normalizeGameLanguage(navigator.language);
   const text = copy[language];
   document.documentElement.lang = language;
@@ -82,7 +82,7 @@ export function startGame(reviewFields: readonly Level[] = [], platformFactory: 
       dirty: requestRender,
       move: () => undefined,
       ready(activeScene) {
-        const surface = installGameSurface(activeScene, platform, platform.settings.state.language, reviewFields);
+        const surface = installGameSurface(activeScene, platform, platform.settings.state.language, reviewFields, reviewOptions);
         handleBack = () => surface.onBack();
         disposers.push(() => surface.destroy());
       },

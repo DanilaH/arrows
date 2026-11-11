@@ -16,7 +16,7 @@ import { earnedAwards } from '../progression/collection';
 import type { BoardScene } from './BoardScene';
 
 type Platform = ReturnType<typeof createPlatformRuntime>;
-export function installGameSurface(scene: BoardScene, platform: Platform, language: GameLanguage, reviewFields: readonly Level[] = []) {
+export function installGameSurface(scene: BoardScene, platform: Platform, language: GameLanguage, reviewFields: readonly Level[] = [], reviewOptions: { scaleContext?: boolean } = {}) {
   let text = copy[language];
   const motion = createUiMotion();
   const root = document.querySelector<HTMLElement>('#game-root')!;
@@ -63,6 +63,12 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if (control || tutorial() !== step) return;
     run(progress.tutorial(step).then(changed => { if (changed) platform.analytics.track('tutorial_step', { step, outcome: 'completed' }); }));
   };
+  const manualZoom = (previous: Point, current: Point, ratio: number): void => {
+    const before = scene.boardCamera.scale;
+    scene.zoom(previous, current, ratio); scheduleView();
+    if (!loaded || control || meta.screen !== 'game' || progress.state.tutorials.includes('zoom') || Math.abs(scene.boardCamera.scale - before) < .01) return;
+    run(progress.tutorial('zoom').then(changed => { if (changed) platform.analytics.track('tutorial_step', { step: 'zoom', outcome: 'completed' }); }));
+  };
   const point = (event: PointerEvent | WheelEvent): Point => ({ x: event.clientX, y: event.clientY });
   const inBoard = (p: Point): boolean => {
     const v = scene.playArea; return p.x >= v.x && p.y >= v.y && p.x <= v.x + v.width && p.y <= v.y + v.height;
@@ -88,7 +94,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     },
     preview: id => scene.setPreview(id),
     pan: (dx, dy) => { scene.pan(dx, dy); scheduleView(); },
-    pinch: (previous, current, ratio) => { scene.zoom(previous, current, ratio); scheduleView(); if (Math.abs(ratio - 1) > .01) finishTutorial('zoom'); },
+    pinch: manualZoom,
   });
   const cancel = (): void => { if (holdTimer !== undefined) clearTimeout(holdTimer); holdTimer = undefined; gestures.cancel(); };
   const close = (after: ()=>void = () => {}): void => { modal = null; motion.close(dialog, () => { platform.activity.setBlocked('dialog', false); if(meta.screen === 'game')root.focus({ preventScroll: true }); after(); }); };
@@ -250,7 +256,9 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const detail=document.querySelector('#win-detail')!, result=board.snapshot().errors.length === 0 ? text.flawless : text.cleared;
     if(detail.textContent!==result)detail.textContent=result;
     const step = board.complete ? null : tutorial();
-    status.textContent = !loaded ? text.restoring : notice || (step ? text[`teach_${step}` as keyof typeof text] : control && remaining === board.level.arrows.length ? text.zoomTip : '');
+    // Isolated-QA experiment: never participates in tutorial(), Hint or ad clocks.
+    const scaleContext = reviewOptions.scaleContext && !control && !board.complete && board.hearts > 0 && !progress.state.tutorials.includes('zoom') && scene.boardCamera.scale < 12 && scene.boardCamera.snapshot().zoom < 1.15;
+    status.textContent = !loaded ? text.restoring : notice || (step ? text[`teach_${step}` as keyof typeof text] : scaleContext || control && remaining === board.level.arrows.length ? text.zoomTip : '');
     const hintWasHidden = hintButton.hidden;
     hintButton.hidden = !loaded || control || board.complete || board.hearts === 0 || !!step || idleMs < 3000 || a.hint !== null;
     if (hintWasHidden && !hintButton.hidden) motion.reveal(hintButton);
@@ -363,7 +371,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   on(root, 'pointercancel', cancel); on(root, 'lostpointercapture', event => { if (gestures.hasPointer(event.pointerId)) cancel(); });
   on(root, 'wheel', event => {
     if (motion.routeBusy || !inBoard(point(event)) || platform.activity.isBlocked()) return;
-    event.preventDefault(); cancel(); scene.zoom(point(event), point(event), Math.exp(-event.deltaY * .0015)); scheduleView(); finishTutorial('zoom');
+    event.preventDefault(); cancel(); manualZoom(point(event), point(event), Math.exp(-event.deltaY * .0015));
   }, { passive: false });
   on(document.querySelector<HTMLElement>('#choose-field')!, 'click', backToMenu);
   on(document.querySelector<HTMLElement>('#restart')!, 'click', () => open('restart'));

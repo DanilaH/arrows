@@ -24,7 +24,8 @@ it('resolves an awarded frozen version and rejects a conflicting identity instea
   expect(trophy('2026-11', true, { binding: { version: 1, id: 't1-2026-11' } })).toBe(legacyTrophy('2026-11', true));
   expect(trophy('2026-11', true, { binding: trophyBinding('2026-11') })).toContain('trophy-rich');
   expect(() => trophy('2026-11', true, { binding: trophyBinding('2026-10') })).toThrow('binding');
-  expect(() => generateTrophyDesign('2026-13')).toThrow(); expect(() => generateTrophyDesign('2046-01')).toThrow();
+  expect(() => generateTrophyDesign('2026-13')).toThrow(); expect(() => generateTrophyDesign('2201-01')).toThrow();
+  expect(trophy('2046-01', true, { binding: trophyBinding('2046-01') })).toContain('trophy-rich');
 });
 it('uses separate SVG definitions for collection, calendar and full-size preview of the same award', () => {
   const scopes = ['collection', 'calendar', 'viewer'];

@@ -23,7 +23,7 @@ function permutation(length: number, seed: number): number[] {
 export function generateTrophyDesign(month: string): TrophyDesign {
   if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(month)) throw Error('Invalid trophy month');
   const year = Number(month.slice(0, 4)), index = Number(month.slice(-2)) - 1;
-  if (year < TROPHY_FIRST_YEAR || year > TROPHY_LAST_YEAR) throw Error('Trophy year outside frozen catalog');
+  if (year < TROPHY_FIRST_YEAR || year > 2200) throw Error('Unsupported trophy year');
   const seed = trophySeed(`arrows.trophy.v2.${month}`), next = random(seed);
   const take = (count: number): number => Math.floor(next() * count);
   return { version: 2, month, id: `t2-${month}-${seed.toString(16).padStart(8, '0')}`,

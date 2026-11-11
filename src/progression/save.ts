@@ -1,6 +1,6 @@
 import { JsonStorageRepository, type ReceiptCommitResult, type StorageAdapter } from '@danilah/mini-games-kit/platform';
 import { campaign, CATALOG_VERSION } from '../content/campaign';
-import { dailyCatalog, dailyMonths, DAILY_CATALOG_VERSION } from '../content/daily';
+import { dailyLevel, dailyId, supportsDailyDate, supportsDailyMonth, DAILY_CATALOG_VERSION } from '../content/daily';
 import { localDate, validDate, monthDates } from './calendar';
 import { legacyTrophyBinding, trophyBinding, validTrophyBinding } from '../content/trophies';
 import type { TrophyBinding } from '../domain/trophy';
@@ -66,7 +66,7 @@ function attempt(value: unknown): SavedAttempt {
 export function decodeSave(value: unknown): GameSave {
   let s = record(value);
   if (s.schema === 1) s = { ...s, schema: 2, dailyCatalogVersion: DAILY_CATALOG_VERSION, dailyWins: {}, cups: [], facts: [], seenAwards: [], collectionSeen: false };
-  if (s.schema === 2 && s.dailyCatalogVersion === 1) s = { ...s, dailyCatalogVersion: DAILY_CATALOG_VERSION };
+  if (s.schema === 2 && (s.dailyCatalogVersion === 1 || s.dailyCatalogVersion === 2)) s = { ...s, dailyCatalogVersion: DAILY_CATALOG_VERSION };
   // Known catalogues retain embedded attempts, geometry and receipts. Catalogue 5 selects the dense bank only for fresh attempts.
   if (s.schema === 2 && (s.catalogVersion === 1 || s.catalogVersion === 2 || s.catalogVersion === 3 || s.catalogVersion === 4)) s = { ...s, catalogVersion: CATALOG_VERSION };
   if (s.schema !== 2 || !integer(s.revision) || s.catalogVersion !== CATALOG_VERSION || !integer(s.index, campaign.length - 1) || !Array.isArray(s.wins)) throw Error('Unsupported save');
@@ -81,8 +81,8 @@ export function decodeSave(value: unknown): GameSave {
   if (current.level.id !== campaign[s.index]!.id || wins.length !== s.index + (new Board(current.level, current.board.id, current.board).complete ? 1 : 0) ||
       (wins.length > s.index && wins.at(-1)?.attempt !== current.board.id)) throw Error('Invalid campaign position');
   const daily = Object.fromEntries(Object.entries(record(s.daily)).map(([date, a]) => {
-    if (!validDate(date) || !dailyCatalog[date]) throw Error('Invalid daily date');
-    const current = attempt(a); if (current.level.id !== dailyCatalog[date]!.id) throw Error('Wrong daily field');
+    if (!supportsDailyDate(date)) throw Error('Invalid daily date');
+    const current = attempt(a); if (current.level.id !== dailyId(date)) throw Error('Wrong daily field');
     return [date, current];
   }));
   const receipts = strings(s.receipts), tutorials = strings(s.tutorials);
@@ -114,7 +114,7 @@ export function decodeSave(value: unknown): GameSave {
     }
   }
   const cups = s.cups;
-  if (!Array.isArray(cups) || !cups.every(m => typeof m === 'string' && dailyMonths.includes(m) && monthDates(m).every(d => dailyWins[d])) || new Set(cups).size !== cups.length) throw Error('Invalid trophy');
+  if (!Array.isArray(cups) || !cups.every(m => typeof m === 'string' && supportsDailyMonth(m) && monthDates(m).every(d => dailyWins[d])) || new Set(cups).size !== cups.length) throw Error('Invalid trophy');
   const trophyDesigns = s.trophyDesigns === undefined
     ? Object.fromEntries(cups.map(month => [month, legacyTrophyBinding(month)]))
     : record(s.trophyDesigns);
@@ -266,8 +266,8 @@ export class ProgressStore {
   }
   public openDaily(date: string): Promise<string | undefined> {
     return this.update(next => {
-      if (next.index < 19 || !validDate(date) || !dailyCatalog[date] || date > localDate(this.now())) return null;
-      next.daily[date] ??= freshAttempt(dailyCatalog[date]!);
+      if (next.index < 19 || !supportsDailyDate(date) || date > localDate(this.now())) return null;
+      next.daily[date] ??= freshAttempt(dailyLevel(date)!);
       return { value: next.daily[date]!.board.id };
     });
   }

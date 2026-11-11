@@ -2,7 +2,7 @@ import type { UiMotion } from './uiMotion';
 import type { ProgressStore } from '../progression/save';
 import { collectionOpen, challengeOpen, collectionStats, medals, earnedAwards, type UnlockId } from '../progression/collection';
 import { calendarDate, localDate, monthDates } from '../progression/calendar';
-import { dailyCatalog, dailyMonths, dailyDates } from '../content/daily';
+import { availableDailyMonths, dailyDifficulty, supportsDailyDate } from '../content/daily';
 import { campaign } from '../content/campaign';
 import { trophy } from './trophies';
 import { settingsIcon } from './settings';
@@ -31,10 +31,11 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   const pendingUnlocks = new Set<UnlockId>();
   let pendingDaily: {date:string;attempt:string} | null = null, lastDailyArrival = '';
   let screen: AppScreen = 'home', alive = true, ready = false, busy = false, revision = 0;
-  let month = dailyMonths.includes(localDate().slice(0, 7)) ? localDate().slice(0, 7) : dailyMonths[0]!;
-  let selected = dailyDates.filter(d => d <= localDate()).at(-1) ?? dailyDates[0]!;
+  let calendarToday = localDate(), dailyMonths = availableDailyMonths(calendarToday);
+  const boundedDate = (date: string): string => date < '2026-01-01' ? '2026-01-01' : date > '2200-12-31' ? '2200-12-31' : date;
+  let selected = boundedDate(calendarToday), month = selected.slice(0, 7);
   let calendarParent: 'home' | 'collection' = 'home';
-  const installedYears = [...new Set(dailyMonths.map(key => key.slice(0, 4)))];
+  let installedYears = [...new Set(dailyMonths.map(key => key.slice(0, 4)))];
   let calendarNotice = '', collectionYear = installedYears.includes(localDate().slice(0, 4)) ? localDate().slice(0, 4) : installedYears.at(-1)!;
   const trophyDialog = document.querySelector<HTMLDialogElement>('#trophy-viewer')!;
   let trophyFocus: HTMLElement | null = null;
@@ -95,18 +96,30 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     if (!selected.startsWith(month)) selected = dates.filter(d => d <= today).at(-1) ?? dates[0]!;
     const firstWeekday = (calendarDate(dates[0]!).getUTCDay() + 6) % 7, done = dates.filter(d => save.dailyWins[d]).length;
     const week = Array.from({ length: 7 }, (_, i) => new Intl.DateTimeFormat(locale, { weekday: 'short', timeZone: 'UTC' }).format(calendarDate(`2026-11-${String(2 + i).padStart(2, '0')}`)));
-    const current = save.daily[selected], completed = !!save.dailyWins[selected], allowed = selected <= today && !!dailyCatalog[selected] && challengeOpen(save);
-    const difficulty = dailyCatalog[selected]?.difficulty;
+    const current = save.daily[selected], completed = !!save.dailyWins[selected], allowed = selected <= today && supportsDailyDate(selected) && challengeOpen(save);
+    const difficulty = dailyDifficulty(selected);
     return title(text.challenge) + `<div class="meta-content calendar-content"><section class="month-award"><button id="view-trophy" class="trophy-inspect" type="button" aria-label="${text.inspectTrophy}">${trophy(month, save.cups.includes(month), { ...(save.cups.includes(month) ? { binding: save.trophyDesigns[month]! } : {}), scope: 'calendar' })}<span>${text.inspectTrophy}</span></button><p class="month-count"><span>${done}</span> / ${dates.length} · ${text.daysDone}</p><div class="month-progress" role="progressbar" aria-label="${text.daysDone}" aria-valuemin="0" aria-valuemax="${dates.length}" aria-valuenow="${done}"><span style="transform:scaleX(${done/dates.length})"></span></div><small>${save.cups.includes(month)?text.cupEarned:text.cupRule}</small></section>
       <section class="calendar-month"><div class="month-heading"><button class="circle" type="button" data-shift="-1" aria-label="${text.previousMonth}" ${index <= 0 ? 'disabled' : ''}>‹</button><h2>${monthFormat.format(calendarDate(month + '-01'))}</h2><button class="circle" type="button" data-shift="1" aria-label="${text.nextMonth}" ${index >= dailyMonths.length - 1 ? 'disabled' : ''}>›</button></div>
       <div class="weekdays" aria-hidden="true">${week.map(d => `<span>${d}</span>`).join('')}</div>
       <div class="calendar-grid" role="group" aria-label="${monthFormat.format(calendarDate(month + '-01'))}">${'<span></span>'.repeat(firstWeekday)}${dates.map(date => `<button type="button" class="calendar-day ${save.dailyWins[date] ? 'done' : ''} ${date === today ? 'today' : ''}" data-date="${date}" aria-label="${dayFormat.format(calendarDate(date))}${save.dailyWins[date] ? ', ' + text.dayCompleted : ''}" aria-pressed="${date === selected}" ${date > today ? 'disabled' : ''}>${Number(date.slice(-2))}${save.dailyWins[date] ? '<small aria-hidden="true">✓</small>' : ''}</button>`).join('')}</div></section>
-      <section class="selected-day"><h3>${dayFormat.format(calendarDate(selected))}</h3><span>${completed ? text.dayCompleted : difficulty === 'normal' ? text.dailyPuzzle : difficulty === 'hard' ? 'Hard' : 'Nightmare'}</span><button id="start-daily" class="primary" type="button" ${!ready || !allowed || busy ? 'disabled' : ''}>${completed ? text.viewResult : current?.started ? text.resume : text.play}</button><p id="calendar-notice" role="status">${calendarNotice || (selected > today ? text.futureDay : '')}</p></section></div>`;
+      <section class="selected-day"><h3>${dayFormat.format(calendarDate(selected))}</h3><span>${completed ? text.dayCompleted : difficulty === 'normal' ? text.dailyPuzzle : difficulty === 'hard' ? 'Hard' : 'Nightmare'}</span><button id="start-daily" class="primary" type="button" ${!ready || !allowed || busy ? 'disabled' : ''}>${completed ? text.viewResult : current?.started ? text.resume : text.play}</button><p id="calendar-notice" role="status">${calendarNotice || (today < '2026-01-01' ? text.calendarNotStarted : today > '2200-12-31' ? text.calendarArchive : selected > today ? text.futureDay : '')}</p></section></div>`;
+  };
+  const updateCalendarDate = (): void => {
+    const today = localDate();
+    if (today !== calendarToday) {
+      const followedToday = selected === boundedDate(calendarToday);
+      const followedYear = collectionYear === calendarToday.slice(0, 4);
+      dailyMonths = availableDailyMonths(today); installedYears = [...new Set(dailyMonths.map(key => key.slice(0, 4)))];
+      if (followedToday || !dailyMonths.includes(month)) { selected = boundedDate(today); month = selected.slice(0, 7); }
+      if (followedYear || !installedYears.includes(collectionYear)) collectionYear = installedYears.at(-1)!;
+      calendarToday = today;
+    }
   };
   const refresh = (): void => {
     if (!alive || screen === 'game') return;
     if(presenting){deferredRefresh=true;return;}
     if (options.motion.deferRoute(refresh)) return;
+    updateCalendarDate();
     const focus = document.activeElement as HTMLElement | null;
     const key = focus && root.contains(focus) ? focus.id || focus.dataset.date || focus.dataset.month || focus.dataset.shift : '';
     const expanded = [...root.querySelectorAll<HTMLDetailsElement>('details[open]')].map(el=>el.dataset.medal || el.id);
@@ -158,7 +171,8 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       scroll.set(screen, root.scrollTop);
       if (screen === 'game' && next !== 'game') options.leaveGame();
       screen = next; shell.dataset.screen = screen; root.hidden = screen === 'game'; nav.hidden = root.hidden; options.blocked(screen !== 'game'); options.visited(screen);
-      if (date && dailyCatalog[date]) { selected = date; month = date.slice(0, 7); }
+      updateCalendarDate();
+      if (date && supportsDailyDate(date) && dailyMonths.includes(date.slice(0, 7))) { selected = date; month = date.slice(0, 7); }
       if (screen !== 'game') { refresh(); root.scrollTop = screen==='calendar' && pendingDaily ? 0 : scroll.get(screen) ?? 0; root.querySelector<HTMLElement>('h1')?.focus({ preventScroll: true });
 
       }
@@ -208,7 +222,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     } else if (target.id === 'home-calendar') show('calendar');
     else if (target.dataset.month && dailyMonths.includes(target.dataset.month)) { month = target.dataset.month; show('calendar'); }
     else if (target.id === 'view-trophy') openTrophy(month);
-    else if (target.dataset.shift) { month = dailyMonths[dailyMonths.indexOf(month) + Number(target.dataset.shift)]!; calendarNotice = ''; refresh(); options.motion.reveal(root.querySelector('.calendar-content')!); }
+    else if (target.dataset.shift) { const next = dailyMonths[dailyMonths.indexOf(month) + Number(target.dataset.shift)]; if (!next) return; month = next; calendarNotice = ''; refresh(); options.motion.reveal(root.querySelector('.calendar-content')!); }
     else if (target.dataset.date) { selected = target.dataset.date; calendarNotice = ''; refresh(); options.motion.reveal(root.querySelector('.selected-day')!); }
     else if (target.id === 'start-daily') {
       busy = true; calendarNotice = ''; refresh();

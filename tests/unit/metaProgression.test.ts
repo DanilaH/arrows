@@ -4,7 +4,7 @@ import previousFields from '../fixtures/daily-v1-hashes.json';
 import type { StorageAdapter } from '@danilah/mini-games-kit/platform';
 import { campaign } from '../../src/content/campaign';
 import { trophyBinding, legacyTrophyBinding } from '../../src/content/trophies';
-import { dailyCatalog, dailyDates, dailyMonths } from '../../src/content/daily';
+import { dailyCatalog, dailyDates, dailyMonths, DAILY_CATALOG_VERSION } from '../../src/content/daily';
 import { Board, canExit, validateLevel } from '../../src/domain/board';
 import { decodeSave, freshAttempt, freshSave, ProgressStore, SAVE_KEY } from '../../src/progression/save';
 import { localDate, validDate, daysInMonth, monthDates } from '../../src/progression/calendar';
@@ -137,7 +137,7 @@ it('upgrades the 0.3 daily catalog without losing attempts, views, completed day
   await store.commitReward({ id: 'old-catalog-reward', schema: 1, attempt: pending, mode: 'daily', placement: 'hint' });
   const old = { ...store.state, dailyCatalogVersion: 1 }; rows.set(SAVE_KEY, JSON.stringify(old));
   const restored = new ProgressStore(storage); await restored.load();
-  expect(restored.available).toBe(true); expect(restored.state).toEqual({ ...old, dailyCatalogVersion: 2 });
+  expect(restored.available).toBe(true); expect(restored.state).toEqual({ ...old, dailyCatalogVersion: DAILY_CATALOG_VERSION });
   expect(await restored.openDaily('2026-11-09')).toBe(pending);
   expect(await restored.commitReward({ id: 'old-catalog-reward', schema: 1, attempt: pending, mode: 'daily', placement: 'hint' })).toBe('already-applied');
 });
