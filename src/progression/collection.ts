@@ -1,5 +1,7 @@
 import type { GameSave } from './save';
 import { dateOrdinal, localDate } from './calendar';
+export type UnlockId = 'collection' | 'calendar';
+export const availableUnlocks = (index: number): UnlockId[] => index >= 19 ? ['collection','calendar'] : index >= 9 ? ['collection'] : [];
 export const collectionOpen = (save: GameSave): boolean => save.index >= 9;
 export const challengeOpen = (save: GameSave): boolean => save.index >= 19;
 /** Explicit local product rules; the original League/thresholds have not been established. */

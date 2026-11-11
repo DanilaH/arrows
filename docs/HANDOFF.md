@@ -2,6 +2,10 @@
 
 ## Current milestone
 
+Version 0.14.0 / Android versionCode 19 implements the user-approved meta follow-ups: once-only section disclosure on menu return, daily-cell→monthly-progress arrival, and an enabled Calendar destination after c120. Additive schema-2 `seenUnlocks` metadata does not alter availability, content or reward authority. Read `META_ARRIVALS.md` for ownership, quiet upgrade, fallback/reduced-motion and capture provenance.
+
+Previous finish milestone:
+
 Version 0.13.0 / Android versionCode 18 implements the requested fuller minimalist finish: radial dot wave, two restrained ribbon fans/glints, larger drawn seal and coordinated result entry. Completed tutorials/restart clutter are removed from the finish; live-result text is stable. See `FINISH_POLISH.md` for bounds, review proposals and recording provenance.
 
 Previous assistance milestone:
@@ -55,6 +59,10 @@ Stage C navigation/records remain: Collection at current level 10, daily at 20, 
 D–E remain: exact-device SDK fill/live earned acceptance, dashboard delivery, physical-phone sound/haptics/system-bar/feel/performance/process-kill evidence, human bank playtesting, physical native-icon/splash acceptance, signing and RuStore package. Keep attaching authentic GIFs for visible changes.
 
 ## Verification
+
+0.14.0 local: strict check/build passes with 89 TS tests. The 54-case relevant browser run passes, followed by six final lifecycle cases. Phase-specific phone visual checks and native sync pass; final CI/artifact evidence follows.
+
+Historical 0.13.0:
 
 0.13.0: [CI 42977404951](https://github.com/DanilaH/arrows/actions/runs/42977404951) passes both jobs on source `366c716263dcc37a33ef748cb1edb7dadfea01b6`: 85 TS tests, all 118 browser cases and seven JVM tests/Android assembly. Local strict check/build/native sync pass; 32 relevant browser cases are covered, including all ten final victory cases, plus two Collection/calendar/theme review cases. A restored completed-c120 regression reproduced visual replay (20 frames/350ms) before the fresh/unannounced start guard, and stays quiet after it. New verification covers interruption, quick Next, stable live-result text, 320px light/reduced-motion and 568×320 landscape. APK 0.13.0 (18): 10,219,250 bytes; SHA-256 `22f2891fc48bc19914f3566e11b05b52af05c11be786bd7b7ad9b7b755033073`. Both archive digests, manifest, all eight web files, native configuration/analytics and compiled feedback profile match. Two authentic production GIFs and actual-output sound MP4 share that exact payload: fresh storage, six error-free touch-earned wins, normal dark c01 and Hard light c06, no injected progression/rewards/transport. Evidence: `verification/FINISH_POLISH_BUILD_2026-11-11.json`. The evidence-only follow-up changes no application payload. Physical-phone sound/haptics/performance, live-service/signing/store acceptance remain open.
 

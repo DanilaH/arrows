@@ -63,7 +63,7 @@ test('accepts a quick next action during the short-landscape celebration',async(
 test('restores a completed final campaign field without restarting its visual celebration',async({page})=>{
   await observe(page);const state=freshSave(),level=campaign.at(-1)!,attempt=freshAttempt(level);state.index=campaign.length-1;attempt.started=true;attempt.board={...attempt.board,removed:level.arrows.map(a=>a.id)};state.campaign=attempt;
   state.wins=campaign.map((l,i)=>({attempt:i===state.index?attempt.board.id:`fixture-${i}`,levelId:l.id,activeMs:1000,completedAt:i*1000,localDate:'1970-01-01',mistakes:0}));decodeSave(state);
-  await page.addInitScript(({key,state})=>localStorage.setItem(key,JSON.stringify(state)),{key:SAVE_KEY,state});await page.goto('/');await page.locator('#home-play:enabled').click();await expect(page.locator('#win')).toBeVisible();await expect(page.locator('#next')).toBeDisabled();
+  await page.addInitScript(({key,state})=>localStorage.setItem(key,JSON.stringify(state)),{key:SAVE_KEY,state});await page.goto('/');await page.locator('#home-play:enabled').click();await expect(page.locator('#win')).toBeVisible();await expect(page.locator('#next')).toBeEnabled();
   await page.waitForTimeout(500);expect(await wins(page)).toBe(0);expect(await page.locator('#win').evaluate(e=>e.getAnimations({subtree:true}).length)).toBe(0);
   const quiet=await page.evaluate(()=>Reflect.get(window,'victoryFrames') as number);await page.waitForTimeout(350);expect(await page.evaluate(()=>Reflect.get(window,'victoryFrames') as number)-quiet).toBeLessThan(5);
 });

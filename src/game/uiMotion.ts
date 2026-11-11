@@ -7,7 +7,7 @@ export function createUiMotion() {
   const stopRefill = (): void => { for(const end of refillEnds.splice(0))end(); };
   const dialogs = new Map<HTMLDialogElement, { finish(): void; cancel(): void }>();
   let snapshotSerial = 0;
-  let awardFinish: (()=>void) | undefined;
+  let arrivalFinish: (()=>void) | undefined;
   let routeFinish: (() => void) | undefined, routeBusy = false, alive = true;
   const animate = (element: Element, frames: Keyframe[], duration: number, done = (): void => {}, delay = 0): (() => void) => {
     if (!alive || reduced.matches || document.hidden || !element.animate) { done(); return () => {}; }
@@ -18,6 +18,19 @@ export function createUiMotion() {
     };
     const timer = setTimeout(finish, duration + delay + 80); running.add(finish);
     void animation.finished.then(finish, () => {}); return finish;
+  };
+  const presentation = (duration: number, done: () => void) => {
+    arrivalFinish?.();
+    const owned: (()=>void)[] = [], elements: Element[] = []; let ended=false;
+    const finish=():void=>{if(ended)return;ended=true;clearTimeout(timer);if(arrivalFinish===finish)arrivalFinish=undefined;for(const end of owned)end();for(const element of elements)element.remove();done();};
+    const timer=setTimeout(finish,duration);arrivalFinish=finish;
+    return {own:(end:()=>void)=>owned.push(end),remove:(element:Element)=>elements.push(element),finish};
+  };
+  const notice = (label: string, group: ReturnType<typeof presentation>, duration: number, anchor?: HTMLElement): void => {
+    const element=document.createElement('span');element.className='arrival-notice';element.setAttribute('role','status');element.textContent=label;document.body.append(element);group.remove(element);
+    if(anchor){const r=anchor.getBoundingClientRect(),opacity=anchor.style.opacity;anchor.style.opacity='0';group.own(()=>{anchor.style.opacity=opacity;});Object.assign(element.style,{left:`${r.x}px`,right:'auto',top:`${r.y-4}px`,bottom:'auto',width:`${r.width}px`,maxWidth:`${r.width}px`,margin:'0'});}
+    if(reduced.matches)element.style.opacity='1';
+    else group.own(animate(element,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)',offset:.12},{opacity:1,transform:'translateY(0)',offset:.82},{opacity:0,transform:'translateY(-3px)'}],duration));
   };
   const releasePress = (id: number, bounce: boolean): void => {
     const press = presses.get(id); if (!press) return; presses.delete(id); press.animation.cancel();
@@ -37,10 +50,10 @@ export function createUiMotion() {
     if (event.detail !== 0) return; const button = (event.target as Element).closest<HTMLButtonElement>('button');
     if (button && !button.disabled) animate(button, [{ transform: 'scale(.97)' }, { transform: 'scale(1)' }], 170);
   };
-  const settle = (): void => { stopRefill(); blur(); routeFinish?.(); for (const finish of [...running]) finish(); };
+  const settle = (): void => { arrivalFinish?.(); stopRefill(); blur(); routeFinish?.(); for (const finish of [...running]) finish(); };
   const visibility = (): void => { if (document.hidden) settle(); };
   document.addEventListener('pointerdown', down, true); document.addEventListener('pointerup', up, true); document.addEventListener('pointercancel', cancel, true);
-  document.addEventListener('click', keyboard, true); document.addEventListener('visibilitychange', visibility); window.addEventListener('blur', blur);
+  document.addEventListener('click', keyboard, true); document.addEventListener('visibilitychange', visibility); window.addEventListener('blur', blur); window.addEventListener('resize', settle);
   return {
     get routeBusy() { return routeBusy; },
     deferRoute(work: () => void): boolean { if (!routeBusy) return false; deferredRoutes.add(work); return true; },
@@ -113,21 +126,47 @@ export function createUiMotion() {
       if(rays)animate(rays,[{opacity:0,transform:'scale(.65)'},{opacity:1,transform:'scale(1)',offset:.35},{opacity:0,transform:'scale(1.16)'}],640,undefined,100);
       for(const [i,el] of [...element.querySelectorAll('strong,.win-detail,button')].entries()) animate(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],240,undefined,40+i*40);
     },
-    award(target: HTMLElement, artwork: string): void {
-      awardFinish?.();
-      if (!alive || reduced.matches || document.hidden || !target.isConnected) return;
-      const rect=target.getBoundingClientRect(); if(!rect.width||!rect.height)return;
-      const token=document.createElement('span'), x=innerWidth/2-18, y=innerHeight*.48-18;
+    unlock(target: HTMLElement, label: string, done: () => void): void {
+      if(!alive || document.hidden || !target.isConnected){done();return;}
+      const group=presentation(1900,done);notice(label,group,1900);
+      group.own(animate(target,[{transform:'scale(.75)'},{transform:'scale(1.26)',offset:.45},{transform:'scale(1)'}],640));
+      if(reduced.matches)return;
+      const box=target.getBoundingClientRect(),halo=document.createElement('i');halo.className='arrival-halo';halo.setAttribute('aria-hidden','true');
+      Object.assign(halo.style,{left:`${box.x-7}px`,top:`${box.y-7}px`,width:`${box.width+14}px`,height:`${box.height+14}px`});document.body.append(halo);group.remove(halo);
+      group.own(animate(halo,[{opacity:0,transform:'scale(.65)'},{opacity:.8,transform:'scale(1)',offset:.3},{opacity:0,transform:'scale(1.55)'}],740));
+    },
+    dailyProgress(day: HTMLElement, bar: HTMLElement, count: HTMLElement, trophy: HTMLElement, from: number, to: number, total: number, label: string, earned: boolean, done: () => void): void {
+      if(!alive || document.hidden || !day.isConnected){done();return;}
+      const group=presentation(1400,done);
+      if(reduced.matches){notice(label,group,1400,count.parentElement??undefined);return;}
+      group.own(animate(day,[{opacity:.4,transform:'scale(.75)'},{opacity:1,transform:'scale(1.1)',offset:.6},{opacity:1,transform:'scale(1)'}],400));
+      group.own(animate(bar,[{transform:`scaleX(${from/total})`},{transform:`scaleX(${to/total})`}],400,undefined,760));
+      group.own(animate(count,[{opacity:.4,transform:'translateY(3px)'},{opacity:1,transform:'translateY(0)'}],300,undefined,760));
+      group.own(animate(trophy,[{transform:'scale(.97)'},{transform:`scale(${earned?1.1:1.04})`,offset:.5},{transform:'scale(1)'}],420,undefined,800));
+      const a=day.getBoundingClientRect(),b=trophy.getBoundingClientRect(),nav=document.querySelector('#meta-nav')?.getBoundingClientRect();
+      const footer=document.querySelector('.selected-day')?.getBoundingClientRect(),bottom=Math.min(nav?.top??innerHeight,footer?.top??innerHeight);
+      const visible=(r:DOMRect):boolean=>r.width>0&&r.top>=0&&r.bottom<=bottom;
+      if(earned&&visible(b)){const halo=document.createElement('i');halo.className='arrival-halo cup-arrival-halo';halo.setAttribute('aria-hidden','true');Object.assign(halo.style,{left:`${b.x-8}px`,top:`${b.y-6}px`,width:`${b.width+16}px`,height:`${b.height+12}px`});document.body.append(halo);group.remove(halo);group.own(animate(halo,[{opacity:0,transform:'scale(.85)'},{opacity:.8,transform:'scale(1)',offset:.25},{opacity:0,transform:'scale(1.18)'}],500,undefined,800));}
+      if(!visible(a)||!visible(b)){notice(label,group,1400,count.parentElement??undefined);return;}
+      const token=document.createElement('i');token.className='day-progress-token';token.setAttribute('aria-hidden','true');
+      const x=a.x+a.width/2-4,y=a.y+a.height/2-4,dx=b.x+b.width/2-4-x,dy=b.y+b.height*.75-4-y;
+      Object.assign(token.style,{left:`${x}px`,top:`${y}px`});document.body.append(token);group.remove(token);
+      group.own(animate(token,[{opacity:0,transform:'translate(0,0) scale(.4)'},{opacity:1,transform:'translate(0,-4px) scale(1)',offset:.14},{opacity:1,transform:`translate(${dx*.55}px,${dy*.5-24}px) scale(.9)`,offset:.6},{opacity:0,transform:`translate(${dx}px,${dy}px) scale(.3)`}],680,undefined,150));
+    },
+    award(target: HTMLElement, artwork: string, done: () => void = () => {}): void {
+      if (!alive || reduced.matches || document.hidden || !target.isConnected) {done();return;}
+      const rect=target.getBoundingClientRect(); if(!rect.width||!rect.height){done();return;}
+      const group=presentation(800,done),token=document.createElement('span'), x=innerWidth/2-18, y=innerHeight*.48-18;
       token.className='award-flight';token.setAttribute('aria-hidden','true');token.innerHTML=artwork;
-      Object.assign(token.style,{left:`${x}px`,top:`${y}px`});document.body.append(token);
-      awardFinish=animate(token,[{opacity:0,transform:'translate(0,10px) scale(.7)'},{opacity:1,transform:'translate(0,0) scale(1.25)',offset:.23},{opacity:1,transform:`translate(${(rect.x+rect.width/2-18-x)*.5}px,${rect.y+rect.height/2-18-y-30}px) scale(.85)`,offset:.7},{opacity:0,transform:`translate(${rect.x+rect.width/2-18-x}px,${rect.y+rect.height/2-18-y}px) scale(.5)`}],680,()=>{token.remove();awardFinish=undefined;});
-      animate(target,[{transform:'scale(1)'},{transform:'scale(1.18)',offset:.4},{transform:'scale(1)'}],180,undefined,570);
+      Object.assign(token.style,{left:`${x}px`,top:`${y}px`,opacity:'0'});document.body.append(token);group.remove(token);
+      group.own(animate(token,[{opacity:0,transform:'translate(0,10px) scale(.7)'},{opacity:1,transform:'translate(0,0) scale(1.25)',offset:.23},{opacity:1,transform:`translate(${(rect.x+rect.width/2-18-x)*.5}px,${rect.y+rect.height/2-18-y-30}px) scale(.85)`,offset:.7},{opacity:0,transform:`translate(${rect.x+rect.width/2-18-x}px,${rect.y+rect.height/2-18-y}px) scale(.5)`}],680));
+      group.own(animate(target,[{transform:'scale(1)'},{transform:'scale(1.18)',offset:.4},{transform:'scale(1)'}],180,undefined,570));
     },
     finish: settle,
     destroy(): void {
       alive = false; deferredRoutes.clear(); settle(); dialogs.clear();
       document.removeEventListener('pointerdown', down, true); document.removeEventListener('pointerup', up, true); document.removeEventListener('pointercancel', cancel, true);
-      document.removeEventListener('click', keyboard, true); document.removeEventListener('visibilitychange', visibility); window.removeEventListener('blur', blur);
+      document.removeEventListener('click', keyboard, true); document.removeEventListener('visibilitychange', visibility); window.removeEventListener('blur', blur); window.removeEventListener('resize', settle);
     },
   };
 }

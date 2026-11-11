@@ -1,0 +1,29 @@
+# Section discovery and daily progress — 0.14.0 (19), 2026-11-11
+
+The user approved the three follow-ups from the finish review: gentle Collection/daily unlock arrival, a daily-clear→monthly-cup connection, and a useful destination after the final campaign field.
+
+## Actual availability and once-only discovery
+
+Availability remains current campaign level 10 (index 9) for Collection and level 20 (index 19) for daily challenges. A real index crossing queues at most these two transient disclosures. On the next menu return, after the route settles, the existing navigation icon receives a brief pulse/ring and a 1.9s caption. There is no modal or blocked input. Entering the destination directly consumes its discovery quietly. Navigation, scrolling, resize and hard interruption settle active presentation.
+
+`seenUnlocks` is additive cosmetic metadata in save schema 2, claimed through the same authoritative ProgressStore writer **before** presenting. Fresh saves start empty. A legacy document without this field treats already available sections as seen, so upgrade never announces old unlocks. Malformed cosmetic metadata is repaired to available sections without changing campaign/date attempts, receipts or actual availability. Claims reject unavailable sections, deduplicate through the writer and do not overwrite simultaneous earned receipts. A failed claim does not present an unconfirmed notification. Initial load/recovery never manufactures a new unlock event; the transient queue is not durable.
+
+## Daily return
+
+A fresh rendered daily victory grants the usual authoritative win/day/month facts before presentation. Returning to its calendar, either with the result action or Back, updates the green cell and canonical numeric/ARIA month count immediately. A 1.4s owned sequence highlights the cell, transfers a small light toward the cup, then animates the existing summary's new thin progress line/count and trophy. The animated old-to-new bar ratio is only a WAAPI layer over the already-correct canonical value. A newly completed month uses its actual earned trophy binding and a restrained gold halo; it absorbs the generic Collection flight rather than layering two celebrations.
+
+A fresh daily return starts at the month summary. If the source or destination is outside the visible calendar area or covered by the sticky day controls, the flight is skipped and a finite caption highlights the existing month counter. Reduced motion keeps immediate progress and that short static caption, without movement. Ordinary calendar navigation retains its previous scroll behavior.
+
+Only the fresh rendered attempt can queue a return effect. Viewing a completed result, recovery and a hard interruption outside an owned continuation never replay it. A result continuation captures its presentation intent, waits through the existing interstitial/foreground transition, and only queues the arrival at the actual destination. Adding the menu blocker while the owned transition is still active must not discard that destination cue. All other ad cadence/reward authority is unchanged.
+
+## Final campaign action
+
+The final result uses an enabled Calendar action. It flushes accepted progress and uses the existing foreground-safe transition owner, but requests no interstitial and consumes no opportunity. It creates no c121 attempt, new win or loop. Existing campaign/daily attempts and the final board stay intact; the installed calendar is already available at this point.
+
+## Ownership and verification
+
+Meta presentation is serialized: the relevant daily arrival, then any generic award, then section discovery. Root refresh waits while its animated elements are owned; a click settles presentation and flushes the latest view before navigating. The single UI presentation owner cancels all animations, finite timers and temporary DOM on background, reload/recovery, scroll, resize and teardown. Activity eligibility permits menu presentation but excludes settings/dialogs, loading, ads and native/document background. No UI animation owns progression or starts a permanent render loop.
+
+New unit checks cover quiet legacy upgrade, cosmetic repair, unavailable/duplicate claims, concurrent receipt merging, confirmed write failure and recovery. Browser checks cover both real section crossings, cancellation/restore, canonical count before flight, repeated completed views, quick navigation, background, a genuinely committed last-month-day fixture, the final-campaign destination/cadence and 320px light/reduced-motion behavior. Existing menu/motion/victory regressions remain applicable. Local strict checks pass 89 TS tests; the 54-case relevant browser run and six final lifecycle cases pass. Three phase-specific phone screenshots provide internal visual QA; final narrow/reduced-motion cases also pass. Queued render-time scroll events are distinguished from an actual changed scroll position, so an automatic calendar return cannot cancel its own reduced-motion caption. Full CI and exact build/capture evidence follow assembly.
+
+`capture-meta-arrivals-gifs.mjs` uses fresh storage and ordinary production touch input with an independent cell-walking oracle. It earns nineteen campaign wins and the real 2026-11-11 daily task, records both actual unlock disclosures and the daily return after a real Settings switch to light, and records the actual AudioContext output for its MP4. No progress, trophy ownership or SDK transport is injected. The full-month fixture is internal QA, not a delivery claim that the recording earned a monthly cup. Browser emulation does not establish physical-phone sound/haptics/performance or genuine native SDK delivery. Content catalogue, daily/trophy art identities, kit pin, native feedback profiles and existing reward authority are unchanged.

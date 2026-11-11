@@ -6,6 +6,7 @@ import { legacyTrophyBinding, trophyBinding, validTrophyBinding } from '../conte
 import type { TrophyBinding } from '../domain/trophy';
 import { Board, canExit, validateLevel, type Attempt, type Level, type MoveResult } from '../domain/board';
 import { parseReceipt, type EarnedReceipt } from '../platform/ads';
+import { availableUnlocks, type UnlockId } from './collection';
 import { decodeAdCadence, deferAds, freshAdCadence, interstitialReason, type AdCadence } from './adCadence';
 
 export const SAVE_KEY = 'arrows.progress.v1';
@@ -21,7 +22,7 @@ export interface GameSave {
   daily: Record<string, SavedAttempt>; wins: Win[]; tutorials: string[];
   receipts: string[]; reservedRewards: EarnedReceipt[];
   dailyCatalogVersion: number; dailyWins: Record<string, Win>; cups: string[]; facts: RunFact[]; seenAwards: string[]; collectionSeen: boolean;
-  trophyDesigns: Record<string, TrophyBinding>;
+  trophyDesigns: Record<string, TrophyBinding>; seenUnlocks: UnlockId[];
   adCadence: AdCadence;
 }
 export interface SaveChange { kind: 'load' | 'state' | 'move'; result?: MoveResult; attempt?: string; mode?: 'campaign' | 'daily'; date?: string; startedNow?: boolean; }
@@ -30,7 +31,7 @@ export const freshAttempt = (level: Level, id = crypto.randomUUID()): SavedAttem
   continuations: 0, hint: null, started: false, activeMs: 0,
 });
 export const freshSave = (): GameSave => ({ schema: 2, revision: 0, catalogVersion: CATALOG_VERSION, index: 0,
-  campaign: freshAttempt(campaign[0]!), daily: {}, wins: [], tutorials: [], receipts: [], reservedRewards: [], dailyCatalogVersion: DAILY_CATALOG_VERSION, dailyWins: {}, cups: [], facts: [], seenAwards: [], collectionSeen: false, trophyDesigns: {}, adCadence: freshAdCadence() });
+  campaign: freshAttempt(campaign[0]!), daily: {}, wins: [], tutorials: [], receipts: [], reservedRewards: [], dailyCatalogVersion: DAILY_CATALOG_VERSION, dailyWins: {}, cups: [], facts: [], seenAwards: [], collectionSeen: false, trophyDesigns: {}, seenUnlocks: [], adCadence: freshAdCadence() });
 const record = (v: unknown): Record<string, unknown> => {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw Error('Invalid save object');
   return v as Record<string, unknown>;
@@ -120,8 +121,12 @@ export function decodeSave(value: unknown): GameSave {
   if (Object.entries(trophyDesigns).some(([month, binding]) => !cups.includes(month) || !validTrophyBinding(month, binding)) ||
       cups.some(month => !Object.hasOwn(trophyDesigns, month))) throw Error('Invalid awarded trophy design');
   const seenAwards = strings(s.seenAwards);
+  // Existing unlocked sections stay quiet on upgrade. New fresh saves explicitly start empty.
+  const unlocked = availableUnlocks(s.index as number);
+  const seenUnlocks = Array.isArray(s.seenUnlocks) && s.seenUnlocks.every(key=>unlocked.includes(key as UnlockId))
+    ? [...new Set(s.seenUnlocks)] : unlocked;
   const adCadence = decodeAdCadence(s.adCadence, wins.length + Object.keys(dailyWins).length);
-  return { ...s, campaign: current, wins, daily, receipts, tutorials, reservedRewards, dailyWins, cups, facts, seenAwards, trophyDesigns, adCadence } as GameSave;
+  return { ...s, campaign: current, wins, daily, receipts, tutorials, reservedRewards, dailyWins, cups, facts, seenAwards, trophyDesigns, seenUnlocks, adCadence } as GameSave;
 }
 
 /** Every mutation derives from the latest committed state inside ONE queue, including camera and SDK receipts. */
@@ -265,6 +270,12 @@ export class ProgressStore {
       next.daily[date] ??= freshAttempt(dailyCatalog[date]!);
       return { value: next.daily[date]!.board.id };
     });
+  }
+  public markUnlockSeen(key: UnlockId): Promise<boolean | undefined> {
+    return this.update(next => {
+      if(!availableUnlocks(next.index).includes(key) || next.seenUnlocks.includes(key))return null;
+      next.seenUnlocks.push(key); return {value:true};
+    }, true);
   }
   public markCollectionSeen(awards: string[]): Promise<void | undefined> {
     return this.update(next => {

@@ -203,3 +203,13 @@ button:active { transform: scale(.97); }
 .win-rays { opacity: 0; transform-origin: 36px 36px; stroke: var(--accent-soft); stroke-width: 1.6; stroke-linecap: round; }
 
 #game-shell[data-state='complete'] #restart { visibility: hidden; }
+
+/* A single quiet arrival cue; these elements never reserve layout space or take input. */
+.arrival-notice { position: fixed; left: 16px; right: 16px; bottom: calc(92px + env(safe-area-inset-bottom)); z-index: 12; text-align: center; color: var(--accent-soft); font-size: 12px; line-height: 18px; pointer-events: none; opacity: 0; width: fit-content; max-width: calc(100% - 32px); margin: auto; padding: 4px 10px; background: var(--bg); border-radius: 20px; }
+.arrival-halo { position: fixed; z-index: 12; border: 1.3px solid var(--accent-soft); border-radius: 50%; pointer-events: none; opacity: 0; }
+.cup-arrival-halo { border-color: var(--gold); }
+.day-progress-token { position: fixed; z-index: 12; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-soft); pointer-events: none; opacity: 0; }
+.month-progress { width: 112px; max-width: 80%; height: 3px; margin: 8px auto; background: var(--progress-bg); border-radius: 3px; overflow: hidden; }
+.month-progress > span { display: block; height: 100%; background: var(--accent-soft); transform-origin: left; }
+.month-count > span { display: inline-block; }
+@media (max-height: 500px) { .arrival-notice { bottom: calc(64px + env(safe-area-inset-bottom)); font-size: 11px; } .month-progress { width: 82px; margin: 6px auto; } }

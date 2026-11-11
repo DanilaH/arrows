@@ -27,3 +27,5 @@ Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the
 - 0.12.0 adds finite assistance/next-field presentation. Preserve `docs/ASSISTANCE_FEEL.md`: post-dialog/ad/foreground feedback, no reward/restore replay, owned cancellable heart motion, bounded measured-path light and old/new dot handoff. Controlled SDK transport is isolated test infrastructure with explicit capture provenance; it must not enter the application payload.
 
 - 0.13.0 strengthens the minimal finish; preserve `docs/FINISH_POLISH.md`: last-removal radial wave, bounded palette-limited fans/glints, drawn seal, stable live result, no mandatory wait/replay and 2300ms cleanup. Unlock/calendar review proposals are separate scope.
+
+- 0.14.0 implements the subsequently authorized Collection/daily disclosures, daily→monthly-progress arrival and c120→calendar destination. Preserve `docs/META_ARRIVALS.md`: actual index ownership, quiet additive cosmetic upgrade, shared-writer seen claims, transient/no-replay cues, owned ad/foreground continuation, serialized finite DOM motion and no final-campaign opportunity consumption. Content/trophy identities and kit pin stay frozen.
