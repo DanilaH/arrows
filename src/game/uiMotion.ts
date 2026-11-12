@@ -3,14 +3,16 @@ export function createUiMotion() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const running = new Set<() => void>(), presses = new Map<number, { button: HTMLButtonElement; animation: Animation }>();
   const deferredRoutes = new Set<() => void>();
+  const taps = new Map<HTMLElement, () => void>();
+  const clearTaps = (): void => { for (const end of [...taps.values()]) end(); };
   const refillEnds: (()=>void)[] = [];
   const stopRefill = (): void => { for(const end of refillEnds.splice(0))end(); };
   const dialogs = new Map<HTMLDialogElement, { finish(): void; cancel(): void }>();
   let snapshotSerial = 0;
   let arrivalFinish: (()=>void) | undefined;
   let routeFinish: (() => void) | undefined, routeBusy = false, alive = true;
-  const animate = (element: Element, frames: Keyframe[], duration: number, done = (): void => {}, delay = 0, easing = 'cubic-bezier(.2,.8,.2,1)'): (() => void) => {
-    if (!alive || reduced.matches || document.hidden || !element.animate) { done(); return () => {}; }
+  const animate = (element: Element, frames: Keyframe[], duration: number, done = (): void => {}, delay = 0, easing = 'cubic-bezier(.2,.8,.2,1)', allowReduced = false): (() => void) => {
+    if (!alive || reduced.matches && !allowReduced || document.hidden || !element.animate) { done(); return () => {}; }
     const animation = element.animate(frames, { duration, delay, easing, fill: 'both' });
     let finished = false;
     const finish = (): void => {
@@ -50,14 +52,30 @@ export function createUiMotion() {
     if (event.detail !== 0) return; const button = (event.target as Element).closest<HTMLButtonElement>('button');
     if (button && !button.disabled) animate(button, [{ transform: 'scale(.97)' }, { transform: 'scale(1)' }], 170);
   };
-  const settle = (): void => { arrivalFinish?.(); stopRefill(); blur(); routeFinish?.(); for (const finish of [...running]) finish(); };
+  const settle = (): void => { clearTaps(); arrivalFinish?.(); stopRefill(); blur(); routeFinish?.(); for (const finish of [...running]) finish(); };
   const visibility = (): void => { if (document.hidden) settle(); };
   document.addEventListener('pointerdown', down, true); document.addEventListener('pointerup', up, true); document.addEventListener('pointercancel', cancel, true);
   document.addEventListener('click', keyboard, true); document.addEventListener('visibilitychange', visibility); window.addEventListener('blur', blur); window.addEventListener('resize', settle);
   return {
+    clearTaps,
+    emptyTap(root: HTMLElement, point: { x: number; y: number }): void {
+      if (!alive || document.hidden) return;
+      if (taps.size >= 4) taps.values().next().value?.();
+      const dot = document.createElement('span'), bounds = root.getBoundingClientRect();
+      dot.className = 'empty-tap'; dot.setAttribute('aria-hidden', 'true');
+      Object.assign(dot.style, { left: `${point.x-bounds.left}px`, top: `${point.y-bounds.top}px` }); root.append(dot);
+      const frames = reduced.matches ? [{ opacity: 1 }, { opacity: 0 }] : [
+        { opacity: .9, transform: 'translate(-50%,-50%) scale(.6)' },
+        { opacity: .8, transform: 'translate(-50%,-50%) scale(1)', offset: .3 },
+        { opacity: 0, transform: 'translate(-50%,-50%) scale(1.12)' },
+      ];
+      const end = animate(dot, frames, reduced.matches ? 140 : 280, () => { dot.remove(); taps.delete(dot); }, 0, 'ease-out', true);
+      if (dot.isConnected) taps.set(dot, end);
+    },
     get routeBusy() { return routeBusy; },
     deferRoute(work: () => void): boolean { if (!routeBusy) return false; deferredRoutes.add(work); return true; },
     swap(root: HTMLElement, from: string, to: string, render: () => void): void {
+      clearTaps();
       routeFinish?.();
       if (from === to || reduced.matches || document.hidden || !alive) { render(); return; }
       let snapshot: HTMLElement | undefined;

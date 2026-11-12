@@ -4,6 +4,7 @@ interface Callbacks {
   hit(point: Point): string | null;
   contains(id: string, point: Point): boolean;
   activate(id: string): void;
+  emptyTap?(point: Point): void;
   preview(id: string | null): void;
   pan(dx: number, dy: number): void;
   pinch(previous: Point, current: Point, ratio: number): void;
@@ -47,17 +48,19 @@ export class BoardGestures {
     }
     if (this.phase === 'pan') this.callbacks.pan(point.x - old.x, point.y - old.y);
   }
-  public up(id: number, point: Point): void {
+  public up(id: number, point: Point, time: number): void {
     if (!this.pointers.has(id)) return;
     // Validate final displacement too: some WebViews coalesce the last move into pointerup.
     this.move(id, point);
     const target = this.target, activate = this.pointers.size === 1 &&
       (this.phase === 'pressCandidate' || this.phase === 'heldPreview') && target !== null && this.callbacks.contains(target, point);
+    const emptyTap = this.pointers.size === 1 && this.phase === 'pressCandidate' && target === null && time - this.downAt < 300;
     this.pointers.delete(id);
     this.target = null; this.callbacks.preview(null);
     if (!this.pointers.size) this.phase = 'idle';
     else this.phase = 'pinch';
     if (activate) this.callbacks.activate(target!);
+    else if (emptyTap) this.callbacks.emptyTap?.(point);
   }
   public cancel(): void { this.pointers.clear(); this.target = null; this.phase = 'idle'; this.callbacks.preview(null); }
 }

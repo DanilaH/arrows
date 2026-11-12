@@ -92,11 +92,18 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       const expected = scene.board.attemptId;
       run(progress.move(expected, id, ...takeTime()));
     },
+    emptyTap(p) {
+      if (!loaded || meta.screen !== 'game' || !inBoard(p) || requestingAd || motion.routeBusy || platform.activity.isBlocked() || progress.uncertain || scene.board.complete || scene.board.hearts === 0) return;
+      // Ambiguous arrow picks are not empty space. Keep their existing safe rejection.
+      const world = scene.boardCamera.world(p);
+      if (scene.board.remaining.some(a => distanceToPath(world, a.path) * scene.boardCamera.scale <= 13)) return;
+      motion.emptyTap(root, p); platform.feedback.play('button');
+    },
     preview: id => scene.setPreview(id),
     pan: (dx, dy) => { scene.pan(dx, dy); scheduleView(); },
     pinch: manualZoom,
   });
-  const cancel = (): void => { if (holdTimer !== undefined) clearTimeout(holdTimer); holdTimer = undefined; gestures.cancel(); };
+  const cancel = (): void => { if (holdTimer !== undefined) clearTimeout(holdTimer); holdTimer = undefined; gestures.cancel(); motion.clearTaps(); };
   const close = (after: ()=>void = () => {}): void => { modal = null; motion.close(dialog, () => { platform.activity.setBlocked('dialog', false); if(meta.screen === 'game')root.focus({ preventScroll: true }); after(); }); };
   const loadActive = (): void => {
     cancel(); pendingTime = 0; pendingAdTime = 0; wasActive = false; freshWinAttempt = ''; dailyReturnAttempt=''; idleMs = 0; notice = '';
@@ -233,7 +240,9 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     document.querySelector('#app-title')!.textContent = control ? text.title : activeDate ? dailyLabel : `${text.level} ${progress.state.index + 1}`;
     document.querySelector('#choose-field')!.setAttribute('aria-label', activeDate && !control ? text.toCalendar : text.home);
     document.querySelector('#field-name')!.textContent = control ? names[selectedControl]! : activeDate ? dailyLabel : `${progress.state.index + 1} / ${campaign.length}`;
-    document.querySelector('#difficulty')!.textContent = board.level.difficulty === 'normal' ? '' : board.level.difficulty === 'hard' ? 'Hard' : 'Nightmare';
+    const difficulty = document.querySelector<HTMLElement>('#difficulty')!;
+    difficulty.textContent = board.level.difficulty === 'normal' ? '' : board.level.difficulty === 'hard' ? 'Hard' : 'Nightmare';
+    difficulty.dataset.difficulty = board.level.difficulty;
     const hearts = document.querySelector<HTMLElement>('#hearts')!; hearts.setAttribute('aria-label', `${text.lives}: ${board.hearts}`);
     Array.from(hearts.children).forEach((heart, i) => heart.classList.toggle('empty', i >= board.hearts));
     document.querySelector<HTMLElement>('#progress-fill')!.style.transform = `scaleX(${1 - remaining / board.level.arrows.length})`;
@@ -367,7 +376,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if (holdTimer !== undefined) clearTimeout(holdTimer); holdTimer = setTimeout(() => { holdTimer = undefined; gestures.hold(performance.now()); }, 305);
   });
   on(root, 'pointermove', event => gestures.move(event.pointerId, point(event)));
-  on(root, 'pointerup', event => { if (holdTimer !== undefined) clearTimeout(holdTimer); gestures.up(event.pointerId, point(event)); if (root.hasPointerCapture(event.pointerId)) root.releasePointerCapture(event.pointerId); });
+  on(root, 'pointerup', event => { if (holdTimer !== undefined) clearTimeout(holdTimer); gestures.up(event.pointerId, point(event), performance.now()); if (root.hasPointerCapture(event.pointerId)) root.releasePointerCapture(event.pointerId); });
   on(root, 'pointercancel', cancel); on(root, 'lostpointercapture', event => { if (gestures.hasPointer(event.pointerId)) cancel(); });
   on(root, 'wheel', event => {
     if (motion.routeBusy || !inBoard(point(event)) || platform.activity.isBlocked()) return;

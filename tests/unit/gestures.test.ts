@@ -3,8 +3,8 @@ import { BoardGestures } from '../../src/input/gestures';
 import { BoardCamera } from '../../src/input/camera';
 
 function setup() {
-  const callbacks = { hit: () => 'arrow', contains: (_id: string, p: { x: number; y: number }) => p.x >= 0 && p.x <= 10 && p.y >= 0 && p.y <= 10,
-    activate: vi.fn(), preview: vi.fn(), pan: vi.fn(), pinch: vi.fn() };
+  const callbacks = { hit: (): string | null => 'arrow', contains: (_id: string, p: { x: number; y: number }) => p.x >= 0 && p.x <= 10 && p.y >= 0 && p.y <= 10,
+    activate: vi.fn(), emptyTap: vi.fn(), preview: vi.fn(), pan: vi.fn(), pinch: vi.fn() };
   return { gesture: new BoardGestures(callbacks), callbacks };
 }
 describe('board gesture contract', () => {
@@ -13,13 +13,13 @@ describe('board gesture contract', () => {
     gesture.down(1, { x: 5, y: 5 }, 0); gesture.hold(300);
     expect(callbacks.preview).toHaveBeenLastCalledWith('arrow');
     expect(callbacks.activate).not.toHaveBeenCalled();
-    gesture.up(1, { x: 5, y: 5 }); gesture.up(1, { x: 5, y: 5 });
+    gesture.up(1, { x: 5, y: 5 }, 400); gesture.up(1, { x: 5, y: 5 }, 400);
     expect(callbacks.activate).toHaveBeenCalledOnce();
   });
   it('permanently cancels a held arrow after leaving and returning', () => {
     const { gesture, callbacks } = setup();
     gesture.down(1, { x: 5, y: 5 }, 0); gesture.hold(300);
-    gesture.move(1, { x: 11, y: 5 }); gesture.move(1, { x: 5, y: 5 }); gesture.up(1, { x: 5, y: 5 });
+    gesture.move(1, { x: 11, y: 5 }); gesture.move(1, { x: 5, y: 5 }); gesture.up(1, { x: 5, y: 5 }, 400);
     expect(callbacks.activate).not.toHaveBeenCalled();
   });
   it('never turns pan, a coalesced final movement or pointercancel into a tap', () => {
@@ -27,7 +27,7 @@ describe('board gesture contract', () => {
       const { gesture, callbacks } = setup();
       gesture.down(1, { x: 1, y: 1 }, 0);
       if (cancel) gesture.cancel();
-      gesture.up(1, { x: 9, y: 9 });
+      gesture.up(1, { x: 9, y: 9 }, 400);
       expect(callbacks.activate).not.toHaveBeenCalled();
     }
   });
@@ -36,9 +36,28 @@ describe('board gesture contract', () => {
     gesture.down(1, { x: 1, y: 5 }, 0); gesture.down(2, { x: 9, y: 5 }, 10);
     gesture.move(2, { x: 19, y: 5 });
     expect(callbacks.pinch).toHaveBeenCalledOnce();
-    gesture.up(2, { x: 19, y: 5 }); gesture.up(1, { x: 1, y: 5 });
+    gesture.up(2, { x: 19, y: 5 }, 400); gesture.up(1, { x: 1, y: 5 }, 400);
     expect(callbacks.activate).not.toHaveBeenCalled();
     expect(gesture.phase).toBe('idle');
+  });
+});
+describe('empty board taps', () => {
+  const blank = () => { const s=setup(); s.callbacks.hit=()=>null; return s; };
+  it('acknowledges only the completed short single-pointer tap once, never an arrow move', () => {
+    const {gesture,callbacks}=blank(); gesture.down(1,{x:4,y:4},0);
+    expect(callbacks.emptyTap).not.toHaveBeenCalled();
+    gesture.up(1,{x:5,y:5},80); gesture.up(1,{x:5,y:5},90);
+    expect(callbacks.emptyTap).toHaveBeenCalledExactlyOnceWith({x:5,y:5}); expect(callbacks.activate).not.toHaveBeenCalled();
+  });
+  it('rejects holds, coalesced drags, out-and-back pans, cancellation and both pinch releases', () => {
+    for(const kind of ['hold','coalesced','pan','cancel','pinch']) {
+      const {gesture,callbacks}=blank();gesture.down(1,{x:4,y:4},0);
+      if(kind==='pan'){gesture.move(1,{x:30,y:4});gesture.move(1,{x:4,y:4});}
+      if(kind==='cancel')gesture.cancel();
+      if(kind==='pinch'){gesture.down(2,{x:40,y:4},20);gesture.up(2,{x:40,y:4},30);}
+      gesture.up(1,kind==='coalesced'?{x:20,y:4}:{x:4,y:4},kind==='hold'?350:90);
+      expect(callbacks.emptyTap).not.toHaveBeenCalled();expect(callbacks.activate).not.toHaveBeenCalled();
+    }
   });
 });
 describe('CSS/world camera coordinates', () => {

@@ -47,3 +47,5 @@ Existing Arrows product/technical rules above remain authoritative. Before subst
 Research guidance snapshot: e2382670fbd5c2aa76462fea688c60de2b067392. The installed runtime mini-games-kit dependency remains separately pinned; **do not upgrade it or assume new exports exist**. For code reuse inspect the actual installed-runtime API and current docs/API.md before inventing helpers.
 
 At the end of substantial implementation report KIT IMPACT: NONE / REUSE / IMPROVE / CANDIDATE / EXTRACTED with a reproducer and concrete upstream proposal when relevant (docs/kit-guidance/KIT_FEEDBACK_LOOP.md). No automatic game-rules, art, monetization or public store changes.
+
+- 0.17.3 adds owner-requested empty-tap feedback and semantic difficulty colors. Preserve `docs/EMPTY_TAP_FEEDBACK.md`: completed short single-pointer empty taps only; no ambiguous arrow/hold/pan/pinch/cancel feedback; four finite owned marks, fade-only reduced motion, existing gameplay-channel button sound/haptic/settings and shared textual Hard/Nightmare colors. No move/start/save/tutorial/Hint-clock/ads changes. Same signed `.playtest` update; genuine current-build GIFs/audio and physical-feel limits.

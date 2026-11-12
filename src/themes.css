@@ -13,7 +13,8 @@
   --accent-soft: #9398f1;
   --accent-focus: #a7a8ff;
   --on-accent: #f3f2ff;
-  --difficulty: #46b3e6;
+  --difficulty-hard: #e7b96b;
+  --difficulty-nightmare: #f58ba2;
   --heart: #ff4c66;
   --heart-empty: #63313f;
   --notice-bg: #393344;
@@ -89,7 +90,8 @@ select:focus-visible { outline: 2px solid var(--accent-focus); outline-offset: 3
   --accent-soft: #6c61d3;
   --accent-focus: #7265d5;
   --on-accent: #ffffff;
-  --difficulty: #1b729a;
+  --difficulty-hard: #8e570e;
+  --difficulty-nightmare: #ac3153;
   --heart: #cc3154;
   --heart-empty: #dfbcc6;
   --notice-bg: #f4e5dd;
@@ -115,6 +117,8 @@ select:focus-visible { outline: 2px solid var(--accent-focus); outline-offset: 3
 }
 
 #ad-dialog { background: var(--surface); color: var(--ink); border: 1px solid var(--border); border-radius: 26px; padding: 30px 24px 24px; width: min(340px, calc(100vw - 36px)); max-height: calc(100dvh - 36px); overflow: auto; text-align: center; }
+[data-difficulty='hard'] { --difficulty: var(--difficulty-hard); }
+[data-difficulty='nightmare'] { --difficulty: var(--difficulty-nightmare); }
 #ad-dialog::backdrop { background: var(--backdrop); }
 #ad-dialog h2 { font-size: 20px; font-weight: 550; margin: 20px 0 10px; }
 #ad-dialog p { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 0 0 18px; }

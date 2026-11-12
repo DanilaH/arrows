@@ -16,6 +16,8 @@ button:disabled { cursor: default; opacity: .55; transform: none; }
 #game-shell { position: relative; }
 #game-root { position: absolute; inset: 0; touch-action: none; outline: none; }
 #game-root canvas { display: block; }
+.empty-tap { position: absolute; width: 34px; height: 34px; border-radius: 50%; background: color-mix(in srgb, var(--ink) 14%, transparent); transform: translate(-50%,-50%); display: grid; place-items: center; pointer-events: none; z-index: 1; }
+.empty-tap::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); opacity: .72; }
 #game-header { position: absolute; left: 0; right: 0; top: 0; padding: calc(18px + env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) 0 max(18px, env(safe-area-inset-left)); pointer-events: none; }
 #game-header button { pointer-events: auto; }
 .top-row { display: flex; align-items: center; justify-content: space-between; min-height: 45px; }
@@ -154,7 +156,7 @@ progress::-moz-progress-bar { background: var(--accent-soft); border-radius: 8px
 .calendar-day small { position: absolute; bottom: 1px; right: 4px; font-size: 9px; }
 .selected-day { text-align: center; padding-top: 26px; }
 .selected-day h3 { font-size: 19px; font-weight: 550; margin: 0 0 6px; }
-.selected-day > span { display: block; font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+.selected-day > span { display: block; font-size: 12px; color: var(--difficulty, var(--muted)); margin-bottom: 18px; }
 #start-daily { width: min(280px, 100%); }
 #calendar-notice { color: var(--notice-ink); font-size: 12px; line-height: 1.6; }
 @media (max-height: 500px) and (min-width: 600px) {
