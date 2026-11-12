@@ -14,7 +14,7 @@ export function installSettingsSurface(store: SettingsStore, activity: GameplayA
     const activeId = dialog.contains(document.activeElement) ? (document.activeElement as HTMLElement).id : '';
     dialog.innerHTML = `<header class="settings-heading"><div><span class="settings-eyebrow">${text.title}</span><h2 id="settings-title">${text.settings}</h2></div><button id="close-settings" class="circle" type="button" aria-label="${text.close}">${closeIcon}</button></header>
       <section class="settings-section"><h3>${text.appearance}</h3><div class="theme-choices">${(['dark', 'light'] as const).map(theme => `<button id="theme-${theme}" class="theme-choice ${theme}" type="button" data-theme="${theme}" aria-pressed="false"><span class="theme-swatch">${themeArt(theme)}</span><span>${theme === 'dark' ? text.darkTheme : text.lightTheme}</span></button>`).join('')}</div></section>
-      <section class="settings-section"><h3>${text.feedback}</h3><div class="settings-group">${(['sound', 'vibration'] as const).map(key => `<button id="setting-${key}" class="setting-toggle" type="button" role="switch" aria-checked="false" aria-labelledby="${key}-label" data-toggle="${key}"><span><strong id="${key}-label">${key === 'sound' ? text.sounds : text.vibrations}</strong><small>${key === 'sound' ? text.soundDescription : text.vibrationDescription}</small></span><i class="switch-track" aria-hidden="true"><i></i></i></button>`).join('')}</div><button id="preview-sound" data-feedback-preview type="button" class="sound-preview"><span aria-hidden="true">♪</span>${text.previewSound}</button></section>
+      <section class="settings-section"><h3>${text.feedback}</h3><div class="settings-group">${(['sound', 'vibration'] as const).map(key => `<button id="setting-${key}" class="setting-toggle" type="button" role="switch" aria-checked="false" aria-labelledby="${key}-label" data-toggle="${key}"><span><strong id="${key}-label">${key === 'sound' ? text.sounds : text.vibrations}</strong><small>${key === 'sound' ? text.soundDescription : text.vibrationDescription}</small></span><i class="switch-track" aria-hidden="true"><i></i></i></button>`).join('')}</div><div class="feedback-previews"><button id="preview-sound" data-feedback-preview type="button" class="sound-preview"><span aria-hidden="true">♪</span>${text.previewSound}</button><button id="preview-vibration" data-feedback-preview type="button" class="sound-preview"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="4" width="8" height="16" rx="2"/><path d="m4 8-2 4 2 4m16-8 2 4-2 4"/></svg>${text.previewVibration}</button></div></section>
       <section class="settings-section"><label class="language-setting" for="setting-language"><span>${text.language}</span><select id="setting-language"><option value="ru">Русский</option><option value="en">English</option></select></label></section>
       <footer class="settings-save"><span id="settings-save-status" role="status"></span><button id="retry-settings" type="button" hidden>${text.retrySettings}</button></footer>`;
     if (activeId) dialog.querySelector<HTMLElement>('#' + activeId)?.focus({ preventScroll: true });
@@ -27,6 +27,7 @@ export function installSettingsSurface(store: SettingsStore, activity: GameplayA
     for (const key of ['sound', 'vibration'] as const) dialog.querySelector('#setting-' + key)!.setAttribute('aria-checked', String(store.state[key]));
     (dialog.querySelector('#setting-language') as HTMLSelectElement).value = store.state.language;
     (dialog.querySelector('#preview-sound') as HTMLButtonElement).disabled = !store.state.sound;
+    (dialog.querySelector('#preview-vibration') as HTMLButtonElement).disabled = !store.state.vibration;
     dialog.querySelector('#settings-save-status')!.textContent = store.status === 'error' ? text.settingsSaveError : store.status === 'saving' ? text.savingSettings : store.status === 'loading' ? text.loadingSettings : text.settingsSaved;
     (dialog.querySelector('#retry-settings') as HTMLButtonElement).hidden = store.status !== 'error';
   };
@@ -46,6 +47,7 @@ export function installSettingsSurface(store: SettingsStore, activity: GameplayA
     else if (button.dataset.theme === 'light' || button.dataset.theme === 'dark') void store.update({ theme: button.dataset.theme });
     else if (button.dataset.toggle === 'sound' || button.dataset.toggle === 'vibration') { const key = button.dataset.toggle; void store.update({ [key]: !store.state[key] }); }
     else if (button.id === 'retry-settings') void store.save();
+    else if (button.id === 'preview-vibration') feedback.previewVibration();
     else if (button.id === 'preview-sound') feedback.previewSound();
   };
   const change = (event: Event): void => { const target = event.target as HTMLSelectElement; if (target.id === 'setting-language' && (target.value === 'ru' || target.value === 'en')) void store.update({ language: target.value }); };

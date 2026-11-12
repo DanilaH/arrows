@@ -60,3 +60,23 @@ jobs:
           name: native-unit-results
           path: native/android/app/build/test-results/testDebugUnitTest/
           retention-days: 7
+      - uses: actions/cache@v4
+        id: playtest-key
+        with:
+          path: .ci-signing/playtest.keystore
+          key: arrows-playtest-signing-v1
+      - name: Create playtest key on first build
+        if: steps.playtest-key.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .ci-signing
+          keytool -genkeypair -keystore .ci-signing/playtest.keystore -storepass android -keypass android -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Arrows Playtest,O=Arrows,C=RU"
+      - name: Build isolated phone playtest
+        run: ./gradlew --no-daemon -ParrowsPlaytest=true assembleDebug
+        working-directory: native/android
+        env:
+          ARROWS_DEBUG_KEYSTORE: ${{ github.workspace }}/.ci-signing/playtest.keystore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arrows-playtest
+          path: native/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7

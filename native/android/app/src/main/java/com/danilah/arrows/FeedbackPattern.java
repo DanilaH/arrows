@@ -8,13 +8,13 @@ final class FeedbackPattern {
     static FeedbackPattern forCue(String cue) {
         if (cue == null) return null;
         switch (cue) {
-            case "button": return new FeedbackPattern(new long[]{0, 8}, new int[]{0, 90});
-            case "remove": return new FeedbackPattern(new long[]{0, 12}, new int[]{0, 140});
-            case "combo": return new FeedbackPattern(new long[]{0, 9, 22, 13}, new int[]{0, 150, 0, 195});
-            case "error": return new FeedbackPattern(new long[]{0, 24, 32, 15}, new int[]{0, 230, 0, 160});
-            case "hint": return new FeedbackPattern(new long[]{0, 9, 28, 14}, new int[]{0, 115, 0, 175});
-            case "life": return new FeedbackPattern(new long[]{0, 14, 36, 25}, new int[]{0, 135, 0, 210});
-            case "win": return new FeedbackPattern(new long[]{0, 16, 45, 22, 60, 38}, new int[]{0, 145, 0, 195, 0, 240});
+            case "button": return new FeedbackPattern(new long[]{0, 12}, new int[]{0, 140});
+            case "remove": return new FeedbackPattern(new long[]{0, 20}, new int[]{0, 190});
+            case "combo": return new FeedbackPattern(new long[]{0, 12, 18, 18}, new int[]{0, 180, 0, 225});
+            case "error": return new FeedbackPattern(new long[]{0, 28, 26, 18}, new int[]{0, 245, 0, 185});
+            case "hint": return new FeedbackPattern(new long[]{0, 12, 24, 18}, new int[]{0, 145, 0, 190});
+            case "life": return new FeedbackPattern(new long[]{0, 18, 30, 28}, new int[]{0, 160, 0, 225});
+            case "win": return new FeedbackPattern(new long[]{0, 20, 40, 26, 50, 40}, new int[]{0, 165, 0, 210, 0, 245});
             default: return null;
         }
     }

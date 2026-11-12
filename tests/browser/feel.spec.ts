@@ -23,21 +23,21 @@ test('times collision feedback at contact, accepts an unblock during return, cel
   await observe(page); await page.goto('/'); await page.locator('#home-play:enabled').click(); await page.waitForTimeout(450);
   const level=campaign[0]!, free=level.arrows.find(a=>canExit(a,level.arrows))!, blocked=level.arrows.find(a=>!canExit(a,level.arrows))!;
   await tap(page,blocked.path);
-  await expect.poll(async()=> (await cues(page)).some(c=>Math.abs(c.duration-.23)<.001)).toBe(true);
-  const sounds=await cues(page), slide=sounds.find(c=>Math.abs(c.duration-.12)<.001)!, impact=sounds.find(c=>Math.abs(c.duration-.23)<.001)!;
+  await expect.poll(async()=> (await cues(page)).some(c=>Math.abs(c.duration-.2)<.001)).toBe(true);
+  const sounds=await cues(page), slide=sounds.find(c=>Math.abs(c.duration-.12)<.001)!, impact=sounds.find(c=>Math.abs(c.duration-.2)<.001)!;
   expect(impact.at-slide.at).toBeGreaterThanOrEqual(75);
   await tap(page,blocked.path); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives','2');
   await tap(page,free.path); await tap(page,blocked.path);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','1');
   const remaining=level.arrows.find(a=>a!==free&&a!==blocked)!; await tap(page,remaining.path);
   await expect(page.locator('#win')).toBeVisible(); await page.screenshot({path:info.outputPath('victory.png')});
-  await expect.poll(async()=> (await cues(page)).filter(c=>c.duration>=.93).length).toBe(1);
+  await expect.poll(async()=> (await cues(page)).filter(c=>c.duration>=.55).length).toBe(1);
   await page.waitForTimeout(2400);
   expect(await page.evaluate(()=>document.getAnimations().length)).toBe(0);
   const before=await page.evaluate(()=>Reflect.get(window,'__feelFrames') as number); await page.waitForTimeout(350);
   expect(await page.evaluate(()=>Reflect.get(window,'__feelFrames') as number)-before).toBeLessThan(5);
   await page.reload(); await page.locator('#home-play:enabled').click(); await expect(page.locator('#game-shell')).toHaveAttribute('data-level','c02');
-  await page.waitForTimeout(650); expect((await cues(page)).filter(c=>c.duration>=.93)).toHaveLength(0);
+  await page.waitForTimeout(650); expect((await cues(page)).filter(c=>c.duration>=.55)).toHaveLength(0);
 });
 
 test('finishes the last collision before opening the loss modal', async ({ page }) => {

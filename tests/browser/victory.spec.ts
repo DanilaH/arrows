@@ -13,7 +13,7 @@ async function observe(page:Page){
     const start=AudioBufferSourceNode.prototype.start;AudioBufferSourceNode.prototype.start=function(...args){if(this.buffer)cues.push(this.buffer.duration);return start.apply(this,args);};
   });
 }
-const wins=(page:Page)=>page.evaluate(()=>(Reflect.get(window,'victoryCues') as number[]).filter(n=>n>=.93).length);
+const wins=(page:Page)=>page.evaluate(()=>(Reflect.get(window,'victoryCues') as number[]).filter(n=>n>=.55).length);
 async function solve(page:Page,index:number){
   const board=new Board(campaign[index]!,'oracle');
   while(!board.complete){const a=board.remaining.find(a=>canExit(a,board.remaining))!,c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),p=a.path.at(-1)!;await page.mouse.click(c.x+p.x*c.scale,c.y+p.y*c.scale);board.activate(a.id);await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining',String(board.remaining.length));}

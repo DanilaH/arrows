@@ -14,6 +14,7 @@ const navIcons = {
   collection: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0V4ZM7 6H4v2a4 4 0 0 0 4 4m9-6h3v2a4 4 0 0 1-4 4M12 13v5m-3 0h6l1 3H8l1-3Z"/></svg>',
   calendar: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 10h18m-14 5h2m6 0h2m-10 3h2"/></svg>',
 };
+const lockIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></svg>';
 const badge = (key: string): string => `<svg class="medal-icon" viewBox="0 0 72 84" aria-hidden="true" focusable="false">
   <path class="medal-ribbon" d="m21 46-5 30 20-9 20 9-5-30"/>
   <circle class="medal-face" cx="36" cy="31" r="24"/>
@@ -63,8 +64,9 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       if(screen===route)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');
       button.setAttribute('aria-label',label+(!available?'. '+reason:id==='home-collection'&&newAward?'. '+text.newAward:''));
       if(!available)button.title=reason;else button.removeAttribute('title');
-      button.querySelector('.nav-label')!.textContent=label;
-      button.querySelector('.nav-icon')!.innerHTML=icon+(!available?`<small class="nav-lock" aria-hidden="true">${route==='calendar'?20:10}</small>`:'')+(id==='home-collection'&&newAward?'<i class="new-dot"></i>':'');
+      button.dataset.locked=String(!available);
+      button.querySelector('.nav-label')!.textContent=available?label:`${text.level} ${route==='calendar'?20:10}`;
+      button.querySelector('.nav-icon')!.innerHTML=(available?icon:lockIcon)+(id==='home-collection'&&newAward?'<i class="new-dot"></i>':'');
       if(id==='home-settings')button.setAttribute('aria-haspopup','dialog');
     }
   };
@@ -77,10 +79,15 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       const h=v.path.at(-1)!, before=v.path.at(-2)!, dx=Math.sign(h.x-before.x), dy=Math.sign(h.y-before.y), size=.35;
       return `<polyline points="${v.path.map(p=>`${p.x},${p.y}`).join(' ')}"/><path d="M${h.x-dx*size-dy*size/2} ${h.y-dy*size+dx*size/2}L${h.x} ${h.y}L${h.x-dx*size+dy*size/2} ${h.y-dy*size-dx*size/2}"/>`;
     }).join('');
+    // Fit the original occupied bounds, never the shrinking set of remaining arrows.
+    const points=preview.arrows.flatMap(arrow=>arrow.path), xs=points.map(p=>p.x), ys=points.map(p=>p.y);
+    const left=Math.min(...xs)-.65, top=Math.min(...ys)-.65, width=Math.max(...xs)-left+.65, height=Math.max(...ys)-top+.65;
+    const viewBox=`${left} ${top} ${width} ${height}`;
+    const previewStroke=Math.max(1.6,Math.min(2.8,3.2-Math.max(width,height)*.035));
     const difficulty=final || preview.difficulty === 'normal' ? '' : preview.difficulty === 'hard' ? 'Hard' : 'Nightmare';
     return `<div class="home-layout"><header class="home-heading"><h1 id="menu-title" tabindex="-1">${text.title}</h1>${stats.current ? `<span class="streak-chip">${text.streakShort} ${stats.current}</span>` : ''}</header>
       <section class="home-current"><div class="campaign-heading"><h2>${final ? text.chapterComplete : `${text.level} ${nextIndex+1}`}</h2><span class="home-difficulty" ${difficulty ? '' : 'hidden'}>${difficulty}</span></div>
-      <svg class="home-board${final ? ' home-finish' : ''}" viewBox="${final ? '0 0 72 72' : `-1 -1 ${preview.width+1} ${preview.height+1}`}" aria-hidden="true">${final ? '<circle cx="36" cy="36" r="28"/><path d="m24 36 8 8 17-18"/>' : paths}</svg>
+      <svg style="--preview-line:${previewStroke}px" class="home-board${final ? ' home-finish' : ''}" viewBox="${final ? '0 0 72 72' : viewBox}" aria-hidden="true">${final ? '<circle cx="36" cy="36" r="28"/><path d="m24 36 8 8 17-18"/>' : paths}</svg>
       <button id="home-play" class="primary home-play" type="button" ${!ready || busy ? 'disabled' : ''}>${final ? text.viewResult : cleared ? text.next : a.started ? text.resume : text.play}<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></button>
       <p class="home-progress">${text.chapter}: ${save.wins.length} / ${campaign.length}</p></section>${options.controls ? `<button id="home-controls" class="review-link" type="button">${text.controlFields}</button>` : ''}</div>`;
   };

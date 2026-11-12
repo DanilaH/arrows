@@ -17,11 +17,12 @@ export function createFeedback(activity: GameplayActivityCoordinator, settings: 
   const offSettings = settings.subscribe(refresh);
   return {
     resetGameplay(): void { chain = 0; lastRemoval = -Infinity; sound.resetGameplay(); haptics.cancel(); },
+    previewVibration(): void { if (eligibility.ui && settings.state.vibration) haptics.pulse('life'); },
     previewSound(): void { if (eligibility.ui && settings.state.sound) sound.play('win', 'ui'); },
     play(cue: SoundCue, channel: 'gameplay' | 'ui' = 'gameplay'): void {
       if (!eligibility[channel]) return;
       const now = performance.now(); let rate = 1;
-      if (cue === 'remove') { chain = now - lastRemoval < 650 ? Math.min(chain + 1, 4) : 0; lastRemoval = now; rate = [1, 1.125, 1.25, 1.5, 1.667][chain]!; }
+      if (cue === 'remove') { chain = now - lastRemoval < 650 ? Math.min(chain + 1, 4) : 0; lastRemoval = now; rate = [1, 1.035, 1.07, 1.105, 1.14][chain]!; }
       if (settings.state.sound) sound.play(cue, channel, rate);
       const haptic = cue === 'remove' && chain >= 3 ? 'combo' : hapticCue[cue]; if (haptic) haptics.pulse(haptic);
     },

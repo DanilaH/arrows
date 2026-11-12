@@ -209,14 +209,14 @@ export class BoardScene extends Phaser.Scene {
     if (!arrowhead) return;
     const head = path.at(-1)!, previous = path.at(-2)!;
     const dx = Math.sign(head.x - previous.x), dy = Math.sign(head.y - previous.y);
-    const size = Math.max(.28, width * 2.8);
+    const size = Math.min(.64, Math.max(.34, width * 2.1));
     layer.fillTriangle(head.x + dx * size * .12, head.y + dy * size * .12,
       head.x - dx * size - dy * size * .58, head.y - dy * size + dx * size * .58,
       head.x - dx * size + dy * size * .58, head.y - dy * size - dx * size * .58);
   }
   private drawStable(): void {
     this.stableDirty = false; this.stable.clear(); this.guidesLayer.clear();
-    const stroke = Math.max(.11, 1.9 / this.boardCamera.scale);
+    const stroke = Math.max(.14, 2.8 / this.boardCamera.scale);
     for (const [index,arrow] of this.board.remaining.entries()) {
       const amount=Math.max(0,Math.min(1,(this.clock-this.entry-Math.min(90,index*8))/280)), ease=1-(1-amount)**3;
       const path = this.paths.get(arrow.id)!;
@@ -314,7 +314,7 @@ export class BoardScene extends Phaser.Scene {
     }
     if (this.clock - this.entry < 420 || this.preview !== null && this.clock-this.previewAt<180) this.stableDirty = true;
     if (this.stableDirty) this.drawStable();
-    this.active.clear(); const stroke = Math.max(.11, 1.9 / this.boardCamera.scale);
+    this.active.clear(); const stroke = Math.max(.14, 2.8 / this.boardCamera.scale);
     for (let i = this.flights.length - 1; i >= 0; i--) {
       const flight = this.flights[i]!, old = flight.travelled;
       flight.age += dt; flight.travelled += flight.speed * dt / 1000 * Math.min(1, .3 + flight.age / 110);

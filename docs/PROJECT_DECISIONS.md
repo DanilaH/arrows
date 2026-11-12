@@ -181,3 +181,7 @@ The user requested cleaner icon artwork based on the Collection medal screenshot
 ## Debug signing evidence correction, 2026-11-11
 
 The APK-v2 X.509 certificate of 0.16.0 differs from archived 0.15.0 (and 0.14.0 differs too). Completed CI job 130718283407 reports a signing-cache miss and post-cache path validation failure for `~/.android/debug.keystore`; the earlier stable-preview-update assumption is superseded. No private key recovery or signing/cache repair was performed. The debug APK is a fresh-install preview, not an in-place update for the differently signed old build; existing real installation data must not be removed as a workaround. Format migrations/receipt ownership pass independently. Durable signing and actual installation/update evidence remain release work.
+
+## 2026-11-12 — actual phone readability and feedback
+
+User feedback authorizes 0.17.0 presentation/native fixes in `PHONE_FEEDBACK.md`. Preserve bank geometry, all embedded attempts, progression/ads/reward authority and kit pin. Correct actual Capacitor JSON counter parsing before treating absent vibration as device tuning; physical acceptance remains open. Replicate observed V06 full nav locks and level captions without changing unlock boundaries. The new `.playtest` app explicitly isolates fresh test progress from the differently signed installed app; never prescribe uninstalling real progress. This bounded debug delivery does not complete release signing.

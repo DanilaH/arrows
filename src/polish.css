@@ -39,11 +39,10 @@ button:active { transform: scale(.97); }
 .nav-items { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); max-width: 560px; height: 100%; margin: auto; }
 .nav-items button { transition: none; position: relative; min-width: 0; min-height: 56px; padding: 9px 2px 3px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: transparent; color: var(--muted); border-radius: 13px; font-size: 10px; line-height: 1.2; }
 .nav-items button[aria-current='page'] { color: var(--accent-soft); }
-.nav-items button[aria-current='page']::before { content: ''; position: absolute; top: 0; width: 20px; height: 2px; border-radius: 2px; background: currentColor; }
+.nav-items button[aria-current='page'] .nav-icon::before { content: ''; position: absolute; inset: -5px -21px; border-radius: 22px; background: var(--surface-soft); z-index: -1; }
 .nav-items button:disabled { opacity: .65; }
-.nav-icon { position: relative; width: 24px; height: 24px; display: block; }
+.nav-icon { isolation: isolate; position: relative; width: 24px; height: 24px; display: block; }
 .nav-icon svg, .award-flight svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.nav-lock { position: absolute; right: -7px; bottom: -1px; padding: 0 2px; min-width: 14px; line-height: 13px; font-size: 8px; font-weight: 650; background: var(--bg); color: var(--secondary); }
 .nav-icon .new-dot { position: absolute; right: -5px; top: -1px; width: 6px; height: 6px; margin: 0; background: var(--gold); }
 .award-flight { position: fixed; z-index: 12; width: 36px; height: 36px; display: grid; place-items: center; color: var(--gold); pointer-events: none; }
 .award-flight svg { width: 36px; height: 36px; stroke-width: 1.6; }
@@ -58,8 +57,8 @@ button:active { transform: scale(.97); }
 .campaign-heading { text-align: center; }
 .campaign-heading h2 { font-size: 19px; line-height: 1.3; font-weight: 550; margin: 0; color: var(--accent-soft); }
 .home-difficulty { display: block; font-size: 11px; line-height: 18px; min-height: 0; padding: 0; background: transparent; border: 0; margin-top: 4px; }
-.home-board { height: clamp(140px,29dvh,255px); width: min(72vw,260px); flex: 0 1 auto; padding: 10px; margin: 20px 0 30px; opacity: .72; fill: none; stroke: var(--ink); }
-.home-board polyline, .home-board path { vector-effect: non-scaling-stroke; stroke-width: 1.5px; }
+.home-board { height: clamp(180px,36dvh,340px); width: min(82vw,340px); flex: 0 1 auto; padding: 6px; margin: 18px 0 24px; opacity: .94; fill: none; stroke: var(--ink); }
+.home-board polyline, .home-board path { vector-effect: non-scaling-stroke; stroke-width: var(--preview-line,2.8px); }
 #home-play { width: min(240px,85%); min-height: 52px; font-size: 17px; border-radius: 28px; align-items: center; justify-content: center; display: flex; gap: 13px; }
 .home-progress { font-size: 10px; color: var(--faint); margin: 12px 0 0; }
 .review-link { margin: 0 auto; padding: 0 10px; }
@@ -154,7 +153,7 @@ button:active { transform: scale(.97); }
   #meta-screen { padding-left: 14px; padding-right: 14px; }
   .home-heading h1 { font-size: 31px; }
   .meta-header h1 { font-size: 18px; }
-  .home-board { margin-top: 14px; margin-bottom: 22px; height: 25dvh; }
+  .home-board { margin-top: 14px; margin-bottom: 22px; height: clamp(180px,36dvh,340px); }
   .month-trophy .trophy-rich { height: 118px; }
   .calendar-grid, .weekdays { gap: 2px; }
   #game-header { padding-left: 8px; padding-right: 8px; }
@@ -242,3 +241,9 @@ button:active { transform: scale(.97); }
 
 .home-finish { max-width: 150px; color: var(--accent-soft); stroke: currentColor; }
 .home-finish circle, .home-finish path { stroke-width: 2px; }
+
+.nav-items button[data-locked='true'] { opacity: 1; color: var(--secondary); }
+.nav-items button[data-locked='true'] .nav-label { font-size: 11px; }
+.feedback-previews { display: flex; flex-wrap: wrap; gap: 0 18px; }
+.feedback-previews .sound-preview { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; }
+.feedback-previews svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }

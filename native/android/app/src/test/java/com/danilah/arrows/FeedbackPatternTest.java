@@ -23,6 +23,6 @@ public class FeedbackPatternTest {
     }
     @Test public void callersCannotMutateAnotherCueInstance() {
         FeedbackPattern p = FeedbackPattern.forCue("win"); p.timings[1] = 9999;
-        assertEquals(16, FeedbackPattern.forCue("win").timings[1]);
+        assertEquals(20, FeedbackPattern.forCue("win").timings[1]);
     }
 }

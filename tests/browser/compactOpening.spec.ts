@@ -6,12 +6,12 @@ test('keeps the opening small, resolves adjacent paths safely and clears it thro
   await page.setViewportSize({ width: 390, height: 844 }); await page.goto('/');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-progress', 'ready'); await page.locator('#home-play').click(); await page.waitForTimeout(450);
   const camera = () => page.locator('#game-root').evaluate(el => JSON.parse(el.getAttribute('data-camera')!) as { x: number; y: number; scale: number });
-  const c = await camera(); expect(c.scale * 5).toBeCloseTo(90); expect(c.scale).toBeLessThanOrEqual(18);
+  const c = await camera(); expect(c.scale * 5).toBeCloseTo(110); expect(c.scale).toBeLessThanOrEqual(22);
   const tap = async (x: number, y: number) => { const p = await camera(); await page.mouse.click(p.x + x * p.scale, p.y + y * p.scale); };
   await tap(0, 4.5); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '3'); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '3');
   await tap(0, 4); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2');
   await page.reload(); await expect(page.locator('#game-shell')).toHaveAttribute('data-progress', 'ready'); await page.locator('#home-play').click(); await page.waitForTimeout(450);
-  await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2'); expect((await camera()).scale).toBeCloseTo(18);
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2'); expect((await camera()).scale).toBeCloseTo(22);
   for (const [i, arrow] of campaign[0]!.arrows.entries()) {
     const head = arrow.path.at(-1)!; await tap(head.x, head.y); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(2 - i));
   }
