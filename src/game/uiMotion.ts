@@ -144,7 +144,7 @@ export function createUiMotion() {
         owned.push(animate(target,[{opacity:0},{opacity:1}],60));
         owned.push(animate(bridge.layer,[{opacity:bridge.opacity},{opacity:0}],60,finish,0,'linear'));
       };
-      if(snapshot)owned.push(animate(snapshot,[{opacity:1},{opacity:0}],160));
+      if(snapshot)owned.push(animate(snapshot,[{opacity:1},{opacity:0}],160,()=>snapshot?.remove()));
       if(to!=='game'){
         const bounds=root.getBoundingClientRect();
         const items=[...root.querySelectorAll<HTMLElement>('.home-heading,.campaign-heading,.home-board,#home-play,.home-progress,.meta-header,.record-grid>article,.record-rules,.meta-content>h2,.medal,.month-trophy,.month-award,.month-heading,.calendar-grid,.selected-day')]

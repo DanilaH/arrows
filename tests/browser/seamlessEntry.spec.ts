@@ -26,7 +26,7 @@ test('hides an unopened field, then retains its selected state without starting 
 for(const index of [2,19])test(`bridges the same selected c${index+1} preview to the actual view and returns without camera drift`,async({page},info)=>{
  const before=await opened(page,index);
  const buttonStyle=await page.locator('#home-play').evaluate(e=>({width:(e as HTMLElement).offsetWidth,height:(e as HTMLElement).offsetHeight,font:getComputedStyle(e).fontSize}));
- await page.evaluate(()=>{const snapshots:unknown[]=[];Reflect.set(window,'__entrySnapshots',snapshots);new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)if(n instanceof HTMLElement && n.classList.contains('route-snapshot')){const b=n.querySelector<HTMLElement>('.home-play');if(b)snapshots.push({width:b.offsetWidth,height:b.offsetHeight,font:getComputedStyle(b).fontSize});}}).observe(document.body,{childList:true,subtree:true});});
+ await page.evaluate(()=>{const snapshots:unknown[]=[],presence:boolean[]=[];Reflect.set(window,'__entrySnapshots',snapshots);Reflect.set(window,'__entryFades',presence);new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)if(n instanceof HTMLElement && n.classList.contains('route-snapshot')){const b=n.querySelector<HTMLElement>('.home-play');if(b)snapshots.push({width:b.offsetWidth,height:b.offsetHeight,font:getComputedStyle(b).fontSize});const a=n.getAnimations()[0];if(a){const record=()=>queueMicrotask(()=>presence.push(n.isConnected));void a.finished.then(record,record);}}}).observe(document.body,{childList:true,subtree:true});});
  const expected=await page.locator('.home-board').evaluate(e=>{const m=(e as SVGSVGElement).getScreenCTM()!;return [m.a,m.b,m.c,m.d,m.e,m.f];});
  await page.locator('#home-play').click();const bridge=page.locator('.board-transition');await expect(bridge).toHaveCount(1);
  expect(await page.evaluate(()=>Reflect.get(window,'__entrySnapshots')[0])).toEqual(buttonStyle);
@@ -37,6 +37,7 @@ for(const index of [2,19])test(`bridges the same selected c${index+1} preview to
  end.forEach((n,i)=>expect(n).toBeCloseTo([camera.scale,0,0,camera.scale,camera.x,camera.y][i]!,3));
  await settled(page);await page.waitForTimeout(300);expect(JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!)).toEqual(camera);
  await page.screenshot({path:info.outputPath(`settled-c${index+1}.png`)});
+ await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'__entryFades').length)).toBeGreaterThan(0);expect(await page.evaluate(()=>Reflect.get(window,'__entryFades').every((v:boolean)=>!v))).toBe(true);
  expect((await current(page)).board).toEqual(before.board);expect((await current(page)).started).toBe(false);
  await page.locator('#choose-field').click();await settled(page);await expect(page.locator('.home-board')).toBeVisible();
  await page.locator('#home-play').click();await settled(page);expect(JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!)).toEqual(camera);

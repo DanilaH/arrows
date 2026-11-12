@@ -24,7 +24,7 @@ Prepare the canonical attempt, HUD text and final layout before revealing play. 
 
 An unopened level uses a quiet fade into its first selected field. Reduced motion uses a direct actual-frame handoff. Its owner/cleanup must be installed **before** unblocking: Phaser can produce POST_RENDER synchronously during wake. Local loss→Back→reduced-motion reentry caught and fixed this reentrancy case. Loss dialog presentation waits for the entry route to settle, so it cannot block the first prepared frame.
 
-Back, new route, dialog/blocker, resize, background and disposal cancel the owned SVG, animations and paint listener. Shared route snapshots preserve computed ID-scoped dimensions before renaming IDs, and keep difficulty styling, preventing the cloned button from changing layout. No repeated success, reward or audio cues are created by a transition.
+Back, new route, dialog/blocker, resize, background and disposal cancel the owned SVG, animations and paint listener. Shared route snapshots preserve computed ID-scoped dimensions before renaming IDs, and keep difficulty styling, preventing the cloned button from changing layout. Remove the snapshot at the end of its own fade: cancelling a fill-both WAAPI fade while keeping the node would otherwise expose its original opacity before the longer field bridge ends. The first actual capture exposed this short flash; a completed-fade DOM regression covers it. No repeated success, reward or audio cues are created by a transition.
 
 ## Difficulty
 
