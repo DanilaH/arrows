@@ -31,11 +31,11 @@ async function fixture(page:Page,lost:boolean,continued=false){await observe(pag
 test('refills three redesigned hearts after the free-continuation dialog closes and never replays on restore',async({page})=>{
   await observe(page);const state=await seed(page,true);await page.goto('/');await page.locator('#home-play:enabled').click();
   await page.locator('[data-action=free-continue]').click();
-  await expect(page.locator('#game-dialog')).not.toBeVisible();await expect.poll(()=>cueCount(page,.38)).toBe(1);
+  await expect(page.locator('#game-dialog')).not.toBeVisible();await expect.poll(()=>cueCount(page,.34)).toBe(1);
   expect(await heartEvents(page)).toEqual([{delay:0,modal:false},{delay:75,modal:false},{delay:150,modal:false}]);
   const after=await saved(page);expect(after.campaign.board.errors).toEqual(state.campaign.board.errors);expect(after.campaign.board.removed).toEqual(state.campaign.board.removed);expect(after.campaign.continuations).toBe(1);
   await expect(page.locator('#hearts svg')).toHaveCount(3);await expect(page.locator('#hearts .empty')).toHaveCount(0);
-  await page.reload();await page.locator('#home-play:enabled').click();await page.waitForTimeout(650);expect(await cueCount(page,.38)).toBe(0);expect(await heartEvents(page)).toEqual([]);
+  await page.reload();await page.locator('#home-play:enabled').click();await page.waitForTimeout(650);expect(await cueCount(page,.34)).toBe(0);expect(await heartEvents(page)).toEqual([]);
 });
 
 for(const foregroundFirst of [true,false])test(`presents earned lives once after ${foregroundFirst?'foreground then dismissal':'dismissal then foreground'}`,async({page})=>{
@@ -43,12 +43,12 @@ for(const foregroundFirst of [true,false])test(`presents earned lives once after
   await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'assistanceFixture').snapshot().shows)).toBe(1);
   expect(await page.evaluate(()=>Reflect.get(window,'assistanceFixture').snapshot().blocked)).toEqual(['ad']);
   await page.evaluate(()=>{const f=Reflect.get(window,'assistanceFixture');f.shown();f.background(true);f.earn();});
-  await expect.poll(async()=>(await saved(page)).campaign.board.lives).toBe(3);expect(await cueCount(page,.38)).toBe(0);expect(await heartEvents(page)).toEqual([]);
+  await expect.poll(async()=>(await saved(page)).campaign.board.lives).toBe(3);expect(await cueCount(page,.34)).toBe(0);expect(await heartEvents(page)).toEqual([]);
   await page.evaluate(first=>{const f=Reflect.get(window,'assistanceFixture');if(first)f.background(false);else f.dismiss();},foregroundFirst);
-  await page.waitForTimeout(350);expect(await cueCount(page,.38)).toBe(0);
+  await page.waitForTimeout(350);expect(await cueCount(page,.34)).toBe(0);
   await page.evaluate(first=>{const f=Reflect.get(window,'assistanceFixture');if(first)f.dismiss();else f.background(false);},foregroundFirst);
-  await expect.poll(()=>cueCount(page,.38)).toBe(1);expect(await heartEvents(page)).toHaveLength(3);
-  await page.evaluate(()=>Reflect.get(window,'assistanceFixture').duplicate());await page.waitForTimeout(650);expect(await cueCount(page,.38)).toBe(1);expect(await heartEvents(page)).toHaveLength(3);
+  await expect.poll(()=>cueCount(page,.34)).toBe(1);expect(await heartEvents(page)).toHaveLength(3);
+  await page.evaluate(()=>Reflect.get(window,'assistanceFixture').duplicate());await page.waitForTimeout(650);expect(await cueCount(page,.34)).toBe(1);expect(await heartEvents(page)).toHaveLength(3);
   const after=await saved(page);expect(after.campaign.continuations).toBe(2);expect(after.campaign.board.errors).toEqual(before.campaign.board.errors);
 });
 
@@ -57,26 +57,26 @@ test('traces an earned hint after return without making a move or replaying the 
   const before=await fixture(page,false);await page.locator('#hint:visible').click();
   await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'assistanceFixture').snapshot().shows)).toBe(1);
   await page.evaluate(()=>{const f=Reflect.get(window,'assistanceFixture');f.shown();f.earn();});
-  await expect.poll(async()=>!!(await saved(page)).campaign.hint).toBe(true);expect(await cueCount(page,.32)).toBe(0);
+  await expect.poll(async()=>!!(await saved(page)).campaign.hint).toBe(true);expect(await cueCount(page,.24)).toBe(0);
   const dismissed=await page.evaluate(()=>{Reflect.get(window,'assistanceFixture').dismiss();return performance.now();});
-  await expect.poll(()=>cueCount(page,.32)).toBe(1);
-  const cue=await page.evaluate(()=>(Reflect.get(window,'assistanceCues') as {duration:number;at:number;modal:boolean}[]).find(c=>Math.abs(c.duration-.32)<.001)!);expect(cue.at-dismissed).toBeGreaterThanOrEqual(300);expect(cue.modal).toBe(false);
+  await expect.poll(()=>cueCount(page,.24)).toBe(1);
+  const cue=await page.evaluate(()=>(Reflect.get(window,'assistanceCues') as {duration:number;at:number;modal:boolean}[]).find(c=>Math.abs(c.duration-.24)<.001)!);expect(cue.at-dismissed).toBeGreaterThanOrEqual(300);expect(cue.modal).toBe(false);
   expect((await saved(page)).campaign.board).toEqual(before.campaign.board);
-  await page.evaluate(()=>Reflect.get(window,'assistanceFixture').duplicate());await page.waitForTimeout(900);expect(await cueCount(page,.32)).toBe(1);
+  await page.evaluate(()=>Reflect.get(window,'assistanceFixture').duplicate());await page.waitForTimeout(900);expect(await cueCount(page,.24)).toBe(1);
 });
 
 test('settles heart motion on background without stale replay',async({page})=>{
-  await fixture(page,true);await page.locator('[data-action=free-continue]').click();await expect.poll(()=>cueCount(page,.38)).toBe(1);
+  await fixture(page,true);await page.locator('[data-action=free-continue]').click();await expect.poll(()=>cueCount(page,.34)).toBe(1);
   await page.evaluate(()=>Reflect.get(window,'assistanceFixture').background(true));
   expect(await page.locator('#hearts').evaluate(e=>e.getAnimations({subtree:true}).length)).toBe(0);
-  await page.evaluate(()=>Reflect.get(window,'assistanceFixture').background(false));await page.waitForTimeout(600);expect(await cueCount(page,.38)).toBe(1);expect(await heartEvents(page)).toHaveLength(3);
+  await page.evaluate(()=>Reflect.get(window,'assistanceFixture').background(false));await page.waitForTimeout(600);expect(await cueCount(page,.34)).toBe(1);expect(await heartEvents(page)).toHaveLength(3);
 });
 
 test('keeps recovery correct with reduced motion and narrow light UI',async({page})=>{
   await page.emulateMedia({reducedMotion:'reduce',colorScheme:'light'});await page.setViewportSize({width:320,height:640});
   await page.addInitScript(({key,settings})=>localStorage.setItem(key,JSON.stringify(settings)),{key:SETTINGS_KEY,settings:{...defaultSettings('en'),theme:'light'}});
   await fixture(page,true);await expect(page.locator('html')).toHaveAttribute('data-theme','light');
-  await page.locator('[data-action=free-continue]').click();await expect.poll(()=>cueCount(page,.38)).toBe(1);expect(await heartEvents(page)).toEqual([]);
+  await page.locator('[data-action=free-continue]').click();await expect.poll(()=>cueCount(page,.34)).toBe(1);expect(await heartEvents(page)).toEqual([]);
   expect(await page.locator('#game-header').evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
   await expect(page.locator('#hearts .empty')).toHaveCount(0);
 });
