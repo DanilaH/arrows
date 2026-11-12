@@ -8,6 +8,7 @@ for (const index of [0, 8, 9, 18, 19]) test(`shows full locks and readable thres
   const state=freshSave();state.index=index;state.campaign=freshAttempt(campaign[index]!);
   state.wins=campaign.slice(0,index).map((level,i)=>({attempt:`phone-past-${i}`,levelId:level.id,activeMs:1000,completedAt:i*1000,localDate:'2026-11-12',mistakes:0}));
   state.seenUnlocks=['collection','calendar'];
+  state.campaign.view={centerX:(state.campaign.level.width-1)/2,centerY:(state.campaign.level.height-1)/2,zoom:1};
   await page.addInitScript(({state,key,settings,settingsKey})=>{localStorage.setItem(key,JSON.stringify(state));localStorage.setItem(settingsKey,JSON.stringify(settings));},{state,key:SAVE_KEY,settings:defaultSettings('ru'),settingsKey:SETTINGS_KEY});
   await page.setViewportSize({width:320,height:568});await page.goto('/');await page.locator('#home-play:enabled').waitFor();
   for(const [id,threshold] of [['collection',10],['calendar',20]] as const){

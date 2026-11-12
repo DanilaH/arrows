@@ -131,14 +131,14 @@ test('settles a lost-result native Back without reopening it, including synchron
   }
 });
 
-test('previews the actual next board after a win and gives the exhausted campaign an honest result entry', async ({ page }) => {
+test('keeps the next board hidden until opened and gives the exhausted campaign an honest result entry', async ({ page }) => {
   const state = freshSave(), board = new Board(state.campaign.level, state.campaign.board.id);
   while (!board.complete) board.activate(board.hint()!);
   state.campaign.board = board.snapshot(); state.campaign.started = true;
   state.wins.push({ attempt: board.attemptId, levelId: board.level.id, activeMs: 1000, completedAt: 1000, localDate: '2026-11-10', mistakes: 0 });
   await seed(page, state);
   await expect(page.locator('.campaign-heading h2')).toHaveText('Уровень 2'); await expect(page.locator('#home-play')).toHaveText('Дальше');
-  await expect(page.locator('.home-board polyline')).toHaveCount(campaign[1]!.arrows.length);
+  await expect(page.locator('.home-board')).toBeHidden();await expect(page.locator('.home-board polyline')).toHaveCount(0);
   expect((await saved(page)).index).toBe(0); expect((await saved(page)).campaign.board).toEqual(state.campaign.board);
   await page.locator('#home-play').click(); await expect(page.locator('#game-shell')).toHaveAttribute('data-level', 'c02');
   expect((await saved(page)).wins).toHaveLength(1);

@@ -256,3 +256,13 @@ button:active { transform: scale(.97); }
 .settings-section h3 { font-weight: 650; }
 
 .home-board .preview-tip { fill: var(--ink); stroke: none; }
+
+/* The difficulty is the main challenge heading, as in the inspected reference. */
+#difficulty { font-size: 15px; font-weight: 900; line-height: 20px; letter-spacing: .15px; }
+.heading[data-difficulty='hard'] #app-title, .heading[data-difficulty='nightmare'] #app-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+#game-shell[data-mode='daily'] .heading[data-difficulty='hard'] #app-title, #game-shell[data-mode='daily'] .heading[data-difficulty='nightmare'] #app-title { position: static; width: auto; height: auto; overflow: visible; clip-path: none; white-space: normal; font-size: 10px; line-height: 12px; }
+#game-shell[data-mode='daily'] #difficulty { font-size: 13px; line-height: 16px; }
+.home-difficulty { font-size: 15px; line-height: 22px; font-weight: 900; letter-spacing: .2px; margin-top: 5px; }
+.home-board polyline { stroke: var(--arrow-ink,var(--ink)); }
+.home-board .preview-tip { fill: var(--arrow-ink,var(--ink)); }
+.board-transition { position: fixed; inset: 0; width: 100vw; height: 100dvh; z-index: 10; pointer-events: none; overflow: hidden; }

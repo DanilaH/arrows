@@ -1,4 +1,5 @@
 import type { UiMotion } from './uiMotion';
+import type { BoardArtwork } from './boardTransition';
 import { roundedRoute, roundedTip, svgPoints } from './arrowArt';
 import type { ProgressStore } from '../progression/save';
 import { collectionOpen, challengeOpen, collectionStats, medals, earnedAwards, type UnlockId } from '../progression/collection';
@@ -24,7 +25,7 @@ const badge = (key: string): string => `<svg class="medal-icon" viewBox="0 0 72 
 </svg>`;
 
 export function installMetaSurface(progress: ProgressStore, language: GameLanguage, options: {
-  motion: UiMotion; canPresent(): boolean; blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; controls?(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;
+  motion: UiMotion; canPresent(): boolean; blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; artwork(): BoardArtwork | null; controls?(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;
 }) {
   const nav = document.querySelector<HTMLElement>('#meta-nav')!;
   const root = document.querySelector<HTMLElement>('#meta-screen')!, shell = document.querySelector<HTMLElement>('#game-shell')!;
@@ -38,6 +39,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   const pendingUnlocks = new Set<UnlockId>();
   let pendingDaily: {date:string;attempt:string} | null = null, lastDailyArrival = '';
   let screen: AppScreen = 'home', alive = true, ready = false, busy = false, revision = 0;
+  let selectedCampaign = '';
   let calendarToday = localDate(), dailyMonths = availableDailyMonths(calendarToday);
   const boundedDate = (date: string): string => date < '2026-01-01' ? '2026-01-01' : date > '2200-12-31' ? '2200-12-31' : date;
   let selected = boundedDate(calendarToday), month = selected.slice(0, 7);
@@ -76,9 +78,10 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     const save = progress.state, a = save.campaign, stats = collectionStats(save);
     const cleared = a.board.removed.length === a.level.arrows.length, final = cleared && save.index === campaign.length - 1;
     const nextIndex = cleared && !final ? save.index + 1 : save.index, preview = cleared && !final ? campaign[nextIndex]! : a.level;
+    const selected = ready && !cleared && (selectedCampaign === a.board.id || a.started || a.view !== null);
     const tipSize=Math.min(.74,Math.max(.58,.48+Math.max(preview.width,preview.height)*.005));
-    const paths = preview.arrows.filter(v => cleared && !final || !a.board.removed.includes(v.id)).map(v =>
-      `<polyline points="${svgPoints(roundedRoute(v.path,tipSize*.82))}"/><path class="preview-tip" d="M${svgPoints(roundedTip(v.path,tipSize)).replaceAll(' ','L')}Z"/>`
+    const paths = !selected ? '' : preview.arrows.filter(v => cleared && !final || !a.board.removed.includes(v.id)).map(v =>
+      `<g style="--arrow-ink:${!cleared && v.id===a.hint?'var(--accent)':!cleared && a.board.errors.includes(v.id)?'var(--heart)':'var(--ink)'}"><polyline points="${svgPoints(roundedRoute(v.path,tipSize*.82))}"/><path class="preview-tip" d="M${svgPoints(roundedTip(v.path,tipSize)).replaceAll(' ','L')}Z"/></g>`
     ).join('');
     // Fit the original occupied bounds, never the shrinking set of remaining arrows.
     const points=preview.arrows.flatMap(arrow=>arrow.path), xs=points.map(p=>p.x), ys=points.map(p=>p.y);
@@ -88,7 +91,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     const difficulty=final || preview.difficulty === 'normal' ? '' : preview.difficulty === 'hard' ? 'Hard' : 'Nightmare';
     return `<div class="home-layout"><header class="home-heading"><h1 id="menu-title" tabindex="-1">${text.title}</h1>${stats.current ? `<span class="streak-chip">${text.streakShort} ${stats.current}</span>` : ''}</header>
       <section class="home-current"><div class="campaign-heading"><h2>${final ? text.chapterComplete : `${text.level} ${nextIndex+1}`}</h2><span class="home-difficulty" data-difficulty="${preview.difficulty}" ${difficulty ? '' : 'hidden'}>${difficulty}</span></div>
-      <svg style="--preview-line:${previewStroke}px" class="home-board${final ? ' home-finish' : ''}" viewBox="${final ? '0 0 72 72' : viewBox}" aria-hidden="true">${final ? '<circle cx="36" cy="36" r="28"/><path d="m24 36 8 8 17-18"/>' : paths}</svg>
+      <svg style="--preview-line:${previewStroke}px;${selected || final ? '' : 'visibility:hidden'}" data-level="${preview.id}" data-selected="${selected}" class="home-board${final ? ' home-finish' : ''}" viewBox="${final ? '0 0 72 72' : viewBox}" aria-hidden="true">${final ? '<circle cx="36" cy="36" r="28"/><path d="m24 36 8 8 17-18"/>' : selected ? paths : ''}</svg>
       <button id="home-play" class="primary home-play" type="button" ${!ready || busy ? 'disabled' : ''}>${final ? text.viewResult : cleared ? text.next : a.started ? text.resume : text.play}<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></button>
       <p class="home-progress">${text.chapter}: ${save.wins.length} / ${campaign.length}</p></section>${options.controls ? `<button id="home-controls" class="review-link" type="button">${text.controlFields}</button>` : ''}</div>`;
   };
@@ -175,9 +178,10 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       if(target){presenting=true;presentationScroll=root.scrollTop;options.motion.unlock(target,key==='collection'?text.collectionUnlocked:text.calendarUnlocked,presentationEnded);}
     }).catch(()=>{}).finally(()=>{claiming=false;if(alive)queueMicrotask(presentArrivals);});
   };
-  const show = (next: AppScreen, date?: string): void => {
+  const show = (next: AppScreen, date?: string, artwork?: BoardArtwork): void => {
     if(presenting)options.motion.finish();
     changingScreen=true;
+    const art = artwork ?? (screen==='game' && next==='home' ? options.artwork() ?? undefined : undefined);
     try { options.motion.swap(root, screen, next, () => {
       revision++;
       if (next === 'calendar' && (screen === 'home' || screen === 'collection')) calendarParent = screen;
@@ -189,7 +193,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       if (screen !== 'game') { refresh(); root.scrollTop = screen==='calendar' && pendingDaily ? 0 : scroll.get(screen) ?? 0; root.querySelector<HTMLElement>('h1')?.focus({ preventScroll: true });
 
       }
-    }); } finally {changingScreen=false;}
+    }, art); } finally {changingScreen=false;}
   };
   const back = (): void => show(screen === 'calendar' ? calendarParent : 'home');
   const closeTrophy = (): boolean => {
@@ -252,6 +256,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     discardArrivals(): void {arrivalEpoch++;pendingUnlocks.clear();pendingDaily=null;if(presenting)options.motion.finish();},
     presentArrivals,
     queueAward(): void { pendingAward=true; }, discardAward(): void { pendingAward=false; }, get screen() { return screen; }, get revision() { return revision; }, refresh, show, back, closeTrophy,
+    selectCampaign(): void { selectedCampaign = progress.state.campaign.board.id; },
     setLanguage(value: GameLanguage): void {
       language = value; text = copy[value]; locale = value === 'ru' ? 'ru-RU' : 'en-US';
       monthFormat = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric', timeZone: 'UTC' });

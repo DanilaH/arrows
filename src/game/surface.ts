@@ -107,13 +107,15 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const close = (after: ()=>void = () => {}): void => { modal = null; motion.close(dialog, () => { platform.activity.setBlocked('dialog', false); if(meta.screen === 'game')root.focus({ preventScroll: true }); after(); }); };
   const loadActive = (): void => {
     cancel(); pendingTime = 0; pendingAdTime = 0; wasActive = false; freshWinAttempt = ''; dailyReturnAttempt=''; idleMs = 0; notice = '';
-    const a = active(); celebratedAttempt = a.board.removed.length === a.level.arrows.length ? a.board.id : ''; pendingAward = false; scene.loadAttempt(activeBoard(), a.view, a.guides, a.hint); scheduleView(); sync();
+    const a = active(); celebratedAttempt = a.board.removed.length === a.level.arrows.length ? a.board.id : ''; pendingAward = false;
+    scene.loadAttempt(activeBoard(), a.view, a.guides, a.hint, false, true); sync(); scene.layout(); scheduleView(); sync();
   };
   const enterCampaign = (): void => { const intent = meta.revision; run((async () => {
     await progress.flush();
     if (!alive || meta.revision !== intent) return;
     if (progress.board.complete && progress.state.index < campaign.length - 1) await progress.next(progress.board.attemptId);
-    if (!alive || meta.revision !== intent) return; control = false; activeDate = null; meta.show('game'); loadActive(); root.focus({ preventScroll: true });
+    if (!alive || meta.revision !== intent) return; control = false; activeDate = null;
+    meta.selectCampaign(); loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true });
   })()); };
   const leaveGame = (): void => {
     if(activeDate && dailyReturnAttempt===scene.board.attemptId && scene.board.complete)meta.queueDailyArrival(activeDate,dailyReturnAttempt);
@@ -128,12 +130,13 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     blocked: value => platform.activity.setBlocked('menu', value),
     previewBlocked: value => platform.activity.setBlocked('trophy-preview', value), leaveGame, enterCampaign,
     visited: screen => platform.analytics.track('screen_view', { screen }),
+    artwork: () => !activeDate && !control ? scene.artwork() : null,
     ...(reviewFields.length ? { controls: () => open('controls') } : {}), settings: () => settingsSurface.open(),
     async enterDaily(date) {
       const intent = meta.revision;
       await progress.flush(); const attempt = await progress.openDaily(date); if (!attempt || !alive) throw Error('Daily unavailable');
       if (meta.revision !== intent) return;
-      activeDate = date; control = false; meta.show('game'); loadActive(); root.focus({ preventScroll: true });
+      activeDate = date; control = false; loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true });
       platform.analytics.track('daily_open', { date, attempt, resumed: active().started });
     },
   });
@@ -243,6 +246,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const difficulty = document.querySelector<HTMLElement>('#difficulty')!;
     difficulty.textContent = board.level.difficulty === 'normal' ? '' : board.level.difficulty === 'hard' ? 'Hard' : 'Nightmare';
     difficulty.dataset.difficulty = board.level.difficulty;
+    document.querySelector<HTMLElement>('.heading')!.dataset.difficulty = board.level.difficulty;
     const hearts = document.querySelector<HTMLElement>('#hearts')!; hearts.setAttribute('aria-label', `${text.lives}: ${board.hearts}`);
     Array.from(hearts.children).forEach((heart, i) => heart.classList.toggle('empty', i >= board.hearts));
     document.querySelector<HTMLElement>('#progress-fill')!.style.transform = `scaleX(${1 - remaining / board.level.arrows.length})`;
@@ -284,7 +288,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     }
     platform.activity.setGameplayDesired(loaded && meta.screen === 'game' && !board.complete && board.hearts > 0);
     if (modal === 'lost' && board.hearts > 0) close();
-    if (loaded && meta.screen === 'game' && board.hearts === 0 && !scene.hasErrorMotion && modal === null && !requestingAd) open('lost');
+    if (loaded && meta.screen === 'game' && board.hearts === 0 && !scene.hasErrorMotion && modal === null && !requestingAd && !motion.routeBusy) open('lost');
     scheduleAssistance();
     meta.presentArrivals();
   };
@@ -301,6 +305,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       if (scene.board.attemptId !== a.board.id || event.kind === 'load') {
         const advancing=event.kind!=='load' && scene.board.complete; assistance=null; motion.cancelRefill();
         platform.feedback.resetGameplay(); cancel(); idleMs = 0; pendingTime = 0; notice = ''; scene.loadAttempt(activeBoard(), a.view, a.guides, a.hint, advancing);
+        if (!activeDate) meta.selectCampaign();
         if(advancing)motion.reveal(document.querySelector('#app-title')!);
       } else {
         scene.acceptBoard(activeBoard(), event.attempt === a.board.id ? event.result : undefined);
@@ -391,7 +396,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   sessionPlay.textContent = text.sessionPlay;
   on(sessionPlay, 'click', () => { progress.startSessionOnly(); finishLoad(); });
   on(dialog, 'cancel', event => { event.preventDefault(); if (modal === 'lost') backToMenu(); else close(); sync(); });
-  listeners.push(platform.activity.onBlockedChange(value => { sample(); if (value) { cancel(); saveView(); if (scene.board.complete) { celebratedAttempt = scene.board.attemptId; pendingAward = false; } scene.settlePresentation(); } }));
+  listeners.push(platform.activity.onBlockedChange(value => { sample(); if (value) { motion.stopRoute(); cancel(); saveView(); if (scene.board.complete) { celebratedAttempt = scene.board.attemptId; pendingAward = false; } scene.settlePresentation(); } }));
   listeners.push(platform.activity.onBlockReasonsChange(() => { if (platform.activity.getBlockReasons().some(reason => !['menu','dialog','settings','trophy-preview'].includes(reason))) { motion.finish(); meta.discardAward(); if(!transition.busy){meta.discardArrivals();dailyReturnAttempt='';} if(!requestingAd)assistance=null; } }));
   listeners.push(scene.subscribe(sync));
   listeners.push(scene.subscribeFeedback(event => {

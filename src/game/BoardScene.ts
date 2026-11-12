@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { roundedRoute, roundedTip } from './arrowArt';
+import type { BoardArtwork } from './boardTransition';
 import { arrowContact, bumpTiming, sampleBump, type ArrowContact, type BumpTiming } from './bumpMotion';
 import { boardPalettes } from '../app/theme';
 import type { GameTheme } from '../app/settings';
@@ -105,7 +106,7 @@ export class BoardScene extends Phaser.Scene {
     this.stableDirty = true; this.active?.clear(); this.overlay?.clear(); this.reactiveDots?.clear(); this.changed();
   }
   private changed(): void { for (const listener of this.listeners) listener(); this.options.dirty(); }
-  public loadAttempt(board: Board, view: ViewState | null = null, guides = false, hint: string | null = null, transition = false): void {
+  public loadAttempt(board: Board, view: ViewState | null = null, guides = false, hint: string | null = null, transition = false, settled = false): void {
     const blend=transition && !this.reducedMotion && !board.complete && this.board.complete && this.board.attemptId!==board.attemptId;
     this.outgoing.clear().setAlpha(1);
     if(blend){const ratio=1/this.scale.zoom, old=this.boardCamera;this.outgoing.setPosition(old.x*ratio,old.y*ratio).setScale(old.scale*ratio).fillStyle(this.colors.dot,1);for(const point of this.board.level.mask)this.outgoing.fillCircle(point.x,point.y,.07);}
@@ -115,10 +116,10 @@ export class BoardScene extends Phaser.Scene {
     this.paths = new Map(level.arrows.map(a => [a.id, measurePath(a.path)]));
     this.dotMask = new Map(level.mask.map(p => [`${p.x},${p.y}`, p]));
     this.flights.length = 0; this.bumps.clear(); this.impacts.length = 0; this.confetti.length = 0; this.pulses.clear(); this.preview = null; this.rewardCelebration=false; this.active.clear(); this.overlay.clear(); this.reactiveDots.clear();
-    this.entry = this.clock - (this.reducedMotion || board.complete ? 500 : 0) + (blend?110:0); this.dots.setAlpha(blend?0:1); this.errorUntil = -1; this.victoryAt = board.complete ? this.clock - VICTORY_MS - 1 : -1; this.victoryCursor = board.complete ? level.mask.length : 0; this.announcedWin = board.complete;
+    this.entry = this.clock - (settled || this.reducedMotion || board.complete ? 500 : 0) + (blend?110:0); this.dots.setAlpha(blend?0:1); this.errorUntil = -1; this.victoryAt = board.complete ? this.clock - VICTORY_MS - 1 : -1; this.victoryCursor = board.complete ? level.mask.length : 0; this.announcedWin = board.complete;
     this.stableDirty = true; this.layout(true);
     if (view) { this.boardCamera.restore(view); this.transform(); }
-    this.drawDots(); this.setHint(hint); this.changed();
+    this.drawDots(); this.setHint(hint, !settled); this.changed();
   }
   public acceptBoard(board: Board, result?: MoveResult): void {
     this.board = board;
@@ -148,11 +149,18 @@ export class BoardScene extends Phaser.Scene {
     this.stableDirty=true;this.changed();
   }
   public get finished(): boolean { return this.announcedWin; }
+  public artwork(): BoardArtwork {
+    const ink=this.arrowWidth, color=(value:number)=>`#${value.toString(16).padStart(6,'0')}`;
+    return { levelId:this.board.level.id, camera:{x:this.boardCamera.x,y:this.boardCamera.y,scale:this.boardCamera.scale}, viewport:{...this.playArea}, ink,
+      arrows:this.board.remaining.map(arrow=>{const width=Math.min(.68,ink*(arrow.id===this.hintTarget?1.65:1));return {path:arrow.path,width,tip:Math.min(.74,Math.max(.48,width*2.15)),color:color(arrow.id===this.hintTarget?this.colors.exit:this.board.isError(arrow.id)?this.colors.error:this.colors.arrow)};}),
+      afterPaint: done=>{this.game.events.once(Phaser.Core.Events.POST_RENDER,done);return()=>{this.game.events.off(Phaser.Core.Events.POST_RENDER,done);};},
+    };
+  }
   private measureView(): Rect {
     // Insets are measured from the real DOM HUD, including enlarged fonts/cutouts.
-    const header = document.querySelector<HTMLElement>('#game-header')?.getBoundingClientRect();
-    const footer = document.querySelector<HTMLElement>('#game-footer')?.getBoundingClientRect();
-    const top = header?.bottom ?? 92, bottom = footer?.top ?? this.heightCss - 100;
+    const header=document.querySelector<HTMLElement>('#game-header'), footer=document.querySelector<HTMLElement>('#game-footer');
+    // Layout bounds exclude transient HUD transforms during a menu transition.
+    const top=header?header.offsetTop+header.offsetHeight:92, bottom=footer?footer.offsetTop:this.heightCss-100;
     return { x: 0, y: top + 12, width: this.widthCss, height: Math.max(100, bottom - top - 24) };
   }
   public layout(reset = false): void {

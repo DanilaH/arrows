@@ -2,7 +2,7 @@
   "schema": 1,
   "folder_url": "https://drive.google.com/drive/folders/1Zw5hOmrq3N1CNFfMH610RiPgjeYAmbf6",
   "listing_checked_on": "2026-11-09",
-  "verification": "Folder listing verified for eight files. V06 bytes downloaded, ffprobe metadata verified and selected visual frames inspected on 2026-11-09; other files are not newly inspected or hashed. See STAGE_A_IMPLEMENTATION.md. V06 bytes re-downloaded and the same hash verified on 2026-11-10; early compact fields reviewed for 0.8.1.",
+  "verification": "Folder listing verified for eight files. V06 bytes downloaded, ffprobe metadata verified and selected visual frames inspected on 2026-11-09; other files are not newly inspected or hashed. See STAGE_A_IMPLEMENTATION.md. V06 bytes re-downloaded and the same hash verified on 2026-11-10; early compact fields reviewed for 0.8.1. V06/V19 bytes downloaded and decoded again on 2026-11-13 for menu-entry and difficulty-heading sequences; see SEAMLESS_ENTRY.md. Physical feel/audio not assessed.",
   "files": [
     {
       "code": "V06",
@@ -27,9 +27,22 @@
         35.7,
         35.9,
         50,
-        86
+        55.5,
+        56.5,
+        57,
+        57.5,
+        58,
+        58.2,
+        58.4,
+        58.6,
+        58.8,
+        59.2,
+        83,
+        84,
+        86,
+        88
       ],
-      "rechecked_on": "2026-11-10"
+      "rechecked_on": "2026-11-13"
     },
     {
       "code": "V11",
@@ -62,7 +75,14 @@
       "size_bytes": 167173741,
       "modified_time": "2026-11-08T15:58:01.594Z",
       "role": "primary_reference",
-      "sha256": null
+      "sha256": "b959d7f03577ea0ff89e4133a4ecc6cb43b2d04b2de62ab6263d294b02de90d5",
+      "rechecked_on": "2026-11-13",
+      "visual_checks_seconds": [
+        46,
+        48,
+        50,
+        52
+      ]
     },
     {
       "code": "V22",

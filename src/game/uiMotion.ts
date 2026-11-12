@@ -1,3 +1,4 @@
+import { createBoardTransition, type BoardArtwork } from './boardTransition';
 /** Bounded presentation only. No progress, rewards or scene ownership lives here. */
 export function createUiMotion() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -74,19 +75,40 @@ export function createUiMotion() {
     },
     get routeBusy() { return routeBusy; },
     deferRoute(work: () => void): boolean { if (!routeBusy) return false; deferredRoutes.add(work); return true; },
-    swap(root: HTMLElement, from: string, to: string, render: () => void): void {
-      clearTaps();
-      routeFinish?.();
-      if (from === to || reduced.matches || document.hidden || !alive) { render(); return; }
+    stopRoute(): void { routeFinish?.(); },
+    swap(root: HTMLElement, from: string, to: string, render: () => void, art?: BoardArtwork): void {
+      clearTaps(); routeFinish?.();
+      if (from === to || reduced.matches || document.hidden || !alive) {
+        if(to==='game' && art && alive && !document.hidden){
+          const game=document.querySelector<HTMLElement>('#game-root')!, visibility=game.style.visibility;
+          let ended=false, off=()=>{};game.style.visibility='hidden';
+          const finish=():void=>{if(ended)return;ended=true;off();game.style.visibility=visibility;routeBusy=false;routeFinish=undefined;const work=[...deferredRoutes];deferredRoutes.clear();for(const fn of work)fn();};
+          off=art.afterPaint(finish);routeBusy=true;routeFinish=finish;render();
+        } else render();
+        return;
+      }
+      const game = document.querySelector<HTMLElement>('#game-root')!, entering = to === 'game';
+      const oldVisibility=game.style.visibility, oldOpacity=game.style.opacity;
+      const source=from==='home' && entering ? root.querySelector<SVGSVGElement>('.home-board') : null;
+      let bridge=source && art ? createBoardTransition(source,art,true) : null;
       let snapshot: HTMLElement | undefined;
       if (from !== 'game' && !root.hidden) {
         snapshot = root.cloneNode(true) as HTMLElement; snapshot.removeAttribute('id'); snapshot.hidden = false;
         const prefix = `route-${++snapshotSerial}-`, ids = new Map<string, string>();
-        for (const el of snapshot.querySelectorAll('[id]')) { const id = el.id; ids.set(id, prefix + id); el.id = prefix + id; }
+        for (const el of snapshot.querySelectorAll('[id]')) {
+          const id=el.id;
+          // Renaming IDs must not remove the original button/text sizing in the snapshot.
+          const original=root.querySelector(`#${CSS.escape(id)}`);
+          if(el instanceof HTMLElement && original){
+            const style=getComputedStyle(original);
+            for(const key of ['display','width','height','min-width','max-width','min-height','padding','margin','font-family','font-size','font-weight','letter-spacing','line-height','border','border-radius','background','color','flex','align-self','align-items','justify-content','gap','opacity','transform','visibility'])el.style.setProperty(key,style.getPropertyValue(key));
+          }
+          ids.set(id,prefix+id);el.id=prefix+id;
+        }
         for (const el of snapshot.querySelectorAll('*')) for (const attr of [...el.attributes]) {
           let value = attr.value;
           for (const [oldId, newId] of ids) value = value.replaceAll(`url(#${oldId})`, `url(#${newId})`);
-          if (attr.name.startsWith('data-')) el.removeAttribute(attr.name);
+          if (attr.name.startsWith('data-') && attr.name !== 'data-difficulty') el.removeAttribute(attr.name);
           else if (value !== attr.value) el.setAttribute(attr.name, value);
         }
         snapshot.className = 'route-snapshot'; snapshot.inert = true; snapshot.setAttribute('aria-hidden', 'true');
@@ -94,21 +116,51 @@ export function createUiMotion() {
         Object.assign(snapshot.style,{left:`${rect.x}px`,top:`${rect.y}px`,width:`${rect.width}px`,height:`${rect.height}px`,right:'auto',bottom:'auto'});
         root.parentElement!.append(snapshot); snapshot.scrollTop = root.scrollTop;
       }
-      render(); routeBusy = true;
-      const direction = to === 'home' || from === 'calendar' && to === 'collection' ? -1 : 1;
-      const target = to === 'game' ? document.querySelector<HTMLElement>('#game-root')! : root;
       const owned: (() => void)[] = [];
-      if (snapshot) owned.push(animate(snapshot, [{ opacity: 1, transform: 'translateX(0)' }, { opacity: 0, transform: `translateX(${-direction*8}px)` }], 160));
-      if (to !== 'game') {
+      let done=false, painted=!entering || !art, moved=false, blending=false;
+      let complete=():void=>{};
+      if (entering && art) {
+        game.style.visibility='hidden';
+        owned.push(art.afterPaint(()=>{painted=true;if(!bridge)game.style.visibility=oldVisibility;complete();}));
+      }
+      render(); routeBusy = true;
+      if (from==='game' && to==='home' && art) {
+        const target=root.querySelector<SVGSVGElement>('.home-board');
+        if(target)bridge=createBoardTransition(target,art,false);
+      }
+      const finish=():void=>{
+        if(done)return;done=true;routeBusy=false;routeFinish=undefined;
+        for(const end of owned)end();bridge?.finish();snapshot?.remove();game.style.visibility=oldVisibility;game.style.opacity=oldOpacity;
+        if(entering && document.activeElement===document.body && document.hasFocus() && !document.querySelector('dialog[open]'))game.focus({preventScroll:true});
+        const work=[...deferredRoutes];deferredRoutes.clear();for(const fn of work)fn();
+      };
+      routeFinish=finish;
+      complete=():void=>{
+        if(done || !moved || !painted || blending)return;
+        if(!bridge){finish();return;}
+        blending=true;
+        const target=entering?game:root.querySelector<SVGSVGElement>('.home-board')!;
+        if(entering)game.style.visibility=oldVisibility;else bridge.reveal();
+        owned.push(animate(target,[{opacity:0},{opacity:1}],60));
+        owned.push(animate(bridge.layer,[{opacity:bridge.opacity},{opacity:0}],60,finish,0,'linear'));
+      };
+      if(snapshot)owned.push(animate(snapshot,[{opacity:1},{opacity:0}],160));
+      if(to!=='game'){
         const bounds=root.getBoundingClientRect();
         const items=[...root.querySelectorAll<HTMLElement>('.home-heading,.campaign-heading,.home-board,#home-play,.home-progress,.meta-header,.record-grid>article,.record-rules,.meta-content>h2,.medal,.month-trophy,.month-award,.month-heading,.calendar-grid,.selected-day')]
-          .filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.bottom>bounds.top&&r.top<bounds.bottom;}).slice(0,12);
+          .filter(el=>{const r=el.getBoundingClientRect();return !(bridge && el.classList.contains('home-board')) && r.width>0&&r.bottom>bounds.top&&r.top<bounds.bottom;}).slice(0,12);
         items.forEach((el,i)=>owned.push(animate(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],220,undefined,Math.min(64,i*18))));
+      } else {
+        for(const el of document.querySelectorAll('#game-header,#game-footer'))owned.push(animate(el,[{opacity:0,transform:'translateY(4px)'},{opacity:1,transform:'translateY(0)'}],220));
       }
-      let done=false, endAnimation: (()=>void)|undefined;
-      const finish=():void=>{ if(done)return; done=true; snapshot?.remove(); routeBusy=false; routeFinish=undefined; for(const end of owned)end(); endAnimation?.(); const work=[...deferredRoutes]; deferredRoutes.clear(); for(const fn of work)fn(); };
-      routeFinish=finish;
-      endAnimation=animate(target,[{opacity:.3},{opacity:1}],to==='game'?220:300,finish);
+      if(bridge){
+        const b=bridge;
+        owned.push(animate(b.layer,[{clipPath:b.clipFrom,strokeWidth:`${b.inkFrom}px`},{clipPath:b.clipTo,strokeWidth:`${b.inkTo}px`}],240));
+        owned.push(animate(b.group,[{transform:b.from},{transform:b.to}],240,()=>{moved=true;complete();}));
+      } else {
+        const target=entering?game:root;
+        owned.push(animate(target,[{opacity:0},{opacity:1}],entering?220:300,()=>{moved=true;complete();}));
+      }
     },
     open(dialog: HTMLDialogElement): void {
       dialogs.get(dialog)?.cancel(); dialogs.delete(dialog);
