@@ -185,3 +185,7 @@ The APK-v2 X.509 certificate of 0.16.0 differs from archived 0.15.0 (and 0.14.0 
 ## 2026-11-12 — actual phone readability and feedback
 
 User feedback authorizes 0.17.0 presentation/native fixes in `PHONE_FEEDBACK.md`. Preserve bank geometry, all embedded attempts, progression/ads/reward authority and kit pin. Correct actual Capacitor JSON counter parsing before treating absent vibration as device tuning; physical acceptance remains open. Replicate observed V06 full nav locks and level captions without changing unlock boundaries. The new `.playtest` app explicitly isolates fresh test progress from the differently signed installed app; never prescribe uninstalling real progress. This bounded debug delivery does not complete release signing.
+
+## 2026-11-12 — casual face and tighter presentation
+
+The user explicitly requests a more casual-game font and slightly thicker/closer arrows. Version 0.17.1 ships Nunito locally with its OFL and uses stronger text hierarchy; font failure must not block startup or play. Correct the prior camera side effect: compact spacing22→20 while shared ink rises independently, with a dense .58-cell cap. The large Home preview and frozen content/input/save/reward/ad authority remain. See `TYPOGRAPHY_DENSITY.md`. Continue the same signed `.playtest` package, subject to exact artifact/certificate evidence; no player uninstall or fabricated install/update claim.

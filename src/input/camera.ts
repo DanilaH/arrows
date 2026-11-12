@@ -22,8 +22,8 @@ export class BoardCamera {
     const oldCenter = this.world({ x: this.view.x + this.view.width / 2, y: this.view.y + this.view.height / 2 });
     const oldRelative = this.scale / this.minScale;
     this.view = view;
-    // Compact puzzles get a readable 22px grid; larger fields still fit the viewport.
-    const cellLimit = this.width <= 13 && this.height <= 13 ? 22 : 30;
+    // Compact puzzles get a tighter 20px grid; larger fields still fit the viewport.
+    const cellLimit = this.width <= 13 && this.height <= 13 ? 20 : 30;
     this.minScale = Math.min(cellLimit, (view.width - 40) / (this.width + 1), (view.height - 40) / (this.height + 1));
     this.maxScale = Math.max(42, this.minScale * 4);
     this.scale = Math.min(this.maxScale, this.minScale * (reset ? 1 : oldRelative));

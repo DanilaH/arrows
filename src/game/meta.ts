@@ -76,14 +76,14 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     const cleared = a.board.removed.length === a.level.arrows.length, final = cleared && save.index === campaign.length - 1;
     const nextIndex = cleared && !final ? save.index + 1 : save.index, preview = cleared && !final ? campaign[nextIndex]! : a.level;
     const paths = preview.arrows.filter(v => cleared && !final || !a.board.removed.includes(v.id)).map(v => {
-      const h=v.path.at(-1)!, before=v.path.at(-2)!, dx=Math.sign(h.x-before.x), dy=Math.sign(h.y-before.y), size=.35;
+      const h=v.path.at(-1)!, before=v.path.at(-2)!, dx=Math.sign(h.x-before.x), dy=Math.sign(h.y-before.y), size=.4;
       return `<polyline points="${v.path.map(p=>`${p.x},${p.y}`).join(' ')}"/><path d="M${h.x-dx*size-dy*size/2} ${h.y-dy*size+dx*size/2}L${h.x} ${h.y}L${h.x-dx*size+dy*size/2} ${h.y-dy*size-dx*size/2}"/>`;
     }).join('');
     // Fit the original occupied bounds, never the shrinking set of remaining arrows.
     const points=preview.arrows.flatMap(arrow=>arrow.path), xs=points.map(p=>p.x), ys=points.map(p=>p.y);
     const left=Math.min(...xs)-.65, top=Math.min(...ys)-.65, width=Math.max(...xs)-left+.65, height=Math.max(...ys)-top+.65;
     const viewBox=`${left} ${top} ${width} ${height}`;
-    const previewStroke=Math.max(1.6,Math.min(2.8,3.2-Math.max(width,height)*.035));
+    const previewStroke=Math.max(1.85,Math.min(3.7,4.1-Math.max(width,height)*.04));
     const difficulty=final || preview.difficulty === 'normal' ? '' : preview.difficulty === 'hard' ? 'Hard' : 'Nightmare';
     return `<div class="home-layout"><header class="home-heading"><h1 id="menu-title" tabindex="-1">${text.title}</h1>${stats.current ? `<span class="streak-chip">${text.streakShort} ${stats.current}</span>` : ''}</header>
       <section class="home-current"><div class="campaign-heading"><h2>${final ? text.chapterComplete : `${text.level} ${nextIndex+1}`}</h2><span class="home-difficulty" ${difficulty ? '' : 'hidden'}>${difficulty}</span></div>
