@@ -1,0 +1,342 @@
+{
+  "version": "0.17.3",
+  "versionCode": 27,
+  "sourceCommit": "9449c421acb263cefd16bef57077c87d414c753b",
+  "baselineCommit": "d62b8fbc8c2496a9ede6076eaaa0dfe8e2cada27",
+  "workflowRun": 43249213456,
+  "workflowUrl": "https://github.com/DanilaH/arrows/actions/runs/43249213456",
+  "verification": {
+    "localTS": 98,
+    "localFocusedBrowser": 12,
+    "localFeelRegressionBrowser": 44,
+    "fullBrowser": 190,
+    "nativeSuites": [
+      {
+        "name": "com.danilah.arrows.FeedbackCounterTest",
+        "tests": "2",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0",
+        "timestamp": "2026-11-12T15:35:55.382Z",
+        "hostname": "runnervm7aw5e",
+        "time": "0.019"
+      },
+      {
+        "name": "com.danilah.arrows.RewardJournalCoreTest",
+        "tests": "5",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0",
+        "timestamp": "2026-11-12T15:35:55.409Z",
+        "hostname": "runnervm7aw5e",
+        "time": "0.02"
+      },
+      {
+        "name": "com.danilah.arrows.FeedbackPatternTest",
+        "tests": "2",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0",
+        "timestamp": "2026-11-12T15:35:55.404Z",
+        "hostname": "runnervm7aw5e",
+        "time": "0.001"
+      }
+    ],
+    "ciConclusion": "success",
+    "workflowAttempt": 1,
+    "webJob": 131290100784,
+    "androidJob": 131290100744
+  },
+  "apk": {
+    "artifactId": 13957348498,
+    "archiveSha256": "8ec4f39f0ec39aef63ed418fdec6c4b7178548aae802c785deb74fbe30703c21",
+    "package": "com.danilah.arrows.playtest",
+    "versionName": "0.17.3",
+    "versionCode": "27",
+    "label": "Стрелки · Тест",
+    "bytes": 10366211,
+    "sha256": "c6b5831db568de7857738551dfc7a8b87bb33abe7f6687cc0ca88f5e6f37b6e5",
+    "v2Certificates": [
+      "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36"
+    ],
+    "nativeConfig": {
+      "AD_MODE": "test",
+      "ANALYTICS_API_KEY": "",
+      "APPLICATION_ID": "com.danilah.arrows.playtest",
+      "INTERSTITIAL_AD_UNIT_ID": "demo-interstitial-yandex",
+      "REWARDED_AD_UNIT_ID": "demo-rewarded-yandex"
+    },
+    "payload": {
+      "assets/index-Cmo3mmMR.js": "88448bbf4b03be77808e5e341be4ab40f9e4a60ece10b954577bfef78a974699",
+      "assets/index-DEUcyRqc.css": "7805d47cf5c70e8b8b01204bd23b837d256b36323fb8abf81a8b62ec3e13a59e",
+      "assets/web-CgWNcaeh.js": "58e4aed7305b7b7b49c0ae285389f311ca9d1a461cc4ba8b3300245c45d9c044",
+      "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+      "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+      "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+      "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+      "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+      "index.html": "71f73fe332a94b4a729898f89ca836b53e4c5f149c35aa4a096906be7acab0cc",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "capacitorAdapters": {
+      "cordova.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cordova_plugins.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "capturePayloadMatches": true
+  },
+  "nativeUnitArtifact": {
+    "id": 13959315240,
+    "archiveSha256": "9d1ca5ab6dc8852f379abca26349220d967cb7f8324cc46e96f406a44dbc6d5e"
+  },
+  "capture": {
+    "sourceCommit": "9449c421acb263cefd16bef57077c87d414c753b",
+    "provenance": "Unmodified production Chromium mobile emulation, RU,390x844 DPR1. Fresh storage; nineteen genuine campaign wins earned through ordinary touch selected by an independent cell-walking oracle. Hard c06 and Nightmare c20 Home/HUD labels, three completed empty-space touches per clip with real finite circle/halo and unchanged board, actual Home return. No injected progression, rewards or SDK transport. Companion MP4 tees timestamp-aligned actual AudioContext output, no added/replaced sound. Browser does not prove physical haptic/audible feel or phone performance.",
+    "assets": {
+      "assets/index-Cmo3mmMR.js": "88448bbf4b03be77808e5e341be4ab40f9e4a60ece10b954577bfef78a974699",
+      "assets/index-DEUcyRqc.css": "7805d47cf5c70e8b8b01204bd23b837d256b36323fb8abf81a8b62ec3e13a59e",
+      "assets/web-CgWNcaeh.js": "58e4aed7305b7b7b49c0ae285389f311ca9d1a461cc4ba8b3300245c45d9c044",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+      "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+      "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+      "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207"
+    },
+    "records": [
+      {
+        "name": "arrows-empty-tap-hard",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 99,
+        "durationMs": 5517,
+        "audio": "Actual AudioContext output tee into MediaStreamAudioDestinationNode and MediaRecorder Opus; timestamp-aligned and muxed AAC, no added/replaced sound."
+      },
+      {
+        "name": "arrows-empty-tap-nightmare",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 93,
+        "durationMs": 5968,
+        "audio": null
+      }
+    ],
+    "ending": {
+      "wins": [
+        {
+          "attempt": "8de03031-8d65-4218-869c-83a4b4de594b",
+          "levelId": "c01",
+          "completedAt": 1794497666598,
+          "localDate": "2026-11-12",
+          "activeMs": 929,
+          "mistakes": 0
+        },
+        {
+          "attempt": "90da2d30-2b42-4b80-a926-5e6005f9d12d",
+          "levelId": "c02",
+          "completedAt": 1794497669615,
+          "localDate": "2026-11-12",
+          "activeMs": 1017,
+          "mistakes": 0
+        },
+        {
+          "attempt": "c7cd7f2e-0860-4dc4-89fb-74aff7509e54",
+          "levelId": "c03",
+          "completedAt": 1794497672597,
+          "localDate": "2026-11-12",
+          "activeMs": 1011,
+          "mistakes": 0
+        },
+        {
+          "attempt": "3505f3ce-4de6-49b3-b464-044c774ed6bf",
+          "levelId": "c04",
+          "completedAt": 1794497675750,
+          "localDate": "2026-11-12",
+          "activeMs": 1127,
+          "mistakes": 0
+        },
+        {
+          "attempt": "edc9599d-229f-4d0c-a251-644da6fe1dc0",
+          "levelId": "c05",
+          "completedAt": 1794497679517,
+          "localDate": "2026-11-12",
+          "activeMs": 1794,
+          "mistakes": 0
+        },
+        {
+          "attempt": "ba88ca6c-718f-4132-bee0-c791fc2de93d",
+          "levelId": "c06",
+          "completedAt": 1794497692844,
+          "localDate": "2026-11-12",
+          "activeMs": 5604,
+          "mistakes": 0
+        },
+        {
+          "attempt": "84b15b34-653e-44be-919b-1a8aa0749ebd",
+          "levelId": "c07",
+          "completedAt": 1794497695550,
+          "localDate": "2026-11-12",
+          "activeMs": 1392,
+          "mistakes": 0
+        },
+        {
+          "attempt": "dcf62dd2-1891-478f-a473-3f1d704d8efe",
+          "levelId": "c08",
+          "completedAt": 1794497699299,
+          "localDate": "2026-11-12",
+          "activeMs": 1779,
+          "mistakes": 0
+        },
+        {
+          "attempt": "ab8687ee-18ee-4924-be42-1b31e00f7b50",
+          "levelId": "c09",
+          "completedAt": 1794497701772,
+          "localDate": "2026-11-12",
+          "activeMs": 1317,
+          "mistakes": 0
+        },
+        {
+          "attempt": "feeba60e-1a0f-479b-b5b2-67c9d0079e10",
+          "levelId": "c10",
+          "completedAt": 1794497705854,
+          "localDate": "2026-11-12",
+          "activeMs": 2103,
+          "mistakes": 0
+        },
+        {
+          "attempt": "685f6ca6-e82c-432c-bfa7-ce536b221eb0",
+          "levelId": "c11",
+          "completedAt": 1794497709050,
+          "localDate": "2026-11-12",
+          "activeMs": 1905,
+          "mistakes": 0
+        },
+        {
+          "attempt": "affb254a-1f62-4229-84ba-19bc9c79c91e",
+          "levelId": "c12",
+          "completedAt": 1794497714808,
+          "localDate": "2026-11-12",
+          "activeMs": 4478,
+          "mistakes": 0
+        },
+        {
+          "attempt": "f9633fe4-5a14-41ec-8e21-2b42d07787e2",
+          "levelId": "c13",
+          "completedAt": 1794497719669,
+          "localDate": "2026-11-12",
+          "activeMs": 2847,
+          "mistakes": 0
+        },
+        {
+          "attempt": "339d5902-88b9-4517-9c8e-3ebb794e0e52",
+          "levelId": "c14",
+          "completedAt": 1794497723553,
+          "localDate": "2026-11-12",
+          "activeMs": 2455,
+          "mistakes": 0
+        },
+        {
+          "attempt": "4ead9387-47d2-4d11-9763-125fd2277143",
+          "levelId": "c15",
+          "completedAt": 1794497726746,
+          "localDate": "2026-11-12",
+          "activeMs": 1874,
+          "mistakes": 0
+        },
+        {
+          "attempt": "61205879-5d37-44c1-872c-35a047849d74",
+          "levelId": "c16",
+          "completedAt": 1794497730027,
+          "localDate": "2026-11-12",
+          "activeMs": 2304,
+          "mistakes": 0
+        },
+        {
+          "attempt": "f70166f6-b8a1-49dc-a5ba-26765fae3881",
+          "levelId": "c17",
+          "completedAt": 1794497733577,
+          "localDate": "2026-11-12",
+          "activeMs": 2274,
+          "mistakes": 0
+        },
+        {
+          "attempt": "17588bc7-a676-4d9b-aa08-74364b7a3ffd",
+          "levelId": "c18",
+          "completedAt": 1794497740333,
+          "localDate": "2026-11-12",
+          "activeMs": 5404,
+          "mistakes": 0
+        },
+        {
+          "attempt": "93ee35e7-545f-417f-8178-fd6b7eea9bfd",
+          "levelId": "c19",
+          "completedAt": 1794497744082,
+          "localDate": "2026-11-12",
+          "activeMs": 2301,
+          "mistakes": 0
+        }
+      ],
+      "index": 19,
+      "campaign": {
+        "levelId": "c20",
+        "contentVersion": 4,
+        "geometrySha256": "12071000c8e6eb54fddd07eb96ef752ee630b07fe512dd13cf3f00daab64616a",
+        "board": {
+          "id": "02c2b91d-3d3f-45ee-b20a-4082093b1e6a",
+          "levelId": "c20",
+          "contentVersion": 4,
+          "removed": [],
+          "errors": [],
+          "lives": 3
+        },
+        "started": false,
+        "view": {
+          "centerX": 23,
+          "centerY": 27,
+          "zoom": 1
+        }
+      },
+      "cups": [],
+      "dailyWins": {},
+      "receipts": []
+    }
+  },
+  "media": [
+    {
+      "name": "arrows-0.17.3-hard.gif",
+      "bytes": 208452,
+      "sha256": "3b6cceb59b2e1e8bdde1af0734f100edb87ce4bccfa17108929280a010b792a5"
+    },
+    {
+      "name": "arrows-0.17.3-nightmare.gif",
+      "bytes": 272231,
+      "sha256": "d713b342a3adacd3febed93ccb3f4c6b913b3318cd10f3f4bf61bac5e1295874"
+    },
+    {
+      "name": "arrows-0.17.3-sound.mp4",
+      "bytes": 133178,
+      "sha256": "fb654b7890d57353aee47c801158df1e13b72ef37038a21a3299be220b138ece"
+    }
+  ],
+  "compatibility": {
+    "unchanged": "src/content, src/domain, src/progression and src/platform match baseline exactly; published bank, generator/date mapping, schema2, rewards/ads/cues/native bridge remain unchanged. Only version metadata changes natively; existing Hint/ad sampling code is untouched.",
+    "update": "Same .playtest applicationId and actual V2 certificate as 0.17.0/0.17.1/0.17.2; higher code27 supports an update. No physical install/update performed."
+  },
+  "research": {
+    "guidance": "e2382670fbd5c2aa76462fea688c60de2b067392",
+    "runtimePin": "a9325265e87583a4872cf6a158e1e881a0d7508e",
+    "select": [
+      "PUZZLE_PRODUCTION bounded finite feedback",
+      "accessibility color plus text and input/reduced-motion constraints"
+    ],
+    "reference": "Owner-described circle/halo/sound/haptic requirement. Original videos NOT INSPECTED again; original source timing/sound/physical haptics UNKNOWN. Historical source analysis did not establish recorded touch circles as game-owned. This explicit owner request authorizes the feature without claiming exact reference parity.",
+    "kitImpact": "NONE; game-specific presentation using the existing feedback bridge, checked actual pinned audio/OneShotPlayer contract. No new general API/kit upgrade/extraction."
+  },
+  "limits": [
+    "Browser scheduling/frames do not establish physical vibration, subjective sound/pleasantness, real phone performance or native installation/update.",
+    "Internal test fixtures for colors/background are QA only; delivery GIFs use nineteen genuine touch-earned wins with no injected progression/reward/SDK transport."
+  ]
+}
