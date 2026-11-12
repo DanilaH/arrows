@@ -53,7 +53,7 @@ describe('CSS/world camera coordinates', () => {
   });
   it('keeps small fields compact without shrinking the large-board fit policy', () => {
     const camera = new BoardCamera(6, 6); camera.layout({ x: 0, y: 100, width: 390, height: 600 }, true);
-    expect(camera.screen({ x: 5, y: 5 }).x - camera.screen({ x: 0, y: 0 }).x).toBe(100);
+    expect(camera.screen({ x: 5, y: 5 }).x - camera.screen({ x: 0, y: 0 }).x).toBe(95);
     const center = camera.world({ x: 195, y: 400 }); camera.zoom({ x: 195, y: 400 }, { x: 195, y: 400 }, 2);
     expect(camera.screen(center)).toEqual({ x: 195, y: 400 });
     const large = new BoardCamera(47, 55); large.layout({ x: 0, y: 100, width: 390, height: 600 }, true);

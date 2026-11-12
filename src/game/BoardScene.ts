@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { roundedRoute, roundedTip } from './arrowArt';
 import { arrowContact, bumpTiming, sampleBump, type ArrowContact, type BumpTiming } from './bumpMotion';
 import { boardPalettes } from '../app/theme';
 import type { GameTheme } from '../app/settings';
@@ -202,20 +203,29 @@ export class BoardScene extends Phaser.Scene {
   }
   private stroke(layer: Phaser.GameObjects.Graphics, path: readonly Point[], color: number, width: number, arrowhead: boolean, alpha = 1): void {
     if (path.length < 2) return;
-    layer.lineStyle(width, color, alpha).beginPath().moveTo(path[0]!.x, path[0]!.y);
-    for (let i = 1; i < path.length; i++) layer.lineTo(path[i]!.x, path[i]!.y);
-    layer.strokePath().fillStyle(color, alpha);
-    for (let i = 0; i < path.length - 1; i++) layer.fillCircle(path[i]!.x, path[i]!.y, width / 2);
-    if (!arrowhead) return;
-    const head = path.at(-1)!, previous = path.at(-2)!;
-    const dx = Math.sign(head.x - previous.x), dy = Math.sign(head.y - previous.y);
-    const size = Math.min(.66, Math.max(.38, width * 2.1));
-    layer.fillTriangle(head.x + dx * size * .12, head.y + dy * size * .12,
-      head.x - dx * size - dy * size * .58, head.y - dy * size + dx * size * .58,
-      head.x - dx * size + dy * size * .58, head.y - dy * size - dx * size * .58);
+    const ink=Math.min(.68,width), size=Math.min(.74,Math.max(.48,ink*2.15));
+    const route=roundedRoute(path,arrowhead?size*.82:0);
+    if (route.length>1) {
+      // A filled tube avoids WebGL miter spikes on short, thick curve segments.
+      layer.fillStyle(color,alpha);
+      for (let i=1;i<route.length;i++) {
+        const a=route[i-1]!,b=route[i]!,length=Math.hypot(b.x-a.x,b.y-a.y);
+        if (length<1e-9) continue;
+        const nx=-(b.y-a.y)*ink/(2*length),ny=(b.x-a.x)*ink/(2*length);
+        layer.fillTriangle(a.x+nx,a.y+ny,a.x-nx,a.y-ny,b.x+nx,b.y+ny);
+        layer.fillTriangle(b.x+nx,b.y+ny,a.x-nx,a.y-ny,b.x-nx,b.y-ny);
+      }
+      for (const point of route) layer.fillEllipse(point.x,point.y,ink,ink,16);
+    }
+    if (arrowhead) {
+      const tip=roundedTip(path,size);
+      layer.fillStyle(color,alpha).beginPath().moveTo(tip[0]!.x,tip[0]!.y);
+      for (let i=1;i<tip.length;i++) layer.lineTo(tip[i]!.x,tip[i]!.y);
+      layer.closePath().fillPath();
+    }
   }
-  // Keep a visible gap on dense fit-to-screen boards; all motion uses the same weight.
-  private get arrowWidth(): number { return Math.min(.58, Math.max(.18, 3.6 / this.boardCamera.scale)); }
+  // One ink weight for static, moving, blocked and hinted arrows; keep a dense-board gap.
+  private get arrowWidth(): number { return Math.min(.64, Math.max(.24, 4.6 / this.boardCamera.scale)); }
   private drawStable(): void {
     this.stableDirty = false; this.stable.clear(); this.guidesLayer.clear();
     const stroke = this.arrowWidth;

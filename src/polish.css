@@ -254,3 +254,5 @@ button:active { transform: scale(.97); }
 .meta-content h2, .medal h3, .record-grid strong, .month-trophy strong, .selected-day h3 { font-weight: 750; }
 .nav-label, #difficulty, .setting-toggle strong { font-weight: 700; }
 .settings-section h3 { font-weight: 650; }
+
+.home-board .preview-tip { fill: var(--ink); stroke: none; }

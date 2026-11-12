@@ -189,3 +189,7 @@ User feedback authorizes 0.17.0 presentation/native fixes in `PHONE_FEEDBACK.md`
 ## 2026-11-12 — casual face and tighter presentation
 
 The user explicitly requests a more casual-game font and slightly thicker/closer arrows. Version 0.17.1 ships Nunito locally with its OFL and uses stronger text hierarchy; font failure must not block startup or play. Correct the prior camera side effect: compact spacing22→20 while shared ink rises independently, with a dense .58-cell cap. The large Home preview and frozen content/input/save/reward/ad authority remain. See `TYPOGRAPHY_DENSITY.md`. Continue the same signed `.playtest` package, subject to exact artifact/certificate evidence; no player uninstall or fabricated install/update claim.
+
+## 2026-11-12 — rounded triangles, bends and heavier ink
+
+The user explicitly requests rounded triangular heads, mildly rounded bends and more ink/density. Version0.17.2 uses shared display-only fillets/markers in Home and game; the open Home chevron is replaced by the filled marker. Keep all canonical paths, picking/contact/arc-distance authority and saved geometry frozen. A bounded filled tube avoids observed WebGL miter artifacts; partial shaft clipping stays behind the head. Compact spacing20→19; shared ink4.6 CSS px with dense/assistance caps. No font/audio/haptic, content, progression, ad or kit change. See `ROUNDED_ARROWS.md`; require matching playtest certificate and genuine current-build GIFs, including real pinch rather than injected camera state.
