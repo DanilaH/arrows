@@ -39,3 +39,11 @@ Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the
 - 0.17.1 supersedes the compact spacing/ink of 0.17.0: preserve `docs/TYPOGRAPHY_DENSITY.md`, bundled Nunito/OFL with no font CDN/readiness gate, shared static/animated stroke with a dense gap cap and 20px compact spacing. Keep every level/save/rule/ad identity and the same `.playtest` update package/signing path. Attach genuine current-build GIFs; seeded late-field images remain internal QA.
 
 - 0.17.2 supersedes the arrow artwork/compact spacing in0.17.1: preserve `docs/ROUNDED_ARROWS.md`, shared display-only fillets and filled rounded triangles, clipped shafts and artifact-free lightweight filled tube (outer wedges/two cached caps; no per-curve-sample ellipse), unchanged Hint/ad clocks, bounded dense/assistance ink and19px compact spacing. Canonical orthogonal paths/contact/picking/saves/ads stay unchanged. Use the same signed `.playtest` update path and attach genuine current-build GIFs with ordinary zoom.
+
+## mini-games-kit: task-routed research and kit feedback
+
+Existing Arrows product/technical rules above remain authoritative. Before substantial work, open docs/kit-guidance/TASK_ROUTER.md; choose 1–2 relevant methodologies instead of applying every framework. For an original-game video/GIF/screenshot or a parity/feel request, first follow docs/kit-guidance/REFERENCE_PROTOCOL.md and separate OBSERVED/INFERRED/NOT INSPECTED.
+
+Research guidance snapshot: e2382670fbd5c2aa76462fea688c60de2b067392. The installed runtime mini-games-kit dependency remains separately pinned; **do not upgrade it or assume new exports exist**. For code reuse inspect the actual installed-runtime API and current docs/API.md before inventing helpers.
+
+At the end of substantial implementation report KIT IMPACT: NONE / REUSE / IMPROVE / CANDIDATE / EXTRACTED with a reproducer and concrete upstream proposal when relevant (docs/kit-guidance/KIT_FEEDBACK_LOOP.md). No automatic game-rules, art, monetization or public store changes.
