@@ -1,0 +1,459 @@
+{
+  "version": "0.18.0",
+  "versionCode": 28,
+  "sourceCommit": "98f960c48936cee6e317bbaa00910ad3b50886e1",
+  "baselineCommit": "7b6d5d8f4b03406bdd88b4030f2758fe2839f7f8",
+  "workflowRun": 43295549495,
+  "workflowUrl": "https://github.com/DanilaH/arrows/actions/runs/43295549495",
+  "verification": {
+    "localTS": 98,
+    "localEntryBrowser": 12,
+    "localEntryDailyVictoryBrowser": {
+      "passed": 36,
+      "stage": "Earlier UI candidate; final 12-case entry suite and full final CI independently check the subsequent corrections."
+    },
+    "earlierBroaderBatch": {
+      "recordedPassed": 68,
+      "note": "No completed process result retained for the70-case batch; do not count it as a completed full pass. Final CI independently covers the full suite."
+    },
+    "fullBrowser": 202,
+    "nativeSuites": [
+      {
+        "name": "com.danilah.arrows.FeedbackCounterTest",
+        "tests": "2",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0",
+        "timestamp": "2026-11-12T20:00:01.215Z",
+        "hostname": "runnervm8axu0",
+        "time": "0.019"
+      },
+      {
+        "name": "com.danilah.arrows.RewardJournalCoreTest",
+        "tests": "5",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0",
+        "timestamp": "2026-11-12T20:00:01.239Z",
+        "hostname": "runnervm8axu0",
+        "time": "0.016"
+      },
+      {
+        "name": "com.danilah.arrows.FeedbackPatternTest",
+        "tests": "2",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0",
+        "timestamp": "2026-11-12T20:00:01.236Z",
+        "hostname": "runnervm8axu0",
+        "time": "0.001"
+      }
+    ],
+    "workflowConclusion": "success",
+    "workflowAttempt": 1,
+    "jobs": {
+      "web": {
+        "id": 131452775344,
+        "conclusion": "success"
+      },
+      "android": {
+        "id": 131452776218,
+        "conclusion": "success"
+      }
+    }
+  },
+  "apk": {
+    "artifactId": 13978993540,
+    "archiveSha256": "18127415f73f1c6319b6f9a3067099252b9792cff5a915da0a06a34e87321eab",
+    "package": "com.danilah.arrows.playtest",
+    "versionName": "0.18.0",
+    "versionCode": "28",
+    "label": "Стрелки · Тест",
+    "bytes": 10368739,
+    "sha256": "fce9136281d7c8cd38ec36e5071901522c07eb2eeec547098d79a680707178a9",
+    "v2Certificates": [
+      "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36"
+    ],
+    "nativeConfig": {
+      "AD_MODE": "test",
+      "ANALYTICS_API_KEY": "",
+      "APPLICATION_ID": "com.danilah.arrows.playtest",
+      "INTERSTITIAL_AD_UNIT_ID": "demo-interstitial-yandex",
+      "REWARDED_AD_UNIT_ID": "demo-rewarded-yandex"
+    },
+    "payload": {
+      "assets/index-CFfaU0-Z.css": "37d046857788e7bacd0dd253f6859f967c8d36704590ae52176c26a7f714be8e",
+      "assets/index-CmoiVfU1.js": "382cd58be2391fed8022a6a908e7a71cf3908ef6bb515e94522f1cf00fa783bb",
+      "assets/web-i3Q4gdOY.js": "1a9e59d5c28dd3777c338c6a32c57f6398f42bb3b0ae0523657a4346ad7ce713",
+      "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+      "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+      "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+      "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+      "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+      "index.html": "dc7f54ee1e75dd1f0b409c65ddc2cee05262cc0294faea8e6d53b39b08b48fc3",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "capacitorAdapters": {
+      "cordova.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cordova_plugins.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "capturePayloadMatches": true
+  },
+  "nativeUnitArtifact": {
+    "id": 13980115155,
+    "archiveSha256": "8ea2a0ce1967494362ab180ebd9074e8c79e8dd8910e4b9e9279fc4491fc42bc"
+  },
+  "reference": {
+    "readOn": "2026-11-13",
+    "V06": {
+      "sha256": "c32f1f98a37753eba07901e337948e5fb2673c747020bfa6a328602bec954dff",
+      "bytes": 74608971,
+      "seconds": [
+        55.5,
+        56.5,
+        57,
+        57.5,
+        58,
+        58.2,
+        58.4,
+        58.6,
+        58.8,
+        59.2,
+        83,
+        84,
+        86,
+        88
+      ]
+    },
+    "V19": {
+      "sha256": "b959d7f03577ea0ff89e4133a4ecc6cb43b2d04b2de62ab6263d294b02de90d5",
+      "bytes": 167173741,
+      "seconds": [
+        46,
+        48,
+        50,
+        52
+      ]
+    },
+    "observed": "Original empty Home/Continue entry and principal Hard/Nightmare labels above hearts. Our active-preview continuity and amber/coral palette are intentional owner-authorized design, not exact source parity. No original subjective audio/haptic assessment."
+  },
+  "capture": {
+    "sourceCommit": "98f960c48936cee6e317bbaa00910ad3b50886e1",
+    "provenance": "Unmodified production Chromium mobile emulation, RU,390x844 DPR1. Fresh storage; unopened c01 hidden until actual Play, one genuine removal, Home selection/continuation; nineteen genuine wins earned by ordinary touch chosen by an independent cell-walking oracle. Hard c06 dominant heading and same-field Home/game transitions around one genuine removal and empty tap; Nightmare c20 heading and continuation after an actual two-finger zoom with exact restored camera. No injected progression/rewards/camera/SDK transport. Companion MP4 tees actual AudioContext output. Browser recordings do not establish physical-phone performance/feel.",
+    "assets": {
+      "assets/index-CFfaU0-Z.css": "37d046857788e7bacd0dd253f6859f967c8d36704590ae52176c26a7f714be8e",
+      "assets/index-CmoiVfU1.js": "382cd58be2391fed8022a6a908e7a71cf3908ef6bb515e94522f1cf00fa783bb",
+      "assets/web-i3Q4gdOY.js": "1a9e59d5c28dd3777c338c6a32c57f6398f42bb3b0ae0523657a4346ad7ce713",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+      "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+      "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+      "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207"
+    },
+    "records": [
+      {
+        "name": "arrows-first-selection",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 101,
+        "durationMs": 5596,
+        "audio": null
+      },
+      {
+        "name": "arrows-seamless-hard",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 112,
+        "durationMs": 6126,
+        "audio": "Actual AudioContext output tee into MediaStreamAudioDestinationNode and MediaRecorder Opus; timestamp-aligned and muxed AAC, no added/replaced sound."
+      },
+      {
+        "name": "arrows-seamless-nightmare",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 95,
+        "durationMs": 5319,
+        "audio": null
+      }
+    ],
+    "ending": {
+      "wins": [
+        {
+          "attempt": "77c4f2d7-6e2b-4c78-bc89-739d5c1f3877",
+          "levelId": "c01",
+          "completedAt": 1794513517511,
+          "localDate": "2026-11-12",
+          "activeMs": 4526,
+          "mistakes": 0
+        },
+        {
+          "attempt": "77f56078-dcc6-49c5-9913-c62dc0384ed2",
+          "levelId": "c02",
+          "completedAt": 1794513520281,
+          "localDate": "2026-11-12",
+          "activeMs": 864,
+          "mistakes": 0
+        },
+        {
+          "attempt": "51ea69c7-8ab1-4498-a1d0-a330070b159b",
+          "levelId": "c03",
+          "completedAt": 1794513523094,
+          "localDate": "2026-11-12",
+          "activeMs": 897,
+          "mistakes": 0
+        },
+        {
+          "attempt": "c892cc57-c6ad-4742-a135-d78f6a4b7fd6",
+          "levelId": "c04",
+          "completedAt": 1794513525894,
+          "localDate": "2026-11-12",
+          "activeMs": 896,
+          "mistakes": 0
+        },
+        {
+          "attempt": "2981261f-4c6a-4c4d-88fe-637a39c4bbac",
+          "levelId": "c05",
+          "completedAt": 1794513528862,
+          "localDate": "2026-11-12",
+          "activeMs": 1067,
+          "mistakes": 0
+        },
+        {
+          "attempt": "827e35fc-8b6f-4bff-a04c-04872d4e6708",
+          "levelId": "c06",
+          "completedAt": 1794513541296,
+          "localDate": "2026-11-12",
+          "activeMs": 6983,
+          "mistakes": 0
+        },
+        {
+          "attempt": "2cd54074-8ff4-43bd-ae67-c432c21414e8",
+          "levelId": "c07",
+          "completedAt": 1794513544160,
+          "localDate": "2026-11-12",
+          "activeMs": 941,
+          "mistakes": 0
+        },
+        {
+          "attempt": "c820f9fe-e19a-42c0-ab2a-029387d33a47",
+          "levelId": "c08",
+          "completedAt": 1794513547044,
+          "localDate": "2026-11-12",
+          "activeMs": 982,
+          "mistakes": 0
+        },
+        {
+          "attempt": "f3c5286c-9dd5-449d-8c33-ca7789c012fa",
+          "levelId": "c09",
+          "completedAt": 1794513549900,
+          "localDate": "2026-11-12",
+          "activeMs": 953,
+          "mistakes": 0
+        },
+        {
+          "attempt": "4b5c01e8-d3ba-4c76-8963-2b270dd408f7",
+          "levelId": "c10",
+          "completedAt": 1794513553077,
+          "localDate": "2026-11-12",
+          "activeMs": 1231,
+          "mistakes": 0
+        },
+        {
+          "attempt": "8cdefa80-7226-461c-8700-22358533ef19",
+          "levelId": "c11",
+          "completedAt": 1794513555028,
+          "localDate": "2026-11-12",
+          "activeMs": 1046,
+          "mistakes": 0
+        },
+        {
+          "attempt": "d56fcaaf-e37e-4604-a248-e32ffc323063",
+          "levelId": "c12",
+          "completedAt": 1794513559210,
+          "localDate": "2026-11-12",
+          "activeMs": 2263,
+          "mistakes": 0
+        },
+        {
+          "attempt": "55731293-9d30-4bb0-bf6a-0e193d368dc7",
+          "levelId": "c13",
+          "completedAt": 1794513562332,
+          "localDate": "2026-11-12",
+          "activeMs": 1212,
+          "mistakes": 0
+        },
+        {
+          "attempt": "68ca43de-9254-4e85-9c80-d8236ff22ded",
+          "levelId": "c14",
+          "completedAt": 1794513565675,
+          "localDate": "2026-11-12",
+          "activeMs": 1431,
+          "mistakes": 0
+        },
+        {
+          "attempt": "fbeb1b7d-9a8f-4831-a762-5ada30adc213",
+          "levelId": "c15",
+          "completedAt": 1794513568627,
+          "localDate": "2026-11-12",
+          "activeMs": 1048,
+          "mistakes": 0
+        },
+        {
+          "attempt": "ce59c2c2-5fff-417e-ada0-a5f0395cbbca",
+          "levelId": "c16",
+          "completedAt": 1794513571644,
+          "localDate": "2026-11-12",
+          "activeMs": 1113,
+          "mistakes": 0
+        },
+        {
+          "attempt": "cf2db6e5-05e7-401e-977f-a57873a12a8e",
+          "levelId": "c17",
+          "completedAt": 1794513574630,
+          "localDate": "2026-11-12",
+          "activeMs": 1084,
+          "mistakes": 0
+        },
+        {
+          "attempt": "bb135be6-17f9-4576-8b23-2e90bf761990",
+          "levelId": "c18",
+          "completedAt": 1794513578329,
+          "localDate": "2026-11-12",
+          "activeMs": 1783,
+          "mistakes": 0
+        },
+        {
+          "attempt": "feeac5e9-9682-4782-ab70-41f9d964ded1",
+          "levelId": "c19",
+          "completedAt": 1794513580361,
+          "localDate": "2026-11-12",
+          "activeMs": 1113,
+          "mistakes": 0
+        }
+      ],
+      "index": 19,
+      "board": {
+        "id": "2ab94db1-f7d3-4b5c-a5bc-d08d025fd1ff",
+        "levelId": "c20",
+        "contentVersion": 4,
+        "removed": [],
+        "errors": [],
+        "lives": 3
+      },
+      "view": {
+        "centerX": 23,
+        "centerY": 27.106597402597398,
+        "zoom": 1.6666666666666667
+      },
+      "cups": [],
+      "dailyWins": {},
+      "receipts": []
+    }
+  },
+  "media": [
+    {
+      "name": "arrows-0.18.0-first-selection.gif",
+      "bytes": 183408,
+      "sha256": "fc420298ab33f3b7f3a0f7d3149dc16901e063926d308df8191471a9a768b223"
+    },
+    {
+      "name": "arrows-0.18.0-hard.gif",
+      "bytes": 418472,
+      "sha256": "f30493f4f53f15af90e65d329dd7489f00fb80c7bf73702fa9c3fa5d0219a48f"
+    },
+    {
+      "name": "arrows-0.18.0-nightmare.gif",
+      "bytes": 717680,
+      "sha256": "ea9b1cb4ba7e5fc6887e970639ba3c60a3292e2c5e72464f5bf308b80c38d371"
+    },
+    {
+      "name": "arrows-0.18.0-sound.mp4",
+      "bytes": 194005,
+      "sha256": "4c6d59dd35007ae750d157e8969c4be7005d1157ea79d0079f01fca5cbcda3a9"
+    }
+  ],
+  "compatibility": {
+    "unchanged": "src/content,domain,progression,platform match baseline exactly; schema2, bank/generator/date identity, move/contact/receipt/ads authority and runtime pin retained. Existing sample() and interval/Hints/ad time code compare exactly.",
+    "presentation": "This-session opening or existing saved view/started state selects Home geometry; no new saved selection field. c120 result is preserved. A saved hint does not refocus the continued camera; newly applied hint behavior is unchanged.",
+    "update": "Same .playtest appId/V2 certificate as preceding builds; higher code28, actual compiled demo ads/empty analytics key; physical install/update not claimed."
+  },
+  "firstVisualCandidate": {
+    "sourceCommit": "784ce932136c10dab0a25c90cebed214e98b1fa7",
+    "workflowRun": 43294546685,
+    "flaw": "Actual first capture exposed snapshot reappearing after its160ms fill-both fade cancelled and before the longer bridge ended. Final source removes the snapshot at its own fade completion; regression observes node disconnection at the actual completed-fade event."
+  },
+  "renderingDiagnostic": {
+    "method": "One headless Chromium instance, three sequential fresh contexts; exact0.17.3 APK web baseline versus current production and isolated optional-context QA source. Same seeded c20/saved view320x568, DPR2.625 (renderer cap2), CPU4x via CDP. Wait for actual Hint and flush actual active time. One sample per variant; software diagnostic, not statistical/physical-phone performance evidence.",
+    "rows": [
+      {
+        "name": "baseline-0.17.3",
+        "viewport": "320x568",
+        "dpr": 2.625,
+        "cpuRate": 4,
+        "clickMs": 391,
+        "hintMs": 3709,
+        "scriptMs": 1592.8369999999998,
+        "taskMs": 2339.8610000000003,
+        "adActiveMs": 3662
+      },
+      {
+        "name": "current-production",
+        "viewport": "320x568",
+        "dpr": 2.625,
+        "cpuRate": 4,
+        "clickMs": 262,
+        "hintMs": 3867,
+        "scriptMs": 445.58199999999994,
+        "taskMs": 1284.634,
+        "adActiveMs": 3301
+      },
+      {
+        "name": "current-isolated-context",
+        "viewport": "320x568",
+        "dpr": 2.625,
+        "cpuRate": 4,
+        "clickMs": 273,
+        "hintMs": 4015,
+        "scriptMs": 461.8199999999999,
+        "taskMs": 1314.7250000000001,
+        "adActiveMs": 3391
+      }
+    ],
+    "baselineApkSha256": "c6b5831db568de7857738551dfc7a8b87bb33abe7f6687cc0ca88f5e6f37b6e5"
+  },
+  "research": {
+    "guidance": "e2382670fbd5c2aa76462fea688c60de2b067392",
+    "runtimePin": "a9325265e87583a4872cf6a158e1e881a0d7508e",
+    "select": [
+      "REFERENCE_PROTOCOL actual decoded sequences vs inference",
+      "PUZZLE_PRODUCTION bounded coherent feedback and authority"
+    ],
+    "hold": [
+      "exact original feel/audio/haptics",
+      "physical phone frame pacing"
+    ],
+    "reject": [
+      "new director/metagame/framework",
+      "content/rule/ad changes"
+    ],
+    "kitImpact": "NONE; checked pinned API, existing activity/viewport/audio retained. Local artwork bridge/snapshot lifetime fix; no new common API or other consumer changes."
+  },
+  "limits": [
+    "Browser/CI scheduling/captures do not prove physical haptics, subjective sound/feel, phone frame pacing, native installation or release/store acceptance.",
+    "Internal seeded color/zoom/SDK-boundary fixtures are QA only; delivery recordings use fresh normal touch and nineteen genuine wins with actual pinch."
+  ],
+  "delivery": {
+    "apk": "https://chatgpt.com/library?file_id=libfile_53a8a91458cc81918acb88cb2a5da7d6&account_id=personal",
+    "firstSelectionGif": "https://chatgpt.com/library?file_id=libfile_d3c30c40edc48191b05b92acc1286f3d&account_id=personal",
+    "hardGif": "https://chatgpt.com/library?file_id=libfile_91ddf05d8d608191b05d1ad82d1eaa9f&account_id=personal",
+    "nightmareGif": "https://chatgpt.com/library?file_id=libfile_d79c74480f3c8191a3df22447aef126c&account_id=personal",
+    "soundMp4": "https://chatgpt.com/library?file_id=libfile_acc9e838fe808191bbac5d07da6c2bd8&account_id=personal"
+  }
+}
