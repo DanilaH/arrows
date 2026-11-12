@@ -16,8 +16,9 @@ function corners(points: readonly Point[], radius: number, closed: boolean): Poi
     const enter={x:at.x+(before.x-at.x)*cut/incoming,y:at.y+(before.y-at.y)*cut/incoming};
     const leave={x:at.x+(after.x-at.x)*cut/outgoing,y:at.y+(after.y-at.y)*cut/outgoing};
     result.push(enter);
-    for (let step=1;step<=6;step++) {
-      const t=step/6,u=1-t;
+    const steps=closed?6:4;
+    for (let step=1;step<=steps;step++) {
+      const t=step/steps,u=1-t;
       result.push({x:u*u*enter.x+2*u*t*at.x+t*t*leave.x,y:u*u*enter.y+2*u*t*at.y+t*t*leave.y});
     }
   }

@@ -10,6 +10,8 @@ Body bends trim at most .24 cells (and at most half either adjacent segment). Ca
 
 Phaser's mitered polyline renderer produced visible spikes/holes on very short thick curve segments during visual QA. BoardScene instead fills the stroke tube with segment quads and small round joins; this matches the SVG's rounded contour. No masks/render textures/extra scenes or looping animation. Route fillets are weakly cached; no canonical data is mutated. Static, flight, contact/return and assistance rendering share this drawing path.
 
+The first candidate passed178 browser cases but missed the original4.5s Hint deadline in two isolated large-field QA cases under CI load. A dedicated c20/320px diagnostic at CPU4x found roughly2x script cost versus0.17.1. Remove per-sample ellipse construction/earcut: body fillets use four samples, shared outer join wedges, and only two cached12-point cap fans. Triangular fillets retain six samples. Final diagnostic script cost is about40% below the first candidate, with the actual Hint visible within3.7s including route handoff at CPU4x. Original clocks/ad policy and QA deadlines are unchanged; this is a software diagnostic, not phone performance evidence. Build26 replaces the provisional build25 with the same visible version0.17.2 and a higher Android update code.
+
 ## Further density
 
 Compact spacing20→19px. Base shaft becomes min(.64,max(.24,4.6/scale)) cells; final assistance widths cap at .68 cells, so dense highlighting retains a gap. Heads are .48–.74 cells with visibly rounded corners. Home stays large and increases adaptive ink weight; it still fits all original occupied bounds rather than shrinking remaining geometry.
@@ -22,4 +24,4 @@ Local strict check:96 TS cases, including independent geometry coverage for unch
 
 Internal QA renders c03/c06/c20/c60/c120 at390×844 and320×568/root125%. Seeded late views remain internal. Delivery uses `node tools/capture-rounded-arrows-gifs.mjs`: unmodified production browser, fresh storage, three genuinely touch-earned wins, c03 Home, real two-finger zoom to show the shape, one actual blocked contact/return and c03 finish. Companion MP4 records the unchanged actual AudioContext output; no replacement sound/progress/reward/SDK transport.
 
-APK remains **com.danilah.arrows.playtest / Стрелки · Тест**, version0.17.2/code25. Match its actual certificate to0.17.1 before recommending an update; never uninstall player progress. Production signing and physical install/update/feel/performance remain separate acceptance.
+APK remains **com.danilah.arrows.playtest / Стрелки · Тест**, version0.17.2/code26. Match its actual certificate to0.17.1 before recommending an update; never uninstall player progress. Production signing and physical install/update/feel/performance remain separate acceptance.

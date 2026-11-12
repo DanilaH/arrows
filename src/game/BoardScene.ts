@@ -11,6 +11,7 @@ import { BoardCamera, type Rect } from '../input/camera';
 import type { ViewState } from '../progression/save';
 
 const VICTORY_MS = 2300;
+const ROUND_JOIN = Array.from({length:12},(_,i)=>({x:Math.cos(i*Math.PI/6),y:Math.sin(i*Math.PI/6)}));
 
 export const GAME_PRESENTABLE_EVENT = 'arrows:scene-authored';
 
@@ -24,6 +25,8 @@ export interface SceneOptions { ready(scene: BoardScene): void; dirty(): void; m
 
 /** Stable geometry is rebuilt on state/camera changes; only active flights/dots animate. */
 export class BoardScene extends Phaser.Scene {
+  private joinInk = -1;
+  private joinFan: readonly Point[] = [];
   public board = new Board(campaign[0]!, crypto.randomUUID());
   public boardCamera = new BoardCamera(this.board.level.width, this.board.level.height);
   public guides = false;
@@ -208,14 +211,26 @@ export class BoardScene extends Phaser.Scene {
     if (route.length>1) {
       // A filled tube avoids WebGL miter spikes on short, thick curve segments.
       layer.fillStyle(color,alpha);
+      let lastNx=0,lastNy=0,lastDx=0,lastDy=0,haveSegment=false;
       for (let i=1;i<route.length;i++) {
-        const a=route[i-1]!,b=route[i]!,length=Math.hypot(b.x-a.x,b.y-a.y);
+        const a=route[i-1]!,b=route[i]!,dx=b.x-a.x,dy=b.y-a.y,length=Math.hypot(dx,dy);
         if (length<1e-9) continue;
-        const nx=-(b.y-a.y)*ink/(2*length),ny=(b.x-a.x)*ink/(2*length);
+        const nx=-dy*ink/(2*length),ny=dx*ink/(2*length);
         layer.fillTriangle(a.x+nx,a.y+ny,a.x-nx,a.y-ny,b.x+nx,b.y+ny);
         layer.fillTriangle(b.x+nx,b.y+ny,a.x-nx,a.y-ny,b.x-nx,b.y-ny);
+        const cross=lastDx*dy-lastDy*dx;
+        if (haveSegment&&Math.abs(cross)>1e-12) {
+          const side=cross>0?-1:1;
+          layer.fillTriangle(a.x,a.y,a.x+side*lastNx,a.y+side*lastNy,a.x+side*nx,a.y+side*ny);
+        }
+        lastNx=nx;lastNy=ny;lastDx=dx;lastDy=dy;haveSegment=true;
       }
-      for (const point of route) layer.fillEllipse(point.x,point.y,ink,ink,16);
+      // Only the two exposed caps need a fan. Curved joins use bounded outer wedges.
+      if (this.joinInk!==ink) { this.joinInk=ink;this.joinFan=ROUND_JOIN.map(p=>({x:p.x*ink/2,y:p.y*ink/2})); }
+      for (const point of [route[0]!,route.at(-1)!]) for (let i=0;i<this.joinFan.length;i++) {
+        const a=this.joinFan[i]!,b=this.joinFan[(i+1)%this.joinFan.length]!;
+        layer.fillTriangle(point.x,point.y,point.x+a.x,point.y+a.y,point.x+b.x,point.y+b.y);
+      }
     }
     if (arrowhead) {
       const tip=roundedTip(path,size);
