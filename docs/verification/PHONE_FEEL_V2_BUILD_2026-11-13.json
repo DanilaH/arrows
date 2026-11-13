@@ -1,0 +1,749 @@
+{
+  "version": "0.19.0",
+  "versionCode": 30,
+  "baselineCommit": "0a25e24490737a0facd898bd745ab4c086286dbf",
+  "applicationSource": "fcd0fe36a2cd8eb75a308402c9d3ecbfd23ac8c1",
+  "verificationCommit": "f88a3732b53a21ede0420fb1d67d528258267c42",
+  "verificationWorkflow": 43390000317,
+  "verificationWorkflowUrl": "https://github.com/DanilaH/arrows/actions/runs/43390000317",
+  "artifactWorkflow": 43389355731,
+  "artifactWorkflowUrl": "https://github.com/DanilaH/arrows/actions/runs/43389355731",
+  "verification": {
+    "localTS": 102,
+    "localPreEntryResumeBrowser": 78,
+    "localFinalEntryAndSeamlessBrowser": 24,
+    "localFinal30PhoneFeedbackBrowser": 14,
+    "localPolicyRegressionBrowser": 22,
+    "localFullBrowser": 216,
+    "ciFullBrowser": 216,
+    "note": "Local groups overlap and represent explicitly stated candidates; do not add them together. Final full suite independently covers current application and corrected historical assertions.",
+    "nativeSuites": [
+      {
+        "name": "com.danilah.arrows.FeedbackPatternTest",
+        "tests": "2",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "com.danilah.arrows.FeedbackCounterTest",
+        "tests": "2",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "com.danilah.arrows.RewardJournalCoreTest",
+        "tests": "5",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      }
+    ],
+    "finalLocalScope": "Full suite on test-only followup f88a373, exactly matching the application captured and packaged at fcd0fe3.",
+    "ciConclusion": "success",
+    "workflowAttempt": 1,
+    "ciTS": 102,
+    "jobs": {
+      "web": {
+        "id": 131767354675,
+        "conclusion": "success"
+      },
+      "android": {
+        "id": 131767354964,
+        "conclusion": "success"
+      }
+    },
+    "localNativeSync": true,
+    "exitCodes": {
+      "localFullBrowser": 0,
+      "localNativeSyncAndApkComparison": 0,
+      "finalCapture": 0,
+      "profilePair": 0,
+      "deliverySave": 0
+    }
+  },
+  "apk": {
+    "artifactId": 14019299104,
+    "archiveSha256": "994d8ca8ebdd738ede2ed122ef47b7cd71b1837d71525ea172f8e29584d6dc77",
+    "bytes": 10371619,
+    "sha256": "6eb48a3550ccbcbce36b328f04ff44deff30c9a299695df0042e3f1d701b2c22",
+    "package": "com.danilah.arrows.playtest",
+    "versionName": "0.19.0",
+    "versionCode": "30",
+    "label": "Стрелки · Тест",
+    "v2Certificates": [
+      "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36"
+    ],
+    "nativeConfig": {
+      "AD_MODE": "test",
+      "ANALYTICS_API_KEY": "",
+      "APPLICATION_ID": "com.danilah.arrows.playtest",
+      "INTERSTITIAL_AD_UNIT_ID": "demo-interstitial-yandex",
+      "REWARDED_AD_UNIT_ID": "demo-rewarded-yandex"
+    },
+    "payload": {
+      "assets/index-BvLULHNN.css": "3fe25e33b95103c9defcb37fa2042d8c0dfcc8add4b3bc9707b1bdbfc80bff0b",
+      "assets/index-LM5fahCw.js": "c96f62c46c69794233253e11a591e93cf8f9d8f88c1322ceb5597051fc7533d5",
+      "assets/web-BzN44XVq.js": "cf995e8d7cf70045ff95cccd37323eef4dcb9585efa88a18b4ae7bf3570a3168",
+      "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+      "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+      "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+      "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+      "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+      "index.html": "060e7bd9b1d4968df68ba444e0dd9fa5ee053d648c069958d505021c66a239c8",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "capacitorAdapters": {
+      "cordova.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cordova_plugins.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "capturePayloadMatches": true
+  },
+  "nativeUnitArtifact": {
+    "id": 14020127194,
+    "archiveSha256": "81e8f0cba583ea3828c28cdec2645095a658a2bbaf0f7ab82cab185ec2130977"
+  },
+  "capture": {
+    "sourceCommit": "fcd0fe36a2cd8eb75a308402c9d3ecbfd23ac8c1",
+    "provenance": "Unmodified production Chromium mobile emulation RU390x844 DPR1. Fresh storage; nineteen wins earned through ordinary touches chosen by independent cell-walking oracle. One intentional c03 mistake followed by automatic marked-arrow release. Real c05 guide/hold/cancel/Settings presses; actual two-finger zoom before the perfect Hard c06 final move; real c10/c20 section arrivals and actual big-field pinch. No injected progress/camera/rewards/SDK transport. Companion MP4s tee actual AudioContext output, GIFs are silent. Browser evidence, not physical-device performance/subjective feel.",
+    "assets": {
+      "assets/index-BvLULHNN.css": "3fe25e33b95103c9defcb37fa2042d8c0dfcc8add4b3bc9707b1bdbfc80bff0b",
+      "assets/index-LM5fahCw.js": "c96f62c46c69794233253e11a591e93cf8f9d8f88c1322ceb5597051fc7533d5",
+      "assets/web-BzN44XVq.js": "cf995e8d7cf70045ff95cccd37323eef4dcb9585efa88a18b4ae7bf3570a3168",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+      "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+      "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+      "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207"
+    },
+    "records": [
+      {
+        "name": "arrows-auto-release",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 67,
+        "durationMs": 3643,
+        "audio": "Actual AudioContext output tee into MediaStreamAudioDestinationNode and MediaRecorder Opus; timestamp-aligned and muxed AAC, no added/replaced sound."
+      },
+      {
+        "name": "arrows-hint-guides-buttons",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 135,
+        "durationMs": 7401,
+        "audio": null
+      },
+      {
+        "name": "arrows-perfect-framing",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 114,
+        "durationMs": 6239,
+        "audio": "Actual AudioContext output tee into MediaStreamAudioDestinationNode and MediaRecorder Opus; timestamp-aligned and muxed AAC, no added/replaced sound."
+      },
+      {
+        "name": "arrows-collection-arrival",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 91,
+        "durationMs": 4960,
+        "audio": null
+      },
+      {
+        "name": "arrows-daily-arrival",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 74,
+        "durationMs": 4032,
+        "audio": null
+      },
+      {
+        "name": "arrows-large-field",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "frames": 84,
+        "durationMs": 4834,
+        "audio": null
+      }
+    ],
+    "ending": {
+      "wins": [
+        {
+          "attempt": "0cff135d-5575-45a0-87ad-88ac186e3e1b",
+          "levelId": "c01",
+          "completedAt": 1794556596732,
+          "localDate": "2026-11-13",
+          "activeMs": 783,
+          "mistakes": 0
+        },
+        {
+          "attempt": "8da61119-5bf9-4b2d-b6e3-72f1246c34f1",
+          "levelId": "c02",
+          "completedAt": 1794556599465,
+          "localDate": "2026-11-13",
+          "activeMs": 808,
+          "mistakes": 0
+        },
+        {
+          "attempt": "ff75900c-0a27-432d-9278-4267fc42b87b",
+          "levelId": "c03",
+          "completedAt": 1794556606848,
+          "localDate": "2026-11-13",
+          "activeMs": 5476,
+          "mistakes": 1
+        },
+        {
+          "attempt": "912d2970-89bc-43e5-9858-3a4efebe4f0a",
+          "levelId": "c04",
+          "completedAt": 1794556609565,
+          "localDate": "2026-11-13",
+          "activeMs": 812,
+          "mistakes": 0
+        },
+        {
+          "attempt": "c33fa5b6-eb8a-457c-8385-bb25ba0ee0bd",
+          "levelId": "c05",
+          "completedAt": 1794556620948,
+          "localDate": "2026-11-13",
+          "activeMs": 9053,
+          "mistakes": 0
+        },
+        {
+          "attempt": "521be1cf-d2cd-429b-ad13-5a2b5c5680a3",
+          "levelId": "c06",
+          "completedAt": 1794556626597,
+          "localDate": "2026-11-13",
+          "activeMs": 3743,
+          "mistakes": 0
+        },
+        {
+          "attempt": "e64e8a24-1b18-4c7a-9a36-c45d7542c7fe",
+          "levelId": "c07",
+          "completedAt": 1794556632997,
+          "localDate": "2026-11-13",
+          "activeMs": 679,
+          "mistakes": 0
+        },
+        {
+          "attempt": "a952acad-83cc-4c4c-8b7e-4d57ffe1a778",
+          "levelId": "c08",
+          "completedAt": 1794556635830,
+          "localDate": "2026-11-13",
+          "activeMs": 929,
+          "mistakes": 0
+        },
+        {
+          "attempt": "207a4408-e828-4f14-b9aa-2a93b3e541b1",
+          "levelId": "c09",
+          "completedAt": 1794556638613,
+          "localDate": "2026-11-13",
+          "activeMs": 879,
+          "mistakes": 0
+        },
+        {
+          "attempt": "ddce99a6-f8ee-4e1f-8210-669d98eb50fb",
+          "levelId": "c10",
+          "completedAt": 1794556646765,
+          "localDate": "2026-11-13",
+          "activeMs": 4594,
+          "mistakes": 0
+        },
+        {
+          "attempt": "f59442a3-ddb3-44b5-963d-20b03dfa2926",
+          "levelId": "c11",
+          "completedAt": 1794556649696,
+          "localDate": "2026-11-13",
+          "activeMs": 1031,
+          "mistakes": 0
+        },
+        {
+          "attempt": "64c4885c-f5fc-41c6-99ba-872fe293ad50",
+          "levelId": "c12",
+          "completedAt": 1794556654081,
+          "localDate": "2026-11-13",
+          "activeMs": 2467,
+          "mistakes": 0
+        },
+        {
+          "attempt": "c0131c3e-0bbc-4f7d-8afa-5a53bcc00d51",
+          "levelId": "c13",
+          "completedAt": 1794556657381,
+          "localDate": "2026-11-13",
+          "activeMs": 1381,
+          "mistakes": 0
+        },
+        {
+          "attempt": "edc4d0fc-f965-44f5-bc73-3917585727e7",
+          "levelId": "c14",
+          "completedAt": 1794556660414,
+          "localDate": "2026-11-13",
+          "activeMs": 1131,
+          "mistakes": 0
+        },
+        {
+          "attempt": "d67caae0-233f-48e8-b05c-02272fc2833c",
+          "levelId": "c15",
+          "completedAt": 1794556663298,
+          "localDate": "2026-11-13",
+          "activeMs": 966,
+          "mistakes": 0
+        },
+        {
+          "attempt": "9da7ebd9-83a3-4645-84fc-99a03a4b38b6",
+          "levelId": "c16",
+          "completedAt": 1794556666574,
+          "localDate": "2026-11-13",
+          "activeMs": 1358,
+          "mistakes": 0
+        },
+        {
+          "attempt": "45077292-ff6f-4cc5-9cec-9385c0f83228",
+          "levelId": "c17",
+          "completedAt": 1794556669564,
+          "localDate": "2026-11-13",
+          "activeMs": 1065,
+          "mistakes": 0
+        },
+        {
+          "attempt": "86ffc2b0-07cd-4378-9225-b80f32ca966b",
+          "levelId": "c18",
+          "completedAt": 1794556674200,
+          "localDate": "2026-11-13",
+          "activeMs": 2736,
+          "mistakes": 0
+        },
+        {
+          "attempt": "12a06386-ada9-4229-bdb9-0c6cff5365fb",
+          "levelId": "c19",
+          "completedAt": 1794556677313,
+          "localDate": "2026-11-13",
+          "activeMs": 1193,
+          "mistakes": 0
+        }
+      ],
+      "index": 19,
+      "board": {
+        "id": "e1723d5c-a7af-43bc-9cd8-1585141ade06",
+        "levelId": "c20",
+        "contentVersion": 4,
+        "removed": [],
+        "errors": [],
+        "lives": 3
+      },
+      "view": {
+        "centerX": 23.000000000000007,
+        "centerY": 27,
+        "zoom": 1.1520007188585693
+      },
+      "freeContinueUsed": false,
+      "seenUnlocks": [
+        "collection",
+        "calendar"
+      ],
+      "receipts": []
+    }
+  },
+  "delivery": [
+    {
+      "name": "arrows-playtest-0.19.0.apk",
+      "bytes": 10371619,
+      "sha256": "6eb48a3550ccbcbce36b328f04ff44deff30c9a299695df0042e3f1d701b2c22",
+      "libraryFileId": "libfile_8a81b1af8bf48191a9effc995b880923",
+      "url": "https://chatgpt.com/library?file_id=libfile_8a81b1af8bf48191a9effc995b880923&account_id=personal"
+    },
+    {
+      "name": "arrows-0.19.0-auto-release.gif",
+      "bytes": 86858,
+      "sha256": "57654b6108a04abe4d133ccf1ebe94cda1d8a568dc5d1535f0ec65340e187f7a",
+      "libraryFileId": "libfile_0a95bc490d948191949edd8fd315716d",
+      "url": "https://chatgpt.com/library?file_id=libfile_0a95bc490d948191949edd8fd315716d&account_id=personal"
+    },
+    {
+      "name": "arrows-0.19.0-perfect-finish.gif",
+      "bytes": 289421,
+      "sha256": "ea11fd37c96877935ad1841205bd567a5736149678a40154e2b86183781ab8b1",
+      "libraryFileId": "libfile_ff182a199c588191b40be319bf89bf46",
+      "url": "https://chatgpt.com/library?file_id=libfile_ff182a199c588191b40be319bf89bf46&account_id=personal"
+    },
+    {
+      "name": "arrows-0.19.0-hint-guides-buttons.gif",
+      "bytes": 220149,
+      "sha256": "b1cb91126ef45db8dac915760dfa7a7fd0ff17489677d7365cf17995de2f10b3",
+      "libraryFileId": "libfile_10a0f631b40c8191b19a40621bcd48ce",
+      "url": "https://chatgpt.com/library?file_id=libfile_10a0f631b40c8191b19a40621bcd48ce&account_id=personal"
+    },
+    {
+      "name": "arrows-0.19.0-collection-unlock.gif",
+      "bytes": 304034,
+      "sha256": "0fa8f4f33ecdd1f168f2b44222e6019241c0b2da32a493c3bed5daf52ea8eb18",
+      "libraryFileId": "libfile_12060270bda4819192119c0567b600c0",
+      "url": "https://chatgpt.com/library?file_id=libfile_12060270bda4819192119c0567b600c0&account_id=personal"
+    },
+    {
+      "name": "arrows-0.19.0-daily-unlock.gif",
+      "bytes": 202926,
+      "sha256": "722a7e2046c1a8a860fb16115f84f0fe3f44435d12095569fdea5a8cbce8e079",
+      "libraryFileId": "libfile_c31fd1c046208191bb6ad04838a0a696",
+      "url": "https://chatgpt.com/library?file_id=libfile_c31fd1c046208191bb6ad04838a0a696&account_id=personal"
+    },
+    {
+      "name": "arrows-0.19.0-large-field.gif",
+      "bytes": 923164,
+      "sha256": "b85a80aee8b051f20b62c14b680e5633d25904d4390112f0e3b1003a51127632",
+      "libraryFileId": "libfile_73e0d13d050c819193d20f7bfdfea4fd",
+      "url": "https://chatgpt.com/library?file_id=libfile_73e0d13d050c819193d20f7bfdfea4fd&account_id=personal"
+    },
+    {
+      "name": "arrows-0.19.0-sound.mp4",
+      "bytes": 303096,
+      "sha256": "75d170d28c2307f93b2a2a4cc9e2de345d3987b73e14bd53df52989273d9be72",
+      "libraryFileId": "libfile_76a55d08f36c81919b90912d215f8c77",
+      "url": "https://chatgpt.com/library?file_id=libfile_76a55d08f36c81919b90912d215f8c77&account_id=personal"
+    }
+  ],
+  "reference": {
+    "ownerScreenshot": "image(20261113-065228).png",
+    "sha256": "3a0b228b9439b08c24e32567cc4912fdf3e6116056a8a4cec91421b4edda3a24",
+    "observed": "Actual Level 3, remaining red outer arrow, two lives, low-emphasis outlined Hint. The preceding gesture/performance/audio is the owner report, not derivable from the static image. New auto-release and lifetime gift are explicit owner changes; no fresh original-video/audio parity claim."
+  },
+  "compatibility": {
+    "contentFrozen": true,
+    "receiptSdkAndAdCadenceFrozen": true,
+    "nativeHapticProfilesFrozen": true,
+    "runtimePin": "a9325265e87583a4872cf6a158e1e881a0d7508e",
+    "schema": 2,
+    "newField": "freeContinueUsed",
+    "historicalAttempts": "Exact embedded paths/IDs/removed/error/life history remains valid; decode uses recorded legal order without replaying current auto-release. Explicit game entry may durably resume queued unblocked error arrows after actual-frame handoff.",
+    "legacyGiftPolicy": "Infer spent from current/daily continuations or >=3-error win. Retired Restart history lost refill details, so ambiguous legacy restarts conservatively count as spent. This is policy, not reconstructed proof.",
+    "giftGrant": "One durable serialized transaction spans campaign/daily/Restart/Next/reload; rewarded receipt identities and per-attempt continuation/life invariants retained.",
+    "artifactAndCaptureVsTestFollowup": "Actual git diff confirms no src/native/package/lock change between application source and verification commit; followup changes only three stale browser assertions and adds an independent integer-cell release oracle. All 11 core web/font/license files and 2 empty native adapters match the actual delivered APK."
+  },
+  "performance": {
+    "source": "fcd0fe36a2cd8eb75a308402c9d3ecbfd23ac8c1",
+    "method": "Sequential baseline and final production builds, each with fresh c20/c120 contexts; headless Chromium390x844,DPR2, CDP CPU4x, same actual pinch and held gesture. Fixed final candidate follows real-pixel/visual screening. One paired final sample per field; prior repeats are diagnostic only.",
+    "rows": [
+      {
+        "label": "baseline-final30",
+        "index": 19,
+        "arrows": 136,
+        "dots": 1719,
+        "samples": 28,
+        "p50": 66.59999999999854,
+        "p95": 100,
+        "scriptMs": 3591.506,
+        "taskMs": 5821.380999999999,
+        "top": [
+          [
+            "(program)",
+            2499404
+          ],
+          [
+            "e.exports",
+            1310498
+          ],
+          [
+            "(garbage collector)",
+            589188
+          ],
+          [
+            "(idle)",
+            556208
+          ],
+          [
+            "run",
+            417167
+          ],
+          [
+            "batch",
+            330162
+          ],
+          [
+            "fillTriangle",
+            233073
+          ],
+          [
+            "stroke",
+            92816
+          ],
+          [
+            "renderWebGLStep",
+            64064
+          ],
+          [
+            "De",
+            62245
+          ],
+          [
+            "elementFromPoint",
+            60352
+          ],
+          [
+            "bufferSubData",
+            56059
+          ]
+        ]
+      },
+      {
+        "label": "baseline-final30",
+        "index": 119,
+        "arrows": 97,
+        "dots": 1145,
+        "samples": 34,
+        "p50": 49.899999999999636,
+        "p95": 116.67600000000039,
+        "scriptMs": 2712.5249999999996,
+        "taskMs": 4748.659,
+        "top": [
+          [
+            "(program)",
+            2270418
+          ],
+          [
+            "e.exports",
+            973593
+          ],
+          [
+            "(idle)",
+            714578
+          ],
+          [
+            "(garbage collector)",
+            395286
+          ],
+          [
+            "run",
+            296064
+          ],
+          [
+            "batch",
+            220890
+          ],
+          [
+            "fillTriangle",
+            159620
+          ],
+          [
+            "stroke",
+            79452
+          ],
+          [
+            "renderWebGLStep",
+            75049
+          ],
+          [
+            "elementFromPoint",
+            52115
+          ],
+          [
+            "addPoint",
+            47928
+          ],
+          [
+            "s",
+            38187
+          ]
+        ]
+      },
+      {
+        "label": "final30",
+        "index": 19,
+        "arrows": 136,
+        "dots": 1719,
+        "samples": 32,
+        "p50": 50,
+        "p95": 100,
+        "scriptMs": 1569.5459999999998,
+        "taskMs": 4779.659000000001,
+        "top": [
+          [
+            "(program)",
+            3528117
+          ],
+          [
+            "fillTriangle",
+            558395
+          ],
+          [
+            "(idle)",
+            553195
+          ],
+          [
+            "stroke",
+            176317
+          ],
+          [
+            "(garbage collector)",
+            142223
+          ],
+          [
+            "batchTriangles",
+            119356
+          ],
+          [
+            "elementFromPoint",
+            64770
+          ],
+          [
+            "Oe",
+            53270
+          ],
+          [
+            "drawStable",
+            42844
+          ],
+          [
+            "run",
+            38527
+          ],
+          [
+            "(anonymous)",
+            30605
+          ],
+          [
+            "e.exports",
+            29935
+          ]
+        ]
+      },
+      {
+        "label": "final30",
+        "index": 119,
+        "arrows": 97,
+        "dots": 1145,
+        "samples": 40,
+        "p50": 33.30000000000018,
+        "p95": 83.30000000000018,
+        "scriptMs": 1287.9759999999999,
+        "taskMs": 3979.871,
+        "top": [
+          [
+            "(program)",
+            2968876
+          ],
+          [
+            "(idle)",
+            767901
+          ],
+          [
+            "fillTriangle",
+            399829
+          ],
+          [
+            "stroke",
+            153322
+          ],
+          [
+            "(garbage collector)",
+            95533
+          ],
+          [
+            "batchTriangles",
+            75635
+          ],
+          [
+            "elementFromPoint",
+            63068
+          ],
+          [
+            "Oe",
+            45994
+          ],
+          [
+            "run",
+            34176
+          ],
+          [
+            "update",
+            34060
+          ],
+          [
+            "drawStable",
+            32036
+          ],
+          [
+            "(anonymous)",
+            31776
+          ]
+        ]
+      }
+    ],
+    "resources": {
+      "dotAtlasPixels": [
+        32,
+        16
+      ],
+      "inkAtlasPixels": [
+        80,
+        8
+      ],
+      "totalDecodedRgbaProxyBytes": 4608,
+      "staticMeshes": 1,
+      "notes": "Current-state vertex/index arrays, active Graphics and Canvas fallback retained. RGBA proxy excludes driver/buffer overhead; no physical GPU-memory/FPS/heat/leak claim."
+    },
+    "limits": "ScriptDuration falls in the paired software run; mixed-frame quantiles vary and cannot establish physical-phone smoothness. No claim that all performance problems are resolved."
+  },
+  "provisionalEvidence": {
+    "firstAtlasPrototype": "Own-scale handling made dots invisible; caught by actual screenshot before delivery. Final parent-transform ownership and actual-pixel silhouette regression prevent this.",
+    "firstSource": "564a8a1c521caca3359eccdf6c73e96593592ee7",
+    "firstCode": 29,
+    "firstWorkflow": 43388411230,
+    "firstWebResult": {
+      "passed": 210,
+      "failed": 6,
+      "reason": "Three historical tests in both projects assumed one removal after a blocker tap, contrary to the new requested automatic error release. Corrected exact history/error/lives expectations and added independent cell-walking oracle; application policy unchanged."
+    },
+    "firstArtifactNotDelivered": true,
+    "firstCanvasIssue": "Canvas Blitter mixed atlas coordinates with camera scroll; final code30 preserves original Graphics dot path. Forced-Canvas actual-pixel regression verifies all three newly uncovered corner dots in both themes.",
+    "firstMediaNotDelivered": "All final delivery GIF/MP4 recordings repeat the genuine play session on application source fcd0fe3/code30."
+  },
+  "research": {
+    "guidanceSnapshot": "e2382670fbd5c2aa76462fea688c60de2b067392",
+    "selected": [
+      "PUZZLE_PRODUCTION bounded causal feedback",
+      "PERFORMANCE_PLAYBOOK paired active/idle and resource ownership"
+    ],
+    "hold": [
+      "subjective sound/haptic acceptance",
+      "physical phone frame pacing"
+    ],
+    "reject": [
+      "universal director/new currency/meta",
+      "content/difficulty/SDK/cadence changes"
+    ],
+    "kitImpact": "NONE; exact pinned audio/activity/storage/receipt primitives retained; no new public shared API or kit/other-consumer change."
+  },
+  "limits": [
+    "No physical phone installation/update, listening/haptics, frame pacing, heat, live paid-ad/account service or store-acceptance evidence.",
+    "Silent GIFs show real production browser play; sound MP4 concatenates two actual-output recordings without added/replaced sounds.",
+    "Injected fixtures/CPU4x/software profiler and forced-Canvas cases are isolated QA, not the delivered gameplay recordings."
+  ],
+  "deliveryAudio": {
+    "durationSeconds": 10.01,
+    "composition": "Two actual-output continuous production captures concatenated: c03 collision/auto-release and zoomed flawless Hard c06 finish. No added or replaced audio."
+  },
+  "artifactJobs": {
+    "android": {
+      "id": 131765297696,
+      "conclusion": "success"
+    },
+    "web": {
+      "id": 131765298091,
+      "conclusion": "failure",
+      "reason": "Same six stale historical one-removal expectations; corrected by test-only f88a373 and all216 pass in the final workflow."
+    }
+  }
+}
