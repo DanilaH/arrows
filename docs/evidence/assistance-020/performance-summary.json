@@ -1,0 +1,95 @@
+{
+  "sourceBaseline": "ad4bc416",
+  "sourceCandidate": "0006e7ca (same exercised presentation as35693f1a; writer-only fix after)",
+  "environment": "Chromium headless, software WebGL,390x844 DPR2,4x CPU slowdown, nominal60Hz; two pairs, original untouched c20/c120, exact old APK bundle vs candidate dist. Desktop capture/profiling load varied. No physical phone FPS/acceptance claim.",
+  "rows": [
+    {
+      "label": "assistance-baseline-final-1",
+      "index": 19,
+      "arrows": 136,
+      "dots": 1719,
+      "samples": 16,
+      "p50": 83.29999999999927,
+      "p95": 249.942,
+      "scriptMs": 1824.9119999999998,
+      "taskMs": 6209.718
+    },
+    {
+      "label": "assistance-baseline-final-1",
+      "index": 119,
+      "arrows": 97,
+      "dots": 1145,
+      "samples": 32,
+      "p50": 33.399999999999636,
+      "p95": 83.5,
+      "scriptMs": 1696.473,
+      "taskMs": 4297.438999999999
+    },
+    {
+      "label": "assistance-candidate-final-1",
+      "index": 19,
+      "arrows": 136,
+      "dots": 1719,
+      "samples": 53,
+      "p50": 49.900000000000546,
+      "p95": 83.39999999999964,
+      "scriptMs": 2124.3340000000003,
+      "taskMs": 6075.063999999999
+    },
+    {
+      "label": "assistance-candidate-final-1",
+      "index": 119,
+      "arrows": 97,
+      "dots": 1145,
+      "samples": 60,
+      "p50": 33.400000000000546,
+      "p95": 83.2460000000001,
+      "scriptMs": 1432.5529999999999,
+      "taskMs": 4665.973
+    },
+    {
+      "label": "assistance-baseline-final-2",
+      "index": 19,
+      "arrows": 136,
+      "dots": 1719,
+      "samples": 33,
+      "p50": 33.400000000000546,
+      "p95": 200,
+      "scriptMs": 1851.6570000000002,
+      "taskMs": 4888.923
+    },
+    {
+      "label": "assistance-baseline-final-2",
+      "index": 119,
+      "arrows": 97,
+      "dots": 1145,
+      "samples": 36,
+      "p50": 33.399999999999636,
+      "p95": 133.30000000000018,
+      "scriptMs": 1511.6340000000002,
+      "taskMs": 4738.856
+    },
+    {
+      "label": "assistance-candidate-final-2",
+      "index": 19,
+      "arrows": 136,
+      "dots": 1719,
+      "samples": 53,
+      "p50": 50,
+      "p95": 116.59999999999991,
+      "scriptMs": 1974.064,
+      "taskMs": 5943.323
+    },
+    {
+      "label": "assistance-candidate-final-2",
+      "index": 119,
+      "arrows": 97,
+      "dots": 1145,
+      "samples": 58,
+      "p50": 33.399999999999636,
+      "p95": 83.39999999999986,
+      "scriptMs": 1589.9479999999999,
+      "taskMs": 4808.466
+    }
+  ]
+}

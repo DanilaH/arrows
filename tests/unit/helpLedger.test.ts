@@ -1,7 +1,7 @@
 import {describe,it,expect} from 'vitest';
 import type {StorageAdapter} from '@danilah/mini-games-kit/platform';
 import {campaign} from '../../src/content/campaign';
-import {Board} from '../../src/domain/board';
+import {Board,canExit} from '../../src/domain/board';
 import {ProgressStore,freshSave,freshAttempt,decodeSave,SAVE_KEY} from '../../src/progression/save';
 import type {HelpRequest} from '../../src/progression/helpLedger';
 import type {EarnedReceipt} from '../../src/platform/ads';
@@ -89,6 +89,20 @@ describe('durable immutable assistance rights',()=>{
     failWrite(true);await expect(store.claimHelp(attempt,r.requestId)).rejects.toThrow();expect(store.state.helpLedger.rights[r.requestId]!.status).toBe('reserved');failWrite(false);
     uncertain();await expect(store.claimHelp(attempt,r.requestId)).rejects.toThrow();expect(store.uncertain).toBe(true);repair();await store.recover();expect(store.currentHelp(attempt)!.id).toBe(r.requestId);expect(await store.claimHelp(attempt,r.requestId)).toBeUndefined();
     await store.commitReward(earned(r));expect(store.currentHelp(attempt)!.id).toBe(r.requestId);
+  });
+
+  it('attributes explicit entry release of an old free marked hint to native use, not a paid manual tap',async()=>{
+    const {rows,storage}=await setup(),raw=seed('single-v2'),b=new Board(raw.campaign.level,raw.campaign.board.id,raw.campaign.board);b.activate('c40-22');raw.campaign.board={...b.snapshot(),errors:['c40-23'],lives:2};raw.campaign.hint='c40-23';Reflect.deleteProperty(raw,'helpLedger');rows.set(SAVE_KEY,JSON.stringify(raw));
+    const restored=new ProgressStore(storage);await restored.load();const id=restored.currentHelp(restored.board.attemptId)!.id,result=await restored.releaseReadyErrors(restored.board.attemptId);
+    expect(result?.kind==='removed'&&result.help).toMatchObject({entitlement:id,manual:[],native:['c40-23'],bonus:[]});expect(restored.state.helpLedger.rights[id]!.status).toBe('used');expect(restored.state.helpLedger.rights[id]!.requestId).toBeNull();
+  });
+  it.each(['first_move','repeat_loss','exit_before_move'])('records actual post-continue outcome %s without prematurely retiring the attempt',async(outcome)=>{
+    const {rows,storage}=await setup(),raw=seed('single-v2');raw.campaign.board={...raw.campaign.board,errors:['c40-23','c40-24','c40-27'],lives:0};rows.set(SAVE_KEY,JSON.stringify(raw));const store=new ProgressStore(storage);await store.load();const id=store.board.attemptId,events:string[]=[];store.subscribe(e=>events.push(...(e.continueFacts??[]).map(f=>f.outcome)));
+    const r=(await store.prepareHelpRequest(store.helpOffer(id,'lives')!))!;await store.commitReward(earned(r));expect(store.board.hearts).toBe(3);
+    if(outcome==='first_move')await store.move(id,'c40-22');
+    if(outcome==='repeat_loss'){const errors=new Set(store.board.snapshot().errors),targets=store.board.remaining.filter(a=>!errors.has(a.id)&&!canExit(a,store.board.remaining)).slice(0,3);expect(targets).toHaveLength(3);for(const a of targets)await store.move(id,a.id);}
+    if(outcome==='exit_before_move')await store.recordHelpExit(id);
+    expect(events).toEqual([outcome]);expect(store.findAttempt(id)).not.toBeNull();expect(store.board.complete).toBe(false);expect(store.state.wins).toHaveLength(39);
   });
 
 });

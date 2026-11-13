@@ -33,3 +33,7 @@ Presentation policy: actual sampled opaque RGB/width/head-marker retarget, finit
 Canonical monetary analysis: tools/assistance-revenue.mjs joins custom sdk-ilrd observations by request→assignment, excludes QA, reports unknown/missing joins/dedup and mature7d denominator including nonviewers; currencies remain separate. No dashboard delivery, automatic revenue reconciliation or uplift is claimed. SDK8.6 API remains pinned; no ad-revenue module added because custom scalar events are the chosen export, never summed with automatic SDK totals.
 
 Visual review of the first QA capture caught overly fast exits in the conservative full-viewport scheduler. Before delivery this was narrowed to the actual last corridor intersection plus ink margin; dependent order and700ms budget remain. A new APK/payload is required for this refinement.
+
+## Delivery1 actually issued
+
+0.20.0/code32 from35693f1a was delivered with permanent APK/audio/GIF links before A3 work. See evidence/assistance-020/ACCEPTANCE.md and deliverables.json. Exact APK signature/config/payload passed; native16/16; local check132/132; current focused browser6/6. Latest full CI43461425616 still running at delivery. Physical haptics/performance/actual SDK install and external money remain separate NOT RUN gates. Next task is implement A3 route-v1, then separate A4, then B1; continue autonomously. Also keep common C presentation-event timing and post-continue exit clock bookkeeping exact when touching those seams.
