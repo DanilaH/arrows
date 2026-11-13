@@ -58,7 +58,17 @@ final class RewardJournalCore {
     }
     JSONArray pending() throws Exception { synchronized (memory) { return array(reconcile()); } }
     void record(JSONObject value) throws Exception { synchronized (memory) {
-        merge(memory.unconfirmed, value); // retain before touching a potentially failing disk
+        JSONObject normalized = receipt(value);
+        LinkedHashMap<String, JSONObject> existing;
+        try { existing = read(); }
+        catch (Exception unavailable) {
+            // Genuine callbacks survive unavailable/corrupt storage. A known
+            // conflicting alias, however, must not poison the recovery buffer.
+            merge(memory.unconfirmed, normalized);
+            throw unavailable;
+        }
+        merge(existing, normalized); // validate a known disk identity first
+        merge(memory.unconfirmed, normalized); // retain before a failing write
         reconcile();
     } }
     void acknowledge(String id) throws Exception { synchronized (memory) {
