@@ -1,0 +1,140 @@
+[
+  {
+    "level": "c01",
+    "removed": [],
+    "default": {
+      "root": "c01-0",
+      "native": [],
+      "newlyFree": [
+        "c01-1"
+      ]
+    },
+    "equalUsefulAlternatives": [],
+    "defaultOfferRoot": "c01-0",
+    "cascade": {
+      "root": "c01-0",
+      "bonus": [
+        "c01-1",
+        "c01-2"
+      ],
+      "actual": 0
+    },
+    "route": [
+      "c01-0",
+      "c01-1",
+      "c01-2"
+    ]
+  },
+  {
+    "level": "c20",
+    "removed": [],
+    "default": {
+      "root": "c20-1",
+      "native": [],
+      "newlyFree": [
+        "c20-13"
+      ]
+    },
+    "equalUsefulAlternatives": [
+      "c20-3",
+      "c20-9"
+    ],
+    "defaultOfferRoot": "c20-1",
+    "visibleOfferRoot": "c20-3",
+    "cascade": {
+      "root": "c20-9",
+      "bonus": [
+        "c20-12",
+        "c20-15"
+      ],
+      "actual": 133
+    },
+    "route": [
+      "c20-9",
+      "c20-12",
+      "c20-15"
+    ]
+  },
+  {
+    "level": "c40",
+    "removed": [
+      "c40-0",
+      "c40-1",
+      "c40-2",
+      "c40-3",
+      "c40-4",
+      "c40-5",
+      "c40-6",
+      "c40-7",
+      "c40-8",
+      "c40-9",
+      "c40-10",
+      "c40-11",
+      "c40-12",
+      "c40-13",
+      "c40-14",
+      "c40-15",
+      "c40-16",
+      "c40-17",
+      "c40-18",
+      "c40-19",
+      "c40-20"
+    ],
+    "default": {
+      "root": "c40-22",
+      "native": [],
+      "newlyFree": [
+        "c40-23",
+        "c40-24",
+        "c40-27"
+      ]
+    },
+    "equalUsefulAlternatives": [],
+    "defaultOfferRoot": "c40-22",
+    "cascade": {
+      "root": "c40-22",
+      "bonus": [
+        "c40-23",
+        "c40-24",
+        "c40-27"
+      ],
+      "actual": 15
+    },
+    "route": [
+      "c40-22",
+      "c40-23",
+      "c40-28"
+    ]
+  },
+  {
+    "level": "c120",
+    "removed": [],
+    "default": {
+      "root": "c120-0",
+      "native": [],
+      "newlyFree": [
+        "c120-12"
+      ]
+    },
+    "equalUsefulAlternatives": [
+      "c120-3",
+      "c120-4",
+      "c120-5"
+    ],
+    "defaultOfferRoot": "c120-0",
+    "visibleOfferRoot": "c120-3",
+    "cascade": {
+      "root": "c120-0",
+      "bonus": [
+        "c120-12",
+        "c120-13"
+      ],
+      "actual": 94
+    },
+    "route": [
+      "c120-0",
+      "c120-12",
+      "c120-13"
+    ]
+  }
+]

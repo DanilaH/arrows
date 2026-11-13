@@ -1,0 +1,52 @@
+{
+  "provenance": {
+    "head": "794bef1e5056800f2dd42343b02fe5f8fb1b586c",
+    "version": "0.23.0",
+    "method": "Actual createAds/adCadence modules; controlled bridge and monotonic clock; no Android SDK"
+  },
+  "readiness": {
+    "before": {
+      "configured": true,
+      "phase": "backoff",
+      "ready": false,
+      "preloadId": "test-load-1",
+      "loadedAt": 0,
+      "expiresInMs": 0,
+      "retryInMs": 30000,
+      "playtest": true
+    },
+    "after": {
+      "configured": true,
+      "phase": "backoff",
+      "ready": false,
+      "preloadId": "test-load-1",
+      "loadedAt": 0,
+      "expiresInMs": 0,
+      "retryInMs": 0,
+      "playtest": true
+    },
+    "refreshed": {
+      "configured": true,
+      "phase": "idle",
+      "ready": false,
+      "preloadId": "test-load-1",
+      "loadedAt": 0,
+      "expiresInMs": 0,
+      "retryInMs": 0,
+      "playtest": true
+    },
+    "countsAtExpiry": {
+      "prepareCalls": 1,
+      "statusCalls": 1
+    }
+  },
+  "policy": {
+    "fiveWins": "protected",
+    "sixthWin": "eligible",
+    "immediatelyAfterRequest": "cooldown",
+    "after150SecondsOneNewWin": "progress",
+    "after150SecondsTwoNewWins": "eligible",
+    "restoreWithoutNewGrace": "eligible"
+  },
+  "conclusion": "Backoff phase stays stale after retryInMs reaches zero until explicit refresh/other state transition. No automatic preload retry asserted as required."
+}

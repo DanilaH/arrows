@@ -44,6 +44,12 @@ export function createAds(
   let demand=false,demandSent=false,readinessEpoch=0,readinessAt=performance.now(),demandFlight:Promise<RewardedReadiness|void>|undefined;
   let readiness:RewardedReadiness={configured:false,phase:'unavailable',ready:false,preloadId:'',loadedAt:0,expiresInMs:0,retryInMs:0,playtest:false};
   const readinessObservers=new Set<()=>void>(),seenImpressions=new Set<string>();
+  // Expiry removes only the stale prohibition. No ready object or retry is invented.
+  const currentReadiness=():Readonly<RewardedReadiness>=>{
+    const elapsed=Math.max(0,performance.now()-readinessAt);
+    const phase=readiness.ready&&elapsed>=readiness.expiresInMs?'expired':readiness.phase==='backoff'&&elapsed>=readiness.retryInMs?'idle':readiness.phase;
+    return {...readiness,phase,ready:phase==='ready'&&readiness.ready,expiresInMs:Math.max(0,readiness.expiresInMs-elapsed),retryInMs:Math.max(0,readiness.retryInMs-elapsed)};
+  };
   let state: AdState = { phase: 'idle' }, recoveryWait: Promise<void> | undefined, cancelFlight: Promise<void> | undefined;
   const observers = new Set<(state: Readonly<AdState>) => void>(), acknowledgements = new Map<string, Promise<void>>();
   const update = (next: AdState): void => { state = Object.freeze(next); if (alive) for (const listener of observers) { try { listener(state); } catch { analytics.track('runtime_error', { operation: 'ad_ui', reason: 'observer_failed' }); } } };
@@ -114,7 +120,7 @@ export function createAds(
   return {
     get state(): Readonly<AdState> { return state; },
     subscribe(listener: (state: Readonly<AdState>) => void): () => void { observers.add(listener); listener(state); return () => observers.delete(listener); },
-    get rewardedState():Readonly<RewardedReadiness>{const elapsed=performance.now()-readinessAt;return {...readiness,...(readiness.ready&&elapsed>=readiness.expiresInMs?{ready:false,phase:'expired' as const}:{}),expiresInMs:Math.max(0,readiness.expiresInMs-elapsed),retryInMs:Math.max(0,readiness.retryInMs-elapsed)};},
+    get rewardedState():Readonly<RewardedReadiness>{return currentReadiness();},
     subscribeRewarded(observer:()=>void):()=>void{readinessObservers.add(observer);return()=>readinessObservers.delete(observer);},
     setRewardedDemand(active:boolean):void{if(demand===active)return;demand=active;sendDemand();},
     refreshReadiness,
@@ -153,7 +159,7 @@ export function createAds(
     async show(request: AdRequest): Promise<AdOutcome> {
       if (!alive || !native || showing || activity.isBlocked() || (request.kind === 'rewarded' && !receiptQueue)) return unavailable;
       const requestId = request.requestId ?? crypto.randomUUID();
-      if(request.context){const c=request.context;analytics.track('ad_session',{request_id:requestId,format:request.kind,placement:request.placement,attempt:request.attempt,mode:request.mode,assignment_id:c.assignmentId,variant:c.variant,experiment_id:c.experimentId,install_id:c.installId,qa:c.qa,cache_state:readiness.phase});}
+      if(request.context){const c=request.context;analytics.track('ad_session',{request_id:requestId,format:request.kind,placement:request.placement,attempt:request.attempt,mode:request.mode,assignment_id:c.assignmentId,variant:c.variant,experiment_id:c.experimentId,install_id:c.installId,qa:c.qa,cache_state:currentReadiness().phase});}
       showing = true; activity.setBlocked('ad', true); update({ phase: 'loading', requestId, kind: request.kind });
       try {
         const result = await native.show({ ...request, requestId });

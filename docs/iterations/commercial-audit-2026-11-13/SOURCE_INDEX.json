@@ -1,0 +1,88 @@
+{
+  "repository": "DanilaH/arrows",
+  "head": "794bef1e5056800f2dd42343b02fe5f8fb1b586c",
+  "sources": [
+    {
+      "id": "F1",
+      "paths": [
+        "src/game/helpOffers.ts:22-36",
+        "src/game/surface.ts:199-223",
+        "src/game/surface.ts:319-322"
+      ],
+      "evidence": "evidence/offer-choice-results.json",
+      "classification": "confirmed UI event-correlation defect"
+    },
+    {
+      "id": "F2",
+      "paths": [
+        "src/platform/ads.ts:63,113,117-119,164",
+        "src/game/surface.ts:297-305",
+        "native/android/app/src/main/java/com/danilah/arrows/RewardedCacheState.java:9-12"
+      ],
+      "evidence": "evidence/ADS_READINESS_PROBE.json",
+      "classification": "confirmed stale status; button remains enabled"
+    },
+    {
+      "id": "F3",
+      "paths": [
+        "src/domain/assistance.ts:71-83",
+        "src/game/helpOffers.ts:16-20",
+        "src/progression/save.ts:363-365",
+        "docs/iterations/assistance-2026-11-13/TASK.md:113-120"
+      ],
+      "evidence": "evidence/HELP_PROBE.json",
+      "classification": "confirmed omitted visibility input; controlled domain execution"
+    },
+    {
+      "id": "F4",
+      "paths": [
+        "src/platform/analytics.ts:20-34",
+        "src/platform/analytics-contract.json"
+      ],
+      "evidence": "evidence/transport-loss-results.json",
+      "classification": "confirmed observability gap under artificial load, real loss rate unknown"
+    },
+    {
+      "id": "F5",
+      "paths": [
+        "native/android/arrows-platform.gradle:3-8",
+        "native/android/app/src/main/java/com/danilah/arrows/ArrowsAdsPlugin.java:67",
+        "src/game/helpOffers.ts:14,63",
+        "tools/assistance-revenue.mjs:6,15"
+      ],
+      "classification": "build and export identity gap; no observed production contamination"
+    },
+    {
+      "id": "M1",
+      "paths": [
+        "src/progression/helpLedger.ts:32-41",
+        "src/progression/save.ts:239-270",
+        "src/game/helpOffers.ts:56-67",
+        "src/platform/analytics-contract.json"
+      ],
+      "classification": "new limited recommendation, not an old task breach"
+    },
+    {
+      "id": "ADS_POLICY",
+      "paths": [
+        "src/progression/adCadence.ts:1-16",
+        "src/progression/save.ts:273-285,368-380",
+        "src/game/surface.ts:49-58,163-197"
+      ],
+      "evidence": "evidence/ADS_READINESS_PROBE.json"
+    },
+    {
+      "id": "QA_ACTIVATION",
+      "paths": [
+        "src/game/helpOffers.ts:69-82",
+        "src/lab/main.ts:18-19",
+        "src/progression/helpLedger.ts:30"
+      ]
+    },
+    {
+      "id": "CI",
+      "url": "https://github.com/DanilaH/arrows/actions/runs/43474798189",
+      "evidence": "checks/CI_JOBS_VERIFIED.json"
+    }
+  ]
+}

@@ -1,0 +1,456 @@
+{
+  "source": "794bef1e5056800f2dd42343b02fe5f8fb1b586c",
+  "provenance": "Unmodified production dist, Chromium phone viewport, isolated seeded c40 and existing controlled native transport; no real SDK or user analytics.",
+  "rows": [
+    {
+      "scenario": "hint_restart",
+      "offerBefore": [
+        {
+          "event": "assistance_offer",
+          "params": {
+            "event_id": "664993e5-0ea3-46a5-a5a8-df1c8a2e8102",
+            "offer_id": "offer-c3a8ce69b55f9f2",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "variant": "single-v2",
+            "effect": "single-v2",
+            "amount": 1,
+            "readiness": "ready",
+            "source": "advertisement"
+          },
+          "at": 1794597346584
+        }
+      ],
+      "choices": [],
+      "events": [
+        {
+          "event": "screen_view",
+          "params": {
+            "screen": "home"
+          },
+          "at": 1794597343084
+        },
+        {
+          "event": "app_ready",
+          "params": {
+            "language": "en"
+          },
+          "at": 1794597343114
+        },
+        {
+          "event": "screen_view",
+          "params": {
+            "screen": "game"
+          },
+          "at": 1794597343173
+        },
+        {
+          "event": "assistance_offer",
+          "params": {
+            "event_id": "664993e5-0ea3-46a5-a5a8-df1c8a2e8102",
+            "offer_id": "offer-c3a8ce69b55f9f2",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "variant": "single-v2",
+            "effect": "single-v2",
+            "amount": 1,
+            "readiness": "ready",
+            "source": "advertisement"
+          },
+          "at": 1794597346584
+        },
+        {
+          "event": "assistance_assignment",
+          "params": {
+            "event_id": "assignment-280e84a05528f0d6",
+            "assignment_id": "assignment-280e84a05528f0d6",
+            "install_id": "aa63f335-664c-4ae2-a923-d6aa07710caa",
+            "experiment_id": "assistance-v1",
+            "variant": "single-v2",
+            "eligible_at": 1794597346585,
+            "qa": true
+          },
+          "at": 1794597346589
+        },
+        {
+          "event": "level_restart",
+          "params": {
+            "mode": "campaign",
+            "level_id": "c40",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04"
+          },
+          "at": 1794597347506
+        },
+        {
+          "event": "attempt_final",
+          "params": {
+            "event_id": "48025459-f50b-4a8d-83e4-aaf798af6a04-restart",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "mode": "campaign",
+            "outcome": "restart",
+            "active_ms": 3662
+          },
+          "at": 1794597347506
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "scenario": "lost_restart",
+      "offerBefore": [
+        {
+          "event": "assistance_offer",
+          "params": {
+            "event_id": "ed3f0c7c-92c1-490c-a18c-757ca7453662",
+            "offer_id": "offer-aa5619255e16eebf",
+            "attempt": "7bea7965-f066-46dd-8384-e3e59f692876",
+            "variant": "single-v2",
+            "effect": "lives",
+            "amount": 3,
+            "readiness": "ready",
+            "source": "advertisement"
+          },
+          "at": 1794597348524
+        }
+      ],
+      "choices": [],
+      "events": [
+        {
+          "event": "screen_view",
+          "params": {
+            "screen": "home"
+          },
+          "at": 1794597348062
+        },
+        {
+          "event": "app_ready",
+          "params": {
+            "language": "en"
+          },
+          "at": 1794597348085
+        },
+        {
+          "event": "screen_view",
+          "params": {
+            "screen": "game"
+          },
+          "at": 1794597348128
+        },
+        {
+          "event": "assistance_offer",
+          "params": {
+            "event_id": "ed3f0c7c-92c1-490c-a18c-757ca7453662",
+            "offer_id": "offer-aa5619255e16eebf",
+            "attempt": "7bea7965-f066-46dd-8384-e3e59f692876",
+            "variant": "single-v2",
+            "effect": "lives",
+            "amount": 3,
+            "readiness": "ready",
+            "source": "advertisement"
+          },
+          "at": 1794597348524
+        },
+        {
+          "event": "assistance_assignment",
+          "params": {
+            "event_id": "assignment-bb03ea88240502c2",
+            "assignment_id": "assignment-bb03ea88240502c2",
+            "install_id": "0c9a8ccc-85f4-47ff-8eb4-5e2a57ff7cd8",
+            "experiment_id": "assistance-v1",
+            "variant": "single-v2",
+            "eligible_at": 1794597348526,
+            "qa": true
+          },
+          "at": 1794597348526
+        },
+        {
+          "event": "level_restart",
+          "params": {
+            "mode": "campaign",
+            "level_id": "c40",
+            "attempt": "7bea7965-f066-46dd-8384-e3e59f692876"
+          },
+          "at": 1794597349388
+        },
+        {
+          "event": "attempt_final",
+          "params": {
+            "event_id": "7bea7965-f066-46dd-8384-e3e59f692876-restart",
+            "attempt": "7bea7965-f066-46dd-8384-e3e59f692876",
+            "mode": "campaign",
+            "outcome": "restart",
+            "active_ms": 0
+          },
+          "at": 1794597349388
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "scenario": "hint_exit",
+      "offerBefore": [
+        {
+          "event": "assistance_offer",
+          "params": {
+            "event_id": "76881a11-4381-45f7-99e3-d35b63440242",
+            "offer_id": "offer-c3a8ce69b55f9f2",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "variant": "single-v2",
+            "effect": "single-v2",
+            "amount": 1,
+            "readiness": "ready",
+            "source": "advertisement"
+          },
+          "at": 1794597353326
+        }
+      ],
+      "choices": [
+        {
+          "event": "assistance_choice",
+          "params": {
+            "event_id": "76881a11-4381-45f7-99e3-d35b63440242-exit",
+            "offer_id": "offer-c3a8ce69b55f9f2",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "choice": "exit",
+            "request_id": ""
+          },
+          "at": 1794597353839
+        }
+      ],
+      "events": [
+        {
+          "event": "screen_view",
+          "params": {
+            "screen": "home"
+          },
+          "at": 1794597349825
+        },
+        {
+          "event": "app_ready",
+          "params": {
+            "language": "en"
+          },
+          "at": 1794597349847
+        },
+        {
+          "event": "screen_view",
+          "params": {
+            "screen": "game"
+          },
+          "at": 1794597349946
+        },
+        {
+          "event": "assistance_offer",
+          "params": {
+            "event_id": "76881a11-4381-45f7-99e3-d35b63440242",
+            "offer_id": "offer-c3a8ce69b55f9f2",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "variant": "single-v2",
+            "effect": "single-v2",
+            "amount": 1,
+            "readiness": "ready",
+            "source": "advertisement"
+          },
+          "at": 1794597353326
+        },
+        {
+          "event": "assistance_assignment",
+          "params": {
+            "event_id": "assignment-280e84a05528f0d6",
+            "assignment_id": "assignment-280e84a05528f0d6",
+            "install_id": "aa63f335-664c-4ae2-a923-d6aa07710caa",
+            "experiment_id": "assistance-v1",
+            "variant": "single-v2",
+            "eligible_at": 1794597353326,
+            "qa": true
+          },
+          "at": 1794597353330
+        },
+        {
+          "event": "assistance_choice",
+          "params": {
+            "event_id": "76881a11-4381-45f7-99e3-d35b63440242-exit",
+            "offer_id": "offer-c3a8ce69b55f9f2",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "choice": "exit",
+            "request_id": ""
+          },
+          "at": 1794597353839
+        },
+        {
+          "event": "level_exit",
+          "params": {
+            "mode": "campaign",
+            "level_id": "c40",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "active_ms": 178
+          },
+          "at": 1794597353840
+        },
+        {
+          "event": "screen_view",
+          "params": {
+            "screen": "home"
+          },
+          "at": 1794597353840
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "scenario": "hint_accept",
+      "offerBefore": [
+        {
+          "event": "assistance_offer",
+          "params": {
+            "event_id": "6b864f77-452a-4aeb-bd99-2ae54ec79617",
+            "offer_id": "offer-c3a8ce69b55f9f2",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "variant": "single-v2",
+            "effect": "single-v2",
+            "amount": 1,
+            "readiness": "ready",
+            "source": "advertisement"
+          },
+          "at": 1794597357889
+        }
+      ],
+      "choices": [
+        {
+          "event": "assistance_choice",
+          "params": {
+            "event_id": "6b864f77-452a-4aeb-bd99-2ae54ec79617-accept",
+            "offer_id": "offer-c3a8ce69b55f9f2",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "choice": "accept",
+            "request_id": ""
+          },
+          "at": 1794597359221
+        }
+      ],
+      "events": [
+        {
+          "event": "screen_view",
+          "params": {
+            "screen": "home"
+          },
+          "at": 1794597354390
+        },
+        {
+          "event": "app_ready",
+          "params": {
+            "language": "en"
+          },
+          "at": 1794597354430
+        },
+        {
+          "event": "screen_view",
+          "params": {
+            "screen": "game"
+          },
+          "at": 1794597354463
+        },
+        {
+          "event": "assistance_offer",
+          "params": {
+            "event_id": "6b864f77-452a-4aeb-bd99-2ae54ec79617",
+            "offer_id": "offer-c3a8ce69b55f9f2",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "variant": "single-v2",
+            "effect": "single-v2",
+            "amount": 1,
+            "readiness": "ready",
+            "source": "advertisement"
+          },
+          "at": 1794597357889
+        },
+        {
+          "event": "assistance_assignment",
+          "params": {
+            "event_id": "assignment-280e84a05528f0d6",
+            "assignment_id": "assignment-280e84a05528f0d6",
+            "install_id": "aa63f335-664c-4ae2-a923-d6aa07710caa",
+            "experiment_id": "assistance-v1",
+            "variant": "single-v2",
+            "eligible_at": 1794597357889,
+            "qa": true
+          },
+          "at": 1794597357891
+        },
+        {
+          "event": "assistance_choice",
+          "params": {
+            "event_id": "6b864f77-452a-4aeb-bd99-2ae54ec79617-accept",
+            "offer_id": "offer-c3a8ce69b55f9f2",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "choice": "accept",
+            "request_id": ""
+          },
+          "at": 1794597359221
+        },
+        {
+          "event": "hint_request",
+          "params": {
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04"
+          },
+          "at": 1794597359221
+        },
+        {
+          "event": "assistance_request",
+          "params": {
+            "request_id": "6bb72f10-3b16-42c2-ae1b-248d922aa78b",
+            "offer_id": "offer-c3a8ce69b55f9f2",
+            "assignment_id": "assignment-280e84a05528f0d6",
+            "install_id": "aa63f335-664c-4ae2-a923-d6aa07710caa",
+            "variant": "single-v2",
+            "effect": "single-v2",
+            "effect_version": 1,
+            "amount": 1,
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "mode": "campaign",
+            "content_version": 4,
+            "fallback": "",
+            "at": 1794597359224,
+            "qa": true
+          },
+          "at": 1794597359226
+        },
+        {
+          "event": "assistance_fact",
+          "params": {
+            "event_id": "6bb72f10-3b16-42c2-ae1b-248d922aa78b-request",
+            "phase": "request",
+            "entitlement_id": "6bb72f10-3b16-42c2-ae1b-248d922aa78b",
+            "request_id": "6bb72f10-3b16-42c2-ae1b-248d922aa78b",
+            "source_attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "effect": "single-v2",
+            "variant": "single-v2",
+            "manual": 0,
+            "native": 0,
+            "bonus": 0,
+            "use_origin": "none",
+            "component": "standalone"
+          },
+          "at": 1794597359226
+        },
+        {
+          "event": "ad_session",
+          "params": {
+            "request_id": "6bb72f10-3b16-42c2-ae1b-248d922aa78b",
+            "format": "rewarded",
+            "placement": "hint",
+            "attempt": "48025459-f50b-4a8d-83e4-aaf798af6a04",
+            "mode": "campaign",
+            "assignment_id": "assignment-280e84a05528f0d6",
+            "variant": "single-v2",
+            "experiment_id": "assistance-v1",
+            "install_id": "aa63f335-664c-4ae2-a923-d6aa07710caa",
+            "qa": true,
+            "cache_state": "ready"
+          },
+          "at": 1794597359227
+        }
+      ],
+      "pageErrors": []
+    }
+  ]
+}

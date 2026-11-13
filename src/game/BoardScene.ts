@@ -9,7 +9,7 @@ import { boardPalettes } from '../app/theme';
 import type { GameTheme } from '../app/settings';
 import { stepDampedMotion } from '@danilah/mini-games-kit/feel';
 import { campaign } from '../content/campaign';
-import { Board, type MoveResult } from '../domain/board';
+import { Board, canExit, type MoveResult } from '../domain/board';
 import { extractPath, measurePath, pointAt, type Arrow, type MeasuredPath, type Point } from '../domain/geometry';
 import { BoardCamera, type Rect } from '../input/camera';
 import type { ViewState } from '../progression/save';
@@ -60,6 +60,16 @@ export class BoardScene extends Phaser.Scene {
   private pressed:string|null=null;
   private helpFinal=false;
   private manualCamera=false;
+  private visibleCache:{board:Board;camera:string;ids:ReadonlySet<string>}|null=null;
+  private freeCache:{board:Board;arrows:Arrow[]}|null=null;
+  /** Clear-area legal heads, memoized independently of colour/press/FX frames. */
+  public visibleHelpCandidates():ReadonlySet<string>{
+    const v=this.playArea,c=this.boardCamera,key=`${c.x},${c.y},${c.scale},${v.x},${v.y},${v.width},${v.height}`;
+    if(this.visibleCache?.board===this.board&&this.visibleCache.camera===key)return this.visibleCache.ids;
+    if(this.freeCache?.board!==this.board){const remaining=this.board.remaining;this.freeCache={board:this.board,arrows:remaining.filter(a=>canExit(a,remaining))};}
+    const ids=new Set(this.freeCache.arrows.filter(a=>{const p=c.screen(a.path.at(-1)!);return p.x>=v.x+12&&p.x<=v.x+v.width-12&&p.y>=v.y+12&&p.y<=v.y+v.height-12;}).map(a=>a.id));
+    this.visibleCache={board:this.board,camera:key,ids};return ids;
+  }
   public setAssistance(plan:HelpPlan|null,quiet=false):void {
     const predicted=plan?.kind==='cascade-v1'?predictHelp(this.board,plan):null;
     const next=new Set(predicted?.bonus??[]),native=new Set(predicted?.native??[]),pending=plan?.kind==='route-v1'?new Set(routePending(this.board,plan)):new Set<string>();

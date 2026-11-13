@@ -20,7 +20,9 @@ export function createPlatformRuntime(onBack: () => boolean = () => false) {
     : () => undefined;
   const analytics = createAnalytics();
   const ads = createAds(activity, analytics);
-  const flushAnalytics = (): void => analytics.flush(); window.addEventListener('pagehide', flushAnalytics);
+  const flushAnalytics = (): void => analytics.flush('pagehide'); window.addEventListener('pagehide', flushAnalytics);
+  const removeAnalyticsBoundary=activity.onBlockedChange(blocked=>{if(blocked)analytics.flush('background');});
+  const analyticsTimer=setInterval(()=>{if(!activity.isBlocked())analytics.flush('interval');},60000);
   const storage = createStorage();
   const settings = new SettingsStore(storage, navigator.language);
   const feedback = createFeedback(activity, settings);
@@ -32,6 +34,7 @@ export function createPlatformRuntime(onBack: () => boolean = () => false) {
     kind: native ? 'android' : 'browser',
     destroy() {
       window.removeEventListener('pagehide', flushAnalytics);
+      clearInterval(analyticsTimer);removeAnalyticsBoundary();
       ads.destroy();
       analytics.destroy();
       if (!native) { window.removeEventListener('blur', blur); window.removeEventListener('focus', focus); }

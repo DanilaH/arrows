@@ -27,7 +27,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const warning = document.querySelector<HTMLElement>('#save-status')!, retry = document.querySelector<HTMLButtonElement>('#save-retry')!;
   const sessionPlay = document.querySelector<HTMLButtonElement>('#session-play')!;
   const progress = new ProgressStore(platform.storage), listeners: Array<() => void> = [];
-  const helpOffers=createHelpOffers(progress,platform.ads,platform.analytics,()=>language);
+  const helpOffers=createHelpOffers(progress,platform.ads,platform.analytics,()=>language,()=>scene.visibleHelpCandidates());
   let alive = true, loaded = false, loadSlow = false, control = false, requestingAd = false;
   let selectedControl = 0;
   const loadControl = (index: number): void => { const level = reviewFields[index]; if (!level) return; selectedControl = index; scene.loadAttempt(new Board(level, crypto.randomUUID())); };
@@ -38,6 +38,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const requestedRewards = new Set<string>();
   let holdTimer: ReturnType<typeof setTimeout> | undefined, cameraTimer: ReturnType<typeof setTimeout> | undefined;
   let modal: 'pause' | 'controls' | 'restart' | 'lost' | null = null;
+  let restartChoice:ReturnType<typeof helpOffers.captureChoice>=null;
   let notice = '', idleMs = 0, pendingTime = 0, pendingAdTime = 0, lastTime = performance.now(), wasActive = false, lastFlush = lastTime;
   let lastSaveError: string | null = null;
   let assistance: { attempt: string; lives?: { from: number; to: number }; hint?: string } | null = null, assistanceScheduled=false;
@@ -108,7 +109,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     pinch: manualZoom,
   });
   const cancel = (): void => { if (holdTimer !== undefined) clearTimeout(holdTimer); holdTimer = undefined; gestures.cancel(); motion.clearTaps(); };
-  const close = (after: ()=>void = () => {}): void => { modal = null; motion.close(dialog, () => { platform.activity.setBlocked('dialog', false); if(meta.screen === 'game')root.focus({ preventScroll: true }); after(); }); };
+  const close = (after: ()=>void = () => {}): void => { modal = null;restartChoice=null; motion.close(dialog, () => { platform.activity.setBlocked('dialog', false); if(meta.screen === 'game')root.focus({ preventScroll: true }); after(); }); };
   const loadActive = (): void => {
     cancel(); pendingTime = 0; pendingAdTime = 0; wasActive = false; freshWinAttempt = ''; dailyReturnAttempt=''; idleMs = 0; notice = '';
     const a = active(); celebratedAttempt = a.board.removed.length === a.level.arrows.length ? a.board.id : ''; pendingAward = false;
@@ -198,6 +199,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   };
   const open = (kind: NonNullable<typeof modal>): void => {
     if (kind === 'controls' && !reviewFields.length) return;
+    restartChoice=kind==='restart'?(modal==='restart'?restartChoice:helpOffers.captureChoice()):null;
+    const confirmedChoice=restartChoice;
     cancel(); saveView(); modal = kind; platform.activity.setBlocked('dialog', true); content.replaceChildren();
     const title = document.createElement('h2'); title.id = 'dialog-title';
     title.textContent = kind === 'pause' ? `${text.level} ${progress.state.index + 1}` : kind === 'controls' ? text.chooseField : kind === 'lost' ? text.noLives : text.restartQuestion;
@@ -220,7 +223,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       button('confirm-restart', text.restart, () => {
         close(); if (control) loadControl(selectedControl);
         else {
-          const a = scene.board, mode = gameMode(),beforeMs=active().activeMs; helpOffers.choice('restart');run(progress.restart(a.attemptId).then(changed => { if (changed) {platform.analytics.track('level_restart', { mode, level_id: a.level.id, attempt: a.attemptId });platform.analytics.track('attempt_final',{event_id:`${a.attemptId}-restart`,attempt:a.attemptId,mode,outcome:'restart',active_ms:beforeMs});} }));
+          const a = scene.board, mode = gameMode(),beforeMs=active().activeMs;run(progress.restart(a.attemptId).then(changed => { if (changed) {helpOffers.choice('restart','',confirmedChoice,a.attemptId);platform.analytics.track('level_restart', { mode, level_id: a.level.id, attempt: a.attemptId });platform.analytics.track('attempt_final',{event_id:`${a.attemptId}-restart`,attempt:a.attemptId,mode,outcome:'restart',active_ms:beforeMs});} }));
         }
       }, true);
       button('cancel', text.cancel, () => close());

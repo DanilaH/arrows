@@ -13,6 +13,7 @@ import java.util.Iterator;
 @CapacitorPlugin(name = "ArrowsAnalytics")
 public class ArrowsAnalyticsPlugin extends Plugin {
     private JSONObject contract = new JSONObject();
+    private final AnalyticsEnvironment environment = new AnalyticsEnvironment(BuildConfig.DEBUG, BuildConfig.APPLICATION_ID.endsWith(".playtest"), BuildConfig.AD_MODE, !BuildConfig.ANALYTICS_API_KEY.isEmpty());
     @Override public void load() {
         try (InputStream in = getContext().getAssets().open("arrows-analytics-contract.json")) {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -44,7 +45,17 @@ public class ArrowsAnalyticsPlugin extends Plugin {
         }
         JSObject result = new JSObject(); result.put("accepted", false); result.put("disabled", !ArrowsApplication.analyticsEnabled);
         if (ArrowsApplication.analyticsEnabled) {
-            try { AppMetrica.reportEvent(name, params.toString()); result.put("accepted", true); }
+            try {
+                // Validate the exact shared event schema first, then add the native
+                // envelope. JS/QA flags cannot relabel a test build as live.
+                params.put("environment_version", 1);
+                params.put("build_environment", environment.build);
+                params.put("ad_environment", environment.ads);
+                params.put("analytics_environment", environment.analytics);
+                params.put("app_version", BuildConfig.VERSION_NAME);
+                params.put("app_version_code", BuildConfig.VERSION_CODE);
+                AppMetrica.reportEvent(name, params.toString()); result.put("accepted", true);
+            }
             catch (RuntimeException ignored) { /* Never a gameplay dependency. */ }
         }
         call.resolve(result);

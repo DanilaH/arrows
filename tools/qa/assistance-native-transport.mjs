@@ -1,10 +1,10 @@
 /** Isolated browser QA adapter. Inject before the UNMODIFIED production bundle.
  * Never imported by src or copied to Android assets. This is not a video SDK. */
-export function controlledNative({save,settings}) {
-  const listeners=new Map(),events=[],pulses=[];let serial=0,pending=[],request=null,resolveShow=null,loadPhase='ready';
+export function controlledNative({save,settings,preserve=false}) {
+  const listeners=new Map(),events=[],pulses=[];let serial=0,pending=[],request=null,resolveShow=null,loadPhase='ready',retryAt=0;
   const emit=(plugin,name,value)=>{for(const l of listeners.values())if(l.plugin===plugin&&l.name===name)l.callback(value);};
-  const readiness=()=>({configured:true,phase:loadPhase,ready:loadPhase==='ready',preloadId:'controlled-qa',loadedAt:1,expiresInMs:300000,retryInMs:0,playtest:true});
-  localStorage.setItem('arrows.progress.v1',JSON.stringify(save));if(settings)localStorage.setItem('arrows.settings.v1',JSON.stringify(settings));
+  const readiness=()=>({configured:true,phase:loadPhase,ready:loadPhase==='ready',preloadId:'controlled-qa',loadedAt:1,expiresInMs:300000,retryInMs:Math.max(0,retryAt-performance.now()),playtest:true});
+  if(!preserve||!localStorage.getItem('arrows.progress.v1'))localStorage.setItem('arrows.progress.v1',JSON.stringify(save));if(settings)localStorage.setItem('arrows.settings.v1',JSON.stringify(settings));
   const methods={ArrowsStorage:['get','set','remove'],ArrowsAnalytics:['report','flush'],ArrowsAds:['prepareRewarded','prepareInterstitial','status','show','pending','acknowledge','cancelPending'],ArrowsFeedback:['pulse','cancel'],App:['getState','minimizeApp'],SystemBars:['setStyle']};
   window.androidBridge={};window.Capacitor={PluginHeaders:Object.entries(methods).map(([name,names])=>({name,methods:[...names.map(name=>({name,rtype:'promise'})),{name:'addListener',rtype:'callback'},{name:'removeListener',rtype:'promise'}]})),
     nativeCallback(plugin,method,options,callback){const id=String(++serial);listeners.set(id,{plugin,name:options.eventName,callback});return id;},
@@ -34,6 +34,7 @@ export function controlledNative({save,settings}) {
     dismiss(){resolveShow?.({shown:true,outcome:'dismissed',earned:true});resolveShow=null;},
     background(value){emit('App','appStateChange',{isActive:!value});},
     loading(){loadPhase='loading';emit('ArrowsAds','adEvent',{kind:'rewarded',phase:'preload_start',readiness:readiness()});},
+    backoff(ms=30000){loadPhase='backoff';retryAt=performance.now()+ms;emit('ArrowsAds','adEvent',{kind:'rewarded',phase:'load_error',readiness:readiness()});},
     lateReady(){loadPhase='ready';emit('ArrowsAds','adEvent',{kind:'rewarded',phase:'preload_ready',readiness:readiness()});},
     async startAudio(){chunks=[];recordingContext=new Original();await recordingContext.resume();const sink=recordingContext.createMediaStreamDestination();recordingContext.createMediaStreamSource(destination.stream).connect(sink);recorder=new MediaRecorder(sink.stream,{mimeType:'audio/webm;codecs=opus'});recorder.ondataavailable=e=>chunks.push(e.data);recorder.start();},
     stopAudio(){return new Promise(r=>{recorder.onstop=async()=>{const bytes=new Uint8Array(await new Blob(chunks).arrayBuffer());await recordingContext.close();r(Array.from(bytes));};recorder.stop();});}

@@ -1,0 +1,137 @@
+{
+  "source_sha": "794bef1e5056800f2dd42343b02fe5f8fb1b586c",
+  "artifact": "audit report and reproduction evidence",
+  "game_source_modified": false,
+  "files": [
+    {
+      "path": "ADS_AUDIT.md",
+      "bytes": 17378,
+      "sha256": "0cdd3a816f2f5bfd9affcec19675daa565789e04f7d0025af7295861d089a287"
+    },
+    {
+      "path": "ARROWS_COMMERCIAL_AUDIT.pdf",
+      "bytes": 85024,
+      "sha256": "aec0af00b7d37da410f1461573ddfd29d8bc96773e7536b4727c629d49e587b8"
+    },
+    {
+      "path": "FINAL_REVIEW.md",
+      "bytes": 8136,
+      "sha256": "554791ef837337aac3d76a6ad3118562bf833e762a66db57237aabeb350bac52"
+    },
+    {
+      "path": "HELP_AUDIT.md",
+      "bytes": 8502,
+      "sha256": "5a1e9836cbf547fb81dcb5e860c0dca65a54f7a4139c5f1ed403ef9dd2a383b6"
+    },
+    {
+      "path": "MEASUREMENT_AUDIT.md",
+      "bytes": 21563,
+      "sha256": "c30543c074434cfb1d8c4996b34043fde38354f930801f211161b6bd71ffb8b4"
+    },
+    {
+      "path": "NEXT_STEPS.txt",
+      "bytes": 9133,
+      "sha256": "bcecf8981157beedb650850e5efd7983a9dc2aa02cd005bd5f4445b07c81d504"
+    },
+    {
+      "path": "REPORT.txt",
+      "bytes": 21986,
+      "sha256": "580ec5a06eb2d1e7a2ee2a3d4eca81621f08e2de7e47a9c34884adadf4422851"
+    },
+    {
+      "path": "REPORT_CONTENT.json",
+      "bytes": 28830,
+      "sha256": "8443bf4b5387dd9fe0268c277f6c3e87d9bed43be8903b192fd0e3cd8da1d2d7"
+    },
+    {
+      "path": "REPORT_FACT_REVIEW.md",
+      "bytes": 5572,
+      "sha256": "d6acdd9e2ad7b96ca30f883cfc44fbea008ae93fd9df3ee42432ec973e510bd2"
+    },
+    {
+      "path": "SOURCE_INDEX.json",
+      "bytes": 2739,
+      "sha256": "65ee36955dcc3d4944ffa7b06c3643a9755c2e0bed9ac13ef018759a6b4e6528"
+    },
+    {
+      "path": "START_HERE.txt",
+      "bytes": 5635,
+      "sha256": "624969a259e1ee7794fd1179bfcacb74b619b876c97e0d5e9448e0a8da9a8390"
+    },
+    {
+      "path": "checks/CI_JOBS_VERIFIED.json",
+      "bytes": 5850,
+      "sha256": "00c0756f7f844172ef29166c524a7d695fb0cba4fc754de3a85dd282390bf876"
+    },
+    {
+      "path": "checks/PDF_QA.json",
+      "bytes": 4172,
+      "sha256": "41a2c78504e5346cd7b69e48da4c827b30acfac651b4f6e61243018f77458dce"
+    },
+    {
+      "path": "checks/PDF_QA_METRICS.json",
+      "bytes": 5252,
+      "sha256": "66e827847675fab1a5025838db52e8111a563e6f0ba3b29c487a6e3590b422b5"
+    },
+    {
+      "path": "checks/RUN_STATUS.json",
+      "bytes": 1812,
+      "sha256": "813d1129ea7ec09a90500925fd97c2c1ad6b14681becbe4d734d22ba2509d36a"
+    },
+    {
+      "path": "checks/browser-results.json",
+      "bytes": 27756,
+      "sha256": "aac1913dc99b63ef7bbf53d1ff9f8cf8746849889a3994417ebe81858f1808b1"
+    },
+    {
+      "path": "checks/browser-stderr.log",
+      "bytes": 99,
+      "sha256": "7125f194612fcff2f454c05d848e7cb71facc1967b4d5017e25b34fdee3ba74f"
+    },
+    {
+      "path": "checks/check.log",
+      "bytes": 2183,
+      "sha256": "d6e845ca39ef058d01dfe564d4f24eeb96db9162d8b8c75c3a09604dec2bfc3d"
+    },
+    {
+      "path": "evidence/ADS_READINESS_PROBE.json",
+      "bytes": 1398,
+      "sha256": "bd708b1cc64c2e237a9f64ddb8ecadd4b506e29b8cab2c945a9ca07ab30a2381"
+    },
+    {
+      "path": "evidence/HELP_PROBE.json",
+      "bytes": 2241,
+      "sha256": "969d7aa1b5cc9ecea17ab0b8edba0cc605dc4ea7a5fd504299dfd222309f6793"
+    },
+    {
+      "path": "evidence/offer-choice-results.json",
+      "bytes": 13510,
+      "sha256": "ff41e10ce00594e609fed0047ac2aa9d74613abc73d61580fa03d8bc02ec5d89"
+    },
+    {
+      "path": "evidence/transport-loss-results.json",
+      "bytes": 597,
+      "sha256": "19e5a68e0f3a8d475aa61a8ab055664fd200dea8850675007fd4d6a51b94c8eb"
+    },
+    {
+      "path": "probes/ads-readiness-probe.mjs",
+      "bytes": 4349,
+      "sha256": "58f3303515cb802f217768cdcad9562ea09c81510fdbfe988d43089e6ac59ee3"
+    },
+    {
+      "path": "probes/help_probe.mjs",
+      "bytes": 3314,
+      "sha256": "32cf78c55a47315f1aeea483a74b0cdb846fba6439a6f3f06018528f328dfeaa"
+    },
+    {
+      "path": "probes/measurement/reproduce-offer-choices.mjs",
+      "bytes": 5259,
+      "sha256": "7df42071a841e7d48d1a47fca7dccfd7c3f84c4fc50d4f51fa4c4c5d59960da0"
+    },
+    {
+      "path": "probes/measurement/reproduce-transport-loss.mjs",
+      "bytes": 2168,
+      "sha256": "a0924160d1c84a44300213a48dc7c26d35a6812e47cdbd14f8cb5bfedc1b472e"
+    }
+  ]
+}

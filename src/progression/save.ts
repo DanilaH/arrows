@@ -9,7 +9,7 @@ import { parseReceipt, type EarnedReceipt } from '../platform/ads';
 import { availableUnlocks, type UnlockId } from './collection';
 import { decodeAdCadence, deferAds, freshAdCadence, interstitialReason, type AdCadence } from './adCadence';
 import { predictHelp, routePending, routeCurrent, validatePlan, localIdentity, type HelpVariant } from '../domain/assistance';
-import { freshHelpLedger, decodeHelpLedger, lifeEffect, activeRight, ownerOf, makeOffer, sameOwner, applyRight, reserveAttempt, compatibleReserve, fact, assignmentId, beginContinue, continueFacts, type ContinueFact, type HelpLedger, type HelpOffer, type HelpRequest, type HelpFact, type HelpRight } from './helpLedger';
+import { freshHelpLedger, decodeHelpLedger, lifeEffect, activeRight, ownerOf, makeOffer, sameOwner, applyRight, reserveAttempt, compatibleReserve, fact, assignmentId, beginContinue, continueFacts, beginHelpFollowUp, finishHelpFollowUps, type ContinueFact, type HelpLedger, type HelpOffer, type HelpRequest, type HelpFact, type HelpRight } from './helpLedger';
 
 export const SAVE_KEY = 'arrows.progress.v1';
 export interface ViewState { centerX: number; centerY: number; zoom: number; }
@@ -29,7 +29,7 @@ export interface GameSave {
   freeContinueUsed: boolean;
   helpLedger: HelpLedger;
 }
-export interface SaveChange { kind: 'load' | 'state' | 'move'; result?: MoveResult; attempt?: string; mode?: 'campaign' | 'daily'; date?: string; startedNow?: boolean; helpFacts?:HelpFact[]; continueFacts?:ContinueFact[]; }
+export interface SaveChange { kind: 'load' | 'state' | 'move'; result?: MoveResult; attempt?: string; mode?: 'campaign' | 'daily'; date?: string; startedNow?: boolean; helpFacts?:HelpFact[]; continueFacts?:ContinueFact[]; followupFacts?:ContinueFact[]; }
 export const freshAttempt = (level: Level, id = crypto.randomUUID()): SavedAttempt => ({
   level, board: new Board(level, id).snapshot(), view: null, guides: false, freeUsed: false,
   continuations: 0, hint: null, started: false, activeMs: 0,
@@ -236,7 +236,7 @@ export class ProgressStore {
       if (result.kind === 'ignored') return null;
       a.started = true; a.activeMs += Math.max(0, Math.round(activeMs)); a.board = board.snapshot();
       next.adCadence.activeMs += Math.max(0, Math.round(adActiveMs));
-      const helpFacts:HelpFact[]=[],continuations:ContinueFact[]=[];
+      const helpFacts:HelpFact[]=[],continuations:ContinueFact[]=[],followupFacts:ContinueFact[]=[];
       if (result.kind === 'removed') {
         const native=prediction?.native??[...(arrow===null?[result.arrow.id]:[]),...(result.released??[]).map(a=>a.id)],manual=arrow===null?[]:[result.arrow.id],bonus=prediction?.bonus??[];
         const routeAfter=routeBefore&&help?.plan?routePending(board,help.plan):null,routeProgress=routeBefore!==null&&routeAfter!==null&&routeAfter.length<routeBefore.length;
@@ -244,10 +244,11 @@ export class ProgressStore {
         const operation={id:crypto.randomUUID(),entitlement:related?help!.id:'',kind:related?help!.kind:'ordinary',manual,native,bonus,
           ...(routeProgress?{route:{manualStep:arrow!==null&&routeBefore!.includes(selected),completed:help!.plan!.route!.length-routeAfter!.length,total:help!.plan!.route!.length,targetReached:consumed}}:{})};
         result.help=operation;
+        if(arrow!==null&&!related)followupFacts.push(...finishHelpFollowUps(next.helpLedger,a,'first_move'));
         if(help&&related){
           const members=help.kind==='route-v1'?new Set(help.plan!.route):null;
           help.operation={id:operation.id,manual:members?manual.filter(id=>members.has(id)):manual,native:members?native.filter(id=>members.has(id)):native,bonus};
-          if(consumed){help.status='used';if(help.bundle?.single==='active')help.bundle.single='used';}helpFacts.push(fact(consumed?'use':'progress',help,expected));
+          if(consumed){help.status='used';if(help.bundle?.single==='active')help.bundle.single='used';followupFacts.push(...beginHelpFollowUp(help,a,board.complete));}helpFacts.push(fact(consumed?'use':'progress',help,expected));
         }
         if(help?.kind==='route-v1'&&help.plan)a.hint=consumed?null:routeCurrent(board,help.plan);
         else if (a.hint && a.board.removed.includes(a.hint)) a.hint = null;
@@ -267,7 +268,7 @@ export class ProgressStore {
         }
       }
       if(result.kind==='error'&&a.board.lives===0)continuations.push(...continueFacts(next.helpLedger,a,'repeat_loss'));
-      return { value: result, event: { kind: 'move', result, attempt: expected, mode: target.mode, ...(target.date ? { date: target.date } : {}), startedNow,helpFacts,continueFacts:continuations } };
+      return { value: result, event: { kind: 'move', result, attempt: expected, mode: target.mode, ...(target.date ? { date: target.date } : {}), startedNow,helpFacts,continueFacts:continuations,followupFacts } };
     });
   }
   public presentation(expected: string, fields: Partial<Pick<SavedAttempt, 'view' | 'guides'>>, activeMs = 0, adActiveMs = activeMs): Promise<void | undefined> {
@@ -294,12 +295,12 @@ export class ProgressStore {
     return this.update(next => {
       const target = this.findAttempt(expected, next); if (!target || new Board(target.saved.level, expected, target.saved.board).complete) return null;
       const old = target.saved;
-      const helpFacts=reserveAttempt(next,expected),continuations=continueFacts(next.helpLedger,old,'restart');
+      const helpFacts=reserveAttempt(next,expected),continuations=continueFacts(next.helpLedger,old,'restart'),followupFacts=finishHelpFollowUps(next.helpLedger,old,'restart');
       if (old.started) next.facts.push({ kind: 'restart', attempt: expected, mode: target.mode, localDate: localDate(this.now()), at: this.now().getTime() });
       const fresh = freshAttempt(old.level);
       next.helpLedger.assignments[fresh.board.id]=next.helpLedger.nextVariant;
       if (target.mode === 'campaign') next.campaign = fresh; else next.daily[target.date!] = fresh;
-      return { value: true,event:{kind:'state',helpFacts,continueFacts:continuations} };
+      return { value: true,event:{kind:'state',helpFacts,continueFacts:continuations,followupFacts} };
     });
   }
   public next(expected: string): Promise<boolean | undefined> {
@@ -311,7 +312,7 @@ export class ProgressStore {
   public continueFree(expected: string): Promise<boolean | undefined> {
     return this.update(next => {
       const a = this.findAttempt(expected, next)?.saved; if (!a || next.freeContinueUsed || a.freeUsed || a.board.lives !== 0) return null;
-      next.freeContinueUsed = true; a.freeUsed = true; a.continuations++; a.board = { ...a.board, lives: 3 };beginContinue(next.helpLedger,a,`gift-${localIdentity(next.helpLedger.installId)}`); return { value: true };
+      next.freeContinueUsed = true; a.freeUsed = true; a.continuations++; a.board = { ...a.board, lives: 3 };beginContinue(next.helpLedger,a,`gift-${localIdentity(next.helpLedger.installId)}`); return { value: true,event:{kind:'state',followupFacts:finishHelpFollowUps(next.helpLedger,a,'new_help')} };
     }, true);
   }
   public openDaily(date: string): Promise<string | undefined> {
@@ -355,7 +356,7 @@ export class ProgressStore {
       const applied=target&&sameOwner(originalOwner,ownerOf(target,receipt.mode))&&applyRight(next,target,receipt.mode,right);
       next.helpLedger.rights[right.id]=right;
       if(right.status==='reserved')next.reservedRewards.push(receipt);
-      next.receipts.push(receipt.id);return {value:'applied' as const,event:{kind:'state' as const,helpFacts:[fact(applied?'grant':'reserve',right),...(applied&&right.status==='reserved'?[fact('reserve',right)]:[])]}};
+      next.receipts.push(receipt.id);return {value:'applied' as const,event:{kind:'state' as const,helpFacts:[fact(applied?'grant':'reserve',right),...(applied&&right.status==='reserved'?[fact('reserve',right)]:[])],followupFacts:applied&&target?finishHelpFollowUps(next.helpLedger,target,'new_help'):[]}};
     }, true);
     if (!result) throw Error('Reward not committed');
     return result;
@@ -384,7 +385,7 @@ export class ProgressStore {
       const target=this.findAttempt(expected,next),right=next.helpLedger.rights[id];
       if(!target||!right||right.status!=='reserved'||!applyRight(next,target.saved,target.mode,right,true))return null;
       right.claimId=crypto.randomUUID();if(right.status!=='reserved')next.reservedRewards=next.reservedRewards.filter(r=>r.id!==right.receiptId);
-      return {value:true,event:{kind:'state',helpFacts:[fact('claim',right,expected)]}};
+      return {value:true,event:{kind:'state',helpFacts:[fact('claim',right,expected)],followupFacts:finishHelpFollowUps(next.helpLedger,target.saved,'new_help')}};
     },true);
   }
   /** Native .playtest UI is the only production caller; applies to future attempts. */
@@ -403,8 +404,8 @@ export class ProgressStore {
     return {value:true,event:{kind:'state',helpFacts:[{id,phase:'assignment',entitlement:'',request:'',sourceAttempt:expected,attempt:expected,kind:'none',variant,manual:0,native:0,bonus:0}]}};
   },true);}
   public recordHelpExit(expected:string):Promise<boolean|undefined>{return this.update(next=>{
-    const target=this.findAttempt(expected,next);if(!target)return null;const facts=continueFacts(next.helpLedger,target.saved,'exit');if(!facts.length)return null;
-    return {value:true,event:{kind:'state',continueFacts:facts}};
+    const target=this.findAttempt(expected,next);if(!target)return null;const facts=continueFacts(next.helpLedger,target.saved,'exit'),followupFacts=finishHelpFollowUps(next.helpLedger,target.saved,'exit');if(!facts.length&&!followupFacts.length)return null;
+    return {value:true,event:{kind:'state',continueFacts:facts,followupFacts}};
   });}
   public flush(): Promise<unknown> { return this.tail; }
   public destroy(): void { this.alive = false; this.loadEpoch++; this.listeners.clear(); }

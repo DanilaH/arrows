@@ -13,6 +13,7 @@ export interface HelpRight {
   originalOwner: HelpOwner; owner: HelpOwner|null; kind: HelpEffect; version: 1; amount: number;
   plan: HelpPlan|null; status: 'active'|'reserved'|'used'; claimId?: string;
   operation?: {id:string;manual:string[];native:string[];bonus:string[]};
+  followUp?:{attempt:string;startedAt:number;outcome:'pending'|'first_move'|'new_help'|'completed_by_help'|'exit'|'restart';activeMs?:number};
   bundle?:{lives:'pending'|'applied';single:'none'|'pending'|'active'|'used';retainedAtOffer:boolean;livesOwner?:HelpOwner;retainedHelp?:string};
 }
 export interface HelpLedger {
@@ -23,6 +24,21 @@ export interface HelpLedger {
   continues:Record<string,{attempt:string;startedAt:number;firstMove:boolean;closed:boolean}>;
 }
 export interface ContinueFact {id:string;entitlement:string;attempt:string;outcome:string;activeMs:number;}
+/** Best-effort analytics of a durable terminal observation, never an event outbox. */
+export function finishHelpFollowUps(ledger:HelpLedger,a:SavedAttempt,outcome:Exclude<NonNullable<HelpRight['followUp']>['outcome'],'pending'|'completed_by_help'>):ContinueFact[]{
+  const facts:ContinueFact[]=[];
+  for(const r of Object.values(ledger.rights)){
+    const f=r.followUp;if(!f||f.attempt!==a.board.id||f.outcome!=='pending')continue;
+    f.outcome=outcome;f.activeMs=Math.max(0,a.activeMs-f.startedAt);
+    facts.push({id:`${r.id}-followup-${outcome}`,entitlement:r.id,attempt:f.attempt,outcome,activeMs:f.activeMs});
+  }
+  return facts;
+}
+export function beginHelpFollowUp(r:HelpRight,a:SavedAttempt,complete:boolean):ContinueFact[]{
+  if(r.followUp||lifeEffect(r.kind))return [];
+  r.followUp={attempt:a.board.id,startedAt:a.activeMs,outcome:complete?'completed_by_help':'pending',...(complete?{activeMs:0}:{})};
+  return complete?[{id:`${r.id}-followup-completed_by_help`,entitlement:r.id,attempt:a.board.id,outcome:'completed_by_help',activeMs:0}]:[];
+}
 export interface HelpFact { id:string; phase:'request'|'grant'|'reserve'|'claim'|'use'|'unresolved'|'assignment'|'progress'; entitlement:string; request:string; sourceAttempt:string; attempt:string; kind:string; variant:string; manual:number; native:number; bonus:number; }
 const validId=(v:unknown):v is string=>typeof v==='string'&&/^[a-zA-Z0-9_-]{1,100}$/.test(v);
 const variant=(v:unknown):v is HelpVariant=>v==='legacy'||v==='single-v2'||v==='cascade-v1'||v==='route-v1'||v==='continue-single-v1';
@@ -52,7 +68,7 @@ export function makeOffer(save:GameSave,a:SavedAttempt,mode:HelpOwner['mode'],pl
   if(placement==='lives'){
     if(b.hearts!==0)return null;
     if(assigned==='continue-single-v1'&&ledger.candidateEnabled){
-      const occupied=!!a.hint||!!activeRight(save,a.board.id),plan=occupied?null:singlePlan(new Board(a.level,a.board.id,{...a.board,lives:3}));
+      const occupied=!!a.hint||!!activeRight(save,a.board.id),plan=occupied?null:singlePlan(new Board(a.level,a.board.id,{...a.board,lives:3}),false,visible);
       if(!occupied&&!plan)return null;
       return {id:`offer-${localIdentity(JSON.stringify([owner,a.board,occupied,plan]))}`,owner,variant:assigned,kind:'continue-single-v1',amount:3,plan,fallback:occupied?'occupied_help_retained':'',bundle:{hint:occupied?'retain':'new-single'}};
     }
@@ -90,6 +106,7 @@ export function decodeHelpLedger(value:unknown,campaign:SavedAttempt,daily:Recor
     if(!validId(id)||r.id!==id||!kind(r.kind)||r.version!==1||!['active','reserved','used'].includes(r.status)||!['sdk','legacy-save'].includes(r.origin)||
       r.receiptId!==null&&!validId(r.receiptId)||r.requestId!==null&&!validId(r.requestId))throw Error('Invalid earned help');
     checkOwner(r.originalOwner);if(r.owner)checkOwner(r.owner);checkBudget(r.kind,r.amount);
+    if(r.followUp){const f=r.followUp;if(r.status!=='used'||lifeEffect(r.kind)||!validId(f.attempt)||r.owner?.attempt!==f.attempt||!Number.isFinite(f.startedAt)||f.startedAt<0||!['pending','first_move','new_help','completed_by_help','exit','restart'].includes(f.outcome)||(f.outcome==='pending'?f.activeMs!==undefined:!Number.isFinite(f.activeMs)||f.activeMs!<0))throw Error('Invalid help follow-up');}
     if(r.plan&&(r.plan.kind!==(r.kind==='continue-single-v1'?'single-v2':r.kind)||r.kind==='cascade-v1'&&r.plan.budget!==r.amount))throw Error('Help amount changed');
     if(r.kind==='route-v1'&&r.status==='active'&&r.plan&&r.plan.budget>r.amount)throw Error('Route exceeds paid limit');
     if(r.kind==='continue-single-v1'){

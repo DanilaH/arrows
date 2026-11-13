@@ -1,0 +1,28 @@
+{
+  "source": "794bef1e5056800f2dd42343b02fe5f8fb1b586c",
+  "provenance": "Actual analytics.ts with an intentionally delayed fake bridge, not observed production load.",
+  "attempted": 33,
+  "observedByBridge": 32,
+  "saturated": {
+    "accepted": 0,
+    "disabled": 0,
+    "failed": 0,
+    "dropped": 1,
+    "outstanding": 32
+  },
+  "after": {
+    "accepted": 32,
+    "disabled": 0,
+    "failed": 0,
+    "dropped": 1,
+    "outstanding": 0
+  },
+  "newProcess": {
+    "accepted": 0,
+    "disabled": 0,
+    "failed": 0,
+    "dropped": 0,
+    "outstanding": 0
+  },
+  "diagnosticEventEmitted": false
+}

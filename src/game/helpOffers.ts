@@ -6,7 +6,7 @@ import type {createAnalytics} from '../platform/analytics';
 import {copy,type GameLanguage} from '../app/language';
 
 /** One current-state cache and visibility episode; no frame/tween/reward authority. */
-export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof createAds>,analytics:ReturnType<typeof createAnalytics>,language:()=>GameLanguage){
+export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof createAds>,analytics:ReturnType<typeof createAnalytics>,language:()=>GameLanguage,visibleCandidates:()=>ReadonlySet<string>=()=>new Set()){
   const cache=new Map<string,{key:string;value:{offer:HelpOffer|null;reserve:HelpRight|null}}>();
   let episode:{id:string;offerId:string;attempt:string;choices:Set<string>}|null=null,enrolling=false;
   const context=(attempt:string,chosen?:HelpVariant):AdContext=>{
@@ -15,8 +15,9 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
   };
   const snapshot=(attempt:string,placement:'hint'|'lives'='hint')=>{
     const saved=progress.findAttempt(attempt)?.saved,l=progress.state.helpLedger;
-    const key=JSON.stringify([attempt,placement,saved?.board,l.assignments[attempt],l.candidateEnabled,Object.values(l.rights).map(r=>[r.id,r.status,r.owner?.attempt])]);
-    let entry=cache.get(placement);if(entry?.key!==key){entry={key,value:{offer:progress.helpOffer(attempt,placement),reserve:progress.savedHelp(attempt)}};cache.set(placement,entry);}
+    const visible=visibleCandidates();
+    const key=JSON.stringify([attempt,placement,saved?.board,[...visible].sort(),l.assignments[attempt],l.candidateEnabled,Object.values(l.rights).map(r=>[r.id,r.status,r.owner?.attempt])]);
+    let entry=cache.get(placement);if(entry?.key!==key){entry={key,value:{offer:progress.helpOffer(attempt,placement,visible),reserve:progress.savedHelp(attempt)}};cache.set(placement,entry);}
     return entry!.value;
   };
   const visible=(show:boolean,attempt:string,placement:'hint'|'lives'='hint'):void=>{
@@ -33,7 +34,8 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
   };
   return {
     context,snapshot,visible,
-    choice(choice:string,requestId=''):void{if(episode&&!episode.choices.has(choice)){episode.choices.add(choice);analytics.track('assistance_choice',{event_id:`${episode.id}-${choice}`,offer_id:episode.offerId,attempt:episode.attempt,choice,request_id:requestId});}},
+    captureChoice(){return episode;},
+    choice(choice:string,requestId='',captured=episode,sourceAttempt=captured?.attempt):void{if(captured&&captured.attempt===sourceAttempt&&!captured.choices.has(choice)){captured.choices.add(choice);analytics.track('assistance_choice',{event_id:`${captured.id}-${choice}`,offer_id:captured.offerId,attempt:captured.attempt,choice,request_id:requestId});}},
     reveal(attempt:string,phase:'reveal_started'|'reveal_ready'):void{
       const right=progress.currentHelp(attempt);if(!right)return;const request=right.requestId?progress.state.helpLedger.requests[right.requestId]:null;
       analytics.track('assistance_fact',{event_id:`${right.id}-${phase}`,phase,entitlement_id:right.id,request_id:right.requestId??'',source_attempt:right.originalOwner.attempt,attempt,effect:right.kind,variant:request?.variant??'legacy-unknown',manual:0,native:0,bonus:0,use_origin:'none',component:right.bundle?`lives_${right.bundle.lives}_single_${right.bundle.single}`:'standalone'});
@@ -65,6 +67,7 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
         analytics.track('assistance_fact',{event_id:f.id,phase:f.phase,entitlement_id:f.entitlement,request_id:f.request,source_attempt:f.sourceAttempt,attempt:f.attempt,effect:f.kind,variant:request?.variant??(f.variant||'legacy-unknown'),manual:f.manual,native:f.native,bonus:f.bonus,use_origin:useOrigin,component:right?.bundle?`lives_${right.bundle.lives}_single_${right.bundle.single}${right.bundle.retainedAtOffer?'_retained':''}`:'standalone'});
       }
       for(const f of change.continueFacts??[])analytics.track('continue_outcome',{event_id:f.id,entitlement_id:f.entitlement,attempt:f.attempt,outcome:f.outcome,active_ms:f.activeMs});
+      for(const f of change.followupFacts??[])analytics.track('assistance_followup',{event_id:f.id,entitlement_id:f.entitlement,attempt:f.attempt,outcome:f.outcome,active_ms:f.activeMs});
     },
     renderQA():HTMLElement|null{
       if(!ads.rewardedState.playtest)return null;
