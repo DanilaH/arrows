@@ -7,7 +7,7 @@ import {copy,type GameLanguage} from '../app/language';
 
 /** One current-state cache and visibility episode; no frame/tween/reward authority. */
 export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof createAds>,analytics:ReturnType<typeof createAnalytics>,language:()=>GameLanguage){
-  let cacheKey='',cached:{offer:HelpOffer|null;reserve:HelpRight|null}={offer:null,reserve:null},episode:{id:string;offerId:string;attempt:string}|null=null,enrolling=false;
+  let cacheKey='',cached:{offer:HelpOffer|null;reserve:HelpRight|null}={offer:null,reserve:null},episode:{id:string;offerId:string;attempt:string;choices:Set<string>}|null=null,enrolling=false;
   const context=(attempt:string,chosen?:HelpVariant):AdContext=>{
     const ledger=progress.state.helpLedger,variant=chosen??ledger.assignments[attempt]??ledger.nextVariant;
     return {assignmentId:assignmentId(ledger,variant),variant,experimentId:'assistance-v1',installId:ledger.installId,qa:ads.rewardedState.playtest};
@@ -23,7 +23,7 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
     const {offer,reserve}=snapshot(attempt,placement),effect=reserve??offer;if(!effect){episode=null;return;}
     const offerId=reserve?`reserve-${reserve.id}`:offer!.id;
     if(episode?.offerId===offerId&&episode.attempt===attempt)return;
-    episode={id:crypto.randomUUID(),offerId,attempt};
+    episode={id:crypto.randomUUID(),offerId,attempt,choices:new Set()};
     const c=context(attempt),source=reserve?'reserve':'advertisement';
     analytics.track('assistance_offer',{event_id:episode.id,offer_id:offerId,attempt,variant:c.variant,effect:effect.kind,amount:effect.amount,readiness:ads.rewardedState.phase,source});
     if(!enrolling&&!progress.state.helpLedger.enrollments[c.assignmentId]){
@@ -32,7 +32,11 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
   };
   return {
     context,snapshot,visible,
-    choice(choice:string,requestId=''):void{if(episode)analytics.track('assistance_choice',{event_id:`${episode.id}-${choice}`,offer_id:episode.offerId,attempt:episode.attempt,choice,request_id:requestId});},
+    choice(choice:string,requestId=''):void{if(episode&&!episode.choices.has(choice)){episode.choices.add(choice);analytics.track('assistance_choice',{event_id:`${episode.id}-${choice}`,offer_id:episode.offerId,attempt:episode.attempt,choice,request_id:requestId});}},
+    reveal(attempt:string,phase:'reveal_started'|'reveal_ready'):void{
+      const right=progress.currentHelp(attempt);if(!right)return;const request=right.requestId?progress.state.helpLedger.requests[right.requestId]:null;
+      analytics.track('assistance_fact',{event_id:`${right.id}-${phase}`,phase,entitlement_id:right.id,request_id:right.requestId??'',source_attempt:right.originalOwner.attempt,attempt,effect:right.kind,variant:request?.variant??'legacy-unknown',manual:0,native:0,bonus:0,use_origin:'none'});
+    },
     label(attempt:string):{text:string;detail:string;reserved:boolean;kind:string}{
       const ru=language()==='ru',{offer,reserve}=snapshot(attempt),effect=reserve??offer;
       if(!effect)return {text:copy[language()].hint,detail:'',reserved:false,kind:'none'};

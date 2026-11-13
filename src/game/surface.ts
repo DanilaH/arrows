@@ -91,6 +91,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     activate(id) {
       if (requestingAd || motion.routeBusy || platform.activity.isBlocked()) return;
       if (control) { scene.activate(id); return; }
+      helpOffers.choice('continued_play');
       const expected = scene.board.attemptId;
       run(progress.move(expected, id, ...takeTime()));
     },
@@ -111,7 +112,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const loadActive = (): void => {
     cancel(); pendingTime = 0; pendingAdTime = 0; wasActive = false; freshWinAttempt = ''; dailyReturnAttempt=''; idleMs = 0; notice = '';
     const a = active(); celebratedAttempt = a.board.removed.length === a.level.arrows.length ? a.board.id : ''; pendingAward = false;
-    scene.loadAttempt(activeBoard(), a.view, a.guides, a.hint, false, true); sync(); scene.layout(); scheduleView(); sync();
+    scene.loadAttempt(activeBoard(), a.view, a.guides, a.hint, false, true);scene.setAssistance(progress.currentHelp(a.board.id)?.plan??null,true); sync(); scene.layout(); scheduleView(); sync();
   };
   const resumeErrors = (): void => {
     const attempt=scene.board.attemptId;
@@ -246,7 +247,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       if(requestingAd || transition.busy || motion.routeBusy || platform.activity.isBlocked())return;
       assistance=null;
       if(effect.lives && scene.board.hearts===effect.lives.to){motion.refill(document.querySelector<HTMLElement>('#hearts')!,effect.lives.from,effect.lives.to);platform.feedback.play('life');}
-      if(effect.hint && scene.hintTarget===effect.hint)scene.revealHint(effect.hint);
+      if(effect.hint && scene.hintTarget===effect.hint){scene.revealHint(effect.hint);helpOffers.reveal(effect.attempt,'reveal_started');}
     });
   };
   const sync = (): void => {
@@ -442,7 +443,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     else if(event.kind==='repeat-impact')platform.feedback.play('repeat-error');
     else if(event.kind==='auto-start')platform.feedback.play('auto');
     else if(event.kind==='help-finish')platform.feedback.play('help-final');
-    else if (event.kind === 'hint-ready') platform.feedback.play('hint');
+    else if (event.kind === 'hint-ready') {platform.feedback.play('hint');helpOffers.reveal(event.attempt,'reveal_ready');}
     else if (event.kind === 'exit') platform.feedback.play('exit');
     else if (event.kind === 'victory' && celebratedAttempt !== event.attempt) { celebratedAttempt = event.attempt; platform.feedback.play(pendingAward ? 'award' : scene.board.snapshot().errors.length===0 ? 'perfect' : 'win'); pendingAward = false; }
     else if (event.kind === 'win-ready' && (control || freshWinAttempt === event.attempt)) {motion.reward(document.querySelector('#win')!);saveView();if(activeDate)dailyReturnAttempt=event.attempt;}

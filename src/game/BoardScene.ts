@@ -189,6 +189,7 @@ export class BoardScene extends Phaser.Scene {
   }
   public setHint(id: string | null, focus = true): void {
     if(this.hintTarget===id)return;
+    if(id)this.manualCamera=false;
     this.hintTarget=id;this.hintReveal=null;this.retarget();
     if(focus)this.focusHint(id);
     this.stableDirty=true;this.changed();
