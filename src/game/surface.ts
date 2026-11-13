@@ -71,7 +71,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   };
   const point = (event: PointerEvent | WheelEvent): Point => ({ x: event.clientX, y: event.clientY });
   const inBoard = (p: Point): boolean => {
-    const v = scene.playArea; return p.x >= v.x && p.y >= v.y && p.x <= v.x + v.width && p.y <= v.y + v.height;
+    const v = scene.playArea; return p.x >= v.x + 12 && p.y >= v.y && p.x <= v.x + v.width - 12 && p.y <= v.y + v.height;
   };
   const gestures = new BoardGestures({
     hit(p) {

@@ -5,7 +5,8 @@ export class BoardCamera {
   public x = 0; public y = 0; public scale = 1;
   public minScale = 1; public maxScale = 1;
   private view: Rect = { x: 0, y: 0, width: 1, height: 1 };
-  public constructor(private readonly width: number, private readonly height: number) {}
+  public constructor(private readonly width: number, private readonly height: number,
+    private readonly bounds: Rect = { x: 0, y: 0, width: width - 1, height: height - 1 }) {}
   public screen(p: Point): Point { return { x: this.x + p.x * this.scale, y: this.y + p.y * this.scale }; }
   public world(p: Point): Point { return { x: (p.x - this.x) / this.scale, y: (p.y - this.y) / this.scale }; }
   public snapshot(): ViewState {
@@ -45,7 +46,10 @@ export class BoardCamera {
       if (span <= size - 32) return start + (size - span) / 2;
       return Math.max(start + size - span - 48, Math.min(start + 48, offset));
     };
-    this.x = limit(this.x, (this.width - 1) * this.scale, this.view.x, this.view.width);
-    this.y = limit(this.y, (this.height - 1) * this.scale, this.view.y, this.view.height);
+    // Bounds belong to the original field, never its shrinking remaining arrows.
+    // Ignore catalogue padding while preserving world coordinates and saved zoom.
+    const left = this.bounds.x * this.scale, top = this.bounds.y * this.scale;
+    this.x = limit(this.x + left, this.bounds.width * this.scale, this.view.x, this.view.width) - left;
+    this.y = limit(this.y + top, this.bounds.height * this.scale, this.view.y, this.view.height) - top;
   }
 }

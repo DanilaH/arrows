@@ -37,6 +37,7 @@ export class BoardScene extends Phaser.Scene {
   public clock = 0;
   public frames = 0;
   public playArea: Rect = { x: 0, y: 0, width: 1, height: 1 };
+  private renderArea: Rect = { x: 0, y: 0, width: 1, height: 1 };
   private colors: { arrow: number; exit: number; error: number; dot: number; guide: number } = boardPalettes.dark;
   private theme: GameTheme = 'dark';
   public setTheme(theme: GameTheme): void {
@@ -135,7 +136,11 @@ export class BoardScene extends Phaser.Scene {
     if(blend){const ratio=1/this.scale.zoom, old=this.boardCamera;this.outgoingWorld.setPosition(old.x*ratio,old.y*ratio).setScale(old.scale*ratio*(this.outgoing instanceof Phaser.GameObjects.Blitter?.01:1));this.dotBatch(this.outgoing,this.board.level.mask);}
     this.transitionAt=blend?this.clock:-1;this.hintReveal=null;this.victorySource=null;this.victoryDots=[];
     const level = board.level; this.board = board; this.guides = guides; this.hintTarget = null; this.focusMotion = null; this.finishFramed = board.complete;
-    this.boardCamera = new BoardCamera(level.width, level.height);
+    let left=level.width-1, top=level.height-1, right=0, bottom=0;
+    for(const p of [...level.mask,...level.arrows.flatMap(arrow=>arrow.path)]){
+      left=Math.min(left,p.x);top=Math.min(top,p.y);right=Math.max(right,p.x);bottom=Math.max(bottom,p.y);
+    }
+    this.boardCamera = new BoardCamera(level.width, level.height,{x:left,y:top,width:right-left,height:bottom-top});
     this.paths = new Map(level.arrows.map(a => [a.id, measurePath(a.path)]));
     this.dotMask = new Map(level.mask.map(p => [`${p.x},${p.y}`, p]));
     this.flights.length = 0; this.bumps.clear(); this.impacts.length = 0; this.confetti.length = 0; this.pulses.clear(); this.preview = null; this.rewardCelebration=false; this.active.clear(); this.overlay.clear(); this.reactiveDots.clear();
@@ -174,7 +179,7 @@ export class BoardScene extends Phaser.Scene {
   public get finished(): boolean { return this.announcedWin; }
   public artwork(): BoardArtwork {
     const ink=this.arrowWidth, color=(value:number)=>`#${value.toString(16).padStart(6,'0')}`;
-    return { levelId:this.board.level.id, camera:{x:this.boardCamera.x,y:this.boardCamera.y,scale:this.boardCamera.scale}, viewport:{...this.playArea}, ink,
+    return { levelId:this.board.level.id, camera:{x:this.boardCamera.x,y:this.boardCamera.y,scale:this.boardCamera.scale}, viewport:{...this.renderArea}, ink,
       arrows:this.board.remaining.map(arrow=>{const width=Math.min(.68,ink*(arrow.id===this.hintTarget?1.65:1));return {path:arrow.path,width,tip:Math.min(.74,Math.max(.48,width*2.15)),color:color(arrow.id===this.hintTarget?this.colors.exit:this.board.isError(arrow.id)?this.colors.error:this.colors.arrow)};}),
       afterPaint: done=>{this.game.events.once(Phaser.Core.Events.POST_RENDER,done);return()=>{this.game.events.off(Phaser.Core.Events.POST_RENDER,done);};},
     };
@@ -184,17 +189,20 @@ export class BoardScene extends Phaser.Scene {
     const header=document.querySelector<HTMLElement>('#game-header'), footer=document.querySelector<HTMLElement>('#game-footer');
     // Layout bounds exclude transient HUD transforms during a menu transition.
     const top=header?header.offsetTop+header.offsetHeight:92, bottom=footer?footer.offsetTop:this.heightCss-100;
-    return { x: 0, y: top + 12, width: this.widthCss, height: Math.max(100, bottom - top - 24) };
+    return { x: 0, y: top + 28, width: this.widthCss, height: Math.max(100, bottom - top - 36) };
   }
   public layout(reset = false): void {
     const ratio = 1 / this.scale.zoom;
     this.widthCss = this.scale.width / ratio; this.heightCss = this.scale.height / ratio;
     this.playArea = this.measureView();
     this.boardCamera.layout(this.playArea, reset);
-    const view = this.playArea;
-    // A camera viewport is a scissor in both renderer backends; no offscreen mask/filter allocation.
-    this.cameras.main.setViewport(view.x * ratio, view.y * ratio, view.width * ratio, view.height * ratio)
-      .setScroll(view.x * ratio, view.y * ratio);
+    this.renderArea = {x:0,y:0,width:this.widthCss,height:this.heightCss};
+    const root=document.querySelector<HTMLElement>('#game-root')!;
+    root.style.setProperty('--board-clear-top',`${this.playArea.y}px`);
+    root.style.setProperty('--board-clear-bottom',`${this.playArea.y+this.playArea.height}px`);
+    // Render past the safe interaction/fit area; static DOM gradients soften the
+    // edges in both WebGL and Canvas without renderer masks or texture passes.
+    this.cameras.main.setViewport(0,0,this.widthCss*ratio,this.heightCss*ratio).setScroll(0,0);
     this.transform(); this.stableDirty = true; this.changed();
   }
   private transform(): void {
@@ -296,7 +304,7 @@ export class BoardScene extends Phaser.Scene {
       const amount=Math.max(0,Math.min(1,(this.clock-this.entry-Math.min(90,index*8))/280)), ease=1-(1-amount)**3;
       const path = this.paths.get(arrow.id)!;
       if (this.guides || arrow.id === this.preview) {
-        const head = arrow.path.at(-1)!, at=this.boardCamera.screen(head), dir=path.direction, view=this.playArea;
+        const head = arrow.path.at(-1)!, at=this.boardCamera.screen(head), dir=path.direction, view=this.renderArea;
         const distance=(dir.x>0?view.x+view.width-at.x:dir.x<0?at.x-view.x:dir.y>0?view.y+view.height-at.y:at.y-view.y)/this.boardCamera.scale;
         const growth=this.reducedMotion||this.guides?1:1-(1-Math.min(1,(this.clock-this.previewAt)/160))**3;
         this.guidesLayer.lineStyle(Math.min(.22, 1.8 / this.boardCamera.scale), this.colors.guide, 1);
@@ -409,7 +417,7 @@ export class BoardScene extends Phaser.Scene {
       }
       const path = extractPath(flight.path, flight.travelled), tail = this.boardCamera.screen(path[0]!);
       const dir = flight.path.direction;
-      const view = this.playArea;
+      const view = this.renderArea;
       const leftView = dir.x > 0 ? tail.x > view.x + view.width + 30 : dir.x < 0 ? tail.x < view.x - 30 : dir.y > 0 ? tail.y > view.y + view.height + 30 : tail.y < view.y - 30;
       if (flight.travelled >= flight.path.length && leftView) { this.flights.splice(i, 1); this.feedback('exit'); continue; }
       this.stroke(this.active, path, this.colors.exit, stroke, true);

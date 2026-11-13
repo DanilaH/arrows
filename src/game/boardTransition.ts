@@ -23,9 +23,13 @@ export function createBoardTransition(preview: SVGSVGElement, art: BoardArtwork,
   if (!matrix || !rect.width || !rect.height || bodies.length !== art.arrows.length || heads.length !== bodies.length) return null;
   const home = `matrix(${matrix.a},${matrix.b},${matrix.c},${matrix.d},${matrix.e},${matrix.f})`;
   const { x,y,scale } = art.camera, game = `matrix(${scale},0,0,${scale},${x},${y})`;
-  const layer = document.createElementNS(ns,'svg'), group = document.createElementNS(ns,'g');
+  const layer = document.createElement('div'), svg = document.createElementNS(ns,'svg'), group = document.createElementNS(ns,'g');
   layer.classList.add('board-transition');layer.setAttribute('aria-hidden','true');
-  layer.setAttribute('viewBox',`0 0 ${innerWidth} ${innerHeight}`);layer.append(group);
+  svg.setAttribute('viewBox',`0 0 ${innerWidth} ${innerHeight}`);svg.append(group);
+  const fade=document.createElement('div');fade.className='board-edge-fade';
+  const edgeStyle=getComputedStyle(document.querySelector('#game-root')!);
+  for(const name of ['--board-clear-top','--board-clear-bottom'])layer.style.setProperty(name,edgeStyle.getPropertyValue(name));
+  layer.append(svg,fade);
   const homeInk = parseFloat(getComputedStyle(bodies[0]!).strokeWidth), gameInk = art.ink*scale;
   const opacity=entering?getComputedStyle(preview).opacity:'1';layer.style.opacity=opacity;
   layer.style.strokeWidth = `${entering ? gameInk : homeInk}px`;

@@ -78,6 +78,17 @@ describe('CSS/world camera coordinates', () => {
     const large = new BoardCamera(47, 55); large.layout({ x: 0, y: 100, width: 390, height: 600 }, true);
     expect(large.minScale).toBeCloseTo(350 / 48);
   });
+  it('centers original occupied bounds and reaches every edge without panning through catalogue padding', () => {
+    // c120 has ten empty catalogue rows below its original figure.
+    const camera = new BoardCamera(47, 51, { x: 4, y: 0, width: 38, height: 40 });
+    camera.layout({ x: 0, y: 100, width: 390, height: 600 }, true);
+    expect(camera.screen({ x: 23, y: 20 })).toEqual({ x: 195, y: 400 });
+    camera.zoom({ x: 195, y: 400 }, { x: 195, y: 400 }, 100);
+    camera.pan(1e9, 1e9);
+    expect(camera.screen({ x: 4, y: 0 })).toEqual({ x: 48, y: 148 });
+    camera.pan(-1e9, -1e9);
+    expect(camera.screen({ x: 42, y: 40 })).toEqual({ x: 342, y: 652 });
+  });
   it('bounds zoom and pan, and keeps the board reachable after orientation changes', () => {
     const camera = new BoardCamera(47, 55);
     camera.layout({ x: 0, y: 100, width: 390, height: 600 }, true);
