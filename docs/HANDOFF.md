@@ -1,5 +1,9 @@
 # Arrows handoff — 2026-11-13
 
+## Pending kit transfer audit
+
+Owner requested research before refactoring mini-games-kit. [KIT_TRANSFER_AUDIT_2026-11-13.md](KIT_TRANSFER_AUDIT_2026-11-13.md) compares Arrows `e535fe4`/runtime pin `a932526` with kit `f154e0b`. Prioritize numeric native-haptic decoding/cancel and finite transition ownership recipes; performance/backend and APK/audio evidence follow. Advertising banner geometry already exists in kit; compact slot policy remains HOLD without a concrete donor. The c10/c20 in-game unlock notice is a separate local presentation candidate. No runtime extraction, dependency upgrade or gameplay change has been made by this audit; kit impact is IMPROVE proposals/CANDIDATE, not EXTRACTED.
+
 ## Current milestone
 
 Version **0.19.0 / Android versionCode 30** implements the owner’s next ten phone-feedback items. Read `PHONE_FEEL_V2.md`: automatic marked-arrow release/upgrade resume, one durable lifetime free refill, tactile/air sound revision, visible warm Hint/stronger rays, full-field camera before a distinct flawless finish, in-game c10/c20 unlock arrivals, stronger cancellable press acknowledgement and retained large-field geometry/dot batching. This explicitly supersedes the old per-attempt gift and manual marked-arrow reactivation. Schema2 is additive; content, embedded attempts, receipt/SDK/ad clocks and kit pin remain authoritative. Final verification and actual media follow below; no physical-phone FPS/sound acceptance claim. KIT IMPACT: NONE.
