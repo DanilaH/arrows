@@ -4,6 +4,7 @@ import {Board} from '../../src/domain/board';
 import {freshSave,freshAttempt,SAVE_KEY,decodeSave} from '../../src/progression/save';
 import {openAssistanceReview} from './helpers/assistanceReview';
 async function seed(page:Page){
+  await page.addInitScript(()=>{let count=0;const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=callback=>raf(time=>{count++;callback(time);});Object.defineProperty(window,'assistanceFrameCount',{get:()=>count});});
   const s=freshSave();s.index=39;s.campaign=freshAttempt(campaign[39]!);const b=new Board(s.campaign.level,s.campaign.board.id);
   for(let i=0;i<=20;i++)b.activate(`c40-${i}`);s.campaign.board=b.snapshot();s.campaign.started=true;s.helpLedger.assignments[b.attemptId]='cascade-v1';s.tutorials=['tap','error','hint','zoom'];
   s.wins=campaign.slice(0,39).map((l,i)=>({attempt:`seed-${i}`,levelId:l.id,activeMs:1000,completedAt:1000+i,mistakes:0}));decodeSave(s);
@@ -24,7 +25,7 @@ for(const marked of [false,true])test(`fixed cascade actual writer/input ${marke
   const after=await saved(page),right=after.helpLedger.rights[request.requestId];expect(right.status).toBe('used');expect(right.operation.manual).toEqual(['c40-22']);
   expect(right.operation.native).toEqual(marked?['c40-23','c40-24']:[]);expect(right.operation.bonus).toEqual(marked?['c40-27']:['c40-23','c40-24','c40-27']);expect(after.campaign.board.lives).toBe(marked?1:3);
   await page.evaluate(()=>Reflect.get(window,'assistanceFixture').duplicate());expect((await saved(page)).campaign.board).toEqual(after.campaign.board);
-  await page.waitForTimeout(3000);const first=Number(await page.locator('#game-shell').getAttribute('data-frames'));await page.waitForTimeout(500);expect(Number(await page.locator('#game-shell').getAttribute('data-frames'))-first).toBeLessThanOrEqual(2);
+  await page.waitForTimeout(3000);const first=await page.evaluate(()=>Reflect.get(window,'assistanceFrameCount') as number);expect(first).toBeGreaterThan(0);await page.waitForTimeout(500);expect(await page.evaluate(()=>Reflect.get(window,'assistanceFrameCount') as number)-first).toBeLessThanOrEqual(2);
 });
 
 test('restores the exact earned group quietly, then uses it without another show',async({page})=>{

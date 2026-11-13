@@ -187,14 +187,15 @@ export class ProgressStore {
     if (!this.available) { if (requireDurable) throw Error('No durable storage'); return; }
     try { await this.repository.write(candidate); this.error = null; }
     catch {
+      let confirmedFailure=false;
       try {
         const raw = await this.storage.getItem(SAVE_KEY);
         if (raw === JSON.stringify(candidate)) { this.error = null; return; }
         // A failed write may still have committed. Only authoritative readback can settle it.
         if (raw === null && this.state.revision === 0 || raw !== null && JSON.stringify(decodeSave(JSON.parse(raw))) === JSON.stringify(this.state)) {
-          this.error = 'write'; this.emit({ kind: 'state' }); throw Error('Confirmed failed save');
+          confirmedFailure=true;this.error = 'write'; this.emit({ kind: 'state' }); throw Error('Confirmed failed save');
         }
-      } catch (error) { if (this.error === 'write') throw error; }
+      } catch (error) { if (confirmedFailure) throw error; }
       this.uncertain = true; this.error = 'uncertain'; this.emit({ kind: 'state' }); throw Error('Unknown save outcome');
     }
   }

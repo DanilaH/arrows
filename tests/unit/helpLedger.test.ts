@@ -83,4 +83,12 @@ describe('durable immutable assistance rights',()=>{
     await store.setNextHelpVariant('single-v2');await store.setHelpCandidateEnabled(false);
     expect(store.state.helpLedger.assignments[attempt]).toBe('cascade-v1');await store.move(attempt,'c40-22');expect(store.board.remaining).toHaveLength(15);
   });
+  it('keeps an explicit reserve through failed claim and recovers an uncertain claim exactly once',async()=>{
+    const {store,failWrite,uncertain,repair}=await setup(),r=await request(store),old=store.board.attemptId;await store.commitReward(earned(r));await store.restart(old);
+    const attempt=store.board.attemptId;for(let i=0;i<21;i++)await store.move(attempt,`c40-${i}`);
+    failWrite(true);await expect(store.claimHelp(attempt,r.requestId)).rejects.toThrow();expect(store.state.helpLedger.rights[r.requestId]!.status).toBe('reserved');failWrite(false);
+    uncertain();await expect(store.claimHelp(attempt,r.requestId)).rejects.toThrow();expect(store.uncertain).toBe(true);repair();await store.recover();expect(store.currentHelp(attempt)!.id).toBe(r.requestId);expect(await store.claimHelp(attempt,r.requestId)).toBeUndefined();
+    await store.commitReward(earned(r));expect(store.currentHelp(attempt)!.id).toBe(r.requestId);
+  });
+
 });

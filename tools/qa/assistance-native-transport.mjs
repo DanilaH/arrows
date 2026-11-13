@@ -22,7 +22,7 @@ export function controlledNative({save,settings}) {
       }
     }
   };
-  const Original=window.AudioContext;let audioContext,destination,recorder,chunks=[];
+  const Original=window.AudioContext;let audioContext,destination,recorder,recordingContext,chunks=[];
   const connect=AudioNode.prototype.connect;
   AudioNode.prototype.connect=function(target,...args){if(audioContext&&target===audioContext.destination)connect.call(this,destination);return connect.call(this,target,...args);};
   window.AudioContext=class extends Original{constructor(...args){super(...args);audioContext=this;destination=this.createMediaStreamDestination();}};
@@ -34,8 +34,8 @@ export function controlledNative({save,settings}) {
     background(value){emit('App','appStateChange',{isActive:!value});},
     loading(){loadPhase='loading';emit('ArrowsAds','adEvent',{kind:'rewarded',phase:'preload_start',readiness:readiness()});},
     lateReady(){loadPhase='ready';emit('ArrowsAds','adEvent',{kind:'rewarded',phase:'preload_ready',readiness:readiness()});},
-    async startAudio(){await audioContext?.resume();chunks=[];recorder=new MediaRecorder(destination.stream,{mimeType:'audio/webm;codecs=opus'});recorder.ondataavailable=e=>chunks.push(e.data);recorder.start();},
-    stopAudio(){return new Promise(r=>{recorder.onstop=async()=>{const bytes=new Uint8Array(await new Blob(chunks).arrayBuffer());r(Array.from(bytes));};recorder.stop();});}
+    async startAudio(){chunks=[];recordingContext=new Original();await recordingContext.resume();const sink=recordingContext.createMediaStreamDestination();recordingContext.createMediaStreamSource(destination.stream).connect(sink);recorder=new MediaRecorder(sink.stream,{mimeType:'audio/webm;codecs=opus'});recorder.ondataavailable=e=>chunks.push(e.data);recorder.start();},
+    stopAudio(){return new Promise(r=>{recorder.onstop=async()=>{const bytes=new Uint8Array(await new Blob(chunks).arrayBuffer());await recordingContext.close();r(Array.from(bytes));};recorder.stop();});}
   };
   addEventListener('DOMContentLoaded',()=>{const label=document.createElement('div');label.id='qa-recording-source';label.textContent='CURRENT APK WEB PAYLOAD · SEEDED QA · CONTROLLED AD TRANSPORT';label.style.cssText='position:fixed;bottom:1px;left:0;right:0;z-index:999;pointer-events:none;text-align:center;font:8px sans-serif;color:#8291a8;background:#1e1e2c';document.body.append(label);});
 }
