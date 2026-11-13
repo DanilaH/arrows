@@ -1,0 +1,55 @@
+{
+  "source": "ffc925b2610c65185c47e80d0fe94cd4429d884e",
+  "provenance": "Unmodified production dist, browser Chromium WebGL, 390x844 DPR1.5; explicitly seeded saves and controlled native SDK transport. No real ad video, natural player behaviour or physical haptics claimed.",
+  "payload": {
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "fbc1b082650ea46b8d1f8ab76f406864c08189e1077dc5bdae5e56ec46ce86bc",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "assets/index-BBkAoISK.css": "b31c4ff9dab5d5b026860171938b4b971d4f2f1533ae33cc0cd7da42516b5bf0",
+    "assets/index-U_e6P_Ge.js": "b7f5c34c18469b01e2f720fb60068ca866aa35dfa3cbcfa6e68441f8506a6b0d",
+    "assets/web-HOpQF01v.js": "d538d1eaf0f7ae48b3b59b6bec9417deeb04363c8f018ac7e302e9908a0935b4"
+  },
+  "clips": [
+    {
+      "name": "a4-new",
+      "capturedSource": "ffc925b2610c65185c47e80d0fe94cd4429d884e",
+      "theme": "dark",
+      "level": "c40",
+      "variant": "continue-single-v1",
+      "zoom": 1.55,
+      "frames": 35,
+      "durationMs": 4119.345233,
+      "remaining": 15,
+      "qa": true
+    },
+    {
+      "name": "a4-retain",
+      "capturedSource": "ffc925b2610c65185c47e80d0fe94cd4429d884e",
+      "theme": "light",
+      "level": "c40",
+      "variant": "continue-single-v1",
+      "zoom": 1.55,
+      "frames": 40,
+      "durationMs": 3885.0101950000007,
+      "remaining": 19,
+      "qa": true
+    },
+    {
+      "name": "a4-late-component",
+      "capturedSource": "ffc925b2610c65185c47e80d0fe94cd4429d884e",
+      "theme": "dark",
+      "level": "c40",
+      "variant": "continue-single-v1",
+      "zoom": 1.55,
+      "frames": 72,
+      "durationMs": 7745.3585,
+      "remaining": 15,
+      "qa": true
+    }
+  ]
+}

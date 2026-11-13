@@ -1,0 +1,41 @@
+{
+  "bytes": 10404407,
+  "sha256": "e86e76819c2e909a42af5c19a162d12868091f8f63c639179e5e6669dbb00839",
+  "package": "com.danilah.arrows.playtest",
+  "versionName": "0.23.0",
+  "versionCode": "35",
+  "label": "Стрелки · Тест",
+  "v2Certificates": [
+    "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36"
+  ],
+  "nativeConfig": {
+    "AD_MODE": "test",
+    "ANALYTICS_API_KEY": "",
+    "APPLICATION_ID": "com.danilah.arrows.playtest",
+    "INTERSTITIAL_AD_UNIT_ID": "demo-interstitial-yandex",
+    "REWARDED_AD_UNIT_ID": "demo-rewarded-yandex"
+  },
+  "payload": {
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/gestures-BBkAoISK.css": "b31c4ff9dab5d5b026860171938b4b971d4f2f1533ae33cc0cd7da42516b5bf0",
+    "assets/gestures-BWK0X5qs.js": "0351641ddfd31aef9baf71c44231c45dd7a3b3743fae0fbde93df3c97fca76f1",
+    "assets/main-CGd4BDfP.js": "8927973d7fd705d186ed23e81e809067ff3f00c8bcdc1966e737e50d75b8a9c9",
+    "assets/targetLab-D9KRaeTg.js": "3c95a23a554e30be11bad7e4ccc62448f4861c6eec9cc4db5911969e53b23905",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "index.html": "d2151d1571623a169ffb67935f1773a3c358e104b168e8e6e6451ec382c31223",
+    "target-lab.html": "d3a306b6b60db9f1a497f07008ed872d0b4ff2f5da615935056511f93a24b41c",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "capacitorAdapters": {
+    "cordova.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cordova_plugins.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "capturePayloadMatches": true
+}

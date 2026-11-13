@@ -1,0 +1,146 @@
+{
+  "source": "ccf330a7f056fb386ee3da5fbc289d896f68dc5c",
+  "environment": "actual frozen0.23.0 APK web payload, Chromium390x844 DPR1.5; controlled native transport; sound/vibration off. Monochrome screenshots are an explicit CSS diagnostic, not a game theme.",
+  "rows": [
+    {
+      "id": "FEEL-03/06",
+      "variant": "cascade-v1",
+      "theme": "dark",
+      "silent": true,
+      "monochrome": true,
+      "gesture": "press→pan→release",
+      "boardUnchanged": true
+    },
+    {
+      "id": "FEEL-03/06",
+      "variant": "cascade-v1",
+      "theme": "light",
+      "silent": true,
+      "monochrome": true,
+      "gesture": "press→pan→release",
+      "boardUnchanged": true
+    },
+    {
+      "id": "FEEL-03/06",
+      "variant": "route-v1",
+      "theme": "dark",
+      "silent": true,
+      "monochrome": true,
+      "gesture": "press→pan→release",
+      "boardUnchanged": true
+    },
+    {
+      "id": "FEEL-03/06",
+      "variant": "route-v1",
+      "theme": "light",
+      "silent": true,
+      "monochrome": true,
+      "gesture": "press→pan→release",
+      "boardUnchanged": true
+    },
+    {
+      "id": "FEEL-17",
+      "level": "c20",
+      "gesture": "pan",
+      "before": {
+        "x": -620.5,
+        "y": 69.375,
+        "scale": 21.875
+      },
+      "during": {
+        "x": -550.0012478823968,
+        "y": -227.78259058454944,
+        "scale": 23.311640056530795
+      },
+      "hand": {
+        "x": -339.6992200124199,
+        "y": -584.8662774745887,
+        "scale": 25.689736105280552
+      },
+      "after": {
+        "x": -339.6992200124199,
+        "y": -584.8662774745887,
+        "scale": 25.689736105280552
+      },
+      "noReturn": true
+    },
+    {
+      "id": "FEEL-17",
+      "level": "c20",
+      "gesture": "pinch",
+      "before": {
+        "x": -620.5,
+        "y": 69.375,
+        "scale": 21.875
+      },
+      "during": {
+        "x": -533.6362623853717,
+        "y": -292.96302542318335,
+        "scale": 23.60657825273666
+      },
+      "hand": {
+        "x": -787.8426655266326,
+        "y": -1272.395520094337,
+        "scale": 42
+      },
+      "after": {
+        "x": -787.8426655266326,
+        "y": -1272.395520094337,
+        "scale": 42
+      },
+      "noReturn": true
+    },
+    {
+      "id": "FEEL-17",
+      "level": "c120",
+      "gesture": "pan",
+      "before": {
+        "x": -576.75,
+        "y": -159,
+        "scale": 21.875
+      },
+      "during": {
+        "x": -279.795733632538,
+        "y": 63.28991371008868,
+        "scale": 23.98435435202832
+      },
+      "hand": {
+        "x": -54.67479664032152,
+        "y": 135,
+        "scale": 25.66869916008038
+      },
+      "after": {
+        "x": -54.67479664032152,
+        "y": 135,
+        "scale": 25.66869916008038
+      },
+      "noReturn": true
+    },
+    {
+      "id": "FEEL-17",
+      "level": "c120",
+      "gesture": "pinch",
+      "before": {
+        "x": -576.75,
+        "y": -159,
+        "scale": 21.875
+      },
+      "during": {
+        "x": -346.92928275257907,
+        "y": 13.026520682700209,
+        "scale": 23.545698083675717
+      },
+      "hand": {
+        "x": -214.3422400326104,
+        "y": -41.490585095019526,
+        "scale": 42
+      },
+      "after": {
+        "x": -214.3422400326104,
+        "y": -41.490585095019526,
+        "scale": 42
+      },
+      "noReturn": true
+    }
+  ]
+}

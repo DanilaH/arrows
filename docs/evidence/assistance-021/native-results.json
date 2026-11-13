@@ -1,0 +1,36 @@
+{
+  "suites": [
+    {
+      "name": "com.danilah.arrows.RewardJournalCoreTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "name": "com.danilah.arrows.FeedbackPatternTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "name": "com.danilah.arrows.RewardedCacheStateTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "name": "com.danilah.arrows.FeedbackCounterTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "name": "com.danilah.arrows.ImpressionValueTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "total": 17,
+  "failures": 0
+}

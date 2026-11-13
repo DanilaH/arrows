@@ -1,0 +1,136 @@
+{
+  "results": [
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-021/arrows-0.21.0-playtest.apk",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_000000001f3c8210bd0f81819986934c",
+      "library_file_id": "libfile_43a276c55e6481919040cde3726c7983",
+      "file_name": "arrows-0.21.0-playtest.apk",
+      "local_metadata_applied": true,
+      "path": "/arrows-0.21.0-playtest.apk",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-022/arrows-0.22.0-playtest.apk",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_000000001f3082109f4047a9419b9d3c",
+      "library_file_id": "libfile_b4d9277195b48191a5f2761a251ce26b",
+      "file_name": "arrows-0.22.0-playtest.apk",
+      "local_metadata_applied": true,
+      "path": "/arrows-0.22.0-playtest.apk",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-023/arrows-0.23.0-playtest.apk",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_0000000035bc8210a1ababdc91b397b6",
+      "library_file_id": "libfile_c922d2464bb0819189eb1721f0a6f196",
+      "file_name": "arrows-0.23.0-playtest.apk",
+      "local_metadata_applied": true,
+      "path": "/arrows-0.23.0-playtest.apk",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-023/a3/route-pause-early.gif",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000ccc482109800bbaf78423ca8",
+      "library_file_id": "libfile_2d4c9fafc0a88191b6b730c8cc9ffca8",
+      "file_name": "route-pause-early.gif",
+      "local_metadata_applied": true,
+      "path": "/route-pause-early.gif",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-023/a3/route-native-skip.gif",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_0000000079848210a025a4919ee3e7d9",
+      "library_file_id": "libfile_1b1f3b2ed93c8191893a159f3bc4607b",
+      "file_name": "route-native-skip.gif",
+      "local_metadata_applied": true,
+      "path": "/route-native-skip.gif",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-023/a3/route-partial-reserve.gif",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_000000006e888210807e1456e8890d7a",
+      "library_file_id": "libfile_95a685547d5081918121b1cd96c82a1d",
+      "file_name": "route-partial-reserve.gif",
+      "local_metadata_applied": true,
+      "path": "/route-partial-reserve.gif",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-023/a4/a4-new.gif",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_0000000010688211a1aeed1c70b79dc9",
+      "library_file_id": "libfile_0c61601bf370819183cee5cc97aa56c3",
+      "file_name": "a4-new.gif",
+      "local_metadata_applied": true,
+      "path": "/a4-new.gif",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-023/a4/a4-retain.gif",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000fdf08211b5e8ddae91733b67",
+      "library_file_id": "libfile_1695733f1c7c81919b2e661798b45436",
+      "file_name": "a4-retain.gif",
+      "local_metadata_applied": true,
+      "path": "/a4-retain.gif",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-023/a4/a4-late-component.gif",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_000000000e2082109c7e4f6cd0a6cd6d",
+      "library_file_id": "libfile_3b711b68b0688191896a2afa5e3bf35e",
+      "file_name": "a4-late-component.gif",
+      "local_metadata_applied": true,
+      "path": "/a4-late-component.gif",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-023/b1-target-none.gif",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000ddc482108232d8aec4541831",
+      "library_file_id": "libfile_938e40d528d0819193a953eff6872eae",
+      "file_name": "b1-target-none.gif",
+      "local_metadata_applied": true,
+      "path": "/b1-target-none.gif",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-023/b1-target-qa-single.gif",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000ca588210b5e9c6e937e3535e",
+      "library_file_id": "libfile_d8c5c59cddbc8191af8481e9f3edfaac",
+      "file_name": "b1-target-qa-single.gif",
+      "local_metadata_applied": true,
+      "path": "/b1-target-qa-single.gif",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/assistance-023/arrows-0.23.0-actual-audio.mp4",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000e5508211b00bccecad126cc6",
+      "library_file_id": "libfile_dceadc4e7be4819186eae12103dd766e",
+      "file_name": "arrows-0.23.0-actual-audio.mp4",
+      "local_metadata_applied": true,
+      "path": "/arrows-0.23.0-actual-audio.mp4",
+      "current_version_number": 0
+    }
+  ]
+}

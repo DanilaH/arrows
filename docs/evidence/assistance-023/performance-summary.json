@@ -1,0 +1,496 @@
+{
+  "baseline": "ad4bc416",
+  "candidate": "ccf330a7",
+  "method": "phone-rendering-profile.mjs, unchanged c20/c120, Chromium software WebGL,390x844 DPR2,4x CPU slowdown. Two pairs, second reversed. ScriptDuration covers the whole interaction and differing active-frame counts; neither normalized performance nor physical phone FPS.",
+  "conclusion": "Mixed tail timing, same medians, higher total script/activity. Not evidence of a performance improvement or physical-device pass. Finite idle/teardown tested separately.",
+  "rows": [
+    {
+      "label": "assistance-023-baseline",
+      "index": 19,
+      "arrows": 136,
+      "dots": 1719,
+      "samples": 34,
+      "p50": 50,
+      "p95": 83.39999999999964,
+      "scriptMs": 1913.464,
+      "taskMs": 5523.07,
+      "top": [
+        [
+          "(program)",
+          3991344
+        ],
+        [
+          "fillTriangle",
+          636807
+        ],
+        [
+          "(idle)",
+          546149
+        ],
+        [
+          "(garbage collector)",
+          176278
+        ],
+        [
+          "stroke",
+          170004
+        ],
+        [
+          "batchTriangles",
+          139640
+        ],
+        [
+          "e.exports",
+          83217
+        ],
+        [
+          "elementFromPoint",
+          76619
+        ],
+        [
+          "Oe",
+          72393
+        ],
+        [
+          "run",
+          59496
+        ],
+        [
+          "drawStable",
+          51020
+        ],
+        [
+          "bufferSubData",
+          41368
+        ]
+      ]
+    },
+    {
+      "label": "assistance-023-baseline",
+      "index": 119,
+      "arrows": 97,
+      "dots": 1145,
+      "samples": 40,
+      "p50": 33.399999999999636,
+      "p95": 149.84799999999996,
+      "scriptMs": 1369.532,
+      "taskMs": 4251.433000000001,
+      "top": [
+        [
+          "(program)",
+          3360767
+        ],
+        [
+          "(idle)",
+          707694
+        ],
+        [
+          "fillTriangle",
+          391321
+        ],
+        [
+          "stroke",
+          155686
+        ],
+        [
+          "(garbage collector)",
+          150368
+        ],
+        [
+          "elementFromPoint",
+          64011
+        ],
+        [
+          "batchTriangles",
+          62358
+        ],
+        [
+          "bufferSubData",
+          52263
+        ],
+        [
+          "Oe",
+          49814
+        ],
+        [
+          "e.exports",
+          37162
+        ],
+        [
+          "update",
+          36130
+        ],
+        [
+          "drawStable",
+          36010
+        ]
+      ]
+    },
+    {
+      "label": "assistance-023-current",
+      "index": 19,
+      "arrows": 136,
+      "dots": 1719,
+      "samples": 48,
+      "p50": 50,
+      "p95": 133.5,
+      "scriptMs": 1994.3390000000002,
+      "taskMs": 5874.11,
+      "top": [
+        [
+          "(program)",
+          4303528
+        ],
+        [
+          "fillTriangle",
+          709827
+        ],
+        [
+          "(idle)",
+          229690
+        ],
+        [
+          "stroke",
+          209951
+        ],
+        [
+          "(garbage collector)",
+          174310
+        ],
+        [
+          "e.exports",
+          156333
+        ],
+        [
+          "Z",
+          73460
+        ],
+        [
+          "elementFromPoint",
+          69927
+        ],
+        [
+          "run",
+          61202
+        ],
+        [
+          "batchTriangles",
+          59114
+        ],
+        [
+          "drawStable",
+          52269
+        ],
+        [
+          "(anonymous)",
+          43520
+        ]
+      ]
+    },
+    {
+      "label": "assistance-023-current",
+      "index": 119,
+      "arrows": 97,
+      "dots": 1145,
+      "samples": 57,
+      "p50": 33.30000000000018,
+      "p95": 83.30000000000018,
+      "scriptMs": 1565.871,
+      "taskMs": 4688.170999999999,
+      "top": [
+        [
+          "(program)",
+          3505066
+        ],
+        [
+          "(idle)",
+          551406
+        ],
+        [
+          "fillTriangle",
+          407392
+        ],
+        [
+          "stroke",
+          184792
+        ],
+        [
+          "(garbage collector)",
+          119372
+        ],
+        [
+          "batchTriangles",
+          118899
+        ],
+        [
+          "elementFromPoint",
+          64115
+        ],
+        [
+          "Z",
+          59199
+        ],
+        [
+          "run",
+          53086
+        ],
+        [
+          "drawStable",
+          46270
+        ],
+        [
+          "update",
+          44859
+        ],
+        [
+          "(anonymous)",
+          44062
+        ]
+      ]
+    },
+    {
+      "label": "assistance-023-current2",
+      "index": 19,
+      "arrows": 136,
+      "dots": 1719,
+      "samples": 58,
+      "p50": 49.899999999999636,
+      "p95": 100.09999999999991,
+      "scriptMs": 1965.5629999999999,
+      "taskMs": 5733.714,
+      "top": [
+        [
+          "(program)",
+          4122058
+        ],
+        [
+          "fillTriangle",
+          741550
+        ],
+        [
+          "(idle)",
+          235126
+        ],
+        [
+          "batchTriangles",
+          164997
+        ],
+        [
+          "(garbage collector)",
+          157160
+        ],
+        [
+          "stroke",
+          154557
+        ],
+        [
+          "Z",
+          82025
+        ],
+        [
+          "run",
+          66249
+        ],
+        [
+          "drawStable",
+          64183
+        ],
+        [
+          "bufferSubData",
+          59107
+        ],
+        [
+          "elementFromPoint",
+          57227
+        ],
+        [
+          "update",
+          40309
+        ]
+      ]
+    },
+    {
+      "label": "assistance-023-current2",
+      "index": 119,
+      "arrows": 97,
+      "dots": 1145,
+      "samples": 56,
+      "p50": 33.399999999999636,
+      "p95": 83.40000000000055,
+      "scriptMs": 1716.5970000000002,
+      "taskMs": 4620.752,
+      "top": [
+        [
+          "(program)",
+          3323552
+        ],
+        [
+          "(idle)",
+          435361
+        ],
+        [
+          "fillTriangle",
+          423977
+        ],
+        [
+          "stroke",
+          142755
+        ],
+        [
+          "transformPoint",
+          124158
+        ],
+        [
+          "set",
+          113888
+        ],
+        [
+          "(garbage collector)",
+          111058
+        ],
+        [
+          "batchTriangles",
+          81158
+        ],
+        [
+          "Z",
+          76087
+        ],
+        [
+          "elementFromPoint",
+          55718
+        ],
+        [
+          "e.exports",
+          53994
+        ],
+        [
+          "run",
+          43089
+        ]
+      ]
+    },
+    {
+      "label": "assistance-023-baseline2",
+      "index": 19,
+      "arrows": 136,
+      "dots": 1719,
+      "samples": 33,
+      "p50": 50,
+      "p95": 100.0039999999999,
+      "scriptMs": 1729.0339999999999,
+      "taskMs": 6294.942,
+      "top": [
+        [
+          "(program)",
+          4957082
+        ],
+        [
+          "fillTriangle",
+          601347
+        ],
+        [
+          "(idle)",
+          485772
+        ],
+        [
+          "(garbage collector)",
+          191607
+        ],
+        [
+          "stroke",
+          152255
+        ],
+        [
+          "batchTriangles",
+          144335
+        ],
+        [
+          "elementFromPoint",
+          72262
+        ],
+        [
+          "Oe",
+          64022
+        ],
+        [
+          "run",
+          60205
+        ],
+        [
+          "bufferSubData",
+          51663
+        ],
+        [
+          "drawStable",
+          42293
+        ],
+        [
+          "update",
+          37068
+        ]
+      ]
+    },
+    {
+      "label": "assistance-023-baseline2",
+      "index": 119,
+      "arrows": 97,
+      "dots": 1145,
+      "samples": 41,
+      "p50": 33.30000000000018,
+      "p95": 50.100000000000364,
+      "scriptMs": 1181.378,
+      "taskMs": 3841.6059999999998,
+      "top": [
+        [
+          "(program)",
+          2924853
+        ],
+        [
+          "(idle)",
+          879147
+        ],
+        [
+          "fillTriangle",
+          369201
+        ],
+        [
+          "(garbage collector)",
+          105501
+        ],
+        [
+          "stroke",
+          102458
+        ],
+        [
+          "batchTriangles",
+          71705
+        ],
+        [
+          "elementFromPoint",
+          57439
+        ],
+        [
+          "Oe",
+          47702
+        ],
+        [
+          "run",
+          45544
+        ],
+        [
+          "(anonymous)",
+          40618
+        ],
+        [
+          "update",
+          32762
+        ],
+        [
+          "drawStable",
+          29874
+        ]
+      ]
+    }
+  ]
+}

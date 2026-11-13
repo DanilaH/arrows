@@ -1,0 +1,26 @@
+{
+  "source": "ccf330a7f056fb386ee3da5fbc289d896f68dc5c",
+  "workflow_run": 43474798189,
+  "web": {
+    "job": 132055716171,
+    "conclusion": "success",
+    "unit": 155,
+    "browser": 256,
+    "typecheck": "passed",
+    "production_build": "passed",
+    "native_sync": "passed"
+  },
+  "android": {
+    "job": 132055716808,
+    "conclusion": "success",
+    "jvm_tests": 17,
+    "assembleDebug": "passed",
+    "assemblePlaytest": "passed"
+  },
+  "local_extra": {
+    "b1_browser": 12,
+    "actual_payload_feel_matrix": 8
+  },
+  "physical_device": "NOT RUN",
+  "financial_dashboard": "NOT RUN"
+}

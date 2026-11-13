@@ -1,0 +1,128 @@
+{
+  "source": "ccf330a7",
+  "audio": "actual application WebAudio output, original cue timing; only capture/codec conversion",
+  "order": [
+    "a3/route-pause-early-audio.mp4",
+    "a3/route-native-skip-audio.mp4",
+    "a4/a4-new-audio.mp4",
+    "a4/a4-late-component-audio.mp4",
+    "b1-target-none-audio.mp4",
+    "b1-target-qa-single-audio.mp4"
+  ],
+  "clips": [
+    {
+      "file": "a3/route-pause-early-audio.mp4",
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "duration": "6.760000"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "duration": "6.840000"
+        }
+      ],
+      "level": [
+        "mean_volume: -43.8 dB",
+        "max_volume: -17.0 dB"
+      ]
+    },
+    {
+      "file": "a3/route-native-skip-audio.mp4",
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "duration": "5.160000"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "duration": "5.216000"
+        }
+      ],
+      "level": [
+        "mean_volume: -41.3 dB",
+        "max_volume: -16.7 dB"
+      ]
+    },
+    {
+      "file": "a4/a4-new-audio.mp4",
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "duration": "4.120000"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "duration": "4.139000"
+        }
+      ],
+      "level": [
+        "mean_volume: -43.8 dB",
+        "max_volume: -17.4 dB"
+      ]
+    },
+    {
+      "file": "a4/a4-late-component-audio.mp4",
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "duration": "7.840000"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "duration": "7.920000"
+        }
+      ],
+      "level": [
+        "mean_volume: -45.0 dB",
+        "max_volume: -17.4 dB"
+      ]
+    },
+    {
+      "file": "b1-target-none-audio.mp4",
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "duration": "4.760000"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "duration": "4.918000"
+        }
+      ],
+      "level": [
+        "mean_volume: -38.2 dB",
+        "max_volume: -16.9 dB"
+      ]
+    },
+    {
+      "file": "b1-target-qa-single-audio.mp4",
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "duration": "6.480000"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "duration": "6.600000"
+        }
+      ],
+      "level": [
+        "mean_volume: -38.3 dB",
+        "max_volume: -16.2 dB"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "source": "393408dc9c07676713b574e7459876c61b11afdf",
+  "provenance": "Unmodified production dist, browser Chromium WebGL, 390x844 DPR1.5; explicitly seeded saves and controlled native SDK transport. No real ad video, natural player behaviour or physical haptics claimed.",
+  "payload": {
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "1fec3eef0c148a1a7e31af5fb7badc73534409bac48aeb0bd540aae80ef27380",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "assets/index-BBkAoISK.css": "b31c4ff9dab5d5b026860171938b4b971d4f2f1533ae33cc0cd7da42516b5bf0",
+    "assets/index-DbS6nqh_.js": "a0abf18128de05b113fcb5e430c7a8038c7d83cd636fa6147f7534dd83bb4b47",
+    "assets/web-CjsRiyBz.js": "3d169182310ec4d945d506cff72ccc475186dfa3203022e07b242c2a4194ae05"
+  },
+  "clips": [
+    {
+      "name": "route-pause-early",
+      "capturedSource": "393408dc9c07676713b574e7459876c61b11afdf",
+      "theme": "dark",
+      "level": "c20",
+      "variant": "route-v1",
+      "zoom": 2.5,
+      "frames": 48,
+      "durationMs": 6923.060064,
+      "remaining": 133,
+      "qa": true
+    },
+    {
+      "name": "route-native-skip",
+      "capturedSource": "393408dc9c07676713b574e7459876c61b11afdf",
+      "theme": "light",
+      "level": "c20",
+      "variant": "route-v1",
+      "zoom": 2.5,
+      "frames": 33,
+      "durationMs": 5097.592775000001,
+      "remaining": 133,
+      "qa": true
+    },
+    {
+      "name": "route-partial-reserve",
+      "capturedSource": "393408dc9c07676713b574e7459876c61b11afdf",
+      "theme": "dark",
+      "level": "c20",
+      "variant": "route-v1",
+      "zoom": 2.5,
+      "frames": 68,
+      "durationMs": 8828.309066000002,
+      "remaining": 136,
+      "qa": true
+    }
+  ]
+}

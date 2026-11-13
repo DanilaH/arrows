@@ -1,0 +1,60 @@
+{
+  "source": "ccf330a7f056fb386ee3da5fbc289d896f68dc5c",
+  "provenance": "Unmodified production dist, browser Chromium WebGL, 390x844 DPR1.5; explicitly seeded saves and controlled native SDK transport. No real ad video, natural player behaviour or physical haptics claimed.",
+  "payload": {
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "d2151d1571623a169ffb67935f1773a3c358e104b168e8e6e6451ec382c31223",
+    "target-lab.html": "d3a306b6b60db9f1a497f07008ed872d0b4ff2f5da615935056511f93a24b41c",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/gestures-BBkAoISK.css": "b31c4ff9dab5d5b026860171938b4b971d4f2f1533ae33cc0cd7da42516b5bf0",
+    "assets/gestures-BWK0X5qs.js": "0351641ddfd31aef9baf71c44231c45dd7a3b3743fae0fbde93df3c97fca76f1",
+    "assets/main-CGd4BDfP.js": "8927973d7fd705d186ed23e81e809067ff3f00c8bcdc1966e737e50d75b8a9c9",
+    "assets/targetLab-D9KRaeTg.js": "3c95a23a554e30be11bad7e4ccc62448f4861c6eec9cc4db5911969e53b23905",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7"
+  },
+  "clips": [
+    {
+      "name": "a4-new",
+      "capturedSource": "ccf330a7f056fb386ee3da5fbc289d896f68dc5c",
+      "theme": "dark",
+      "level": "c40",
+      "variant": "continue-single-v1",
+      "zoom": 1.55,
+      "frames": 36,
+      "durationMs": 4061.177124,
+      "remaining": 15,
+      "qa": true
+    },
+    {
+      "name": "a4-retain",
+      "capturedSource": "ccf330a7f056fb386ee3da5fbc289d896f68dc5c",
+      "theme": "light",
+      "level": "c40",
+      "variant": "continue-single-v1",
+      "zoom": 1.55,
+      "frames": 40,
+      "durationMs": 3873.8349990000006,
+      "remaining": 19,
+      "qa": true
+    },
+    {
+      "name": "a4-late-component",
+      "capturedSource": "ccf330a7f056fb386ee3da5fbc289d896f68dc5c",
+      "theme": "dark",
+      "level": "c40",
+      "variant": "continue-single-v1",
+      "zoom": 1.55,
+      "frames": 77,
+      "durationMs": 7811.017790000002,
+      "remaining": 15,
+      "qa": true
+    }
+  ]
+}
