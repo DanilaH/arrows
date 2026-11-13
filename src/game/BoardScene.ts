@@ -47,11 +47,11 @@ export class BoardScene extends Phaser.Scene {
   private world!: Phaser.GameObjects.Container;
   private stable!: Phaser.GameObjects.Graphics;
   private stableBatch: StableArrowBatch | undefined;
-  private outgoing!: Phaser.GameObjects.Blitter;
+  private outgoing!: Phaser.GameObjects.Blitter | Phaser.GameObjects.Graphics;
   private outgoingWorld!: Phaser.GameObjects.Container;
   private transitionAt = -1;
   private hintReveal: { id: string; started: number; arrived: boolean } | null = null;
-  private dots!: Phaser.GameObjects.Blitter;
+  private dots!: Phaser.GameObjects.Blitter | Phaser.GameObjects.Graphics;
   private guidesLayer!: Phaser.GameObjects.Graphics;
   private active!: Phaser.GameObjects.Graphics;
   private reactiveDots!: Phaser.GameObjects.Graphics;
@@ -84,8 +84,9 @@ export class BoardScene extends Phaser.Scene {
   private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   public constructor(private readonly options: SceneOptions) { super('board'); }
   public create(): void {
-    // One tiny two-theme atlas, also colored correctly in Canvas fallback.
-    if (!this.textures.exists('board-dot')) {
+    // One tiny two-theme atlas for WebGL background dots.
+    const webgl=this.game.renderer.type===Phaser.WEBGL;
+    if (webgl && !this.textures.exists('board-dot')) {
       const atlas=this.textures.createCanvas('board-dot',32,16)!;
       const ctx=atlas.getContext();
       for(const [i,theme] of (['dark','light'] as const).entries()){
@@ -95,11 +96,11 @@ export class BoardScene extends Phaser.Scene {
       atlas.refresh();
     }
     // Blitter ignores its own scale; an owned parent supplies the transform in
-    // both renderer backends. Bobs remain compact atlas-pixel coordinates.
-    this.outgoing=this.add.blitter(0,0,'board-dot','dark');
+    // WebGL. Canvas keeps its world-coordinate Graphics path.
+    this.outgoing=webgl?this.add.blitter(0,0,'board-dot','dark'):this.add.graphics();
     this.outgoingWorld=this.add.container(0,0,[this.outgoing]);
-    this.dots=this.add.blitter(0,0,'board-dot','dark');
-    const dotWorld=this.add.container(0,0,[this.dots]).setScale(.01);
+    this.dots=webgl?this.add.blitter(0,0,'board-dot','dark'):this.add.graphics();
+    const dotWorld=this.add.container(0,0,[this.dots]).setScale(webgl?.01:1);
     this.guidesLayer=this.add.graphics();this.stable=this.add.graphics();
     const stableRoot=this.add.container(0,0);
     if(this.game.renderer.type===Phaser.WEBGL)this.stableBatch=new StableArrowBatch(this,stableRoot);
@@ -131,7 +132,7 @@ export class BoardScene extends Phaser.Scene {
   public loadAttempt(board: Board, view: ViewState | null = null, guides = false, hint: string | null = null, transition = false, settled = false): void {
     const blend=transition && !this.reducedMotion && !board.complete && this.board.complete && this.board.attemptId!==board.attemptId;
     this.outgoing.clear(); this.outgoing.setAlpha(1);
-    if(blend){const ratio=1/this.scale.zoom, old=this.boardCamera;this.outgoingWorld.setPosition(old.x*ratio,old.y*ratio).setScale(old.scale*ratio*.01);this.dotBatch(this.outgoing,this.board.level.mask);}
+    if(blend){const ratio=1/this.scale.zoom, old=this.boardCamera;this.outgoingWorld.setPosition(old.x*ratio,old.y*ratio).setScale(old.scale*ratio*(this.outgoing instanceof Phaser.GameObjects.Blitter?.01:1));this.dotBatch(this.outgoing,this.board.level.mask);}
     this.transitionAt=blend?this.clock:-1;this.hintReveal=null;this.victorySource=null;this.victoryDots=[];
     const level = board.level; this.board = board; this.guides = guides; this.hintTarget = null; this.focusMotion = null; this.finishFramed = board.complete;
     this.boardCamera = new BoardCamera(level.width, level.height);
@@ -236,8 +237,12 @@ export class BoardScene extends Phaser.Scene {
   private drawDots(): void {
     this.dots.clear(); this.dotBatch(this.dots,this.board.level.mask);
   }
-  private dotBatch(layer: Phaser.GameObjects.Blitter, points: readonly Point[]): void {
-    for(const point of points)layer.create(point.x*100-8,point.y*100-8,this.theme);
+  private dotBatch(layer: Phaser.GameObjects.Blitter | Phaser.GameObjects.Graphics, points: readonly Point[]): void {
+    if(layer instanceof Phaser.GameObjects.Graphics){
+      // Canvas Blitter also applies camera scroll in atlas-pixel coordinates;
+      // keep its existing world-coordinate Graphics path rather than offset dots.
+      layer.fillStyle(this.colors.dot,1);for(const p of points)layer.fillCircle(p.x,p.y,.07);
+    }else for(const point of points)layer.create(point.x*100-8,point.y*100-8,this.theme);
   }
   private dotCircle(layer: Phaser.GameObjects.Graphics,x:number,y:number,radius:number): void {
     for(let i=0;i<ROUND_JOIN.length;i++){

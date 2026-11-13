@@ -60,5 +60,11 @@ test('resumes the already unblocked red arrow from the old screenshot save throu
 test('keeps the complete Graphics path working when WebGL is unavailable',async({page},info)=>{
  await page.addInitScript(()=>{const get=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(this:HTMLCanvasElement,type:string,...args:unknown[]){if(type.includes('webgl'))return null;return Reflect.apply(get,this,[type,...args]);} as typeof get;});
  if(info.project.name==='desktop')await page.addInitScript(({key,s})=>localStorage.setItem(key,JSON.stringify(s)),{key:SETTINGS_KEY,s:{...defaultSettings('en'),theme:'light'}});
- await seed(page,base(2));await tap(page,campaign[2]!.arrows[0]!.path);await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','5');await page.waitForTimeout(650);await page.screenshot({path:info.outputPath('canvas-fallback.png')});expect((await saved(page)).campaign.board.removed).toEqual(['c03-0']);
+ await seed(page,base(2));await tap(page,campaign[2]!.arrows[0]!.path);await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','5');await page.waitForTimeout(650);await page.screenshot({path:info.outputPath('canvas-fallback.png')});
+ const camera=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),bg=info.project.name==='desktop'?[243,244,250]:[30,30,44];
+ for(const point of [{x:0,y:0},{x:9,y:0},{x:9,y:11}]){
+  const png=await page.screenshot({clip:{x:Math.floor(camera.x+point.x*camera.scale)-2,y:Math.floor(camera.y+point.y*camera.scale)-2,width:5,height:5}});
+  const difference=await page.evaluate(async({encoded,bg})=>{const bytes=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0)),image=await createImageBitmap(new Blob([bytes],{type:'image/png'})),canvas=new OffscreenCanvas(image.width,image.height),ctx=canvas.getContext('2d')!;ctx.drawImage(image,0,0);const data=ctx.getImageData(0,0,image.width,image.height).data;let difference=0;for(let i=0;i<data.length;i+=4)for(let c=0;c<3;c++)difference=Math.max(difference,Math.abs(data[i+c]!-bg[c]!));return difference;},{encoded:png.toString('base64'),bg});expect(difference).toBeGreaterThan(10);
+ }
+ expect((await saved(page)).campaign.board.removed).toEqual(['c03-0']);
 });

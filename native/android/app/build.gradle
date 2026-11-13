@@ -10,7 +10,7 @@ android {
         manifestPlaceholders = [arrowsAppLabel: playtestBuild ? "Стрелки · Тест" : "@string/app_name"]
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 29
+        versionCode 30
         versionName "0.19.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {

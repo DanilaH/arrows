@@ -1,4 +1,4 @@
-# Phone feedback package — 0.19.0 (29), 2026-11-13
+# Phone feedback package — 0.19.0 (30), 2026-11-13
 
 Owner-authorized changes supersede the old per-attempt free-refill rule and manual reactivation of an unblocked marked arrow. No campaign/daily construction, difficulty, trophy identity, SDK, ad cadence or runtime-pin change.
 
@@ -29,7 +29,9 @@ SELECT: bounded causal presentation from mini-games-kit `e2382670fbd5c2aa76462fe
 
 The baseline source is `0a25e24490737a0facd898bd745ab4c086286dbf` (0.18.0). Its stationary mask creates thousands of Graphics circle paths, and unchanged arrow heads/tubes are processed repeatedly during adjacent motion.
 
-A 32x16 two-theme procedural dot atlas and Blitter draw the same radius-.07 world dots. The owned parent container supplies the scale because Phaser4.2.1 Blitter ignores its own scale; baking both theme colors also preserves Canvas fallback. A visual QA failure of the first candidate caught missing dot placement before delivery; the actual-pixel regression now requires the settled silhouette to exist.
+A 32x16 two-theme procedural dot atlas and Blitter draw the same radius-.07 world dots. The owned parent container supplies the scale because Phaser4.2.1 Blitter ignores its own scale; both theme colors are baked into its atlas. Canvas retains the original world-coordinate Graphics dots: actual fallback screenshots exposed the Canvas Blitter camera-scroll/atlas-coordinate mismatch, fixed in final code30. A visual QA failure of the first candidate caught missing dot placement before delivery; the actual-pixel regression now requires the settled silhouette to exist.
+
+Final build30 supersedes the provisional code29 artifact/recordings after that fallback correction. All delivery clips are re-recorded against the final source.
 
 For WebGL only, one retained Mesh2D and a tiny palette atlas reuse the exact shaft/cap/convex-head triangles until a dirty redraw. Active flight/contact artwork keeps Graphics, as does the complete Canvas fallback. Filled rounded head outlines use a convex fan instead of a new Earcut allocation every frame. No shader/filter, full-field render texture, per-dot tween, worker or engine upgrade. Atlas dimensions and scene ownership are fixed, not a cache of all visited fields. Dirty redraw, first rendered frame, DPR cap, clip, reactive-dot budget and final-paint sleep remain.
 
