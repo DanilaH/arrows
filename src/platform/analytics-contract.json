@@ -113,5 +113,110 @@
   "ad_reward_reserved": {
     "placement": "string",
     "attempt": "string"
+  },
+  "ad_preload": {
+    "preload_id": "string",
+    "phase": "string",
+    "elapsed_ms": "number",
+    "ready": "boolean"
+  },
+  "ad_session": {
+    "request_id": "string",
+    "format": "string",
+    "placement": "string",
+    "attempt": "string",
+    "mode": "string",
+    "assignment_id": "string",
+    "variant": "string",
+    "experiment_id": "string",
+    "install_id": "string",
+    "qa": "boolean",
+    "cache_state": "string"
+  },
+  "ad_impression_value": {
+    "event_id": "string",
+    "request_id": "string",
+    "format": "string",
+    "known": "boolean",
+    "amount": "string",
+    "currency": "string",
+    "precision": "string",
+    "source": "string"
+  },
+  "assistance_fact": {
+    "event_id": "string",
+    "phase": "string",
+    "entitlement_id": "string",
+    "request_id": "string",
+    "source_attempt": "string",
+    "attempt": "string",
+    "effect": "string",
+    "variant": "string",
+    "manual": "number",
+    "native": "number",
+    "bonus": "number",
+    "use_origin": "string"
+  },
+  "assistance_request": {
+    "request_id": "string",
+    "offer_id": "string",
+    "assignment_id": "string",
+    "install_id": "string",
+    "variant": "string",
+    "effect": "string",
+    "effect_version": "number",
+    "amount": "number",
+    "attempt": "string",
+    "mode": "string",
+    "content_version": "number",
+    "fallback": "string",
+    "at": "number",
+    "qa": "boolean"
+  },
+  "assistance_assignment": {
+    "event_id": "string",
+    "assignment_id": "string",
+    "install_id": "string",
+    "experiment_id": "string",
+    "variant": "string",
+    "eligible_at": "number",
+    "qa": "boolean"
+  },
+  "assistance_offer": {
+    "event_id": "string",
+    "offer_id": "string",
+    "attempt": "string",
+    "variant": "string",
+    "effect": "string",
+    "amount": "number",
+    "readiness": "string",
+    "source": "string"
+  },
+  "assistance_choice": {
+    "event_id": "string",
+    "offer_id": "string",
+    "attempt": "string",
+    "choice": "string",
+    "request_id": "string"
+  },
+  "attempt_loss": {
+    "event_id": "string",
+    "attempt": "string",
+    "mode": "string",
+    "mistakes": "number"
+  },
+  "attempt_final": {
+    "event_id": "string",
+    "attempt": "string",
+    "mode": "string",
+    "outcome": "string",
+    "active_ms": "number"
+  },
+  "continue_outcome": {
+    "event_id": "string",
+    "entitlement_id": "string",
+    "attempt": "string",
+    "outcome": "string",
+    "active_ms": "number"
   }
 }

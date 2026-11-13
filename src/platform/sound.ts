@@ -1,7 +1,10 @@
 import { OneShotPlayer, type OneShotChannel } from '@danilah/mini-games-kit/audio';
-export type SoundCue = 'button' | 'remove' | 'slide' | 'exit' | 'error' | 'hint' | 'life' | 'win' | 'perfect' | 'award';
+export type SoundCue = 'button' | 'remove' | 'slide' | 'exit' | 'error' | 'hint' | 'life' | 'win' | 'perfect' | 'award' | 'auto' | 'repeat-error' | 'help-final';
 type Profile = { length: number; tap: number; air: number; tail: number; tone: number };
 const profiles: Record<SoundCue, Profile> = {
+  auto: {length:.07,tap:.25,air:.55,tail:65,tone:160},
+  'repeat-error': {length:.09,tap:.38,air:.18,tail:60,tone:98},
+  'help-final': {length:.22,tap:.32,air:.7,tail:19,tone:205},
   button: {length:.055,tap:.85,air:.28,tail:95,tone:185},
   remove: {length:.115,tap:1,air:.8,tail:58,tone:160},
   slide: {length:.12,tap:.08,air:1.05,tail:30,tone:125},
@@ -49,7 +52,7 @@ export function createSound() {
     resetGameplay(): void { player.setEligibility({ ...eligibility, gameplay: false }); player.setEligibility(eligibility); },
     setEligibility(value: { gameplay: boolean; ui: boolean }): void { eligibility = value; player.setEligibility(value); },
     play(cue: SoundCue, channel: OneShotChannel = 'gameplay', rate = 1): void {
-      player.play({ group: cue === 'hint' || cue === 'life' ? 'special' : cue === 'award' || cue === 'perfect' ? 'win' : cue, channel, gain: cue === 'win' || cue === 'perfect' || cue === 'award' ? .9 : cue === 'remove' || cue === 'error' ? .8 : .65, playbackRate: rate, buffer: context => {
+      player.play({ group: cue === 'auto' ? 'exit' : cue === 'repeat-error' ? 'error' : cue === 'help-final' || cue === 'hint' || cue === 'life' ? 'special' : cue === 'award' || cue === 'perfect' ? 'win' : cue, channel, gain: cue === 'win' || cue === 'perfect' || cue === 'award' ? .9 : cue === 'remove' || cue === 'error' ? .8 : .65, playbackRate: rate, buffer: context => {
         let buffer = buffers.get(cue); if (!buffer) { const samples = soundSamples(cue, context.sampleRate); buffer = context.createBuffer(1, samples.length, context.sampleRate); buffer.copyToChannel(samples, 0); buffers.set(cue, buffer); } return buffer;
       } });
     },

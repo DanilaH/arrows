@@ -6,7 +6,7 @@ import type { createFeedback } from '../platform/feedback';
 const closeIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>';
 export const settingsIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h2m4 0h10M4 12h10m4 0h2M4 18h2m4 0h10"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg>';
 const themeArt = (theme: string): string => `<svg viewBox="0 0 24 24" aria-hidden="true">${theme==='dark' ? '<path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z"/>' : '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/>'}</svg>`;
-export function installSettingsSurface(store: SettingsStore, activity: GameplayActivityCoordinator, feedback: ReturnType<typeof createFeedback>, beforeOpen: () => void, motion: UiMotion) {
+export function installSettingsSurface(store: SettingsStore, activity: GameplayActivityCoordinator, feedback: ReturnType<typeof createFeedback>, beforeOpen: () => void, motion: UiMotion, extra:()=>HTMLElement|null=()=>null) {
   const dialog = document.querySelector<HTMLDialogElement>('#settings-dialog')!;
   let focus: HTMLElement | null = null, renderedLanguage = '';
   const render = (): void => {
@@ -17,6 +17,7 @@ export function installSettingsSurface(store: SettingsStore, activity: GameplayA
       <section class="settings-section"><h3>${text.feedback}</h3><div class="settings-group">${(['sound', 'vibration'] as const).map(key => `<button id="setting-${key}" class="setting-toggle" type="button" role="switch" aria-checked="false" aria-labelledby="${key}-label" data-toggle="${key}"><span><strong id="${key}-label">${key === 'sound' ? text.sounds : text.vibrations}</strong><small>${key === 'sound' ? text.soundDescription : text.vibrationDescription}</small></span><i class="switch-track" aria-hidden="true"><i></i></i></button>`).join('')}</div><div class="feedback-previews"><button id="preview-sound" data-feedback-preview type="button" class="sound-preview"><span aria-hidden="true">♪</span>${text.previewSound}</button><button id="preview-vibration" data-feedback-preview type="button" class="sound-preview"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="4" width="8" height="16" rx="2"/><path d="m4 8-2 4 2 4m16-8 2 4-2 4"/></svg>${text.previewVibration}</button></div></section>
       <section class="settings-section"><label class="language-setting" for="setting-language"><span>${text.language}</span><select id="setting-language"><option value="ru">Русский</option><option value="en">English</option></select></label></section>
       <footer class="settings-save"><span id="settings-save-status" role="status"></span><button id="retry-settings" type="button" hidden>${text.retrySettings}</button></footer>`;
+    const additional=extra();if(additional)dialog.querySelector('footer')!.before(additional);
     if (activeId) dialog.querySelector<HTMLElement>('#' + activeId)?.focus({ preventScroll: true });
   };
   const refresh = (): void => {

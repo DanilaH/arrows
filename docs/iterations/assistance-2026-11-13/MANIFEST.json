@@ -1,0 +1,144 @@
+{
+  "package": "arrows-agent-handoff",
+  "version": "1.0",
+  "date": "2026-11-13",
+  "status": "Specification for future implementation; no game changes or APK produced by this package",
+  "repository": "https://github.com/DanilaH/arrows",
+  "research_baseline": {
+    "commit": "ad4bc416aa26e6bbc257875675a428c281564ff9",
+    "version": "0.19.1",
+    "android_version_code": 31
+  },
+  "first_delivery": [
+    "C",
+    "A1",
+    "common F",
+    "isolated QA variant A2"
+  ],
+  "later_deliveries": [
+    "A3",
+    "A4",
+    "B1"
+  ],
+  "acceptance_criteria": {
+    "unique_count": 86,
+    "status": "Future implementation criteria, not passed implementation tests"
+  },
+  "preparation_checks": {
+    "baseline_verifier": "PASS: portable copied domain, offline",
+    "proposed_cascade_verifier": "PASS: four offline scenarios, not application implementation",
+    "pdf": "8 A4 pages; rendered and visually reviewed"
+  },
+  "files": [
+    {
+      "path": "ACCEPTANCE.md",
+      "bytes": 34876,
+      "sha256": "e469a09c8b36c4a683b0b4f26e40d7336178a38cbc6c6d31ca1c28df22359a08"
+    },
+    {
+      "path": "AGENT_PROMPT.txt",
+      "bytes": 3993,
+      "sha256": "9f19b72f5a9ec0b738e5314558ae6187f107474f10796c04ff41c0efb3006bae"
+    },
+    {
+      "path": "ARROWS_BRIEF.pdf",
+      "bytes": 73047,
+      "sha256": "5caff46dd3d03cb81ffde19c6f373699d62be4a295044eeae97b900d5e74f434"
+    },
+    {
+      "path": "FEEL.md",
+      "bytes": 49903,
+      "sha256": "43c6e852e9a3962f7d415a02618e5ec84cf44f005b8226cb60ffd0477c40ad8e"
+    },
+    {
+      "path": "MEASUREMENT.md",
+      "bytes": 37896,
+      "sha256": "d046e0cdf7099a1479111c56a07d5ed821d077f8c95cbb3037add616230b7837"
+    },
+    {
+      "path": "SOURCES.md",
+      "bytes": 13710,
+      "sha256": "908dd488969996195b5b701128362dc288b0a723b47b761208b0423aff1af771"
+    },
+    {
+      "path": "START_HERE.md",
+      "bytes": 10470,
+      "sha256": "5eb0b59c05849fc95a672b9ec4d43d9143be63bb0772b34674104b9a5869f371"
+    },
+    {
+      "path": "TASK.md",
+      "bytes": 48727,
+      "sha256": "9c605cd10886b19d00893a0b0f08100a239209a99c3629ec51ce7b6576a9bffc"
+    },
+    {
+      "path": "proof/VERIFICATION_NOTES.md",
+      "bytes": 3173,
+      "sha256": "a89589c4cd66f3c1f3c3094b73eed7a51352ae691a4742493137f975b40f668e"
+    },
+    {
+      "path": "proof/analysis.json",
+      "bytes": 669343,
+      "sha256": "6736f50cf43b25ea6b4bf5b3fa47a899bdc308c93403b77c436f3d753481988d"
+    },
+    {
+      "path": "proof/analyze.py",
+      "bytes": 3737,
+      "sha256": "0b9b34b5355842c99514b7d7c1bff3bbd1dada04ad08a8c2dcf03e11e75c187c"
+    },
+    {
+      "path": "proof/board.ts",
+      "bytes": 4569,
+      "sha256": "2213294e9ee5d6c3212a4d22dc6b1a4306bc864fff2e9ed03ed98763a484ef1e"
+    },
+    {
+      "path": "proof/campaign.json",
+      "bytes": 1362480,
+      "sha256": "9704048112fda6a2827cc5b834eb9c97490644aefb79775c33052e84dd542dcb"
+    },
+    {
+      "path": "proof/cascade-fixture.json",
+      "bytes": 12063,
+      "sha256": "e1fa525cf29818d2f03509f5e175a453fc88794e7cbec92ab9de9d8676923b55"
+    },
+    {
+      "path": "proof/examples.mjs",
+      "bytes": 2935,
+      "sha256": "30a23fce1eb5b67f2946176f09873b3c64bbcef6dabd87af307d3f1e7c3c868d"
+    },
+    {
+      "path": "proof/geometry.ts",
+      "bytes": 4487,
+      "sha256": "0c28221e86bc2fcfa8fbe28f5a052301ef56ea98a4a45330fc262c16339102f6"
+    },
+    {
+      "path": "proof/hint-examples.json",
+      "bytes": 16351,
+      "sha256": "cb73b0f53a5badc93beab18f3d0475846f3ea89a1765a58db074db368a805f38"
+    },
+    {
+      "path": "proof/source-board.ts",
+      "bytes": 4566,
+      "sha256": "b018c5141bc829c978a53db7bfe5fe5d90a68227f5803a224ec014f6c6ff4f53"
+    },
+    {
+      "path": "proof/source-geometry.ts",
+      "bytes": 4487,
+      "sha256": "0c28221e86bc2fcfa8fbe28f5a052301ef56ea98a4a45330fc262c16339102f6"
+    },
+    {
+      "path": "proof/verification.json",
+      "bytes": 53644,
+      "sha256": "f61c78f19eeb8b294ef6df2f32ca0d2123ca5494b237576322a3c550dcca9696"
+    },
+    {
+      "path": "proof/verify-cascade.mjs",
+      "bytes": 4999,
+      "sha256": "69075d1270d374759b677d04f6a2f3a4fb7577d463fb368fd6deca60c879f994"
+    },
+    {
+      "path": "proof/verify.mjs",
+      "bytes": 3064,
+      "sha256": "e3ac0c4880836068e5918300f04631782ea7889b5d6a742b31f1f2d708028a28"
+    }
+  ]
+}

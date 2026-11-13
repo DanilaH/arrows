@@ -13,15 +13,21 @@ final class RewardJournalCore {
     private final Memory memory;
     RewardJournalCore(Disk disk, Memory memory) { this.disk = disk; this.memory = memory; }
     private static JSONObject receipt(JSONObject value) throws Exception {
-        if (!(value.opt("schema") instanceof Number) || ((Number)value.opt("schema")).doubleValue() != 1) throw new IOException("Invalid receipt schema");
+        if (!(value.opt("schema") instanceof Number) || (((Number)value.opt("schema")).doubleValue() != 1 && ((Number)value.opt("schema")).doubleValue() != 2)) throw new IOException("Invalid receipt schema");
         for (String key : new String[]{"id", "attempt"}) if (!(value.opt(key) instanceof String) || !value.getString(key).matches("[a-zA-Z0-9_-]{1,100}")) throw new IOException("Invalid receipt identity");
         String mode = value.optString("mode"), placement = value.optString("placement");
         if (!(mode.equals("campaign") || mode.equals("daily")) || !(placement.equals("hint") || placement.equals("lives"))) throw new IOException("Invalid receipt destination");
-        return new JSONObject().put("schema", 1).put("id", value.getString("id")).put("attempt", value.getString("attempt")).put("mode", mode).put("placement", placement);
+        int schema=((Number)value.opt("schema")).intValue();
+        JSONObject result=new JSONObject().put("schema", schema).put("id", value.getString("id")).put("attempt", value.getString("attempt")).put("mode", mode).put("placement", placement);
+        if(schema==2){
+            if(!(value.opt("intentVersion") instanceof Number)||((Number)value.opt("intentVersion")).doubleValue()!=1||!value.getString("id").equals(value.opt("requestId")))throw new IOException("Invalid receipt intent");
+            result.put("intentVersion",1).put("requestId",value.getString("requestId"));
+        }
+        return result;
     }
     private static void merge(LinkedHashMap<String, JSONObject> rows, JSONObject value) throws Exception {
         JSONObject next = receipt(value), old = rows.get(next.getString("id"));
-        if (old != null && (!old.getString("attempt").equals(next.getString("attempt")) || !old.getString("mode").equals(next.getString("mode")) || !old.getString("placement").equals(next.getString("placement")))) throw new IOException("Conflicting receipt identity");
+        if (old != null && (old.getInt("schema")!=next.getInt("schema") || !old.getString("attempt").equals(next.getString("attempt")) || !old.getString("mode").equals(next.getString("mode")) || !old.getString("placement").equals(next.getString("placement")))) throw new IOException("Conflicting receipt identity");
         rows.put(next.getString("id"), next);
     }
     private LinkedHashMap<String, JSONObject> read() throws Exception {

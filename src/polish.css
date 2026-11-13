@@ -31,6 +31,9 @@ button:active { transform: scale(.97); }
 .hint-button { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 13px; border: 1px solid var(--hint-edge); background: var(--hint-bg); color: var(--hint-ink); font-size: 12px; font-weight: 800; box-shadow: 0 3px 14px color-mix(in srgb,var(--hint-bg) 20%,transparent); }
 .hint-button svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .hint-button .video-mark { width: 17px; height: 17px; color: currentColor; }
+.hint-copy { display: flex; flex-direction: column; align-items: center; gap: 1px; line-height: 14px; }
+.hint-copy small { font-size: 9px; font-weight: 650; line-height: 11px; opacity: .82; }
+.help-qa p { color: var(--secondary); font-size: 11px; line-height: 1.5; }
 #save-status { top: calc(70px + env(safe-area-inset-top)); }
 
 /* The navigation is outside transitioning/scrolling screen content. */

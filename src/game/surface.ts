@@ -13,6 +13,7 @@ import { createAdTransition } from '../platform/adTransition';
 import { interstitialReason } from '../progression/adCadence';
 import { localDate } from '../progression/calendar';
 import { earnedAwards } from '../progression/collection';
+import { createHelpOffers } from './helpOffers';
 import type { BoardScene } from './BoardScene';
 
 type Platform = ReturnType<typeof createPlatformRuntime>;
@@ -26,6 +27,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const warning = document.querySelector<HTMLElement>('#save-status')!, retry = document.querySelector<HTMLButtonElement>('#save-retry')!;
   const sessionPlay = document.querySelector<HTMLButtonElement>('#session-play')!;
   const progress = new ProgressStore(platform.storage), listeners: Array<() => void> = [];
+  const helpOffers=createHelpOffers(progress,platform.ads,platform.analytics,()=>language);
   let alive = true, loaded = false, loadSlow = false, control = false, requestingAd = false;
   let selectedControl = 0;
   const loadControl = (index: number): void => { const level = reviewFields[index]; if (!level) return; selectedControl = index; scene.loadAttempt(new Board(level, crypto.randomUUID())); };
@@ -99,6 +101,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       if (scene.board.remaining.some(a => distanceToPath(world, a.path) * scene.boardCamera.scale <= 13)) return;
       motion.emptyTap(root, p); platform.feedback.play('button');
     },
+    press:id=>scene.setPress(id),
     preview: id => scene.setPreview(id),
     pan: (dx, dy) => { scene.pan(dx, dy); scheduleView(); },
     pinch: manualZoom,
@@ -123,6 +126,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     meta.selectCampaign(); loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true }); resumeErrors();
   })()); };
   const leaveGame = (): void => {
+    helpOffers.choice('exit');if(!control)run(progress.recordHelpExit(scene.board.attemptId));
     if(activeDate && dailyReturnAttempt===scene.board.attemptId && scene.board.complete)meta.queueDailyArrival(activeDate,dailyReturnAttempt);
     dailyReturnAttempt='';
     assistance=null; motion.cancelRefill(); cancel(); saveView(); if (cameraTimer !== undefined) clearTimeout(cameraTimer); cameraTimer = undefined;
@@ -145,7 +149,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       platform.analytics.track('daily_open', { date, attempt, resumed: active().started });
     },
   });
-  const settingsSurface = installSettingsSurface(platform.settings, platform.activity, platform.feedback, () => { cancel(); saveView(); }, motion);
+  const settingsSurface = installSettingsSurface(platform.settings, platform.activity, platform.feedback, () => { cancel(); saveView(); }, motion,()=>helpOffers.renderQA());
   let celebratedAttempt = '', pendingAward = false, freshWinAttempt = '', dailyReturnAttempt = '';
   const backToMenu = (): void => { if (requestingAd || transition.busy) return; if (activeDate && !control) meta.show('calendar', activeDate); else meta.show('home'); close(); sync(); };
   let rewardIntent = 0, lastPreload = -Infinity, pendingRewardKey = '';
@@ -157,14 +161,19 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const transition = createAdTransition(platform.activity, () => sync(), () => { notice = text.saveFailed; sync(); });
   const requestReward = async (placement: 'hint' | 'lives'): Promise<void> => {
     if (requestingAd || transition.busy || !progress.available || progress.uncertain) return;
+    const selected=helpOffers.snapshot(scene.board.attemptId,placement);
+    if(selected.reserve){helpOffers.choice('claim');await progress.claimHelp(scene.board.attemptId,selected.reserve.id);return;}
+    if(!selected.offer)return;
+    const offer=selected.offer;helpOffers.choice('accept');
     const intent = ++rewardIntent, attempt = scene.board.attemptId, mode = gameMode(); requestingAd = true;
     const dialogClosed = new Promise<void>(resolve => close(resolve)); adSurface.prepare();
     const requestKey = `${attempt}:${placement}`; requestedRewards.add(requestKey); pendingRewardKey = requestKey;
     if (placement === 'hint') platform.analytics.track('hint_request', { attempt });
     try {
       await dialogClosed; if (!alive || rewardIntent !== intent) return;
-      await progress.postponeAds(); if (!alive || rewardIntent !== intent) return;
-      const outcome = await platform.ads.show({ kind: 'rewarded', placement, attempt, mode });
+      const descriptor=await progress.prepareHelpRequest(offer); if (!alive || rewardIntent !== intent) return;
+      if(!descriptor){notice=text.videoUnavailable;return;}
+      const outcome = await platform.ads.show({ kind: 'rewarded', placement, attempt, mode,requestId:descriptor.requestId,intentVersion:1,context:helpOffers.context(attempt,descriptor.variant) });
       if (!alive || rewardIntent !== intent) return;
       if (!outcome.shown) { notice = outcome.outcome === 'cancelled' ? text.videoCancelled : text.videoUnavailable; requestedRewards.delete(requestKey); }
       else if (!progress.state.receipts.includes(outcome.requestId ?? '')) notice = outcome.earned ? text.rewardPending : text.videoClosed;
@@ -182,7 +191,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       const reason = !freshWin ? 'restored_result' : platform.kind !== 'android' ? 'unsupported' : !progress.available || progress.uncertain ? 'save_unavailable' : interstitialReason(progress.state.adCadence, progress.confirmedWins);
       platform.analytics.track('ad_opportunity', { reason, attempt, mode, level_id: levelId });
       return reason === 'eligible' && !!await progress.consumeInterstitial(attempt);
-    }, () => platform.ads.show({ kind: 'interstitial', placement: 'continue', attempt, mode }), async () => {
+    }, () => platform.ads.show({ kind: 'interstitial', placement: 'continue', attempt, mode,context:helpOffers.context(attempt) }), async () => {
       if (date) {if(animateDaily)meta.queueDailyArrival(date,attempt);meta.show('calendar', date);} else if(finalCampaign)meta.show('calendar');else await progress.next(attempt);
     });
   };
@@ -210,7 +219,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       button('confirm-restart', text.restart, () => {
         close(); if (control) loadControl(selectedControl);
         else {
-          const a = scene.board, mode = gameMode(); run(progress.restart(a.attemptId).then(changed => { if (changed) platform.analytics.track('level_restart', { mode, level_id: a.level.id, attempt: a.attemptId }); }));
+          const a = scene.board, mode = gameMode(),beforeMs=active().activeMs; helpOffers.choice('restart');run(progress.restart(a.attemptId).then(changed => { if (changed) {platform.analytics.track('level_restart', { mode, level_id: a.level.id, attempt: a.attemptId });platform.analytics.track('attempt_final',{event_id:`${a.attemptId}-restart`,attempt:a.attemptId,mode,outcome:'restart',active_ms:beforeMs});} }));
         }
       }, true);
       button('cancel', text.cancel, () => close());
@@ -218,7 +227,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       if (!control && !progress.state.freeContinueUsed && !active().freeUsed) { paragraph(text.freeContinueNote); button('free-continue', text.freeContinue, () => {
         const attempt = scene.board.attemptId; run(progress.continueFree(attempt).then(changed => { if (changed) platform.analytics.track('continue_applied', { attempt, source: 'free' }); }));
       }, true); }
-      else if (!control) { paragraph(text.rewardedContinue); button('rewarded-continue', text.watchVideo, () => run(requestReward('lives')), true); }
+      else if (!control) { const reserve=helpOffers.snapshot(scene.board.attemptId,'lives').reserve;paragraph(reserve?(language==='ru'?'Три жизни уже сохранены. Видео не требуется.':'Three saved lives are available. No video needed.'):text.rewardedContinue); button('rewarded-continue', reserve?(language==='ru'?'Использовать сохранённые жизни':'Use saved lives'):text.watchVideo, () => run(requestReward('lives')), true); }
       button('restart', text.restart, () => open('restart'), control);
       button('home', activeDate ? text.toCalendar : text.home, backToMenu);
       if (notice) paragraph(notice);
@@ -281,6 +290,16 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const hintWasHidden = hintButton.hidden;
     hintButton.hidden = !loaded || control || board.complete || board.hearts === 0 || !!step || idleMs < 3000 || a.hint !== null;
     if (hintWasHidden && !hintButton.hidden) motion.hintReady(hintButton);
+    if(loaded&&!control&&meta.screen==='game'){
+      const label=helpOffers.label(a.board.id),copy=hintButton.querySelector('[data-help-label]'),ready=hintButton.querySelector('[data-help-readiness]');
+      if(copy&&copy.textContent!==label.text)copy.textContent=label.text;
+      const phase=platform.ads.rewardedState.phase,ru=language==='ru';
+      const state=label.reserved?`${label.detail} · ${ru?'без видео':'no video'}`:phase==='ready'?ru?'Видео готово':'Video ready':phase==='loading'||phase==='initializing'?ru?'Видео загружается':'Video loading':phase==='backoff'?ru?'Попробуйте позже':'Try later':phase==='unavailable'||phase==='disabled'?ru?'Видео пока недоступно':'Video unavailable':ru?'Проверим видео':'Check video';
+      if(ready&&ready.textContent!==state)ready.textContent=state;
+      const video=hintButton.querySelector<SVGElement>('.video-mark');if(video)video.style.display=label.reserved?'none':'';
+      hintButton.dataset.helpEffect=label.kind;hintButton.dataset.readiness=phase;hintButton.title=label.detail;
+      shell.dataset.helpVariant=progress.state.helpLedger.assignments[a.board.id]??progress.state.helpLedger.nextVariant;
+    }
     const guideLabel=document.querySelector<HTMLElement>('#guides-label')!; guideLabel.hidden = step !== 'guides'; guideLabel.textContent=text.guideShort;
     hintButton.disabled = requestingAd || !progress.available || progress.uncertain;
     warning.hidden = progress.error === null && !loadSlow;
@@ -295,11 +314,17 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     platform.activity.setGameplayDesired(loaded && meta.screen === 'game' && !board.complete && board.hearts > 0);
     if (modal === 'lost' && board.hearts > 0) close();
     if (loaded && meta.screen === 'game' && board.hearts === 0 && !scene.hasErrorMotion && modal === null && !requestingAd && !motion.routeBusy) open('lost');
+    const foreground=!document.hidden&&platform.activity.getBlockReasons().every(reason=>reason==='dialog');
+    const showHint=loaded&&!control&&meta.screen==='game'&&!hintButton.hidden&&!requestingAd&&!motion.routeBusy&&!platform.activity.isBlocked();
+    const showLives=loaded&&!control&&meta.screen==='game'&&modal==='lost'&&dialog.open&&!requestingAd&&!motion.routeBusy&&foreground&&!!content.querySelector('[data-action="rewarded-continue"]');
+    helpOffers.visible(showHint||showLives,board.attemptId,showLives?'lives':'hint');
+    platform.ads.setRewardedDemand(loaded&&!control&&meta.screen==='game'&&!board.complete&&!a.hint&&!step&&!requestingAd&&!motion.routeBusy&&progress.available&&!progress.uncertain&&(showLives||!platform.activity.isBlocked()&&board.hearts>0));
     scheduleAssistance();
     meta.presentArrivals();
   };
   const onChange = (event: SaveChange): void => {
     if (!alive) return;
+    helpOffers.facts(event);
     if(event.kind==='load'){dailyReturnAttempt='';meta.discardAward();meta.discardArrivals();}
     if (activeDate && !progress.state.daily[activeDate]) { activeDate = null; meta.show('home'); }
     if (progress.error !== lastSaveError) {
@@ -318,6 +343,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
         if (scene.guides !== a.guides) scene.setGuides(a.guides);
         if (scene.hintTarget !== a.hint) { scene.setHint(a.hint); scheduleView(); }
       }
+      scene.setAssistance(progress.currentHelp(a.board.id)?.plan??null,event.kind==='load');
       if (event.kind !== 'load' && sameAttempt) {
         if(a.board.lives<previousLives)motion.cancelRefill();
         const lives=a.board.lives>previousLives?{from:previousLives,to:a.board.lives}:undefined, hint=a.hint&&a.hint!==previousHint?a.hint:undefined;
@@ -333,12 +359,13 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       const owner = progress.findAttempt(event.attempt), moved = owner?.saved;
       if (moved && owner) {
         if (event.startedNow) platform.analytics.track('level_start', { mode: owner.mode, level_id: moved.level.id, content_version: moved.level.contentVersion, attempt: moved.board.id, resumed: false });
-        if (event.result?.kind === 'error') platform.analytics.track('level_error', { mode: owner.mode, level_id: moved.level.id, attempt: moved.board.id, first: event.result.first, lives: moved.board.lives });
+        if (event.result?.kind === 'error') {platform.analytics.track('level_error', { mode: owner.mode, level_id: moved.level.id, attempt: moved.board.id, first: event.result.first, lives: moved.board.lives });if(event.result.first&&moved.board.lives===0)platform.analytics.track('attempt_loss',{event_id:`${moved.board.id}-loss-${moved.board.errors.length}`,attempt:moved.board.id,mode:owner.mode,mistakes:moved.board.errors.length});}
         if (event.result?.kind === 'removed') {
           if (scene.board.attemptId === moved.board.id) { idleMs = 0; notice = ''; const step = tutorial(); if (step && ['tap', 'turns', 'blockers'].includes(step)) finishTutorial(step); }
           if (event.result.complete) {
             if (meta.screen === 'game' && scene.board.attemptId === moved.board.id) freshWinAttempt = moved.board.id;
             platform.analytics.track('level_complete', { mode: owner.mode, level_id: moved.level.id, attempt: moved.board.id, active_ms: moved.activeMs, mistakes: moved.board.errors.length, first_clear: true });
+            platform.analytics.track('attempt_final',{event_id:`${moved.board.id}-completed`,attempt:moved.board.id,mode:owner.mode,outcome:'completed',active_ms:moved.activeMs});
             if (owner.date) platform.analytics.track('daily_complete', { date: owner.date, attempt: moved.board.id });
           }
         }
@@ -355,6 +382,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     sync();
   };
   listeners.push(progress.subscribe(onChange));
+  listeners.push(platform.ads.subscribeRewarded(()=>sync()));
   platform.activity.setBlocked('save-load', true);
   const slowLoad = setTimeout(() => { if (!loaded && alive) { loadSlow = true; sync(); } }, 4000);
   const finishLoad = (): void => {
@@ -364,7 +392,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       const result = await progress.commitReward(receipt);
       const recovered = !requestedRewards.delete(`${receipt.attempt}:${receipt.placement}`);
       if (result === 'applied') {
-        const applied = !progress.state.reservedRewards.some(r => r.id === receipt.id);
+        const right=progress.state.helpLedger.rights[receipt.id],applied=!!right&&right.status!=='reserved';
+        if(!right){platform.analytics.track('runtime_error',{operation:'reward_descriptor',reason:'unresolved'});return result;}
         if (!applied) platform.analytics.track('ad_reward_reserved', { placement: receipt.placement, attempt: receipt.attempt });
         if (applied) {
           if (receipt.attempt === scene.board.attemptId) notice = '';
@@ -410,6 +439,9 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if (event.kind === 'move-start') platform.feedback.play('remove');
     else if (event.kind === 'blocked-start') platform.feedback.play('slide');
     else if (event.kind === 'impact') { platform.feedback.play('error'); motion.impact(document.querySelector('#hearts')!); }
+    else if(event.kind==='repeat-impact')platform.feedback.play('repeat-error');
+    else if(event.kind==='auto-start')platform.feedback.play('auto');
+    else if(event.kind==='help-finish')platform.feedback.play('help-final');
     else if (event.kind === 'hint-ready') platform.feedback.play('hint');
     else if (event.kind === 'exit') platform.feedback.play('exit');
     else if (event.kind === 'victory' && celebratedAttempt !== event.attempt) { celebratedAttempt = event.attempt; platform.feedback.play(pendingAward ? 'award' : scene.board.snapshot().errors.length===0 ? 'perfect' : 'win'); pendingAward = false; }
@@ -438,7 +470,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     document.querySelector('#choose-field')!.setAttribute('aria-label', text.home);
     document.querySelector('#restart')!.setAttribute('aria-label', text.restart);
     document.querySelector('#guides')!.setAttribute('aria-label', text.guides);
-    hintButton.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 3H9c0-1 0-2-1-3Z"/></svg><span>${text.hint}</span><svg class="video-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg>`; sessionPlay.textContent = text.sessionPlay;
+    hintButton.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 3H9c0-1 0-2-1-3Z"/></svg><span class="hint-copy"><span data-help-label>${text.hint}</span><small data-help-readiness></small></span><svg class="video-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg>`; sessionPlay.textContent = text.sessionPlay;
   };
   localize();
   listeners.push(platform.settings.subscribe(() => {
@@ -453,7 +485,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     onBack(): boolean { if (requestingAd || platform.ads.state.phase !== 'idle') { cancelAd(); return true; } if (transition.busy) return true; if (settingsSurface.close()) return true; if (meta.closeTrophy()) return true; if (modal) { if (modal === 'lost') backToMenu(); else close(); sync(); return true; } if (meta.screen === 'home') return false; if (meta.screen === 'game') backToMenu(); else meta.back(); return true; }, cancel,
     destroy(): void {
       saveView(); alive = false; assistance=null; cancel(); clearInterval(timer); clearTimeout(slowLoad); if (cameraTimer !== undefined) clearTimeout(cameraTimer);
-      for (const remove of listeners.reverse()) remove(); transition.destroy(); adSurface.destroy(); settingsSurface.destroy(); meta.destroy(); motion.destroy(); platform.activity.setBlocked('menu', false);
+      for (const remove of listeners.reverse()) remove();helpOffers.destroy();platform.ads.setRewardedDemand(false); transition.destroy(); adSurface.destroy(); settingsSurface.destroy(); meta.destroy(); motion.destroy(); platform.activity.setBlocked('menu', false);
       dialog.close(); platform.activity.setBlocked('dialog', false); platform.activity.setBlocked('save-load', false); content.replaceChildren();
       // The final accepted write is allowed to settle; no later receipt can mutate a disposed store.
       void progress.flush().finally(() => progress.destroy());

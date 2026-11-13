@@ -44,4 +44,14 @@ public class RewardJournalCoreTest {
         assertThrows(Exception.class, () -> queue.record(receipt("retained"))); assertEquals("corrupt", disk.raw);
         disk.raw = null; assertEquals("retained", queue.pending().getJSONObject(0).getString("id"));
     }
+    @Test public void preservesNewIntentAcrossRecoveryAndRejectsSchemaAlias() throws Exception {
+        Disk disk=new Disk();RewardJournalCore q=new RewardJournalCore(disk,new RewardJournalCore.Memory());
+        JSONObject next=receipt("new").put("schema",2).put("intentVersion",1).put("requestId","new");
+        q.record(next);q.record(next);q=new RewardJournalCore(disk,new RewardJournalCore.Memory());
+        assertEquals(2,q.pending().getJSONObject(0).getInt("schema"));
+        RewardJournalCore recovered=q;
+        assertThrows(Exception.class,()->recovered.record(receipt("new")));
+        assertThrows(Exception.class,()->recovered.record(receipt("bad").put("schema",2).put("intentVersion",1).put("requestId","different")));
+        assertEquals(1,q.pending().length());q.acknowledge("new");assertEquals(0,q.pending().length());
+    }
 }

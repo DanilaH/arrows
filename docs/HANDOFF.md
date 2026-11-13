@@ -1,3 +1,7 @@
+## Assistance iteration 0.20.0 / code32 — implementation, verification in progress
+
+Owner package starts at docs/iterations/assistance-2026-11-13/START_HERE.md. Source baseline ad4bc416/0.19.1; all newer work preserved. Read docs/ASSISTANCE_ITERATION.md for phases, authority and current factual checks. C/A1/F/A2 are the first APK; A3→A4→B1 must continue as separate changes only after first artifact is delivered. No kit/store publication. Legacy hints retain meaning; schema2 intent is a new native receipt distinction, game save stays additive schema2. Physical phone performance/haptics and live money remain unverified. This entry does not supersede previous completed-release evidence below.
+
 # Arrows handoff — 2026-11-13
 
 ## Pending kit transfer audit

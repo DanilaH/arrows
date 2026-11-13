@@ -8,6 +8,8 @@ startGame([], onBack => {
   let request: (AdRequest & { requestId?: string }) | undefined, last: EarnedReceipt | undefined;
   let receipts: EarnedReceipt[] = [], shows = 0;
   const ads = createAds(base.activity, base.analytics, {
+    async status(){return {rewardedState:{configured:true,phase:'ready' as const,ready:true,preloadId:'controlled',loadedAt:Date.now(),expiresInMs:300000,retryInMs:0,playtest:true}};},
+    async prepareRewarded(){return {configured:true,phase:'ready' as const,ready:true,preloadId:'controlled',loadedAt:Date.now(),expiresInMs:300000,retryInMs:0,playtest:true};},
     async prepareInterstitial() {}, async pending() { return { receipts }; },
     async acknowledge({id}) { receipts = receipts.filter(r => r.id !== id); },
     async addListener(_name, callback) { listener = callback; return { remove: async () => {} }; },
@@ -20,7 +22,7 @@ startGame([], onBack => {
     shown() { if(request)listener({...request, phase:'show'}); },
     earn() {
       if(!request || request.placement==='continue')throw Error('No rewarded request');
-      last = {id:request.requestId!, schema:1, attempt:request.attempt, mode:request.mode, placement:request.placement};
+      last = {id:request.requestId!, ...(request.intentVersion===1?{schema:2 as const,intentVersion:1 as const,requestId:request.requestId!}:{schema:1 as const}), attempt:request.attempt, mode:request.mode, placement:request.placement};
       receipts.push(last); listener({...request, phase:'earned'});
     },
     duplicate() { if(last)receipts.push(last); void ads.recover(); },

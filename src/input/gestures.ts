@@ -5,6 +5,7 @@ interface Callbacks {
   contains(id: string, point: Point): boolean;
   activate(id: string): void;
   emptyTap?(point: Point): void;
+  press?(id: string | null): void;
   preview(id: string | null): void;
   pan(dx: number, dy: number): void;
   pinch(previous: Point, current: Point, ratio: number): void;
@@ -21,12 +22,12 @@ export class BoardGestures {
   public down(id: number, point: Point, time: number): void {
     this.pointers.set(id, point);
     if (this.pointers.size === 1 && this.phase === 'idle') {
-      this.start = point; this.downAt = time; this.target = this.callbacks.hit(point); this.phase = 'pressCandidate';
-    } else { this.target = null; this.callbacks.preview(null); this.phase = 'pinch'; }
+      this.start = point; this.downAt = time; this.target = this.callbacks.hit(point); this.phase = 'pressCandidate'; this.callbacks.press?.(this.target);
+    } else { this.target = null; this.callbacks.press?.(null); this.callbacks.preview(null); this.phase = 'pinch'; }
   }
   public hold(time: number): void {
     if (this.phase === 'pressCandidate' && this.target && time - this.downAt >= 300) {
-      this.phase = 'heldPreview'; this.callbacks.preview(this.target);
+      this.callbacks.press?.(null); this.phase = 'heldPreview'; this.callbacks.preview(this.target);
     }
   }
   public move(id: number, point: Point): void {
@@ -41,10 +42,10 @@ export class BoardGestures {
       return;
     }
     if (this.phase === 'heldPreview' && this.target && !this.callbacks.contains(this.target, point)) {
-      this.target = null; this.phase = 'cancelled'; this.callbacks.preview(null);
+      this.target = null; this.phase = 'cancelled'; this.callbacks.press?.(null); this.callbacks.preview(null);
     }
     if (this.phase !== 'pan' && distance(this.start, point) >= 8) {
-      this.target = null; this.callbacks.preview(null); this.phase = 'pan';
+      this.target = null; this.callbacks.press?.(null); this.callbacks.preview(null); this.phase = 'pan';
     }
     if (this.phase === 'pan') this.callbacks.pan(point.x - old.x, point.y - old.y);
   }
@@ -56,11 +57,12 @@ export class BoardGestures {
       (this.phase === 'pressCandidate' || this.phase === 'heldPreview') && target !== null && this.callbacks.contains(target, point);
     const emptyTap = this.pointers.size === 1 && this.phase === 'pressCandidate' && target === null && time - this.downAt < 300;
     this.pointers.delete(id);
-    this.target = null; this.callbacks.preview(null);
+    this.target = null;
     if (!this.pointers.size) this.phase = 'idle';
     else this.phase = 'pinch';
     if (activate) this.callbacks.activate(target!);
     else if (emptyTap) this.callbacks.emptyTap?.(point);
+    this.callbacks.press?.(null); this.callbacks.preview(null);
   }
-  public cancel(): void { this.pointers.clear(); this.target = null; this.phase = 'idle'; this.callbacks.preview(null); }
+  public cancel(): void { this.pointers.clear(); this.target = null; this.phase = 'idle'; this.callbacks.press?.(null); this.callbacks.preview(null); }
 }

@@ -2,8 +2,8 @@ import type { GameTheme } from './settings';
 import { Capacitor, SystemBars, SystemBarsStyle } from '@capacitor/core';
 let nativeTheme: GameTheme | undefined;
 export const boardPalettes = {
-  dark: { arrow: 0xb4bcfa, exit: 0x6767ff, error: 0xff526d, dot: 0x3e425b, guide: 0x41455f },
-  light: { arrow: 0x374468, exit: 0x6355d9, error: 0xcd3553, dot: 0xc2cbdc, guide: 0xc0c7db },
+  dark: { arrow: 0xb4bcfa, exit: 0x6767ff, error: 0xff526d, dot: 0x3e425b, guide: 0x41455f, help: 0xffd596, group: 0x7bdbc9 },
+  light: { arrow: 0x374468, exit: 0x6355d9, error: 0xcd3553, dot: 0xc2cbdc, guide: 0xc0c7db, help: 0x926020, group: 0x237b6a },
 } as const;
 export function applyTheme(theme: GameTheme): void {
   document.documentElement.dataset.theme = theme;
