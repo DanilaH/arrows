@@ -1,0 +1,20 @@
+{
+  "source": "84a1a5d37ebd761054d6aefcaccb3505e5f27b3a",
+  "method": "Actual game WebAudio output tee, only codec conversion. Controlled SDK transport; no physical phone.",
+  "streams": [
+    {
+      "codec_name": "h264",
+      "codec_type": "video",
+      "duration": "4.520000"
+    },
+    {
+      "codec_name": "aac",
+      "codec_type": "audio",
+      "duration": "4.558000"
+    }
+  ],
+  "volume": [
+    "mean_volume: -45.8 dB",
+    "max_volume: -17.0 dB"
+  ]
+}

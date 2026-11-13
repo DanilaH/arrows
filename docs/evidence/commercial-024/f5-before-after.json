@@ -1,0 +1,271 @@
+{
+  "source": "794bef1 vs84a1a5d",
+  "provenance": "Explicit synthetic export fixture, no money/SDK/session/dashboard. Verifies classification only.",
+  "beforeQaFalseUnknown": {
+    "cohorts": [
+      {
+        "variant": "single-v2",
+        "installs": 1,
+        "revenue": {
+          "RUB": {
+            "amount": "0.25",
+            "perAssignedInstall": 0.25
+          }
+        },
+        "impressions": 1
+      }
+    ],
+    "duplicates": 0,
+    "unknown": 0,
+    "missingJoin": 0,
+    "immature": 0,
+    "canonical": "ad_impression_value/sdk-ilrd",
+    "liveVerified": false
+  },
+  "afterQaFalseUnknown": {
+    "cohorts": [],
+    "duplicates": 0,
+    "unknown": 0,
+    "missingJoin": 0,
+    "immature": 0,
+    "environmentRows": {
+      "live": 0,
+      "test": 0,
+      "unknown": 3
+    },
+    "coverage": {
+      "observed": {
+        "live": {
+          "sdkImpressions": 0,
+          "monetaryFacts": 0,
+          "callbacksWithMonetary": 0,
+          "missingMonetary": 0,
+          "monetaryWithoutCallback": 0
+        },
+        "test": {
+          "sdkImpressions": 0,
+          "monetaryFacts": 0,
+          "callbacksWithMonetary": 0,
+          "missingMonetary": 0,
+          "monetaryWithoutCallback": 0
+        },
+        "unknown": {
+          "sdkImpressions": 0,
+          "monetaryFacts": 1,
+          "callbacksWithMonetary": 0,
+          "missingMonetary": 0,
+          "monetaryWithoutCallback": 1
+        }
+      },
+      "joinedMatureLive": 0,
+      "diagnosticSnapshots": 0,
+      "reportedLosses": {
+        "live": {
+          "transports": 0,
+          "dropped": null,
+          "overflow": null,
+          "invalid": null,
+          "sync_failure": null,
+          "async_failure": null,
+          "native_rejected": null,
+          "flush_failure": null,
+          "diagnostics_failed": null
+        },
+        "test": {
+          "transports": 0,
+          "dropped": null,
+          "overflow": null,
+          "invalid": null,
+          "sync_failure": null,
+          "async_failure": null,
+          "native_rejected": null,
+          "flush_failure": null,
+          "diagnostics_failed": null
+        },
+        "unknown": {
+          "transports": 0,
+          "dropped": null,
+          "overflow": null,
+          "invalid": null,
+          "sync_failure": null,
+          "async_failure": null,
+          "native_rejected": null,
+          "flush_failure": null,
+          "diagnostics_failed": null
+        }
+      },
+      "completeness": "unknown",
+      "note": "Observed export only; an absent callback, monetary fact or diagnostic may itself have been lost. SDK acceptance is not dashboard delivery."
+    },
+    "canonical": "ad_impression_value/sdk-ilrd",
+    "liveVerified": false
+  },
+  "afterExplicitDebug": {
+    "cohorts": [],
+    "duplicates": 0,
+    "unknown": 0,
+    "missingJoin": 0,
+    "immature": 0,
+    "environmentRows": {
+      "live": 0,
+      "test": 3,
+      "unknown": 0
+    },
+    "coverage": {
+      "observed": {
+        "live": {
+          "sdkImpressions": 0,
+          "monetaryFacts": 0,
+          "callbacksWithMonetary": 0,
+          "missingMonetary": 0,
+          "monetaryWithoutCallback": 0
+        },
+        "test": {
+          "sdkImpressions": 0,
+          "monetaryFacts": 1,
+          "callbacksWithMonetary": 0,
+          "missingMonetary": 0,
+          "monetaryWithoutCallback": 1
+        },
+        "unknown": {
+          "sdkImpressions": 0,
+          "monetaryFacts": 0,
+          "callbacksWithMonetary": 0,
+          "missingMonetary": 0,
+          "monetaryWithoutCallback": 0
+        }
+      },
+      "joinedMatureLive": 0,
+      "diagnosticSnapshots": 0,
+      "reportedLosses": {
+        "live": {
+          "transports": 0,
+          "dropped": null,
+          "overflow": null,
+          "invalid": null,
+          "sync_failure": null,
+          "async_failure": null,
+          "native_rejected": null,
+          "flush_failure": null,
+          "diagnostics_failed": null
+        },
+        "test": {
+          "transports": 0,
+          "dropped": null,
+          "overflow": null,
+          "invalid": null,
+          "sync_failure": null,
+          "async_failure": null,
+          "native_rejected": null,
+          "flush_failure": null,
+          "diagnostics_failed": null
+        },
+        "unknown": {
+          "transports": 0,
+          "dropped": null,
+          "overflow": null,
+          "invalid": null,
+          "sync_failure": null,
+          "async_failure": null,
+          "native_rejected": null,
+          "flush_failure": null,
+          "diagnostics_failed": null
+        }
+      },
+      "completeness": "unknown",
+      "note": "Observed export only; an absent callback, monetary fact or diagnostic may itself have been lost. SDK acceptance is not dashboard delivery."
+    },
+    "canonical": "ad_impression_value/sdk-ilrd",
+    "liveVerified": false
+  },
+  "afterExplicitLiveFixture": {
+    "cohorts": [
+      {
+        "variant": "single-v2",
+        "installs": 1,
+        "revenue": {
+          "RUB": {
+            "amount": "0.25",
+            "perAssignedInstall": 0.25
+          }
+        },
+        "impressions": 1
+      }
+    ],
+    "duplicates": 0,
+    "unknown": 0,
+    "missingJoin": 0,
+    "immature": 0,
+    "environmentRows": {
+      "live": 3,
+      "test": 0,
+      "unknown": 0
+    },
+    "coverage": {
+      "observed": {
+        "live": {
+          "sdkImpressions": 0,
+          "monetaryFacts": 1,
+          "callbacksWithMonetary": 0,
+          "missingMonetary": 0,
+          "monetaryWithoutCallback": 1
+        },
+        "test": {
+          "sdkImpressions": 0,
+          "monetaryFacts": 0,
+          "callbacksWithMonetary": 0,
+          "missingMonetary": 0,
+          "monetaryWithoutCallback": 0
+        },
+        "unknown": {
+          "sdkImpressions": 0,
+          "monetaryFacts": 0,
+          "callbacksWithMonetary": 0,
+          "missingMonetary": 0,
+          "monetaryWithoutCallback": 0
+        }
+      },
+      "joinedMatureLive": 1,
+      "diagnosticSnapshots": 0,
+      "reportedLosses": {
+        "live": {
+          "transports": 0,
+          "dropped": null,
+          "overflow": null,
+          "invalid": null,
+          "sync_failure": null,
+          "async_failure": null,
+          "native_rejected": null,
+          "flush_failure": null,
+          "diagnostics_failed": null
+        },
+        "test": {
+          "transports": 0,
+          "dropped": null,
+          "overflow": null,
+          "invalid": null,
+          "sync_failure": null,
+          "async_failure": null,
+          "native_rejected": null,
+          "flush_failure": null,
+          "diagnostics_failed": null
+        },
+        "unknown": {
+          "transports": 0,
+          "dropped": null,
+          "overflow": null,
+          "invalid": null,
+          "sync_failure": null,
+          "async_failure": null,
+          "native_rejected": null,
+          "flush_failure": null,
+          "diagnostics_failed": null
+        }
+      },
+      "completeness": "unknown",
+      "note": "Observed export only; an absent callback, monetary fact or diagnostic may itself have been lost. SDK acceptance is not dashboard delivery."
+    },
+    "canonical": "ad_impression_value/sdk-ilrd",
+    "liveVerified": false
+  }
+}

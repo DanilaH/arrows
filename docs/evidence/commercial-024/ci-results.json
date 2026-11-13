@@ -1,0 +1,25 @@
+{
+  "source": "84a1a5d37ebd761054d6aefcaccb3505e5f27b3a",
+  "run": 43493851522,
+  "web": {
+    "job": 132121668052,
+    "status": "success",
+    "unit": 171,
+    "browser": 274,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "android_sync": "PASS"
+  },
+  "android": {
+    "job": 132121667379,
+    "status": "success",
+    "jvm": 19,
+    "normal_debug_build": "PASS",
+    "isolated_playtest_build": "PASS"
+  },
+  "targeted_browser": 18,
+  "device_install_update": "NOT RUN",
+  "physical_haptics_performance": "NOT RUN",
+  "actual_sdk_session": "NOT RUN",
+  "appmetrica_dashboard_real_money": "SEPARATE STAGE / NOT RUN"
+}

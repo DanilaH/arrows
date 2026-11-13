@@ -1,0 +1,85 @@
+{
+  "method": "Real Chromium390x844/DPR1.5 WebGL frames from exact APK web payloads, seeded saves and controlled native SDK transport. No physical phone/native SDK video/user analytics. Audio is actual game output. F2 uses actual30s clock elapsed; only its exported short clip cuts the waiting gap with explicit caption.",
+  "payloads": [
+    {
+      "source": "ccf330a7f056fb386ee3da5fbc289d896f68dc5c",
+      "files": {
+        "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+        "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+        "index.html": "d2151d1571623a169ffb67935f1773a3c358e104b168e8e6e6451ec382c31223",
+        "target-lab.html": "d3a306b6b60db9f1a497f07008ed872d0b4ff2f5da615935056511f93a24b41c",
+        "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+        "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+        "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+        "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+        "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+        "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+        "assets/gestures-BBkAoISK.css": "b31c4ff9dab5d5b026860171938b4b971d4f2f1533ae33cc0cd7da42516b5bf0",
+        "assets/gestures-BWK0X5qs.js": "0351641ddfd31aef9baf71c44231c45dd7a3b3743fae0fbde93df3c97fca76f1",
+        "assets/main-CGd4BDfP.js": "8927973d7fd705d186ed23e81e809067ff3f00c8bcdc1966e737e50d75b8a9c9",
+        "assets/targetLab-D9KRaeTg.js": "3c95a23a554e30be11bad7e4ccc62448f4861c6eec9cc4db5911969e53b23905",
+        "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+        "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7"
+      }
+    },
+    {
+      "source": "84a1a5d37ebd761054d6aefcaccb3505e5f27b3a",
+      "files": {
+        "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+        "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+        "index.html": "17187256eb6d2de97ce501e0fd07c488b62b87cf4665fbb817d952c647b5a14c",
+        "target-lab.html": "bf15a4088d8169042d2f48e1e21546fc58abcd5f630ca90f1bfded68479ff3b8",
+        "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+        "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+        "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+        "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+        "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+        "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+        "assets/gestures-BBkAoISK.css": "b31c4ff9dab5d5b026860171938b4b971d4f2f1533ae33cc0cd7da42516b5bf0",
+        "assets/gestures-BZk-Jfuu.js": "9ce504d24b9d9b76f5755133f92bad56e8492995f1c79ed575de4f0602d2f0a2",
+        "assets/main-BCKCj5a3.js": "2115a1f2dae5519823779f7f1f9aba424a09b2989b31d4c985029eae6baad391",
+        "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+        "assets/targetLab-toM99NjJ.js": "18a8ad2c3e943b206134bb50b25b9259f891e1c8c573da3e7b43e3d8c658d693",
+        "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7"
+      }
+    }
+  ],
+  "clips": [
+    {
+      "name": "f3-camera-before",
+      "source": "ccf330a7f056fb386ee3da5fbc289d896f68dc5c",
+      "frames": 31,
+      "rawDurationMs": 4473.044405999999,
+      "backoffActualMs": null,
+      "waitingGapCut": false,
+      "cameraBefore": "{\"x\":-941.3333333333334,\"y\":-624.5,\"scale\":29.166666666666668}",
+      "cameraAfter": "{\"x\":-446.66666666666674,\"y\":-800.6666666666667,\"scale\":29.166666666666668}",
+      "requestRoot": "c20-1",
+      "endingCopy": "Video ready"
+    },
+    {
+      "name": "f3-camera-after",
+      "source": "84a1a5d37ebd761054d6aefcaccb3505e5f27b3a",
+      "frames": 37,
+      "rawDurationMs": 4477.332157000001,
+      "backoffActualMs": null,
+      "waitingGapCut": false,
+      "cameraBefore": "{\"x\":-941.3333333333334,\"y\":-624.5,\"scale\":29.166666666666668}",
+      "cameraAfter": "{\"x\":-941.3333333333334,\"y\":-624.5,\"scale\":29.166666666666668}",
+      "requestRoot": "c20-3",
+      "endingCopy": "Video ready"
+    },
+    {
+      "name": "f2-backoff-after",
+      "source": "84a1a5d37ebd761054d6aefcaccb3505e5f27b3a",
+      "frames": 219,
+      "rawDurationMs": 32862.05456999999,
+      "backoffActualMs": 30000,
+      "waitingGapCut": true,
+      "cameraBefore": "{\"x\":27,\"y\":243.5,\"scale\":7}",
+      "cameraAfter": "{\"x\":27,\"y\":243.5,\"scale\":7}",
+      "requestRoot": null,
+      "endingCopy": "Check video"
+    }
+  ]
+}

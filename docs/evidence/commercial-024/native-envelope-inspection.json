@@ -1,0 +1,10 @@
+{
+  "Lcom/danilah/arrows/AnalyticsEnvironment;": true,
+  "environment_version": true,
+  "build_environment": true,
+  "ad_environment": true,
+  "analytics_environment": true,
+  "app_version_code": true,
+  "analytics_health": true,
+  "assistance_followup": true
+}

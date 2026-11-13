@@ -1,0 +1,59 @@
+{
+  "results": [
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/commercial-024/arrows-0.24.0-playtest.apk",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000c98c8210968f3c2dbd0f29b2",
+      "library_file_id": "libfile_fde3_f-2d46e97772bc81919a14ed1abe8dde59_2841ca9da26c8191b7a266fa9b41a810",
+      "file_name": "arrows-0.24.0-playtest.apk",
+      "local_metadata_applied": true,
+      "path": "/arrows-0.24.0-playtest.apk",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/commercial-024/f2-backoff-after.gif",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000a0c882109c5b384bf8fe4383",
+      "library_file_id": "libfile_fde3_f-1664dd738db48191973213ef2366237e_2841ca9da26c8191b7a266fa9b41a810",
+      "file_name": "f2-backoff-after.gif",
+      "local_metadata_applied": true,
+      "path": "/f2-backoff-after.gif",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/commercial-024/f3-camera-before.gif",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000e6d882109bc44671f9dbb069",
+      "library_file_id": "libfile_fde3_f-40f32c3122e881919976ecb93ab9a6a4_2841ca9da26c8191b7a266fa9b41a810",
+      "file_name": "f3-camera-before.gif",
+      "local_metadata_applied": true,
+      "path": "/f3-camera-before.gif",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/commercial-024/f3-camera-after.gif",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_000000001fb88210a5e0f19e125003ca",
+      "library_file_id": "libfile_fde3_f-0630e1babf2881919507f9de6eecfaaf_2841ca9da26c8191b7a266fa9b41a810",
+      "file_name": "f3-camera-after.gif",
+      "local_metadata_applied": true,
+      "path": "/f3-camera-after.gif",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/89a7896b6c60/arrows/.test-output/commercial-024/f3-camera-after-audio.mp4",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_0000000005248210a921711adbf50a5a",
+      "library_file_id": "libfile_fde3_f-d1ac6ddc6540819186c5cf3d128f3419_2841ca9da26c8191b7a266fa9b41a810",
+      "file_name": "f3-camera-after-audio.mp4",
+      "local_metadata_applied": true,
+      "path": "/f3-camera-after-audio.mp4",
+      "current_version_number": 0
+    }
+  ]
+}
