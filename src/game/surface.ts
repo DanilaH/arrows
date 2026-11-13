@@ -347,7 +347,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       scene.setAssistance(progress.currentHelp(a.board.id)?.plan??null,event.kind==='load');
       if (event.kind !== 'load' && sameAttempt) {
         if(a.board.lives<previousLives)motion.cancelRefill();
-        const lives=a.board.lives>previousLives?{from:previousLives,to:a.board.lives}:undefined, hint=a.hint&&a.hint!==previousHint?a.hint:undefined;
+        const lives=a.board.lives>previousLives?{from:previousLives,to:a.board.lives}:undefined, hint=a.hint&&a.hint!==previousHint&&event.kind!=='move'?a.hint:undefined;
         if(lives || hint){
           const hard=platform.activity.getBlockReasons().some(reason=>!['menu','dialog','settings','trophy-preview'].includes(reason));
           const requested=requestedRewards.has(`${a.board.id}:${lives?'lives':'hint'}`);
