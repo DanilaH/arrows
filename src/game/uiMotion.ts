@@ -2,7 +2,7 @@ import { createBoardTransition, type BoardArtwork } from './boardTransition';
 /** Bounded presentation only. No progress, rewards or scene ownership lives here. */
 export function createUiMotion() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const running = new Set<() => void>(), presses = new Map<number, { button: HTMLButtonElement; animation: Animation }>();
+  const running = new Set<() => void>(), presses = new Map<number, { button: HTMLElement; animation: Animation | undefined; x: number; y: number }>();
   const deferredRoutes = new Set<() => void>();
   const taps = new Map<HTMLElement, () => void>();
   const clearTaps = (): void => { for (const end of [...taps.values()]) end(); };
@@ -36,26 +36,28 @@ export function createUiMotion() {
     else group.own(animate(element,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)',offset:.12},{opacity:1,transform:'translateY(0)',offset:.82},{opacity:0,transform:'translateY(-3px)'}],duration,undefined,0,'linear'));
   };
   const releasePress = (id: number, bounce: boolean): void => {
-    const press = presses.get(id); if (!press) return; presses.delete(id); press.animation.cancel();
-    if (bounce && press.button.isConnected && !press.button.disabled) animate(press.button, [{ transform: 'scale(.965)' }, { transform: 'scale(1.018)', offset: .65 }, { transform: 'scale(1)' }], 210);
+    const press = presses.get(id); if (!press) return; presses.delete(id); press.animation?.cancel(); press.button.removeAttribute('data-pressed');
+    if (bounce && press.button.isConnected && !press.button.matches(':disabled')) animate(press.button, [{ transform: 'scale(.94)' }, { transform: 'scale(1.025)', offset: .65 }, { transform: 'scale(1)' }], 210);
   };
   const down = (event: PointerEvent): void => {
-    const button = (event.target as Element).closest<HTMLButtonElement>('button');
-    if (!button || button.disabled || reduced.matches || !button.animate) return;
-    releasePress(event.pointerId, false);
-    const animation = button.animate([{ transform: 'scale(1)' }, { transform: 'scale(.965)' }], { duration: 85, fill: 'forwards' });
-    presses.set(event.pointerId, { button, animation });
+    const button = (event.target as Element).closest<HTMLElement>('button,summary,[role="button"]');
+    if (!button || button.matches(':disabled') || event.button!==0) return;
+    releasePress(event.pointerId, false);button.setAttribute('data-pressed','true');
+    const animation = !reduced.matches && button.animate ? button.animate([{ transform: 'scale(1)' }, { transform: 'scale(.94)' }], { duration: 65, fill: 'forwards' }) : undefined;
+    presses.set(event.pointerId, { button, animation, x:event.clientX,y:event.clientY });
   };
   const up = (event: PointerEvent): void => releasePress(event.pointerId, presses.get(event.pointerId)?.button.contains(event.target as Node) ?? false);
   const cancel = (event: PointerEvent): void => releasePress(event.pointerId, false);
+  const move = (event: PointerEvent): void => { const press=presses.get(event.pointerId);if(press && Math.hypot(event.clientX-press.x,event.clientY-press.y)>12)releasePress(event.pointerId,false); };
+  const scrollPress = (): void => { for(const id of [...presses.keys()])releasePress(id,false); };
   const blur = (): void => { for (const id of [...presses.keys()]) releasePress(id, false); };
   const keyboard = (event: MouseEvent): void => {
-    if (event.detail !== 0) return; const button = (event.target as Element).closest<HTMLButtonElement>('button');
-    if (button && !button.disabled) animate(button, [{ transform: 'scale(.97)' }, { transform: 'scale(1)' }], 170);
+    if (event.detail !== 0) return; const button = (event.target as Element).closest<HTMLElement>('button,summary,[role="button"]');
+    if (button && !button.matches(':disabled')) animate(button, [{ transform: 'scale(.97)' }, { transform: 'scale(1)' }], 170);
   };
   const settle = (): void => { clearTaps(); arrivalFinish?.(); stopRefill(); blur(); routeFinish?.(); for (const finish of [...running]) finish(); };
   const visibility = (): void => { if (document.hidden) settle(); };
-  document.addEventListener('pointerdown', down, true); document.addEventListener('pointerup', up, true); document.addEventListener('pointercancel', cancel, true);
+  document.addEventListener('pointerdown', down, true); document.addEventListener('pointerup', up, true); document.addEventListener('pointercancel', cancel, true); document.addEventListener('pointermove',move,true);document.addEventListener('scroll',scrollPress,true);
   document.addEventListener('click', keyboard, true); document.addEventListener('visibilitychange', visibility); window.addEventListener('blur', blur); window.addEventListener('resize', settle);
   return {
     clearTaps,
@@ -176,6 +178,7 @@ export function createUiMotion() {
       if (dialog.open) dialogs.set(dialog, { finish, cancel() { cancelled = true; dialogs.delete(dialog); finish(); } }); return true;
     },
     reveal(element: Element): void { animate(element, [{ opacity: .3, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }], 200); },
+    hintReady(element: Element): void { animate(element,[{opacity:0,transform:'translateY(6px) scale(.94)'},{opacity:1,transform:'translateY(0) scale(1.045)',offset:.35},{opacity:1,transform:'translateY(0) scale(1)',offset:.55},{opacity:1,transform:'scale(1.035)',offset:.78},{opacity:1,transform:'scale(1)'}],900); },
     impact(element: Element): void { animate(element,[{transform:'translateX(0)'},{transform:'translateX(-4px)',offset:.2},{transform:'translateX(3px)',offset:.45},{transform:'translateX(-2px)',offset:.7},{transform:'translateX(0)'}],180); },
     cancelRefill: stopRefill,
     refill(element: HTMLElement, from: number, to: number): void {
@@ -195,6 +198,18 @@ export function createUiMotion() {
       if(check)animate(check,[{strokeDasharray:'36',strokeDashoffset:'36',opacity:0},{strokeDasharray:'36',strokeDashoffset:'0',opacity:1}],280,undefined,150);
       if(rays)animate(rays,[{opacity:0,transform:'scale(.65)'},{opacity:1,transform:'scale(1)',offset:.35},{opacity:0,transform:'scale(1.16)'}],640,undefined,100);
       for(const [i,el] of [...element.querySelectorAll('strong,.win-detail,button')].entries()) animate(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],240,undefined,40+i*40);
+    },
+    gameUnlock(label: string, detail: string, artwork: string, done: () => void): void {
+      if(!alive||document.hidden){done();return;}
+      const group=presentation(2800,done),element=document.createElement('aside');
+      element.className='game-unlock';element.setAttribute('role','status');
+      element.innerHTML=`<span class="unlock-emblem" aria-hidden="true">${artwork}<i></i></span><span><strong></strong><small></small></span>`;
+      element.querySelector('strong')!.textContent=label;element.querySelector('small')!.textContent=detail;
+      document.querySelector('#game-shell')!.append(element);group.remove(element);
+      if(reduced.matches)return;
+      group.own(animate(element,[{opacity:0,transform:'translateY(-8px) scale(.96)'},{opacity:1,transform:'translateY(0) scale(1)',offset:.13},{opacity:1,transform:'translateY(0) scale(1)',offset:.84},{opacity:0,transform:'translateY(-4px)'}],2800,undefined,0,'linear'));
+      group.own(animate(element.querySelector('.unlock-emblem')!,[{transform:'scale(.55) rotate(-12deg)'},{transform:'scale(1.14) rotate(4deg)',offset:.6},{transform:'scale(1) rotate(0)'}],600));
+      group.own(animate(element.querySelector('.unlock-emblem i')!,[{opacity:0,transform:'scale(.6)'},{opacity:.8,transform:'scale(1)',offset:.25},{opacity:0,transform:'scale(1.55)'}],900));
     },
     unlock(target: HTMLElement, label: string, done: () => void): void {
       if(!alive || document.hidden || !target.isConnected){done();return;}
@@ -235,7 +250,7 @@ export function createUiMotion() {
     finish: settle,
     destroy(): void {
       alive = false; deferredRoutes.clear(); settle(); dialogs.clear();
-      document.removeEventListener('pointerdown', down, true); document.removeEventListener('pointerup', up, true); document.removeEventListener('pointercancel', cancel, true);
+      document.removeEventListener('pointerdown', down, true); document.removeEventListener('pointerup', up, true); document.removeEventListener('pointercancel', cancel, true); document.removeEventListener('pointermove',move,true);document.removeEventListener('scroll',scrollPress,true);
       document.removeEventListener('click', keyboard, true); document.removeEventListener('visibilitychange', visibility); window.removeEventListener('blur', blur); window.removeEventListener('resize', settle);
     },
   };

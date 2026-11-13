@@ -23,16 +23,33 @@ describe('arc-length extraction', () => {
 });
 
 describe('canonical game rules', () => {
-  it('charges the first mistake once per arrow and allows the marked arrow after unblocking', () => {
+  it('charges the first mistake once and automatically releases a marked arrow after unblocking', () => {
     const board = new Board(controlScenes[0]!, 'test');
     expect(board.activate('straight-0')).toMatchObject({ kind: 'error', first: true });
     for (let i = 0; i < 5; i++) expect(board.activate('straight-0')).toMatchObject({ kind: 'error', first: false });
     expect(board.hearts).toBe(2);
-    expect(board.activate('straight-1').kind).toBe('removed');
-    expect(board.activate('straight-0').kind).toBe('removed');
+    expect(board.activate('straight-1')).toMatchObject({kind:'removed',released:[{id:'straight-0'}]});
+    expect(board.snapshot().removed).toEqual(['straight-1','straight-0']);
     expect(board.isError('straight-0')).toBe(true);
     expect(board.activate('straight-0').kind).toBe('ignored');
     expect(board.hearts).toBe(2);
+  });
+  it('releases only errored arrows after all blockers leave, retaining mistakes and life cost', () => {
+    const level:Level={id:'chain',contentVersion:1,width:7,height:7,difficulty:'normal',mask:[],arrows:[
+      {id:'a',path:[{x:0,y:1},{x:1,y:1}]},
+      {id:'b',path:[{x:3,y:1},{x:3,y:2}]},
+      {id:'c',path:[{x:2,y:4},{x:4,y:4}]},
+      {id:'untouched',path:[{x:0,y:6},{x:1,y:6}]},
+    ]};validateLevel(level);const board=new Board(level,'chain');
+    board.activate('a');board.activate('b');expect(board.hearts).toBe(1);
+    expect(board.activate('c')).toMatchObject({kind:'removed',complete:false,released:[{id:'b'},{id:'a'}]});
+    expect(board.snapshot()).toMatchObject({removed:['c','b','a'],errors:['a','b'],lives:1});
+    expect(board.remaining.map(a=>a.id)).toEqual(['untouched']);
+    const multi:Level={...level,arrows:[level.arrows[0]!,level.arrows[1]!,{id:'second',path:[{x:5,y:1},{x:5,y:2}]}]};
+    const both=new Board(multi,'both');both.activate('a');
+    expect(both.activate('b')).toMatchObject({kind:'removed',complete:false});expect(both.remaining.map(a=>a.id)).toContain('a');
+    expect(both.activate('second')).toMatchObject({kind:'removed',complete:true,released:[{id:'a'}]});
+    expect(both.hearts).toBe(2);
   });
   it('removes occupancy immediately, independently of any animation callback', () => {
     const board = new Board(controlScenes[0]!, 'test');

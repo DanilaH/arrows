@@ -172,6 +172,32 @@ describe('authoritative progression writer', () => {
     await store.restart(attempt); expect(store.board.attemptId).not.toBe(attempt); expect(store.state.campaign.freeUsed).toBe(false);
     expect(store.state.campaign.board.errors).toEqual([]);
   });
+  it('keeps one durable free continuation across restart, later levels and daily attempts', async () => {
+    const {storage,rows}=memory(),state=seed(19);rows.set(SAVE_KEY,JSON.stringify(state));
+    const store=new ProgressStore(storage);await store.load();
+    const lose=async(expected:string)=>{const a=store.findAttempt(expected)!.saved;for(const arrow of a.level.arrows.filter(a=>!canExit(a,store.findAttempt(expected)!.saved.level.arrows)).slice(0,3))await store.move(expected,arrow.id);};
+    const first=store.board.attemptId;await lose(first);await store.continueFree(first);expect(store.state.freeContinueUsed).toBe(true);
+    await store.restart(first);const restarted=store.board.attemptId;await lose(restarted);expect(await store.continueFree(restarted)).toBeUndefined();expect(store.board.hearts).toBe(0);
+    const daily=(await store.openDaily('2026-11-09'))!;await lose(daily);expect(await store.continueFree(daily)).toBeUndefined();
+    await store.commitReward({schema:1,id:'daily-lives',mode:'daily',attempt:daily,placement:'lives'});expect(store.findAttempt(daily)!.saved.board.lives).toBe(3);
+    const restored=new ProgressStore(storage);await restored.load();expect(restored.state.freeContinueUsed).toBe(true);expect(await restored.continueFree(restarted)).toBeUndefined();
+    await restored.commitReward(receipt(restarted,'lives','continue-after-gift'));await solve(restored);await restored.next(restarted);expect(restored.state.freeContinueUsed).toBe(true);
+    expect(decodeSave(JSON.parse(rows.get(SAVE_KEY)!)).freeContinueUsed).toBe(true);
+  });
+  it('migrates legacy free rights conservatively without moving arrows or changing receipt ownership', () => {
+    const untouched=seed(0) as unknown as Record<string,unknown>;delete untouched.freeContinueUsed;expect(decodeSave(untouched).freeContinueUsed).toBe(false);
+    const old=seed(5),a=old.campaign;const board=new Board(a.level,a.board.id);for(const arrow of board.remaining.filter(a=>!canExit(a,board.remaining)).slice(0,3))board.activate(arrow.id);board.refill();a.board=board.snapshot();a.continuations=1;a.freeUsed=true;a.started=true;
+    const legacy=structuredClone(old) as unknown as Record<string,unknown>;delete legacy.freeContinueUsed;const migrated=decodeSave(legacy);expect(migrated.freeContinueUsed).toBe(true);expect(migrated.campaign).toEqual(old.campaign);expect(migrated.receipts).toEqual(old.receipts);
+    const retired=seed(0) as unknown as Record<string,unknown>;delete retired.freeContinueUsed;retired.facts=[{kind:'restart',attempt:'retired',mode:'campaign',localDate:'2026-11-09',at:1}];expect(decodeSave(retired).freeContinueUsed).toBe(true);
+    expect(()=>decodeSave({...old,freeContinueUsed:'yes'})).toThrow();
+  });
+  it('commits auto-release and its last-arrow victory once and accepts the exact history on reload', async () => {
+    const {storage,rows}=memory(),state=seed(2);rows.set(SAVE_KEY,JSON.stringify(state));const store=new ProgressStore(storage);await store.load();const id=store.board.attemptId;
+    await store.move(id,'c03-1');const result=await store.move(id,'c03-0');expect(result).toMatchObject({kind:'removed',released:[{id:'c03-1'}]});
+    expect(store.state.campaign.board).toMatchObject({removed:['c03-0','c03-1'],errors:['c03-1'],lives:2});expect(decodeSave(JSON.parse(rows.get(SAVE_KEY)!)).campaign).toEqual(store.state.campaign);
+    await solve(store);expect(store.state.wins).toHaveLength(3);expect(store.state.wins.at(-1)!.mistakes).toBe(1);await store.move(id,'c03-1');expect(store.state.wins).toHaveLength(3);
+    const restored=new ProgressStore(storage);await restored.load();expect(restored.board.complete).toBe(true);expect(restored.state.wins).toEqual(store.state.wins);
+  });
   it('serializes ordinary changes with receipts, chooses a current legal hint and keeps daily independent', async () => {
     const { storage, rows } = memory(), state = seed(2); state.daily['2026-11-09'] = freshAttempt(dailyCatalog['2026-11-09']!); rows.set(SAVE_KEY, JSON.stringify(state));
     const store = new ProgressStore(storage); await store.load(); const expected = store.board.attemptId, arrow = store.board.hint()!;

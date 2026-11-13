@@ -1,0 +1,44 @@
+# Phone feedback package — 0.19.0 (29), 2026-11-13
+
+Owner-authorized changes supersede the old per-attempt free-refill rule and manual reactivation of an unblocked marked arrow. No campaign/daily construction, difficulty, trophy identity, SDK, ad cadence or runtime-pin change.
+
+## Evidence and selected method
+
+OBSERVED: the owner's actual Level 3 screenshot (`image(20261113-065228).png`, SHA-256 `3a0b228b9439b08c24e32567cc4912fdf3e6116056a8a4cec91421b4edda3a24`) has a red remaining outer arrow, two lives and a visually weak outlined Hint. Source inspection confirms no automatic error release and `freshAttempt.freeUsed=false` on every task. The screen alone does not establish the preceding gesture, sound, performance or competitor rules. The owner separately reports those sequences and explicitly requests the new behavior; no newly decoded original-game video/audio claim.
+
+SELECT: bounded causal presentation from mini-games-kit `e2382670fbd5c2aa76462fea688c60de2b067392/docs/PUZZLE_PRODUCTION.md`; paired active/idle measurement and resource ownership from actual runtime pin `a9325265e87583a4872cf6a158e1e881a0d7508e/docs/PERFORMANCE_PLAYBOOK.md`. Read actual pinned API and Phaser 4.2.1 Blitter/Mesh2D renderer source before integration. HOLD: subjective sound/haptics and physical phone frame pacing. REJECT: a new director, content rebalance, extra meta/currency, new SDK, or advertised perfect-parity/FPS claim.
+
+## Rules and save compatibility
+
+- An accepted legal removal also releases previously errored arrows whose last remaining blocker leaves, in stable legal order, including chains. Untouched free arrows still require input. Every accepted removal in the chain is committed atomically before its visual flight; historic error IDs/life costs remain, so this is never a flawless win. The result includes transient `released` artwork only; no new animation state is saved.
+- Histories validate their recorded legal order directly, rather than replaying today's auto-release policy into an old attempt. Hydration preserves embedded geometry, IDs, errors, moves, lives and receipt ownership. Explicit game entry resumes already free marked arrows (including the screenshot's existing save) through the same serialized durable move path, after route/actual-frame handoff. No automatic moves while merely reading a save/menu. Exact attempt/screen/activity guards reject stale continuations.
+- Add schema-2 `freeContinueUsed`, default false, shared across campaign, daily, Next, Restart and reload. Its grant and three-heart refill use one durable transaction, so concurrent requests cannot create extra gifts. The old per-attempt `freeUsed`/`continuations` fields retain their existing historical/receipt meaning and life validation. Rewarded receipts/ack/dedup remain unchanged; a rewarded grant does not independently spend a previously unused lifetime gift.
+- Old saves lacking the global marker infer spent from a retained continuation, a completed win requiring a refill, or a retired Restart fact. Old versions discarded retired refill history: treating that last ambiguous case as spent is an explicit conservative migration, not recovered proof. Clean old saves retain the gift. A nonboolean explicit marker is rejected. No reset/reroll, migration refund or change to existing earned rights.
+
+## Presentation
+
+- Original tactile transient/filtered-air sound set replaces the sustained modal resonances: shorter body, soft swipe/release, distinct collision and a breath-like finish. An error-free finish has a separate cue; new awards retain their existing priority. The existing OneShotPlayer, voice/freshness budgets, independent settings, interruption and native haptic profiles remain. Procedural original samples add no borrowed audio or network loading. Subjective acceptance belongs to listening on the phone; GIFs are silent.
+- Hint is a solid warm accent with high-contrast text and a video icon/label. One finite 900ms appearance attracts attention; there is no permanent pulse or increased frequency. Existing three-active-second eligibility, tutorials, receipt, cancellable ad loading and no-auto-hint-move policy stay unchanged.
+- Held and grid exit rays increase from .7px to a bounded 1.8 CSS px, staying below arrows and on the same canonical ray.
+- After the last flight, finish framing returns to the centered full-board camera in 320ms before the silhouette wave/celebration starts. Canonical victory was already committed. Reduced motion frames directly. Next remains available once the existing result enters, without waiting for the particle tail. Interruption settles; restored completion does not replay rewards or sound. Save the settled camera at win-ready.
+- Flawless completion adds a golden dot wave, twelve short radial streaks, fuller existing fans and gold result ring/detail. Existing error/award facts determine the presentation; no invented bonus. Finite 2300ms celebration and idle cleanup remain.
+- The actual c10/c20 unlock now introduces Collection/daily directly in that game level, using the existing durable seen claim, icon, contextual text, finite 2800ms entrance/halo and cleanup. Availability boundaries remain index9/index19. It does not wait for Home, block play, create another reward or replay on later menu return. If the game is left before presentation, the existing menu path remains the fallback.
+- Buttons, icon controls and summary disclosures now get immediate held contrast plus a stronger 65ms compression/release. Reduced motion retains the static press cue. Pointer displacement >12px, cancel, scroll, background and teardown clear ownership. Completed clicks/keyboard activate existing actions and feedback; previews keep their independent channels. No action is triggered on pointerdown.
+
+## Large-field rendering
+
+The baseline source is `0a25e24490737a0facd898bd745ab4c086286dbf` (0.18.0). Its stationary mask creates thousands of Graphics circle paths, and unchanged arrow heads/tubes are processed repeatedly during adjacent motion.
+
+A 32x16 two-theme procedural dot atlas and Blitter draw the same radius-.07 world dots. The owned parent container supplies the scale because Phaser4.2.1 Blitter ignores its own scale; baking both theme colors also preserves Canvas fallback. A visual QA failure of the first candidate caught missing dot placement before delivery; the actual-pixel regression now requires the settled silhouette to exist.
+
+For WebGL only, one retained Mesh2D and a tiny palette atlas reuse the exact shaft/cap/convex-head triangles until a dirty redraw. Active flight/contact artwork keeps Graphics, as does the complete Canvas fallback. Filled rounded head outlines use a convex fan instead of a new Earcut allocation every frame. No shader/filter, full-field render texture, per-dot tween, worker or engine upgrade. Atlas dimensions and scene ownership are fixed, not a cache of all visited fields. Dirty redraw, first rendered frame, DPR cap, clip, reactive-dot budget and final-paint sleep remain.
+
+The software diagnostic uses the same c20/c120,390x844,DPR2, actual pinch/hold, CDP CPU4x and sequential fresh contexts for baseline/candidates. Store actual measured rows and source/payload hashes in the verification record. Single-run frame quantiles are noisy and not phone FPS. Retain rejected/mispositioned prototype evidence separately; do not count it as a visual or performance pass. Validate the exact APK on the owner's phone before asserting smoothness/hardware acceptance.
+
+## Verification and capture
+
+Unit checks cover legal multi-blocker/error chains, no untouched-arrow autoplay, exact error/life accounting, chain victory once/reload, legacy history decoding, lifetime gift across Restart/Next/daily/reload and migration. Real-browser cases cover the screenshot's new and restored attempts, paid continuation after spending/restart, full-board framing before audio, settled dot pixels, both-theme Hint/guides, press/cancel/reduced motion, unlock-in-game/no replay and existing assistance/finish/menu contracts.
+
+`tools/capture-phone-feel-v2-gifs.mjs` records unmodified production Chromium390x844/DPR1 from fresh storage, nineteen genuinely earned wins and exactly one intentional c03 mistake. It shows automatic release, Hint/grid/hold/cancel/Settings press feedback, actual pinch before the Hard c06 final move, c10/c20 unlocks and large-field gestures. No injected progress, camera, rewards or SDK transport. Actual-output MP4s tee AudioContext output. Exact final CI/APK/payload/signing/media and limitations go in the handoff and verification JSON after completion.
+
+KIT IMPACT: NONE. Existing kit audio/activity/storage/receipt ownership is retained at its exact runtime pin; this game's error queue, entitlement policy, icon/artwork and Phaser batching remain local. No upstream change or new general helper.

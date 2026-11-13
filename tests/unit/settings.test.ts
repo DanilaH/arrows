@@ -55,7 +55,7 @@ describe('bounded feedback', () => {
     expect(feedbackEligibility([])).toEqual({ gameplay: true, ui: true });
   });
   it('produces short finite click-free samples with bounded combined amplitude', () => {
-    for (const cue of ['button', 'remove', 'slide', 'exit', 'error', 'hint', 'life', 'win', 'award'] as SoundCue[]) {
+    for (const cue of ['button', 'remove', 'slide', 'exit', 'error', 'hint', 'life', 'win', 'perfect', 'award'] as SoundCue[]) {
       const samples = soundSamples(cue, 44100);
       expect(samples.reduce((sum,v)=>sum+v*v,0)/samples.length).toBeGreaterThan(1e-7);
       expect(samples.length).toBeLessThanOrEqual(44100); expect(samples[0]).toBe(0);

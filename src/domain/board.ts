@@ -8,7 +8,7 @@ export interface Attempt {
   readonly id: string; readonly levelId: string; readonly contentVersion: number;
   readonly removed: readonly string[]; readonly errors: readonly string[]; readonly lives: number;
 }
-export type MoveResult = { kind: 'ignored' } | { kind: 'error'; first: boolean; arrow: Arrow } | { kind: 'removed'; arrow: Arrow; complete: boolean };
+export type MoveResult = { kind: 'ignored' } | { kind: 'error'; first: boolean; arrow: Arrow } | { kind: 'removed'; arrow: Arrow; complete: boolean; released?: readonly Arrow[] };
 export function canExit(arrow: Arrow, remaining: readonly Arrow[]): boolean {
   const path = measurePath(arrow.path), head = arrow.path.at(-1)!;
   return !remaining.some(other => other.id !== arrow.id && rayHitsPath(head, path.direction, other.path));
@@ -66,6 +66,15 @@ export class Board {
       return { kind: 'error', first, arrow };
     }
     this.removed.add(id);
-    return { kind: 'removed', arrow, complete: this.complete };
+    // Failed arrows are already queued by the player. Commit their release in
+    // a stable legal order, independently of presentation and its interruption.
+    const released: Arrow[] = [];
+    for (;;) {
+      const remaining = this.remaining;
+      const ready = remaining.find(a => this.errors.has(a.id) && canExit(a, remaining));
+      if (!ready) break;
+      this.removed.add(ready.id); released.push(ready);
+    }
+    return { kind: 'removed', arrow, complete: this.complete, ...(released.length ? { released } : {}) };
   }
 }

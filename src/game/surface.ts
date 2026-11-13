@@ -110,12 +110,17 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const a = active(); celebratedAttempt = a.board.removed.length === a.level.arrows.length ? a.board.id : ''; pendingAward = false;
     scene.loadAttempt(activeBoard(), a.view, a.guides, a.hint, false, true); sync(); scene.layout(); scheduleView(); sync();
   };
+  const resumeErrors = (): void => {
+    const attempt=scene.board.attemptId;
+    const apply=():void=>{if(alive && meta.screen==='game' && !control && !platform.activity.isBlocked() && scene.board.attemptId===attempt)run(progress.releaseReadyErrors(attempt));};
+    if(!motion.deferRoute(apply))apply();
+  };
   const enterCampaign = (): void => { const intent = meta.revision; run((async () => {
     await progress.flush();
     if (!alive || meta.revision !== intent) return;
     if (progress.board.complete && progress.state.index < campaign.length - 1) await progress.next(progress.board.attemptId);
     if (!alive || meta.revision !== intent) return; control = false; activeDate = null;
-    meta.selectCampaign(); loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true });
+    meta.selectCampaign(); loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true }); resumeErrors();
   })()); };
   const leaveGame = (): void => {
     if(activeDate && dailyReturnAttempt===scene.board.attemptId && scene.board.complete)meta.queueDailyArrival(activeDate,dailyReturnAttempt);
@@ -136,7 +141,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       const intent = meta.revision;
       await progress.flush(); const attempt = await progress.openDaily(date); if (!attempt || !alive) throw Error('Daily unavailable');
       if (meta.revision !== intent) return;
-      activeDate = date; control = false; loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true });
+      activeDate = date; control = false; loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true }); resumeErrors();
       platform.analytics.track('daily_open', { date, attempt, resumed: active().started });
     },
   });
@@ -210,9 +215,9 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       }, true);
       button('cancel', text.cancel, () => close());
     } else if (kind === 'lost') {
-      if (!control && !active().freeUsed) button('free-continue', text.freeContinue, () => {
+      if (!control && !progress.state.freeContinueUsed && !active().freeUsed) { paragraph(text.freeContinueNote); button('free-continue', text.freeContinue, () => {
         const attempt = scene.board.attemptId; run(progress.continueFree(attempt).then(changed => { if (changed) platform.analytics.track('continue_applied', { attempt, source: 'free' }); }));
-      }, true);
+      }, true); }
       else if (!control) { paragraph(text.rewardedContinue); button('rewarded-continue', text.watchVideo, () => run(requestReward('lives')), true); }
       button('restart', text.restart, () => open('restart'), control);
       button('home', activeDate ? text.toCalendar : text.home, backToMenu);
@@ -266,6 +271,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     document.querySelector<HTMLButtonElement>('#restart')!.disabled = !control && board.complete || board.hearts === 0;
     document.querySelector<HTMLButtonElement>('#game-settings')!.disabled = board.hearts === 0;
     document.querySelector<HTMLButtonElement>('#guides')!.disabled = board.hearts === 0;
+    document.querySelector<HTMLElement>('#win')!.dataset.flawless=String(board.snapshot().errors.length===0);
     const detail=document.querySelector('#win-detail')!, result=board.snapshot().errors.length === 0 ? text.flawless : text.cleared;
     if(detail.textContent!==result)detail.textContent=result;
     const step = board.complete ? null : tutorial();
@@ -274,7 +280,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     status.textContent = !loaded ? text.restoring : notice || (step ? text[`teach_${step}` as keyof typeof text] : scaleContext || control && remaining === board.level.arrows.length ? text.zoomTip : '');
     const hintWasHidden = hintButton.hidden;
     hintButton.hidden = !loaded || control || board.complete || board.hearts === 0 || !!step || idleMs < 3000 || a.hint !== null;
-    if (hintWasHidden && !hintButton.hidden) motion.reveal(hintButton);
+    if (hintWasHidden && !hintButton.hidden) motion.hintReady(hintButton);
     const guideLabel=document.querySelector<HTMLElement>('#guides-label')!; guideLabel.hidden = step !== 'guides'; guideLabel.textContent=text.guideShort;
     hintButton.disabled = requestingAd || !progress.available || progress.uncertain;
     warning.hidden = progress.error === null && !loadSlow;
@@ -406,10 +412,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     else if (event.kind === 'impact') { platform.feedback.play('error'); motion.impact(document.querySelector('#hearts')!); }
     else if (event.kind === 'hint-ready') platform.feedback.play('hint');
     else if (event.kind === 'exit') platform.feedback.play('exit');
-    else if (event.kind === 'victory' && celebratedAttempt !== event.attempt) { celebratedAttempt = event.attempt; platform.feedback.play(pendingAward ? 'award' : 'win'); pendingAward = false; }
-    else if (event.kind === 'win-ready' && (control || freshWinAttempt === event.attempt)) {motion.reward(document.querySelector('#win')!);if(activeDate)dailyReturnAttempt=event.attempt;}
+    else if (event.kind === 'victory' && celebratedAttempt !== event.attempt) { celebratedAttempt = event.attempt; platform.feedback.play(pendingAward ? 'award' : scene.board.snapshot().errors.length===0 ? 'perfect' : 'win'); pendingAward = false; }
+    else if (event.kind === 'win-ready' && (control || freshWinAttempt === event.attempt)) {motion.reward(document.querySelector('#win')!);saveView();if(activeDate)dailyReturnAttempt=event.attempt;}
   }));
-  const uiClick = (event: MouseEvent): void => { const button = (event.target as Element).closest<HTMLButtonElement>('button'); if (button && !button.disabled && !button.hasAttribute('data-feedback-preview')) platform.feedback.play('button', 'ui'); };
+  const uiClick = (event: MouseEvent): void => { const button = (event.target as Element).closest<HTMLElement>('button,summary,[role="button"]'); if (button && !button.matches(':disabled') && !button.hasAttribute('data-feedback-preview')) platform.feedback.play('button', 'ui'); };
   document.addEventListener('click', uiClick); listeners.push(() => document.removeEventListener('click', uiClick));
   const observer = new ResizeObserver(() => { cancel(); if (meta.screen === 'game') { scene.layout(); scheduleView(); } });
   observer.observe(document.querySelector('#game-header')!); observer.observe(document.querySelector('#game-footer')!);

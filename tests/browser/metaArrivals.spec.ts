@@ -17,15 +17,16 @@ async function daily(page:Page,date='2026-11-02'){
   await page.locator(`[data-date="${date}"]`).click();await page.locator('#start-daily').click();await lastTap(page,arrow.path);return {state:s,date};
 }
 
-test('introduces the newly unlocked collection once on menu return and cancels cleanly on navigation',async({page},info)=>{
-  const s=base(8),arrow=nearlyDone(s.campaign);await seed(page,s);await page.locator('#home-play').click();await lastTap(page,arrow.path);await page.locator('#next').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-level','c10');await page.locator('#choose-field').click();
-  await expect(page.locator('.arrival-notice')).toContainText(/Collection|Коллекция/);expect((await saved(page)).seenUnlocks).toEqual(['collection']);await page.waitForTimeout(250);await page.screenshot({path:info.outputPath('collection-unlock.png')});
-  await page.locator('#home-collection').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-screen','collection');await expect(page.locator('.arrival-notice,.arrival-halo')).toHaveCount(0);
+test('introduces the newly unlocked collection in its game level and cancels cleanly on navigation',async({page},info)=>{
+  const s=base(8),arrow=nearlyDone(s.campaign);await seed(page,s);await page.locator('#home-play').click();await lastTap(page,arrow.path);await page.locator('#next').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-level','c10');await expect(page.locator('.game-unlock')).toContainText(/Collection|Коллекция/);
+  await page.screenshot({path:info.outputPath('collection-unlock-in-game.png')});await page.locator('#choose-field').click();
+  await expect(page.locator('.game-unlock,.arrival-notice')).toHaveCount(0);expect((await saved(page)).seenUnlocks).toEqual(['collection']);await page.waitForTimeout(250);await page.screenshot({path:info.outputPath('collection-unlock.png')});
+  await page.locator('#home-collection').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-screen','collection');await expect(page.locator('.arrival-notice,.arrival-halo,.game-unlock')).toHaveCount(0);
   await page.reload();await page.locator('#home-play:enabled').waitFor();await page.waitForTimeout(800);await expect(page.locator('.arrival-notice')).toHaveCount(0);
 });
 test('settles the newly unlocked daily cue on background without replay',async({page})=>{
-  const s=base(18);s.seenUnlocks=['collection'];const arrow=nearlyDone(s.campaign);await seed(page,s);await page.locator('#home-play').click();await lastTap(page,arrow.path);await page.locator('#next').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-level','c20');await page.locator('#choose-field').click();await expect(page.locator('.arrival-notice')).toContainText(/Daily|Ежедневные/);
-  await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));});await expect(page.locator('.arrival-notice,.arrival-halo')).toHaveCount(0);
+  const s=base(18);s.seenUnlocks=['collection'];const arrow=nearlyDone(s.campaign);await seed(page,s);await page.locator('#home-play').click();await lastTap(page,arrow.path);await page.locator('#next').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-level','c20');await expect(page.locator('.game-unlock')).toContainText(/Daily|Ежедневные/);
+  await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));});await expect(page.locator('.arrival-notice,.arrival-halo,.game-unlock')).toHaveCount(0);
   await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'));});await page.waitForTimeout(800);await expect(page.locator('.arrival-notice')).toHaveCount(0);expect((await saved(page)).seenUnlocks).toEqual(['collection','calendar']);
 });
 test('shows canonical daily progress before its transfer and never replays a viewed result',async({page},info)=>{

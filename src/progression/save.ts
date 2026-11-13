@@ -24,6 +24,7 @@ export interface GameSave {
   dailyCatalogVersion: number; dailyWins: Record<string, Win>; cups: string[]; facts: RunFact[]; seenAwards: string[]; collectionSeen: boolean;
   trophyDesigns: Record<string, TrophyBinding>; seenUnlocks: UnlockId[];
   adCadence: AdCadence;
+  freeContinueUsed: boolean;
 }
 export interface SaveChange { kind: 'load' | 'state' | 'move'; result?: MoveResult; attempt?: string; mode?: 'campaign' | 'daily'; date?: string; startedNow?: boolean; }
 export const freshAttempt = (level: Level, id = crypto.randomUUID()): SavedAttempt => ({
@@ -31,7 +32,7 @@ export const freshAttempt = (level: Level, id = crypto.randomUUID()): SavedAttem
   continuations: 0, hint: null, started: false, activeMs: 0,
 });
 export const freshSave = (): GameSave => ({ schema: 2, revision: 0, catalogVersion: CATALOG_VERSION, index: 0,
-  campaign: freshAttempt(campaign[0]!), daily: {}, wins: [], tutorials: [], receipts: [], reservedRewards: [], dailyCatalogVersion: DAILY_CATALOG_VERSION, dailyWins: {}, cups: [], facts: [], seenAwards: [], collectionSeen: false, trophyDesigns: {}, seenUnlocks: [], adCadence: freshAdCadence() });
+  campaign: freshAttempt(campaign[0]!), daily: {}, wins: [], tutorials: [], receipts: [], reservedRewards: [], dailyCatalogVersion: DAILY_CATALOG_VERSION, dailyWins: {}, cups: [], facts: [], seenAwards: [], collectionSeen: false, trophyDesigns: {}, seenUnlocks: [], adCadence: freshAdCadence(), freeContinueUsed: false });
 const record = (v: unknown): Record<string, unknown> => {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw Error('Invalid save object');
   return v as Record<string, unknown>;
@@ -50,10 +51,16 @@ function attempt(value: unknown): SavedAttempt {
       typeof s.started !== 'boolean' || !integer(s.activeMs) || s.freeUsed !== (s.continuations > 0)) throw Error('Invalid attempt');
   const removed = strings(b.removed), errors = strings(b.errors), ids = new Set(level.arrows.map(a => a.id));
   if ([...removed, ...errors].some(a => !ids.has(a)) || b.lives !== 3 * (s.continuations + 1) - errors.length) throw Error('Invalid attempt lives');
-  const replay = new Board(level, b.id);
-  for (const arrowId of removed) if (replay.activate(arrowId).kind !== 'removed') throw Error('Invalid removal history');
+  // Replay the recorded order without applying today's release policy to an
+  // older save or silently accepting additional moves on hydration.
+  const remaining = [...level.arrows];
+  for (const arrowId of removed) {
+    const index = remaining.findIndex(a => a.id === arrowId);
+    if (index < 0 || !canExit(remaining[index]!, remaining)) throw Error('Invalid removal history');
+    remaining.splice(index, 1);
+  }
   if ((removed.length > 0 || errors.length > 0) && !s.started) throw Error('Invalid attempt start');
-  if (s.hint !== null && (!id(s.hint) || removed.includes(s.hint) || !canExit(level.arrows.find(a => a.id === s.hint)!, replay.remaining))) throw Error('Invalid hint');
+  if (s.hint !== null && (!id(s.hint) || removed.includes(s.hint) || !canExit(level.arrows.find(a => a.id === s.hint)!, remaining))) throw Error('Invalid hint');
   // Camera is restartable presentation data; repairing it never guesses gameplay/rewards.
   let view: ViewState | null = null;
   if (s.view && typeof s.view === 'object') {
@@ -126,7 +133,12 @@ export function decodeSave(value: unknown): GameSave {
   const seenUnlocks = Array.isArray(s.seenUnlocks) && s.seenUnlocks.every(key=>unlocked.includes(key as UnlockId))
     ? [...new Set(s.seenUnlocks)] : unlocked;
   const adCadence = decodeAdCadence(s.adCadence, wins.length + Object.keys(dailyWins).length);
-  return { ...s, campaign: current, wins, daily, receipts, tutorials, reservedRewards, dailyWins, cups, facts, seenAwards, trophyDesigns, seenUnlocks, adCadence } as GameSave;
+  if (s.freeContinueUsed !== undefined && typeof s.freeContinueUsed !== 'boolean') throw Error('Invalid lifetime continuation');
+  // Old versions discarded refill history on Restart. A retired attempt is
+  // conservatively treated as spent; documented migration, no progress loss.
+  const freeContinueUsed = s.freeContinueUsed ?? (current.freeUsed || Object.values(daily).some(a => a.freeUsed) ||
+    [...wins, ...Object.values(dailyWins)].some(w => w.mistakes >= 3) || facts.some(f => f.kind === 'restart'));
+  return { ...s, campaign: current, wins, daily, receipts, tutorials, reservedRewards, dailyWins, cups, facts, seenAwards, trophyDesigns, seenUnlocks, adCadence, freeContinueUsed } as GameSave;
 }
 
 /** Every mutation derives from the latest committed state inside ONE queue, including camera and SDK receipts. */
@@ -197,15 +209,24 @@ export class ProgressStore {
     });
   }
   public move(expected: string, arrow: string, activeMs = 0, adActiveMs = activeMs): Promise<MoveResult | undefined> {
+    return this.moveAction(expected,arrow,activeMs,adActiveMs);
+  }
+  /** Upgrade/resume applies an already queued error only on explicit game entry,
+   * through the same durable writer. Hydration never silently changes moves. */
+  public releaseReadyErrors(expected:string): Promise<MoveResult | undefined> { return this.moveAction(expected,null,0,0); }
+  private moveAction(expected: string, arrow: string | null, activeMs: number, adActiveMs: number): Promise<MoveResult | undefined> {
     return this.update(next => {
       const target = this.findAttempt(expected, next); if (!target) return null;
       const a = target.saved, startedNow = !a.started;
-      const board = new Board(a.level, a.board.id, a.board), result = board.activate(arrow);
+      const board = new Board(a.level, a.board.id, a.board);
+      const selected=arrow??board.remaining.find(candidate=>board.isError(candidate.id)&&canExit(candidate,board.remaining))?.id;
+      if(!selected)return null;
+      const result = board.activate(selected);
       if (result.kind === 'ignored') return null;
       a.started = true; a.activeMs += Math.max(0, Math.round(activeMs)); a.board = board.snapshot();
       next.adCadence.activeMs += Math.max(0, Math.round(adActiveMs));
       if (result.kind === 'removed') {
-        if (a.hint === arrow) a.hint = null;
+        if (a.hint && a.board.removed.includes(a.hint)) a.hint = null;
         if (board.complete) {
           const now = this.now(), win: Win = { attempt: a.board.id, levelId: a.level.id, completedAt: now.getTime(), localDate: localDate(now), activeMs: a.activeMs, mistakes: a.board.errors.length };
           if (target.mode === 'campaign') next.wins.push(win);
@@ -260,9 +281,9 @@ export class ProgressStore {
   }
   public continueFree(expected: string): Promise<boolean | undefined> {
     return this.update(next => {
-      const a = this.findAttempt(expected, next)?.saved; if (!a || a.freeUsed || a.board.lives !== 0) return null;
-      a.freeUsed = true; a.continuations++; a.board = { ...a.board, lives: 3 }; return { value: true };
-    });
+      const a = this.findAttempt(expected, next)?.saved; if (!a || next.freeContinueUsed || a.freeUsed || a.board.lives !== 0) return null;
+      next.freeContinueUsed = true; a.freeUsed = true; a.continuations++; a.board = { ...a.board, lives: 3 }; return { value: true };
+    }, true);
   }
   public openDaily(date: string): Promise<string | undefined> {
     return this.update(next => {

@@ -15,6 +15,9 @@
   --on-accent: #f3f2ff;
   --difficulty-hard: #e7b96b;
   --difficulty-nightmare: #f58ba2;
+  --hint-bg: #e7be72;
+  --hint-ink: #342914;
+  --hint-edge: #f1d59c;
   --heart: #ff4c66;
   --heart-empty: #63313f;
   --notice-bg: #393344;
@@ -92,6 +95,9 @@ select:focus-visible { outline: 2px solid var(--accent-focus); outline-offset: 3
   --on-accent: #ffffff;
   --difficulty-hard: #8e570e;
   --difficulty-nightmare: #ac3153;
+  --hint-bg: #f3d28d;
+  --hint-ink: #49310d;
+  --hint-edge: #b4812b;
   --heart: #cc3154;
   --heart-empty: #dfbcc6;
   --notice-bg: #f4e5dd;

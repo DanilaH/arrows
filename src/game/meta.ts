@@ -152,8 +152,8 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     queueMicrotask(presentArrivals);
   };
   const presentArrivals = (): void => {
-    if(!alive || !ready || changingScreen || screen==='game' || busy || presenting || claiming || options.motion.routeBusy || !options.canPresent())return;
-    if(pendingDaily){
+    if(!alive || !ready || changingScreen || busy || presenting || claiming || options.motion.routeBusy || !options.canPresent())return;
+    if(pendingDaily && screen!=='game'){
       const item=pendingDaily;pendingDaily=null;
       if(screen==='calendar' && month===item.date.slice(0,7) && selected===item.date && progress.state.dailyWins[item.date]?.attempt===item.attempt){
         const day=root.querySelector<HTMLElement>(`[data-date="${item.date}"]`),bar=root.querySelector<HTMLElement>('.month-progress > span'),count=root.querySelector<HTMLElement>('.month-count > span'),art=root.querySelector<HTMLElement>('.month-award .trophy-rich');
@@ -165,7 +165,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
         }
       }
     }
-    if(pendingAward){
+    if(pendingAward && screen!=='game'){
       pendingAward=false;const target=nav.querySelector<HTMLElement>('#home-collection .nav-icon');
       if(target){presenting=true;presentationScroll=root.scrollTop;options.motion.award(target,navIcons.collection,presentationEnded);return;}
     }
@@ -173,7 +173,11 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     if(!key || !progress.available || progress.uncertain || progress.error)return;
     pendingUnlocks.delete(key);claiming=true;const epoch=arrivalEpoch;
     void progress.markUnlockSeen(key).then(claimed=>{
-      if(!alive || epoch!==arrivalEpoch || !claimed || screen===key || screen==='game' || options.motion.routeBusy || !options.canPresent())return;
+      if(!alive || epoch!==arrivalEpoch || !claimed || screen===key || options.motion.routeBusy || !options.canPresent())return;
+      if(screen==='game'){
+        presenting=true;presentationScroll=root.scrollTop;
+        options.motion.gameUnlock(key==='collection'?text.collectionUnlocked:text.calendarUnlocked,key==='collection'?text.collectionUnlockedDetail:text.calendarUnlockedDetail,navIcons[key],presentationEnded);return;
+      }
       const target=nav.querySelector<HTMLElement>(key==='collection'?'#home-collection .nav-icon':'#home-calendar .nav-icon');
       if(target){presenting=true;presentationScroll=root.scrollTop;options.motion.unlock(target,key==='collection'?text.collectionUnlocked:text.calendarUnlocked,presentationEnded);}
     }).catch(()=>{}).finally(()=>{claiming=false;if(alive)queueMicrotask(presentArrivals);});

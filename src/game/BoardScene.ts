@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { roundedRoute, roundedTip } from './arrowArt';
+import { StableArrowBatch, type TrianglePaint } from './stableArrowBatch';
 import type { BoardArtwork } from './boardTransition';
 import { arrowContact, bumpTiming, sampleBump, type ArrowContact, type BumpTiming } from './bumpMotion';
 import { boardPalettes } from '../app/theme';
@@ -16,7 +17,7 @@ const ROUND_JOIN = Array.from({length:12},(_,i)=>({x:Math.cos(i*Math.PI/6),y:Mat
 
 export const GAME_PRESENTABLE_EVENT = 'arrows:scene-authored';
 
-interface Flight { path: MeasuredPath; travelled: number; speed: number; age: number; }
+interface Flight { path: MeasuredPath; travelled: number; speed: number; age: number; queued: boolean; }
 interface Bump { id: string; path: MeasuredPath; timing: BumpTiming; contact: ArrowContact; started: number; impacted: boolean; }
 interface Impact { contact: ArrowContact; direction: Point; started: number; }
 interface Confetto { x: number; y: number; delay: number; vx: number; vy: number; angle: number; spin: number; length: number; width: number; life: number; color: number; }
@@ -45,10 +46,12 @@ export class BoardScene extends Phaser.Scene {
   }
   private world!: Phaser.GameObjects.Container;
   private stable!: Phaser.GameObjects.Graphics;
-  private outgoing!: Phaser.GameObjects.Graphics;
+  private stableBatch: StableArrowBatch | undefined;
+  private outgoing!: Phaser.GameObjects.Blitter;
+  private outgoingWorld!: Phaser.GameObjects.Container;
   private transitionAt = -1;
   private hintReveal: { id: string; started: number; arrived: boolean } | null = null;
-  private dots!: Phaser.GameObjects.Graphics;
+  private dots!: Phaser.GameObjects.Blitter;
   private guidesLayer!: Phaser.GameObjects.Graphics;
   private active!: Phaser.GameObjects.Graphics;
   private reactiveDots!: Phaser.GameObjects.Graphics;
@@ -72,6 +75,7 @@ export class BoardScene extends Phaser.Scene {
   private victoryDots: readonly Point[] = [];
   private victoryRadius = 1;
   private announcedWin = false;
+  private finishFramed = false;
   private widthCss = 1;
   private heightCss = 1;
   private readonly listeners = new Set<() => void>();
@@ -80,9 +84,27 @@ export class BoardScene extends Phaser.Scene {
   private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   public constructor(private readonly options: SceneOptions) { super('board'); }
   public create(): void {
-    this.outgoing = this.add.graphics(); this.dots = this.add.graphics(); this.guidesLayer = this.add.graphics(); this.stable = this.add.graphics();
-    this.reactiveDots = this.add.graphics(); this.active = this.add.graphics();
-    this.world = this.add.container(0, 0, [this.dots, this.guidesLayer, this.stable, this.reactiveDots, this.active]);
+    // One tiny two-theme atlas, also colored correctly in Canvas fallback.
+    if (!this.textures.exists('board-dot')) {
+      const atlas=this.textures.createCanvas('board-dot',32,16)!;
+      const ctx=atlas.getContext();
+      for(const [i,theme] of (['dark','light'] as const).entries()){
+        ctx.fillStyle=`#${boardPalettes[theme].dot.toString(16).padStart(6,'0')}`;
+        ctx.beginPath();ctx.arc(i*16+8,8,7,0,Math.PI*2);ctx.fill();atlas.add(theme,0,i*16,0,16,16);
+      }
+      atlas.refresh();
+    }
+    // Blitter ignores its own scale; an owned parent supplies the transform in
+    // both renderer backends. Bobs remain compact atlas-pixel coordinates.
+    this.outgoing=this.add.blitter(0,0,'board-dot','dark');
+    this.outgoingWorld=this.add.container(0,0,[this.outgoing]);
+    this.dots=this.add.blitter(0,0,'board-dot','dark');
+    const dotWorld=this.add.container(0,0,[this.dots]).setScale(.01);
+    this.guidesLayer=this.add.graphics();this.stable=this.add.graphics();
+    const stableRoot=this.add.container(0,0);
+    if(this.game.renderer.type===Phaser.WEBGL)this.stableBatch=new StableArrowBatch(this,stableRoot);
+    this.reactiveDots=this.add.graphics();this.active=this.add.graphics();
+    this.world=this.add.container(0,0,[dotWorld,this.guidesLayer,this.stable,stableRoot,this.reactiveDots,this.active]);
     this.overlay = this.add.graphics();
     this.loadAttempt(this.board);
     const resized = (): void => this.layout(false);
@@ -101,17 +123,17 @@ export class BoardScene extends Phaser.Scene {
   public settlePresentation(): void {
     this.bumps.clear(); this.impacts.length = 0; this.flights.length = 0; this.pulses.clear(); this.confetti.length = 0;
     this.hintReveal=null; this.victoryDots=[]; this.transitionAt=-1; this.outgoing?.clear(); this.dots?.setAlpha(1);
-    this.errorUntil = -1; this.focusMotion = null; this.entry = this.clock - 500;
+    this.errorUntil = -1; this.focusMotion = null; this.finishFramed = this.board.complete; this.entry = this.clock - 500;
     if (this.board.complete) { this.victoryAt = this.clock - VICTORY_MS - 1; this.victoryCursor = this.board.level.mask.length; this.announcedWin = true; }
     this.stableDirty = true; this.active?.clear(); this.overlay?.clear(); this.reactiveDots?.clear(); this.changed();
   }
   private changed(): void { for (const listener of this.listeners) listener(); this.options.dirty(); }
   public loadAttempt(board: Board, view: ViewState | null = null, guides = false, hint: string | null = null, transition = false, settled = false): void {
     const blend=transition && !this.reducedMotion && !board.complete && this.board.complete && this.board.attemptId!==board.attemptId;
-    this.outgoing.clear().setAlpha(1);
-    if(blend){const ratio=1/this.scale.zoom, old=this.boardCamera;this.outgoing.setPosition(old.x*ratio,old.y*ratio).setScale(old.scale*ratio).fillStyle(this.colors.dot,1);for(const point of this.board.level.mask)this.outgoing.fillCircle(point.x,point.y,.07);}
+    this.outgoing.clear(); this.outgoing.setAlpha(1);
+    if(blend){const ratio=1/this.scale.zoom, old=this.boardCamera;this.outgoingWorld.setPosition(old.x*ratio,old.y*ratio).setScale(old.scale*ratio*.01);this.dotBatch(this.outgoing,this.board.level.mask);}
     this.transitionAt=blend?this.clock:-1;this.hintReveal=null;this.victorySource=null;this.victoryDots=[];
-    const level = board.level; this.board = board; this.guides = guides; this.hintTarget = null; this.focusMotion = null;
+    const level = board.level; this.board = board; this.guides = guides; this.hintTarget = null; this.focusMotion = null; this.finishFramed = board.complete;
     this.boardCamera = new BoardCamera(level.width, level.height);
     this.paths = new Map(level.arrows.map(a => [a.id, measurePath(a.path)]));
     this.dotMask = new Map(level.mask.map(p => [`${p.x},${p.y}`, p]));
@@ -178,9 +200,9 @@ export class BoardScene extends Phaser.Scene {
     const ratio = 1 / this.scale.zoom, camera = this.boardCamera;
     this.world.setPosition(camera.x * ratio, camera.y * ratio).setScale(camera.scale * ratio);
   }
-  public pan(dx: number, dy: number): void { this.focusMotion = null; this.boardCamera.pan(dx, dy); this.transform(); this.changed(); }
+  public pan(dx: number, dy: number): void { if(this.board.complete)return; this.focusMotion = null; this.boardCamera.pan(dx, dy); this.transform(); this.changed(); }
   public zoom(previous: Point, current: Point, ratio: number): void {
-    this.focusMotion = null; this.boardCamera.zoom(previous, current, ratio); this.transform(); this.stableDirty = true; this.changed();
+    if(this.board.complete)return; this.focusMotion = null; this.boardCamera.zoom(previous, current, ratio); this.transform(); this.stableDirty = true; this.changed();
   }
   public setPreview(id: string | null): void { if (id === this.preview) return; this.preview = id; this.previewAt=this.clock; const arrow=this.board.remaining.find(a=>a.id===id); if(arrow)this.excite(arrow.path.at(-1)!,4); this.stableDirty = true; this.changed(); }
   public setGuides(value: boolean): void { this.guides = value; this.stableDirty = true; this.changed(); }
@@ -191,11 +213,14 @@ export class BoardScene extends Phaser.Scene {
   }
   private presentMove(result: Exclude<MoveResult, { kind: 'ignored' }>): void {
     if (result.kind === 'removed') {
-      this.victorySource = result.arrow.path.at(-1)!;
-      const bump = this.bumps.get(result.arrow.id), travelled = bump ? sampleBump(bump.timing, this.clock-bump.started).distance : 0;
-      this.bumps.delete(result.arrow.id);
-      if (!this.reducedMotion) this.flights.push({ path: this.paths.get(result.arrow.id)!, travelled, speed: Math.max(22, 950 / this.boardCamera.scale), age: 0 });
-      else this.feedback('exit');
+      const arrows=[result.arrow,...(result.released??[])];
+      this.victorySource = arrows.at(-1)!.path.at(-1)!;
+      for(const [index,arrow] of arrows.entries()){
+        const bump=this.bumps.get(arrow.id),travelled=bump?sampleBump(bump.timing,this.clock-bump.started).distance:0;
+        this.bumps.delete(arrow.id);
+        if(!this.reducedMotion)this.flights.push({path:this.paths.get(arrow.id)!,travelled,speed:Math.max(22,950/this.boardCamera.scale),age:-Math.min(700,index*115),queued:index>0});
+      }
+      if(this.reducedMotion)this.feedback('exit');
       this.feedback('move-start');
     } else {
       const contact = arrowContact(result.arrow, this.board.remaining);
@@ -209,10 +234,18 @@ export class BoardScene extends Phaser.Scene {
     this.preview = null; this.stableDirty = true; this.changed(); this.options.move(result);
   }
   private drawDots(): void {
-    this.dots.clear().fillStyle(this.colors.dot, 1);
-    for (const point of this.board.level.mask) this.dots.fillCircle(point.x, point.y, .07);
+    this.dots.clear(); this.dotBatch(this.dots,this.board.level.mask);
   }
-  private stroke(layer: Phaser.GameObjects.Graphics, path: readonly Point[], color: number, width: number, arrowhead: boolean, alpha = 1): void {
+  private dotBatch(layer: Phaser.GameObjects.Blitter, points: readonly Point[]): void {
+    for(const point of points)layer.create(point.x*100-8,point.y*100-8,this.theme);
+  }
+  private dotCircle(layer: Phaser.GameObjects.Graphics,x:number,y:number,radius:number): void {
+    for(let i=0;i<ROUND_JOIN.length;i++){
+      const a=ROUND_JOIN[i]!,b=ROUND_JOIN[(i+1)%ROUND_JOIN.length]!;
+      layer.fillTriangle(x,y,x+a.x*radius,y+a.y*radius,x+b.x*radius,y+b.y*radius);
+    }
+  }
+  private stroke(layer: TrianglePaint, path: readonly Point[], color: number, width: number, arrowhead: boolean, alpha = 1): void {
     if (path.length < 2) return;
     const ink=Math.min(.68,width), size=Math.min(.74,Math.max(.48,ink*2.15));
     const route=roundedRoute(path,arrowhead?size*.82:0);
@@ -242,15 +275,17 @@ export class BoardScene extends Phaser.Scene {
     }
     if (arrowhead) {
       const tip=roundedTip(path,size);
-      layer.fillStyle(color,alpha).beginPath().moveTo(tip[0]!.x,tip[0]!.y);
-      for (let i=1;i<tip.length;i++) layer.lineTo(tip[i]!.x,tip[i]!.y);
-      layer.closePath().fillPath();
+      layer.fillStyle(color,alpha);
+      // Rounded triangles are convex; reuse their exact outline without a
+      // fresh Earcut allocation for every arrow on every rendered frame.
+      for(let i=1;i<tip.length-1;i++)layer.fillTriangle(tip[0]!.x,tip[0]!.y,tip[i]!.x,tip[i]!.y,tip[i+1]!.x,tip[i+1]!.y);
     }
   }
   // One ink weight for static, moving, blocked and hinted arrows; keep a dense-board gap.
   private get arrowWidth(): number { return Math.min(.64, Math.max(.24, 4.6 / this.boardCamera.scale)); }
   private drawStable(): void {
-    this.stableDirty = false; this.stable.clear(); this.guidesLayer.clear();
+    this.stableDirty = false; this.stable.clear(); this.stableBatch?.clear(); this.guidesLayer.clear();
+    const paint=this.stableBatch??this.stable;
     const stroke = this.arrowWidth;
     for (const [index,arrow] of this.board.remaining.entries()) {
       const amount=Math.max(0,Math.min(1,(this.clock-this.entry-Math.min(90,index*8))/280)), ease=1-(1-amount)**3;
@@ -259,12 +294,12 @@ export class BoardScene extends Phaser.Scene {
         const head = arrow.path.at(-1)!, at=this.boardCamera.screen(head), dir=path.direction, view=this.playArea;
         const distance=(dir.x>0?view.x+view.width-at.x:dir.x<0?at.x-view.x:dir.y>0?view.y+view.height-at.y:at.y-view.y)/this.boardCamera.scale;
         const growth=this.reducedMotion||this.guides?1:1-(1-Math.min(1,(this.clock-this.previewAt)/160))**3;
-        this.guidesLayer.lineStyle(Math.max(.035, .7 / this.boardCamera.scale), this.colors.guide, 1);
+        this.guidesLayer.lineStyle(Math.min(.22, 1.8 / this.boardCamera.scale), this.colors.guide, 1);
         this.guidesLayer.lineBetween(head.x, head.y, head.x + path.direction.x * Math.max(0,distance)*growth, head.y + path.direction.y * Math.max(0,distance)*growth);
       }
       if (this.bumps.has(arrow.id)) continue;
       const visible = ease < 1 ? extractPath(path, 0, path.length * ease) : arrow.path;
-      this.stroke(this.stable, visible, arrow.id === this.preview || arrow.id === this.hintTarget ? this.colors.exit : this.board.isError(arrow.id) ? this.colors.error : this.colors.arrow, stroke * (arrow.id === this.hintTarget ? 1.65 : 1), ease > .6);
+      this.stroke(paint, visible, arrow.id === this.preview || arrow.id === this.hintTarget ? this.colors.exit : this.board.isError(arrow.id) ? this.colors.error : this.colors.arrow, stroke * (arrow.id === this.hintTarget ? 1.65 : 1), ease > .6);
     }
   }
   private excite(point: Point, impulse: number): void {
@@ -292,7 +327,7 @@ export class BoardScene extends Phaser.Scene {
     let seed = this.board.level.mask.length*997+this.board.level.arrows.length*7919;
     const random = (): number => { seed = (Math.imul(seed,1664525)+1013904223)>>>0; return seed/4294967296; };
     const colors = [this.colors.arrow, this.colors.exit, this.theme === 'dark' ? 0xffd596 : 0xb17c2e];
-    const special = this.rewardCelebration || this.board.level.difficulty !== 'normal';
+    const special = this.board.snapshot().errors.length===0 || this.rewardCelebration || this.board.level.difficulty !== 'normal';
     const spread = Math.min(155, this.playArea.width*.32);
     for (let i=0; i<(special ? 100 : 72); i++) {
       const side = i%2 ? -1 : 1;
@@ -307,7 +342,15 @@ export class BoardScene extends Phaser.Scene {
     const age = this.clock-this.victoryAt;
     if (age>=VICTORY_MS) { this.confetti.length=0; this.victoryDots=[]; return; }
     const ratio=1/this.scale.zoom, view=this.playArea, cx=view.x+view.width/2, cy=view.y+view.height*.43;
-    const origin=this.victorySource ? this.boardCamera.screen(this.victorySource) : {x:cx,y:cy};
+    const perfect=this.board.snapshot().errors.length===0, gold=this.theme==='dark'?0xffd596:0x9c6b24;
+    const origin=perfect?this.boardCamera.screen({x:(this.board.level.width-1)/2,y:(this.board.level.height-1)/2}):this.victorySource ? this.boardCamera.screen(this.victorySource) : {x:cx,y:cy};
+    if(perfect){
+      for(let i=0;i<12;i++){
+        const t=(age-100-i*16)/720;if(t<0||t>1)continue;
+        const angle=i*Math.PI/6,near=28+t*65,far=near+Math.sin(t*Math.PI)*18,alpha=Math.sin(t*Math.PI)*.7;
+        this.overlay.lineStyle(1.8*ratio,gold,alpha).lineBetween((origin.x+Math.cos(angle)*near)*ratio,(origin.y+Math.sin(angle)*near)*ratio,(origin.x+Math.cos(angle)*far)*ratio,(origin.y+Math.sin(angle)*far)*ratio);
+      }
+    }
     for(let beat=0;beat<2;beat++) {
       const t=(age-beat*150)/680;
       if(t<0||t>1)continue;
@@ -352,7 +395,10 @@ export class BoardScene extends Phaser.Scene {
     this.active.clear(); const stroke = this.arrowWidth;
     for (let i = this.flights.length - 1; i >= 0; i--) {
       const flight = this.flights[i]!, old = flight.travelled;
-      flight.age += dt; flight.travelled += flight.speed * dt / 1000 * Math.min(1, .3 + flight.age / 110);
+      flight.age += dt;
+      if(flight.age<0){this.stroke(this.active,extractPath(flight.path,flight.travelled),this.colors.error,stroke,true);continue;}
+      if(flight.queued){flight.queued=false;this.feedback('move-start');}
+      flight.travelled += flight.speed * dt / 1000 * Math.min(1, .3 + flight.age / 110);
       for (let d = old; d <= flight.travelled; d += .5) {
         this.excite(pointAt(flight.path, d), 7); this.excite(pointAt(flight.path, d + flight.path.length), 5);
       }
@@ -413,7 +459,15 @@ export class BoardScene extends Phaser.Scene {
       }
     }
     // An expired restored timestamp can be negative while the scene is young.
-    if (this.board.complete && !this.announcedWin && this.flights.length === 0 && this.victoryAt === -1) { this.victoryAt = this.clock; this.startCelebration(); this.feedback('victory'); }
+    if (this.board.complete && !this.announcedWin && this.flights.length === 0 && this.victoryAt === -1) {
+      if(!this.finishFramed){
+        this.finishFramed=true;this.hintReveal=null;
+        const to={centerX:(this.board.level.width-1)/2,centerY:(this.board.level.height-1)/2,zoom:1};
+        if(this.reducedMotion){this.boardCamera.restore(to);this.transform();}
+        else this.focusMotion={from:this.boardCamera.snapshot(),to,elapsed:0};
+      }
+      if(!this.focusMotion){this.victoryAt=this.clock;this.startCelebration();this.feedback('victory');}
+    }
     if (this.victoryAt >= 0) {
       const radius = Math.min(1, (this.clock-this.victoryAt)/500)*this.victoryRadius;
       while(this.victorySource && this.victoryCursor<this.victoryDots.length) {
@@ -424,11 +478,12 @@ export class BoardScene extends Phaser.Scene {
       if (!this.announcedWin && this.clock - this.victoryAt > (this.reducedMotion ? 80 : 340)) { this.announcedWin = true; this.changed(); this.feedback('win-ready'); }
     }
     this.reactiveDots.clear();
+    const pulseColor=this.board.complete && this.board.snapshot().errors.length===0 ? (this.theme==='dark'?0xffd596:0x9c6b24) : this.colors.exit;
     for (const [key, pulse] of this.pulses) {
       stepDampedMotion(pulse.motion, dt / 1000, { angularFrequency: 24, damping: 9 });
       if (Math.abs(pulse.motion.x) < .008 && Math.abs(pulse.motion.v) < .1) { this.pulses.delete(key); continue; }
       const strength = Math.min(1, Math.abs(pulse.motion.x) * 2);
-      this.reactiveDots.fillStyle(this.colors.exit, strength).fillCircle(pulse.point.x, pulse.point.y, .07 + Math.max(0, pulse.motion.x) * .18);
+      this.reactiveDots.fillStyle(pulseColor,strength);this.dotCircle(this.reactiveDots,pulse.point.x,pulse.point.y,.07+Math.max(0,pulse.motion.x)*.18);
     }
     this.overlay.clear();
     this.drawCelebration();
