@@ -31,7 +31,7 @@ test('restores the exact earned group quietly, then uses it without another show
   await seed(page);await page.locator('#hint:visible').click();await expect.poll(()=>page.evaluate(()=>!!Reflect.get(window,'assistanceFixture').snapshot().request)).toBe(true);
   await page.evaluate(()=>{const f=Reflect.get(window,'assistanceFixture');f.shown();f.earn();f.dismiss();});
   await expect(page.locator('#game-root')).toHaveAttribute('data-help-group',JSON.stringify(['c40-23','c40-24','c40-27']));
-  const before=await saved(page);await page.reload();await page.locator('#home-play').click();
+  const before=await saved(page);await page.reload();await page.locator('#home-play').click();await expect(page.locator('.board-transition,.route-snapshot')).toHaveCount(0);
   await expect(page.locator('#game-root')).toHaveAttribute('data-help-group',JSON.stringify(['c40-23','c40-24','c40-27']));
   expect((await saved(page)).campaign.board).toEqual(before.campaign.board);expect(await page.evaluate(()=>Reflect.get(window,'assistanceFixture').snapshot().shows)).toBe(0);
   await tap(page,'c40-22');await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','15');
