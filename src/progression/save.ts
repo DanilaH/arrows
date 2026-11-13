@@ -8,7 +8,7 @@ import { Board, canExit, validateLevel, type Attempt, type Level, type MoveResul
 import { parseReceipt, type EarnedReceipt } from '../platform/ads';
 import { availableUnlocks, type UnlockId } from './collection';
 import { decodeAdCadence, deferAds, freshAdCadence, interstitialReason, type AdCadence } from './adCadence';
-import { predictHelp, localIdentity, type HelpVariant } from '../domain/assistance';
+import { predictHelp, routePending, routeCurrent, validatePlan, localIdentity, type HelpVariant } from '../domain/assistance';
 import { freshHelpLedger, decodeHelpLedger, activeRight, ownerOf, makeOffer, sameOwner, applyRight, reserveAttempt, compatibleReserve, fact, assignmentId, beginContinue, continueFacts, type ContinueFact, type HelpLedger, type HelpOffer, type HelpRequest, type HelpFact, type HelpRight } from './helpLedger';
 
 export const SAVE_KEY = 'arrows.progress.v1';
@@ -229,7 +229,7 @@ export class ProgressStore {
       let board = new Board(a.level, a.board.id, a.board);
       const selected=arrow??board.remaining.find(candidate=>board.isError(candidate.id)&&canExit(candidate,board.remaining))?.id;
       if(!selected)return null;
-      const help=activeRight(next,expected),prediction=help?.kind==='cascade-v1'&&help.plan?.root===selected?predictHelp(board,help.plan):null;
+      const help=activeRight(next,expected),routeBefore=help?.kind==='route-v1'&&help.plan?routePending(board,help.plan):null,prediction=help?.kind==='cascade-v1'&&help.plan?.root===selected?predictHelp(board,help.plan):null;
       if(help?.kind==='cascade-v1'&&help.plan?.root===selected&&!prediction)throw Error('Earned cascade cannot be applied');
       const result = prediction?prediction.result:board.activate(selected);
       if(prediction)board=prediction.board;
@@ -239,11 +239,18 @@ export class ProgressStore {
       const helpFacts:HelpFact[]=[],continuations:ContinueFact[]=[];
       if (result.kind === 'removed') {
         const native=prediction?.native??[...(arrow===null?[result.arrow.id]:[]),...(result.released??[]).map(a=>a.id)],manual=arrow===null?[]:[result.arrow.id],bonus=prediction?.bonus??[];
-        const consumed=!!help?.plan&&a.board.removed.includes(help.plan.root);
-        const operation={id:crypto.randomUUID(),entitlement:consumed?help!.id:'',kind:consumed?help!.kind:'ordinary',manual,native,bonus};
+        const routeAfter=routeBefore&&help?.plan?routePending(board,help.plan):null,routeProgress=routeBefore!==null&&routeAfter!==null&&routeAfter.length<routeBefore.length;
+        const consumed=!!help?.plan&&a.board.removed.includes(help.kind==='route-v1'?help.plan.target!:help.plan.root),related=consumed||routeProgress;
+        const operation={id:crypto.randomUUID(),entitlement:related?help!.id:'',kind:related?help!.kind:'ordinary',manual,native,bonus,
+          ...(routeProgress?{route:{manualStep:arrow!==null&&routeBefore!.includes(selected),completed:help!.plan!.route!.length-routeAfter!.length,total:help!.plan!.route!.length,targetReached:consumed}}:{})};
         result.help=operation;
-        if(help&&consumed){help.status='used';help.operation={id:operation.id,manual,native,bonus};helpFacts.push(fact('use',help,expected));}
-        if (a.hint && a.board.removed.includes(a.hint)) a.hint = null;
+        if(help&&related){
+          const members=help.kind==='route-v1'?new Set(help.plan!.route):null;
+          help.operation={id:operation.id,manual:members?manual.filter(id=>members.has(id)):manual,native:members?native.filter(id=>members.has(id)):native,bonus};
+          if(consumed)help.status='used';helpFacts.push(fact(consumed?'use':'progress',help,expected));
+        }
+        if(help?.kind==='route-v1'&&help.plan)a.hint=consumed?null:routeCurrent(board,help.plan);
+        else if (a.hint && a.board.removed.includes(a.hint)) a.hint = null;
         if(arrow!==null)continuations.push(...continueFacts(next.helpLedger,a,'first_move'));
         if (board.complete) {
           const now = this.now(), win: Win = { attempt: a.board.id, levelId: a.level.id, completedAt: now.getTime(), localDate: localDate(now), activeMs: a.activeMs, mistakes: a.board.errors.length };
@@ -364,7 +371,7 @@ export class ProgressStore {
       const a=target.saved,current=makeOffer(next,a,target.mode,offer.kind==='lives'?'lives':'hint');
       if(!current||current.kind!==offer.kind||current.amount!==offer.amount||
         offer.plan&&JSON.stringify(offer.plan.basis)!==JSON.stringify(a.board))return null;
-      if(offer.plan)predictHelp(new Board(a.level,a.board.id,a.board),offer.plan);
+      if(offer.plan){if(offer.plan.kind==='route-v1')validatePlan(a.level,offer.plan);else predictHelp(new Board(a.level,a.board.id,a.board),offer.plan);}
       const requestId=crypto.randomUUID();
       const request:HelpRequest={...structuredClone(offer),schema:2,intentVersion:1,requestId,assignmentId:assignmentId(next.helpLedger,offer.variant),createdAt:this.now().getTime()};
       next.helpLedger.requests[requestId]=request;next.helpLedger.assignments[a.board.id]=offer.variant;
@@ -382,7 +389,7 @@ export class ProgressStore {
   }
   /** Native .playtest UI is the only production caller; applies to future attempts. */
   public setNextHelpVariant(value:HelpVariant):Promise<boolean|undefined>{
-    if(!['legacy','single-v2','cascade-v1'].includes(value))return Promise.resolve(undefined);
+    if(!['legacy','single-v2','cascade-v1','route-v1'].includes(value))return Promise.resolve(undefined);
     return this.update(next=>{
       for(const a of [next.campaign,...Object.values(next.daily)])next.helpLedger.assignments[a.board.id]??=next.helpLedger.nextVariant;
       next.helpLedger.nextVariant=value;return {value:true};

@@ -1,3 +1,7 @@
+## A3 route iteration —0.21.0/code33, verification in progress
+
+First0.20.0 APK was actually delivered before this change; its full CI43461425616 is now green (232 browser/128 source unit/16 JVM, four additional local evidence units132). A3 is a separate future-attempt QA assignment, never combines A2/A4. Read ASSISTANCE_ITERATION.md checkpoint: actual manual2–3 steps, pending from canonical removals, partial reserve1/2-step cap, numbered participants/goal diamond and semantic three-tier physical audio/haptics. Domain/store7 new cases passed, local139-unit check passed; browser/native/captures are in progress. A4/B1 remain next separate changes. No kit/content/pin/cadence/gift/history changes.
+
 ## First assistance APK delivered — 0.20.0/code32
 
 First delivery C/A1/F/A2 is actually available: source35693f1a, permanent artifacts and factual per-ID status in docs/evidence/assistance-020/ACCEPTANCE.md. 132 local unit checks,16 JVM,6 focused browser; current full CI pending at delivery. Physical phone/SDK/money gates not claimed. Keep existing save/content/lives/gift/error/cadence/pins. Next continue A3→A4→B1 as separate source/builds; no overlapping per-attempt product variants. A3 has not yet been implemented.

@@ -37,3 +37,9 @@ Visual review of the first QA capture caught overly fast exits in the conservati
 ## Delivery1 actually issued
 
 0.20.0/code32 from35693f1a was delivered with permanent APK/audio/GIF links before A3 work. See evidence/assistance-020/ACCEPTANCE.md and deliverables.json. Exact APK signature/config/payload passed; native16/16; local check132/132; current focused browser6/6. Latest full CI43461425616 still running at delivery. Physical haptics/performance/actual SDK install and external money remain separate NOT RUN gates. Next task is implement A3 route-v1, then separate A4, then B1; continue autonomously. Also keep common C presentation-event timing and post-continue exit clock bookkeeping exact when touching those seams.
+
+## A3 checkpoint
+
+First APK full CI43461425616 is now GREEN:128 source units,232 browser,16 JVM, both APK builds. Four extra evidence-only tests132 passed locally. Delivery1 immutable files/links stay valid.
+
+A3 is now implemented as a separate route-v1 assignment/kind with bounded actual-Board2–3 manual route search (including two initially free causal blockers), c20 initial9→12→15. Pending steps derive from accepted removals; native/offpath skips, target-close/no-change and partial reserve1/2-step limits are covered by7 new unit cases. Save effects remain in the existing writer, current Hint tracks the next legal route participant, original request is unchanged. Route numbered badges/goal diamond, finite role handoff, semantic3-tier physical thock rate/haptic profiles are connected; new native17th pattern test added. Common reveal event ordering and continuation exit clock ordering corrected. Typecheck and prior full check139 tests pass; new route browser tests are being run. Version0.21.0/code33 prepared, not yet built/delivered. Next: finish browser/capture/nativeCI/APK for A3, then A4, then B1.

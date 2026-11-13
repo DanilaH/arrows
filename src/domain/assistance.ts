@@ -1,8 +1,8 @@
 import { Board, canExit, type Attempt, type Level, type MoveResult } from './board';
 import { measurePath, rayHitsPath } from './geometry';
 
-export type HelpKind = 'legacy-single' | 'single-v2' | 'cascade-v1';
-export type HelpVariant = 'legacy' | 'single-v2' | 'cascade-v1';
+export type HelpKind = 'legacy-single' | 'single-v2' | 'cascade-v1' | 'route-v1';
+export type HelpVariant = 'legacy' | 'single-v2' | 'cascade-v1' | 'route-v1';
 export interface HelpPlan {
   kind: HelpKind;
   root: string;
@@ -12,6 +12,8 @@ export interface HelpPlan {
   // marked-auto predictions are recalculated, never substituted for bonus IDs.
   basis: Attempt;
   contentKey: string;
+  route?: string[];
+  target?: string;
 }
 export interface HelpPrediction {
   board: Board;
@@ -32,6 +34,38 @@ export function localIdentity(raw: string): string {
 export function contentKey(level: Level): string {return `content-${localIdentity(JSON.stringify([level.id,level.contentVersion,level.width,level.height,level.arrows,level.mask]))}`;}
 const freeIds = (board: Board): string[] => {const remaining=board.remaining;return remaining.filter(a=>canExit(a,remaining)).map(a=>a.id);};
 const copy = (board: Board): Board => new Board(board.level,board.attemptId,board.snapshot());
+
+export function routePending(board:Board,plan:HelpPlan):string[]{
+  const removed=new Set(board.snapshot().removed);
+  if(plan.target&&removed.has(plan.target))return[];
+  return (plan.route??[]).filter(id=>!removed.has(id));
+}
+export function routeCurrent(board:Board,plan:HelpPlan):string|null {
+  const pending=new Set(routePending(board,plan));return (plan.route??[]).find(id=>pending.has(id)&&board.remaining.some(a=>a.id===id&&canExit(a,board.remaining)))??null;
+}
+/** Bounded local search of actual manual activations, never an autoplay rule.
+ * Only newly freed ordinary participants extend the route. No optimality claim. */
+export function routePlan(board:Board,maxSteps=3):HelpPlan|null {
+  if(board.hearts===0||board.complete||maxSteps<1)return null;
+  const make=(route:string[]):HelpPlan=>({kind:'route-v1',root:route[0]!,target:route.at(-1)!,route,bonus:[],budget:route.length,basis:board.snapshot(),contentKey:contentKey(board.level)});
+  if(maxSteps===1){const single=chooseSingle(board),root=single&&!board.isError(single.root)?single.root:board.remaining.find(a=>!board.isError(a.id)&&canExit(a,board.remaining))?.id;return root?make([root]):null;}
+  const initialFree=new Set(freeIds(board));let fallback:HelpPlan|null=null,nodes=0;
+  for(const root of board.remaining.filter(a=>initialFree.has(a.id)&&!board.isError(a.id))){
+    const causal=descendants(board,root.id);if(!causal.size)continue;
+    const after=copy(board);after.activate(root.id);nodes++;
+    const choices=after.remaining.filter(a=>!after.isError(a.id)&&canExit(a,after.remaining)).sort((a,b)=>Number(initialFree.has(a.id))-Number(initialFree.has(b.id)));
+    for(const second of choices){
+      if(!initialFree.has(second.id)&&causal.has(second.id)){fallback??=make([root.id,second.id]);if(maxSteps===2)return fallback;}
+      if(maxSteps===2)continue;
+      const next=copy(after);next.activate(second.id);nodes++;
+      const before=new Set(freeIds(after));
+      const target=next.remaining.find(a=>causal.has(a.id)&&!initialFree.has(a.id)&&!before.has(a.id)&&!next.isError(a.id)&&canExit(a,next.remaining));
+      if(target)return make([root.id,second.id,target.id]);if(nodes>=256)return fallback;
+    }
+    if(nodes>=256)break;
+  }
+  return fallback;
+}
 
 /** Uses the actual activation/marked closure; existing free moves are excluded. */
 export function chooseSingle(board: Board, visible: ReadonlySet<string> = new Set()): SingleChoice | null {
@@ -93,7 +127,7 @@ export function cascadePlan(board: Board, options: {root?:string;budget?:number}
 
 /** Validate the promised original group independently of later errors/removals. */
 export function validatePlan(level: Level, plan: HelpPlan): void {
-  if(!plan||!['legacy-single','single-v2','cascade-v1'].includes(plan.kind)||plan.contentKey!==contentKey(level)||
+  if(!plan||!['legacy-single','single-v2','cascade-v1','route-v1'].includes(plan.kind)||plan.contentKey!==contentKey(level)||
     plan.basis.levelId!==level.id||plan.basis.contentVersion!==level.contentVersion||!Array.isArray(plan.bonus)||
     new Set([plan.root,...plan.bonus]).size!==1+plan.bonus.length)throw Error('Invalid help identity');
   if(!Array.isArray(plan.basis.removed)||!Array.isArray(plan.basis.errors)||new Set(plan.basis.removed).size!==plan.basis.removed.length||
@@ -104,6 +138,12 @@ export function validatePlan(level: Level, plan: HelpPlan): void {
   for(const id of plan.basis.removed){const i=history.findIndex(a=>a.id===id);if(i<0||!canExit(history[i]!,history))throw Error('Invalid help move history');history.splice(i,1);}
   const basis=new Board(level,plan.basis.id,plan.basis),remaining=basis.remaining;
   const root=remaining.find(a=>a.id===plan.root);if(!root||basis.hearts===0&&plan.kind!=='legacy-single'||!canExit(root,remaining))throw Error('Invalid help root');
+  if(plan.kind==='route-v1'){
+    const route=plan.route;if(!route||route.length<1||route.length>3||plan.budget!==route.length||new Set(route).size!==route.length||route[0]!==plan.root||route.at(-1)!==plan.target||plan.bonus.length)throw Error('Invalid manual route');
+    const target=remaining.find(a=>a.id===plan.target);if(!target||route.length>1&&canExit(target,remaining))throw Error('Route target must start blocked');
+    for(const id of route){if(basis.snapshot().removed.includes(id)||basis.isError(id)||basis.activate(id).kind!=='removed')throw Error('Illegal manual route');}
+    return;
+  }
   if(plan.kind==='cascade-v1'){
     if(plan.budget!==plan.bonus.length||plan.budget<2||plan.budget>4||basis.isError(root.id))throw Error('Invalid cascade budget');
     const causal=descendants(basis,root.id);

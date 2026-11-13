@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 public class FeedbackPatternTest {
     @Test public void profilesAreFiniteDistinctAndBounded() {
-        String[] cues = {"button", "remove", "combo", "error", "hint", "life", "win"};
+        String[] cues = {"button", "remove", "combo", "error", "hint", "life", "win", "route1", "route2", "route3"};
         for (String cue : cues) {
             FeedbackPattern p = FeedbackPattern.forCue(cue);
             assertNotNull(p); assertEquals(p.timings.length, p.amplitudes.length);
@@ -24,5 +24,13 @@ public class FeedbackPatternTest {
     @Test public void callersCannotMutateAnotherCueInstance() {
         FeedbackPattern p = FeedbackPattern.forCue("win"); p.timings[1] = 9999;
         assertEquals(20, FeedbackPattern.forCue("win").timings[1]);
+    }
+    @Test public void manualRouteIntensityIsFiniteAndIncreasesWithoutAQueuedSequence() {
+        long previous=0;
+        for(String cue:new String[]{"route1","route2","route3"}) {
+            FeedbackPattern p=FeedbackPattern.forCue(cue);long energy=0,duration=0;
+            for(int i=0;i<p.timings.length;i++){energy+=p.timings[i]*p.amplitudes[i];duration+=p.timings[i];}
+            assertTrue(energy>previous);assertTrue(duration<60);previous=energy;
+        }
     }
 }

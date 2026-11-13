@@ -127,10 +127,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     meta.selectCampaign(); loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true }); resumeErrors();
   })()); };
   const leaveGame = (): void => {
-    helpOffers.choice('exit');if(!control)run(progress.recordHelpExit(scene.board.attemptId));
+    helpOffers.choice('exit');
     if(activeDate && dailyReturnAttempt===scene.board.attemptId && scene.board.complete)meta.queueDailyArrival(activeDate,dailyReturnAttempt);
     dailyReturnAttempt='';
-    assistance=null; motion.cancelRefill(); cancel(); saveView(); if (cameraTimer !== undefined) clearTimeout(cameraTimer); cameraTimer = undefined;
+    assistance=null; motion.cancelRefill(); cancel(); saveView();if(!control)run(progress.recordHelpExit(scene.board.attemptId)); if (cameraTimer !== undefined) clearTimeout(cameraTimer); cameraTimer = undefined;
     if (!control && active().started) platform.analytics.track('level_exit', { mode: gameMode(), level_id: active().level.id, attempt: active().board.id, active_ms: active().activeMs });
     pendingTime = 0; pendingAdTime = 0; wasActive = false; freshWinAttempt = '';
   };
@@ -247,7 +247,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       if(requestingAd || transition.busy || motion.routeBusy || platform.activity.isBlocked())return;
       assistance=null;
       if(effect.lives && scene.board.hearts===effect.lives.to){motion.refill(document.querySelector<HTMLElement>('#hearts')!,effect.lives.from,effect.lives.to);platform.feedback.play('life');}
-      if(effect.hint && scene.hintTarget===effect.hint){scene.revealHint(effect.hint);helpOffers.reveal(effect.attempt,'reveal_started');}
+      if(effect.hint && scene.hintTarget===effect.hint){helpOffers.reveal(effect.attempt,'reveal_started');scene.revealHint(effect.hint);}
     });
   };
   const sync = (): void => {
@@ -437,7 +437,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   listeners.push(scene.subscribe(sync));
   listeners.push(scene.subscribeFeedback(event => {
     if (!loaded || meta.screen !== 'game' || scene.board.attemptId !== event.attempt) return;
-    if (event.kind === 'move-start') platform.feedback.play('remove');
+    if(event.kind==='route-step')platform.feedback.routeStep(event.routeStep??1);
+    else if (event.kind === 'move-start') platform.feedback.play('remove');
     else if (event.kind === 'blocked-start') platform.feedback.play('slide');
     else if (event.kind === 'impact') { platform.feedback.play('error'); motion.impact(document.querySelector('#hearts')!); }
     else if(event.kind==='repeat-impact')platform.feedback.play('repeat-error');

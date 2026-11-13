@@ -8,7 +8,7 @@ export interface Attempt {
   readonly id: string; readonly levelId: string; readonly contentVersion: number;
   readonly removed: readonly string[]; readonly errors: readonly string[]; readonly lives: number;
 }
-export interface HelpOperation {id:string;entitlement:string;kind:string;manual:string[];native:string[];bonus:string[];}
+export interface HelpOperation {id:string;entitlement:string;kind:string;manual:string[];native:string[];bonus:string[];route?:{manualStep:boolean;completed:number;total:number;targetReached:boolean};}
 export type MoveResult = { kind: 'ignored' } | { kind: 'error'; first: boolean; arrow: Arrow } | { kind: 'removed'; arrow: Arrow; complete: boolean; released?: readonly Arrow[]; help?:HelpOperation };
 export function canExit(arrow: Arrow, remaining: readonly Arrow[]): boolean {
   const path = measurePath(arrow.path), head = arrow.path.at(-1)!;

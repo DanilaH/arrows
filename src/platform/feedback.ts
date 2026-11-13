@@ -17,6 +17,10 @@ export function createFeedback(activity: GameplayActivityCoordinator, settings: 
   const offSettings = settings.subscribe(refresh);
   return {
     resetGameplay(): void { chain = 0; lastRemoval = -Infinity; sound.resetGameplay(); haptics.cancel(); },
+    routeStep(stage:number):void {
+      if(!eligibility.gameplay)return;const tier=Math.max(1,Math.min(3,stage));chain=0;lastRemoval=-Infinity;
+      if(settings.state.sound)sound.play('remove','gameplay',[1,1.06,1.12][tier-1]!);haptics.pulse(`route${tier}` as HapticCue);
+    },
     previewVibration(): void { if (eligibility.ui && settings.state.vibration) haptics.pulse('life'); },
     previewSound(): void { if (eligibility.ui && settings.state.sound) sound.play('win', 'ui'); },
     play(cue: SoundCue, channel: 'gameplay' | 'ui' = 'gameplay'): void {

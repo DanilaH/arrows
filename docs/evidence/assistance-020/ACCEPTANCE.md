@@ -4,7 +4,7 @@ APK **0.20.0/code32**, source **35693f1ad049ae7082a3e20256e6583006646463**. Owne
 
 `PASS` below means the named engineering evidence, not human enjoyment, real ad success or physical phone acceptance. Mixed external gates remain `NOT RUN` even where local parts passed.
 
-Checks at delivery: `npm run check`132/132 unit tests + typecheck/production build; current focused browser6/6 including actual RAF idle and restore; native16/16 plus Android debug/playtest assemble. Prior full browser229/230: one finish timing timeout under concurrent stress, isolated repeat2/2 passed. Full current CI run43461425616 still executing at delivery and will be updated.
+Checks at delivery: `npm run check`132/132 unit tests + typecheck/production build; current focused browser6/6 including actual RAF idle and restore; native16/16 plus Android debug/playtest assemble. Prior full browser229/230: one finish timing timeout under concurrent stress, isolated repeat2/2 passed. Full CI run43461425616 subsequently succeeded:128 unit tests at the APK source,232/232 browser cases, native16/16 and both APK builds. Additional four evidence-only local tests make132.
 
 APK: `com.danilah.arrows.playtest`,10,388,199 bytes; SHA256 `fe3c542a45eeeed93a79e09bc5232544db56fadec4a6303c384f6b4f459e9b8e`; V2 certificate `533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36`, same as previous code31. Native DEX config: AD_MODE=test, demo-rewarded-yandex/demo-interstitial-yandex, analytics key empty; automatic SDK reporting disabled with empty key. All captured application web files equal APK bytes. Actual install and SDK video on a phone have not been performed here.
 
@@ -27,7 +27,7 @@ Desktop stress profiles: exact old APK payload vs candidate presentation, same o
 | BASE-05 | PASS | Existing flawless/history tests; A2 c01 win has errors0 and one winner; c40 marks retain lives1/errors2. |
 | BASE-06 | PASS | Existing content hash/date/namespace/unit tests and229 successful full-browser cases; full current CI pending. |
 | BASE-07 | PASS | helpLedger failed request/grant/use/claim, ambiguous write/readback and duplicate receipt tests. |
-| BASE-08 | NOT RUN | Current full CI still running at first delivery. Local check132/132, focused6/6, native16/16/build succeeded. Prior full run229/230; finish timeout passed separately2/2. |
+| BASE-08 | PASS | Full CI43461425616 succeeded:128 source unit tests,232 browser cases,16 JVM, sync and Android builds. Four additional local evidence tests bring local unit count132. Earlier finish timeout was resolved by isolated repeat and subsequent full green CI. |
 | C-01 | PASS | rewardedReadiness coalesced demand with no startup preload/blocker; cache/generation JVM cases. Simulated transport. |
 | C-02 | PASS | Configured vs ready, monotonic TTL/take and stale status tested in TS/JVM; actual APK config inspected. |
 | C-03 | PASS | RewardedCacheStateTest cancellation/generation/expiry/backoff; adapter demand singleflight and stale RPC test. |

@@ -8,6 +8,9 @@ final class FeedbackPattern {
     static FeedbackPattern forCue(String cue) {
         if (cue == null) return null;
         switch (cue) {
+            case "route1": return new FeedbackPattern(new long[]{0,10},new int[]{0,135});
+            case "route2": return new FeedbackPattern(new long[]{0,12,12,12},new int[]{0,145,0,185});
+            case "route3": return new FeedbackPattern(new long[]{0,14,14,18},new int[]{0,170,0,225});
             case "button": return new FeedbackPattern(new long[]{0, 12}, new int[]{0, 140});
             case "remove": return new FeedbackPattern(new long[]{0, 20}, new int[]{0, 190});
             case "combo": return new FeedbackPattern(new long[]{0, 12, 18, 18}, new int[]{0, 180, 0, 225});
