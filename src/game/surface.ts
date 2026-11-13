@@ -225,10 +225,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       }, true);
       button('cancel', text.cancel, () => close());
     } else if (kind === 'lost') {
-      if (!control && !progress.state.freeContinueUsed && !active().freeUsed) { paragraph(text.freeContinueNote); button('free-continue', text.freeContinue, () => {
+      if (!control && !helpOffers.snapshot(scene.board.attemptId,'lives').reserve && !progress.state.freeContinueUsed && !active().freeUsed) { paragraph(text.freeContinueNote); button('free-continue', text.freeContinue, () => {
         const attempt = scene.board.attemptId; run(progress.continueFree(attempt).then(changed => { if (changed) platform.analytics.track('continue_applied', { attempt, source: 'free' }); }));
       }, true); }
-      else if (!control) { const reserve=helpOffers.snapshot(scene.board.attemptId,'lives').reserve;paragraph(reserve?(language==='ru'?'Три жизни уже сохранены. Видео не требуется.':'Three saved lives are available. No video needed.'):text.rewardedContinue); button('rewarded-continue', reserve?(language==='ru'?'Использовать сохранённые жизни':'Use saved lives'):text.watchVideo, () => run(requestReward('lives')), true); }
+      else if (!control) { const offer=helpOffers.livesLabel(scene.board.attemptId);paragraph(offer.detail);button('rewarded-continue',offer.text,()=>run(requestReward('lives')),true); }
       button('restart', text.restart, () => open('restart'), control);
       button('home', activeDate ? text.toCalendar : text.home, backToMenu);
       if (notice) paragraph(notice);
@@ -315,11 +315,12 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     platform.activity.setGameplayDesired(loaded && meta.screen === 'game' && !board.complete && board.hearts > 0);
     if (modal === 'lost' && board.hearts > 0) close();
     if (loaded && meta.screen === 'game' && board.hearts === 0 && !scene.hasErrorMotion && modal === null && !requestingAd && !motion.routeBusy) open('lost');
+    if(modal==='lost'&&content.querySelector('[data-action=rewarded-continue]')){const offer=helpOffers.livesLabel(board.attemptId),p=content.querySelector('p'),button=content.querySelector<HTMLElement>('[data-action=rewarded-continue]')!;if(p&&p.textContent!==offer.detail)p.textContent=offer.detail;if(button.textContent!==offer.text)button.textContent=offer.text;}
     const foreground=!document.hidden&&platform.activity.getBlockReasons().every(reason=>reason==='dialog');
     const showHint=loaded&&!control&&meta.screen==='game'&&!hintButton.hidden&&!requestingAd&&!motion.routeBusy&&!platform.activity.isBlocked();
     const showLives=loaded&&!control&&meta.screen==='game'&&modal==='lost'&&dialog.open&&!requestingAd&&!motion.routeBusy&&foreground&&!!content.querySelector('[data-action="rewarded-continue"]');
     helpOffers.visible(showHint||showLives,board.attemptId,showLives?'lives':'hint');
-    platform.ads.setRewardedDemand(loaded&&!control&&meta.screen==='game'&&!board.complete&&!a.hint&&!step&&!requestingAd&&!motion.routeBusy&&progress.available&&!progress.uncertain&&(showLives||!platform.activity.isBlocked()&&board.hearts>0));
+    platform.ads.setRewardedDemand(loaded&&!control&&meta.screen==='game'&&!board.complete&&(!a.hint||showLives)&&!step&&!requestingAd&&!motion.routeBusy&&progress.available&&!progress.uncertain&&(showLives||!platform.activity.isBlocked()&&board.hearts>0));
     scheduleAssistance();
     meta.presentArrivals();
   };
@@ -393,9 +394,9 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       const result = await progress.commitReward(receipt);
       const recovered = !requestedRewards.delete(`${receipt.attempt}:${receipt.placement}`);
       if (result === 'applied') {
-        const right=progress.state.helpLedger.rights[receipt.id],applied=!!right&&right.status!=='reserved';
+        const right=progress.state.helpLedger.rights[receipt.id],applied=!!right&&(right.status!=='reserved'||right.bundle?.lives==='applied');
         if(!right){platform.analytics.track('runtime_error',{operation:'reward_descriptor',reason:'unresolved'});return result;}
-        if (!applied) platform.analytics.track('ad_reward_reserved', { placement: receipt.placement, attempt: receipt.attempt });
+        if (!applied||right.status==='reserved') platform.analytics.track('ad_reward_reserved', { placement: receipt.placement, attempt: receipt.attempt });
         if (applied) {
           if (receipt.attempt === scene.board.attemptId) notice = '';
           platform.analytics.track('ad_reward_granted', { placement: receipt.placement, attempt: receipt.attempt, recovered });

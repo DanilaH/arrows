@@ -2,7 +2,7 @@ import { Board, canExit, type Attempt, type Level, type MoveResult } from './boa
 import { measurePath, rayHitsPath } from './geometry';
 
 export type HelpKind = 'legacy-single' | 'single-v2' | 'cascade-v1' | 'route-v1';
-export type HelpVariant = 'legacy' | 'single-v2' | 'cascade-v1' | 'route-v1';
+export type HelpVariant = 'legacy' | 'single-v2' | 'cascade-v1' | 'route-v1' | 'continue-single-v1';
 export interface HelpPlan {
   kind: HelpKind;
   root: string;

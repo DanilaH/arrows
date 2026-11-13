@@ -1,0 +1,30 @@
+import {test,expect,type Page} from '@playwright/test';
+import {campaign} from '../../src/content/campaign';
+import {Board} from '../../src/domain/board';
+import {singlePlan} from '../../src/domain/assistance';
+import {freshSave,freshAttempt,SAVE_KEY,decodeSave} from '../../src/progression/save';
+import {ownerOf,assignmentId} from '../../src/progression/helpLedger';
+import {openAssistanceReview} from './helpers/assistanceReview';
+const current=(page:Page)=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),SAVE_KEY);
+async function open(page:Page,slot:'empty'|'occupied'|'late'){
+  const s=freshSave();s.index=39;s.campaign=freshAttempt(campaign[39]!);const b=new Board(s.campaign.level,s.campaign.board.id);for(let i=0;i<21;i++)b.activate(`c40-${i}`);s.campaign.board=b.snapshot();s.campaign.started=true;s.freeContinueUsed=true;s.helpLedger.assignments[b.attemptId]='continue-single-v1';s.helpLedger.nextVariant='continue-single-v1';s.tutorials=['tap','turns','blockers','hint','zoom'];s.seenUnlocks=['collection','calendar'];s.wins=campaign.slice(0,39).map((l,i)=>({attempt:`past-${i}`,levelId:l.id,activeMs:1000,completedAt:1000+i,mistakes:0}));
+  if(slot==='late'){const owner=ownerOf(s.campaign,'campaign');s.helpLedger.requests['seed-late-hint']={schema:2,intentVersion:1,id:'seed-offer',requestId:'seed-late-hint',assignmentId:assignmentId(s.helpLedger,'continue-single-v1'),owner,variant:'continue-single-v1',kind:'single-v2',amount:1,plan:singlePlan(b),fallback:'',createdAt:1000};}
+  s.campaign.board={...b.snapshot(),errors:['c40-23','c40-24','c40-27'],lives:0};if(slot==='occupied')s.campaign.hint='c40-22';decodeSave(s);
+  await page.addInitScript(({s,key})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(s));},{s,key:SAVE_KEY});await openAssistanceReview(page);await page.locator('#home-play').click();await expect(page.locator('[data-action=rewarded-continue]')).toBeVisible();return s;
+}
+async function tap(page:Page,id:string){const c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),p=campaign[39]!.arrows.find(a=>a.id===id)!.path.at(-1)!;await page.mouse.click(c.x+p.x*c.scale,c.y+p.y*c.scale);}
+for(const slot of ['empty','occupied'] as const)test(`A4 describes and grants ${slot==='empty'?'three lives plus A1':'lives retaining existing help'}`,async({page})=>{
+  await open(page,slot);await expect(page.locator('#dialog-content')).toContainText(slot==='empty'?'Three lives and one useful hint':'your help is retained');await page.locator('[data-action=rewarded-continue]').click();await expect.poll(()=>page.evaluate(()=>!!Reflect.get(window,'assistanceFixture').snapshot().request)).toBe(true);
+  const before=await current(page),req=await page.evaluate(()=>Reflect.get(window,'assistanceFixture').snapshot().request);expect(before.helpLedger.requests[req.requestId].bundle.hint).toBe(slot==='empty'?'new-single':'retain');
+  await page.evaluate(()=>{const f=Reflect.get(window,'assistanceFixture');f.shown();f.earn();f.dismiss();});await expect(page.locator('#game-shell')).toHaveAttribute('data-lives','3');await expect(page.locator('#game-dialog')).not.toBeVisible();const after=await current(page);expect(after.campaign.hint).toBe('c40-22');expect(after.campaign.board.errors).toEqual(['c40-23','c40-24','c40-27']);expect(after.helpLedger.rights[req.requestId].bundle.single).toBe(slot==='empty'?'active':'none');await page.evaluate(()=>Reflect.get(window,'assistanceFixture').duplicate());expect((await current(page)).campaign.continuations).toBe(1);
+});
+test('A4 late-slot collision restores lives and claims its remaining A1 with no second show',async({page})=>{
+  const seed=await open(page,'late');await page.locator('[data-action=rewarded-continue]').click();await expect.poll(()=>page.evaluate(()=>!!Reflect.get(window,'assistanceFixture').snapshot().request)).toBe(true);const request=await page.evaluate(()=>Reflect.get(window,'assistanceFixture').snapshot().request);
+  await page.evaluate(receipt=>Reflect.get(window,'assistanceFixture').late(receipt),{schema:2,intentVersion:1,id:'seed-late-hint',requestId:'seed-late-hint',attempt:seed.campaign.board.id,mode:'campaign',placement:'hint'});
+  await expect.poll(async()=>(await current(page)).campaign.hint).toBe('c40-22');expect((await current(page)).campaign.board.lives).toBe(0);await page.evaluate(()=>{const f=Reflect.get(window,'assistanceFixture');f.shown();f.earn();f.dismiss();});await expect(page.locator('#game-dialog')).not.toBeVisible();await expect(page.locator('#game-shell')).toHaveAttribute('data-lives','3');
+  expect((await current(page)).helpLedger.rights[request.requestId].bundle).toMatchObject({lives:'applied',single:'pending'});await tap(page,'c40-22');await expect.poll(async()=>(await current(page)).campaign.hint).toBeNull();await expect(page.locator('#hint:visible')).toContainText('Use saved hint');await page.locator('#hint').click();await expect.poll(async()=>(await current(page)).helpLedger.rights[request.requestId].bundle.single).toBe('active');expect(await page.evaluate(()=>Reflect.get(window,'assistanceFixture').snapshot().shows)).toBe(1);expect((await current(page)).campaign.continuations).toBe(1);
+});
+test('a slot occupied before choosing the video updates the visible retained-help promise',async({page})=>{
+  const seed=await open(page,'late');await page.evaluate(receipt=>Reflect.get(window,'assistanceFixture').late(receipt),{schema:2,intentVersion:1,id:'seed-late-hint',requestId:'seed-late-hint',attempt:seed.campaign.board.id,mode:'campaign',placement:'hint'});
+  await expect(page.locator('#dialog-content')).toContainText('your help is retained');await page.locator('[data-action=rewarded-continue]').click();await expect.poll(()=>page.evaluate(()=>!!Reflect.get(window,'assistanceFixture').snapshot().request)).toBe(true);const r=await page.evaluate(()=>Reflect.get(window,'assistanceFixture').snapshot().request);expect((await current(page)).helpLedger.requests[r.requestId].bundle.hint).toBe('retain');
+});

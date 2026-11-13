@@ -28,6 +28,7 @@ export function controlledNative({save,settings}) {
   window.AudioContext=class extends Original{constructor(...args){super(...args);audioContext=this;destination=this.createMediaStreamDestination();}};
   window.assistanceQA={
     snapshot:()=>({request,events,pulses,pending,readiness:readiness()}),
+    late(receipt){pending.push(receipt);emit('ArrowsAds','adEvent',{kind:'rewarded',phase:'receipt_pending',requestId:receipt.id,attempt:receipt.attempt,mode:receipt.mode,placement:receipt.placement});},
     earned(){if(!request)throw Error('No explicit saved ad request');const receipt={schema:2,intentVersion:1,id:request.requestId,requestId:request.requestId,attempt:request.attempt,mode:request.mode,placement:request.placement};pending.push(receipt);emit('ArrowsAds','adEvent',{...request,phase:'earned'});},
     shown(){emit('ArrowsAds','adEvent',{...request,phase:'show'});},
     dismiss(){resolveShow?.({shown:true,outcome:'dismissed',earned:true});resolveShow=null;},

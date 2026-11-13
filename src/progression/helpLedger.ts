@@ -4,13 +4,16 @@ import { parseReceipt, type EarnedReceipt } from '../platform/ads';
 import type { GameSave, SavedAttempt } from './save';
 
 export interface HelpOwner { attempt: string; mode: 'campaign'|'daily'; levelId: string; contentVersion: number; contentKey: string; }
-export interface HelpOffer { id: string; owner: HelpOwner; variant: HelpVariant; kind: HelpKind|'lives'; amount: number; plan: HelpPlan|null; fallback: string; }
+export type HelpEffect=HelpKind|'lives'|'continue-single-v1';
+export const lifeEffect=(kind:HelpEffect):boolean=>kind==='lives'||kind==='continue-single-v1';
+export interface HelpOffer { id: string; owner: HelpOwner; variant: HelpVariant; kind: HelpEffect; amount: number; plan: HelpPlan|null; fallback: string; bundle?:{hint:'new-single'|'retain'}; }
 export interface HelpRequest extends HelpOffer { schema: 2; intentVersion: 1; requestId: string; assignmentId: string; createdAt: number; }
 export interface HelpRight {
   id: string; origin: 'sdk'|'legacy-save'; receiptId: string|null; requestId: string|null;
-  originalOwner: HelpOwner; owner: HelpOwner|null; kind: HelpKind|'lives'; version: 1; amount: number;
+  originalOwner: HelpOwner; owner: HelpOwner|null; kind: HelpEffect; version: 1; amount: number;
   plan: HelpPlan|null; status: 'active'|'reserved'|'used'; claimId?: string;
   operation?: {id:string;manual:string[];native:string[];bonus:string[]};
+  bundle?:{lives:'pending'|'applied';single:'none'|'pending'|'active'|'used';retainedAtOffer:boolean;livesOwner?:HelpOwner;retainedHelp?:string};
 }
 export interface HelpLedger {
   version: 1; installId: string; nextVariant: HelpVariant; candidateEnabled: boolean;
@@ -22,8 +25,8 @@ export interface HelpLedger {
 export interface ContinueFact {id:string;entitlement:string;attempt:string;outcome:string;activeMs:number;}
 export interface HelpFact { id:string; phase:'request'|'grant'|'reserve'|'claim'|'use'|'unresolved'|'assignment'|'progress'; entitlement:string; request:string; sourceAttempt:string; attempt:string; kind:string; variant:string; manual:number; native:number; bonus:number; }
 const validId=(v:unknown):v is string=>typeof v==='string'&&/^[a-zA-Z0-9_-]{1,100}$/.test(v);
-const variant=(v:unknown):v is HelpVariant=>v==='legacy'||v==='single-v2'||v==='cascade-v1'||v==='route-v1';
-const kind=(v:unknown):v is HelpRight['kind']=>v==='lives'||v==='legacy-single'||v==='single-v2'||v==='cascade-v1'||v==='route-v1';
+const variant=(v:unknown):v is HelpVariant=>v==='legacy'||v==='single-v2'||v==='cascade-v1'||v==='route-v1'||v==='continue-single-v1';
+const kind=(v:unknown):v is HelpRight['kind']=>v==='lives'||v==='legacy-single'||v==='single-v2'||v==='cascade-v1'||v==='route-v1'||v==='continue-single-v1';
 export function freshHelpLedger(installId:string=crypto.randomUUID()):HelpLedger{return {version:1,installId,nextVariant:'single-v2',candidateEnabled:true,assignments:{},requests:{},rights:{},unresolved:[],enrollments:{},continues:{}};}
 export const assignmentId=(ledger:HelpLedger,variant:HelpVariant):string=>`assignment-${localIdentity(ledger.installId+':'+variant)}`;
 export function beginContinue(ledger:HelpLedger,a:SavedAttempt,id:string):void{ledger.continues[id]??={attempt:a.board.id,startedAt:a.activeMs,firstMove:false,closed:false};}
@@ -46,7 +49,15 @@ export function fact(phase:HelpFact['phase'],r:HelpRight,target=r.owner?.attempt
 export function makeOffer(save:GameSave,a:SavedAttempt,mode:HelpOwner['mode'],placement:'hint'|'lives',visible?:ReadonlySet<string>):HelpOffer|null{
   const ledger=save.helpLedger,owner=ownerOf(a,mode),assigned=ledger.assignments[a.board.id]??'single-v2',b=new Board(a.level,a.board.id,a.board);
   if(b.complete)return null;
-  if(placement==='lives')return b.hearts===0?{id:`offer-${localIdentity(a.board.id+'-lives')}`,owner,variant:assigned,kind:'lives',amount:3,plan:null,fallback:''}:null;
+  if(placement==='lives'){
+    if(b.hearts!==0)return null;
+    if(assigned==='continue-single-v1'&&ledger.candidateEnabled){
+      const occupied=!!a.hint||!!activeRight(save,a.board.id),plan=occupied?null:singlePlan(new Board(a.level,a.board.id,{...a.board,lives:3}));
+      if(!occupied&&!plan)return null;
+      return {id:`offer-${localIdentity(JSON.stringify([owner,a.board,occupied,plan]))}`,owner,variant:assigned,kind:'continue-single-v1',amount:3,plan,fallback:occupied?'occupied_help_retained':'',bundle:{hint:occupied?'retain':'new-single'}};
+    }
+    return {id:`offer-${localIdentity(a.board.id+'-lives')}`,owner,variant:assigned,kind:'lives',amount:3,plan:null,fallback:assigned==='continue-single-v1'?'candidate_disabled':''};
+  }
   if(b.hearts===0||a.hint||activeRight(save,a.board.id))return null;
   let plan:HelpPlan|null=null,fallback='';
   if(assigned==='route-v1'&&ledger.candidateEnabled){plan=routePlan(b);if(!plan)fallback='no_short_route';}
@@ -57,7 +68,7 @@ export function makeOffer(save:GameSave,a:SavedAttempt,mode:HelpOwner['mode'],pl
   return {id:`offer-${localIdentity(JSON.stringify([owner,plan]))}`,owner,variant:assigned,kind:plan.kind,amount:plan.kind==='cascade-v1'||plan.kind==='route-v1'?plan.budget:1,plan,fallback};
 }
 function checkOwner(o:HelpOwner):void{if(!o||!validId(o.attempt)||!['campaign','daily'].includes(o.mode)||!validId(o.levelId)||!Number.isInteger(o.contentVersion)||o.contentVersion<1||!validId(o.contentKey))throw Error('Invalid help owner');}
-function checkBudget(k:HelpRight['kind'],n:number):void{if(!Number.isInteger(n)||(k==='cascade-v1'?n<2||n>4:k==='route-v1'?n<1||n>3:k==='lives'?n!==3:n!==1))throw Error('Invalid help amount');}
+function checkBudget(k:HelpRight['kind'],n:number):void{if(!Number.isInteger(n)||(k==='cascade-v1'?n<2||n>4:k==='route-v1'?n<1||n>3:lifeEffect(k)?n!==3:n!==1))throw Error('Invalid help amount');}
 
 /** Additive schema2 migration; no receipt/request identity is invented for old hints. */
 export function decodeHelpLedger(value:unknown,campaign:SavedAttempt,daily:Record<string,SavedAttempt>,reserved:EarnedReceipt[]):HelpLedger{
@@ -71,15 +82,21 @@ export function decodeHelpLedger(value:unknown,campaign:SavedAttempt,daily:Recor
   for(const [id,r]of Object.entries(ledger.requests)){
     if(!validId(id)||r.requestId!==id||r.schema!==2||r.intentVersion!==1||!variant(r.variant)||!kind(r.kind)||!validId(r.assignmentId)||!validId(r.id)||!Number.isFinite(r.createdAt)||r.createdAt<0)throw Error('Invalid help request');
     checkOwner(r.owner);checkBudget(r.kind,r.amount);
-    if(r.kind!=='lives'&&(!r.plan||r.plan.kind!==r.kind||r.plan.contentKey!==r.owner.contentKey))throw Error('Invalid promised plan');
+    if(r.kind==='continue-single-v1'){
+      if(!r.bundle||!['new-single','retain'].includes(r.bundle.hint)||r.bundle.hint==='retain'&&r.plan!==null||r.bundle.hint==='new-single'&&(!r.plan||r.plan.kind!=='single-v2'||r.plan.contentKey!==r.owner.contentKey))throw Error('Invalid promised continue components');
+    }else if(r.kind!=='lives'&&(!r.plan||r.plan.kind!==r.kind||r.plan.contentKey!==r.owner.contentKey))throw Error('Invalid promised plan');
   }
   for(const [id,r]of Object.entries(ledger.rights)){
     if(!validId(id)||r.id!==id||!kind(r.kind)||r.version!==1||!['active','reserved','used'].includes(r.status)||!['sdk','legacy-save'].includes(r.origin)||
       r.receiptId!==null&&!validId(r.receiptId)||r.requestId!==null&&!validId(r.requestId))throw Error('Invalid earned help');
     checkOwner(r.originalOwner);if(r.owner)checkOwner(r.owner);checkBudget(r.kind,r.amount);
-    if(r.plan&&(r.plan.kind!==r.kind||r.kind==='cascade-v1'&&r.plan.budget!==r.amount))throw Error('Help amount changed');
+    if(r.plan&&(r.plan.kind!==(r.kind==='continue-single-v1'?'single-v2':r.kind)||r.kind==='cascade-v1'&&r.plan.budget!==r.amount))throw Error('Help amount changed');
     if(r.kind==='route-v1'&&r.status==='active'&&r.plan&&r.plan.budget>r.amount)throw Error('Route exceeds paid limit');
-    if(r.status==='active'&&(!r.owner||r.kind==='lives'||!r.plan||r.plan.kind!==r.kind))throw Error('Invalid active help');
+    if(r.kind==='continue-single-v1'){
+      const b=r.bundle;if(!b||!['pending','applied'].includes(b.lives)||!['none','pending','active','used'].includes(b.single)||typeof b.retainedAtOffer!=='boolean'||b.retainedAtOffer&&b.single!=='none'||b.lives==='pending'&&['active','used'].includes(b.single))throw Error('Invalid continue components');
+      if(b.livesOwner)checkOwner(b.livesOwner);const expected=b.lives==='pending'||b.single==='pending'?'reserved':b.single==='active'?'active':'used';if(r.status!==expected)throw Error('Conflicting continue component status');if(b.retainedHelp&&!validId(b.retainedHelp))throw Error('Invalid retained help');if(b.lives==='applied'&&!b.livesOwner||r.status==='active'&&b.single!=='active'||r.status==='used'&&['active','pending'].includes(b.single))throw Error('Invalid continue component state');
+    }
+    if(r.status==='active'&&(!r.owner||r.kind==='lives'||!r.plan||r.plan.kind!==(r.kind==='continue-single-v1'?'single-v2':r.kind)))throw Error('Invalid active help');
   }
   const attempts:[SavedAttempt,HelpOwner['mode']][]=[[campaign,'campaign'],...Object.values(daily).map(a=>[a,'daily'] as [SavedAttempt,HelpOwner['mode']])];
   for(const [a,mode]of attempts){
@@ -111,20 +128,34 @@ export function decodeHelpLedger(value:unknown,campaign:SavedAttempt,daily:Recor
 export function reserveAttempt(save:GameSave,attempt:string):HelpFact[]{
   const r=activeRight(save,attempt);if(!r)return[];
   if(r.kind==='route-v1'&&r.plan){const a=[save.campaign,...Object.values(save.daily)].find(a=>a.board.id===attempt);if(a)r.amount=routePending(new Board(a.level,attempt,a.board),r.plan).length;if(r.amount===0){r.status='used';return[fact('use',r,attempt)];}}
+  if(r.kind==='continue-single-v1'&&r.bundle?.single==='active')r.bundle.single='pending';
   r.status='reserved';r.owner=null;
   if(r.receiptId&&!save.reservedRewards.some(receipt=>receipt.id===r.receiptId)){
-    const base={id:r.receiptId,attempt:r.originalOwner.attempt,mode:r.originalOwner.mode,placement:r.kind==='lives'?'lives' as const:'hint' as const};
+    const base={id:r.receiptId,attempt:r.originalOwner.attempt,mode:r.originalOwner.mode,placement:lifeEffect(r.kind)?'lives' as const:'hint' as const};
     save.reservedRewards.push(r.requestId?{...base,schema:2,intentVersion:1,requestId:r.requestId}:{...base,schema:1});
   }
   return[fact('reserve',r,attempt)];
 }
 export function applyRight(save:GameSave,a:SavedAttempt,mode:HelpOwner['mode'],right:HelpRight,replan=false):boolean{
   const b=new Board(a.level,a.board.id,a.board);if(b.complete)return false;
+  if(right.kind==='continue-single-v1'){
+    const components=right.bundle!;let appliedLives=false;
+    if(components.lives==='pending'){
+      if(b.hearts!==0)return false;
+      a.board={...a.board,lives:3};a.freeUsed=true;a.continuations++;components.lives='applied';components.livesOwner=ownerOf(a,mode);right.owner=ownerOf(a,mode);beginContinue(save.helpLedger,a,right.id);appliedLives=true;
+    }
+    if(components.single==='none'){const retained=activeRight(save,a.board.id);if(retained)components.retainedHelp=retained.id;right.status='used';return appliedLives;}
+    if(components.single!=='pending')return false;
+    const current=new Board(a.level,a.board.id,a.board),occupied=activeRight(save,a.board.id);
+    if(current.hearts===0||a.hint||occupied){if(occupied)components.retainedHelp=occupied.id;right.status='reserved';return appliedLives;}
+    const plan=replan?singlePlan(current):right.plan;if(!plan||plan.kind!=='single-v2'){right.status='reserved';return appliedLives;}
+    validatePlan(a.level,plan);right.plan=plan;components.single='active';right.owner=ownerOf(a,mode);right.status='active';a.hint=plan.root;return true;
+  }
   if(right.kind==='lives'){
     if(b.hearts!==0)return false;
     a.board={...a.board,lives:3};a.freeUsed=true;a.continuations++;right.status='used';right.owner=ownerOf(a,mode);beginContinue(save.helpLedger,a,right.id);return true;
   }
-  if(b.hearts===0||a.hint||activeRight(save,a.board.id))return false;
+  if(b.hearts===0&&replan||a.hint||activeRight(save,a.board.id))return false;
   let plan=right.plan;
   if(replan)plan=right.kind==='route-v1'?routePlan(b,right.amount):right.kind==='cascade-v1'?cascadePlan(b,{budget:right.amount}):singlePlan(b,right.kind==='legacy-single');
   if(!plan||plan.kind!==right.kind||!b.remaining.some(a=>a.id===plan!.root))return false;
@@ -134,6 +165,11 @@ export function compatibleReserve(save:GameSave,a:SavedAttempt,mode:HelpOwner['m
   const board=new Board(a.level,a.board.id,a.board),budgets=new Map<number,boolean>();
   if(board.complete)return null;
   for(const r of Object.values(save.helpLedger.rights))if(r.status==='reserved'){
+    if(r.kind==='continue-single-v1'){
+      if(r.bundle?.lives==='pending'&&board.hearts===0)return r;
+      if(r.bundle?.lives==='applied'&&r.bundle.single==='pending'&&board.hearts>0&&!a.hint&&!activeRight(save,a.board.id))return r;
+      continue;
+    }
     if(r.kind==='lives'){if(board.hearts===0)return r;continue;}
     if(board.hearts===0||a.hint||activeRight(save,a.board.id))continue;
     if(r.kind==='route-v1'){const key=-r.amount;if(!budgets.has(key))budgets.set(key,!!routePlan(board,r.amount));if(budgets.get(key))return r;continue;}

@@ -9,7 +9,7 @@ import { parseReceipt, type EarnedReceipt } from '../platform/ads';
 import { availableUnlocks, type UnlockId } from './collection';
 import { decodeAdCadence, deferAds, freshAdCadence, interstitialReason, type AdCadence } from './adCadence';
 import { predictHelp, routePending, routeCurrent, validatePlan, localIdentity, type HelpVariant } from '../domain/assistance';
-import { freshHelpLedger, decodeHelpLedger, activeRight, ownerOf, makeOffer, sameOwner, applyRight, reserveAttempt, compatibleReserve, fact, assignmentId, beginContinue, continueFacts, type ContinueFact, type HelpLedger, type HelpOffer, type HelpRequest, type HelpFact, type HelpRight } from './helpLedger';
+import { freshHelpLedger, decodeHelpLedger, lifeEffect, activeRight, ownerOf, makeOffer, sameOwner, applyRight, reserveAttempt, compatibleReserve, fact, assignmentId, beginContinue, continueFacts, type ContinueFact, type HelpLedger, type HelpOffer, type HelpRequest, type HelpFact, type HelpRight } from './helpLedger';
 
 export const SAVE_KEY = 'arrows.progress.v1';
 export interface ViewState { centerX: number; centerY: number; zoom: number; }
@@ -247,7 +247,7 @@ export class ProgressStore {
         if(help&&related){
           const members=help.kind==='route-v1'?new Set(help.plan!.route):null;
           help.operation={id:operation.id,manual:members?manual.filter(id=>members.has(id)):manual,native:members?native.filter(id=>members.has(id)):native,bonus};
-          if(consumed)help.status='used';helpFacts.push(fact(consumed?'use':'progress',help,expected));
+          if(consumed){help.status='used';if(help.bundle?.single==='active')help.bundle.single='used';}helpFacts.push(fact(consumed?'use':'progress',help,expected));
         }
         if(help?.kind==='route-v1'&&help.plan)a.hint=consumed?null:routeCurrent(board,help.plan);
         else if (a.hint && a.board.removed.includes(a.hint)) a.hint = null;
@@ -341,7 +341,7 @@ export class ProgressStore {
       const found=this.findAttempt(receipt.attempt,next),target=found?.mode===receipt.mode?found.saved:undefined;
       const descriptor=receipt.schema===2?next.helpLedger.requests[receipt.requestId]:undefined;
       if(receipt.schema===2&&(!descriptor||descriptor.owner.attempt!==receipt.attempt||descriptor.owner.mode!==receipt.mode||
-        (receipt.placement==='hint'?descriptor.kind==='lives':descriptor.kind!=='lives'))){
+        (receipt.placement==='hint'?lifeEffect(descriptor.kind):!lifeEffect(descriptor.kind)))){
         next.helpLedger.unresolved.push(receipt);next.receipts.push(receipt.id);
         return {value:'applied' as const,event:{kind:'state' as const,helpFacts:[{id:`${receipt.id}-unresolved`,phase:'unresolved' as const,entitlement:receipt.id,request:receipt.requestId,sourceAttempt:receipt.attempt,attempt:receipt.attempt,kind:'unknown',variant:'unknown',manual:0,native:0,bonus:0}]}};
       }
@@ -350,12 +350,12 @@ export class ProgressStore {
       const legacyRoot=receipt.schema===1&&receipt.placement==='hint'?board?.hint()??null:null;
       const plan=descriptor?.plan??(target&&legacyRoot?{kind:'legacy-single' as const,root:legacyRoot,bonus:[],budget:0,basis:target.board,contentKey:originalOwner.contentKey}:null);
       const right:HelpRight={id:receipt.id,origin:'sdk',receiptId:receipt.id,requestId:descriptor?.requestId??null,originalOwner,owner:null,
-        kind:descriptor?.kind??(receipt.placement==='hint'?'legacy-single':'lives'),version:1,amount:descriptor?.amount??(receipt.placement==='hint'?1:3),plan,status:'reserved'};
+        kind:descriptor?.kind??(receipt.placement==='hint'?'legacy-single':'lives'),version:1,amount:descriptor?.amount??(receipt.placement==='hint'?1:3),plan,status:'reserved',...(descriptor?.kind==='continue-single-v1'?{bundle:{lives:'pending',single:descriptor.bundle!.hint==='retain'?'none':'pending',retainedAtOffer:descriptor.bundle!.hint==='retain'}}:{})};
       // Occupied slots remain untouched, including late schema1 delivery.
       const applied=target&&sameOwner(originalOwner,ownerOf(target,receipt.mode))&&applyRight(next,target,receipt.mode,right);
       next.helpLedger.rights[right.id]=right;
-      if(!applied)next.reservedRewards.push(receipt);
-      next.receipts.push(receipt.id);return {value:'applied' as const,event:{kind:'state' as const,helpFacts:[fact(applied?'grant':'reserve',right)]}};
+      if(right.status==='reserved')next.reservedRewards.push(receipt);
+      next.receipts.push(receipt.id);return {value:'applied' as const,event:{kind:'state' as const,helpFacts:[fact(applied?'grant':'reserve',right),...(applied&&right.status==='reserved'?[fact('reserve',right)]:[])]}};
     }, true);
     if (!result) throw Error('Reward not committed');
     return result;
@@ -368,10 +368,10 @@ export class ProgressStore {
   public prepareHelpRequest(offer:HelpOffer):Promise<HelpRequest|undefined>{
     return this.update(next=>{
       const target=this.findAttempt(offer.owner.attempt,next);if(!target||!sameOwner(offer.owner,ownerOf(target.saved,target.mode)))return null;
-      const a=target.saved,current=makeOffer(next,a,target.mode,offer.kind==='lives'?'lives':'hint');
+      const a=target.saved,current=makeOffer(next,a,target.mode,lifeEffect(offer.kind)?'lives':'hint');
       if(!current||current.kind!==offer.kind||current.amount!==offer.amount||
-        offer.plan&&JSON.stringify(offer.plan.basis)!==JSON.stringify(a.board))return null;
-      if(offer.plan){if(offer.plan.kind==='route-v1')validatePlan(a.level,offer.plan);else predictHelp(new Board(a.level,a.board.id,a.board),offer.plan);}
+        JSON.stringify(offer.bundle)!==JSON.stringify(current.bundle)||offer.plan&&JSON.stringify(offer.plan.basis)!==JSON.stringify(lifeEffect(offer.kind)?{...a.board,lives:3}:a.board))return null;
+      if(offer.plan)validatePlan(a.level,offer.plan);
       const requestId=crypto.randomUUID();
       const request:HelpRequest={...structuredClone(offer),schema:2,intentVersion:1,requestId,assignmentId:assignmentId(next.helpLedger,offer.variant),createdAt:this.now().getTime()};
       next.helpLedger.requests[requestId]=request;next.helpLedger.assignments[a.board.id]=offer.variant;
@@ -383,13 +383,13 @@ export class ProgressStore {
     return this.update(next=>{
       const target=this.findAttempt(expected,next),right=next.helpLedger.rights[id];
       if(!target||!right||right.status!=='reserved'||!applyRight(next,target.saved,target.mode,right,true))return null;
-      right.claimId=crypto.randomUUID();next.reservedRewards=next.reservedRewards.filter(r=>r.id!==right.receiptId);
+      right.claimId=crypto.randomUUID();if(right.status!=='reserved')next.reservedRewards=next.reservedRewards.filter(r=>r.id!==right.receiptId);
       return {value:true,event:{kind:'state',helpFacts:[fact('claim',right,expected)]}};
     },true);
   }
   /** Native .playtest UI is the only production caller; applies to future attempts. */
   public setNextHelpVariant(value:HelpVariant):Promise<boolean|undefined>{
-    if(!['legacy','single-v2','cascade-v1','route-v1'].includes(value))return Promise.resolve(undefined);
+    if(!['legacy','single-v2','cascade-v1','route-v1','continue-single-v1'].includes(value))return Promise.resolve(undefined);
     return this.update(next=>{
       for(const a of [next.campaign,...Object.values(next.daily)])next.helpLedger.assignments[a.board.id]??=next.helpLedger.nextVariant;
       next.helpLedger.nextVariant=value;return {value:true};

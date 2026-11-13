@@ -270,7 +270,10 @@ export class BoardScene extends Phaser.Scene {
     if (result.kind === 'removed') {
       const arrows=[result.arrow,...(result.released??[])];
       this.victorySource = arrows.at(-1)!.path.at(-1)!;
-      const schedule=flightSchedule(arrows,a=>{const path=this.paths.get(a.id)!,p=this.boardCamera.screen(a.path.at(-1)!),d=path.direction,v=this.renderArea;return path.length+Math.max(0,(d.x>0?v.width-p.x:d.x<0?p.x:d.y>0?v.height-p.y:p.y)+32)/this.boardCamera.scale;},Math.max(22,950/this.boardCamera.scale));
+      const exitDistance=(a:Arrow):number=>{const path=this.paths.get(a.id)!,p=this.boardCamera.screen(a.path.at(-1)!),d=path.direction,v=this.renderArea;return path.length+Math.max(0,(d.x>0?v.width-p.x:d.x<0?p.x:d.y>0?v.height-p.y:p.y)+32)/this.boardCamera.scale;};
+      const schedule=flightSchedule(arrows,exitDistance,Math.max(22,950/this.boardCamera.scale));
+      // A long bent route must not accumulate seconds of result latency.
+      for(const [i,a]of arrows.entries())schedule[i]!.speed=Math.max(schedule[i]!.speed,exitDistance(a)/1.1);
       this.helpFinal=result.help?.kind==='cascade-v1'||result.help?.route?.targetReached===true;
       for(const [index,arrow] of arrows.entries()){
         const bump=this.bumps.get(arrow.id),travelled=bump?sampleBump(bump.timing,this.clock-bump.started).distance:0;
@@ -445,10 +448,10 @@ export class BoardScene extends Phaser.Scene {
   }
   public update(_time: number, delta: number): void {
     this.frames += 1;
-    const dt = Math.min(40, Math.max(0, delta)); this.clock += dt;
+    const elapsed=Math.min(250,Math.max(0,delta)),dt=Math.min(40,elapsed);this.clock+=elapsed;
     if(this.transitionAt>=0){const age=this.clock-this.transitionAt;this.outgoing.setAlpha(Math.max(0,1-age/220));this.dots.setAlpha(Math.min(1,Math.max(0,(age-60)/160)));if(age>=240){this.outgoing.clear();this.dots.setAlpha(1);this.transitionAt=-1;}}
     if (this.focusMotion) {
-      const f = this.focusMotion; f.elapsed += dt; const t = 1 - (1 - Math.min(1, f.elapsed / 320)) ** 3;
+      const f = this.focusMotion; f.elapsed += elapsed; const t = 1 - (1 - Math.min(1, f.elapsed / 320)) ** 3;
       this.boardCamera.restore({ centerX: f.from.centerX + (f.to.centerX - f.from.centerX) * t,
         centerY: f.from.centerY + (f.to.centerY - f.from.centerY) * t, zoom: f.from.zoom + (f.to.zoom - f.from.zoom) * t });
       this.transform(); this.stableDirty = true;
@@ -465,11 +468,11 @@ export class BoardScene extends Phaser.Scene {
     }
     for (let i = this.flights.length - 1; i >= 0; i--) {
       const flight = this.flights[i]!, old = flight.travelled;
-      flight.age += dt;
+      flight.age += elapsed;
       const style=sampleStyle(flight.style,this.clock);
       if(flight.age<0){const path=extractPath(flight.path,flight.travelled);this.stroke(this.active,path,style.color,stroke*style.weight,true);this.marker(this.active,path.at(-1)!,style,flight.id,flight.badge,flight.goal);continue;}
       if(flight.queued){flight.queued=false;if(this.flights.length%3===0)this.feedback('auto-start');}
-      flight.travelled += flight.speed * dt / 1000;
+      flight.travelled += flight.speed * Math.min(elapsed,flight.age) / 1000;
       for (let d = old; d <= flight.travelled; d += .5) {
         this.excite(pointAt(flight.path, d), 7); this.excite(pointAt(flight.path, d + flight.path.length), 5);
       }

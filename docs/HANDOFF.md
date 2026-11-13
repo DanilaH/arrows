@@ -1,3 +1,7 @@
+## A4 continue iteration —0.22.0/code34, source/build next
+
+C/A1/F/A2 first APK is delivered and green. A3 is separate source393408dc;139 units/route browser cases and real recordings completed, native17 tests succeeded; full A3 CI had two old timing failures. Current A4 common presentation elapsed/travel correction passes38 targeted old/new browser cases,148 units. A4 typed lives/single components implement EDGE01–03 atomically, retaining legacy/gift semantics and stable receipt identity. Read ASSISTANCE_ITERATION.md checkpoint and continue to nativeCI/media, then B1 separate target lab; no kit/content/pin/cadence changes.
+
 ## A3 route iteration —0.21.0/code33, verification in progress
 
 First0.20.0 APK was actually delivered before this change; its full CI43461425616 is now green (232 browser/128 source unit/16 JVM, four additional local evidence units132). A3 is a separate future-attempt QA assignment, never combines A2/A4. Read ASSISTANCE_ITERATION.md checkpoint: actual manual2–3 steps, pending from canonical removals, partial reserve1/2-step cap, numbered participants/goal diamond and semantic three-tier physical audio/haptics. Domain/store7 new cases passed, local139-unit check passed; browser/native/captures are in progress. A4/B1 remain next separate changes. No kit/content/pin/cadence/gift/history changes.

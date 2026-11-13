@@ -26,6 +26,7 @@ startGame([], onBack => {
       receipts.push(last); listener({...request, phase:'earned'});
     },
     duplicate() { if(last)receipts.push(last); void ads.recover(); },
+    late(receipt:EarnedReceipt) { receipts.push(receipt);listener({kind:'rewarded',phase:'receipt_pending',requestId:receipt.id,placement:receipt.placement,attempt:receipt.attempt,mode:receipt.mode}); },
     dismiss(earned = true) { settle?.({shown:true, outcome:'dismissed', earned}); },
     background(value: boolean) { base.activity.setBlocked('native-background', value); },
   });

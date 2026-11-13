@@ -155,7 +155,8 @@
     "manual": "number",
     "native": "number",
     "bonus": "number",
-    "use_origin": "string"
+    "use_origin": "string",
+    "component": "string"
   },
   "assistance_request": {
     "request_id": "string",

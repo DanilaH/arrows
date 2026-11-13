@@ -7,7 +7,8 @@ import {copy,type GameLanguage} from '../app/language';
 
 /** One current-state cache and visibility episode; no frame/tween/reward authority. */
 export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof createAds>,analytics:ReturnType<typeof createAnalytics>,language:()=>GameLanguage){
-  let cacheKey='',cached:{offer:HelpOffer|null;reserve:HelpRight|null}={offer:null,reserve:null},episode:{id:string;offerId:string;attempt:string;choices:Set<string>}|null=null,enrolling=false;
+  const cache=new Map<string,{key:string;value:{offer:HelpOffer|null;reserve:HelpRight|null}}>();
+  let episode:{id:string;offerId:string;attempt:string;choices:Set<string>}|null=null,enrolling=false;
   const context=(attempt:string,chosen?:HelpVariant):AdContext=>{
     const ledger=progress.state.helpLedger,variant=chosen??ledger.assignments[attempt]??ledger.nextVariant;
     return {assignmentId:assignmentId(ledger,variant),variant,experimentId:'assistance-v1',installId:ledger.installId,qa:ads.rewardedState.playtest};
@@ -15,8 +16,8 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
   const snapshot=(attempt:string,placement:'hint'|'lives'='hint')=>{
     const saved=progress.findAttempt(attempt)?.saved,l=progress.state.helpLedger;
     const key=JSON.stringify([attempt,placement,saved?.board,l.assignments[attempt],l.candidateEnabled,Object.values(l.rights).map(r=>[r.id,r.status,r.owner?.attempt])]);
-    if(key!==cacheKey){cacheKey=key;cached={offer:progress.helpOffer(attempt,placement),reserve:progress.savedHelp(attempt)};}
-    return cached;
+    let entry=cache.get(placement);if(entry?.key!==key){entry={key,value:{offer:progress.helpOffer(attempt,placement),reserve:progress.savedHelp(attempt)}};cache.set(placement,entry);}
+    return entry!.value;
   };
   const visible=(show:boolean,attempt:string,placement:'hint'|'lives'='hint'):void=>{
     if(!show){episode=null;return;}
@@ -35,11 +36,18 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
     choice(choice:string,requestId=''):void{if(episode&&!episode.choices.has(choice)){episode.choices.add(choice);analytics.track('assistance_choice',{event_id:`${episode.id}-${choice}`,offer_id:episode.offerId,attempt:episode.attempt,choice,request_id:requestId});}},
     reveal(attempt:string,phase:'reveal_started'|'reveal_ready'):void{
       const right=progress.currentHelp(attempt);if(!right)return;const request=right.requestId?progress.state.helpLedger.requests[right.requestId]:null;
-      analytics.track('assistance_fact',{event_id:`${right.id}-${phase}`,phase,entitlement_id:right.id,request_id:right.requestId??'',source_attempt:right.originalOwner.attempt,attempt,effect:right.kind,variant:request?.variant??'legacy-unknown',manual:0,native:0,bonus:0,use_origin:'none'});
+      analytics.track('assistance_fact',{event_id:`${right.id}-${phase}`,phase,entitlement_id:right.id,request_id:right.requestId??'',source_attempt:right.originalOwner.attempt,attempt,effect:right.kind,variant:request?.variant??'legacy-unknown',manual:0,native:0,bonus:0,use_origin:'none',component:right.bundle?`lives_${right.bundle.lives}_single_${right.bundle.single}`:'standalone'});
+    },
+    livesLabel(attempt:string):{text:string;detail:string;reserved:boolean}{
+      const ru=language()==='ru',{offer,reserve}=snapshot(attempt,'lives'),effect=reserve??offer;
+      if(reserve)return {text:ru?'Использовать сохранённое':'Use saved continue',detail:effect?.kind==='continue-single-v1'&&effect.bundle&&'single' in effect.bundle&&effect.bundle.single==='pending'?(ru?'Три жизни и полезная подсказка уже сохранены. Без видео.':'Three lives and a useful hint are saved. No video.'):(ru?'Три жизни уже сохранены. Видео не требуется.':'Three saved lives are available. No video needed.'),reserved:true};
+      const detail=offer?.kind==='continue-single-v1'?offer.bundle?.hint==='retain'?(ru?'Три жизни, помощь сохранится.':'Three lives; your help is retained.'):(ru?'Три жизни и одна полезная подсказка.':'Three lives and one useful hint.'):(ru?'Посмотрите видео, чтобы вернуть три жизни.':'Watch a video to restore three lives.');
+      return {text:ru?'Смотреть видео':'Watch video',detail,reserved:false};
     },
     label(attempt:string):{text:string;detail:string;reserved:boolean;kind:string}{
       const ru=language()==='ru',{offer,reserve}=snapshot(attempt),effect=reserve??offer;
       if(!effect)return {text:copy[language()].hint,detail:'',reserved:false,kind:'none'};
+      if(reserve&&effect.kind==='continue-single-v1'&&'bundle' in effect&&effect.bundle&&'lives' in effect.bundle&&effect.bundle.lives==='applied')return {text:ru?'Использовать подсказку':'Use saved hint',detail:ru?'Один полезный ход · без видео':'One useful move · no video',reserved:true,kind:effect.kind};
       if(reserve&&effect.kind==='route-v1')return {text:ru?'Продолжить маршрут':'Resume route',detail:ru?`До ${effect.amount} ${effect.amount===1?'шага':'шагов'} · без видео`:`Up to ${effect.amount} steps · no video`,reserved:true,kind:effect.kind};
       if(effect.kind==='route-v1')return {text:ru?`Маршрут · ${effect.amount} шага · видео`:`Route · ${effect.amount} steps · video`,detail:ru?'Все стрелки убираете вы':'Every action is yours',reserved:false,kind:effect.kind};
       if(reserve)return {text:ru?'Использовать сохранённую помощь':'Use saved help',detail:effect.kind==='cascade-v1'?`${ru?'Автоматически ещё':'Automatically'} ${effect.amount}`:ru?'Без нового видео':'No new video',reserved:true,kind:effect.kind};
@@ -54,7 +62,7 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
         const ledger=progress.state.helpLedger,request=ledger.requests[f.request],right=ledger.rights[f.entitlement];
         if(f.phase==='request'&&request)analytics.track('assistance_request',{request_id:request.requestId,offer_id:request.id,assignment_id:request.assignmentId,install_id:ledger.installId,variant:request.variant,effect:request.kind,effect_version:1,amount:request.amount,attempt:request.owner.attempt,mode:request.owner.mode,content_version:request.owner.contentVersion,fallback:request.fallback,at:request.createdAt,qa:ads.rewardedState.playtest});
         const root=right?.plan?.root,op=right?.operation,useOrigin=!['use','progress'].includes(f.phase)?'none':right?.kind==='route-v1'?op?.manual.length?'manual':op?.native.length?'native':'none':root&&op?.manual.includes(root)?'manual':root&&op?.native.includes(root)?'native':'bonus';
-        analytics.track('assistance_fact',{event_id:f.id,phase:f.phase,entitlement_id:f.entitlement,request_id:f.request,source_attempt:f.sourceAttempt,attempt:f.attempt,effect:f.kind,variant:request?.variant??(f.variant||'legacy-unknown'),manual:f.manual,native:f.native,bonus:f.bonus,use_origin:useOrigin});
+        analytics.track('assistance_fact',{event_id:f.id,phase:f.phase,entitlement_id:f.entitlement,request_id:f.request,source_attempt:f.sourceAttempt,attempt:f.attempt,effect:f.kind,variant:request?.variant??(f.variant||'legacy-unknown'),manual:f.manual,native:f.native,bonus:f.bonus,use_origin:useOrigin,component:right?.bundle?`lives_${right.bundle.lives}_single_${right.bundle.single}${right.bundle.retainedAtOffer?'_retained':''}`:'standalone'});
       }
       for(const f of change.continueFacts??[])analytics.track('continue_outcome',{event_id:f.id,entitlement_id:f.entitlement,attempt:f.attempt,outcome:f.outcome,active_ms:f.activeMs});
     },
@@ -64,7 +72,7 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
       const title=document.createElement('h3');title.textContent=ru?'Тестирование помощи':'Assistance playtest';section.append(title);
       const label=document.createElement('label');label.className='language-setting';label.htmlFor='help-qa-variant';label.textContent=ru?'Для новых попыток':'For new attempts';
       const select=document.createElement('select');select.id='help-qa-variant';
-      for(const [value,name]of [['legacy',ru?'Исходная подсказка':'Legacy single'],['single-v2',ru?'A1 · полезный ход':'A1 · useful single'],['cascade-v1',ru?'A2 · каскад':'A2 · cascade'],['route-v1',ru?'A3 · маршрут до цели':'A3 · route to target']]){const option=document.createElement('option');option.value=value!;option.textContent=name!;select.append(option);}
+      for(const [value,name]of [['legacy',ru?'Исходная подсказка':'Legacy single'],['single-v2',ru?'A1 · полезный ход':'A1 · useful single'],['cascade-v1',ru?'A2 · каскад':'A2 · cascade'],['route-v1',ru?'A3 · маршрут до цели':'A3 · route to target'],['continue-single-v1',ru?'A4 · продолжение с подсказкой':'A4 · continue with a single']]){const option=document.createElement('option');option.value=value!;option.textContent=name!;select.append(option);}
       select.value=progress.state.helpLedger.nextVariant;select.disabled=!progress.available||progress.uncertain;
       select.addEventListener('change',()=>{select.disabled=true;void progress.setNextHelpVariant(select.value as HelpVariant).catch(()=>{select.value=progress.state.helpLedger.nextVariant;}).finally(()=>{select.disabled=progress.uncertain||!progress.available;});});label.append(select);section.append(label);
       const detail=document.createElement('p');detail.textContent=ru?'Применится после «Заново» или на следующем уровне. Полученная помощь сохранится.':'Applies after Restart or on the next level. Earned help is preserved.';section.append(detail);
@@ -73,6 +81,6 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
       update();toggle.addEventListener('click',()=>{toggle.disabled=true;void progress.setHelpCandidateEnabled(!progress.state.helpLedger.candidateEnabled).catch(()=>undefined).finally(()=>{toggle.disabled=progress.uncertain||!progress.available;update();});});section.append(toggle);
       return section;
     },
-    destroy():void{episode=null;cacheKey='';cached={offer:null,reserve:null};}
+    destroy():void{episode=null;cache.clear();}
   };
 }
