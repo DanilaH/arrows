@@ -1,3 +1,4 @@
+import {releaseOracle} from './helpers/errorReleaseOracle';
 import preDense from '../fixtures/campaign-pre-dense.json' with { type: 'json' };
 import { expect, test, type Page } from '@playwright/test';
 import { campaign } from '../../src/content/campaign';
@@ -46,13 +47,16 @@ test('plays and restores a new bent field with error marks, guides and the same 
   await load(page, state); await page.locator('#home-play').click(); await page.waitForTimeout(450);
   const blocked = level.arrows.find(a => !canExit(a, level.arrows))!, free = level.arrows.find(a => canExit(a, level.arrows))!;
   await tap(page, blocked); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2');
-  await tap(page, free); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(level.arrows.length - 1));
+  const removed=releaseOracle(level,[blocked.id],[free.id]);
+  await tap(page, free); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(level.arrows.length-removed.length));
+  const accepted=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).campaign.board,SAVE_KEY);expect(accepted).toMatchObject({removed,errors:[blocked.id],lives:2});
   await page.locator('#guides').click(); await expect(page.locator('#guides')).toHaveAttribute('aria-pressed', 'true');
   await page.reload(); await ready(page); await page.locator('#home-play').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt', state.campaign.board.id);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2');
   await expect(page.locator('#guides')).toHaveAttribute('aria-pressed', 'true');
   await expect(page.locator('#field-name')).toHaveText('21 / 120');
+  expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).campaign.board,SAVE_KEY)).toEqual(accepted);
 });
 
 test('ends explicitly at c120 with accurate totals and no silent reroll', async ({ page }) => {

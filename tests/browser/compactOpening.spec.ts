@@ -12,8 +12,10 @@ test('keeps the opening small, resolves adjacent paths safely and clears it thro
   await tap(0, 4); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2');
   await page.reload(); await expect(page.locator('#game-shell')).toHaveAttribute('data-progress', 'ready'); await page.locator('#home-play').click(); await page.waitForTimeout(450);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2'); expect((await camera()).scale).toBeCloseTo(19);
-  for (const [i, arrow] of campaign[0]!.arrows.entries()) {
-    const head = arrow.path.at(-1)!; await tap(head.x, head.y); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(2 - i));
-  }
+  const first=campaign[0]!.arrows[0]!.path.at(-1)!;await tap(first.x,first.y);
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','1');
+  const accepted=await page.evaluate(()=>JSON.parse(localStorage.getItem('arrows.progress.v1')!).campaign.board);
+  expect(accepted).toMatchObject({removed:['c01-0','c01-1'],errors:['c01-1'],lives:2});
+  const last=campaign[0]!.arrows[2]!.path.at(-1)!;await tap(last.x,last.y);await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','0');
   await expect(page.locator('#win')).toBeVisible();
 });

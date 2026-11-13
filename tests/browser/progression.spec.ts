@@ -48,18 +48,19 @@ test('restores a partial board, marks and guides, while control boards leave cam
   await seed(page, 2, true); const level = campaign[2]!, blocked = level.arrows.find(a => !canExit(a, level.arrows))!, free = level.arrows.find(a => canExit(a, level.arrows))!;
   const attempt = await page.locator('#game-shell').getAttribute('data-attempt');
   await clickArrow(page, blocked); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2');
-  await clickArrow(page, free); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '5');
+  await clickArrow(page, free); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '4');
+  expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).campaign.board,SAVE_KEY)).toMatchObject({removed:['c03-0','c03-1'],errors:[blocked.id],lives:2});
   await page.locator('#guides').click(); await expect(page.locator('#guides')).toHaveAttribute('aria-pressed', 'true');
   await page.reload(); await ready(page);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt', attempt!);
-  await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '5');
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '4');
   await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2');
   await expect(page.locator('#guides')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('#choose-field').click(); await page.locator('#home-controls').click(); await page.locator('[data-action=field-3]').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-mode', 'control');
   await page.locator('#choose-field').click(); await page.locator('#home-play').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt', attempt!);
-  await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '5');
+  await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', '4');
 });
 
 test('free continuation restores hearts once, preserves marks and never fakes an unavailable rewarded refill', async ({ page }) => {
