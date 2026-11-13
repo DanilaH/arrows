@@ -79,6 +79,7 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
       const toggle=document.createElement('button');toggle.type='button';toggle.id='help-qa-enabled';toggle.className='sound-preview';toggle.textContent=ru?'Новые каскады: включены':'New cascades: enabled';
       const update=()=>{toggle.setAttribute('aria-pressed',String(progress.state.helpLedger.candidateEnabled));toggle.textContent=ru?`Новые каскады: ${progress.state.helpLedger.candidateEnabled?'включены':'выключены'}`:`New cascades: ${progress.state.helpLedger.candidateEnabled?'enabled':'disabled'}`;};
       update();toggle.addEventListener('click',()=>{toggle.disabled=true;void progress.setHelpCandidateEnabled(!progress.state.helpLedger.candidateEnabled).catch(()=>undefined).finally(()=>{toggle.disabled=progress.uncertain||!progress.available;update();});});section.append(toggle);
+      const lab=document.createElement('button');lab.type='button';lab.id='target-lab-open';lab.className='sound-preview';lab.textContent=ru?'B1 · Освободи цель · лаборатория':'B1 · Free the target · lab';lab.addEventListener('click',()=>{location.href='./target-lab.html';});section.append(lab);
       return section;
     },
     destroy():void{episode=null;cache.clear();}

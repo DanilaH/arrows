@@ -47,6 +47,16 @@ export class BoardScene extends Phaser.Scene {
   private nativeGroup=new Set<string>();
   private routeSteps=new Map<string,number>();
   private routeTarget:string|null=null;
+  private modeGoal:string|null=null;
+  private targetWon=false;
+  private get presentationComplete():boolean{return this.board.complete||this.targetWon;}
+  /** Isolated target mode owns its predicate; Board.complete remains full clear. */
+  public setGoal(id:string|null,won=false,quiet=false):void {
+    if(this.modeGoal===id&&this.targetWon===won)return;
+    this.modeGoal=id;this.targetWon=won;
+    if(won&&quiet){this.settlePresentation();this.finishFramed=true;this.announcedWin=true;this.victoryAt=this.clock-VICTORY_MS-1;}
+    this.retarget(quiet);this.changed();
+  }
   private pressed:string|null=null;
   private helpFinal=false;
   private manualCamera=false;
@@ -59,8 +69,8 @@ export class BoardScene extends Phaser.Scene {
   }
   private targetStyle(id:string):ArrowStyle {
     const root=id===this.hintTarget,group=this.group.has(id),pressed=id===this.pressed,preview=id===this.preview;
-    return {color:root?this.colors.help:group?this.colors.group:this.board.isError(id)?this.colors.error:preview?this.colors.exit:this.colors.arrow,
-      weight:(root?1.5:group?1.24:1)*(pressed?1.17:1),marker:root?1:group?.62:this.nativeGroup.has(id)?.4:this.routeSteps.has(id)?.45:0};
+    return {color:root?this.colors.help:group?this.colors.group:this.board.isError(id)?this.colors.error:id===this.modeGoal?this.colors.help:preview?this.colors.exit:this.colors.arrow,
+      weight:(root?1.5:group?1.24:id===this.modeGoal?1.22:1)*(pressed?1.17:1),marker:root?1:group?.62:this.nativeGroup.has(id)?.4:this.routeSteps.has(id)?.45:id===this.modeGoal?.8:0};
   }
   private style(id:string):ArrowStyle {const m=this.styles.get(id);return m?sampleStyle(m,this.clock):this.targetStyle(id);}
   private retarget(quiet=false):void {
@@ -71,9 +81,9 @@ export class BoardScene extends Phaser.Scene {
     this.stableDirty=true;
   }
   public setPress(id:string|null):void {if(id===this.pressed)return;this.pressed=id;this.retarget();this.changed();}
-  private marker(layer:Phaser.GameObjects.Graphics,head:Point,style:ArrowStyle,id='',badge=this.routeSteps.get(id)??0,goal=id===this.routeTarget):void {
+  private marker(layer:Phaser.GameObjects.Graphics,head:Point,style:ArrowStyle,id='',badge=this.routeSteps.get(id)??0,goal=id===this.routeTarget||id===this.modeGoal):void {
     if(style.marker<.01)return;const unit=1/this.boardCamera.scale;
-    if(!badge){layer.lineStyle(1.2*unit,style.color,style.marker).strokeCircle(head.x,head.y,(4+3*style.marker)*unit);return;}
+    if(!badge){const r=(4+3*style.marker)*unit;layer.lineStyle(1.2*unit,style.color,style.marker);if(goal)layer.lineBetween(head.x-r,head.y,head.x,head.y-r).lineBetween(head.x,head.y-r,head.x+r,head.y).lineBetween(head.x+r,head.y,head.x,head.y+r).lineBetween(head.x,head.y+r,head.x-r,head.y);else layer.strokeCircle(head.x,head.y,r);return;}
     const d=this.paths.get(id)?.direction??{x:1,y:0},r=Math.min(5*unit,.46),offset=r+3*unit,c={x:head.x-d.y*offset,y:head.y+d.x*offset},alpha=Math.min(1,style.marker*2);
     layer.fillStyle(this.theme==='dark'?0x1e1e2c:0xf3f4fa,alpha);this.dotCircle(layer,c.x,c.y,r);
     layer.lineStyle(1.1*unit,style.color,alpha);
@@ -170,17 +180,17 @@ export class BoardScene extends Phaser.Scene {
     this.bumps.clear(); this.impacts.length = 0; this.flights.length = 0; this.pulses.clear(); this.confetti.length = 0;
     this.pressed=null;this.retarget(true);for(const [id,m]of this.styles)this.styles.set(id,{from:m.to,to:m.to,started:this.clock,duration:0});
     this.hintReveal=null; this.victoryDots=[]; this.transitionAt=-1; this.outgoing?.clear(); this.dots?.setAlpha(1);
-    this.errorUntil = -1; this.focusMotion = null; this.finishFramed = this.board.complete; this.entry = this.clock - 500;
-    if (this.board.complete) { this.victoryAt = this.clock - VICTORY_MS - 1; this.victoryCursor = this.board.level.mask.length; this.announcedWin = true; }
+    this.errorUntil = -1; this.focusMotion = null; this.finishFramed = this.presentationComplete; this.entry = this.clock - 500;
+    if (this.presentationComplete) { this.victoryAt = this.clock - VICTORY_MS - 1; this.victoryCursor = this.board.level.mask.length; this.announcedWin = true; }
     this.stableDirty = true; this.active?.clear(); this.overlay?.clear(); this.reactiveDots?.clear(); this.changed();
   }
   private changed(): void { for (const listener of this.listeners) listener(); this.options.dirty(); }
   public loadAttempt(board: Board, view: ViewState | null = null, guides = false, hint: string | null = null, transition = false, settled = false): void {
-    const blend=transition && !this.reducedMotion && !board.complete && this.board.complete && this.board.attemptId!==board.attemptId;
+    const blend=transition && !this.reducedMotion && !board.complete && this.presentationComplete && this.board.attemptId!==board.attemptId;
     this.outgoing.clear(); this.outgoing.setAlpha(1);
     if(blend){const ratio=1/this.scale.zoom, old=this.boardCamera;this.outgoingWorld.setPosition(old.x*ratio,old.y*ratio).setScale(old.scale*ratio*(this.outgoing instanceof Phaser.GameObjects.Blitter?.01:1));this.dotBatch(this.outgoing,this.board.level.mask);}
     this.transitionAt=blend?this.clock:-1;this.hintReveal=null;this.victorySource=null;this.victoryDots=[];
-    const level = board.level; this.board = board; this.guides = guides; this.hintTarget = null; this.focusMotion = null; this.finishFramed = board.complete;this.manualCamera=false;this.helpFinal=false;this.group.clear();this.nativeGroup.clear();this.routeSteps.clear();this.routeTarget=null;this.styles.clear();this.pressed=null;
+    const level = board.level; this.board = board;this.modeGoal=null;this.targetWon=false; this.guides = guides; this.hintTarget = null; this.focusMotion = null; this.finishFramed = board.complete;this.manualCamera=false;this.helpFinal=false;this.group.clear();this.nativeGroup.clear();this.routeSteps.clear();this.routeTarget=null;this.styles.clear();this.pressed=null;
     let left=level.width-1, top=level.height-1, right=0, bottom=0;
     for(const p of [...level.mask,...level.arrows.flatMap(arrow=>arrow.path)]){
       left=Math.min(left,p.x);top=Math.min(top,p.y);right=Math.max(right,p.x);bottom=Math.max(bottom,p.y);
@@ -255,9 +265,9 @@ export class BoardScene extends Phaser.Scene {
     const ratio = 1 / this.scale.zoom, camera = this.boardCamera;
     this.world.setPosition(camera.x * ratio, camera.y * ratio).setScale(camera.scale * ratio);
   }
-  public pan(dx: number, dy: number): void { if(this.board.complete)return; this.focusMotion = null;this.manualCamera=true; this.boardCamera.pan(dx, dy); this.transform(); this.changed(); }
+  public pan(dx: number, dy: number): void { if(this.presentationComplete)return; this.focusMotion = null;this.manualCamera=true; this.boardCamera.pan(dx, dy); this.transform(); this.changed(); }
   public zoom(previous: Point, current: Point, ratio: number): void {
-    if(this.board.complete)return; this.focusMotion = null;this.manualCamera=true; this.boardCamera.zoom(previous, current, ratio); this.transform(); this.stableDirty = true; this.changed();
+    if(this.presentationComplete)return; this.focusMotion = null;this.manualCamera=true; this.boardCamera.zoom(previous, current, ratio); this.transform(); this.stableDirty = true; this.changed();
   }
   public setPreview(id: string | null): void { if (id === this.preview) return; this.preview = id; this.previewAt=this.clock;this.retarget(); const arrow=this.board.remaining.find(a=>a.id===id); if(arrow)this.excite(arrow.path.at(-1)!,4); this.stableDirty = true; this.changed(); }
   public setGuides(value: boolean): void { this.guides = value; this.stableDirty = true; this.changed(); }
@@ -279,11 +289,11 @@ export class BoardScene extends Phaser.Scene {
         const bump=this.bumps.get(arrow.id),travelled=bump?sampleBump(bump.timing,this.clock-bump.started).distance:0;
         const from=bump?sampleStyle(bump.style,this.clock):this.style(arrow.id),to={color:this.colors.exit,weight:1,marker:0};
         this.bumps.delete(arrow.id);this.styles.delete(arrow.id);
-        if(!this.reducedMotion)this.flights.push({badge:this.routeSteps.get(arrow.id)??0,goal:arrow.id===this.routeTarget,id:arrow.id,style:{from,to,started:this.clock+schedule[index]!.delay,duration:210},automatic:index>0,path:this.paths.get(arrow.id)!,travelled,speed:schedule[index]!.speed,age:-schedule[index]!.delay,queued:index>0});
+        if(!this.reducedMotion)this.flights.push({badge:this.routeSteps.get(arrow.id)??0,goal:arrow.id===this.routeTarget||arrow.id===this.modeGoal,id:arrow.id,style:{from,to,started:this.clock+schedule[index]!.delay,duration:210},automatic:index>0,path:this.paths.get(arrow.id)!,travelled,speed:schedule[index]!.speed,age:-schedule[index]!.delay,queued:index>0});
       }
       if(result.help?.route?.manualStep)this.feedback('route-step',result.help.route.completed);
       else this.feedback(result.help?.manual.length===0?'auto-start':'move-start');
-      if(this.reducedMotion&&!result.complete)this.feedback(this.helpFinal?'help-finish':'exit');
+      if(this.reducedMotion&&!this.presentationComplete)this.feedback(this.helpFinal?'help-finish':'exit');
     } else {
       const contact = arrowContact(result.arrow, this.board.remaining);
       if (this.reducedMotion || !contact) this.feedback(result.first?'impact':'repeat-impact');
@@ -480,7 +490,7 @@ export class BoardScene extends Phaser.Scene {
       const dir = flight.path.direction;
       const view = this.renderArea;
       const leftView = dir.x > 0 ? tail.x > view.x + view.width + 30 : dir.x < 0 ? tail.x < view.x - 30 : dir.y > 0 ? tail.y > view.y + view.height + 30 : tail.y < view.y - 30;
-      if (flight.travelled >= flight.path.length && leftView) { this.flights.splice(i, 1); if(!this.board.complete&&this.flights.length===0){this.feedback(this.helpFinal?'help-finish':'exit');this.helpFinal=false;} continue; }
+      if (flight.travelled >= flight.path.length && leftView) { this.flights.splice(i, 1); if(!this.presentationComplete&&this.flights.length===0){this.feedback(this.helpFinal?'help-finish':'exit');this.helpFinal=false;} continue; }
       this.stroke(this.active,path,style.color,stroke*style.weight,true);this.marker(this.active,path.at(-1)!,style,flight.id,flight.badge,flight.goal);
     }
     let bumpSettled = false;
@@ -533,7 +543,7 @@ export class BoardScene extends Phaser.Scene {
       }
     }
     // An expired restored timestamp can be negative while the scene is young.
-    if (this.board.complete && !this.announcedWin && this.flights.length === 0 && this.victoryAt === -1) {
+    if (this.presentationComplete && !this.announcedWin && this.flights.length === 0 && this.victoryAt === -1) {
       if(!this.finishFramed){
         this.finishFramed=true;this.hintReveal=null;
         const to={centerX:(this.board.level.width-1)/2,centerY:(this.board.level.height-1)/2,zoom:1};
@@ -552,7 +562,7 @@ export class BoardScene extends Phaser.Scene {
       if (!this.announcedWin && this.clock - this.victoryAt > (this.reducedMotion ? 80 : 340)) { this.announcedWin = true; this.changed(); this.feedback('win-ready'); }
     }
     this.reactiveDots.clear();
-    const pulseColor=this.board.complete && this.board.snapshot().errors.length===0 ? (this.theme==='dark'?0xffd596:0x9c6b24) : this.colors.exit;
+    const pulseColor=this.presentationComplete && this.board.snapshot().errors.length===0 ? (this.theme==='dark'?0xffd596:0x9c6b24) : this.colors.exit;
     for (const [key, pulse] of this.pulses) {
       stepDampedMotion(pulse.motion, dt / 1000, { angularFrequency: 24, damping: 9 });
       if (Math.abs(pulse.motion.x) < .008 && Math.abs(pulse.motion.v) < .1) { this.pulses.delete(key); continue; }

@@ -1,0 +1,61 @@
+{
+  "source": "ad4bc416 frozen campaign geometry",
+  "scope": "Independent unmonetized target catalogue1, ordinary legal oracle with no errors/help; not human enjoyment evidence",
+  "proof": [
+    {
+      "id": "b1-01",
+      "source": {
+        "id": "c05",
+        "version": 4
+      },
+      "goal": "b1-01-8",
+      "solution": [
+        "b1-01-1",
+        "b1-01-4",
+        "b1-01-5",
+        "b1-01-8"
+      ],
+      "manual": 4,
+      "remaining": 9,
+      "initialFree": 4
+    },
+    {
+      "id": "b1-02",
+      "source": {
+        "id": "c09",
+        "version": 4
+      },
+      "goal": "b1-02-5",
+      "solution": [
+        "b1-02-0",
+        "b1-02-2",
+        "b1-02-3",
+        "b1-02-4",
+        "b1-02-5"
+      ],
+      "manual": 5,
+      "remaining": 4,
+      "initialFree": 3
+    },
+    {
+      "id": "b1-03",
+      "source": {
+        "id": "c10",
+        "version": 4
+      },
+      "goal": "b1-03-7",
+      "solution": [
+        "b1-03-0",
+        "b1-03-1",
+        "b1-03-3",
+        "b1-03-4",
+        "b1-03-5",
+        "b1-03-6",
+        "b1-03-7"
+      ],
+      "manual": 7,
+      "remaining": 8,
+      "initialFree": 4
+    }
+  ]
+}

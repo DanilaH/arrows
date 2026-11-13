@@ -88,7 +88,10 @@ test('zooms without a phantom tap and repaints after a sleeping-board resize', a
 });
 
 test('clears every control board through actual pointer input and leaves one idle renderer', async ({ page }, testInfo) => {
-  test.setTimeout(180000);
+  // CI trace 43469938209 completed all fields legally at ~179 s; hundreds
+  // of mobile protocol round trips exhausted the aggregate budget at canvas count.
+  // Individual move/win assertions retain their 5 s limit.
+  test.setTimeout(240000);
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await openControlReview(page);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-status', 'ready');
