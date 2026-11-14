@@ -1,5 +1,7 @@
 # Arrows project contract
 
+Latest0.25.0 UI fix contract: preserve docs/UI_POLISH_025.md. Press animates a separate pointer-transparent face, never the actual button's hit area/authored transform. Dialog replacement samples the displayed state and suppresses stale completions. Locked nav retains feature identity/threshold. New A3/A2 reveal frames the whole earned group, without changing the plan or reclaiming the manually moved camera; quiet restore does not replay it. Runtime/SDK/content/save/reward/cadence remain pinned. Real GIF/audio evidence and same-certificate .playtest update are required; phone haptic/frame-pacing acceptance stays separate.
+
 Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the replication spec before feature work.
 
 - Target: Android / RuStore, with a browser development surface. This is not a Yandex Games web project. Do not add its SDK/bootstrap back implicitly.
