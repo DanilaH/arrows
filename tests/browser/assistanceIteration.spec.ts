@@ -22,13 +22,15 @@ for(const marked of [false,true])test(`fixed cascade actual writer/input ${marke
   await expect(page.locator('#game-root')).toHaveAttribute('data-help-group',JSON.stringify(['c40-23','c40-24','c40-27']));
   // Take coordinates after the bounded group overview; this case verifies the
   // native/ordinary accounting, not interception of a moving camera.
-  await page.waitForTimeout(400);
+  await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'assistanceFixture').snapshot().helpPhases.includes('reveal_ready'))).toBe(true);
   if(marked){await tap(page,'c40-23');await expect(page.locator('#hearts .empty')).toHaveCount(1);await tap(page,'c40-24');await expect(page.locator('#hearts .empty')).toHaveCount(2);}
   await tap(page,'c40-22');await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','15');
   const after=await saved(page),right=after.helpLedger.rights[request.requestId];expect(right.status).toBe('used');expect(right.operation.manual).toEqual(['c40-22']);
   expect(right.operation.native).toEqual(marked?['c40-23','c40-24']:[]);expect(right.operation.bonus).toEqual(marked?['c40-27']:['c40-23','c40-24','c40-27']);expect(after.campaign.board.lives).toBe(marked?1:3);
   await page.evaluate(()=>Reflect.get(window,'assistanceFixture').duplicate());expect((await saved(page)).campaign.board).toEqual(after.campaign.board);
-  await page.waitForTimeout(3000);const first=await page.evaluate(()=>Reflect.get(window,'assistanceFrameCount') as number);expect(first).toBeGreaterThan(0);await page.waitForTimeout(500);expect(await page.evaluate(()=>Reflect.get(window,'assistanceFrameCount') as number)-first).toBeLessThanOrEqual(2);
+  expect(await page.evaluate(()=>Reflect.get(window,'assistanceFrameCount') as number)).toBeGreaterThan(0);
+  // Wait for an observed idle window; do not sample in the tail of finite FX.
+  await expect.poll(async()=>{const first=await page.evaluate(()=>Reflect.get(window,'assistanceFrameCount') as number);await page.waitForTimeout(500);return await page.evaluate(()=>Reflect.get(window,'assistanceFrameCount') as number)-first;},{timeout:10000}).toBeLessThanOrEqual(2);
 });
 
 test('restores the exact earned group quietly, then uses it without another show',async({page})=>{

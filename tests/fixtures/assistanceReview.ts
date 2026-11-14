@@ -4,6 +4,8 @@ import { createAds, type AdEvent, type AdOutcome, type AdRequest, type EarnedRec
 // Test reward transport: the real game, receipt writer and presentation; no SDK video.
 startGame([], onBack => {
   const base = createPlatformRuntime(onBack); base.ads.destroy();
+  const helpPhases: string[] = [], track = base.analytics.track;
+  base.analytics.track = (event, params) => { if(event === 'assistance_fact' && typeof params.phase === 'string') helpPhases.push(params.phase); track(event, params); };
   let listener: (event: AdEvent) => void = () => {}, settle: ((result: AdOutcome) => void) | undefined;
   let request: (AdRequest & { requestId?: string }) | undefined, last: EarnedReceipt | undefined;
   let receipts: EarnedReceipt[] = [], shows = 0;
@@ -18,7 +20,7 @@ startGame([], onBack => {
   });
   Reflect.set(window, 'assistanceFixture', {
     back() { return onBack?.() ?? false; },
-    snapshot() { return { shows, request, blocked: base.activity.getBlockReasons(), phase: ads.state.phase }; },
+    snapshot() { return { shows, request, blocked: base.activity.getBlockReasons(), phase: ads.state.phase, helpPhases: [...helpPhases] }; },
     shown() { if(request)listener({...request, phase:'show'}); },
     earn() {
       if(!request || request.placement==='continue')throw Error('No rewarded request');
