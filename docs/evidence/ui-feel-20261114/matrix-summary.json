@@ -1,0 +1,193 @@
+{
+  "source": "342646314b601a3684efbbeea93d3441950aa657",
+  "method": "Unmodified production dist, headless Chromium. Seeded progression explicitly marked; not physical-device feel/player research. CSS font stress is synthetic computed150%, separate from normal profiles.",
+  "profiles": {
+    "tall-dark-ru": {
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "states": [
+        "home",
+        "settings-top",
+        "collection",
+        "medal-open",
+        "collection-bottom",
+        "calendar-six-rows",
+        "trophy",
+        "calendar-selected",
+        "daily-completed",
+        "daily-playing",
+        "game-settings",
+        "restart",
+        "fresh-home",
+        "first-tutorial",
+        "first-win",
+        "win-settled"
+      ]
+    },
+    "small-light-ru": {
+      "viewport": {
+        "w": 320,
+        "h": 568
+      },
+      "states": [
+        "home",
+        "settings-top",
+        "collection",
+        "medal-open",
+        "collection-bottom",
+        "calendar-six-rows",
+        "trophy",
+        "calendar-selected",
+        "daily-completed",
+        "daily-playing",
+        "game-settings",
+        "restart"
+      ]
+    },
+    "landscape-ru": {
+      "viewport": {
+        "w": 568,
+        "h": 320
+      },
+      "states": [
+        "home",
+        "settings-top",
+        "collection",
+        "medal-open",
+        "collection-bottom",
+        "calendar-six-rows",
+        "trophy",
+        "calendar-selected",
+        "daily-completed",
+        "daily-playing",
+        "game-settings",
+        "restart"
+      ]
+    },
+    "tall-light-en": {
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "states": [
+        "home",
+        "settings-top",
+        "collection",
+        "medal-open",
+        "collection-bottom",
+        "calendar-six-rows",
+        "trophy",
+        "calendar-selected",
+        "daily-completed",
+        "daily-playing",
+        "game-settings",
+        "restart"
+      ]
+    },
+    "font150-ru": {
+      "viewport": {
+        "w": 320,
+        "h": 640
+      },
+      "states": [
+        "home",
+        "settings-top",
+        "collection",
+        "medal-open",
+        "collection-bottom",
+        "calendar-six-rows",
+        "trophy",
+        "calendar-selected",
+        "daily-completed",
+        "daily-playing",
+        "game-settings",
+        "restart"
+      ]
+    },
+    "tablet-ru": {
+      "viewport": {
+        "w": 800,
+        "h": 1280
+      },
+      "states": [
+        "home",
+        "settings-top",
+        "collection",
+        "medal-open",
+        "collection-bottom",
+        "calendar-six-rows",
+        "trophy",
+        "calendar-selected",
+        "daily-completed",
+        "daily-playing",
+        "game-settings",
+        "restart"
+      ]
+    }
+  },
+  "screenStates": 76,
+  "bodyOverflowStates": 0,
+  "probes": [
+    {
+      "kind": "button-edge",
+      "type": "mouse",
+      "initial": {
+        "x": 75,
+        "y": 580.8125,
+        "width": 240,
+        "height": 52
+      },
+      "held": {
+        "x": 82.19999694824219,
+        "y": 582.3724975585938,
+        "width": 225.59999084472656,
+        "height": 48.8800048828125
+      },
+      "point": {
+        "x": 77,
+        "y": 606.8125
+      },
+      "result": "home"
+    },
+    {
+      "kind": "button-edge",
+      "type": "touch",
+      "initial": {
+        "x": 75,
+        "y": 580.8125,
+        "width": 240,
+        "height": 52
+      },
+      "held": {
+        "x": 82.19999694824219,
+        "y": 582.3724975585938,
+        "width": 225.59999084472656,
+        "height": 48.8800048828125
+      },
+      "point": {
+        "x": 77,
+        "y": 606.8125
+      },
+      "result": "home"
+    },
+    {
+      "kind": "lab-hint-transform",
+      "before": {
+        "x": 101.5,
+        "y": 696,
+        "width": 187,
+        "height": 44
+      },
+      "held": {
+        "x": 200.61000061035156,
+        "y": 697.3200073242188,
+        "width": 175.78001403808594,
+        "height": 41.3599853515625
+      },
+      "helpUsed": false
+    }
+  ],
+  "errors": []
+}

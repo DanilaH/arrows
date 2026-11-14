@@ -1,0 +1,2854 @@
+[
+  {
+    "profile": "small",
+    "kind": "home",
+    "checks": [
+      {
+        "selector": "#home-play",
+        "rect": {
+          "x": 40,
+          "y": 373.375,
+          "width": 240,
+          "height": 52
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              160,
+              399.375
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              100,
+              386.375
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              220,
+              386.375
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              100,
+              412.375
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              220,
+              412.375
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              43,
+              399.375
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              277,
+              399.375
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              376.375
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              422.375
+            ],
+            "hit": "home-play",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#home-settings",
+        "rect": {
+          "x": 235,
+          "y": 495,
+          "width": 75,
+          "height": 66
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              272.5,
+              528
+            ],
+            "hit": "path",
+            "passed": true
+          },
+          {
+            "point": [
+              253.75,
+              511.5
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              291.25,
+              511.5
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              253.75,
+              544.5
+            ],
+            "hit": "SPAN",
+            "passed": true
+          },
+          {
+            "point": [
+              291.25,
+              544.5
+            ],
+            "hit": "SPAN",
+            "passed": true
+          },
+          {
+            "point": [
+              238,
+              528
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              307,
+              528
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              272.5,
+              498
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              272.5,
+              558
+            ],
+            "hit": "home-settings",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "game",
+      "lives": "3",
+      "level": "c05"
+    }
+  },
+  {
+    "profile": "small",
+    "kind": "loss",
+    "checks": [
+      {
+        "selector": "[data-action=free-continue]",
+        "rect": {
+          "x": 44,
+          "y": 245.84521484375,
+          "width": 232,
+          "height": 72
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              160,
+              281.3741149902344
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              102,
+              263.3741149902344
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              218,
+              263.3741149902344
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              102,
+              299.3741149902344
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              218,
+              299.3741149902344
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              47,
+              281.3741149902344
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              273,
+              281.3741149902344
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              248.37411499023438
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              314.3741149902344
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "[data-action=restart]",
+        "rect": {
+          "x": 44,
+          "y": 325.44476318359375,
+          "width": 232,
+          "height": 48
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              160,
+              349.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              102,
+              337.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              218,
+              337.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              102,
+              361.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              218,
+              361.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              47,
+              349.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              273,
+              349.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              328.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              370.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "[data-action=home]",
+        "rect": {
+          "x": 44,
+          "y": 381.44476318359375,
+          "width": 232,
+          "height": 48
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              160,
+              405.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              102,
+              393.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              218,
+              393.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              102,
+              417.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              218,
+              417.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              47,
+              405.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              273,
+              405.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              384.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              426.18170166015625
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "game",
+      "lives": "3",
+      "level": "c05"
+    }
+  },
+  {
+    "profile": "small",
+    "kind": "win",
+    "checks": [
+      {
+        "selector": "#next",
+        "rect": {
+          "x": 50,
+          "y": 470,
+          "width": 220,
+          "height": 50
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              160,
+              495
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              105,
+              482.5
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              215,
+              482.5
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              105,
+              507.5
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              215,
+              507.5
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              53,
+              495
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              267,
+              495
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              473
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              517
+            ],
+            "hit": "next",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#choose-field",
+        "rect": {
+          "x": 8,
+          "y": 8,
+          "width": 44,
+          "height": 44
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              30,
+              30
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              19,
+              19
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              41,
+              19
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              19,
+              41
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              41,
+              41
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              11,
+              30
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              49,
+              30
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              30,
+              11
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              30,
+              49
+            ],
+            "hit": "choose-field",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#game-settings",
+        "rect": {
+          "x": 267.984375,
+          "y": 8,
+          "width": 44,
+          "height": 44
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              289.984375,
+              30
+            ],
+            "hit": "path",
+            "passed": true
+          },
+          {
+            "point": [
+              278.984375,
+              19
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              300.984375,
+              19
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              278.984375,
+              41
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              300.984375,
+              41
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              270.984375,
+              30
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              308.984375,
+              30
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              289.984375,
+              11
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              289.984375,
+              49
+            ],
+            "hit": "game-settings",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "calendar",
+      "lives": "3",
+      "level": "c120"
+    }
+  },
+  {
+    "profile": "landscape",
+    "kind": "home",
+    "checks": [
+      {
+        "selector": "#home-play",
+        "rect": {
+          "x": 292,
+          "y": 123.75,
+          "width": 212,
+          "height": 51
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              398,
+              149.25
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              345,
+              136.5
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              451,
+              136.5
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              345,
+              162
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              451,
+              162
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              295,
+              149.25
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              501,
+              149.25
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              398,
+              126.75
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              398,
+              171.75
+            ],
+            "hit": "home-play",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#home-settings",
+        "rect": {
+          "x": 421,
+          "y": 264,
+          "width": 137,
+          "height": 56
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              489.5,
+              292
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              455.25,
+              278
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              523.75,
+              278
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              455.25,
+              306
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              523.75,
+              306
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              424,
+              292
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              555,
+              292
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              489.5,
+              267
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              489.5,
+              317
+            ],
+            "hit": "home-settings",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "game",
+      "lives": "3",
+      "level": "c05"
+    }
+  },
+  {
+    "profile": "landscape",
+    "kind": "loss",
+    "checks": [
+      {
+        "selector": "[data-action=free-continue]",
+        "rect": {
+          "x": 138,
+          "y": 133.37454223632812,
+          "width": 292,
+          "height": 49.99998474121094
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              284,
+              158.09197235107422
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              211,
+              145.59197616577148
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              357,
+              145.59197616577148
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              211,
+              170.59196853637695
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              357,
+              170.59196853637695
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              141,
+              158.09197235107422
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              427,
+              158.09197235107422
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              284,
+              136.09197998046875
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              284,
+              180.0919647216797
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "[data-action=restart]",
+        "rect": {
+          "x": 138,
+          "y": 191.1819305419922,
+          "width": 292,
+          "height": 48
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              284,
+              215.0111541748047
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              211,
+              203.0111541748047
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              357,
+              203.0111541748047
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              211,
+              227.0111541748047
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              357,
+              227.0111541748047
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              141,
+              215.0111541748047
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              427,
+              215.0111541748047
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              284,
+              194.0111541748047
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              284,
+              236.0111541748047
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "[data-action=home]",
+        "rect": {
+          "x": 138,
+          "y": 247.1819305419922,
+          "width": 292,
+          "height": 48.00001525878906
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              284,
+              271.0111618041992
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              211,
+              259.01115798950195
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              357,
+              259.01115798950195
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              211,
+              283.0111656188965
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              357,
+              283.0111656188965
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              141,
+              271.0111618041992
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              427,
+              271.0111618041992
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              284,
+              250.0111541748047
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              284,
+              292.01116943359375
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "game",
+      "lives": "3",
+      "level": "c05"
+    }
+  },
+  {
+    "profile": "landscape",
+    "kind": "win",
+    "checks": [
+      {
+        "selector": "#next",
+        "rect": {
+          "x": 354,
+          "y": 216,
+          "width": 150,
+          "height": 72
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              429,
+              252
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              391.5,
+              234
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              466.5,
+              234
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              391.5,
+              270
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              466.5,
+              270
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              357,
+              252
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              501,
+              252
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              429,
+              219
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              429,
+              285
+            ],
+            "hit": "next",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#choose-field",
+        "rect": {
+          "x": 58,
+          "y": 4,
+          "width": 44,
+          "height": 44
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              80,
+              26
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              69,
+              15
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              91,
+              15
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              69,
+              37
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              91,
+              37
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              61,
+              26
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              99,
+              26
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              80,
+              7
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              80,
+              45
+            ],
+            "hit": "choose-field",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#game-settings",
+        "rect": {
+          "x": 465.984375,
+          "y": 4,
+          "width": 44,
+          "height": 44
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              487.984375,
+              26
+            ],
+            "hit": "path",
+            "passed": true
+          },
+          {
+            "point": [
+              476.984375,
+              15
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              498.984375,
+              15
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              476.984375,
+              37
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              498.984375,
+              37
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              468.984375,
+              26
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              506.984375,
+              26
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              487.984375,
+              7
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              487.984375,
+              45
+            ],
+            "hit": "game-settings",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "calendar",
+      "lives": "3",
+      "level": "c120"
+    }
+  },
+  {
+    "profile": "tall",
+    "kind": "home",
+    "checks": [
+      {
+        "selector": "#home-play",
+        "rect": {
+          "x": 75,
+          "y": 567.3125,
+          "width": 240,
+          "height": 52
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              195,
+              593.3125
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              135,
+              580.3125
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              255,
+              580.3125
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              135,
+              606.3125
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              255,
+              606.3125
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              78,
+              593.3125
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              312,
+              593.3125
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              195,
+              570.3125
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              195,
+              616.3125
+            ],
+            "hit": "home-play",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#home-settings",
+        "rect": {
+          "x": 287.5,
+          "y": 771,
+          "width": 92.5,
+          "height": 66
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              333.75,
+              804
+            ],
+            "hit": "path",
+            "passed": true
+          },
+          {
+            "point": [
+              310.625,
+              787.5
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              356.875,
+              787.5
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              310.625,
+              820.5
+            ],
+            "hit": "SPAN",
+            "passed": true
+          },
+          {
+            "point": [
+              356.875,
+              820.5
+            ],
+            "hit": "SPAN",
+            "passed": true
+          },
+          {
+            "point": [
+              290.5,
+              804
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              377,
+              804
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              333.75,
+              774
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              333.75,
+              834
+            ],
+            "hit": "home-settings",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "game",
+      "lives": "3",
+      "level": "c05"
+    }
+  },
+  {
+    "profile": "tall",
+    "kind": "loss",
+    "checks": [
+      {
+        "selector": "[data-action=free-continue]",
+        "rect": {
+          "x": 49,
+          "y": 384.435546875,
+          "width": 292,
+          "height": 50
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              195,
+              408.9679870605469
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              122,
+              396.4679870605469
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              268,
+              396.4679870605469
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              122,
+              421.4679870605469
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              268,
+              421.4679870605469
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              52,
+              408.9679870605469
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              338,
+              408.9679870605469
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              195,
+              386.9679870605469
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              195,
+              430.9679870605469
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "[data-action=restart]",
+        "rect": {
+          "x": 49,
+          "y": 442.03668212890625,
+          "width": 292,
+          "height": 48
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              195,
+              465.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              122,
+              453.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              268,
+              453.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              122,
+              477.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              268,
+              477.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              52,
+              465.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              338,
+              465.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              195,
+              444.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              195,
+              486.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "[data-action=home]",
+        "rect": {
+          "x": 49,
+          "y": 498.03668212890625,
+          "width": 292,
+          "height": 48
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              195,
+              521.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              122,
+              509.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              268,
+              509.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              122,
+              533.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              268,
+              533.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              52,
+              521.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              338,
+              521.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              195,
+              500.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              195,
+              542.7755126953125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "game",
+      "lives": "3",
+      "level": "c05"
+    }
+  },
+  {
+    "profile": "tall",
+    "kind": "win",
+    "checks": [
+      {
+        "selector": "#next",
+        "rect": {
+          "x": 85,
+          "y": 746,
+          "width": 220,
+          "height": 50
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              195,
+              771
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              140,
+              758.5
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              250,
+              758.5
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              140,
+              783.5
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              250,
+              783.5
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              88,
+              771
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              302,
+              771
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              195,
+              749
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              195,
+              793
+            ],
+            "hit": "next",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#choose-field",
+        "rect": {
+          "x": 14,
+          "y": 8,
+          "width": 44,
+          "height": 44
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              36,
+              30
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              25,
+              19
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              47,
+              19
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              25,
+              41
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              47,
+              41
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              17,
+              30
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              55,
+              30
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              36,
+              11
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              36,
+              49
+            ],
+            "hit": "choose-field",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#game-settings",
+        "rect": {
+          "x": 331.984375,
+          "y": 8,
+          "width": 44,
+          "height": 44
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              353.984375,
+              30
+            ],
+            "hit": "path",
+            "passed": true
+          },
+          {
+            "point": [
+              342.984375,
+              19
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              364.984375,
+              19
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              342.984375,
+              41
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              364.984375,
+              41
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              334.984375,
+              30
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              372.984375,
+              30
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              353.984375,
+              11
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              353.984375,
+              49
+            ],
+            "hit": "game-settings",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "calendar",
+      "lives": "3",
+      "level": "c120"
+    }
+  },
+  {
+    "profile": "font150",
+    "kind": "home",
+    "checks": [
+      {
+        "selector": "#home-play",
+        "rect": {
+          "x": 40,
+          "y": 430.40625,
+          "width": 240,
+          "height": 63
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              160,
+              461.90625
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              100,
+              446.15625
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              220,
+              446.15625
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              100,
+              477.65625
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              220,
+              477.65625
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              43,
+              461.90625
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              277,
+              461.90625
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              433.40625
+            ],
+            "hit": "home-play",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              490.40625
+            ],
+            "hit": "home-play",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#home-settings",
+        "rect": {
+          "x": 235,
+          "y": 567,
+          "width": 75,
+          "height": 66
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              272.5,
+              600
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              253.75,
+              583.5
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              291.25,
+              583.5
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              253.75,
+              616.5
+            ],
+            "hit": "SPAN",
+            "passed": true
+          },
+          {
+            "point": [
+              291.25,
+              616.5
+            ],
+            "hit": "SPAN",
+            "passed": true
+          },
+          {
+            "point": [
+              238,
+              600
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              307,
+              600
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              272.5,
+              570
+            ],
+            "hit": "home-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              272.5,
+              630
+            ],
+            "hit": "home-settings",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "game",
+      "lives": "3",
+      "level": "c05"
+    }
+  },
+  {
+    "profile": "font150",
+    "kind": "loss",
+    "checks": [
+      {
+        "selector": "[data-action=free-continue]",
+        "rect": {
+          "x": 51,
+          "y": 327.827392578125,
+          "width": 218,
+          "height": 92
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              160,
+              373.357177734375
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              105.5,
+              350.357177734375
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              214.5,
+              350.357177734375
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              105.5,
+              396.357177734375
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              214.5,
+              396.357177734375
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              54,
+              373.357177734375
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              266,
+              373.357177734375
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              330.357177734375
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              416.357177734375
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "[data-action=restart]",
+        "rect": {
+          "x": 51,
+          "y": 427.427978515625,
+          "width": 218,
+          "height": 48
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              160,
+              451.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              105.5,
+              439.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              214.5,
+              439.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              105.5,
+              463.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              214.5,
+              463.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              54,
+              451.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              266,
+              451.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              430.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              472.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "[data-action=home]",
+        "rect": {
+          "x": 51,
+          "y": 483.427978515625,
+          "width": 218,
+          "height": 48
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              160,
+              507.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              105.5,
+              495.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              214.5,
+              495.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              105.5,
+              519.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              214.5,
+              519.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              54,
+              507.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              266,
+              507.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              486.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              528.165283203125
+            ],
+            "hit": "BUTTON",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "game",
+      "lives": "3",
+      "level": "c05"
+    }
+  },
+  {
+    "profile": "font150",
+    "kind": "win",
+    "checks": [
+      {
+        "selector": "#next",
+        "rect": {
+          "x": 50,
+          "y": 500,
+          "width": 220,
+          "height": 92
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              160,
+              546
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              105,
+              523
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              215,
+              523
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              105,
+              569
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              215,
+              569
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              53,
+              546
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              267,
+              546
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              503
+            ],
+            "hit": "next",
+            "passed": true
+          },
+          {
+            "point": [
+              160,
+              589
+            ],
+            "hit": "next",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#choose-field",
+        "rect": {
+          "x": 8,
+          "y": 8,
+          "width": 44,
+          "height": 44
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              30,
+              30
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              19,
+              19
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              41,
+              19
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              19,
+              41
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              41,
+              41
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              11,
+              30
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              49,
+              30
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              30,
+              11
+            ],
+            "hit": "choose-field",
+            "passed": true
+          },
+          {
+            "point": [
+              30,
+              49
+            ],
+            "hit": "choose-field",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "selector": "#game-settings",
+        "rect": {
+          "x": 267.984375,
+          "y": 8,
+          "width": 44,
+          "height": 44
+        },
+        "passed": false,
+        "reason": "occluded-or-not-interactive",
+        "shaped": [
+          {
+            "point": [
+              289.984375,
+              30
+            ],
+            "hit": "path",
+            "passed": true
+          },
+          {
+            "point": [
+              278.984375,
+              19
+            ],
+            "hit": "svg",
+            "passed": true
+          },
+          {
+            "point": [
+              300.984375,
+              19
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              278.984375,
+              41
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              300.984375,
+              41
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              270.984375,
+              30
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              308.984375,
+              30
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              289.984375,
+              11
+            ],
+            "hit": "game-settings",
+            "passed": true
+          },
+          {
+            "point": [
+              289.984375,
+              49
+            ],
+            "hit": "game-settings",
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "after": {
+      "screen": "calendar",
+      "lives": "3",
+      "level": "c120"
+    }
+  }
+]

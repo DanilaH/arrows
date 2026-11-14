@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-14",
+  "recordings": [
+    {
+      "kind": "edge",
+      "filename": "arrows-024-audit-edge.gif",
+      "sha256": "75d629dd35545ef0dfd9a0a2836df3c1b4cea27bb383aa9e31feccdcdf008045",
+      "size": 534185,
+      "library_file_id": "libfile_fde3_f-f2a6123845c481919287fc67b2ccb12c_2841ca9da26c8191b7a266fa9b41a810",
+      "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-f2a6123845c481919287fc67b2ccb12c_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+      "source": "production dist from main3426463 / application84a1a5d /0.24.0, Chromium390x844, seeded QA, actual pointer holds120ms x3; labelled source/pointer overlay; silent; not phone/SDK recording",
+      "mp4DurationSeconds": 4.32
+    },
+    {
+      "kind": "lab",
+      "filename": "arrows-024-audit-lab.gif",
+      "sha256": "9b723f92b096988f8dfc8a6b578c59fff461f5c72599d842f1281d8cc61568ef",
+      "size": 856420,
+      "library_file_id": "libfile_fde3_f-eacb072baa7481919a4cbc9a37f5bd7e_2841ca9da26c8191b7a266fa9b41a810",
+      "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-eacb072baa7481919a4cbc9a37f5bd7e_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+      "source": "production dist from main3426463 / application84a1a5d /0.24.0, Chromium390x844, seeded QA, actual pointer holds120ms x3; labelled source/pointer overlay; silent; not phone/SDK recording",
+      "mp4DurationSeconds": 5.4
+    }
+  ],
+  "apk": "No application change; no new APK requested or built for this audit."
+}

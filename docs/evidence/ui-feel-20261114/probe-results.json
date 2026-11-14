@@ -1,0 +1,244 @@
+{
+  "method": "Unmodified production dist; actual UI; controlled native receipt transport; seeded progress; headless Chromium 390x844 unless specified.",
+  "dialogs": [
+    {
+      "delay": 35,
+      "before": {
+        "opacity": 0.85841,
+        "transform": "matrix(1, 0, 0, 1, 0, 1.69909)"
+      },
+      "after": {
+        "opacity": 0.523934,
+        "transform": "matrix(0.990479, 0, 0, 0.990479, 0, 4.28459)"
+      },
+      "open": false,
+      "animations": 0
+    },
+    {
+      "delay": 65,
+      "before": {
+        "opacity": 0.858118,
+        "transform": "matrix(1, 0, 0, 1, 0, 1.70259)"
+      },
+      "after": {
+        "opacity": 0.523148,
+        "transform": "matrix(0.990463, 0, 0, 0.990463, 0, 4.29167)"
+      },
+      "open": false,
+      "animations": 0
+    },
+    {
+      "delay": 100,
+      "before": {
+        "opacity": 0.946117,
+        "transform": "matrix(1, 0, 0, 1, 0, 0.646601)"
+      },
+      "after": {
+        "opacity": 1,
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "open": false,
+      "animations": 0
+    }
+  ],
+  "cases": [
+    {
+      "kind": "A1-cancel",
+      "lives": "3",
+      "hint": null
+    },
+    {
+      "kind": "single-v2",
+      "hint": "c40-22",
+      "camera": {
+        "x": 27,
+        "y": 243.5,
+        "scale": 7
+      },
+      "clear": {
+        "top": 87,
+        "bottom": 764
+      },
+      "heads": [
+        {
+          "id": "c40-22",
+          "x": 251,
+          "y": 313.5,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "kind": "cascade-v1",
+      "hint": "c40-22",
+      "group": "[\"c40-23\",\"c40-24\",\"c40-27\"]",
+      "route": "[]",
+      "target": "",
+      "camera": {
+        "x": 27,
+        "y": 243.5,
+        "scale": 7
+      },
+      "clear": {
+        "top": 87,
+        "bottom": 764
+      },
+      "heads": [
+        {
+          "id": "c40-22",
+          "x": 251,
+          "y": 313.5,
+          "visible": true
+        },
+        {
+          "id": "c40-23",
+          "x": 209,
+          "y": 467.5,
+          "visible": true
+        },
+        {
+          "id": "c40-24",
+          "x": 230,
+          "y": 313.5,
+          "visible": true
+        },
+        {
+          "id": "c40-27",
+          "x": 160,
+          "y": 278.5,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "kind": "cascade-used",
+      "remaining": "15"
+    },
+    {
+      "kind": "route-v1",
+      "hint": "c40-22",
+      "group": "[]",
+      "route": "[\"c40-22\",\"c40-23\",\"c40-28\"]",
+      "target": "c40-28",
+      "camera": {
+        "x": -568,
+        "y": 31,
+        "scale": 26
+      },
+      "clear": {
+        "top": 87,
+        "bottom": 764
+      },
+      "heads": [
+        {
+          "id": "c40-22",
+          "x": 264,
+          "y": 291,
+          "visible": true
+        },
+        {
+          "id": "c40-23",
+          "x": 108,
+          "y": 863,
+          "visible": false
+        },
+        {
+          "id": "c40-28",
+          "x": 82,
+          "y": 1123,
+          "visible": false
+        }
+      ]
+    },
+    {
+      "kind": "a4",
+      "occupied": false,
+      "before": "Жизни закончились\n\nТри жизни и одна полезная подсказка.\n\nСмотреть видео\nЗаново\nНа главную",
+      "save": {
+        "lives": 3,
+        "errors": [
+          "c40-23",
+          "c40-24",
+          "c40-27"
+        ],
+        "hint": "c40-22",
+        "freeContinueUsed": true
+      }
+    },
+    {
+      "kind": "a4",
+      "occupied": true,
+      "before": "Жизни закончились\n\nТри жизни, помощь сохранится.\n\nСмотреть видео\nЗаново\nНа главную",
+      "save": {
+        "lives": 3,
+        "errors": [
+          "c40-23",
+          "c40-24",
+          "c40-27"
+        ],
+        "hint": "c40-22",
+        "freeContinueUsed": true
+      }
+    },
+    {
+      "kind": "finish",
+      "index": 9,
+      "win": "Отлично!\nБез ошибок!\nДальше",
+      "unlock": []
+    },
+    {
+      "kind": "finish",
+      "index": 19,
+      "win": "Отлично!\nБез ошибок!\nДальше",
+      "unlock": []
+    },
+    {
+      "kind": "finish",
+      "index": 120,
+      "win": "Кампания пройдена!\nБез ошибок!\nК календарю",
+      "unlock": []
+    },
+    {
+      "kind": "fresh-nav",
+      "items": [
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная",
+          "title": "",
+          "disabled": false
+        },
+        {
+          "id": "home-calendar",
+          "text": "Уровень 20",
+          "label": "Календарь. Откроется на уровне 20",
+          "title": "Откроется на уровне 20",
+          "disabled": true
+        },
+        {
+          "id": "home-collection",
+          "text": "Уровень 10",
+          "label": "Коллекция. Откроется на уровне 10",
+          "title": "Откроется на уровне 10",
+          "disabled": true
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки",
+          "title": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "kind": "video-edge",
+      "file": "cea70faf5635a4f52b57162dbb089507.webm"
+    },
+    {
+      "kind": "video-lab",
+      "file": "4c2b2d97e0466f50db877cba2696296d.webm"
+    }
+  ],
+  "errors": []
+}

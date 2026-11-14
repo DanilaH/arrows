@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-14",
+  "source": "342646314b601a3684efbbeea93d3441950aa657",
+  "applicationSource": "84a1a5d37ebd761054d6aefcaccb3505e5f27b3a",
+  "kitReviewed": "aab9dc8e06bf1b487da9b3a5e67444975e7c8ac0",
+  "unit": {
+    "command": "npm run check",
+    "passed": 171,
+    "failed": 0,
+    "typecheck": "passed",
+    "build": "passed"
+  },
+  "browserUi": {
+    "project": "phone",
+    "workers": 2,
+    "passed": 59,
+    "failed": 1,
+    "failedTest": "phoneFeelV2: gives Hint a contrasting solid accent and a finite arrival, with thicker held/grid guides",
+    "failure": "Expected computed opacity1 after visible; observed intermediate arrival0.428738",
+    "repeat": {
+      "workers": 1,
+      "repeatEach": 3,
+      "passed": 3,
+      "failed": 0
+    },
+    "suites": [
+      "uiMotion",
+      "minimalUi",
+      "phoneFeelV2",
+      "softEdges",
+      "settings",
+      "typography",
+      "metaArrivals",
+      "assistanceIteration",
+      "continueBundle",
+      "routeHelp",
+      "targetLab",
+      "victory",
+      "seamlessEntry"
+    ]
+  },
+  "browserAdditional": {
+    "project": "phone",
+    "workers": 1,
+    "passed": 15,
+    "failed": 0,
+    "suites": [
+      "emptyTap",
+      "feel",
+      "idle",
+      "phoneFeedback"
+    ]
+  },
+  "matrix": {
+    "screens": 76,
+    "pageOrFlowErrors": 0,
+    "bodyHorizontalOverflowStates": 0
+  },
+  "initialActions": {
+    "states": 12,
+    "domCriticalControls": 32,
+    "shapeAwarePointCountPerControl": 9,
+    "coordinateActions": 12,
+    "shapeAwareResult": "passed; original rectangular kit corner checks intentionally retained as failures outside rounded shapes"
+  },
+  "physicalAndroid": "NOT RUN",
+  "realSdk": "NOT RUN",
+  "dashboardAndMoney": "NOT RUN",
+  "applicationFilesChanged": false
+}

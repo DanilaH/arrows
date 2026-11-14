@@ -1,0 +1,133 @@
+{
+  "dialogs": [
+    {
+      "delay": 16,
+      "before": {
+        "opacity": 0.335206,
+        "transform": "matrix(1, 0, 0, 1, 0, 7.97753)"
+      },
+      "immediate": {
+        "opacity": 1,
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "frame": {
+        "opacity": 1,
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      }
+    },
+    {
+      "delay": 35,
+      "before": {
+        "opacity": 0.334803,
+        "transform": "matrix(1, 0, 0, 1, 0, 7.98236)"
+      },
+      "immediate": {
+        "opacity": 1,
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "frame": {
+        "opacity": 1,
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      }
+    },
+    {
+      "delay": 65,
+      "before": {
+        "opacity": 0.766714,
+        "transform": "matrix(1, 0, 0, 1, 0, 2.79944)"
+      },
+      "immediate": {
+        "opacity": 1,
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "frame": {
+        "opacity": 1,
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "kind": "synthetic-font150-fresh-nav",
+      "glyphs": [
+        {
+          "text": "Главная",
+          "left": 19,
+          "right": 76,
+          "top": 613.3189697265625,
+          "bottom": 633.3189697265625
+        },
+        {
+          "text": "Уровень 20",
+          "left": 89,
+          "right": 156,
+          "top": 601.5220947265625,
+          "bottom": 644.3189697265625
+        },
+        {
+          "text": "Уровень 10",
+          "left": 164,
+          "right": 231,
+          "top": 601.5220947265625,
+          "bottom": 644.3189697265625
+        },
+        {
+          "text": "Настройки",
+          "left": 233.5,
+          "right": 311.5,
+          "top": 613.3189697265625,
+          "bottom": 633.3189697265625
+        }
+      ]
+    },
+    {
+      "kind": "a2-zoomed",
+      "data": {
+        "camera": {
+          "x": -393,
+          "y": 51,
+          "scale": 21
+        },
+        "clear": {
+          "top": 87,
+          "bottom": 764
+        },
+        "heads": [
+          {
+            "id": "c40-22",
+            "x": 279,
+            "y": 261,
+            "visible": true
+          },
+          {
+            "id": "c40-23",
+            "x": 153,
+            "y": 723,
+            "visible": true
+          },
+          {
+            "id": "c40-24",
+            "x": 216,
+            "y": 261,
+            "visible": true
+          },
+          {
+            "id": "c40-27",
+            "x": 6,
+            "y": 156,
+            "visible": false
+          }
+        ]
+      }
+    },
+    {
+      "kind": "actual-dark-primary-colors",
+      "data": {
+        "ink": "rgb(243, 242, 255)",
+        "bg": "rgb(98, 100, 239)",
+        "font": "17px",
+        "weight": "800"
+      }
+    }
+  ]
+}
