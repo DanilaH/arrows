@@ -19,6 +19,16 @@ export class BoardCamera {
     this.y = this.view.y + this.view.height / 2 - view.centerY * this.scale; this.clamp();
   }
   public focus(point: Point): ViewState { return { centerX: point.x, centerY: point.y, zoom: Math.max(this.scale, Math.min(26, this.maxScale)) / this.minScale }; }
+  /** Presentation-only overview. Keep saved world-centre/relative-zoom meaning. */
+  public framePoints(points: readonly Point[], padding = 28): ViewState {
+    if (!points.length) return this.snapshot();
+    const xs = points.map(p => p.x), ys = points.map(p => p.y);
+    const left = Math.min(...xs), right = Math.max(...xs), top = Math.min(...ys), bottom = Math.max(...ys);
+    const scale = Math.max(this.minScale, Math.min(26, this.maxScale,
+      (this.view.width - 2 * padding) / Math.max(1, right - left),
+      (this.view.height - 2 * padding) / Math.max(1, bottom - top)));
+    return { centerX: (left + right) / 2, centerY: (top + bottom) / 2, zoom: scale / this.minScale };
+  }
   public layout(view: Rect, reset = false): void {
     const oldCenter = this.world({ x: this.view.x + this.view.width / 2, y: this.view.y + this.view.height / 2 });
     const oldRelative = this.scale / this.minScale;

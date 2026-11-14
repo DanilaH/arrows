@@ -75,7 +75,7 @@ export class BoardScene extends Phaser.Scene {
     const next=new Set(predicted?.bonus??[]),native=new Set(predicted?.native??[]),pending=plan?.kind==='route-v1'?new Set(routePending(this.board,plan)):new Set<string>();
     const route=new Map((plan?.route??[]).flatMap((id,i)=>pending.has(id)?[[id,i+1] as const]:[])),routeChanged=JSON.stringify([...route])!==JSON.stringify([...this.routeSteps]);
     if([...next].join('|')===[...this.group].join('|')&&[...native].join('|')===[...this.nativeGroup].join('|')&&!routeChanged)return;
-    this.group=next;this.nativeGroup=native;this.routeSteps=route;this.routeTarget=plan?.kind==='route-v1'?plan.target??null:null;const root=document.querySelector<HTMLElement>('#game-root');if(root){root.dataset.helpGroup=JSON.stringify([...next]);root.dataset.helpNative=JSON.stringify([...native]);root.dataset.helpRoute=JSON.stringify([...route.keys()]);root.dataset.helpTarget=this.routeTarget??'';}this.retarget(quiet);if(!quiet&&routeChanged&&route.size&&this.boardCamera.scale<12)this.focusHint(this.hintTarget,true);this.changed();
+    this.group=next;this.nativeGroup=native;this.routeSteps=route;this.routeTarget=plan?.kind==='route-v1'?plan.target??null:null;const root=document.querySelector<HTMLElement>('#game-root');if(root){root.dataset.helpGroup=JSON.stringify([...next]);root.dataset.helpNative=JSON.stringify([...native]);root.dataset.helpRoute=JSON.stringify([...route.keys()]);root.dataset.helpTarget=this.routeTarget??'';}this.retarget(quiet);this.changed();
   }
   private targetStyle(id:string):ArrowStyle {
     const root=id===this.hintTarget,group=this.group.has(id),pressed=id===this.pressed,preview=id===this.preview;
@@ -221,9 +221,10 @@ export class BoardScene extends Phaser.Scene {
   }
   public setHint(id: string | null, focus = true): void {
     if(this.hintTarget===id)return;
-    if(id)this.manualCamera=false;
+    const continuingGroup = this.routeSteps.size > 0 || this.group.size > 0;
+    if(id && !continuingGroup)this.manualCamera=false;
     this.hintTarget=id;this.hintReveal=null;this.retarget();
-    if(focus)this.focusHint(id);
+    if(focus && !continuingGroup)this.focusHint(id);
     this.stableDirty=true;this.changed();
   }
   private focusHint(id: string | null,readability=false): void {
@@ -237,10 +238,20 @@ export class BoardScene extends Phaser.Scene {
   }
   public revealHint(id: string): void {
     if(id!==this.hintTarget||!this.board.remaining.some(a=>a.id===id))return;
-    this.focusHint(id);
+    if(this.routeSteps.size)this.focusHelpGroup(new Set(this.routeSteps.keys()));
+    else this.focusHint(id);
     if(this.reducedMotion)this.feedback('hint-ready');
     else this.hintReveal={id,started:-1,arrived:false};
     this.stableDirty=true;this.changed();
+  }
+  private focusHelpGroup(ids: ReadonlySet<string>): void {
+    if(this.manualCamera)return;
+    const points=this.board.remaining.filter(a=>ids.has(a.id)).flatMap(a=>a.path);
+    if(!points.length)return;
+    const to=this.boardCamera.framePoints(points);
+    if(this.reducedMotion){this.boardCamera.restore(to);this.transform();}
+    else this.focusMotion={from:this.boardCamera.snapshot(),to,elapsed:0};
+    this.changed();
   }
   public get finished(): boolean { return this.announcedWin; }
   public artwork(): BoardArtwork {
