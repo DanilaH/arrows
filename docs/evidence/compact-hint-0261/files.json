@@ -1,0 +1,22 @@
+[
+  {
+    "name": "arrows-0.26.1-code39.playtest.apk",
+    "bytes": 10410371,
+    "sha256": "dd44e1f19ea9497f3ab47eb3dd9f49fce7a028368fea92a528da75596aad9503"
+  },
+  {
+    "name": "before-after-detail.gif",
+    "bytes": 65169,
+    "sha256": "eeb11385eac42e095787b74a695c8fa69300ac11e1d2a5ec24b8f70bd64f0799"
+  },
+  {
+    "name": "compact-cue-edge.gif",
+    "bytes": 345678,
+    "sha256": "933f42b1fa5136ba5fc4e3459efc2a2edfb440d6cb3627dfb7e326cd3aa78c16"
+  },
+  {
+    "name": "compact-cue-edge-audio.mp4",
+    "bytes": 46072,
+    "sha256": "5ee973feee43f5c7f6f6d23ce868c911a02f48274b84c4da4980980678531a0f"
+  }
+]

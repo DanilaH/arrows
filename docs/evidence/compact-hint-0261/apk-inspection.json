@@ -1,0 +1,27 @@
+{
+  "source": "8e2c8d322dda6df471218aef73bab6ebe7b03665",
+  "ciRun": 43634090122,
+  "package": "com.danilah.arrows.playtest",
+  "versionName": "0.26.1",
+  "versionCode": "39",
+  "bytes": 10410371,
+  "sha256": "dd44e1f19ea9497f3ab47eb3dd9f49fce7a028368fea92a528da75596aad9503",
+  "signature": {
+    "verified": true,
+    "v2": true,
+    "v3": false,
+    "certificates": [
+      "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36"
+    ]
+  },
+  "nativeConfig": {
+    "AD_MODE": "test",
+    "ANALYTICS_API_KEY": "",
+    "APPLICATION_ID": "com.danilah.arrows.playtest",
+    "INTERSTITIAL_AD_UNIT_ID": "demo-interstitial-yandex",
+    "REWARDED_AD_UNIT_ID": "demo-rewarded-yandex"
+  },
+  "allCapturedPayloadMatches": true,
+  "capturedFiles": 16,
+  "physicalInstallUpdate": "NOT RUN"
+}

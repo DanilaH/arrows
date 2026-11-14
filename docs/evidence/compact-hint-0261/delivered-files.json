@@ -1,0 +1,37 @@
+[
+  {
+    "file_name": "arrows-0.26.1-code39.playtest.apk",
+    "library_file_id": "libfile_fde3_f-5ed6e06750608191a9208abc4caf6396_2841ca9da26c8191b7a266fa9b41a810",
+    "file_id": "file_00000000677881f6b74788b55c00bb3e",
+    "status": "succeeded",
+    "local_metadata_applied": true
+  },
+  {
+    "file_name": "before-after-detail.gif",
+    "library_file_id": "libfile_fde3_f-788cb1e05b08819197cef50e8edc5dd4_2841ca9da26c8191b7a266fa9b41a810",
+    "file_id": "file_00000000028481f6b18d9bad8a864daa",
+    "status": "succeeded",
+    "local_metadata_applied": true
+  },
+  {
+    "file_name": "compact-cue-edge.gif",
+    "library_file_id": "libfile_fde3_f-72cd2e3ce90881919613ed7dd3830f8e_2841ca9da26c8191b7a266fa9b41a810",
+    "file_id": "file_00000000e27081f6b9fd11dc0566c9ff",
+    "status": "succeeded",
+    "local_metadata_applied": true
+  },
+  {
+    "file_name": "compact-cue-edge-audio.mp4",
+    "library_file_id": "libfile_fde3_f-6c7fc5a553c881918932cab9490fd92a_2841ca9da26c8191b7a266fa9b41a810",
+    "file_id": "file_00000000012081f685c8feedccb1544b",
+    "status": "succeeded",
+    "local_metadata_applied": true
+  },
+  {
+    "file_name": "release-info(1).txt",
+    "library_file_id": "libfile_fde3_f-0199aa51b4208191a89cde301b696257_2841ca9da26c8191b7a266fa9b41a810",
+    "file_id": "file_00000000279c81f6a8b85dc74500360f",
+    "status": "succeeded",
+    "local_metadata_applied": true
+  }
+]
