@@ -1,0 +1,64 @@
+{
+  "applicationSource": "f8a75b3106f8194d1ad27a2a58ede7c3b30d48d3",
+  "validationSource": "de2d67d1b05ca63052e5c2125aa2d3639c951fa2",
+  "local": {
+    "unit": {
+      "passed": 171,
+      "failed": 0
+    },
+    "typecheck": "passed",
+    "build": "passed",
+    "nativeSync": "passed",
+    "focusedPhone": {
+      "passed": 27,
+      "failed": 0
+    },
+    "correctedDesktopOverviewRepeat3": {
+      "passed": 6,
+      "failed": 0
+    }
+  },
+  "productionMatrix": {
+    "states": 76,
+    "pageOrFlowErrors": 0,
+    "horizontalBodyOverflow": 0
+  },
+  "initialCriticalActions": {
+    "states": 12,
+    "successfulCoordinateActions": 12,
+    "shapeAwareInteriorChecks": "passed; raw kit rectangular-corner limitations retained"
+  },
+  "cameraMatrix": {
+    "passed": 16,
+    "failed": 0,
+    "levels": [
+      "c20",
+      "c40",
+      "c120"
+    ],
+    "variants": [
+      "route-v1",
+      "cascade-v1"
+    ],
+    "manualGestures": [
+      "pan",
+      "pinch"
+    ],
+    "reducedMotion": true
+  },
+  "nativeTests": {
+    "passed": 19,
+    "failed": 0
+  },
+  "physicalPhone": "NOT RUN",
+  "actualSdkVideo": "NOT RUN",
+  "AppMetricaAndMoney": "NOT RUN",
+  "finalCi": {
+    "run": 43612775540,
+    "source": "de2d67d1b05ca63052e5c2125aa2d3639c951fa2",
+    "passed": 286,
+    "failed": 0,
+    "android": "success",
+    "web": "success"
+  }
+}

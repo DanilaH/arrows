@@ -1,0 +1,12 @@
+{
+  "source": "f8a75b3106f8194d1ad27a2a58ede7c3b30d48d3",
+  "run": 43611526133,
+  "web": {
+    "passed": 285,
+    "failed": 1,
+    "failure": "Desktop A3 quiet restore expected y84.02564102564102, actual y84.025641025641: final-bit floating-point difference; strict serialized-string assertion corrected to 1e-9 coordinate comparison."
+  },
+  "android": "success",
+  "nativeTests": 19,
+  "apkSourceRetained": true
+}

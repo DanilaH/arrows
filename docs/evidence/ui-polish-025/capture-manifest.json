@@ -1,0 +1,61 @@
+{
+  "source": "f8a75b3106f8194d1ad27a2a58ede7c3b30d48d3",
+  "version": "0.25.0/code37",
+  "method": "Real Chromium390x844 DPR1.5 frames, actual WebAudio output, seeded QA saves, controlled native receipt transport; no physical Android/SDK video or human performance measurement. Original timing retained; source caption padded below real frames.",
+  "payload": {
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "f13940adb76332099ef2d13f9f0d2888c6576c980472eb946c9d3aa1615fee64",
+    "target-lab.html": "26fb7f41faa56caba8cf72f3adb2445292c11e54794b810afacfb388884ba718",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/gestures-BDX9-R4q.css": "ffa2ada9a329f41b5ce2bf567c4ab7da091c598418de5259c4d83630fdf1509e",
+    "assets/gestures-iHViA3qN.js": "d11ad205ba16d33c00231a4afe94aef1da63e8729c0aece7b0a900a965a2fe3a",
+    "assets/main-C0A-BA-s.js": "9b4d9432d865fa990456ddbf2a65bb02b11a8979b07c9ed60025f80dd973645f",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/targetLab-K1ZUTrUO.js": "f1ff7674cc7133f61f584eb59ad35bd2be02664b43b6ca1e405c2fab80e364f7",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7"
+  },
+  "clips": [
+    {
+      "name": "main-controls",
+      "variant": null,
+      "frames": 147,
+      "durationMs": 3723.332828,
+      "errors": [],
+      "remaining": "3",
+      "screen": "game"
+    },
+    {
+      "name": "b1-centred-hint",
+      "variant": null,
+      "frames": 84,
+      "durationMs": 2470.5886649999993,
+      "errors": [],
+      "remaining": "13",
+      "screen": "game"
+    },
+    {
+      "name": "route-overview",
+      "variant": "route-v1",
+      "frames": 193,
+      "durationMs": 4297.402339,
+      "errors": [],
+      "remaining": "16",
+      "screen": "game"
+    },
+    {
+      "name": "cascade-overview",
+      "variant": "cascade-v1",
+      "frames": 165,
+      "durationMs": 3889.856040999999,
+      "errors": [],
+      "remaining": "15",
+      "screen": "game"
+    }
+  ]
+}

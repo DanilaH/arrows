@@ -1,0 +1,53 @@
+{
+  "applicationSource": "f8a75b3106f8194d1ad27a2a58ede7c3b30d48d3",
+  "files": [
+    {
+      "filename": "arrows-0.25.0-code37-playtest.apk",
+      "library_file_id": "libfile_fde3_f-a4e661c807908191940d76f87cecbe41_2841ca9da26c8191b7a266fa9b41a810",
+      "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-a4e661c807908191940d76f87cecbe41_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+      "bytes": 10406871,
+      "sha256": "4b6493f8d7763702e05701bfd9a2024e0ff19f19a5bc51b71cb0e12f9bed3d6c",
+      "localMetadataApplied": true
+    },
+    {
+      "filename": "arrows-0.25.0-ui-controls.gif",
+      "library_file_id": "libfile_fde3_f-74478413626c8191bb1b3aec6ce9a83e_2841ca9da26c8191b7a266fa9b41a810",
+      "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-74478413626c8191bb1b3aec6ce9a83e_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+      "bytes": 852268,
+      "sha256": "cfa7d3b4583c099eb1ceeef62fe23a733f7d0d9d603ed38a71787e8937dfabed",
+      "localMetadataApplied": true
+    },
+    {
+      "filename": "arrows-0.25.0-b1-hint.gif",
+      "library_file_id": "libfile_fde3_f-27f58e6b3a6c819199780ea549bab04b_2841ca9da26c8191b7a266fa9b41a810",
+      "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-27f58e6b3a6c819199780ea549bab04b_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+      "bytes": 218659,
+      "sha256": "401dc4ca82a70493baa44f1c25e3e33fd91828b70357ad6e7cf4b00de757c55c",
+      "localMetadataApplied": true
+    },
+    {
+      "filename": "arrows-0.25.0-a3-overview.gif",
+      "library_file_id": "libfile_fde3_f-36132e73d3b48191a1b3db037c81017f_2841ca9da26c8191b7a266fa9b41a810",
+      "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-36132e73d3b48191a1b3db037c81017f_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+      "bytes": 766167,
+      "sha256": "2faf4e59cb793d4cc00a6174930d7e570a7d129ff3fb195de7da06482c1821db",
+      "localMetadataApplied": true
+    },
+    {
+      "filename": "arrows-0.25.0-a2-overview.gif",
+      "library_file_id": "libfile_fde3_f-f913f2f595e4819182ad91c86cf4e2f5_2841ca9da26c8191b7a266fa9b41a810",
+      "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-f913f2f595e4819182ad91c86cf4e2f5_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+      "bytes": 830555,
+      "sha256": "f94f821eae364263e16771aa6727d18b5379d85747b652b0093dc4f6c06f8256",
+      "localMetadataApplied": true
+    },
+    {
+      "filename": "arrows-0.25.0-real-audio.mp4",
+      "library_file_id": "libfile_fde3_f-35d7266e9060819194cd26a6694ecdbf_2841ca9da26c8191b7a266fa9b41a810",
+      "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-35d7266e9060819194cd26a6694ecdbf_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+      "bytes": 114013,
+      "sha256": "ec9878ee04d78181b012535088eb88cdee7eb7bf438a24097e0d462328417b67",
+      "localMetadataApplied": true
+    }
+  ]
+}

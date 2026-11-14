@@ -1,0 +1,25 @@
+{
+  "source": "de2d67d1b05ca63052e5c2125aa2d3639c951fa2",
+  "run": 43612775540,
+  "jobs": [
+    {
+      "id": 132501222051,
+      "name": "web",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 132501222246,
+      "name": "android",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "browser286Passed": true,
+  "unitTests": 171,
+  "browserTests": 286,
+  "nativeTests": 19,
+  "outcome": "GREEN",
+  "applicationSource": "f8a75b3106f8194d1ad27a2a58ede7c3b30d48d3",
+  "artifactByteIdenticalToDelivered": true
+}

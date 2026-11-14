@@ -1,0 +1,32 @@
+[
+  {
+    "name": "arrows-0.25.0-a2-overview.gif",
+    "bytes": 830555,
+    "sha256": "f94f821eae364263e16771aa6727d18b5379d85747b652b0093dc4f6c06f8256"
+  },
+  {
+    "name": "arrows-0.25.0-a3-overview.gif",
+    "bytes": 766167,
+    "sha256": "2faf4e59cb793d4cc00a6174930d7e570a7d129ff3fb195de7da06482c1821db"
+  },
+  {
+    "name": "arrows-0.25.0-b1-hint.gif",
+    "bytes": 218659,
+    "sha256": "401dc4ca82a70493baa44f1c25e3e33fd91828b70357ad6e7cf4b00de757c55c"
+  },
+  {
+    "name": "arrows-0.25.0-real-audio.mp4",
+    "bytes": 114013,
+    "sha256": "ec9878ee04d78181b012535088eb88cdee7eb7bf438a24097e0d462328417b67"
+  },
+  {
+    "name": "arrows-0.25.0-ui-controls.gif",
+    "bytes": 852268,
+    "sha256": "cfa7d3b4583c099eb1ceeef62fe23a733f7d0d9d603ed38a71787e8937dfabed"
+  },
+  {
+    "name": "arrows-0.25.0-code37-playtest.apk",
+    "bytes": 10406871,
+    "sha256": "4b6493f8d7763702e05701bfd9a2024e0ff19f19a5bc51b71cb0e12f9bed3d6c"
+  }
+]

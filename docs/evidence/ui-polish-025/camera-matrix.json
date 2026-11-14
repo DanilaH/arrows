@@ -1,0 +1,122 @@
+{
+  "source": "f8a75b3106f8194d1ad27a2a58ede7c3b30d48d3",
+  "method": "Frozen exact APK web payload, controlled receipts, real UI/CDP touch,320x568 light /390x844 dark; no physical phone claim.",
+  "rows": [
+    {
+      "level": "c20",
+      "variant": "route-v1",
+      "reduced": false,
+      "actualKind": "route-v1",
+      "points": 30,
+      "allVisible": true
+    },
+    {
+      "level": "c20",
+      "variant": "route-v1",
+      "reduced": true,
+      "actualKind": "route-v1",
+      "points": 30,
+      "allVisible": true
+    },
+    {
+      "level": "c20",
+      "variant": "cascade-v1",
+      "reduced": false,
+      "actualKind": "cascade-v1",
+      "points": 30,
+      "allVisible": true
+    },
+    {
+      "level": "c20",
+      "variant": "cascade-v1",
+      "reduced": true,
+      "actualKind": "cascade-v1",
+      "points": 30,
+      "allVisible": true
+    },
+    {
+      "level": "c40",
+      "variant": "route-v1",
+      "reduced": false,
+      "actualKind": "route-v1",
+      "points": 18,
+      "allVisible": true
+    },
+    {
+      "level": "c40",
+      "variant": "route-v1",
+      "reduced": true,
+      "actualKind": "route-v1",
+      "points": 18,
+      "allVisible": true
+    },
+    {
+      "level": "c40",
+      "variant": "cascade-v1",
+      "reduced": false,
+      "actualKind": "cascade-v1",
+      "points": 25,
+      "allVisible": true
+    },
+    {
+      "level": "c40",
+      "variant": "cascade-v1",
+      "reduced": true,
+      "actualKind": "cascade-v1",
+      "points": 25,
+      "allVisible": true
+    },
+    {
+      "level": "c120",
+      "variant": "route-v1",
+      "reduced": false,
+      "actualKind": "route-v1",
+      "points": 37,
+      "allVisible": true
+    },
+    {
+      "level": "c120",
+      "variant": "route-v1",
+      "reduced": true,
+      "actualKind": "route-v1",
+      "points": 37,
+      "allVisible": true
+    },
+    {
+      "level": "c120",
+      "variant": "cascade-v1",
+      "reduced": false,
+      "actualKind": "cascade-v1",
+      "points": 37,
+      "allVisible": true
+    },
+    {
+      "level": "c120",
+      "variant": "cascade-v1",
+      "reduced": true,
+      "actualKind": "cascade-v1",
+      "points": 37,
+      "allVisible": true
+    },
+    {
+      "variant": "route-v1",
+      "gesture": "pan",
+      "noCameraReturn": true
+    },
+    {
+      "variant": "route-v1",
+      "gesture": "pinch",
+      "noCameraReturn": true
+    },
+    {
+      "variant": "cascade-v1",
+      "gesture": "pan",
+      "noCameraReturn": true
+    },
+    {
+      "variant": "cascade-v1",
+      "gesture": "pinch",
+      "noCameraReturn": true
+    }
+  ]
+}
