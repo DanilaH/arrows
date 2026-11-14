@@ -1,0 +1,10 @@
+{
+  "source": "ad75a1a62b6dd6dafa48fede4d26ade75c2b9004",
+  "applicationSource": "19b2fecbe123c8c7b4d3666949b800f725b635f1",
+  "command": "npx playwright test tests/browser/assistanceIteration.spec.ts tests/browser/seamlessEntry.spec.ts --grep 'fixed cascade|bridges the same selected' --repeat-each=3 --workers=3",
+  "tests": 24,
+  "passed": 24,
+  "failed": 0,
+  "duration": "1.2m",
+  "changes": "Only fixture observes existing reveal_ready; tests wait observed readiness/idle and capture short bridge keyframes on insertion. No application, native, package or acceptance threshold changes."
+}

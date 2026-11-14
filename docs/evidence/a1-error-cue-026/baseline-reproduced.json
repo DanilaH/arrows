@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "source": "56f65a4ee5b9b169b1a53ab21f06e186b9619d48",
+  "app": "0.25.0 / 37",
+  "surface": "Unmodified production dist, seeded save, existing controlled native transport; headless Pixel 7 browser. This is not a physical phone or real ad SDK.",
+  "browser": {
+    "version": "141.0.7390.37",
+    "profile": "Playwright Pixel 7",
+    "viewport": {
+      "width": 412,
+      "height": 839
+    }
+  },
+  "status": "passed",
+  "finishedAt": "2026-11-14T17:58:39.200Z",
+  "cases": [
+    {
+      "id": "initial-hint-boundary",
+      "note": "Wall-clock observation of the existing idle gate and arrival; not proof of an exact sample()/3 s race."
+    },
+    {
+      "id": "errors-and-hint-motion",
+      "note": "Two distinct blocked arrows both report first:true in one attempt. Repeating the first reports first:false and costs no additional life. A second distinct error after Hint arrival settled adds no Hint animation."
+    },
+    {
+      "id": "readiness-is-not-visibility",
+      "note": "Visible and enabled is broader than fresh rewarded-ready eligibility. No Hint click was made in loading/backoff."
+    },
+    {
+      "id": "saved-help-free-in-backoff",
+      "note": "Earned A1 was reserved by an actual Restart, then claimed with transport in backoff. No additional ad_session or saved ad request was created. This is a distinct offer source even when the effect is single-v2."
+    },
+    {
+      "id": "first-error-with-settled-ready-a1",
+      "note": "First accepted blocked arrow with an already visible, settled, enabled, fresh single-v2 Hint and ready transport. Hint has no animation immediately after save or 700 ms later; no ad was started."
+    }
+  ],
+  "pageErrors": []
+}

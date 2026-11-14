@@ -1,0 +1,110 @@
+{
+  "source": "19b2fecbe123c8c7b4d3666949b800f725b635f1",
+  "method": "Real frozen APK web payload, controlled native transport, seeded c40, Chromium; no phone/human performance claim.",
+  "rows": [
+    {
+      "theme": "light",
+      "reduced": true,
+      "viewport": "320x700/DPR1.5",
+      "rect": {
+        "x": 26.5,
+        "y": 640,
+        "width": 207,
+        "height": 44
+      },
+      "width": 320,
+      "scroll": 320,
+      "ink": "rgb(73, 49, 13)",
+      "background": "rgb(243, 210, 141)",
+      "text": true,
+      "readiness": true,
+      "video": true,
+      "layerVisible": true,
+      "layerPointerEvents": "none",
+      "finite": true,
+      "idle": true,
+      "trace": [
+        "opportunity",
+        "shown"
+      ]
+    },
+    {
+      "theme": "dark",
+      "reduced": true,
+      "viewport": "320x700/DPR1.5",
+      "rect": {
+        "x": 26.5,
+        "y": 640,
+        "width": 207,
+        "height": 44
+      },
+      "width": 320,
+      "scroll": 320,
+      "ink": "rgb(52, 41, 20)",
+      "background": "rgb(231, 190, 114)",
+      "text": true,
+      "readiness": true,
+      "video": true,
+      "layerVisible": true,
+      "layerPointerEvents": "none",
+      "finite": true,
+      "idle": true,
+      "trace": [
+        "opportunity",
+        "shown"
+      ]
+    },
+    {
+      "theme": "dark",
+      "reduced": false,
+      "viewport": "320x700/DPR1.5",
+      "rect": {
+        "x": 26.5,
+        "y": 640,
+        "width": 207,
+        "height": 44
+      },
+      "width": 320,
+      "scroll": 320,
+      "ink": "rgb(52, 41, 20)",
+      "background": "rgb(231, 190, 114)",
+      "text": true,
+      "readiness": true,
+      "video": true,
+      "layerVisible": true,
+      "layerPointerEvents": "none",
+      "finite": true,
+      "idle": true,
+      "trace": [
+        "opportunity",
+        "shown"
+      ]
+    },
+    {
+      "theme": "light",
+      "reduced": false,
+      "viewport": "320x700/DPR1.5",
+      "rect": {
+        "x": 26.5,
+        "y": 640,
+        "width": 207,
+        "height": 44
+      },
+      "width": 320,
+      "scroll": 320,
+      "ink": "rgb(73, 49, 13)",
+      "background": "rgb(243, 210, 141)",
+      "text": true,
+      "readiness": true,
+      "video": true,
+      "layerVisible": true,
+      "layerPointerEvents": "none",
+      "finite": true,
+      "idle": true,
+      "trace": [
+        "opportunity",
+        "shown"
+      ]
+    }
+  ]
+}

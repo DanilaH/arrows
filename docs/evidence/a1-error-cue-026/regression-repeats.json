@@ -1,0 +1,15 @@
+{
+  "source": "cb668fe1d9d03a23cdccc5a162668251e12f7b6c",
+  "applicationSource": "19b2fecbe123c8c7b4d3666949b800f725b635f1",
+  "command": "npx playwright test tests/browser/assistanceIteration.spec.ts tests/browser/phoneFeelV2.spec.ts tests/browser/seamlessEntry.spec.ts --grep 'ordinary members|fits the whole completed|bridges the same selected c20' --repeat-each=2 --workers=2",
+  "tests": 12,
+  "passed": 12,
+  "failed": 0,
+  "profiles": [
+    "phone",
+    "desktop"
+  ],
+  "duration": "58.3s",
+  "applicationOrOldTestChanges": false,
+  "scope": "Repeat the3 pre-existing scenarios that failed timing expectations in first CI. Does not erase that full-CI failure or prove physical-phone performance."
+}

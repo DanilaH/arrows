@@ -1,0 +1,15 @@
+{
+  "source": "cb668fe1d9d03a23cdccc5a162668251e12f7b6c",
+  "applicationSource": "19b2fecbe123c8c7b4d3666949b800f725b635f1",
+  "run": 43626439148,
+  "passed": 379,
+  "failed": 3,
+  "newCuePassed": 96,
+  "failures": [
+    "assistanceIteration native-marked cascade phone",
+    "assistanceIteration native-marked cascade desktop",
+    "seamlessEntry c20 ephemeral bridge desktop"
+  ],
+  "resolution": "ad75a1a62b6dd6dafa48fede4d26ade75c2b9004 changes tests/fixture only: actual reveal_ready before picking, observed idle window, keyframes captured on insertion.24 focused repeated cases PASS; full validation tracked separately. No app/APK change.",
+  "newCueCountBasis": "All96 listed A1 tests are in the382-test run; its only3 failures are the named pre-existing non-A1 tests."
+}

@@ -1,0 +1,14 @@
+{
+  "source": "19b2fecbe123c8c7b4d3666949b800f725b635f1",
+  "method": "Frozen APK web payload, real Calendar/start-daily action, seeded unlocked campaign, controlled native transport; no physical SDK claim.",
+  "date": "2026-11-14",
+  "newDailyBinding": "cue",
+  "events": [
+    "opportunity",
+    "shown"
+  ],
+  "ownerMode": "daily",
+  "campaignUnchanged": true,
+  "reloadNoReplay": true,
+  "lives": 2
+}

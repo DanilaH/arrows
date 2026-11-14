@@ -1,0 +1,35 @@
+{
+  "source": "ad75a1a62b6dd6dafa48fede4d26ade75c2b9004",
+  "applicationSource": "19b2fecbe123c8c7b4d3666949b800f725b635f1",
+  "run": 43628885996,
+  "jobs": [
+    {
+      "id": 132550830886,
+      "name": "web",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 132550831113,
+      "name": "android",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "unitTests": 174,
+  "localBrowserTests": 382,
+  "localBrowserPassed": 382,
+  "localBrowserFailed": 0,
+  "localBrowserDuration": "9.5m",
+  "newA1Cases": 96,
+  "nativeTests": 19,
+  "componentCleanupCases": 10,
+  "narrowThemeMotionIdleCases": 4,
+  "focusedStableObserverRepeats": 24,
+  "hostedFullBrowser": "IN PROGRESS, not claimed green",
+  "applicationPayloadByteUnchangedSince19b2fec": true,
+  "apkByteIdenticalAcrossRuns": [
+    43625976791,
+    43626439148
+  ]
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "file_name": "arrows-0.26.0-code38.playtest.apk",
+    "library_file_id": "libfile_fde3_f-9b661652352c8191a593324bf26cbfc9_2841ca9da26c8191b7a266fa9b41a810",
+    "file_id": "file_0000000061708212a5bf7dc0c7aed2a2",
+    "status": "succeeded",
+    "local_metadata_applied": true
+  },
+  {
+    "file_name": "control-vs-cue.gif",
+    "library_file_id": "libfile_fde3_f-fa0ed637e2808191b20855169ced03d8_2841ca9da26c8191b7a266fa9b41a810",
+    "file_id": "file_000000001934821283039952d15fa399",
+    "status": "succeeded",
+    "local_metadata_applied": true
+  },
+  {
+    "file_name": "quick-correct-cancellation.gif",
+    "library_file_id": "libfile_fde3_f-40116660965c819197f05b1ebc8c7196_2841ca9da26c8191b7a266fa9b41a810",
+    "file_id": "file_000000006e6c82128ca774291b761219",
+    "status": "succeeded",
+    "local_metadata_applied": true
+  },
+  {
+    "file_name": "edge-hint-activation.gif",
+    "library_file_id": "libfile_fde3_f-8ab678fcb9b88191a1da4f1856eaa116_2841ca9da26c8191b7a266fa9b41a810",
+    "file_id": "file_0000000029748212bbff1d81486b7b1d",
+    "status": "succeeded",
+    "local_metadata_applied": true
+  },
+  {
+    "file_name": "cue-audio.mp4",
+    "library_file_id": "libfile_fde3_f-68ec0afa09348191a04c4ca21e64f842_2841ca9da26c8191b7a266fa9b41a810",
+    "file_id": "file_00000000d4288212a6b7bd7811b376e8",
+    "status": "succeeded",
+    "local_metadata_applied": true
+  },
+  {
+    "file_name": "release-info.txt",
+    "library_file_id": "libfile_fde3_f-cb9c2c7aa3008191a00478b8cca222c0_2841ca9da26c8191b7a266fa9b41a810",
+    "file_id": "file_000000008708821280bd57dd9d3b49af",
+    "status": "succeeded",
+    "local_metadata_applied": true
+  }
+]

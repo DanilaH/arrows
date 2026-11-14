@@ -1,0 +1,17 @@
+{
+  "javascriptFiles": 5,
+  "forbiddenTestMarkers": [
+    "assistanceQA",
+    "controlledNative",
+    "deferProgressWrite",
+    "readinessPhase",
+    "ActualUiMotion",
+    "unlockCueObservation",
+    "assistanceFixture",
+    "Test reward transport"
+  ],
+  "leaks": [],
+  "analyticsSchemaChanged": false,
+  "contentSaveRulesSdkRuntimePinsChanged": false,
+  "verification": "All captured JS checked for named isolated-transport/test hooks; git diff19b versus56f65a4 confirms domain/content/progression/analytics/SDK/pins unchanged. Native change is version only."
+}

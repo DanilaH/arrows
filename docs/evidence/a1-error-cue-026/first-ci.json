@@ -1,0 +1,28 @@
+{
+  "source": "19b2fecbe123c8c7b4d3666949b800f725b635f1",
+  "run": 43625976791,
+  "status": "failure",
+  "passed": 377,
+  "failed": 5,
+  "browserDuration": "20.1m",
+  "failures": [
+    {
+      "test": "a1ErrorCue Q17 phone + desktop",
+      "cause": "Late assertion raced natural finite unlock completion; validation-only cb668fe replaces it with original timer/at-input observation."
+    },
+    {
+      "test": "assistanceIteration ordinary cascade phone",
+      "observed": "8 versus <=2 RAF callbacks in a fixed500ms sample."
+    },
+    {
+      "test": "phoneFeelV2 completed zoomed diagram phone",
+      "observed": "Win remained hidden at5s assertion timeout after canonical completion."
+    },
+    {
+      "test": "seamlessEntry c20 desktop",
+      "observed": "240ms bridge was removed between remote assertions; locator timed out."
+    }
+  ],
+  "note": "Other failures are being investigated/repeated, not silently dismissed. Final validation is tracked separately.",
+  "diagnosticRepeat": "regression-repeats.json:12/12 PASS, no application or old-test edits"
+}

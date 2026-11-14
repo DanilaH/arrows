@@ -1,0 +1,27 @@
+[
+  {
+    "name": "arrows-0.26.0-code38.playtest.apk",
+    "bytes": 10410219,
+    "sha256": "ff20b7c3977e9f8fef37bd27a6ddce731899040a644e6bf0b98e4d0b2a41d102"
+  },
+  {
+    "name": "control-vs-cue.gif",
+    "bytes": 532563,
+    "sha256": "a6119b45336b269ec7530fcea7bf2a7a3c61f18841610d667aef7f6b34ac8e56"
+  },
+  {
+    "name": "quick-correct-cancellation.gif",
+    "bytes": 318483,
+    "sha256": "74b0632862a16e3270b2018ee8540818ca0b0f48386e485f808a07b62bc18410"
+  },
+  {
+    "name": "edge-hint-activation.gif",
+    "bytes": 342194,
+    "sha256": "f0acc702eb1be332342c9bc0433ecfaedfe2d54f868cf064d4134a2fba4ce278"
+  },
+  {
+    "name": "cue-audio.mp4",
+    "bytes": 45122,
+    "sha256": "149404bd69df3548cc37e73491d7633e2d614419def261a9ec6b60ea98062738"
+  }
+]

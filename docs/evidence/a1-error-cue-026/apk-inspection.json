@@ -1,0 +1,48 @@
+{
+  "source": "19b2fecbe123c8c7b4d3666949b800f725b635f1",
+  "package": "com.danilah.arrows.playtest",
+  "versionName": "0.26.0",
+  "versionCode": "38",
+  "label": "Стрелки · Тест",
+  "bytes": 10410219,
+  "sha256": "ff20b7c3977e9f8fef37bd27a6ddce731899040a644e6bf0b98e4d0b2a41d102",
+  "signature": {
+    "verified": true,
+    "v2": true,
+    "v3": false,
+    "certificates": [
+      "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36"
+    ]
+  },
+  "signatureVerifier": "Official com.android.tools.build:apksig:8.13.0 ApkVerifier",
+  "nativeConfig": {
+    "AD_MODE": "test",
+    "ANALYTICS_API_KEY": "",
+    "APPLICATION_ID": "com.danilah.arrows.playtest",
+    "INTERSTITIAL_AD_UNIT_ID": "demo-interstitial-yandex",
+    "REWARDED_AD_UNIT_ID": "demo-rewarded-yandex"
+  },
+  "payload": {
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "af511919772fb754ba61cabbc7506ecec27b03f934c1a069a4b74673c3e0622c",
+    "target-lab.html": "5e54a6f50012c85b3e9df7b09880a6aa4370e6699739d4394021f5f3da3fbc75",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/gestures-BVKjD7Ri.css": "4e0c5b3a661da0f94889f7990af5d3c0f87b4d863b87363128cd4f07571f59b4",
+    "assets/gestures-DKTqRgjw.js": "f21ba522847e82ec3fcc1be00e455dee46f00da69015e38e52bc952e7d35f082",
+    "assets/main-BcIsjk0v.js": "758a113b1d0c2ab6e854476a96f682cc092efe4e5ddb80ba8d302aff3caa5b94",
+    "assets/targetLab-BpEVJahx.js": "9826df43dae669f6a86b5c236d06d70d686d8a21175fcd3a1a1a29f3c3914351",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7"
+  },
+  "capturePayloadMatches": true,
+  "physicalInstallUpdate": "NOT RUN",
+  "ciRun": 43625976791,
+  "reproducedByValidationRun": 43626439148,
+  "validationApkByteIdentical": true
+}

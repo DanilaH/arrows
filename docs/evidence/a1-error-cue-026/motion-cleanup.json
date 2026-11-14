@@ -1,0 +1,86 @@
+{
+  "source": "cb668fe1d9d03a23cdccc5a162668251e12f7b6c",
+  "method": "Actual UI motion source bundled by Vite in isolated Chromium component DOM; complements real production-game E2E, not native hardware evidence.",
+  "rows": [
+    {
+      "reduced": false,
+      "action": "cancel",
+      "shown": 0,
+      "cleanup": true,
+      "noRemainingRaf": true,
+      "independentPressArrival": true
+    },
+    {
+      "reduced": false,
+      "action": "finish",
+      "shown": 0,
+      "cleanup": true,
+      "noRemainingRaf": true,
+      "independentPressArrival": false
+    },
+    {
+      "reduced": false,
+      "action": "destroy",
+      "shown": 0,
+      "cleanup": true,
+      "noRemainingRaf": true,
+      "independentPressArrival": false
+    },
+    {
+      "reduced": false,
+      "action": "resize",
+      "shown": 0,
+      "cleanup": true,
+      "noRemainingRaf": true,
+      "independentPressArrival": false
+    },
+    {
+      "reduced": false,
+      "action": "paint-then-destroy",
+      "shown": 1,
+      "cleanup": true,
+      "noRemainingRaf": true,
+      "independentPressArrival": false
+    },
+    {
+      "reduced": true,
+      "action": "cancel",
+      "shown": 0,
+      "cleanup": true,
+      "noRemainingRaf": true,
+      "independentPressArrival": true
+    },
+    {
+      "reduced": true,
+      "action": "finish",
+      "shown": 0,
+      "cleanup": true,
+      "noRemainingRaf": true,
+      "independentPressArrival": false
+    },
+    {
+      "reduced": true,
+      "action": "destroy",
+      "shown": 0,
+      "cleanup": true,
+      "noRemainingRaf": true,
+      "independentPressArrival": false
+    },
+    {
+      "reduced": true,
+      "action": "resize",
+      "shown": 0,
+      "cleanup": true,
+      "noRemainingRaf": true,
+      "independentPressArrival": false
+    },
+    {
+      "reduced": true,
+      "action": "paint-then-destroy",
+      "shown": 1,
+      "cleanup": true,
+      "noRemainingRaf": true,
+      "independentPressArrival": false
+    }
+  ]
+}

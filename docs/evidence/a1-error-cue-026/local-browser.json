@@ -1,0 +1,14 @@
+{
+  "source": "ad75a1a62b6dd6dafa48fede4d26ade75c2b9004",
+  "applicationSource": "19b2fecbe123c8c7b4d3666949b800f725b635f1",
+  "command": "npx playwright test --workers=4",
+  "tests": 382,
+  "passed": 382,
+  "failed": 0,
+  "duration": "9.5m",
+  "profiles": [
+    "phone",
+    "desktop"
+  ],
+  "surface": "Production dist plus isolated fixtures for existing platform/receipt/gesture scenarios. No phone/SDK/human claim."
+}
