@@ -6,8 +6,8 @@
     {
       "id": 132550830886,
       "name": "web",
-      "status": "in_progress",
-      "conclusion": null
+      "status": "completed",
+      "conclusion": "success"
     },
     {
       "id": 132550831113,
@@ -26,10 +26,15 @@
   "componentCleanupCases": 10,
   "narrowThemeMotionIdleCases": 4,
   "focusedStableObserverRepeats": 24,
-  "hostedFullBrowser": "IN PROGRESS, not claimed green",
+  "hostedFullBrowser": "382/382 PASS",
   "applicationPayloadByteUnchangedSince19b2fec": true,
   "apkByteIdenticalAcrossRuns": [
     43625976791,
-    43626439148
-  ]
+    43626439148,
+    43628885996
+  ],
+  "hostedBrowserTests": 382,
+  "hostedBrowserPassed": 382,
+  "hostedBrowserFailed": 0,
+  "outcome": "GREEN"
 }

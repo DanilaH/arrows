@@ -44,5 +44,7 @@
   "physicalInstallUpdate": "NOT RUN",
   "ciRun": 43625976791,
   "reproducedByValidationRun": 43626439148,
-  "validationApkByteIdentical": true
+  "validationApkByteIdentical": true,
+  "greenCiRun": 43628885996,
+  "greenCiApkByteIdentical": true
 }
