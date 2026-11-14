@@ -177,15 +177,32 @@ test('Q14 restart cancels its cue and the new attempt binds the future preferenc
   await expect(page.locator('.a1-error-cue')).toHaveCount(0);await page.waitForTimeout(1500);expect(await count(page,'shown')).toBe(1);
 });
 test('Q17 real calendar unlock keeps its presentation while first-error cue is skipped',async({page})=>{
+  const blocked=campaign[19]!.arrows.find(v=>!canExit(v,campaign[19]!.arrows))!.id;
   const s=seed();s.index=18;s.campaign=freshAttempt(campaign[18]!);s.campaign.started=true;s.campaign.board={...s.campaign.board,removed:s.campaign.level.arrows.slice(0,-1).map(a=>a.id)};
   s.helpLedger.assignments[s.campaign.board.id]='single-v2';s.helpLedger.nextVariant='single-v2';s.wins=s.wins.slice(0,18);s.seenUnlocks=['collection'];
-  await boot(page,'cue',{state:decodeSave(s)});await tap(page,s.campaign.level.arrows.at(-1)!.id);await page.locator('#next:visible').click();await page.locator('.game-unlock').waitFor();
+  await boot(page,'cue',{state:decodeSave(s)});await tap(page,s.campaign.level.arrows.at(-1)!.id);
+  await page.evaluate(()=>{
+    const timeout=window.setTimeout.bind(window),observation={startedAt:0,firedAt:0,atInput:false};Reflect.set(window,'unlockCueObservation',observation);
+    window.setTimeout=((handler:TimerHandler,ms?:number,...args:unknown[])=>{
+      if(ms===2800 && typeof handler==='function'){observation.startedAt=Date.now();return timeout(()=>{observation.firedAt=Date.now();handler(...args);},ms);}
+      return timeout(handler,ms,...args);
+    }) as typeof window.setTimeout;
+  });
+  await page.locator('#next:visible').click();await page.locator('.game-unlock').waitFor();
   // Speed only the existing idle sampler; the real finite unlock/WAAPI keeps its clock.
   await page.evaluate(()=>{const now=performance.now.bind(performance),start=now();performance.now=()=>start+(now()-start)*6;});
+  await page.locator('#hint:visible').waitFor();
+  // Controlled overlap: finish only the existing Hint entrance with WAAPI.
+  // The real unlock keeps its original animation and2800ms lifetime.
+  await page.locator('#hint').evaluate(e=>{for(const animation of e.getAnimations())animation.finish();});
   await settled(page);await expect(page.locator('.game-unlock')).toBeVisible();
-  const a=(await saved(page)).campaign,b=new Board(a.level,a.board.id,a.board),blocked=b.remaining.find(v=>!canExit(v,b.remaining))!;
-  await error(page,blocked.id);await expect(page.locator('.game-unlock')).toBeVisible();expect(await trace(page)).toEqual([]);
+  await page.evaluate(()=>{
+    const element=document.querySelector('.game-unlock')!,observation=Reflect.get(window,'unlockCueObservation');
+    document.querySelector('#game-root')!.addEventListener('pointerup',()=>{observation.atInput=element.isConnected;},{once:true,capture:true});
+  });
+  await error(page,blocked);expect(await trace(page)).toEqual([]);
   await expect(page.locator('.game-unlock')).toHaveCount(0);expect(await page.locator('.a1-error-cue').count()).toBe(0);
+  const observation=await page.evaluate(()=>Reflect.get(window,'unlockCueObservation'));expect(observation.atInput).toBe(true);expect(observation.firedAt).toBeGreaterThanOrEqual(observation.startedAt+2790);
 });
 test('Q01/Q10 production browser and isolated B1 have no candidate or trace',async({page})=>{
   await page.goto('/');await page.locator('#home-settings').click();await expect(page.locator('#a1-cue-qa-mode')).toHaveCount(0);expect(await notes(page)).toBeNull();
