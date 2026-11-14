@@ -2,13 +2,14 @@ import { createBoardTransition, type BoardArtwork } from './boardTransition';
 /** Bounded presentation only. No progress, rewards or scene ownership lives here. */
 export function createUiMotion() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const running = new Set<() => void>(), presses = new Map<number, { button: HTMLElement; animation: Animation | undefined; x: number; y: number }>();
+  const running = new Set<() => void>(), presses = new Map<number, { button: HTMLElement; x: number; y: number }>();
+  const pressPaint = new Map<HTMLElement, { layer: HTMLElement; stop(): void }>();
   const deferredRoutes = new Set<() => void>();
   const taps = new Map<HTMLElement, () => void>();
   const clearTaps = (): void => { for (const end of [...taps.values()]) end(); };
   const refillEnds: (()=>void)[] = [];
   const stopRefill = (): void => { for(const end of refillEnds.splice(0))end(); };
-  const dialogs = new Map<HTMLDialogElement, { finish(): void; cancel(): void }>();
+  const dialogs = new Map<HTMLDialogElement, { kind: 'open' | 'close'; finish(): void; cancel(): void }>();
   let snapshotSerial = 0;
   let arrivalFinish: (()=>void) | undefined;
   let routeFinish: (() => void) | undefined, routeBusy = false, alive = true;
@@ -35,16 +36,31 @@ export function createUiMotion() {
     if(reduced.matches)element.style.opacity='1';
     else group.own(animate(element,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)',offset:.12},{opacity:1,transform:'translateY(0)',offset:.82},{opacity:0,transform:'translateY(-3px)'}],duration,undefined,0,'linear'));
   };
-  const releasePress = (id: number, bounce: boolean): void => {
-    const press = presses.get(id); if (!press) return; presses.delete(id); press.animation?.cancel(); press.button.removeAttribute('data-pressed');
-    if (bounce && press.button.isConnected && !press.button.matches(':disabled')) animate(press.button, [{ transform: 'scale(.94)' }, { transform: 'scale(1.025)', offset: .65 }, { transform: 'scale(1)' }], 210);
+  // A pointer-transparent face owns press motion. The actual button and its
+  // authored transform (including centred lab controls) never change geometry.
+  const paintPress = (button: HTMLElement, held: boolean, pulse = false): void => {
+    const previous = pressPaint.get(button), layer = previous?.layer ?? document.createElement('i');
+    const from = previous ? { opacity: getComputedStyle(layer).opacity, transform: getComputedStyle(layer).transform } : { opacity: '0', transform: 'scale(.97)' };
+    previous?.stop();
+    if (!button.isConnected) { layer.remove(); pressPaint.delete(button); return; }
+    layer.className = 'ui-press-feedback'; layer.setAttribute('aria-hidden', 'true');
+    if (!layer.isConnected) button.prepend(layer);
+    layer.style.opacity = held ? '.16' : '0'; layer.style.transform = 'scale(1)';
+    const state = { layer, stop: (): void => {} }; pressPaint.set(button, state);
+    state.stop = animate(layer, pulse ? [from, { opacity: .16, transform: 'scale(1)', offset: .25 }, { opacity: 0, transform: 'scale(1)' }] : [from, { opacity: held ? .16 : 0, transform: 'scale(1)' }], pulse ? 170 : held ? 55 : 130, () => {
+      if (!held && pressPaint.get(button) === state) { pressPaint.delete(button); layer.remove(); }
+    });
+  };
+  const releasePress = (id: number, _accepted: boolean): void => {
+    const press = presses.get(id); if (!press) return; presses.delete(id);
+    if ([...presses.values()].some(p => p.button === press.button)) return;
+    press.button.removeAttribute('data-pressed'); paintPress(press.button, false);
   };
   const down = (event: PointerEvent): void => {
     const button = (event.target as Element).closest<HTMLElement>('button,summary,[role="button"]');
     if (!button || button.matches(':disabled') || event.button!==0) return;
-    releasePress(event.pointerId, false);button.setAttribute('data-pressed','true');
-    const animation = !reduced.matches && button.animate ? button.animate([{ transform: 'scale(1)' }, { transform: 'scale(.94)' }], { duration: 65, fill: 'forwards' }) : undefined;
-    presses.set(event.pointerId, { button, animation, x:event.clientX,y:event.clientY });
+    releasePress(event.pointerId, false); button.setAttribute('data-pressed','true');
+    presses.set(event.pointerId, { button, x:event.clientX,y:event.clientY }); paintPress(button, true);
   };
   const up = (event: PointerEvent): void => releasePress(event.pointerId, presses.get(event.pointerId)?.button.contains(event.target as Node) ?? false);
   const cancel = (event: PointerEvent): void => releasePress(event.pointerId, false);
@@ -53,10 +69,24 @@ export function createUiMotion() {
   const blur = (): void => { for (const id of [...presses.keys()]) releasePress(id, false); };
   const keyboard = (event: MouseEvent): void => {
     if (event.detail !== 0) return; const button = (event.target as Element).closest<HTMLElement>('button,summary,[role="button"]');
-    if (button && !button.matches(':disabled')) animate(button, [{ transform: 'scale(.97)' }, { transform: 'scale(1)' }], 170);
+    if (button && !button.matches(':disabled')) paintPress(button, false, true);
   };
   const settle = (): void => { clearTaps(); arrivalFinish?.(); stopRefill(); blur(); routeFinish?.(); for (const finish of [...running]) finish(); };
   const visibility = (): void => { if (document.hidden) settle(); };
+  const dialogMotion = (dialog: HTMLDialogElement, kind: 'open' | 'close', from: Keyframe, after = (): void => {}): void => {
+    dialogs.get(dialog)?.cancel();
+    let ended = false;
+    const owned: (() => void)[] = [];
+    const end = (complete: boolean): void => {
+      if (ended) return; ended = true;
+      if (dialogs.get(dialog) === state) dialogs.delete(dialog);
+      for (const finish of owned) finish();
+      if (complete && kind === 'close') { dialog.close(); after(); }
+    };
+    const state = { kind, finish: () => end(true), cancel: () => end(false) };
+    dialogs.set(dialog, state);
+    owned.push(animate(dialog, [from, kind === 'open' ? { opacity: 1, transform: 'translateY(0) scale(1)' } : { opacity: 0, transform: 'translateY(9px) scale(.98)' }], kind === 'open' ? 200 : 135, state.finish));
+  };
   document.addEventListener('pointerdown', down, true); document.addEventListener('pointerup', up, true); document.addEventListener('pointercancel', cancel, true); document.addEventListener('pointermove',move,true);document.addEventListener('scroll',scrollPress,true);
   document.addEventListener('click', keyboard, true); document.addEventListener('visibilitychange', visibility); window.addEventListener('blur', blur); window.addEventListener('resize', settle);
   return {
@@ -165,17 +195,16 @@ export function createUiMotion() {
       }
     },
     open(dialog: HTMLDialogElement): void {
-      dialogs.get(dialog)?.cancel(); dialogs.delete(dialog);
+      const visible = dialog.open, style = visible ? getComputedStyle(dialog) : null;
+      const from = style ? { opacity: style.opacity, transform: style.transform } : { opacity: 0, transform: 'translateY(12px) scale(1)' };
       if (!dialog.open) dialog.showModal();
-      for (const el of [...dialog.querySelectorAll<HTMLElement>('header,.settings-section,.settings-group,.trophy-portrait,.trophy-rule,.primary')].slice(0,6)) animate(el,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],140,undefined,35);
-      animate(dialog, [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }], 200);
+      dialogMotion(dialog, 'open', from);
     },
     close(dialog: HTMLDialogElement, after: () => void): boolean {
       if (!dialog.open) { after(); return false; }
-      if (dialogs.has(dialog)) return true;
-      let cancelled = false;
-      const finish = animate(dialog, [{ opacity: 1, transform: 'translateY(0) scale(1)' }, { opacity: 0, transform: 'translateY(9px) scale(.98)' }], 135, () => { if (cancelled) return; dialogs.delete(dialog); dialog.close(); after(); });
-      if (dialog.open) dialogs.set(dialog, { finish, cancel() { cancelled = true; dialogs.delete(dialog); finish(); } }); return true;
+      if (dialogs.get(dialog)?.kind === 'close') return true;
+      const style = getComputedStyle(dialog), from = { opacity: style.opacity, transform: style.transform };
+      dialogMotion(dialog, 'close', from, after); return true;
     },
     reveal(element: Element): void { animate(element, [{ opacity: .3, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }], 200); },
     hintReady(element: Element): void { animate(element,[{opacity:0,transform:'translateY(6px) scale(.94)'},{opacity:1,transform:'translateY(0) scale(1.045)',offset:.35},{opacity:1,transform:'translateY(0) scale(1)',offset:.55},{opacity:1,transform:'scale(1.035)',offset:.78},{opacity:1,transform:'scale(1)'}],900); },

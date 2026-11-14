@@ -4,7 +4,7 @@ import { campaign } from '../../src/content/campaign';
 import { defaultSettings, SETTINGS_KEY } from '../../src/app/settings';
 
 // Internal fixtures verify the exact unlock boundary, not human-earned progress.
-for (const index of [0, 8, 9, 18, 19]) test(`shows full locks and readable thresholds at campaign index ${index}`, async ({page}) => {
+for (const index of [0, 8, 9, 18, 19]) test(`keeps destination names and readable lock thresholds at campaign index ${index}`, async ({page}) => {
   const state=freshSave();state.index=index;state.campaign=freshAttempt(campaign[index]!);
   state.wins=campaign.slice(0,index).map((level,i)=>({attempt:`phone-past-${i}`,levelId:level.id,activeMs:1000,completedAt:i*1000,localDate:'2026-11-12',mistakes:0}));
   state.seenUnlocks=['collection','calendar'];
@@ -14,7 +14,8 @@ for (const index of [0, 8, 9, 18, 19]) test(`shows full locks and readable thres
   for(const [id,threshold] of [['collection',10],['calendar',20]] as const){
     const button=page.locator('#home-'+id),locked=index+1<threshold;
     await expect(button).toHaveAttribute('data-locked',String(locked));
-    if(locked){await expect(button).toBeDisabled();await expect(button.locator('.nav-label')).toHaveText(`Уровень ${threshold}`);await expect(button.locator('rect')).toHaveCount(1);await expect(button).toHaveAccessibleName(new RegExp(`Откроется на уровне ${threshold}`));}
+    await expect(button.locator('.nav-label')).toHaveText(id==='calendar'?'Календарь':'Коллекция');
+    if(locked){await expect(button).toBeDisabled();await expect(button.locator('.nav-lock')).toHaveText(String(threshold));await expect(button).toHaveAccessibleName(new RegExp(`Откроется на уровне ${threshold}`));}
     else await expect(button).toBeEnabled();
   }
   const box=await page.locator('.home-board').boundingBox(),nav=await page.locator('#meta-nav').boundingBox();

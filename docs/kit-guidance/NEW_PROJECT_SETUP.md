@@ -1,6 +1,6 @@
 # New Game Repo Setup — минимальная и воспроизводимая инициализация
 
-**Действует:** 12.11.2026. **Принцип:** проект получает доказанный технический baseline своей платформы, короткие инструкции агента, локальную карту выбора исследований и **точный guidance SHA** (а Yandex bootstrap отдельно закрепляет ту же версию runtime-зависимости). Он НЕ получает все игровые механики, директора, рекламную политику или контент только потому, что они существуют в kit.
+**Действует:** 14.11.2026. **Принцип:** проект получает доказанный технический baseline своей платформы, короткие инструкции агента, локальную карту выбора исследований и **точный guidance SHA** (а Yandex bootstrap отдельно закрепляет ту же версию runtime-зависимости). Он НЕ получает все игровые механики, директора, рекламную политику или контент только потому, что они существуют в kit.
 
 ## 1. Выбрать тип проекта, не смешивая разные хосты
 
@@ -14,7 +14,7 @@
 
     npm run guidance:init -- ../my-android-game --platform android --name my-android-game
 
-Команда не устанавливает Phaser/Capacitor, Яндекс мобильную рекламу, Android signing, работу с банковскими и store аккаунтами. Она создаёт AGENTS.md, docs/PROJECT_DECISIONS.md и локальные docs/kit-guidance/ с ссылками на exact kit SHA. Затем отдельно провести android startup, ads, save, UI, native acceptance по [Android Ads](https://github.com/DanilaH/mini-games-kit/blob/e2382670fbd5c2aa76462fea688c60de2b067392/docs/android/ADS_AND_LIFECYCLE.md) и [Android Release](https://github.com/DanilaH/mini-games-kit/blob/e2382670fbd5c2aa76462fea688c60de2b067392/docs/ANDROID_RELEASE_ACCEPTANCE.md). **Будущий android-phaser bootstrap — самостоятельная работа** после сравнения не менее двух реальных Android consumers и проверки полного package lifecycle. Не добавлять недоказанную сборку.
+Команда не устанавливает Phaser/Capacitor, Яндекс мобильную рекламу, Android signing, работу с банковскими и store аккаунтами. Она создаёт AGENTS.md, docs/PROJECT_DECISIONS.md и локальные docs/kit-guidance/ с ссылками на exact kit SHA. Затем отдельно провести android startup, ads, save, UI, native acceptance по [Android Ads](https://github.com/DanilaH/mini-games-kit/blob/e04a3fe87ca93d506e01df4acc5afe690408cefa/docs/android/ADS_AND_LIFECYCLE.md) и [Android Release](https://github.com/DanilaH/mini-games-kit/blob/e04a3fe87ca93d506e01df4acc5afe690408cefa/docs/ANDROID_RELEASE_ACCEPTANCE.md). **Будущий android-phaser bootstrap — самостоятельная работа** после сравнения не менее двух реальных Android consumers и проверки полного package lifecycle. Не добавлять недоказанную сборку.
 
 **Существующий репозиторий:** guidance:init намеренно **не переписывает существующий AGENTS.md и docs/PROJECT_DECISIONS.md**. Если они уже существуют, выполнить безопасное дополняющее подключение:
 
@@ -34,11 +34,13 @@
 
 Не создаются: код и ассеты из чужой игры, release keys, production ad IDs, store assets, gameplay policy, общий analytics/backend, исторические копии всех научных файлов, обязательные тысячи строк test harness. Полные research docs доступны на GitHub под **проверенным pinned SHA** по ссылкам в маршрутизаторе.
 
+**UI с первой задачи:** локальный Task Router содержит прямые pinned-ссылки на [UX & Art System](https://github.com/DanilaH/mini-games-kit/blob/e04a3fe87ca93d506e01df4acc5afe690408cefa/docs/visual-preproduction/UX_AND_ART_SYSTEM.md), [Stable Progress UI](https://github.com/DanilaH/mini-games-kit/blob/e04a3fe87ca93d506e01df4acc5afe690408cefa/docs/layout/STABLE_PROGRESS_UI.md) и [UI Motion Recipes](https://github.com/DanilaH/mini-games-kit/blob/e04a3fe87ca93d506e01df4acc5afe690408cefa/docs/feel/UI_MOTION_RECIPES.md). AGENTS требует выбирать подходящий маршрут до реализации UI и проверять затронутые состояния. PROJECT_DECISIONS содержит место для профиля конкретной игры: компоненты/токены, основные действия, движение, отмена/reduced motion и осознанные исключения. Заполнять только принятые решения; существующая Art Bible может оставаться их источником. Эти документы не устанавливают новый UI runtime или общую тему.
+
 ## 3. Перед первым gameplay implementation
 
 1. Проверить, что origin boilerplate соответствует платформе и поддерживает реальные game start/stop/save/SDK ошибки. Завести CI, минимум unit/build и хотя бы один реальный gesture/viewport smoke до релиза.
 2. Из local Task Router выбрать реальную задачу: core prototype, input/UX, reference reproduction, asset production, release и т.д. Не читать каждый архивный research paper на каждый баг.
-3. Открыть [Kit public API](https://github.com/DanilaH/mini-games-kit/blob/e2382670fbd5c2aa76462fea688c60de2b067392/docs/API.md) закреплённого SHA и сделать явный **adoption matrix**: REUSE (импорт и тест), NOT APPLICABLE, LOCAL POLICY (почему не в kit), MISSING (доказанный недостающий контракт). Для часто нужных ресурсов смотреть storage, durable receipts, activity coordinator, audio, layout, haptics, loading/asset formatting.
+3. Открыть [Kit public API](https://github.com/DanilaH/mini-games-kit/blob/e04a3fe87ca93d506e01df4acc5afe690408cefa/docs/API.md) закреплённого SHA и сделать явный **adoption matrix**: REUSE (импорт и тест), NOT APPLICABLE, LOCAL POLICY (почему не в kit), MISSING (доказанный недостающий контракт). Для часто нужных ресурсов смотреть storage, durable receipts, activity coordinator, audio, layout, haptics, loading/asset formatting.
 4. Не копировать готовый экспорт в исходники ради удобства: использовать dependency/совместимый path, pin/upgrade review. На React/DOM/Phaser/Android распространять только подходящий runtime contract; Yandex SDK web отличается от Yandex Mobile Ads Android.
 5. Зафиксировать game-specific source of truth: правила/состояния, RNG, версии сохранения, ориентации, основное действие, onboarding, платформу, эстетический выбор и ограничения.
 6. Для конкретного референса открыть Reference Protocol, снять наблюдаемые transition/gestures и составить gap matrix. Для нового арт направления до массового производства — отдельный Visual Preproduction/owner approval.
@@ -52,13 +54,42 @@
 
 **Если доступ к pinned GitHub закрыт:** писать NOT READ / UNKNOWN, использовать уже локально собранный код/отчёты, не придумывать содержание исследования. Возможность скачать полный архив заранее для offline работы — отдельный ручной action, не обязательная дублирующая часть bootstrap.
 
-## 5. Назначение AGENTS.md и отличие платформ
+## 5. Проверка целостности агентских инструкций
+
+Новые проекты получают короткий CLAUDE.md-мост для Claude Code и основной AGENTS.md для Codex/Copilot. Для уже существующих репозиториев не перезаписывать чужой CLAUDE.md; если он используется, вручную связать его с AGENTS.md и локальным Task Router после review.
+
+Команды из рабочего mini-games-kit:
+
+    npm run guidance:doctor -- ../my-android-game --strict
+    npm run guidance:doctor -- ../existing-game --expected-kit-ref <new-approved-kit-sha>
+
+Doctor только читает файлы: наличие local router/reference/kit feedback, согласованность ссылок на точный SHA, pinned ревизии в AGENTS и видимую установленную runtime-зависимость. Флаг --json выводит JSON, --strict возвращает ошибку при нарушении обязательных инвариантов. --expected-kit-ref сообщает о возможном устаревании исследовательских материалов, но никогда не переписывает runtime/pins/проектные решения.
+
+В `uiRoutes` doctor отдельно показывает найденные и отсутствующие прямые UI-ссылки на текущем guidance SHA. Название файла или голый URL не заменяют Markdown-маршрут. Для старого consumer отсутствие нового маршрута даёт `UI_ROUTES_MISSING` warning, не ошибку `--strict`; несовместимые SHA остаются ошибкой. `bootstrap:check` требует все три маршрута в новых init/create/adopt результатах и проверяет испорченные пути/пины. `bootstrap:smoke` проверяет маршруты перед сборкой созданного Yandex-проекта. Это проверка файлов и ссылок, не поведения модели и не доступности GitHub из её среды.
+
+Две независимые проверки:
+- File check: doctor доказывает, что необходимые документы и ссылки есть и согласованы.
+- Actual harness smoke: в новой агентской сессии попросить назвать реально загруженные instructions, выбранный Task Router route и guidance SHA, а перед импортом API — отдельный runtime SHA. Doctor не доказывает, что модель прочла файлы.
+
+По официальным документам Codex загружает AGENTS.md при старте сессии, Claude Code загружает CLAUDE.md; Copilot использует AGENTS.md и/или отдельные репозиторные инструкции в зависимости от режима. Не создавать конфликтующих копий. Источники: [Codex](https://learn.chatgpt.com/docs/agent-configuration/agents-md), [Claude](https://support.claude.com/en/articles/14553240-give-claude-context-claude-md-and-better-prompts), [Copilot](https://docs.github.com/en/copilot/concepts/prompting-and-context/custom-instructions).
+
+**Обновление текущего проекта:** новый research SHA — сигнал для отдельного review diff, не основание тихо менять pinned runtime. В существующем проекте AGENTS/PROJECT_DECISIONS могли редактироваться; команды автоматического безопасного overwrite старых инструкций нет.
+
+Для подключения обновлённых UI-правил в уже подключённой игре:
+
+1. Взять актуальную рабочую ветку и сохранить более свежую работу/решения владельца, включая выключенные фичи. Проверить отдельно guidance и npm/vendor runtime pins.
+2. Сравнить прежние local guides с новой закреплённой ревизией. Можно создать временный guidance-only проект через `guidance:init -- <temporary-empty-dir> --kit-ref <approved-sha>` из checkout **этого же SHA**, затем перенести проверенный diff `docs/kit-guidance/`. Не запускать `guidance:adopt` повторно поверх уже установленных guides.
+3. Согласованно обновить guidance SHA и ссылки, короткое UI-требование в существующем AGENTS и проектный UI-профиль там, где он нужен. Проверить, что CLAUDE-мост ссылается на AGENTS/Task Router; не дублировать в нём UI-правила. Не заменять проектные инструкции шаблоном, не менять runtime pin ради чтения документации.
+4. Выполнить `guidance:doctor -- <game> --expected-kit-ref <approved-sha> --strict --json`, убедиться в отсутствии ошибок, предупреждения об устаревшем SHA и пропущенных UI-маршрутов. Проверить diff; doctor сам файлы не меняет.
+5. В целевой агентской сессии применить один нужный UI-маршрут и предъявить фактическую проверку изменённого состояния. Достаточный отчёт: что применено, что уже соответствовало, осознанное исключение и кадр/запись. Установка правил сама по себе не полирует игру.
+
+## 6. Назначение AGENTS.md и отличие платформ
 
 У Codex, GitHub Copilot и Claude Code есть поддержка проектных инструкций, но **конкретный loader и precedence зависят от агента/harness**. Краткий repo-root AGENTS — наиболее переносимый общий минимум; в Codex инструкции автоматически читаются при старте, nested AGENTS в подпапках применяются к своим областям; у Copilot/Claude может потребоваться собственная конфигурация/проверка. Проверить реально loaded instructions на целевой среде, не обещать магическое 100% выполнение по Markdown.
 
 Если агент регулярно игнорирует правило, добавить **автоматический тест/CI проверку**, либо специализированный навык/skill при доказанной необходимости, а не ещё абзацы в root AGENTS.
 
-## 6. Первое техническое подтверждение готовности
+## 7. Первое техническое подтверждение готовности
 
 **Yandex Phaser:** complete npm install, npm run typecheck, npm test, npm run build, npm run release:check, smoke input/lifecycle real/mock, hosted DRAFT только при реальной нужде. CI в kit проверяет создание проекта и его compile/test/audit.
 

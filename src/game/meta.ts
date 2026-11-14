@@ -68,8 +68,8 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       button.setAttribute('aria-label',label+(!available?'. '+reason:id==='home-collection'&&newAward?'. '+text.newAward:''));
       if(!available)button.title=reason;else button.removeAttribute('title');
       button.dataset.locked=String(!available);
-      button.querySelector('.nav-label')!.textContent=available?label:`${text.level} ${route==='calendar'?20:10}`;
-      button.querySelector('.nav-icon')!.innerHTML=(available?icon:lockIcon)+(id==='home-collection'&&newAward?'<i class="new-dot"></i>':'');
+      button.querySelector('.nav-label')!.textContent=label;
+      button.querySelector('.nav-icon')!.innerHTML=icon+(!available?`<span class="nav-lock" aria-hidden="true">${lockIcon}<b>${route==='calendar'?20:10}</b></span>`:'')+(id==='home-collection'&&newAward?'<i class="new-dot"></i>':'');
       if(id==='home-settings')button.setAttribute('aria-haspopup','dialog');
     }
   };

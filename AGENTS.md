@@ -42,9 +42,9 @@ Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the
 
 ## mini-games-kit: task-routed research and kit feedback
 
-Existing Arrows product/technical rules above remain authoritative. Before substantial work, open docs/kit-guidance/TASK_ROUTER.md; choose 1–2 relevant methodologies instead of applying every framework. For an original-game video/GIF/screenshot or a parity/feel request, first follow docs/kit-guidance/REFERENCE_PROTOCOL.md and separate OBSERVED/INFERRED/NOT INSPECTED.
+Existing Arrows product/technical rules above remain authoritative. Before substantial work, open docs/kit-guidance/TASK_ROUTER.md; choose 1–2 relevant methodologies instead of applying every framework. For UI work select the UI composition, motion or stable-layout route before implementation, preserve approved components/tokens, and verify only affected states with genuine evidence. For an original-game video/GIF/screenshot or a parity/feel request, first follow docs/kit-guidance/REFERENCE_PROTOCOL.md and separate OBSERVED/INFERRED/NOT INSPECTED.
 
-Research guidance snapshot: e2382670fbd5c2aa76462fea688c60de2b067392. The installed runtime mini-games-kit dependency remains separately pinned; **do not upgrade it or assume new exports exist**. For code reuse inspect the actual installed-runtime API and current docs/API.md before inventing helpers.
+Research guidance snapshot: e04a3fe87ca93d506e01df4acc5afe690408cefa. The installed runtime mini-games-kit dependency remains separately pinned; **do not upgrade it or assume new exports exist**. For code reuse inspect the actual installed-runtime API and current docs/API.md before inventing helpers.
 
 At the end of substantial implementation report KIT IMPACT: NONE / REUSE / IMPROVE / CANDIDATE / EXTRACTED with a reproducer and concrete upstream proposal when relevant (docs/kit-guidance/KIT_FEEDBACK_LOOP.md). No automatic game-rules, art, monetization or public store changes.
 

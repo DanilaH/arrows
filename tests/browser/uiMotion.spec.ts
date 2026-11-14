@@ -8,7 +8,9 @@ test('shows finite button and route motion, accepts a quick return and settles',
   await ready(page);
   const button = page.locator('#home-play'), box = (await button.boundingBox())!;
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await page.mouse.down();
-  await expect.poll(() => button.evaluate(e => getComputedStyle(e).transform)).not.toBe('none');
+  await expect(button).toHaveAttribute('data-pressed', 'true');
+  await expect.poll(() => button.locator('.ui-press-feedback').evaluate(e => Number(getComputedStyle(e).opacity))).toBeGreaterThan(.1);
+  expect(await button.boundingBox()).toEqual(box);
   await page.mouse.up(); await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'game');
   // Exercise navigation before the incoming motion finishes, without Playwright's stability wait.
   await page.locator('#choose-field').evaluate((e: HTMLButtonElement) => e.click());
