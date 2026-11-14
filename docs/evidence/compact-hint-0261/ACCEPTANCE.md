@@ -10,7 +10,7 @@ Implemented over current main907b4b2 without reverting newer work. Application s
 | First-error A1 cue | Own inward layer fits36px painted bounds; eligibility/default Off/1200ms/400ms reduced and cancellation unchanged. |
 | Actual presses | Centre/2px edge hold/release/cancel/Enter preserve target geometry and single request semantics. An initial child-order CSS rule exposed the bulb when press prepended its face; semantic hint-bulb class fixes this. First19/24 failures retained in checks.json; corrected24/24 PASS, not weaker assertions. |
 | Themes / motion / narrow / idle |4 frozen-payload dark/light × normal/reduced cases at320×700/DPR1.5 PASS; stable rect, visible text/video/cue, no overflow and idle after finish. |
-| Automated checks |174 unit/type/build PASS;24 phone +9 desktop affected browser cases PASS.19 JVM PASS, Android sync and normal+.playtest builds PASS. Full hosted CI43634090122 is still IN PROGRESS in this report snapshot; not represented as green. |
+| Automated checks |174 unit/type/build PASS;24 phone +9 desktop affected browser cases PASS.19 JVM PASS, Android sync and normal+.playtest builds PASS. Full hosted [CI43634090122](https://github.com/DanilaH/arrows/actions/runs/43634090122) GREEN:174 unit/type/build,386 browser,sync,19 JVM and both APK builds. |
 
 No game content/generator/save/earned/help strength/lives/error/flawless/lifetime gift/ad cadence/SDK/runtime/guidance pin or analytics-schema change. This is the same .playtest update identity; no kit/store publication.
 

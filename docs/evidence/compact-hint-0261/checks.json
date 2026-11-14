@@ -6,7 +6,7 @@
   "themeMotionNarrowIdleCases": 4,
   "outcome": "PASS targeted checks",
   "fullCiRun": 43634090122,
-  "fullCiStatus": "IN PROGRESS, not claimed green",
+  "fullCiStatus": "GREEN",
   "nativeBuild": "PASS normal and playtest",
   "before": {
     "width": 207,
@@ -25,5 +25,8 @@
     "failed": 5,
     "cause": "New CSS used svg:first-child; press prepended a face and exposed the bulb, changing width. Fixed with a semantic hint-bulb class; no acceptance threshold relaxed."
   },
-  "physicalPhone": "NOT RUN"
+  "physicalPhone": "NOT RUN",
+  "fullBrowserPassed": 386,
+  "fullBrowserFailed": 0,
+  "nativeTests": 19
 }
