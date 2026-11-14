@@ -55,7 +55,7 @@ test('early modal close starts from its displayed state and leaves focus usable'
   await page.locator('#home-play').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-screen','game');
 });
 
-for(const variant of ['route-v1'] as const) test(`${variant} frames its immutable earned group and yields to manual camera`,async({page})=>{
+for(const variant of ['route-v1','cascade-v1'] as const) test(`${variant} frames its immutable earned group and yields to manual camera`,async({page})=>{
   const s=freshSave();s.index=39;s.campaign=freshAttempt(campaign[39]!);const b=new Board(s.campaign.level,s.campaign.board.id);
   for(let i=0;i<21;i++)b.activate(`c40-${i}`);s.campaign.board=b.snapshot();s.campaign.started=true;s.campaign.view={centerX:32,centerY:10,zoom:3};
   s.helpLedger.assignments[b.attemptId]=variant;s.wins=campaign.slice(0,39).map((l,i)=>({attempt:`overview-${i}`,levelId:l.id,activeMs:1000,completedAt:i+1,mistakes:0}));
@@ -65,13 +65,18 @@ for(const variant of ['route-v1'] as const) test(`${variant} frames its immutabl
   await expect.poll(()=>page.evaluate(()=>!!Reflect.get(window,'assistanceFixture').snapshot().request)).toBe(true);
   await page.evaluate(()=>{const f=Reflect.get(window,'assistanceFixture');f.shown();f.earn();f.dismiss();});
   await expect.poll(()=>page.locator('#game-root').getAttribute(variant==='route-v1'?'data-help-route':'data-help-group')).not.toBe('[]');
-  await page.waitForTimeout(750);
+  await page.waitForTimeout(400);
   const view=await page.locator('#game-root').evaluate((e,variant)=>{
     const s=JSON.parse(localStorage.getItem('arrows.progress.v1')!),a=s.campaign,c=JSON.parse((e as HTMLElement).dataset.camera!),top=parseFloat((e as HTMLElement).style.getPropertyValue('--board-clear-top')),bottom=parseFloat((e as HTMLElement).style.getPropertyValue('--board-clear-bottom'));
     const ids=[a.hint,...JSON.parse(e.getAttribute(variant==='route-v1'?'data-help-route':'data-help-group')!)];
-    return{width:innerWidth,top,bottom,points:[...new Set(ids)].flatMap(id=>a.level.arrows.find((v:{id:string})=>v.id===id).path.map((p:{x:number;y:number})=>({x:c.x+p.x*c.scale,y:c.y+p.y*c.scale}))),plan:JSON.stringify(Object.values(s.helpLedger.requests).map((r:unknown)=>(r as {plan:unknown}).plan))};
+    const head=a.level.arrows.find((v:{id:string})=>v.id===a.hint).path.at(-1);
+    return{root:a.hint as string,head:{x:c.x+head.x*c.scale,y:c.y+head.y*c.scale},width:innerWidth,top,bottom,points:[...new Set(ids)].flatMap(id=>a.level.arrows.find((v:{id:string})=>v.id===id).path.map((p:{x:number;y:number})=>({x:c.x+p.x*c.scale,y:c.y+p.y*c.scale}))),plan:JSON.stringify(Object.values(s.helpLedger.requests).map((r:unknown)=>(r as {plan:unknown}).plan))};
   },variant);
   for(const p of view.points){expect(p.x).toBeGreaterThanOrEqual(12);expect(p.x).toBeLessThanOrEqual(view.width-12);expect(p.y).toBeGreaterThanOrEqual(view.top+12);expect(p.y).toBeLessThanOrEqual(view.bottom-12);}
+  // The 320ms overview has settled; the subsequent >=360ms path-light effect
+  // need not finish before accepting a real manual move.
+  await page.mouse.click(view.head.x,view.head.y);
+  await expect.poll(()=>page.evaluate(id=>JSON.parse(localStorage.getItem('arrows.progress.v1')!).campaign.board.removed.includes(id),view.root)).toBe(true);
   await page.mouse.move(190,420);await page.mouse.down();await page.mouse.move(245,455,{steps:3});await page.mouse.up();
   const camera=await page.locator('#game-root').getAttribute('data-camera');await page.waitForTimeout(650);expect(await page.locator('#game-root').getAttribute('data-camera')).toBe(camera);
   expect(await page.evaluate(()=>JSON.stringify(Object.values(JSON.parse(localStorage.getItem('arrows.progress.v1')!).helpLedger.requests).map((r:unknown)=>(r as {plan:unknown}).plan)))).toBe(view.plan);

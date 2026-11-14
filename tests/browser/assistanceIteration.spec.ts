@@ -20,6 +20,9 @@ for(const marked of [false,true])test(`fixed cascade actual writer/input ${marke
   expect((await saved(page)).helpLedger.requests[request.requestId].plan.bonus).toEqual(['c40-23','c40-24','c40-27']);
   await page.evaluate(()=>{const f=Reflect.get(window,'assistanceFixture');f.shown();f.earn();f.dismiss();});
   await expect(page.locator('#game-root')).toHaveAttribute('data-help-group',JSON.stringify(['c40-23','c40-24','c40-27']));
+  // Take coordinates after the bounded group overview; this case verifies the
+  // native/ordinary accounting, not interception of a moving camera.
+  await page.waitForTimeout(400);
   if(marked){await tap(page,'c40-23');await expect(page.locator('#hearts .empty')).toHaveCount(1);await tap(page,'c40-24');await expect(page.locator('#hearts .empty')).toHaveCount(2);}
   await tap(page,'c40-22');await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','15');
   const after=await saved(page),right=after.helpLedger.rights[request.requestId];expect(right.status).toBe('used');expect(right.operation.manual).toEqual(['c40-22']);

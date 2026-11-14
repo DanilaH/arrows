@@ -239,6 +239,7 @@ export class BoardScene extends Phaser.Scene {
   public revealHint(id: string): void {
     if(id!==this.hintTarget||!this.board.remaining.some(a=>a.id===id))return;
     if(this.routeSteps.size)this.focusHelpGroup(new Set(this.routeSteps.keys()));
+    else if(this.group.size)this.focusHelpGroup(new Set([id,...this.group,...this.nativeGroup]));
     else this.focusHint(id);
     if(this.reducedMotion)this.feedback('hint-ready');
     else this.hintReveal={id,started:-1,arrived:false};
