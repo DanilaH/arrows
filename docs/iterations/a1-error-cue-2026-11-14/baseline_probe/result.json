@@ -1,0 +1,1403 @@
+{
+  "schema": 1,
+  "startedAt": "2026-11-14T17:36:45.553Z",
+  "source": "56f65a4ee5b9b169b1a53ab21f06e186b9619d48",
+  "app": "0.25.0 / 37",
+  "surface": "Unmodified production dist, seeded save, existing controlled native transport; headless Pixel 7 browser. This is not a physical phone or real ad SDK.",
+  "analytics": "Local captured calls only; controlled ArrowsAnalytics returns accepted:false,disabled:true.",
+  "commands": [
+    "npm run build",
+    "node node_modules/vite/bin/vite.js build --ssr tools/qa/assistance-state.ts --outDir .test-output/assistance-source",
+    "node ../baseline_probe/run.mjs"
+  ],
+  "cases": [
+    {
+      "id": "initial-hint-boundary",
+      "enteredAt": 780.3999999985099,
+      "immediate": {
+        "at": 910.2999999970198,
+        "board": {
+          "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+          "lives": 3,
+          "errors": [],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": true,
+          "visible": false,
+          "disabled": false,
+          "text": "Hint · video ×1Video ready",
+          "readiness": "ready",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "ready",
+            "ready": true,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 0,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "arrival": {
+        "at": 4530.39999999851,
+        "board": {
+          "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+          "lives": 3,
+          "errors": [],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Hint · video ×1Video ready",
+          "readiness": "ready",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "matrix(0.94, 0, 0, 0.94, 0, 6)",
+          "rect": {
+            "x": 100.33000183105469,
+            "y": 786.3200073242188,
+            "width": 151.33999633789062,
+            "height": 41.3599853515625
+          },
+          "animations": [
+            {
+              "playState": "running",
+              "currentTime": 0,
+              "duration": 900,
+              "target": "hint",
+              "keyframes": [
+                {
+                  "offset": null,
+                  "transform": "translateY(6px) scale(0.94)",
+                  "opacity": "0"
+                },
+                {
+                  "offset": 0.35,
+                  "transform": "translateY(0px) scale(1.045)",
+                  "opacity": "1"
+                },
+                {
+                  "offset": 0.55,
+                  "transform": "translateY(0px) scale(1)",
+                  "opacity": "1"
+                },
+                {
+                  "offset": 0.78,
+                  "transform": "scale(1.035)",
+                  "opacity": "1"
+                },
+                {
+                  "offset": null,
+                  "transform": "scale(1)",
+                  "opacity": "1"
+                }
+              ]
+            }
+          ]
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "ready",
+            "ready": true,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 0,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "timeline": [
+        {
+          "at": 858.2999999970198,
+          "hidden": true
+        },
+        {
+          "at": 858.2999999970198,
+          "hidden": true
+        },
+        {
+          "at": 858.2999999970198,
+          "hidden": true
+        },
+        {
+          "at": 858.2999999970198,
+          "hidden": true
+        },
+        {
+          "at": 858.2999999970198,
+          "hidden": true
+        },
+        {
+          "at": 858.2999999970198,
+          "hidden": true
+        },
+        {
+          "at": 901.3999999985099,
+          "hidden": true
+        },
+        {
+          "at": 994.1000000014901,
+          "hidden": true
+        },
+        {
+          "at": 1136.8999999985099,
+          "hidden": true
+        },
+        {
+          "at": 1244.1000000014901,
+          "hidden": true
+        },
+        {
+          "at": 1252.6000000014901,
+          "hidden": true
+        },
+        {
+          "at": 1252.6000000014901,
+          "hidden": true
+        },
+        {
+          "at": 1479.2000000029802,
+          "hidden": true
+        },
+        {
+          "at": 1479.3999999985099,
+          "hidden": true
+        },
+        {
+          "at": 1516.2000000029802,
+          "hidden": true
+        },
+        {
+          "at": 1744,
+          "hidden": true
+        },
+        {
+          "at": 1977.2000000029802,
+          "hidden": true
+        },
+        {
+          "at": 2014.5,
+          "hidden": true
+        },
+        {
+          "at": 2244,
+          "hidden": true
+        },
+        {
+          "at": 2494.10000000149,
+          "hidden": true
+        },
+        {
+          "at": 2744.7999999970198,
+          "hidden": true
+        },
+        {
+          "at": 2777.7000000029802,
+          "hidden": true
+        },
+        {
+          "at": 2994,
+          "hidden": true
+        },
+        {
+          "at": 3244,
+          "hidden": true
+        },
+        {
+          "at": 3494,
+          "hidden": true
+        },
+        {
+          "at": 3744,
+          "hidden": true
+        },
+        {
+          "at": 3994,
+          "hidden": true
+        },
+        {
+          "at": 4244.10000000149,
+          "hidden": true
+        },
+        {
+          "at": 4494.79999999702,
+          "hidden": false
+        }
+      ],
+      "note": "Wall-clock observation of the existing idle gate and arrival; not proof of an exact sample()/3 s race."
+    },
+    {
+      "id": "errors-and-hint-motion",
+      "first": {
+        "at": 4759.70000000298,
+        "board": {
+          "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+          "lives": 2,
+          "errors": [
+            "c40-23"
+          ],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Hint · video ×1Video ready",
+          "readiness": "ready",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "matrix(1.031, 0, 0, 1.031, 0, 0)",
+          "rect": {
+            "x": 93.00474548339844,
+            "y": 778.3180541992188,
+            "width": 165.99049377441406,
+            "height": 45.3638916015625
+          },
+          "animations": [
+            {
+              "playState": "running",
+              "currentTime": 216.69099999631314,
+              "duration": 900,
+              "target": "hint",
+              "keyframes": [
+                {
+                  "offset": null,
+                  "transform": "translateY(6px) scale(0.94)",
+                  "opacity": "0"
+                },
+                {
+                  "offset": 0.35,
+                  "transform": "translateY(0px) scale(1.045)",
+                  "opacity": "1"
+                },
+                {
+                  "offset": 0.55,
+                  "transform": "translateY(0px) scale(1)",
+                  "opacity": "1"
+                },
+                {
+                  "offset": 0.78,
+                  "transform": "scale(1.035)",
+                  "opacity": "1"
+                },
+                {
+                  "offset": null,
+                  "transform": "scale(1)",
+                  "opacity": "1"
+                }
+              ]
+            }
+          ]
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "ready",
+            "ready": true,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 0,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 2
+            }
+          }
+        ],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "repeated": {
+        "at": 5998.70000000298,
+        "board": {
+          "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+          "lives": 2,
+          "errors": [
+            "c40-23"
+          ],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Hint · video ×1Video ready",
+          "readiness": "ready",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 95.5,
+            "y": 779,
+            "width": 161,
+            "height": 44
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "ready",
+            "ready": true,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 0,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": false,
+              "lives": 2
+            }
+          }
+        ],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "secondDistinct": {
+        "at": 7049.39999999851,
+        "board": {
+          "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+          "lives": 1,
+          "errors": [
+            "c40-23",
+            "c40-24"
+          ],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Hint · video ×1Video ready",
+          "readiness": "ready",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 95.5,
+            "y": 779,
+            "width": 161,
+            "height": 44
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "ready",
+            "ready": true,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 0,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": false,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 1
+            }
+          }
+        ],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "settled": {
+        "at": 5965.10000000149,
+        "board": {
+          "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+          "lives": 2,
+          "errors": [
+            "c40-23"
+          ],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Hint · video ×1Video ready",
+          "readiness": "ready",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 95.5,
+            "y": 779,
+            "width": 161,
+            "height": 44
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "ready",
+            "ready": true,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 0,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 2
+            }
+          }
+        ],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "note": "Two distinct blocked arrows both report first:true in one attempt. Repeating the first reports first:false and costs no additional life. A second distinct error after Hint arrival settled adds no Hint animation."
+    },
+    {
+      "id": "readiness-is-not-visibility",
+      "ready": {
+        "at": 7051,
+        "board": {
+          "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+          "lives": 1,
+          "errors": [
+            "c40-23",
+            "c40-24"
+          ],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Hint · video ×1Video ready",
+          "readiness": "ready",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 95.5,
+            "y": 779,
+            "width": 161,
+            "height": 44
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "ready",
+            "ready": true,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 0,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": false,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 1
+            }
+          }
+        ],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "loading": {
+        "at": 7118.5,
+        "board": {
+          "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+          "lives": 1,
+          "errors": [
+            "c40-23",
+            "c40-24"
+          ],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Hint · video ×1Video loading",
+          "readiness": "loading",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 95.5,
+            "y": 779,
+            "width": 161,
+            "height": 44
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "loading",
+            "ready": false,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 0,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": false,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 1
+            }
+          }
+        ],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "backoff": {
+        "at": 7152.5,
+        "board": {
+          "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+          "lives": 1,
+          "errors": [
+            "c40-23",
+            "c40-24"
+          ],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Hint · video ×1Try later",
+          "readiness": "backoff",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 95.5,
+            "y": 779,
+            "width": 161,
+            "height": 44
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "backoff",
+            "ready": false,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 29968.39999999851,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": false,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 1
+            }
+          }
+        ],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "note": "Visible and enabled is broader than fresh rewarded-ready eligibility. No Hint click was made in loading/backoff."
+    },
+    {
+      "id": "saved-help-free-in-backoff",
+      "earned": {
+        "at": 7528,
+        "board": {
+          "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+          "lives": 1,
+          "errors": [
+            "c40-23",
+            "c40-24"
+          ],
+          "removed": 21,
+          "hint": "c40-22"
+        },
+        "hint": {
+          "hidden": true,
+          "visible": false,
+          "disabled": false,
+          "text": "Hint · videoVideo ready",
+          "readiness": "ready",
+          "effect": "none",
+          "title": "",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "ready",
+            "ready": true,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 29592.79999999702,
+            "playtest": true
+          },
+          "request": {
+            "kind": "rewarded",
+            "placement": "hint",
+            "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+            "mode": "campaign",
+            "requestId": "e5b541de-97de-4f80-942b-f1e3eb43c985",
+            "intentVersion": 1,
+            "context": {
+              "assignmentId": "assignment-416df752501e3bae",
+              "variant": "single-v2",
+              "experimentId": "assistance-v1",
+              "installId": "fb457907-96b3-4245-bd03-e6ad65d62ace",
+              "qa": true
+            }
+          }
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": false,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 1
+            }
+          }
+        ],
+        "adSessions": [
+          {
+            "event": "ad_session",
+            "params": {
+              "request_id": "e5b541de-97de-4f80-942b-f1e3eb43c985",
+              "format": "rewarded",
+              "placement": "hint",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "mode": "campaign",
+              "assignment_id": "assignment-416df752501e3bae",
+              "variant": "single-v2",
+              "experiment_id": "assistance-v1",
+              "install_id": "fb457907-96b3-4245-bd03-e6ad65d62ace",
+              "qa": true,
+              "cache_state": "ready"
+            }
+          }
+        ],
+        "rights": [
+          {
+            "id": "e5b541de-97de-4f80-942b-f1e3eb43c985",
+            "kind": "single-v2",
+            "status": "active",
+            "owner": {
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "mode": "campaign",
+              "levelId": "c40",
+              "contentVersion": 4,
+              "contentKey": "content-2cdc3a9d57c9bc4d"
+            },
+            "originalOwner": {
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "mode": "campaign",
+              "levelId": "c40",
+              "contentVersion": 4,
+              "contentKey": "content-2cdc3a9d57c9bc4d"
+            }
+          }
+        ],
+        "requests": 1
+      },
+      "reserved": {
+        "at": 12520.60000000149,
+        "board": {
+          "attempt": "e8a45e8b-93e3-4cab-b790-43f800ee159c",
+          "lives": 3,
+          "errors": [],
+          "removed": 0,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Use saved helpNo new video · no video",
+          "readiness": "backoff",
+          "effect": "single-v2",
+          "title": "No new video",
+          "videoVisible": false,
+          "transform": "matrix(0.94, 0, 0, 0.94, 0, 6)",
+          "rect": {
+            "x": 104.55999755859375,
+            "y": 786.3200073242188,
+            "width": 142.8800048828125,
+            "height": 41.3599853515625
+          },
+          "animations": [
+            {
+              "playState": "running",
+              "currentTime": 0,
+              "duration": 900,
+              "target": "hint",
+              "keyframes": [
+                {
+                  "offset": null,
+                  "transform": "translateY(6px) scale(0.94)",
+                  "opacity": "0"
+                },
+                {
+                  "offset": 0.35,
+                  "transform": "translateY(0px) scale(1.045)",
+                  "opacity": "1"
+                },
+                {
+                  "offset": 0.55,
+                  "transform": "translateY(0px) scale(1)",
+                  "opacity": "1"
+                },
+                {
+                  "offset": 0.78,
+                  "transform": "scale(1.035)",
+                  "opacity": "1"
+                },
+                {
+                  "offset": null,
+                  "transform": "scale(1)",
+                  "opacity": "1"
+                }
+              ]
+            }
+          ]
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "backoff",
+            "ready": false,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 29996.19999999553,
+            "playtest": true
+          },
+          "request": {
+            "kind": "rewarded",
+            "placement": "hint",
+            "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+            "mode": "campaign",
+            "requestId": "e5b541de-97de-4f80-942b-f1e3eb43c985",
+            "intentVersion": 1,
+            "context": {
+              "assignmentId": "assignment-416df752501e3bae",
+              "variant": "single-v2",
+              "experimentId": "assistance-v1",
+              "installId": "fb457907-96b3-4245-bd03-e6ad65d62ace",
+              "qa": true
+            }
+          }
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": false,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 1
+            }
+          }
+        ],
+        "adSessions": [
+          {
+            "event": "ad_session",
+            "params": {
+              "request_id": "e5b541de-97de-4f80-942b-f1e3eb43c985",
+              "format": "rewarded",
+              "placement": "hint",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "mode": "campaign",
+              "assignment_id": "assignment-416df752501e3bae",
+              "variant": "single-v2",
+              "experiment_id": "assistance-v1",
+              "install_id": "fb457907-96b3-4245-bd03-e6ad65d62ace",
+              "qa": true,
+              "cache_state": "ready"
+            }
+          }
+        ],
+        "rights": [
+          {
+            "id": "e5b541de-97de-4f80-942b-f1e3eb43c985",
+            "kind": "single-v2",
+            "status": "reserved",
+            "owner": null,
+            "originalOwner": {
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "mode": "campaign",
+              "levelId": "c40",
+              "contentVersion": 4,
+              "contentKey": "content-2cdc3a9d57c9bc4d"
+            }
+          }
+        ],
+        "requests": 1
+      },
+      "claimed": {
+        "at": 13629.29999999702,
+        "board": {
+          "attempt": "e8a45e8b-93e3-4cab-b790-43f800ee159c",
+          "lives": 3,
+          "errors": [],
+          "removed": 0,
+          "hint": "c40-0"
+        },
+        "hint": {
+          "hidden": true,
+          "visible": false,
+          "disabled": false,
+          "text": "Hint · videoTry later",
+          "readiness": "backoff",
+          "effect": "none",
+          "title": "",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "backoff",
+            "ready": false,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 28887.19999999553,
+            "playtest": true
+          },
+          "request": {
+            "kind": "rewarded",
+            "placement": "hint",
+            "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+            "mode": "campaign",
+            "requestId": "e5b541de-97de-4f80-942b-f1e3eb43c985",
+            "intentVersion": 1,
+            "context": {
+              "assignmentId": "assignment-416df752501e3bae",
+              "variant": "single-v2",
+              "experimentId": "assistance-v1",
+              "installId": "fb457907-96b3-4245-bd03-e6ad65d62ace",
+              "qa": true
+            }
+          }
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": false,
+              "lives": 2
+            }
+          },
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "first": true,
+              "lives": 1
+            }
+          }
+        ],
+        "adSessions": [
+          {
+            "event": "ad_session",
+            "params": {
+              "request_id": "e5b541de-97de-4f80-942b-f1e3eb43c985",
+              "format": "rewarded",
+              "placement": "hint",
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "mode": "campaign",
+              "assignment_id": "assignment-416df752501e3bae",
+              "variant": "single-v2",
+              "experiment_id": "assistance-v1",
+              "install_id": "fb457907-96b3-4245-bd03-e6ad65d62ace",
+              "qa": true,
+              "cache_state": "ready"
+            }
+          }
+        ],
+        "rights": [
+          {
+            "id": "e5b541de-97de-4f80-942b-f1e3eb43c985",
+            "kind": "single-v2",
+            "status": "active",
+            "owner": {
+              "attempt": "e8a45e8b-93e3-4cab-b790-43f800ee159c",
+              "mode": "campaign",
+              "levelId": "c40",
+              "contentVersion": 4,
+              "contentKey": "content-2cdc3a9d57c9bc4d"
+            },
+            "originalOwner": {
+              "attempt": "7d255ff7-c1ba-417f-95d3-c6e745b0057f",
+              "mode": "campaign",
+              "levelId": "c40",
+              "contentVersion": 4,
+              "contentKey": "content-2cdc3a9d57c9bc4d"
+            }
+          }
+        ],
+        "requests": 1
+      },
+      "note": "Earned A1 was reserved by an actual Restart, then claimed with transport in backoff. No additional ad_session or saved ad request was created. This is a distinct offer source even when the effect is single-v2."
+    },
+    {
+      "id": "first-error-with-settled-ready-a1",
+      "before": {
+        "at": 5115.89999999851,
+        "board": {
+          "attempt": "8ee88ec5-606e-4a40-b580-33f4768e1fa3",
+          "lives": 3,
+          "errors": [],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Hint · video ×1Video ready",
+          "readiness": "ready",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 95.5,
+            "y": 779,
+            "width": 161,
+            "height": 44
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "ready",
+            "ready": true,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 0,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "afterSave": {
+        "at": 5298.5999999940395,
+        "board": {
+          "attempt": "8ee88ec5-606e-4a40-b580-33f4768e1fa3",
+          "lives": 2,
+          "errors": [
+            "c40-23"
+          ],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Hint · video ×1Video ready",
+          "readiness": "ready",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 95.5,
+            "y": 779,
+            "width": 161,
+            "height": 44
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "ready",
+            "ready": true,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 0,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "8ee88ec5-606e-4a40-b580-33f4768e1fa3",
+              "first": true,
+              "lives": 2
+            }
+          }
+        ],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "afterImpact": {
+        "at": 6002.0999999940395,
+        "board": {
+          "attempt": "8ee88ec5-606e-4a40-b580-33f4768e1fa3",
+          "lives": 2,
+          "errors": [
+            "c40-23"
+          ],
+          "removed": 21,
+          "hint": null
+        },
+        "hint": {
+          "hidden": false,
+          "visible": true,
+          "disabled": false,
+          "text": "Hint · video ×1Video ready",
+          "readiness": "ready",
+          "effect": "single-v2",
+          "title": "One useful move",
+          "videoVisible": true,
+          "transform": "none",
+          "rect": {
+            "x": 95.5,
+            "y": 779,
+            "width": 161,
+            "height": 44
+          },
+          "animations": []
+        },
+        "transport": {
+          "readiness": {
+            "configured": true,
+            "phase": "ready",
+            "ready": true,
+            "preloadId": "controlled-qa",
+            "loadedAt": 1,
+            "expiresInMs": 300000,
+            "retryInMs": 0,
+            "playtest": true
+          },
+          "request": null
+        },
+        "errors": [
+          {
+            "event": "level_error",
+            "params": {
+              "mode": "campaign",
+              "level_id": "c40",
+              "attempt": "8ee88ec5-606e-4a40-b580-33f4768e1fa3",
+              "first": true,
+              "lives": 2
+            }
+          }
+        ],
+        "adSessions": [],
+        "rights": [],
+        "requests": 0
+      },
+      "note": "First accepted blocked arrow with an already visible, settled, enabled, fresh single-v2 Hint and ready transport. Hint has no animation immediately after save or 700 ms later; no ad was started."
+    }
+  ],
+  "errors": [],
+  "preview": {
+    "url": "http://127.0.0.1:33157",
+    "command": "node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 33157 --strictPort"
+  },
+  "browser": {
+    "version": "141.0.7390.37",
+    "profile": "Playwright Pixel 7",
+    "viewport": {
+      "width": 412,
+      "height": 839
+    }
+  },
+  "status": "passed",
+  "finishedAt": "2026-11-14T17:37:05.684Z",
+  "previewStopped": true,
+  "serverLog": "  ➜  Local:   http://127.0.0.1:33157/\n",
+  "gitStatus": ""
+}

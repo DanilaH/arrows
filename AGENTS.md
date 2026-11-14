@@ -1,5 +1,7 @@
 # Arrows project contract
 
+0.26.0 adds only the owner-approved first-error A1 QA accent; preserve docs/A1_ERROR_CUE_026.md. Off by default, separate local off/control/cue bindings only on new attempts, outside save/earned/assistance-v1. Pre-sample settled-visible snapshot, canonical first error of the attempt and fresh ready advertisement A1 are required. Own inset layer only;1200ms/400ms reduced, actual painted shown, immediate cancellation, no input/reward authority or production candidate. Preserve0.25 press/dialog/earned overview fixes and all content/rights/cadence/pins. Same-certificate .playtest code38, genuine comparative GIF/audio and separate physical-phone status.
+
 Latest0.25.0 UI fix contract: preserve docs/UI_POLISH_025.md. Press animates a separate pointer-transparent face, never the actual button's hit area/authored transform. Dialog replacement samples the displayed state and suppresses stale completions. Locked nav retains feature identity/threshold. New A3/A2 reveal frames the whole earned group, without changing the plan or reclaiming the manually moved camera; quiet restore does not replay it. Runtime/SDK/content/save/reward/cadence remain pinned. Real GIF/audio evidence and same-certificate .playtest update are required; phone haptic/frame-pacing acceptance stays separate.
 
 Read `docs/HANDOFF.md`, `docs/PROJECT_DECISIONS.md`, `docs/KIT_REUSE.md` and the replication spec before feature work.

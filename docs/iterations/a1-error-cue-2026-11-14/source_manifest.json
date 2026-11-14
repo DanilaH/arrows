@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-14",
+  "repository": "DanilaH/arrows",
+  "main": "56f65a4ee5b9b169b1a53ab21f06e186b9619d48",
+  "application_source": "f8a75b3106f8194d1ad27a2a58ede7c3b30d48d3",
+  "version": "0.25.0",
+  "android_code": 37,
+  "status": "Research handoff and unchanged-baseline probes only; candidate not implemented.",
+  "ci_url": "https://github.com/DanilaH/arrows/actions/runs/43612775540",
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "url": "https://github.com/DanilaH/arrows/blob/56f65a4ee5b9b169b1a53ab21f06e186b9619d48/AGENTS.md",
+      "purpose": "Текущие обязательные продуктовые/технические ограничения",
+      "sha256": "3f3b64b7326ce810929820c0e1c03291d9430b5b621584ad944671d8f4e1e101"
+    },
+    {
+      "path": "docs/UI_POLISH_025.md",
+      "url": "https://github.com/DanilaH/arrows/blob/56f65a4ee5b9b169b1a53ab21f06e186b9619d48/docs/UI_POLISH_025.md",
+      "purpose": "Исправления U1-U6, runtime/guidance и границы",
+      "sha256": "b4d2859fd15b132fc5fbb5eb9499862544e0b9bc06916ce8d9c47be8d187df52"
+    },
+    {
+      "path": "docs/evidence/ui-polish-025/ACCEPTANCE.md",
+      "url": "https://github.com/DanilaH/arrows/blob/56f65a4ee5b9b169b1a53ab21f06e186b9619d48/docs/evidence/ui-polish-025/ACCEPTANCE.md",
+      "purpose": "Фактический CI, APK и ещё непроверенные внешние пункты",
+      "sha256": "ef1dd9fecfca9f54dfb9b50dde370370a32f3dd3aee03a06d2a58684589b013c"
+    },
+    {
+      "path": "src/game/surface.ts",
+      "url": "https://github.com/DanilaH/arrows/blob/56f65a4ee5b9b169b1a53ab21f06e186b9619d48/src/game/surface.ts",
+      "purpose": "Видимость/доступность Hint, получение change и feedback",
+      "sha256": "6af2167a4f69a5a710716d1fc93d5badba5cb7ae7b67140e51762b3b991c7920"
+    },
+    {
+      "path": "src/game/uiMotion.ts",
+      "url": "https://github.com/DanilaH/arrows/blob/56f65a4ee5b9b169b1a53ab21f06e186b9619d48/src/game/uiMotion.ts",
+      "purpose": "hintReady, press-face, notice и владение анимацией",
+      "sha256": "000d0959d447e6e118024832c85ac65915a87c7bf5778e89a3f58f3b865ad563"
+    },
+    {
+      "path": "src/game/helpOffers.ts",
+      "url": "https://github.com/DanilaH/arrows/blob/56f65a4ee5b9b169b1a53ab21f06e186b9619d48/src/game/helpOffers.ts",
+      "purpose": "Эффект/source/reserve и имеющиеся offer episodes",
+      "sha256": "e285a011b41ea05e44b460036310ce09563c256a550308376410ee93c362af9b"
+    },
+    {
+      "path": "src/domain/board.ts",
+      "url": "https://github.com/DanilaH/arrows/blob/56f65a4ee5b9b169b1a53ab21f06e186b9619d48/src/domain/board.ts",
+      "purpose": "Смысл first и каноническая история ошибок",
+      "sha256": "70f1a427abe488692b4b9ade5d62cc68806f94b7aa004f8d852ddfeffa3bcfc0"
+    },
+    {
+      "path": "src/platform/ads.ts",
+      "url": "https://github.com/DanilaH/arrows/blob/56f65a4ee5b9b169b1a53ab21f06e186b9619d48/src/platform/ads.ts",
+      "purpose": "Свежая готовность рекламы и expiry",
+      "sha256": "9f10401d89b4d3409aa09c40f1e82fee0e20fea69a548e98fa5029a2c286a365"
+    },
+    {
+      "path": "docs/iterations/assistance-2026-11-13/TASK.md",
+      "url": "https://github.com/DanilaH/arrows/blob/56f65a4ee5b9b169b1a53ab21f06e186b9619d48/docs/iterations/assistance-2026-11-13/TASK.md",
+      "purpose": "Принятые права и точное раскрытие после earned",
+      "sha256": "9c605cd10886b19d00893a0b0f08100a239209a99c3629ec51ce7b6576a9bffc"
+    }
+  ]
+}

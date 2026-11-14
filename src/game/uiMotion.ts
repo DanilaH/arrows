@@ -5,6 +5,8 @@ export function createUiMotion() {
   const running = new Set<() => void>(), presses = new Map<number, { button: HTMLElement; x: number; y: number }>();
   const pressPaint = new Map<HTMLElement, { layer: HTMLElement; stop(): void }>();
   const deferredRoutes = new Set<() => void>();
+  const hintEntrances = new Set<Element>(), impacts = new Set<Element>();
+  let cueEnd: (() => void) | undefined;
   const taps = new Map<HTMLElement, () => void>();
   const clearTaps = (): void => { for (const end of [...taps.values()]) end(); };
   const refillEnds: (()=>void)[] = [];
@@ -71,7 +73,7 @@ export function createUiMotion() {
     if (event.detail !== 0) return; const button = (event.target as Element).closest<HTMLElement>('button,summary,[role="button"]');
     if (button && !button.matches(':disabled')) paintPress(button, false, true);
   };
-  const settle = (): void => { clearTaps(); arrivalFinish?.(); stopRefill(); blur(); routeFinish?.(); for (const finish of [...running]) finish(); };
+  const settle = (): void => { cueEnd?.(); clearTaps(); arrivalFinish?.(); stopRefill(); blur(); routeFinish?.(); for (const finish of [...running]) finish(); };
   const visibility = (): void => { if (document.hidden) settle(); };
   const dialogMotion = (dialog: HTMLDialogElement, kind: 'open' | 'close', from: Keyframe, after = (): void => {}): void => {
     dialogs.get(dialog)?.cancel();
@@ -106,6 +108,35 @@ export function createUiMotion() {
       if (dot.isConnected) taps.set(dot, end);
     },
     get routeBusy() { return routeBusy; },
+    get arrivalBusy() { return !!arrivalFinish || routeBusy || dialogs.size > 0; },
+    get impactBusy() { return impacts.size > 0; },
+    hintSettled(element: Element): boolean { return !hintEntrances.has(element); },
+    hintCue(element: HTMLElement, valid: () => boolean, shown: () => void, done: () => void): () => void {
+      cueEnd?.();
+      if (!alive || document.hidden || !element.isConnected || !valid()) { done(); return () => {}; }
+      const layer = document.createElement('i'); layer.className = 'a1-error-cue'; layer.setAttribute('aria-hidden', 'true');
+      element.append(layer);
+      let ended = false, painted = false, previousVisible = false, frame = 0, stop = (): void => {};
+      const end = (): void => {
+        if (ended) return; ended = true; cancelAnimationFrame(frame); stop(); layer.remove();
+        if (cueEnd === end) cueEnd = undefined; done();
+      };
+      cueEnd = end;
+      // A second nonzero, uncovered frame acknowledges the preceding paint.
+      // This bounded observer belongs only to this finite layer, never the board loop.
+      const observe = (): void => {
+        if (ended) return;
+        if (document.hidden || !element.isConnected || !valid()) { end(); return; }
+        const rect = layer.getBoundingClientRect(), style = getComputedStyle(element);
+        const visible = rect.width > 0 && rect.height > 0 && rect.top >= 0 && rect.bottom <= innerHeight && style.visibility === 'visible' && Number(style.opacity) > 0 && Number(getComputedStyle(layer).opacity) > 0;
+        if (!painted && previousVisible && visible) { painted = true; shown(); }
+        previousVisible = visible; frame = requestAnimationFrame(observe);
+      };
+      const frames = reduced.matches ? [{ opacity: 1 }, { opacity: 1 }] : [{ opacity: 0 }, { opacity: 1, offset: 1/6 }, { opacity: 1, offset: 7/12 }, { opacity: 0 }];
+      stop = animate(layer, frames, reduced.matches ? 400 : 1200, end, 0, 'linear', true);
+      if (!ended) frame = requestAnimationFrame(observe);
+      return end;
+    },
     deferRoute(work: () => void): boolean { if (!routeBusy) return false; deferredRoutes.add(work); return true; },
     stopRoute(): void { routeFinish?.(); },
     swap(root: HTMLElement, from: string, to: string, render: () => void, art?: BoardArtwork): void {
@@ -207,8 +238,8 @@ export function createUiMotion() {
       dialogMotion(dialog, 'close', from, after); return true;
     },
     reveal(element: Element): void { animate(element, [{ opacity: .3, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }], 200); },
-    hintReady(element: Element): void { animate(element,[{opacity:0,transform:'translateY(6px) scale(.94)'},{opacity:1,transform:'translateY(0) scale(1.045)',offset:.35},{opacity:1,transform:'translateY(0) scale(1)',offset:.55},{opacity:1,transform:'scale(1.035)',offset:.78},{opacity:1,transform:'scale(1)'}],900); },
-    impact(element: Element): void { animate(element,[{transform:'translateX(0)'},{transform:'translateX(-4px)',offset:.2},{transform:'translateX(3px)',offset:.45},{transform:'translateX(-2px)',offset:.7},{transform:'translateX(0)'}],180); },
+    hintReady(element: Element): void { hintEntrances.add(element); animate(element,[{opacity:0,transform:'translateY(6px) scale(.94)'},{opacity:1,transform:'translateY(0) scale(1.045)',offset:.35},{opacity:1,transform:'translateY(0) scale(1)',offset:.55},{opacity:1,transform:'scale(1.035)',offset:.78},{opacity:1,transform:'scale(1)'}],900,()=>hintEntrances.delete(element)); },
+    impact(element: Element): void { impacts.add(element); animate(element,[{transform:'translateX(0)'},{transform:'translateX(-4px)',offset:.2},{transform:'translateX(3px)',offset:.45},{transform:'translateX(-2px)',offset:.7},{transform:'translateX(0)'}],180,()=>impacts.delete(element)); },
     cancelRefill: stopRefill,
     refill(element: HTMLElement, from: number, to: number): void {
       stopRefill();

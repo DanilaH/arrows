@@ -32,6 +32,7 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
 .hint-button .video-mark { width: 17px; height: 17px; color: currentColor; }
 .hint-copy { display: flex; flex-direction: column; align-items: center; gap: 1px; line-height: 14px; }
 .hint-copy small { font-size: 9px; font-weight: 650; line-height: 11px; opacity: .82; }
+.a1-error-cue { position: absolute; inset: 0; box-sizing: border-box; border-radius: inherit; box-shadow: inset 0 0 0 2px var(--hint-ink), inset 0 0 7px 2px color-mix(in srgb,var(--hint-ink) 24%,transparent); opacity: 0; pointer-events: none; }
 .help-qa p { color: var(--secondary); font-size: 11px; line-height: 1.5; }
 #save-status { top: calc(70px + env(safe-area-inset-top)); }
 
