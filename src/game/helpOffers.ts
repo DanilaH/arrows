@@ -53,7 +53,7 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
       if(reserve&&effect.kind==='route-v1')return {text:ru?'Продолжить маршрут':'Resume route',detail:ru?`До ${effect.amount} ${effect.amount===1?'шага':'шагов'} · без видео`:`Up to ${effect.amount} steps · no video`,reserved:true,kind:effect.kind};
       if(effect.kind==='route-v1')return {text:ru?`Маршрут · ${effect.amount} шага · видео`:`Route · ${effect.amount} steps · video`,detail:ru?'Все стрелки убираете вы':'Every action is yours',reserved:false,kind:effect.kind};
       if(reserve)return {text:ru?'Использовать сохранённую помощь':'Use saved help',detail:effect.kind==='cascade-v1'?`${ru?'Автоматически ещё':'Automatically'} ${effect.amount}`:ru?'Без нового видео':'No new video',reserved:true,kind:effect.kind};
-      return {text:effect.kind==='cascade-v1'?`${ru?'Каскад':'Cascade'} +${effect.amount} · ${ru?'видео':'video'}`:`${copy[language()].hint} ×1`,detail:effect.kind==='cascade-v1'?ru?`Одна пусковая и ещё ${effect.amount} стрелки автоматически`:`One trigger and ${effect.amount} automatic arrows`:ru?'Один полезный ход':'One useful move',reserved:false,kind:effect.kind};
+      return {text:effect.kind==='cascade-v1'?`${ru?'Каскад':'Cascade'} +${effect.amount} · ${ru?'видео':'video'}`:copy[language()].hint,detail:effect.kind==='cascade-v1'?ru?`Одна пусковая и ещё ${effect.amount} стрелки автоматически`:`One trigger and ${effect.amount} automatic arrows`:ru?'Один полезный ход':'One useful move',reserved:false,kind:effect.kind};
     },
     facts(change:SaveChange):void{
       for(const f of change.helpFacts??[]){

@@ -33,6 +33,14 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
 .hint-copy { display: flex; flex-direction: column; align-items: center; gap: 1px; line-height: 14px; }
 .hint-copy small { font-size: 9px; font-weight: 650; line-height: 11px; opacity: .82; }
 .a1-error-cue { position: absolute; inset: 0; box-sizing: border-box; border-radius: inherit; box-shadow: inset 0 0 0 2px var(--hint-ink), inset 0 0 7px 2px color-mix(in srgb,var(--hint-ink) 24%,transparent); opacity: 0; pointer-events: none; }
+/* The compact painted pill keeps a stable44px touch/keyboard target. */
+#hint { gap: 6px; min-height: 44px; max-width: calc(100% - 60px); padding: 8px 10px; border: 0; background: transparent; box-shadow: none; }
+#hint::before { content: ''; position: absolute; box-sizing: border-box; inset: 4px 0; z-index: -1; border: 1px solid var(--hint-edge); border-radius: inherit; background: var(--hint-bg); box-shadow: 0 2px 8px color-mix(in srgb,var(--hint-bg) 14%,transparent); pointer-events: none; }
+#hint .hint-copy { display: block; }
+#hint svg { width: 16px; height: 16px; flex-shrink: 0; }
+#hint .video-mark { width: 14px; height: 14px; }
+#hint:not([data-help-reserved='true']) > .hint-bulb { display: none; }
+#hint > .ui-press-feedback, #hint > .a1-error-cue { inset: 4px 0; }
 .help-qa p { color: var(--secondary); font-size: 11px; line-height: 1.5; }
 #save-status { top: calc(70px + env(safe-area-inset-top)); }
 

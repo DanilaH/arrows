@@ -44,6 +44,19 @@ const count = async (p:Page,event:string) => (await trace(p)).filter(t=>t.event=
 async function opportunity(p:Page){await expect.poll(()=>count(p,'opportunity')).toBe(1);}
 async function shown(p:Page){await expect.poll(()=>count(p,'shown')).toBe(1);}
 
+for(const language of ['ru','en'])test(`compact Hint ${language}: quiet ready, stable target through loading/backoff and one request`,async({page})=>{
+  await boot(page,'off');await page.locator('#game-settings').click();await page.locator('#setting-language').selectOption(language);await page.locator('#close-settings').click();await settled(page);
+  const hint=page.locator('#hint'),before=(await hint.boundingBox())!;
+  expect(before.height).toBeGreaterThanOrEqual(44);expect(before.width).toBeLessThanOrEqual(170);
+  await expect(hint).not.toContainText(/×1|Видео готово|Video ready/);await expect(page.locator('[data-help-readiness]')).toBeHidden();
+  const paint=await hint.evaluate(e=>({height:parseFloat(getComputedStyle(e,'::before').height),bg:getComputedStyle(e,'::before').backgroundColor,icons:[...e.querySelectorAll('svg')].filter(n=>getComputedStyle(n).display!=='none').length}));
+  expect(paint.height).toBe(36);expect(paint.bg).not.toBe('rgba(0, 0, 0, 0)');expect(paint.icons).toBe(1);
+  for(const [phase,caption] of [['loading',language==='ru'?'Видео загружается':'Video loading'],['backoff',language==='ru'?'Попробуйте позже':'Try later'],['unavailable',language==='ru'?'Видео пока недоступно':'Video unavailable']]){
+    await qa(page,'readinessPhase',phase);await expect(page.locator('[data-help-readiness]')).toHaveText(caption!);expect(await hint.boundingBox()).toEqual(before);await expect(hint).toBeEnabled();
+  }
+  await qa(page,'lateReady');await expect(page.locator('[data-help-readiness]')).toBeHidden();expect(await hint.boundingBox()).toEqual(before);await hint.click();await expect.poll(()=>ads(page)).toBe(1);expect(Object.keys((await saved(page)).helpLedger.requests)).toHaveLength(1);
+});
+
 for(const mode of ['off','control','cue'] as const)test(`Q01–03 ${mode}: one eligible first error, finite independent layer`,async({page})=>{
   await boot(page,mode);await settled(page);const before=await saved(page),rect=await page.locator('#hint').boundingBox();
   await error(page);
@@ -129,7 +142,7 @@ for(const theme of ['light','dark'])test(`Q16 reduced motion ${theme}, narrow la
   const before=await page.locator('#hint').boundingBox();await error(page);await shown(page);expect(await page.locator('#hint').boundingBox()).toEqual(before);
   const animations=await page.evaluate(()=>Reflect.get(window,'cueMotion'));expect(animations[0].options.duration).toBe(400);expect(animations[0].frames).toEqual([{opacity:1},{opacity:1}]);
   await expect(page.locator('.a1-error-cue')).toHaveCount(0);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  await expect(page.locator('#hint [data-help-label]')).toBeVisible();await expect(page.locator('#hint [data-help-readiness]')).toBeVisible();await expect(page.locator('#hint .video-mark')).toBeVisible();
+  await expect(page.locator('#hint [data-help-label]')).toBeVisible();await expect(page.locator('[data-help-readiness]')).toBeHidden();await expect(page.locator('#hint .video-mark')).toBeVisible();
 });
 test('Q18 reload after error does not replay and retains exact board/camera',async({page})=>{
   await boot(page);await settled(page);await error(page);await shown(page);await page.waitForTimeout(550);const before=await saved(page),camera=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);

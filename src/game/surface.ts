@@ -307,20 +307,21 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const step = board.complete ? null : tutorial();
     // Isolated-QA experiment: never participates in tutorial(), Hint or ad clocks.
     const scaleContext = reviewOptions.scaleContext && !control && !board.complete && board.hearts > 0 && !progress.state.tutorials.includes('zoom') && scene.boardCamera.scale < 12 && scene.boardCamera.snapshot().zoom < 1.15;
-    status.textContent = !loaded ? text.restoring : notice || (step ? text[`teach_${step}` as keyof typeof text] : scaleContext || control && remaining === board.level.arrows.length ? text.zoomTip : '');
+    let statusText = !loaded ? text.restoring : notice || (step ? text[`teach_${step}` as keyof typeof text] : scaleContext || control && remaining === board.level.arrows.length ? text.zoomTip : '');
     const hintWasHidden = hintButton.hidden;
     hintButton.hidden = !loaded || control || board.complete || board.hearts === 0 || !!step || idleMs < 3000 || a.hint !== null;
     if (hintWasHidden && !hintButton.hidden) motion.hintReady(hintButton);
     if(loaded&&!control&&meta.screen==='game'){
-      const label=helpOffers.label(a.board.id),copy=hintButton.querySelector('[data-help-label]'),ready=hintButton.querySelector('[data-help-readiness]');
+      const label=helpOffers.label(a.board.id),copy=hintButton.querySelector('[data-help-label]');
       if(copy&&copy.textContent!==label.text)copy.textContent=label.text;
       const phase=platform.ads.rewardedState.phase,ru=language==='ru';
-      const state=label.reserved?`${label.detail} · ${ru?'без видео':'no video'}`:phase==='ready'?ru?'Видео готово':'Video ready':phase==='loading'||phase==='initializing'?ru?'Видео загружается':'Video loading':phase==='backoff'?ru?'Попробуйте позже':'Try later':phase==='unavailable'||phase==='disabled'?ru?'Видео пока недоступно':'Video unavailable':ru?'Проверим видео':'Check video';
-      if(ready&&ready.textContent!==state)ready.textContent=state;
+      const state=label.reserved?(label.kind==='cascade-v1'?`${label.detail} · ${ru?'без видео':'no video'}`:label.detail):phase==='ready'?'':phase==='loading'||phase==='initializing'?ru?'Видео загружается':'Video loading':phase==='backoff'?ru?'Попробуйте позже':'Try later':phase==='unavailable'||phase==='disabled'?ru?'Видео пока недоступно':'Video unavailable':ru?'Проверим видео':'Check video';
+      if(!hintButton.hidden&&!statusText)statusText=state;
       const video=hintButton.querySelector<SVGElement>('.video-mark');if(video)video.style.display=label.reserved?'none':'';
-      hintButton.dataset.helpEffect=label.kind;hintButton.dataset.readiness=phase;hintButton.title=label.detail;
+      hintButton.dataset.helpEffect=label.kind;hintButton.dataset.readiness=phase;hintButton.dataset.helpReserved=String(label.reserved);hintButton.title=label.detail;hintButton.setAttribute('aria-label',label.text);
       shell.dataset.helpVariant=progress.state.helpLedger.assignments[a.board.id]??progress.state.helpLedger.nextVariant;
     }
+    if(status.textContent!==statusText)status.textContent=statusText;
     const guideLabel=document.querySelector<HTMLElement>('#guides-label')!; guideLabel.hidden = step !== 'guides'; guideLabel.textContent=text.guideShort;
     hintButton.disabled = requestingAd || !progress.available || progress.uncertain;
     warning.hidden = progress.error === null && !loadSlow;
@@ -499,8 +500,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     document.querySelector('#choose-field')!.setAttribute('aria-label', text.home);
     document.querySelector('#restart')!.setAttribute('aria-label', text.restart);
     document.querySelector('#guides')!.setAttribute('aria-label', text.guides);
-    hintButton.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 3H9c0-1 0-2-1-3Z"/></svg><span class="hint-copy"><span data-help-label>${text.hint}</span><small data-help-readiness></small></span><svg class="video-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg>`; sessionPlay.textContent = text.sessionPlay;
+    hintButton.innerHTML = `<svg class="hint-bulb" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 3H9c0-1 0-2-1-3Z"/></svg><span class="hint-copy"><span data-help-label>${text.hint}</span></span><svg class="video-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg>`; sessionPlay.textContent = text.sessionPlay;
   };
+  status.setAttribute('data-help-readiness','');
+  hintButton.setAttribute('aria-describedby','app-status');
   localize();
   listeners.push(platform.settings.subscribe(() => {
     const next = platform.settings.state.language;
