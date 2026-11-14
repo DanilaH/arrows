@@ -80,5 +80,9 @@ for(const variant of ['route-v1','cascade-v1'] as const) test(`${variant} frames
   await page.mouse.move(190,420);await page.mouse.down();await page.mouse.move(245,455,{steps:3});await page.mouse.up();
   const camera=await page.locator('#game-root').getAttribute('data-camera');await page.waitForTimeout(650);expect(await page.locator('#game-root').getAttribute('data-camera')).toBe(camera);
   expect(await page.evaluate(()=>JSON.stringify(Object.values(JSON.parse(localStorage.getItem('arrows.progress.v1')!).helpLedger.requests).map((r:unknown)=>(r as {plan:unknown}).plan)))).toBe(view.plan);
-  await page.reload();await page.locator('#home-play').click();await expect(page.locator('.board-transition,.route-snapshot')).toHaveCount(0);expect(await page.locator('#game-root').getAttribute('data-camera')).toBe(camera);
+  await page.reload();await page.locator('#home-play').click();await expect(page.locator('.board-transition,.route-snapshot')).toHaveCount(0);
+  // World-centre/relative-zoom persistence may round-trip the final bit of a
+  // floating-point coordinate; require far tighter than a subpixel agreement.
+  const restored=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),previous=JSON.parse(camera!);
+  for(const key of ['x','y','scale'])expect(restored[key]).toBeCloseTo(previous[key],9);
 });
