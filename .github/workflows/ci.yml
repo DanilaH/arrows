@@ -16,7 +16,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npx playwright install --with-deps chromium
-      - run: npm run test:browser
+      - run: npm run test:browser -- --workers=2
       - run: npm run android:sync
       - uses: actions/upload-artifact@v4
         if: failure()

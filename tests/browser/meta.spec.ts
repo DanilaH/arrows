@@ -1,7 +1,8 @@
 import { expect, test, type Page } from '@playwright/test';
 import { freshAttempt, freshSave, SAVE_KEY } from '../../src/progression/save';
 import { campaign } from '../../src/content/campaign';
-import { dailyCatalog } from '../../src/content/daily';
+import { dailyLevel } from '../../src/content/daily';
+import {releaseOracle} from './helpers/errorReleaseOracle';
 import { Board, canExit } from '../../src/domain/board';
 
 async function ready(page: Page) {
@@ -55,10 +56,10 @@ test('keeps two daily dates and campaign state independent through mode changes 
   await unlocked(page); await page.locator('#home-play').click(); await page.waitForTimeout(450);
   const campaignId = await page.locator('#game-shell').getAttribute('data-attempt');
   await page.locator('#choose-field').click(); await openDaily(page, '2026-11-09');
-  const level = dailyCatalog['2026-11-09']!, blocked = level.arrows.find(a => !canExit(a, level.arrows))!, free = level.arrows.find(a => canExit(a, level.arrows))!;
+  const level = dailyLevel('2026-11-09')!, blocked = level.arrows.find(a => !canExit(a, level.arrows))!, free = level.arrows.find(a => canExit(a, level.arrows))!;
   const id = await page.locator('#game-shell').getAttribute('data-attempt');
   await tapArrow(page, blocked); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives', '2');
-  await tapArrow(page, free); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(level.arrows.length - 1));
+  const released=releaseOracle(level,[blocked.id],[free.id]);await tapArrow(page, free); await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(level.arrows.length-released.length));
   await page.locator('#guides').click(); await page.locator('#choose-field').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-screen', 'calendar');
   await page.locator('[data-date="2026-11-08"]').click(); await page.locator('#start-daily').click();
@@ -71,7 +72,8 @@ test('keeps two daily dates and campaign state independent through mode changes 
 });
 
 test('daily victory turns only its own calendar cell green and survives reload without duplicate awards', async ({ page }) => {
-  await unlocked(page); await openDaily(page, '2026-11-09'); const level = dailyCatalog['2026-11-09']!, board = new Board(level, 'oracle');
+  test.setTimeout(90000); // Full real pointer traversal now covers ~200 arrows, not the old sparse field.
+  await unlocked(page); await openDaily(page, '2026-11-09'); const level = dailyLevel('2026-11-09')!, board = new Board(level, 'oracle');
   while (!board.complete) {
     const arrow = board.remaining.find(a => canExit(a, board.remaining))!; await tapArrow(page, arrow); board.activate(arrow.id);
     await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(board.remaining.length));
@@ -102,9 +104,9 @@ test('shows all twelve monthly rewards and lets the player resume a January arch
   await page.locator('[data-month="2026-01"]').click();
   await expect(page.locator('[data-date="2026-01-01"]')).toBeEnabled();
   await expect(page.locator('[data-shift="-1"]')).toBeDisabled();
-  await page.locator('[data-date="2026-01-01"]').click(); await page.locator('#start-daily').click(); await page.waitForTimeout(450);
+  await page.locator('[data-date="2026-01-01"]').click(); await page.locator('#start-daily').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-level','d20260101');await page.waitForTimeout(450);
   const id = await page.locator('#game-shell').getAttribute('data-attempt');
-  const level = dailyCatalog['2026-01-01']!, board = new Board(level, 'oracle');
+  const level = dailyLevel('2026-01-01')!, board = new Board(level, 'oracle');
   await tapArrow(page, board.remaining.find(a => canExit(a, board.remaining))!);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining', String(level.arrows.length - 1));
   await page.locator('#choose-field').click(); await page.locator('[data-nav=back]').click();
