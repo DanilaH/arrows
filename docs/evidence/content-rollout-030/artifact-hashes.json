@@ -1,0 +1,38 @@
+{
+  "source": "56ad4e79d635e9f95dec5c7625c83ba51e0b6b0e",
+  "version": "0.30.0/code43",
+  "files": [
+    {
+      "name": "Arrows-0.30.0-playtest.apk",
+      "bytes": 11005713,
+      "sha256": "735f8d7974d7322593644181940aadd344266ad894f29d1254d7d0bed8b21edc"
+    },
+    {
+      "name": "campaign-variety.gif",
+      "bytes": 3613201,
+      "sha256": "4942add29a92a9689ed1081ba7b2daf7b41cb808452840aaa8e7c39468ef24c8"
+    },
+    {
+      "name": "large-dailies.gif",
+      "bytes": 3590062,
+      "sha256": "a3e7242da866d4ba074ccbf27b613ba94a10f0047846684808e4b2998a019080"
+    },
+    {
+      "name": "campaign-variety-audio.mp4",
+      "bytes": 486831,
+      "sha256": "d8ad7b9d79c3dabb297dff55a1faea3f76aa362fcdd52551205f8c120e005c8f"
+    },
+    {
+      "name": "large-dailies-audio.mp4",
+      "bytes": 646961,
+      "sha256": "85b121cb12e1ce59b7415ae398099f744ae701462bdd36d907f2cdbe420abd82"
+    }
+  ],
+  "actualAudio": {
+    "large-dailies-audio.mp4": {
+      "meanDbfs": -46.3,
+      "maxDbfs": -16.8
+    }
+  },
+  "physicalPhone": false
+}

@@ -1,0 +1,28 @@
+{
+  "source": "56ad4e79d635e9f95dec5c7625c83ba51e0b6b0e",
+  "method": "Actual extracted-APK Chromium390x844/DPR1.5, ordinary Calendar, actual cascade dialog/pointer use/reload; prepared campaign unlocks and controlled native reward receipt. No physical/SDK/money evidence.",
+  "date": "2026-11-14",
+  "arrows": 289,
+  "groupBounds": {
+    "left": 156,
+    "right": 234,
+    "top": 271.5,
+    "bottom": 583.5
+  },
+  "operation": {
+    "id": "8f495684-edad-4e9c-a64b-bccfbb2a15f0",
+    "manual": [
+      "d20261114-4"
+    ],
+    "native": [],
+    "bonus": [
+      "d20261114-278",
+      "d20261114-281",
+      "d20261114-285"
+    ]
+  },
+  "lives": 3,
+  "errors": [],
+  "exactLegalGroup": true,
+  "quietReloadPreserved": true
+}
