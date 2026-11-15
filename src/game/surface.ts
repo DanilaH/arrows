@@ -501,7 +501,9 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     else if (event.kind === 'victory' && celebratedAttempt !== event.attempt) { celebratedAttempt = event.attempt; platform.feedback.play(pendingAward ? 'award' : scene.board.snapshot().errors.length===0 ? 'perfect' : 'win'); pendingAward = false; }
     else if (event.kind === 'win-ready' && (control || freshWinAttempt === event.attempt)) {motion.reward(document.querySelector('#win')!);saveView();if(activeDate)dailyReturnAttempt=event.attempt;}
   }));
-  const uiClick = (event: MouseEvent): void => { const button = (event.target as Element).closest<HTMLElement>('button,summary,[role="button"]'); if (button && !button.matches(':disabled') && !button.hasAttribute('data-feedback-preview')) platform.feedback.play('button', 'ui'); };
+  // Menu actions can replace an icon's parent before this bubble listener runs.
+  // The dispatch path retains the accepted control through that DOM replacement.
+  const uiClick = (event: MouseEvent): void => { const button = event.composedPath().find(node=>node instanceof HTMLElement&&node.matches('button,summary,[role="button"]')) as HTMLElement|undefined; if (button && !button.matches(':disabled') && !button.hasAttribute('data-feedback-preview')) platform.feedback.play('button', 'ui'); };
   document.addEventListener('click', uiClick); listeners.push(() => document.removeEventListener('click', uiClick));
   const observer = new ResizeObserver(() => { cancel(); if (meta.screen === 'game') { scene.layout(); scheduleView(); } });
   observer.observe(document.querySelector('#game-header')!); observer.observe(document.querySelector('#game-footer')!);

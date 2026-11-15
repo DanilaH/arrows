@@ -7,6 +7,12 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => Object.defineProperty(navigator, 'language', { configurable: true, value: 'ru-RU' }));
 });
 
+test('acknowledges an icon click even when navigation replaces its original parent contents',async({page})=>{
+  const state=freshSave();state.index=19;state.campaign=freshAttempt(campaign[19]!);state.wins=campaign.slice(0,19).map((l,i)=>({attempt:`nav-${i}`,levelId:l.id,activeMs:1,completedAt:1,mistakes:0}));state.seenUnlocks=['collection','calendar'];
+  await page.addInitScript(({key,state})=>{localStorage.setItem(key,JSON.stringify(state));Reflect.set(window,'navStarts',0);const original=AudioContext.prototype.createBufferSource;AudioContext.prototype.createBufferSource=function(){const source=original.call(this),start=source.start.bind(source);source.start=(...args:Parameters<typeof start>)=>{Reflect.set(window,'navStarts',Reflect.get(window,'navStarts')+1);return start(...args);};return source;};},{key:SAVE_KEY,state});
+  await page.goto('/');await expect(page.locator('#game-shell')).toHaveAttribute('data-status','ready');await page.locator('#home-calendar svg').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-screen','calendar');await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'navStarts'))).toBe(1);
+});
+
 test('changes theme and language live, retaining a partial board and independent preferences across reload', async ({ page }, info) => {
   await page.goto('/'); await expect(page.locator('#game-shell')).toHaveAttribute('data-progress', 'ready');
   await page.locator('#home-play').click(); await page.waitForTimeout(450);

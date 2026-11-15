@@ -238,7 +238,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     if (options.motion.routeBusy || presenting) options.motion.finish();
     if (target.dataset.nav === 'back') back();
     else if (target.id === 'home-tab') show('home');
-    else if (target.id === 'home-settings') {cancelDailyWork();refresh();options.settings();}
+    else if (target.id === 'home-settings') {const wasBusy=busy;cancelDailyWork();if(wasBusy)refresh();options.settings();}
     else if (target.id === 'home-controls') options.controls?.();
     else if (target.id === 'home-play') options.enterCampaign();
     else if (target.id === 'home-collection') {

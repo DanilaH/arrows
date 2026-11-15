@@ -1,5 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
-import { campaign } from '../../src/content/campaign';
+// Fixed central segment isolates the fade contract; live-bank pan is covered in contentRollout.
+import { campaign } from '../fixtures/campaignV4';
 import { freshSave, freshAttempt, SAVE_KEY, type GameSave } from '../../src/progression/save';
 import { defaultSettings, SETTINGS_KEY } from '../../src/app/settings';
 
