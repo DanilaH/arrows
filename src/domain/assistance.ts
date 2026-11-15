@@ -70,13 +70,15 @@ export function routePlan(board:Board,maxSteps=3):HelpPlan|null {
 /** Uses the actual activation/marked closure; existing free moves are excluded. */
 export function chooseSingle(board: Board, visible: ReadonlySet<string> = new Set()): SingleChoice | null {
   if(board.hearts===0 || board.complete)return null;
-  const before=new Set(freeIds(board));
+  const remaining=board.remaining,state=blockerState(board),before=new Set(remaining.filter(a=>state.counts.get(a.id)===0).map(a=>a.id));
   let best:SingleChoice|null=null;
-  for(const arrow of board.remaining){
+  for(const arrow of remaining){
     if(!before.has(arrow.id))continue;
-    const candidate=copy(board),result=candidate.activate(arrow.id);
-    if(result.kind!=='removed')continue;
-    const choice={root:arrow.id,native:(result.released??[]).map(a=>a.id),newlyFree:freeIds(candidate).filter(id=>!before.has(id)&&!candidate.isError(id))};
+    const counts=new Map(state.counts),removed=new Set<string>(),native:string[]=[];
+    const remove=(id:string):void=>{removed.add(id);for(const dependent of state.dependents.get(id)??[])counts.set(dependent,counts.get(dependent)!-1);};
+    remove(arrow.id);
+    for(;;){const ready=remaining.find(a=>!removed.has(a.id)&&board.isError(a.id)&&counts.get(a.id)===0);if(!ready)break;remove(ready.id);native.push(ready.id);}
+    const choice={root:arrow.id,native,newlyFree:remaining.filter(a=>!removed.has(a.id)&&!before.has(a.id)&&!board.isError(a.id)&&counts.get(a.id)===0).map(a=>a.id)};
     if(!best || choice.native.length>best.native.length || choice.native.length===best.native.length &&
       (choice.newlyFree.length>best.newlyFree.length || choice.newlyFree.length===best.newlyFree.length && visible.has(choice.root)&&!visible.has(best.root)))best=choice;
   }
@@ -84,16 +86,17 @@ export function chooseSingle(board: Board, visible: ReadonlySet<string> = new Se
 }
 
 /** Current ray dependencies; this is computed on state changes, never per frame. */
-function dependencyGraph(board: Board): Map<string,string[]> {
-  const remaining=board.remaining,dependents=new Map<string,string[]>();
+function blockerState(board: Board): {dependents:Map<string,string[]>;counts:Map<string,number>} {
+  const remaining=board.remaining,dependents=new Map<string,string[]>(),counts=new Map(remaining.map(a=>[a.id,0]));
   for(const arrow of remaining){
     const head=arrow.path.at(-1)!,direction=measurePath(arrow.path).direction;
     for(const blocker of remaining)if(blocker.id!==arrow.id&&rayHitsPath(head,direction,blocker.path)){
-      const rows=dependents.get(blocker.id)??[];rows.push(arrow.id);dependents.set(blocker.id,rows);
+      const rows=dependents.get(blocker.id)??[];rows.push(arrow.id);dependents.set(blocker.id,rows);counts.set(arrow.id,counts.get(arrow.id)!+1);
     }
   }
-  return dependents;
+  return {dependents,counts};
 }
+function dependencyGraph(board: Board): Map<string,string[]> {return blockerState(board).dependents;}
 function descendants(board: Board, root: string, dependents=dependencyGraph(board)): Set<string> {
   const result=new Set<string>(),queue=[root];
   for(let i=0;i<queue.length;i++)for(const id of dependents.get(queue[i]!)??[])if(!result.has(id)){result.add(id);queue.push(id);}
@@ -108,19 +111,20 @@ export function singlePlan(board: Board, legacy = false, visible?: ReadonlySet<s
 /** Prefer a small connected group; exact-budget claims cannot silently shrink. */
 export function cascadePlan(board: Board, options: {root?:string;budget?:number} = {}): HelpPlan | null {
   if(board.hearts===0||board.complete || options.budget!==undefined&&(!Number.isInteger(options.budget)||options.budget<2||options.budget>4))return null;
-  const remaining=board.remaining,initiallyFree=new Set(freeIds(board));
+  const remaining=board.remaining,state=blockerState(board),initiallyFree=new Set(remaining.filter(a=>state.counts.get(a.id)===0).map(a=>a.id));
   const roots=remaining.filter(a=>initiallyFree.has(a.id)&&!board.isError(a.id)&&(!options.root||a.id===options.root));
-  const graph=dependencyGraph(board);
+  const graph=state.dependents;
   let best:HelpPlan|null=null;
   for(const root of roots){
-    const causal=descendants(board,root.id,graph),candidate=copy(board),bonus:string[]=[];
-    candidate.activate(root.id);
+    const causal=descendants(board,root.id,graph),candidate=copy(board),bonus:string[]=[],counts=new Map(state.counts);
+    const update=(result:MoveResult):void=>{if(result.kind!=='removed')return;for(const id of[result.arrow.id,...(result.released??[]).map(a=>a.id)])for(const dependent of graph.get(id)??[])counts.set(dependent,counts.get(dependent)!-1);};
+    update(candidate.activate(root.id));
     const budget=options.budget??3;
     while(bonus.length<budget){
       const current=candidate.remaining;
-      const next=current.find(a=>causal.has(a.id)&&!initiallyFree.has(a.id)&&!board.isError(a.id)&&canExit(a,current));
+      const next=current.find(a=>causal.has(a.id)&&!initiallyFree.has(a.id)&&!board.isError(a.id)&&counts.get(a.id)===0);
       if(!next)break;
-      const result=candidate.activate(next.id);if(result.kind!=='removed')throw Error('Invalid cascade construction');bonus.push(next.id);
+      const result=candidate.activate(next.id);if(result.kind!=='removed')throw Error('Invalid cascade construction');bonus.push(next.id);update(result);
     }
     if(bonus.length<2 || options.budget!==undefined&&bonus.length!==options.budget)continue;
     const plan:HelpPlan={kind:'cascade-v1',root:root.id,bonus,budget:bonus.length,basis:board.snapshot(),contentKey:contentKey(board.level)};

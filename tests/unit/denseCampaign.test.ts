@@ -6,7 +6,7 @@ import { denseCampaignField } from '../../tools/content/dense-campaign-generator
 import { qualityProblems } from '../../tools/content/dense-quality';
 import { shape } from '../../tools/content/silhouettes';
 import type { Pace } from '../../tools/content/campaign-shapes';
-import selected from '../../docs/verification/CAMPAIGN_SELECTION_V4.json';
+import selected from '../../docs/verification/CAMPAIGN_SELECTION_V5.json';
 import previous from '../fixtures/campaign-pre-dense.json';
 import type { Level } from '../../src/domain/board';
 
@@ -24,7 +24,7 @@ describe('dense campaign quality contract', () => {
         expect(m.depth, level.id).toBeGreaterThanOrEqual(nightmare ? 18 : 10);
       }
     }
-    expect(new Set(selected.levels.map(r => r.family)).size).toBe(20);
+    expect(new Set(selected.levels.map(r => r.family)).size).toBe(40);
   });
   it('rejects the historical sparse Nightmare instead of accepting its label or arrow count', () => {
     const old = previous.find(l => l.id === 'c120') as Level;

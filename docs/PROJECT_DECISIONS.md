@@ -1,5 +1,9 @@
 # Project decisions — 2026-11-09
 
+## 2026-11-15 — main content rollout0.30.0
+
+Owner explicitly accepted replacing fresh assignments throughout main campaign and calendar, demanded large dailies and changing recognizable silhouettes. Supersedes pilot-only HOLD for rollout; human enjoyment remains unproven. Forty original masks, no nearby family repeats, frequent peaks/breathers, progressively larger later fields; all unopened archive/future dates select deterministic largev2, old constructors and embedded attempts retained. Campaign catalogue6/daily4 within schema2, no reward/life/cadence/pin change. Bounded Worker plus identical cooperative transport fallback, cancellation/unknown retry; optimize local planning only with exact frozen-reference equivalence. See CONTENT_ROLLOUT_030.md. Compatiblecode43 and actual recordings, KIT IMPACT REUSE, no kit/store publication.
+
 ## 2026-11-15 — bounded challenge content pilot0.29.0
 
 Owner approved the first campaign fragment/week comparison after reporting easy dailies and sparse peaks. Build an isolated20-position/7-daily fixed shortlist with baseline toggle, same3hearts/no-help/no-ad controls. No universal director, production rollout or silent published-bank rewrite. Disable native receipt/analytics transport at construction, scope placeholder writer and optional bounded QA resume, preserve normal0.28 help/ads/rights/pins. Offline solvability/frontier/motif checks qualify candidates only; human interest and compatibility-aware future assignment rollout remain separate gates. Same-cert code42, real recordings. See CONTENT_PILOT_029.md. KIT IMPACT REUSE; no kit/store write.

@@ -1,5 +1,5 @@
 import {test,expect,type Page} from '@playwright/test';
-import {campaign} from '../../src/content/campaign';
+import {campaign} from '../fixtures/campaignV4';
 import {Board} from '../../src/domain/board';
 import {freshSave,freshAttempt,SAVE_KEY,decodeSave} from '../../src/progression/save';
 // @ts-expect-error QA-only native transport, never a production import.

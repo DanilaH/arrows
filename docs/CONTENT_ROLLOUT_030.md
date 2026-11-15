@@ -1,0 +1,41 @@
+# Full campaign and large daily rollout —0.30.0 / code43
+
+Owner explicitly authorized the production rollout after0.29: change the ordinary bank, make dailies large, vary campaign silhouettes beyond recurring hearts/butterflies/rectangles. This supersedes the pilot-only HOLD for **fresh content assignment**, not old attempts, earned rights or research evidence. Based on9f125c9; preserve0.28 help,0.27 audio/settings/camera and all later fixes.0.29 hosted43719550404 has now completed SUCCESS.
+
+## What players get
+
+- Ordinary campaign has120levels. c01–c04 remain byte-for-byte compact onboarding v3; fresh c05–c120 use v5/catalogue6. Forty original silhouettes: rocket, crescent, fish, castle, flower, sword, owl, gear, boat, heart, cactus, infinity, umbrella, key, butterfly, magnet, mushroom, star, whale, shield, dragonfly, coffee, snowflake, mountain, octopus, lightning, bell, leaf, trophy, spiral, bulb, tree, crab, flame, crown, diamond, planet, hourglass, cross, bat. They are code-native arrow masks, not downloaded art or decorative panels.
+- No family repeats within the preceding24fields. Neighbor normalized-mask intersection/union must be below.82. Hearts/butterflies occur once each in116rebuilt fields. These guards control repetition; visual inspection of all40exact-path figures supplements them, without asserting human recognizability from IoU alone.
+- Early learning/Hard6/12/18 and first Nightmare20 remain. After20: meaningful peaks are more frequent, Nightmare every5levels; short breathers follow peaks. Size/dependency targets rise over five20-level sections. Late fields include fish85/173arrows, gear90/166, octopus105/189, crown115/194, bat120/204. Existing strict fill, bends, holes, early-choice and dependency gates apply to all116; each has multiple exits and later non-breather fields have real multi-unlock moves.
+- **All unopened calendar dates**, including the2026archive, now select large daily algorithmv2 / levelv3 / catalogue4, start2026-01-01. Normal calendar entry, not a lab. Monday/Tuesday/Thursday/Friday/Sunday Hard, Wednesday/Saturday Nightmare, by civil-date weekday. Same date+algorithm gives the same field; no personalized difficulty or restart reroll. Future years continue through the existing2200contract.
+- Independently audited365fresh2026dates plus40future/leap/century/end-range probes: Hard177–251arrows, Nightmare244–300. Hard/Nightmare minimum admitted counts140/170, maximum300, ≥98%intentional-mask fill, ≥4initial choices, low early freedom, ≥20/28dependency depth and mean bends≥3.2. Actual sizes are much greater than the0.29daily pilot42–85.
+
+## Compatibility
+
+Save schema2/key`arrows.progress.v1` unchanged. Known campaign catalogues1–5 migrate to6; known daily1–3 migrate to4. Decode validates **embedded** levels, never regenerates them. Current campaign attempts, including unstarted ones, remain exact; Restart retains their field; explicit Next selects the new bank. Existing opened dates likewise retain old geometry, camera, guides, histories, lives, Hint/earned/reserved rights and results. Cups/art/awards, lifetime gift, errors/flawless and ad cadence are unchanged. New content is not a gift or a reward.
+
+The old2026JSON archive, published v1dated constructor and mask libraries remain untouched, with old fingerprints. This update's fresh-assignment selection intentionally supersedes the old archive/date policy under the owner's “change everything” authorization. An old app/embedded attempt can therefore have another content version for the same date; the update never rewrites that attempt. New v2libraries/seed selection must now remain frozen; any subsequent policy needs another explicit version/cutover.
+
+The0.29pilot and baseline are frozen, including newly embedded baseline JSON; its optional saved comparisons do not accidentally point to the new main bank. Settings labels it the0.29archive. It is not the entry for this rollout.
+
+## Large-field responsiveness
+
+Normal first open prepares geometry in a dedicated Worker, with four bounded deterministic candidates and a15sdeadline; acceptance/persistence still belongs to the existing coordinated ProgressStore. Calendar shows a loading label and remains navigable. Leaving/changing date cancels the request, clears handlers/timer and terminates its worker. Stale/invalid result cannot create an attempt; accepted result commits independently of presentation. Reopen/Restart uses the embedded geometry.
+
+Missing Worker or transport creation/load/post error uses the **same** stepwise algorithm cooperatively (~6msyield budget between construction steps), never a smaller/easier substitute. Worker deadline, invalid packet or generation failure is an unknown/retry; it does not choose another puzzle. A separate content fallback is deterministic inside the algorithm after four rejected candidates: four frozen independently qualified large layouts with date-specific IDs. All devices take the same branch after the same bounded work.1/405auditeddates used it, no exact geometry duplicates in this sample. Host generation median~152ms/p95~450ms/max~795ms under concurrent verification, not phone latency/FPS.
+
+Large-board A1/A2 planning exposed repeated geometry scans. Local blocker-count scratch state now reuses one graph per planning call; priorities, native marked-release ordering, visible tie-breaking, budgets and returned plans are identical. Frozen0.28 reference versus old120/new120/eight large dailies in fresh/mid/marked states: **744exact comparisons**, budgets2/3/4, zero mutation/mismatch. This is an optimization, not a new help policy. Host timings are retained in LARGE_PLANNER_EQUIVALENCE_030.json; no physical smoothness claim.
+
+## Evidence and acceptance
+
+`verification/CAMPAIGN_SELECTION_V5.json`: every selected field, seed, pace/family, full independent cell-walking metrics and multi-unlock signature. Four qualified candidates from at most24per field. `verification/DAILY_V2_AUDIT.json`: every audited date, independent geometry/DAG/three legal-order checks and host timing. `verification/DAILY_V2_FALLBACKS.json`: safety layouts. `verification/LARGE_PLANNER_EQUIVALENCE_030.json`: exact old/new plan comparisons. Both historical/default dense outputs and new selected campaign are reproducible offline.
+
+The monthly-cup regression now explicitly preloads the frozen v1month before replaying every day; this preserves the old compatibility test without turning a logical cup test into thousands of new giant-field writes. The separate generated-daily leap-month test completes a new large final date through the ordinary writer, with old dates/results retained. Test time allowances for whole-bank and giant full-completion checks reflect their increased workload; they are not performance evidence.
+
+Final unit/browser/native/compatible APK and actual GIF/audio facts: `evidence/content-rollout-030/ACCEPTANCE.md`. Physical phone install/update, touch/haptics/speaker feel and frame pacing/thermal remain separately NOT RUN until measured. Real SDK/AppMetrica/financial verification is separate. Solvability, larger size and shape variety do not prove human enjoyment or difficulty; owner play remains the validation of that effect.
+
+## Research / KIT IMPACT
+
+**SELECT:** fixed-bank contrast, bounded content curation, explicit peaks/breathers, independent checks and bounded-worker/unknown-result recipe. Concrete evidence: owner reports repetitive/easy fields; old dailies begin mostly free; larger planning has measurable duplicate work. **HOLD:** human challenge ranking and lasting variety. **REJECT:** universal/adaptive directors, extra currencies/meta, cosmetic noise and ad/reward changes bundled with difficulty.
+
+**KIT IMPACT: REUSE.** Existing local dense constructor/control geometry, pinned platform/writer/feedback primitives and content-quality/puzzle-worker recipes. Runtimea9325265e87583a4872cf6a158e1e881a0d7508e/guidancee04a3fe87ca93d506e01df4acc5afe690408cefa unchanged. New masks/dated selection/planner scratch state are consumer code; no generic extraction justified by two consumers. No mini-games-kit/store publication.

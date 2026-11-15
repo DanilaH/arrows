@@ -1,6 +1,6 @@
 import { JsonStorageRepository, type ReceiptCommitResult, type StorageAdapter } from '@danilah/mini-games-kit/platform';
 import { campaign, CATALOG_VERSION } from '../content/campaign';
-import { dailyLevel, dailyId, supportsDailyDate, supportsDailyMonth, DAILY_CATALOG_VERSION } from '../content/daily';
+import { prepareDaily, dailyId, supportsDailyDate, supportsDailyMonth, DAILY_CATALOG_VERSION } from '../content/daily';
 import { localDate, validDate, monthDates } from './calendar';
 import { legacyTrophyBinding, trophyBinding, validTrophyBinding } from '../content/trophies';
 import type { TrophyBinding } from '../domain/trophy';
@@ -78,9 +78,9 @@ function attempt(value: unknown): SavedAttempt {
 export function decodeSave(value: unknown): GameSave {
   let s = record(value);
   if (s.schema === 1) s = { ...s, schema: 2, dailyCatalogVersion: DAILY_CATALOG_VERSION, dailyWins: {}, cups: [], facts: [], seenAwards: [], collectionSeen: false };
-  if (s.schema === 2 && (s.dailyCatalogVersion === 1 || s.dailyCatalogVersion === 2)) s = { ...s, dailyCatalogVersion: DAILY_CATALOG_VERSION };
-  // Known catalogues retain embedded attempts, geometry and receipts. Catalogue 5 selects the dense bank only for fresh attempts.
-  if (s.schema === 2 && (s.catalogVersion === 1 || s.catalogVersion === 2 || s.catalogVersion === 3 || s.catalogVersion === 4)) s = { ...s, catalogVersion: CATALOG_VERSION };
+  if (s.schema === 2 && (s.dailyCatalogVersion === 1 || s.dailyCatalogVersion === 2 || s.dailyCatalogVersion === 3)) s = { ...s, dailyCatalogVersion: DAILY_CATALOG_VERSION };
+  // Known catalogues retain embedded attempts, geometry and receipts. Catalogue 6 selects the varied bank only for fresh attempts.
+  if (s.schema === 2 && (s.catalogVersion === 1 || s.catalogVersion === 2 || s.catalogVersion === 3 || s.catalogVersion === 4 || s.catalogVersion === 5)) s = { ...s, catalogVersion: CATALOG_VERSION };
   if (s.schema !== 2 || !integer(s.revision) || s.catalogVersion !== CATALOG_VERSION || !integer(s.index, campaign.length - 1) || !Array.isArray(s.wins)) throw Error('Unsupported save');
   const wins = s.wins.map(v => {
     const w = record(v);
@@ -315,10 +315,13 @@ export class ProgressStore {
       next.freeContinueUsed = true; a.freeUsed = true; a.continuations++; a.board = { ...a.board, lives: 3 };beginContinue(next.helpLedger,a,`gift-${localIdentity(next.helpLedger.installId)}`); return { value: true,event:{kind:'state',followupFacts:finishHelpFollowUps(next.helpLedger,a,'new_help')} };
     }, true);
   }
-  public openDaily(date: string): Promise<string | undefined> {
+  public async openDaily(date: string,signal?:AbortSignal): Promise<string | undefined> {
+    if (this.state.index < 19 || !supportsDailyDate(date) || date > localDate(this.now()) || signal?.aborted) return undefined;
+    const level=this.state.daily[date]?.level??await prepareDaily(date,signal);
+    if(!level||signal?.aborted||!this.alive)return undefined;
     return this.update(next => {
-      if (next.index < 19 || !supportsDailyDate(date) || date > localDate(this.now())) return null;
-      next.daily[date] ??= freshAttempt(dailyLevel(date)!);
+      if (signal?.aborted || next.index < 19 || date > localDate(this.now())) return null;
+      next.daily[date] ??= freshAttempt(level);
       next.helpLedger.assignments[next.daily[date]!.board.id]??=next.helpLedger.nextVariant;
       return { value: next.daily[date]!.board.id };
     });

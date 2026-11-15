@@ -163,9 +163,9 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     visited: screen => platform.analytics.track('screen_view', { screen }),
     artwork: () => !activeDate && !control ? scene.artwork() : null,
     ...(reviewFields.length ? { controls: () => open('controls') } : {}), settings: () => settingsSurface.open(),
-    async enterDaily(date) {
+    async enterDaily(date,signal) {
       const intent = meta.revision;
-      await progress.flush(); const existed = !!progress.state.daily[date], mode = cueQA.next; const attempt = await progress.openDaily(date); if (attempt && !existed) cueQA.bindNew(attempt, mode); if (!attempt || !alive) throw Error('Daily unavailable');
+      await progress.flush(); const existed = !!progress.state.daily[date], mode = cueQA.next; const attempt = await progress.openDaily(date,signal); if (attempt && !existed) cueQA.bindNew(attempt, mode); if (!attempt || !alive||signal?.aborted) throw Error('Daily unavailable');
       if (meta.revision !== intent) return;
       activeDate = date; control = false; loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true }); resumeErrors();
       platform.analytics.track('daily_open', { date, attempt, resumed: active().started });

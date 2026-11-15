@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
-import { campaign } from '../../src/content/campaign';
+import { campaign } from '../fixtures/campaignV4';
 import { Board, canExit } from '../../src/domain/board';
 import { ProgressStore, freshSave, freshAttempt, decodeSave, SAVE_KEY, type GameSave } from '../../src/progression/save';
 import { A1_CUE_KEY, A1_CUE_VERSION, type A1CueMode } from '../../src/game/a1ErrorCue';

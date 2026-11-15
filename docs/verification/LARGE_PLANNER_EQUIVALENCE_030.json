@@ -1,0 +1,146 @@
+{
+  "comparisons": 744,
+  "exact": true,
+  "method": "Frozen0.28 planners vs optimized planners, all old120/new120 plus8large dailies × fresh/mid/marked; same ordered A1/A2 output for budgets2/3/4; no state mutation. Host CPU samples only.",
+  "largeMedianMs": {
+    "oldSingle": 7.430288999999902,
+    "single": 4.126358999999866,
+    "oldCascade": 9.641751000000113,
+    "cascade": 6.135083000000122
+  },
+  "timings": [
+    {
+      "arrows": 163,
+      "oldSingle": 6.604364000000714,
+      "single": 2.8500119999998788,
+      "oldCascade": 4.429976000000352,
+      "cascade": 3.638670999999704
+    },
+    {
+      "arrows": 150,
+      "oldSingle": 3.963505000000623,
+      "single": 4.0404180000005,
+      "oldCascade": 5.934669000000213,
+      "cascade": 3.6541849999994156
+    },
+    {
+      "arrows": 153,
+      "oldSingle": 4.74943600000006,
+      "single": 2.594096000000718,
+      "oldCascade": 3.751267999999982,
+      "cascade": 2.815511000000697
+    },
+    {
+      "arrows": 153,
+      "oldSingle": 5.259776000000784,
+      "single": 3.1005310000000463,
+      "oldCascade": 5.999343999999837,
+      "cascade": 4.319794000000002
+    },
+    {
+      "arrows": 173,
+      "oldSingle": 6.880100000000311,
+      "single": 5.7018660000003365,
+      "oldCascade": 9.578999000000294,
+      "cascade": 6.43977200000063
+    },
+    {
+      "arrows": 166,
+      "oldSingle": 7.0855209999999715,
+      "single": 5.645653999999922,
+      "oldCascade": 9.914557000000059,
+      "cascade": 3.937050999999883
+    },
+    {
+      "arrows": 174,
+      "oldSingle": 6.138578999999481,
+      "single": 2.886384999999791,
+      "oldCascade": 4.412169000000176,
+      "cascade": 3.6034899999995105
+    },
+    {
+      "arrows": 189,
+      "oldSingle": 5.09168899999986,
+      "single": 2.6517299999995885,
+      "oldCascade": 6.090987999999925,
+      "cascade": 3.3240990000003876
+    },
+    {
+      "arrows": 155,
+      "oldSingle": 3.778647000000092,
+      "single": 2.049133000000438,
+      "oldCascade": 5.144465999999738,
+      "cascade": 3.3179400000008172
+    },
+    {
+      "arrows": 194,
+      "oldSingle": 9.13367400000061,
+      "single": 4.126358999999866,
+      "oldCascade": 10.314970999999787,
+      "cascade": 6.393272999999681
+    },
+    {
+      "arrows": 204,
+      "oldSingle": 7.430288999999902,
+      "single": 3.320443999999952,
+      "oldCascade": 9.191773999999896,
+      "cascade": 6.135083000000122
+    },
+    {
+      "arrows": 198,
+      "oldSingle": 17.412790000000314,
+      "single": 11.547072999999727,
+      "oldCascade": 13.304237999999714,
+      "cascade": 6.514390999999705
+    },
+    {
+      "arrows": 200,
+      "oldSingle": 21.387656999999308,
+      "single": 5.675447000000531,
+      "oldCascade": 9.641751000000113,
+      "cascade": 6.062066000000414
+    },
+    {
+      "arrows": 280,
+      "oldSingle": 65.42769899999985,
+      "single": 32.26665699999921,
+      "oldCascade": 24.46766200000002,
+      "cascade": 11.204478999999992
+    },
+    {
+      "arrows": 257,
+      "oldSingle": 34.65218100000038,
+      "single": 10.813273999999183,
+      "oldCascade": 20.300562999999784,
+      "cascade": 14.338009000000056
+    },
+    {
+      "arrows": 292,
+      "oldSingle": 34.339459999999235,
+      "single": 13.580157999998846,
+      "oldCascade": 19.541440999999395,
+      "cascade": 7.757269000001543
+    },
+    {
+      "arrows": 208,
+      "oldSingle": 20.767985000000408,
+      "single": 5.906206999999995,
+      "oldCascade": 12.024705999998332,
+      "cascade": 7.315298999999868
+    },
+    {
+      "arrows": 205,
+      "oldSingle": 13.67236899999989,
+      "single": 3.9104609999994864,
+      "oldCascade": 10.894698000000062,
+      "cascade": 7.117207999999664
+    },
+    {
+      "arrows": 279,
+      "oldSingle": 22.162908000000243,
+      "single": 9.598778999999922,
+      "oldCascade": 15.586183999999776,
+      "cascade": 10.965087999999014
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import {test, expect, type Page} from '@playwright/test';
-import {campaign} from '../../src/content/campaign';
+import {campaign} from '../fixtures/campaignV4';
 import {Board} from '../../src/domain/board';
 import {freshSave, freshAttempt, SAVE_KEY} from '../../src/progression/save';
 import {openAssistanceReview} from './helpers/assistanceReview';

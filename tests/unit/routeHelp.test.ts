@@ -1,5 +1,5 @@
 import {it,expect} from 'vitest';
-import {campaign} from '../../src/content/campaign';
+import {campaign} from '../fixtures/campaignV4';
 import {Board,type Level} from '../../src/domain/board';
 import {routePlan,validatePlan,routeCurrent} from '../../src/domain/assistance';
 import {freshSave,freshAttempt,SAVE_KEY,ProgressStore,decodeSave} from '../../src/progression/save';

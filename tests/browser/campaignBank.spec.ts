@@ -37,7 +37,7 @@ test('upgrades completed c20 into the larger bank through explicit Continue exac
   await page.locator('#home-play').dblclick();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-level', 'c21');
   const saved = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), SAVE_KEY);
-  expect(saved.catalogVersion).toBe(5); expect(saved.wins).toHaveLength(20); expect(saved.index).toBe(20);
+  expect(saved.catalogVersion).toBe(6); expect(saved.wins).toHaveLength(20); expect(saved.index).toBe(20);
   await page.reload(); await ready(page); await page.locator('#home-play').click();
   await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt', saved.campaign.board.id);
 });

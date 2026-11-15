@@ -25,7 +25,7 @@ const badge = (key: string): string => `<svg class="medal-icon" viewBox="0 0 72 
 </svg>`;
 
 export function installMetaSurface(progress: ProgressStore, language: GameLanguage, options: {
-  motion: UiMotion; canPresent(): boolean; blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; artwork(): BoardArtwork | null; controls?(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string): Promise<void>;
+  motion: UiMotion; canPresent(): boolean; blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; artwork(): BoardArtwork | null; controls?(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string,signal?:AbortSignal): Promise<void>;
 }) {
   const nav = document.querySelector<HTMLElement>('#meta-nav')!;
   const root = document.querySelector<HTMLElement>('#meta-screen')!, shell = document.querySelector<HTMLElement>('#game-shell')!;
@@ -39,6 +39,8 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   const pendingUnlocks = new Set<UnlockId>();
   let pendingDaily: {date:string;attempt:string} | null = null, lastDailyArrival = '';
   let screen: AppScreen = 'home', alive = true, ready = false, busy = false, revision = 0;
+  let dailyWork:AbortController|undefined,dailyWorkId=0;
+  const cancelDailyWork=():void=>{dailyWork?.abort();dailyWork=undefined;dailyWorkId++;busy=false;};
   let selectedCampaign = '';
   let calendarToday = localDate(), dailyMonths = availableDailyMonths(calendarToday);
   const boundedDate = (date: string): string => date < '2026-01-01' ? '2026-01-01' : date > '2200-12-31' ? '2200-12-31' : date;
@@ -113,12 +115,12 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     const firstWeekday = (calendarDate(dates[0]!).getUTCDay() + 6) % 7, done = dates.filter(d => save.dailyWins[d]).length;
     const week = Array.from({ length: 7 }, (_, i) => new Intl.DateTimeFormat(locale, { weekday: 'short', timeZone: 'UTC' }).format(calendarDate(`2026-11-${String(2 + i).padStart(2, '0')}`)));
     const current = save.daily[selected], completed = !!save.dailyWins[selected], allowed = selected <= today && supportsDailyDate(selected) && challengeOpen(save);
-    const difficulty = dailyDifficulty(selected);
+    const difficulty = current?.level.difficulty??dailyDifficulty(selected);
     return title(text.challenge) + `<div class="meta-content calendar-content"><section class="month-award"><button id="view-trophy" class="trophy-inspect" type="button" aria-label="${text.inspectTrophy}">${trophy(month, save.cups.includes(month), { ...(save.cups.includes(month) ? { binding: save.trophyDesigns[month]! } : {}), scope: 'calendar' })}<span>${text.inspectTrophy}</span></button><p class="month-count"><span>${done}</span> / ${dates.length} · ${text.daysDone}</p><div class="month-progress" role="progressbar" aria-label="${text.daysDone}" aria-valuemin="0" aria-valuemax="${dates.length}" aria-valuenow="${done}"><span style="transform:scaleX(${done/dates.length})"></span></div><small>${save.cups.includes(month)?text.cupEarned:text.cupRule}</small></section>
       <section class="calendar-month"><div class="month-heading"><button class="circle" type="button" data-shift="-1" aria-label="${text.previousMonth}" ${index <= 0 ? 'disabled' : ''}>‹</button><h2>${monthFormat.format(calendarDate(month + '-01'))}</h2><button class="circle" type="button" data-shift="1" aria-label="${text.nextMonth}" ${index >= dailyMonths.length - 1 ? 'disabled' : ''}>›</button></div>
       <div class="weekdays" aria-hidden="true">${week.map(d => `<span>${d}</span>`).join('')}</div>
       <div class="calendar-grid" role="group" aria-label="${monthFormat.format(calendarDate(month + '-01'))}">${'<span></span>'.repeat(firstWeekday)}${dates.map(date => `<button type="button" class="calendar-day ${save.dailyWins[date] ? 'done' : ''} ${date === today ? 'today' : ''}" data-date="${date}" aria-label="${dayFormat.format(calendarDate(date))}${save.dailyWins[date] ? ', ' + text.dayCompleted : ''}" aria-pressed="${date === selected}" ${date > today ? 'disabled' : ''}>${Number(date.slice(-2))}${save.dailyWins[date] ? '<small aria-hidden="true">✓</small>' : ''}</button>`).join('')}</div></section>
-      <section class="selected-day"><h3>${dayFormat.format(calendarDate(selected))}</h3><span data-difficulty="${completed ? 'normal' : difficulty}">${completed ? text.dayCompleted : difficulty === 'normal' ? text.dailyPuzzle : difficulty === 'hard' ? 'Hard' : 'Nightmare'}</span><button id="start-daily" class="primary" type="button" ${!ready || !allowed || busy ? 'disabled' : ''}>${completed ? text.viewResult : current?.started ? text.resume : text.play}</button><p id="calendar-notice" role="status">${calendarNotice || (today < '2026-01-01' ? text.calendarNotStarted : today > '2200-12-31' ? text.calendarArchive : selected > today ? text.futureDay : '')}</p></section></div>`;
+      <section class="selected-day"><h3>${dayFormat.format(calendarDate(selected))}</h3><span data-difficulty="${completed ? 'normal' : difficulty}">${completed ? text.dayCompleted : difficulty === 'normal' ? text.dailyPuzzle : difficulty === 'hard' ? 'Hard' : 'Nightmare'}</span><button id="start-daily" class="primary" aria-busy="${busy}" type="button" ${!ready || !allowed || busy ? 'disabled' : ''}>${busy ? text.loading : completed ? text.viewResult : current?.started ? text.resume : text.play}</button><p id="calendar-notice" role="status">${calendarNotice || (today < '2026-01-01' ? text.calendarNotStarted : today > '2200-12-31' ? text.calendarArchive : selected > today ? text.futureDay : '')}</p></section></div>`;
   };
   const updateCalendarDate = (): void => {
     const today = localDate();
@@ -184,6 +186,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   };
   const show = (next: AppScreen, date?: string, artwork?: BoardArtwork): void => {
     if(presenting)options.motion.finish();
+    cancelDailyWork();
     changingScreen=true;
     const art = artwork ?? (screen==='game' && next==='home' ? options.artwork() ?? undefined : undefined);
     try { options.motion.swap(root, screen, next, () => {
@@ -208,7 +211,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     });
     return true;
   };
-  const openTrophy = (key: string): void => {
+  const openTrophy = (key: string): void => {cancelDailyWork();
     if (!dailyMonths.includes(key)) return;
     trophyFocus = document.activeElement as HTMLElement | null;
     const save = progress.state, owned = save.cups.includes(key), done = monthDates(key).filter(d => save.dailyWins[d]).length;
@@ -231,11 +234,11 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     collectionYear = target.value; refresh(); root.querySelector<HTMLElement>('#trophy-year')?.focus({ preventScroll: true });
   };
   const click = (event: MouseEvent): void => {
-    const target = (event.target as HTMLElement).closest<HTMLButtonElement>('button'); if (!target || target.disabled || busy) return;
+    const target = (event.target as HTMLElement).closest<HTMLButtonElement>('button'); if (!target || target.disabled) return;
     if (options.motion.routeBusy || presenting) options.motion.finish();
     if (target.dataset.nav === 'back') back();
     else if (target.id === 'home-tab') show('home');
-    else if (target.id === 'home-settings') options.settings();
+    else if (target.id === 'home-settings') {cancelDailyWork();refresh();options.settings();}
     else if (target.id === 'home-controls') options.controls?.();
     else if (target.id === 'home-play') options.enterCampaign();
     else if (target.id === 'home-collection') {
@@ -243,11 +246,11 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     } else if (target.id === 'home-calendar') show('calendar');
     else if (target.dataset.month && dailyMonths.includes(target.dataset.month)) { month = target.dataset.month; show('calendar'); }
     else if (target.id === 'view-trophy') openTrophy(month);
-    else if (target.dataset.shift) { const next = dailyMonths[dailyMonths.indexOf(month) + Number(target.dataset.shift)]; if (!next) return; month = next; calendarNotice = ''; refresh(); options.motion.reveal(root.querySelector('.calendar-content')!); }
-    else if (target.dataset.date) { selected = target.dataset.date; calendarNotice = ''; refresh(); options.motion.reveal(root.querySelector('.selected-day')!); }
+    else if (target.dataset.shift) { const next = dailyMonths[dailyMonths.indexOf(month) + Number(target.dataset.shift)]; if (!next) return;cancelDailyWork(); month = next; calendarNotice = ''; refresh(); options.motion.reveal(root.querySelector('.calendar-content')!); }
+    else if (target.dataset.date) {cancelDailyWork(); selected = target.dataset.date; calendarNotice = ''; refresh(); options.motion.reveal(root.querySelector('.selected-day')!); }
     else if (target.id === 'start-daily') {
-      busy = true; calendarNotice = ''; refresh();
-      void options.enterDaily(selected).catch(() => { calendarNotice = text.dailyUnavailable; }).finally(() => { busy = false; refresh(); });
+      cancelDailyWork();const controller=new AbortController(),work=++dailyWorkId;dailyWork=controller;busy = true; calendarNotice = ''; refresh();
+      void options.enterDaily(selected,controller.signal).catch(() => {if(!controller.signal.aborted&&work===dailyWorkId) calendarNotice = text.dailyUnavailable; }).finally(() => {if(work===dailyWorkId&&alive){dailyWork=undefined;busy = false; refresh();} });
     }
   };
   const scrolled=():void=>{if(presenting && root.scrollTop!==presentationScroll)options.motion.finish();};
@@ -269,6 +272,6 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       shortDate = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', timeZone: 'UTC' }); refresh();
     },
     ready(): void { ready = true; refresh(); options.motion.reveal(nav); },
-    destroy(): void { alive = false; pendingDaily=null;pendingUnlocks.clear();closeTrophy(); root.removeEventListener('scroll',scrolled);root.removeEventListener('click', click); nav.removeEventListener('click', click); nav.replaceChildren(); nav.hidden=true; root.removeEventListener('change', changeYear); trophyDialog.removeEventListener('click', viewerClick); trophyDialog.removeEventListener('cancel', viewerCancel); trophyDialog.replaceChildren(); root.replaceChildren(); },
+    destroy(): void {cancelDailyWork(); alive = false; pendingDaily=null;pendingUnlocks.clear();closeTrophy(); root.removeEventListener('scroll',scrolled);root.removeEventListener('click', click); nav.removeEventListener('click', click); nav.replaceChildren(); nav.hidden=true; root.removeEventListener('change', changeYear); trophyDialog.removeEventListener('click', viewerClick); trophyDialog.removeEventListener('cancel', viewerCancel); trophyDialog.replaceChildren(); root.replaceChildren(); },
   };
 }

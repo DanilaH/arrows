@@ -1,0 +1,78 @@
+[
+  {
+    "kind": "rocket",
+    "seed": 300001,
+    "metrics": {
+      "arrows": 229,
+      "dots": 2798,
+      "coverage": 0.9982130092923517,
+      "initialFree": 27,
+      "depth": 43,
+      "edges": 1522,
+      "meanLength": 11.196506550218341,
+      "meanBends": 4.646288209606987,
+      "initialFreeFraction": 0.11790393013100436,
+      "meanEarlyFreeFraction": 0.06816085037280999,
+      "peakEarlyFreeFraction": 0.24812030075187969,
+      "largestHole": 1,
+      "straightFraction": 0.13973799126637554
+    }
+  },
+  {
+    "kind": "fish",
+    "seed": 310008,
+    "metrics": {
+      "arrows": 221,
+      "dots": 2811,
+      "coverage": 0.9925293489861259,
+      "initialFree": 24,
+      "depth": 43,
+      "edges": 1376,
+      "meanLength": 11.624434389140271,
+      "meanBends": 4.981900452488688,
+      "initialFreeFraction": 0.1085972850678733,
+      "meanEarlyFreeFraction": 0.06830751616067857,
+      "peakEarlyFreeFraction": 0.22413793103448276,
+      "largestHole": 2,
+      "straightFraction": 0.1493212669683258
+    }
+  },
+  {
+    "kind": "owl",
+    "seed": 320015,
+    "metrics": {
+      "arrows": 292,
+      "dots": 3679,
+      "coverage": 0.9951073661321012,
+      "initialFree": 21,
+      "depth": 50,
+      "edges": 2228,
+      "meanLength": 11.537671232876713,
+      "meanBends": 4.678082191780822,
+      "initialFreeFraction": 0.07191780821917808,
+      "meanEarlyFreeFraction": 0.06341892288903113,
+      "peakEarlyFreeFraction": 0.1232876712328767,
+      "largestHole": 1,
+      "straightFraction": 0.1404109589041096
+    }
+  },
+  {
+    "kind": "castle",
+    "seed": 337941,
+    "metrics": {
+      "arrows": 297,
+      "dots": 3680,
+      "coverage": 0.998641304347826,
+      "initialFree": 24,
+      "depth": 61,
+      "edges": 2416,
+      "meanLength": 11.373737373737374,
+      "meanBends": 4.575757575757576,
+      "initialFreeFraction": 0.08080808080808081,
+      "meanEarlyFreeFraction": 0.06107314829664164,
+      "peakEarlyFreeFraction": 0.16,
+      "largestHole": 1,
+      "straightFraction": 0.15151515151515152
+    }
+  }
+]

@@ -1,5 +1,5 @@
 import {it,expect} from 'vitest';
-import {campaign} from '../../src/content/campaign';
+import {campaign} from '../fixtures/campaignV4';
 import {Board,canExit} from '../../src/domain/board';
 import {freshSave,freshAttempt,decodeSave,ProgressStore,SAVE_KEY} from '../../src/progression/save';
 import {lifeEffect,type HelpRequest} from '../../src/progression/helpLedger';

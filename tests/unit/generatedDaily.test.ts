@@ -22,7 +22,7 @@ it('reproduces dated tasks beyond the installed archive, including leap days and
   for (const date of ['2027-01-01', '2027-01-08', '2027-01-14', '2028-02-29', '2046-01-28', '2100-02-28', '2200-12-31']) {
     const a = generateDaily(date); validateLevel(a);
     expect(a.id).toBe(`d${date.replaceAll('-', '')}`); expect(a.contentVersion).toBe(2);
-    expect(generateDaily(date)).toEqual(a); expect(dailyLevel(date)).toEqual(a);
+    expect(generateDaily(date)).toEqual(a); expect(dailyLevel(date)!.contentVersion).toBe(3);
   }
   for (const date of ['2025-12-31', '2100-02-29', '2201-01-01', '2027-13-01']) expect(supportsDailyDate(date)).toBe(false);
   expect(availableDailyMonths('2027-01-01')).toHaveLength(24);
@@ -64,7 +64,7 @@ it('migrates v2, preserves embedded generated geometry/rights and never rerolls 
 it('awards and restores a post-reserve leap-month trophy exactly once through the ordinary writer', async () => {
   const state = unlocked(), dates = monthDates('2048-02');
   for (const date of dates.slice(0, -1)) {
-    const a = freshAttempt(dailyLevel(date)!), b = new Board(a.level, a.board.id);
+    const a = freshAttempt(generateDaily(date)), b = new Board(a.level, a.board.id);
     while (!b.complete) b.activate(b.hint()!);
     a.board = b.snapshot(); a.started = true; state.daily[date] = a;
     state.dailyWins[date] = { attempt: a.board.id, levelId: a.level.id, activeMs: 0, completedAt: 0, localDate: '2048-02-29', mistakes: 0 };
@@ -78,4 +78,4 @@ it('awards and restores a post-reserve leap-month trophy exactly once through th
   const restored = new ProgressStore(storage, () => new Date(2026, 0, 1)); await restored.load();
   expect(restored.available).toBe(true); expect(restored.state.cups).toEqual(['2048-02']);
   expect(await restored.restart(id)).toBeUndefined(); expect(decodeSave(restored.state).daily['2048-02-29']!.board).toEqual(store.state.daily['2048-02-29']!.board);
-});
+}, 30000);

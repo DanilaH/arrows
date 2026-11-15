@@ -2,7 +2,7 @@ import {it,expect,vi} from 'vitest';
 import {createAnalytics,validEvent} from '../../src/platform/analytics';
 import {createAds,type AdEvent,type RewardedReadiness} from '../../src/platform/ads';
 import {ProgressStore,freshSave,freshAttempt,SAVE_KEY,decodeSave,type SaveChange} from '../../src/progression/save';
-import {campaign} from '../../src/content/campaign';
+import {campaign} from '../fixtures/campaignV4';
 import {Board,canExit} from '../../src/domain/board';
 import {createHelpOffers} from '../../src/game/helpOffers';
 // @ts-expect-error Executable offline export reader.

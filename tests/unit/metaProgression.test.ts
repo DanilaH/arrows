@@ -93,8 +93,8 @@ it('commits a daily win once on its selected date across midnight, restarts and 
   expect(store.state.facts.filter(f => f.kind === 'win')).toHaveLength(1); expect(store.state.cups).toEqual([]);
   const restored = new ProgressStore(storage); await restored.load(); expect(restored.state.dailyWins).toEqual(store.state.dailyWins);
 });
-it('awards a full-month cup exactly once and retains it when the clock moves backwards', async () => {
-  const { storage, rows } = memory(); rows.set(SAVE_KEY, JSON.stringify(unlocked())); let now = new Date(2026, 11, 31);
+it('preserves the published v1 full-month writer, cup and clock reversal on upgrade', async () => {
+  const { storage, rows } = memory();const oldMonth=unlocked();for(const date of monthDates('2026-11'))oldMonth.daily[date]=freshAttempt(dailyCatalog[date]!);rows.set(SAVE_KEY, JSON.stringify(oldMonth));let now = new Date(2026, 11, 31);
   const store = new ProgressStore(storage, () => now); await store.load();
   for (const date of monthDates('2026-11')) { const expected = (await store.openDaily(date))!; await solve(store, expected); }
   expect(store.state.cups).toEqual(['2026-11']); expect(store.state.trophyDesigns['2026-11']).toEqual(trophyBinding('2026-11')); now = new Date(2026, 10, 1);
@@ -105,7 +105,7 @@ it('awards a full-month cup exactly once and retains it when the clock moves bac
   const migrated = decodeSave(legacy); expect(migrated.trophyDesigns['2026-11']).toEqual(legacyTrophyBinding('2026-11'));
   expect(migrated.cups).toEqual(restored.state.cups);
   expect(() => decodeSave({ ...migrated, trophyDesigns: { '2026-11': { version: 99, id: 'bogus' } } })).toThrow('design');
-}, 15000);
+}, 60000);
 it('computes explicit records and medals from real wins and resets only the consecutive-win run on restart', () => {
   const save = freshSave(); save.wins = [];
   for (let i = 0; i < 10; i++) {

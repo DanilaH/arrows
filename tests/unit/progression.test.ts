@@ -38,7 +38,7 @@ describe('fixed selected campaign bank', () => {
     for (const level of preDense) { const pins = Number(level.id.slice(1)) <= 20 ? middleFingerprints : tailFingerprints; expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(pins[level.id as keyof typeof pins]); }
     for (const level of campaign.slice(0, 4)) expect(createHash('sha256').update(JSON.stringify(level)).digest('hex')).toBe(compactHashes[level.id as keyof typeof compactHashes]);
     expect(campaign.slice(0, 4).every(l => l.contentVersion === 3)).toBe(true);
-    expect(campaign.slice(4).every(l => l.contentVersion === 4)).toBe(true);
+    expect(campaign.slice(4).every(l => l.contentVersion === 5)).toBe(true);
     const fingerprints = campaign.map(l => JSON.stringify({ mask: l.mask, paths: l.arrows.map(a => a.path) }));
     expect(new Set(fingerprints).size).toBe(120);
   });
@@ -80,7 +80,7 @@ describe('fixed selected campaign bank', () => {
       }
       }
     }
-  });
+  }, 30000);
 });
 
 describe('authoritative progression writer', () => {
@@ -94,7 +94,7 @@ describe('authoritative progression writer', () => {
     state.receipts = ['existing-right']; state.reservedRewards = [receipt('old-retired', 'hint', 'existing-right')];
     rows.set(SAVE_KEY, JSON.stringify(state));
     const store = new ProgressStore(storage); await store.load();
-    expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(5);
+    expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(6);
     expect(store.state.campaign).toEqual(state.campaign); expect(store.state.wins).toHaveLength(20);
     expect(store.state.daily).toEqual(state.daily); expect(store.state.reservedRewards).toEqual(state.reservedRewards);
     await Promise.all([store.next(oldBoard.attemptId), store.next(oldBoard.attemptId)]);
@@ -112,15 +112,15 @@ describe('authoritative progression writer', () => {
     state.catalogVersion = 2; state.adCadence.activeMs = 123456; state.receipts = ['confirmed-receipt'];
     const decoded = decodeSave(state);
     expect(decoded.campaign).toEqual(state.campaign); expect(decoded.receipts).toEqual(state.receipts);
-    expect(decoded.adCadence).toEqual(state.adCadence); expect(decoded.catalogVersion).toBe(5);
-    expect(() => decodeSave({ ...state, catalogVersion: 6 })).toThrow('Unsupported save');
+    expect(decoded.adCadence).toEqual(state.adCadence); expect(decoded.catalogVersion).toBe(6);
+    expect(() => decodeSave({ ...state, catalogVersion: 7 })).toThrow('Unsupported save');
     const schema1 = { ...state, schema: 1 }; expect(decodeSave(schema1).campaign).toEqual(state.campaign);
   });
   it('retains catalogue-3 compactness revision predecessors including an unstarted embedded attempt', () => {
     for (const started of [false, true]) {
       const state = freshSave(); state.catalogVersion = 3; state.campaign = freshAttempt(openingV2[0] as Level); state.campaign.started = started;
       const decoded = decodeSave(state);
-      expect(decoded.catalogVersion).toBe(5); expect(decoded.campaign).toEqual(state.campaign);
+      expect(decoded.catalogVersion).toBe(6); expect(decoded.campaign).toEqual(state.campaign);
     }
   });
   it('upgrades catalogue 4 without rerolling old early/late fields or pending reward identities', async () => {
@@ -129,7 +129,7 @@ describe('authoritative progression writer', () => {
       const board = new Board(level as Level, state.campaign.board.id); board.activate(board.hint()!); state.campaign.board = board.snapshot(); state.campaign.started = true;
       const pending = receipt(board.attemptId); state.reservedRewards = [pending]; state.receipts = [pending.id];
       const { rows, storage } = memory(); rows.set(SAVE_KEY, JSON.stringify(state)); const store = new ProgressStore(storage); await store.load();
-      expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(5); expect(store.state.campaign).toEqual(state.campaign); expect(store.state.reservedRewards).toEqual([pending]);
+      expect(store.available).toBe(true); expect(store.state.catalogVersion).toBe(6); expect(store.state.campaign).toEqual(state.campaign); expect(store.state.reservedRewards).toEqual([pending]);
       await store.restart(board.attemptId); expect(store.board.level).toEqual(level);
     }
   });

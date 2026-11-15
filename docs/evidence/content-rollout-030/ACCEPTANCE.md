@@ -1,0 +1,3 @@
+# Content rollout0.30.0/code43 — signed delivery in preparation
+
+221unit/type/build PASS.42unique focused browser checks PASS across phone/desktop (30existing campaign/autonomous-date/pilot checks and12new rollout checks): real Worker date identity, large input/reload, Nightmare zoom/pan+earned A1, legacy retention/new archive assignment, cancellation/stale reply, unknown/retry and cooperative construction.405dates independently checked (all365fresh2026+40future/leap/end-range probes), all116new campaign fields strict gates,744exact old/new A1/A2 comparisons. Frozen0.29pilot/default constructor outputs reproduce unchanged. Android sync PASS. Hosted full web/native/APK and actual records pending; do not claim phone/SDK/financial acceptance. KIT IMPACT REUSE.

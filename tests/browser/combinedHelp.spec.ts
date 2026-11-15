@@ -1,6 +1,6 @@
 import {test,expect,type Page} from '@playwright/test';
 import{readFileSync}from'node:fs';
-import{campaign}from'../../src/content/campaign';
+import{campaign}from'../fixtures/campaignV4';
 import{makeOffer,assignmentId}from'../../src/progression/helpLedger';
 import{Board,canExit}from'../../src/domain/board';
 import{freshSave,freshAttempt,SAVE_KEY,decodeSave}from'../../src/progression/save';

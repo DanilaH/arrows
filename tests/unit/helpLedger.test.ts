@@ -1,6 +1,6 @@
 import {describe,it,expect} from 'vitest';
 import type {StorageAdapter} from '@danilah/mini-games-kit/platform';
-import {campaign} from '../../src/content/campaign';
+import {campaign} from '../fixtures/campaignV4';
 import {Board,canExit} from '../../src/domain/board';
 import {ProgressStore,freshSave,freshAttempt,decodeSave,SAVE_KEY} from '../../src/progression/save';
 import type {HelpRequest} from '../../src/progression/helpLedger';

@@ -1,0 +1,3487 @@
+{
+  "catalogVersion": 6,
+  "contentVersion": 5,
+  "policy": "Owner-authorized full rollout: c01–c04 unchanged, fresh c05–c120 v5; 40 original silhouettes, no repeat within24, neighbor normalized-mask IoU<.82, denser peak cadence. Existing attempts/rights immutable. Four qualified seeds from at most24, old strict quality gates, multiple roots and unlocks. Proxies do not prove human enjoyment.",
+  "levels": [
+    {
+      "number": 5,
+      "family": "rocket",
+      "pace": "normal",
+      "seed": 30060035,
+      "candidates": 5,
+      "metrics": {
+        "arrows": 18,
+        "dots": 191,
+        "coverage": 0.9947643979057592,
+        "initialFree": 4,
+        "depth": 5,
+        "edges": 33,
+        "meanLength": 9.555555555555555,
+        "meanBends": 5.055555555555555,
+        "initialFreeFraction": 0.2222222222222222,
+        "meanEarlyFreeFraction": 0.29007271595506884,
+        "peakEarlyFreeFraction": 0.4444444444444444,
+        "largestHole": 1,
+        "straightFraction": 0.1111111111111111
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 9,
+        "remoteRayCells": 24,
+        "unlockBursts": 4,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0
+    },
+    {
+      "number": 6,
+      "family": "crescent",
+      "pace": "hard",
+      "seed": 30077961,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 32,
+        "dots": 410,
+        "coverage": 0.9926829268292683,
+        "initialFree": 4,
+        "depth": 13,
+        "edges": 81,
+        "meanLength": 11.71875,
+        "meanBends": 6.09375,
+        "initialFreeFraction": 0.125,
+        "meanEarlyFreeFraction": 0.15401878146781908,
+        "peakEarlyFreeFraction": 0.4375,
+        "largestHole": 1,
+        "straightFraction": 0.125
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 19,
+        "remoteRayCells": 53,
+        "unlockBursts": 7,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.3081395348837209
+    },
+    {
+      "number": 7,
+      "family": "fish",
+      "pace": "normal",
+      "seed": 30095887,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 17,
+        "dots": 172,
+        "coverage": 1,
+        "initialFree": 5,
+        "depth": 8,
+        "edges": 36,
+        "meanLength": 9.117647058823529,
+        "meanBends": 4.9411764705882355,
+        "initialFreeFraction": 0.29411764705882354,
+        "meanEarlyFreeFraction": 0.21875498019288867,
+        "peakEarlyFreeFraction": 0.4,
+        "largestHole": 0,
+        "straightFraction": 0.11764705882352941
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 9,
+        "remoteRayCells": 35,
+        "unlockBursts": 1,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.32868352223190933
+    },
+    {
+      "number": 8,
+      "family": "castle",
+      "pace": "normal",
+      "seed": 30105894,
+      "candidates": 5,
+      "metrics": {
+        "arrows": 13,
+        "dots": 191,
+        "coverage": 1,
+        "initialFree": 4,
+        "depth": 5,
+        "edges": 24,
+        "meanLength": 13.692307692307692,
+        "meanBends": 5.538461538461538,
+        "initialFreeFraction": 0.3076923076923077,
+        "meanEarlyFreeFraction": 0.19364511150225436,
+        "peakEarlyFreeFraction": 0.3076923076923077,
+        "largestHole": 0,
+        "straightFraction": 0
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 8,
+        "remoteRayCells": 28,
+        "unlockBursts": 2,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.520336605890603
+    },
+    {
+      "number": 9,
+      "family": "flower",
+      "pace": "normal",
+      "seed": 30100063,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 19,
+        "dots": 222,
+        "coverage": 0.9954954954954955,
+        "initialFree": 6,
+        "depth": 8,
+        "edges": 37,
+        "meanLength": 10.631578947368421,
+        "meanBends": 4.947368421052632,
+        "initialFreeFraction": 0.3157894736842105,
+        "meanEarlyFreeFraction": 0.25081262219033124,
+        "peakEarlyFreeFraction": 0.4,
+        "largestHole": 1,
+        "straightFraction": 0.21052631578947367
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 11,
+        "remoteRayCells": 13,
+        "unlockBursts": 3,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.5158045977011494
+    },
+    {
+      "number": 10,
+      "family": "sword",
+      "pace": "normal",
+      "seed": 30133827,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 18,
+        "dots": 214,
+        "coverage": 1,
+        "initialFree": 4,
+        "depth": 6,
+        "edges": 43,
+        "meanLength": 10.88888888888889,
+        "meanBends": 5.166666666666667,
+        "initialFreeFraction": 0.2222222222222222,
+        "meanEarlyFreeFraction": 0.22490445828681127,
+        "peakEarlyFreeFraction": 0.5555555555555556,
+        "largestHole": 0,
+        "straightFraction": 0.16666666666666666
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 9,
+        "remoteRayCells": 33,
+        "unlockBursts": 3,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.3711967545638945
+    },
+    {
+      "number": 11,
+      "family": "owl",
+      "pace": "normal",
+      "seed": 30135915,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 22,
+        "dots": 220,
+        "coverage": 0.9954545454545455,
+        "initialFree": 6,
+        "depth": 6,
+        "edges": 38,
+        "meanLength": 8.954545454545455,
+        "meanBends": 3.8636363636363638,
+        "initialFreeFraction": 0.2727272727272727,
+        "meanEarlyFreeFraction": 0.24953169572945116,
+        "peakEarlyFreeFraction": 0.7272727272727273,
+        "largestHole": 1,
+        "straightFraction": 0.18181818181818182
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 11,
+        "remoteRayCells": 26,
+        "unlockBursts": 3,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.3968253968253968
+    },
+    {
+      "number": 12,
+      "family": "gear",
+      "pace": "hard",
+      "seed": 30130084,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 30,
+        "dots": 408,
+        "coverage": 1,
+        "initialFree": 4,
+        "depth": 16,
+        "edges": 82,
+        "meanLength": 12.6,
+        "meanBends": 5.866666666666666,
+        "initialFreeFraction": 0.13333333333333333,
+        "meanEarlyFreeFraction": 0.13641118330256785,
+        "peakEarlyFreeFraction": 0.26666666666666666,
+        "largestHole": 0,
+        "straightFraction": 0.03333333333333333
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 20,
+        "remoteRayCells": 61,
+        "unlockBursts": 7,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5246422893481717
+    },
+    {
+      "number": 13,
+      "family": "boat",
+      "pace": "normal",
+      "seed": 30155929,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 30,
+        "dots": 256,
+        "coverage": 0.99609375,
+        "initialFree": 7,
+        "depth": 8,
+        "edges": 67,
+        "meanLength": 7.5,
+        "meanBends": 3.3666666666666667,
+        "initialFreeFraction": 0.23333333333333334,
+        "meanEarlyFreeFraction": 0.26730085922020436,
+        "peakEarlyFreeFraction": 0.5625,
+        "largestHole": 1,
+        "straightFraction": 0.2
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 18,
+        "remoteRayCells": 62,
+        "unlockBursts": 5,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.44
+    },
+    {
+      "number": 14,
+      "family": "heart",
+      "pace": "normal",
+      "seed": 30150098,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 23,
+        "dots": 267,
+        "coverage": 1,
+        "initialFree": 6,
+        "depth": 8,
+        "edges": 52,
+        "meanLength": 10.608695652173912,
+        "meanBends": 5,
+        "initialFreeFraction": 0.2608695652173913,
+        "meanEarlyFreeFraction": 0.2221717625076366,
+        "peakEarlyFreeFraction": 0.5833333333333334,
+        "largestHole": 0,
+        "straightFraction": 0.08695652173913043
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 14,
+        "remoteRayCells": 42,
+        "unlockBursts": 6,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.3729181752353367
+    },
+    {
+      "number": 15,
+      "family": "cactus",
+      "pace": "normal",
+      "seed": 30160105,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 19,
+        "dots": 258,
+        "coverage": 1,
+        "initialFree": 5,
+        "depth": 7,
+        "edges": 52,
+        "meanLength": 12.578947368421053,
+        "meanBends": 5.526315789473684,
+        "initialFreeFraction": 0.2631578947368421,
+        "meanEarlyFreeFraction": 0.17459755128485777,
+        "peakEarlyFreeFraction": 0.3,
+        "largestHole": 0,
+        "straightFraction": 0.15789473684210525
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 12,
+        "remoteRayCells": 61,
+        "unlockBursts": 4,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5468873128447597
+    },
+    {
+      "number": 16,
+      "family": "infinity",
+      "pace": "normal",
+      "seed": 30193869,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 29,
+        "dots": 254,
+        "coverage": 1,
+        "initialFree": 5,
+        "depth": 9,
+        "edges": 80,
+        "meanLength": 7.758620689655173,
+        "meanBends": 3.7241379310344827,
+        "initialFreeFraction": 0.1724137931034483,
+        "meanEarlyFreeFraction": 0.17182333035872568,
+        "peakEarlyFreeFraction": 0.5333333333333333,
+        "largestHole": 0,
+        "straightFraction": 0.3103448275862069
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 19,
+        "remoteRayCells": 86,
+        "unlockBursts": 3,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.41752988047808764
+    },
+    {
+      "number": 17,
+      "family": "umbrella",
+      "pace": "normal",
+      "seed": 30180119,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 25,
+        "dots": 293,
+        "coverage": 1,
+        "initialFree": 6,
+        "depth": 6,
+        "edges": 58,
+        "meanLength": 10.72,
+        "meanBends": 4.76,
+        "initialFreeFraction": 0.24,
+        "meanEarlyFreeFraction": 0.2338226346989044,
+        "peakEarlyFreeFraction": 0.6153846153846154,
+        "largestHole": 0,
+        "straightFraction": 0.24
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 15,
+        "remoteRayCells": 40,
+        "unlockBursts": 3,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.449438202247191
+    },
+    {
+      "number": 18,
+      "family": "key",
+      "pace": "hard",
+      "seed": 30229721,
+      "candidates": 6,
+      "metrics": {
+        "arrows": 34,
+        "dots": 414,
+        "coverage": 1,
+        "initialFree": 4,
+        "depth": 15,
+        "edges": 104,
+        "meanLength": 11.176470588235293,
+        "meanBends": 5.205882352941177,
+        "initialFreeFraction": 0.11764705882352941,
+        "meanEarlyFreeFraction": 0.09681376476141469,
+        "peakEarlyFreeFraction": 0.19047619047619047,
+        "largestHole": 0,
+        "straightFraction": 0.14705882352941177
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 24,
+        "remoteRayCells": 79,
+        "unlockBursts": 5,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.47876106194690266
+    },
+    {
+      "number": 19,
+      "family": "butterfly",
+      "pace": "normal",
+      "seed": 30215971,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 25,
+        "dots": 276,
+        "coverage": 1,
+        "initialFree": 6,
+        "depth": 8,
+        "edges": 59,
+        "meanLength": 10.04,
+        "meanBends": 4.68,
+        "initialFreeFraction": 0.24,
+        "meanEarlyFreeFraction": 0.2853094496573534,
+        "peakEarlyFreeFraction": 0.5714285714285714,
+        "largestHole": 0,
+        "straightFraction": 0.24
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 14,
+        "remoteRayCells": 60,
+        "unlockBursts": 4,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.5185979971387696
+    },
+    {
+      "number": 20,
+      "family": "magnet",
+      "pace": "nightmare",
+      "seed": 30225978,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 100,
+        "dots": 1164,
+        "coverage": 0.9991408934707904,
+        "initialFree": 7,
+        "depth": 23,
+        "edges": 464,
+        "meanLength": 10.63,
+        "meanBends": 4.7,
+        "initialFreeFraction": 0.07,
+        "meanEarlyFreeFraction": 0.05723186233305692,
+        "peakEarlyFreeFraction": 0.18,
+        "largestHole": 1,
+        "straightFraction": 0.19
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 76,
+        "remoteRayCells": 517,
+        "unlockBursts": 20,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.4832869080779944
+    },
+    {
+      "number": 21,
+      "family": "mushroom",
+      "pace": "normal",
+      "seed": 30235985,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 34,
+        "dots": 387,
+        "coverage": 1,
+        "initialFree": 8,
+        "depth": 11,
+        "edges": 104,
+        "meanLength": 10.382352941176471,
+        "meanBends": 4.382352941176471,
+        "initialFreeFraction": 0.23529411764705882,
+        "meanEarlyFreeFraction": 0.1638629879620126,
+        "peakEarlyFreeFraction": 0.3157894736842105,
+        "largestHole": 0,
+        "straightFraction": 0.23529411764705882
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 24,
+        "remoteRayCells": 95,
+        "unlockBursts": 7,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.3191489361702128
+    },
+    {
+      "number": 22,
+      "family": "star",
+      "pace": "hard",
+      "seed": 30238073,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 59,
+        "dots": 765,
+        "coverage": 1,
+        "initialFree": 7,
+        "depth": 20,
+        "edges": 236,
+        "meanLength": 11.966101694915254,
+        "meanBends": 5.593220338983051,
+        "initialFreeFraction": 0.11864406779661017,
+        "meanEarlyFreeFraction": 0.08247546702187213,
+        "peakEarlyFreeFraction": 0.23333333333333334,
+        "largestHole": 0,
+        "straightFraction": 0.1016949152542373
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 43,
+        "remoteRayCells": 217,
+        "unlockBursts": 10,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.4956521739130435
+    },
+    {
+      "number": 23,
+      "family": "whale",
+      "pace": "normal",
+      "seed": 30248080,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 33,
+        "dots": 384,
+        "coverage": 0.9973958333333334,
+        "initialFree": 8,
+        "depth": 8,
+        "edges": 88,
+        "meanLength": 10.606060606060606,
+        "meanBends": 5.090909090909091,
+        "initialFreeFraction": 0.24242424242424243,
+        "meanEarlyFreeFraction": 0.23687787299694646,
+        "peakEarlyFreeFraction": 0.4117647058823529,
+        "largestHole": 1,
+        "straightFraction": 0.09090909090909091
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 20,
+        "remoteRayCells": 64,
+        "unlockBursts": 6,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.4821256038647343
+    },
+    {
+      "number": 24,
+      "family": "shield",
+      "pace": "hard",
+      "seed": 30273925,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 62,
+        "dots": 736,
+        "coverage": 0.998641304347826,
+        "initialFree": 7,
+        "depth": 18,
+        "edges": 204,
+        "meanLength": 10.85483870967742,
+        "meanBends": 4.661290322580645,
+        "initialFreeFraction": 0.11290322580645161,
+        "meanEarlyFreeFraction": 0.1162726463931585,
+        "peakEarlyFreeFraction": 0.19444444444444445,
+        "largestHole": 1,
+        "straightFraction": 0.1935483870967742
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 44,
+        "remoteRayCells": 164,
+        "unlockBursts": 10,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.5511751326762699
+    },
+    {
+      "number": 25,
+      "family": "dragonfly",
+      "pace": "nightmare",
+      "seed": 30268094,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 111,
+        "dots": 1288,
+        "coverage": 0.9968944099378882,
+        "initialFree": 9,
+        "depth": 26,
+        "edges": 542,
+        "meanLength": 10.567567567567568,
+        "meanBends": 4.423423423423423,
+        "initialFreeFraction": 0.08108108108108109,
+        "meanEarlyFreeFraction": 0.07188619583945506,
+        "peakEarlyFreeFraction": 0.26785714285714285,
+        "largestHole": 1,
+        "straightFraction": 0.22522522522522523
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 83,
+        "remoteRayCells": 539,
+        "unlockBursts": 19,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.5453100158982512
+    },
+    {
+      "number": 26,
+      "family": "coffee",
+      "pace": "breather",
+      "seed": 30270182,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 18,
+        "dots": 154,
+        "coverage": 1,
+        "initialFree": 5,
+        "depth": 5,
+        "edges": 36,
+        "meanLength": 7.555555555555555,
+        "meanBends": 3.5,
+        "initialFreeFraction": 0.2777777777777778,
+        "meanEarlyFreeFraction": 0.25637867306984957,
+        "peakEarlyFreeFraction": 0.5555555555555556,
+        "largestHole": 0,
+        "straightFraction": 0.2222222222222222
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 11,
+        "remoteRayCells": 49,
+        "unlockBursts": 3,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.5062320230105465
+    },
+    {
+      "number": 27,
+      "family": "snowflake",
+      "pace": "hard",
+      "seed": 30296027,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 69,
+        "dots": 752,
+        "coverage": 0.9933510638297872,
+        "initialFree": 7,
+        "depth": 21,
+        "edges": 268,
+        "meanLength": 9.826086956521738,
+        "meanBends": 4.463768115942029,
+        "initialFreeFraction": 0.10144927536231885,
+        "meanEarlyFreeFraction": 0.09916120857478514,
+        "peakEarlyFreeFraction": 0.34285714285714286,
+        "largestHole": 1,
+        "straightFraction": 0.14492753623188406
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 50,
+        "remoteRayCells": 260,
+        "unlockBursts": 14,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5134892086330936
+    },
+    {
+      "number": 28,
+      "family": "mountain",
+      "pace": "normal",
+      "seed": 30306034,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 35,
+        "dots": 419,
+        "coverage": 1,
+        "initialFree": 8,
+        "depth": 11,
+        "edges": 95,
+        "meanLength": 10.971428571428572,
+        "meanBends": 4.571428571428571,
+        "initialFreeFraction": 0.22857142857142856,
+        "meanEarlyFreeFraction": 0.202248916637671,
+        "peakEarlyFreeFraction": 0.3888888888888889,
+        "largestHole": 0,
+        "straightFraction": 0.2857142857142857
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 21,
+        "remoteRayCells": 80,
+        "unlockBursts": 8,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.4175170068027211
+    },
+    {
+      "number": 29,
+      "family": "octopus",
+      "pace": "hard",
+      "seed": 30300203,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 56,
+        "dots": 724,
+        "coverage": 0.9972375690607734,
+        "initialFree": 7,
+        "depth": 17,
+        "edges": 225,
+        "meanLength": 11.892857142857142,
+        "meanBends": 5.464285714285714,
+        "initialFreeFraction": 0.125,
+        "meanEarlyFreeFraction": 0.11771181365992654,
+        "peakEarlyFreeFraction": 0.39285714285714285,
+        "largestHole": 1,
+        "straightFraction": 0.16071428571428573
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 40,
+        "remoteRayCells": 181,
+        "unlockBursts": 8,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5831285831285832
+    },
+    {
+      "number": 30,
+      "family": "lightning",
+      "pace": "nightmare",
+      "seed": 30326048,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 116,
+        "dots": 1310,
+        "coverage": 0.9908396946564886,
+        "initialFree": 11,
+        "depth": 30,
+        "edges": 594,
+        "meanLength": 10.189655172413794,
+        "meanBends": 4.405172413793103,
+        "initialFreeFraction": 0.09482758620689655,
+        "meanEarlyFreeFraction": 0.08969713817367614,
+        "peakEarlyFreeFraction": 0.2413793103448276,
+        "largestHole": 1,
+        "straightFraction": 0.20689655172413793
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 88,
+        "remoteRayCells": 338,
+        "unlockBursts": 20,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.43238587424633934
+    },
+    {
+      "number": 31,
+      "family": "bell",
+      "pace": "breather",
+      "seed": 30336055,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 15,
+        "dots": 168,
+        "coverage": 1,
+        "initialFree": 6,
+        "depth": 4,
+        "edges": 20,
+        "meanLength": 10.2,
+        "meanBends": 5,
+        "initialFreeFraction": 0.4,
+        "meanEarlyFreeFraction": 0.35457493894993886,
+        "peakEarlyFreeFraction": 0.625,
+        "largestHole": 0,
+        "straightFraction": 0.3333333333333333
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 5,
+        "remoteRayCells": 12,
+        "unlockBursts": 3,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.49577167019027485
+    },
+    {
+      "number": 32,
+      "family": "leaf",
+      "pace": "hard",
+      "seed": 30338143,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 60,
+        "dots": 733,
+        "coverage": 1,
+        "initialFree": 7,
+        "depth": 22,
+        "edges": 245,
+        "meanLength": 11.216666666666667,
+        "meanBends": 4.783333333333333,
+        "initialFreeFraction": 0.11666666666666667,
+        "meanEarlyFreeFraction": 0.09134784326531435,
+        "peakEarlyFreeFraction": 0.3333333333333333,
+        "largestHole": 0,
+        "straightFraction": 0.2
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 45,
+        "remoteRayCells": 214,
+        "unlockBursts": 11,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.710820895522388
+    },
+    {
+      "number": 33,
+      "family": "trophy",
+      "pace": "normal",
+      "seed": 30363988,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 39,
+        "dots": 418,
+        "coverage": 1,
+        "initialFree": 8,
+        "depth": 11,
+        "edges": 131,
+        "meanLength": 9.717948717948717,
+        "meanBends": 4.384615384615385,
+        "initialFreeFraction": 0.20512820512820512,
+        "meanEarlyFreeFraction": 0.1728568827788499,
+        "peakEarlyFreeFraction": 0.5,
+        "largestHole": 0,
+        "straightFraction": 0.28205128205128205
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 25,
+        "remoteRayCells": 119,
+        "unlockBursts": 5,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5347280334728034
+    },
+    {
+      "number": 34,
+      "family": "spiral",
+      "pace": "hard",
+      "seed": 30366076,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 58,
+        "dots": 747,
+        "coverage": 1,
+        "initialFree": 7,
+        "depth": 18,
+        "edges": 196,
+        "meanLength": 11.879310344827585,
+        "meanBends": 4.775862068965517,
+        "initialFreeFraction": 0.1206896551724138,
+        "meanEarlyFreeFraction": 0.10738592137000945,
+        "peakEarlyFreeFraction": 0.3448275862068966,
+        "largestHole": 0,
+        "straightFraction": 0.15517241379310345
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 40,
+        "remoteRayCells": 192,
+        "unlockBursts": 13,
+        "maxUnlock": 5
+      },
+      "neighborSimilarity": 0.4892037786774629
+    },
+    {
+      "number": 35,
+      "family": "bulb",
+      "pace": "nightmare",
+      "seed": 30368164,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 105,
+        "dots": 1314,
+        "coverage": 1,
+        "initialFree": 9,
+        "depth": 30,
+        "edges": 477,
+        "meanLength": 11.514285714285714,
+        "meanBends": 5.114285714285714,
+        "initialFreeFraction": 0.08571428571428572,
+        "meanEarlyFreeFraction": 0.07344581090800234,
+        "peakEarlyFreeFraction": 0.2222222222222222,
+        "largestHole": 0,
+        "straightFraction": 0.14285714285714285
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 82,
+        "remoteRayCells": 311,
+        "unlockBursts": 18,
+        "maxUnlock": 5
+      },
+      "neighborSimilarity": 0.6318572372769332
+    },
+    {
+      "number": 36,
+      "family": "tree",
+      "pace": "breather",
+      "seed": 30386090,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 16,
+        "dots": 155,
+        "coverage": 0.9935483870967742,
+        "initialFree": 7,
+        "depth": 5,
+        "edges": 30,
+        "meanLength": 8.625,
+        "meanBends": 4.5625,
+        "initialFreeFraction": 0.4375,
+        "meanEarlyFreeFraction": 0.3757523854746078,
+        "peakEarlyFreeFraction": 0.5,
+        "largestHole": 1,
+        "straightFraction": 0.1875
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 7,
+        "remoteRayCells": 28,
+        "unlockBursts": 1,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.5492063492063493
+    },
+    {
+      "number": 37,
+      "family": "crab",
+      "pace": "hard",
+      "seed": 30380259,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 72,
+        "dots": 765,
+        "coverage": 0.9973856209150327,
+        "initialFree": 7,
+        "depth": 18,
+        "edges": 298,
+        "meanLength": 9.597222222222221,
+        "meanBends": 4.444444444444445,
+        "initialFreeFraction": 0.09722222222222222,
+        "meanEarlyFreeFraction": 0.11571854384180061,
+        "peakEarlyFreeFraction": 0.3611111111111111,
+        "largestHole": 1,
+        "straightFraction": 0.20833333333333334
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 51,
+        "remoteRayCells": 218,
+        "unlockBursts": 19,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.4446280991735537
+    },
+    {
+      "number": 38,
+      "family": "flame",
+      "pace": "normal",
+      "seed": 30414023,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 34,
+        "dots": 383,
+        "coverage": 0.9947780678851175,
+        "initialFree": 8,
+        "depth": 12,
+        "edges": 107,
+        "meanLength": 10.205882352941176,
+        "meanBends": 4.264705882352941,
+        "initialFreeFraction": 0.23529411764705882,
+        "meanEarlyFreeFraction": 0.21536824463315155,
+        "peakEarlyFreeFraction": 0.4444444444444444,
+        "largestHole": 1,
+        "straightFraction": 0.23529411764705882
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 22,
+        "remoteRayCells": 73,
+        "unlockBursts": 5,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5120732722731057
+    },
+    {
+      "number": 39,
+      "family": "crown",
+      "pace": "hard",
+      "seed": 30424030,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 59,
+        "dots": 739,
+        "coverage": 0.9986468200270636,
+        "initialFree": 8,
+        "depth": 23,
+        "edges": 251,
+        "meanLength": 11.508474576271187,
+        "meanBends": 5.203389830508475,
+        "initialFreeFraction": 0.13559322033898305,
+        "meanEarlyFreeFraction": 0.09267245850214885,
+        "peakEarlyFreeFraction": 0.20588235294117646,
+        "largestHole": 1,
+        "straightFraction": 0.13559322033898305
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 45,
+        "remoteRayCells": 216,
+        "unlockBursts": 12,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.6695205479452054
+    },
+    {
+      "number": 40,
+      "family": "diamond",
+      "pace": "nightmare",
+      "seed": 30418199,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 120,
+        "dots": 1293,
+        "coverage": 0.9853054911059551,
+        "initialFree": 12,
+        "depth": 30,
+        "edges": 543,
+        "meanLength": 9.616666666666667,
+        "meanBends": 4.225,
+        "initialFreeFraction": 0.1,
+        "meanEarlyFreeFraction": 0.10362207152460336,
+        "peakEarlyFreeFraction": 0.3582089552238806,
+        "largestHole": 1,
+        "straightFraction": 0.2
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 86,
+        "remoteRayCells": 326,
+        "unlockBursts": 25,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.6134020618556701
+    },
+    {
+      "number": 41,
+      "family": "planet",
+      "pace": "normal",
+      "seed": 30428206,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 39,
+        "dots": 465,
+        "coverage": 1,
+        "initialFree": 9,
+        "depth": 10,
+        "edges": 135,
+        "meanLength": 10.923076923076923,
+        "meanBends": 5.230769230769231,
+        "initialFreeFraction": 0.23076923076923078,
+        "meanEarlyFreeFraction": 0.13518833199385613,
+        "peakEarlyFreeFraction": 0.35,
+        "largestHole": 0,
+        "straightFraction": 0.23076923076923078
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 26,
+        "remoteRayCells": 93,
+        "unlockBursts": 7,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.6606170598911071
+    },
+    {
+      "number": 42,
+      "family": "hourglass",
+      "pace": "hard",
+      "seed": 30446132,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 82,
+        "dots": 918,
+        "coverage": 1,
+        "initialFree": 9,
+        "depth": 22,
+        "edges": 345,
+        "meanLength": 10.195121951219512,
+        "meanBends": 4.2560975609756095,
+        "initialFreeFraction": 0.10975609756097561,
+        "meanEarlyFreeFraction": 0.07416746157282128,
+        "peakEarlyFreeFraction": 0.21951219512195122,
+        "largestHole": 0,
+        "straightFraction": 0.21951219512195122
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 60,
+        "remoteRayCells": 363,
+        "unlockBursts": 14,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.5598755832037325
+    },
+    {
+      "number": 43,
+      "family": "cross",
+      "pace": "normal",
+      "seed": 30440301,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 38,
+        "dots": 477,
+        "coverage": 1,
+        "initialFree": 9,
+        "depth": 12,
+        "edges": 95,
+        "meanLength": 11.552631578947368,
+        "meanBends": 5,
+        "initialFreeFraction": 0.23684210526315788,
+        "meanEarlyFreeFraction": 0.1770417169170821,
+        "peakEarlyFreeFraction": 0.45,
+        "largestHole": 0,
+        "straightFraction": 0.13157894736842105
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 23,
+        "remoteRayCells": 64,
+        "unlockBursts": 6,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.4264705882352941
+    },
+    {
+      "number": 44,
+      "family": "bat",
+      "pace": "hard",
+      "seed": 30466146,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 78,
+        "dots": 901,
+        "coverage": 0.9900110987791343,
+        "initialFree": 8,
+        "depth": 23,
+        "edges": 395,
+        "meanLength": 10.435897435897436,
+        "meanBends": 4.5,
+        "initialFreeFraction": 0.10256410256410256,
+        "meanEarlyFreeFraction": 0.06616122876146044,
+        "peakEarlyFreeFraction": 0.2,
+        "largestHole": 1,
+        "straightFraction": 0.15384615384615385
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 64,
+        "remoteRayCells": 335,
+        "unlockBursts": 12,
+        "maxUnlock": 5
+      },
+      "neighborSimilarity": 0.6372881355932203
+    },
+    {
+      "number": 45,
+      "family": "rocket",
+      "pace": "nightmare",
+      "seed": 30468234,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 127,
+        "dots": 1556,
+        "coverage": 0.9961439588688946,
+        "initialFree": 10,
+        "depth": 31,
+        "edges": 625,
+        "meanLength": 11.204724409448819,
+        "meanBends": 4.850393700787402,
+        "initialFreeFraction": 0.07874015748031496,
+        "meanEarlyFreeFraction": 0.06226753039676935,
+        "peakEarlyFreeFraction": 0.15625,
+        "largestHole": 1,
+        "straightFraction": 0.1968503937007874
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 93,
+        "remoteRayCells": 386,
+        "unlockBursts": 27,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.41379310344827586
+    },
+    {
+      "number": 46,
+      "family": "crescent",
+      "pace": "breather",
+      "seed": 30494079,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 15,
+        "dots": 183,
+        "coverage": 0.994535519125683,
+        "initialFree": 5,
+        "depth": 5,
+        "edges": 25,
+        "meanLength": 11.133333333333333,
+        "meanBends": 5.333333333333333,
+        "initialFreeFraction": 0.3333333333333333,
+        "meanEarlyFreeFraction": 0.3048441142191141,
+        "peakEarlyFreeFraction": 0.625,
+        "largestHole": 1,
+        "straightFraction": 0.13333333333333333
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 7,
+        "remoteRayCells": 32,
+        "unlockBursts": 2,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.3081395348837209
+    },
+    {
+      "number": 47,
+      "family": "fish",
+      "pace": "hard",
+      "seed": 30504086,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 79,
+        "dots": 910,
+        "coverage": 0.9978021978021978,
+        "initialFree": 11,
+        "depth": 23,
+        "edges": 336,
+        "meanLength": 10.49367088607595,
+        "meanBends": 4.506329113924051,
+        "initialFreeFraction": 0.13924050632911392,
+        "meanEarlyFreeFraction": 0.11832592779201648,
+        "peakEarlyFreeFraction": 0.325,
+        "largestHole": 1,
+        "straightFraction": 0.20253164556962025
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 55,
+        "remoteRayCells": 243,
+        "unlockBursts": 15,
+        "maxUnlock": 5
+      },
+      "neighborSimilarity": 0.32868352223190933
+    },
+    {
+      "number": 48,
+      "family": "castle",
+      "pace": "normal",
+      "seed": 30490336,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 33,
+        "dots": 428,
+        "coverage": 1,
+        "initialFree": 8,
+        "depth": 12,
+        "edges": 94,
+        "meanLength": 11.969696969696969,
+        "meanBends": 5.121212121212121,
+        "initialFreeFraction": 0.24242424242424243,
+        "meanEarlyFreeFraction": 0.12267266525499317,
+        "peakEarlyFreeFraction": 0.25,
+        "largestHole": 0,
+        "straightFraction": 0.15151515151515152
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 17,
+        "remoteRayCells": 89,
+        "unlockBursts": 6,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.520336605890603
+    },
+    {
+      "number": 49,
+      "family": "flower",
+      "pace": "hard",
+      "seed": 30508262,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 77,
+        "dots": 907,
+        "coverage": 0.9977949283351709,
+        "initialFree": 8,
+        "depth": 20,
+        "edges": 318,
+        "meanLength": 10.753246753246753,
+        "meanBends": 4.532467532467533,
+        "initialFreeFraction": 0.1038961038961039,
+        "meanEarlyFreeFraction": 0.07858137148971699,
+        "peakEarlyFreeFraction": 0.28205128205128205,
+        "largestHole": 1,
+        "straightFraction": 0.19480519480519481
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 56,
+        "remoteRayCells": 185,
+        "unlockBursts": 15,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5158045977011494
+    },
+    {
+      "number": 50,
+      "family": "sword",
+      "pace": "nightmare",
+      "seed": 30526188,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 115,
+        "dots": 1532,
+        "coverage": 0.9986945169712794,
+        "initialFree": 9,
+        "depth": 31,
+        "edges": 500,
+        "meanLength": 12.304347826086957,
+        "meanBends": 5.147826086956521,
+        "initialFreeFraction": 0.0782608695652174,
+        "meanEarlyFreeFraction": 0.06881386829460605,
+        "peakEarlyFreeFraction": 0.22413793103448276,
+        "largestHole": 1,
+        "straightFraction": 0.13043478260869565
+      },
+      "situations": {
+        "interiorRoots": 5,
+        "sharedBlockers": 84,
+        "remoteRayCells": 406,
+        "unlockBursts": 25,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.3711967545638945
+    },
+    {
+      "number": 51,
+      "family": "owl",
+      "pace": "breather",
+      "seed": 30528276,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 20,
+        "dots": 164,
+        "coverage": 1,
+        "initialFree": 5,
+        "depth": 6,
+        "edges": 37,
+        "meanLength": 7.2,
+        "meanBends": 3.45,
+        "initialFreeFraction": 0.25,
+        "meanEarlyFreeFraction": 0.25665217708561366,
+        "peakEarlyFreeFraction": 0.6,
+        "largestHole": 0,
+        "straightFraction": 0.25
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 10,
+        "remoteRayCells": 17,
+        "unlockBursts": 2,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.3968253968253968
+    },
+    {
+      "number": 52,
+      "family": "gear",
+      "pace": "hard",
+      "seed": 30538283,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 77,
+        "dots": 908,
+        "coverage": 0.9922907488986784,
+        "initialFree": 10,
+        "depth": 22,
+        "edges": 277,
+        "meanLength": 10.7012987012987,
+        "meanBends": 4.792207792207792,
+        "initialFreeFraction": 0.12987012987012986,
+        "meanEarlyFreeFraction": 0.09448624182482958,
+        "peakEarlyFreeFraction": 0.21951219512195122,
+        "largestHole": 1,
+        "straightFraction": 0.09090909090909091
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 54,
+        "remoteRayCells": 241,
+        "unlockBursts": 16,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5246422893481717
+    },
+    {
+      "number": 53,
+      "family": "boat",
+      "pace": "normal",
+      "seed": 30556209,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 39,
+        "dots": 473,
+        "coverage": 0.9957716701902748,
+        "initialFree": 9,
+        "depth": 9,
+        "edges": 131,
+        "meanLength": 11.076923076923077,
+        "meanBends": 5.358974358974359,
+        "initialFreeFraction": 0.23076923076923078,
+        "meanEarlyFreeFraction": 0.15638785994298765,
+        "peakEarlyFreeFraction": 0.3,
+        "largestHole": 1,
+        "straightFraction": 0.1794871794871795
+      },
+      "situations": {
+        "interiorRoots": 5,
+        "sharedBlockers": 25,
+        "remoteRayCells": 130,
+        "unlockBursts": 8,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.44
+    },
+    {
+      "number": 54,
+      "family": "cactus",
+      "pace": "hard",
+      "seed": 30550378,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 77,
+        "dots": 925,
+        "coverage": 1,
+        "initialFree": 9,
+        "depth": 20,
+        "edges": 308,
+        "meanLength": 11.012987012987013,
+        "meanBends": 4.415584415584416,
+        "initialFreeFraction": 0.11688311688311688,
+        "meanEarlyFreeFraction": 0.10885558952184388,
+        "peakEarlyFreeFraction": 0.24444444444444444,
+        "largestHole": 0,
+        "straightFraction": 0.22077922077922077
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 53,
+        "remoteRayCells": 217,
+        "unlockBursts": 15,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.2917726887192536
+    },
+    {
+      "number": 55,
+      "family": "infinity",
+      "pace": "nightmare",
+      "seed": 30560385,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 131,
+        "dots": 1546,
+        "coverage": 0.9967658473479948,
+        "initialFree": 9,
+        "depth": 33,
+        "edges": 624,
+        "meanLength": 10.763358778625955,
+        "meanBends": 4.67175572519084,
+        "initialFreeFraction": 0.06870229007633588,
+        "meanEarlyFreeFraction": 0.053286603311586266,
+        "peakEarlyFreeFraction": 0.15151515151515152,
+        "largestHole": 1,
+        "straightFraction": 0.183206106870229
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 106,
+        "remoteRayCells": 565,
+        "unlockBursts": 22,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.41752988047808764
+    },
+    {
+      "number": 56,
+      "family": "umbrella",
+      "pace": "breather",
+      "seed": 30570392,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 16,
+        "dots": 189,
+        "coverage": 1,
+        "initialFree": 6,
+        "depth": 4,
+        "edges": 29,
+        "meanLength": 10.8125,
+        "meanBends": 4.75,
+        "initialFreeFraction": 0.375,
+        "meanEarlyFreeFraction": 0.347956672956673,
+        "peakEarlyFreeFraction": 0.6666666666666666,
+        "largestHole": 0,
+        "straightFraction": 0.1875
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 9,
+        "remoteRayCells": 24,
+        "unlockBursts": 1,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.449438202247191
+    },
+    {
+      "number": 57,
+      "family": "key",
+      "pace": "hard",
+      "seed": 30596237,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 76,
+        "dots": 886,
+        "coverage": 0.9966139954853274,
+        "initialFree": 8,
+        "depth": 21,
+        "edges": 266,
+        "meanLength": 10.618421052631579,
+        "meanBends": 4.605263157894737,
+        "initialFreeFraction": 0.10526315789473684,
+        "meanEarlyFreeFraction": 0.11939207863307758,
+        "peakEarlyFreeFraction": 0.3157894736842105,
+        "largestHole": 1,
+        "straightFraction": 0.2236842105263158
+      },
+      "situations": {
+        "interiorRoots": 7,
+        "sharedBlockers": 48,
+        "remoteRayCells": 132,
+        "unlockBursts": 13,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.47876106194690266
+    },
+    {
+      "number": 58,
+      "family": "magnet",
+      "pace": "normal",
+      "seed": 30606244,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 37,
+        "dots": 469,
+        "coverage": 0.9936034115138592,
+        "initialFree": 10,
+        "depth": 12,
+        "edges": 126,
+        "meanLength": 11.594594594594595,
+        "meanBends": 5.1891891891891895,
+        "initialFreeFraction": 0.2702702702702703,
+        "meanEarlyFreeFraction": 0.1940117589529505,
+        "peakEarlyFreeFraction": 0.45,
+        "largestHole": 1,
+        "straightFraction": 0.13513513513513514
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 26,
+        "remoteRayCells": 172,
+        "unlockBursts": 6,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.32581648522550544
+    },
+    {
+      "number": 59,
+      "family": "mushroom",
+      "pace": "hard",
+      "seed": 30600413,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 73,
+        "dots": 920,
+        "coverage": 0.9989130434782608,
+        "initialFree": 9,
+        "depth": 20,
+        "edges": 266,
+        "meanLength": 11.58904109589041,
+        "meanBends": 5.164383561643835,
+        "initialFreeFraction": 0.1232876712328767,
+        "meanEarlyFreeFraction": 0.07083417741125013,
+        "peakEarlyFreeFraction": 0.16279069767441862,
+        "largestHole": 1,
+        "straightFraction": 0.1643835616438356
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 53,
+        "remoteRayCells": 137,
+        "unlockBursts": 15,
+        "maxUnlock": 5
+      },
+      "neighborSimilarity": 0.3191489361702128
+    },
+    {
+      "number": 60,
+      "family": "star",
+      "pace": "nightmare",
+      "seed": 30634177,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 135,
+        "dots": 1594,
+        "coverage": 0.9981179422835633,
+        "initialFree": 10,
+        "depth": 32,
+        "edges": 653,
+        "meanLength": 10.785185185185185,
+        "meanBends": 4.82962962962963,
+        "initialFreeFraction": 0.07407407407407407,
+        "meanEarlyFreeFraction": 0.08268450451999707,
+        "peakEarlyFreeFraction": 0.2,
+        "largestHole": 1,
+        "straightFraction": 0.1925925925925926
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 105,
+        "remoteRayCells": 396,
+        "unlockBursts": 28,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.4956521739130435
+    },
+    {
+      "number": 61,
+      "family": "whale",
+      "pace": "normal",
+      "seed": 30628346,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 41,
+        "dots": 512,
+        "coverage": 0.998046875,
+        "initialFree": 10,
+        "depth": 9,
+        "edges": 119,
+        "meanLength": 11.463414634146341,
+        "meanBends": 4.878048780487805,
+        "initialFreeFraction": 0.24390243902439024,
+        "meanEarlyFreeFraction": 0.15972035293574333,
+        "peakEarlyFreeFraction": 0.38095238095238093,
+        "largestHole": 1,
+        "straightFraction": 0.24390243902439024
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 26,
+        "remoteRayCells": 113,
+        "unlockBursts": 6,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.4821256038647343
+    },
+    {
+      "number": 62,
+      "family": "shield",
+      "pace": "hard",
+      "seed": 30654191,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 85,
+        "dots": 1032,
+        "coverage": 0.999031007751938,
+        "initialFree": 10,
+        "depth": 24,
+        "edges": 355,
+        "meanLength": 11.129411764705882,
+        "meanBends": 4.741176470588235,
+        "initialFreeFraction": 0.11764705882352941,
+        "meanEarlyFreeFraction": 0.08190486973722383,
+        "peakEarlyFreeFraction": 0.2558139534883721,
+        "largestHole": 1,
+        "straightFraction": 0.16470588235294117
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 63,
+        "remoteRayCells": 242,
+        "unlockBursts": 13,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.5511751326762699
+    },
+    {
+      "number": 63,
+      "family": "dragonfly",
+      "pace": "normal",
+      "seed": 30656279,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 43,
+        "dots": 538,
+        "coverage": 0.9962825278810409,
+        "initialFree": 10,
+        "depth": 10,
+        "edges": 133,
+        "meanLength": 11.465116279069768,
+        "meanBends": 5.325581395348837,
+        "initialFreeFraction": 0.23255813953488372,
+        "meanEarlyFreeFraction": 0.2059692958698181,
+        "peakEarlyFreeFraction": 0.36363636363636365,
+        "largestHole": 1,
+        "straightFraction": 0.11627906976744186
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 27,
+        "remoteRayCells": 111,
+        "unlockBursts": 7,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.5453100158982512
+    },
+    {
+      "number": 64,
+      "family": "coffee",
+      "pace": "hard",
+      "seed": 30674205,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 89,
+        "dots": 1083,
+        "coverage": 1,
+        "initialFree": 10,
+        "depth": 26,
+        "edges": 344,
+        "meanLength": 11.168539325842696,
+        "meanBends": 4.820224719101123,
+        "initialFreeFraction": 0.11235955056179775,
+        "meanEarlyFreeFraction": 0.08537236688394793,
+        "peakEarlyFreeFraction": 0.24444444444444444,
+        "largestHole": 0,
+        "straightFraction": 0.21348314606741572
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 65,
+        "remoteRayCells": 251,
+        "unlockBursts": 15,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5062320230105465
+    },
+    {
+      "number": 65,
+      "family": "snowflake",
+      "pace": "nightmare",
+      "seed": 30660455,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 163,
+        "dots": 1762,
+        "coverage": 0.9869466515323496,
+        "initialFree": 12,
+        "depth": 32,
+        "edges": 768,
+        "meanLength": 9.668711656441717,
+        "meanBends": 4.288343558282208,
+        "initialFreeFraction": 0.0736196319018405,
+        "meanEarlyFreeFraction": 0.07611617167527804,
+        "peakEarlyFreeFraction": 0.21686746987951808,
+        "largestHole": 1,
+        "straightFraction": 0.2147239263803681
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 125,
+        "remoteRayCells": 551,
+        "unlockBursts": 35,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5134892086330936
+    },
+    {
+      "number": 66,
+      "family": "mountain",
+      "pace": "breather",
+      "seed": 30678381,
+      "candidates": 5,
+      "metrics": {
+        "arrows": 21,
+        "dots": 204,
+        "coverage": 1,
+        "initialFree": 7,
+        "depth": 5,
+        "edges": 44,
+        "meanLength": 8.714285714285714,
+        "meanBends": 3.4285714285714284,
+        "initialFreeFraction": 0.3333333333333333,
+        "meanEarlyFreeFraction": 0.2862439267167666,
+        "peakEarlyFreeFraction": 0.5833333333333334,
+        "largestHole": 0,
+        "straightFraction": 0.3333333333333333
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 11,
+        "remoteRayCells": 50,
+        "unlockBursts": 4,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.4175170068027211
+    },
+    {
+      "number": 67,
+      "family": "octopus",
+      "pace": "hard",
+      "seed": 30688388,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 86,
+        "dots": 1079,
+        "coverage": 1,
+        "initialFree": 11,
+        "depth": 23,
+        "edges": 324,
+        "meanLength": 11.546511627906977,
+        "meanBends": 5.046511627906977,
+        "initialFreeFraction": 0.12790697674418605,
+        "meanEarlyFreeFraction": 0.10695030406913697,
+        "peakEarlyFreeFraction": 0.20930232558139536,
+        "largestHole": 0,
+        "straightFraction": 0.13953488372093023
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 62,
+        "remoteRayCells": 226,
+        "unlockBursts": 12,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5831285831285832
+    },
+    {
+      "number": 68,
+      "family": "lightning",
+      "pace": "normal",
+      "seed": 30698395,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 43,
+        "dots": 531,
+        "coverage": 0.992467043314501,
+        "initialFree": 10,
+        "depth": 13,
+        "edges": 155,
+        "meanLength": 11.255813953488373,
+        "meanBends": 5.4186046511627906,
+        "initialFreeFraction": 0.23255813953488372,
+        "meanEarlyFreeFraction": 0.15023769014916596,
+        "peakEarlyFreeFraction": 0.2727272727272727,
+        "largestHole": 1,
+        "straightFraction": 0.16279069767441862
+      },
+      "situations": {
+        "interiorRoots": 8,
+        "sharedBlockers": 30,
+        "remoteRayCells": 131,
+        "unlockBursts": 7,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.43238587424633934
+    },
+    {
+      "number": 69,
+      "family": "bell",
+      "pace": "hard",
+      "seed": 30708402,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 87,
+        "dots": 1104,
+        "coverage": 0.9990942028985508,
+        "initialFree": 10,
+        "depth": 22,
+        "edges": 372,
+        "meanLength": 11.67816091954023,
+        "meanBends": 5.068965517241379,
+        "initialFreeFraction": 0.11494252873563218,
+        "meanEarlyFreeFraction": 0.1484009101316182,
+        "peakEarlyFreeFraction": 0.3673469387755102,
+        "largestHole": 1,
+        "straightFraction": 0.11494252873563218
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 61,
+        "remoteRayCells": 312,
+        "unlockBursts": 13,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.49577167019027485
+    },
+    {
+      "number": 70,
+      "family": "leaf",
+      "pace": "nightmare",
+      "seed": 30710490,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 150,
+        "dots": 1844,
+        "coverage": 0.9994577006507592,
+        "initialFree": 10,
+        "depth": 38,
+        "edges": 939,
+        "meanLength": 11.286666666666667,
+        "meanBends": 4.94,
+        "initialFreeFraction": 0.06666666666666667,
+        "meanEarlyFreeFraction": 0.03856856180644891,
+        "peakEarlyFreeFraction": 0.22666666666666666,
+        "largestHole": 1,
+        "straightFraction": 0.17333333333333334
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 120,
+        "remoteRayCells": 680,
+        "unlockBursts": 27,
+        "maxUnlock": 5
+      },
+      "neighborSimilarity": 0.710820895522388
+    },
+    {
+      "number": 71,
+      "family": "trophy",
+      "pace": "breather",
+      "seed": 30744254,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 21,
+        "dots": 212,
+        "coverage": 1,
+        "initialFree": 6,
+        "depth": 5,
+        "edges": 40,
+        "meanLength": 9.095238095238095,
+        "meanBends": 3.8095238095238093,
+        "initialFreeFraction": 0.2857142857142857,
+        "meanEarlyFreeFraction": 0.28541960132517413,
+        "peakEarlyFreeFraction": 0.45454545454545453,
+        "largestHole": 0,
+        "straightFraction": 0.19047619047619047
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 12,
+        "remoteRayCells": 15,
+        "unlockBursts": 1,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.5347280334728034
+    },
+    {
+      "number": 72,
+      "family": "spiral",
+      "pace": "hard",
+      "seed": 30730504,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 83,
+        "dots": 1015,
+        "coverage": 1,
+        "initialFree": 9,
+        "depth": 25,
+        "edges": 359,
+        "meanLength": 11.228915662650602,
+        "meanBends": 4.469879518072289,
+        "initialFreeFraction": 0.10843373493975904,
+        "meanEarlyFreeFraction": 0.060141824644107306,
+        "peakEarlyFreeFraction": 0.16279069767441862,
+        "largestHole": 0,
+        "straightFraction": 0.20481927710843373
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 68,
+        "remoteRayCells": 421,
+        "unlockBursts": 16,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.4892037786774629
+    },
+    {
+      "number": 73,
+      "family": "bulb",
+      "pace": "normal",
+      "seed": 30764268,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 43,
+        "dots": 526,
+        "coverage": 0.9942965779467681,
+        "initialFree": 10,
+        "depth": 12,
+        "edges": 144,
+        "meanLength": 11.162790697674419,
+        "meanBends": 4.906976744186046,
+        "initialFreeFraction": 0.23255813953488372,
+        "meanEarlyFreeFraction": 0.18932109806713732,
+        "peakEarlyFreeFraction": 0.3333333333333333,
+        "largestHole": 1,
+        "straightFraction": 0.09302325581395349
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 30,
+        "remoteRayCells": 88,
+        "unlockBursts": 6,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.6318572372769332
+    },
+    {
+      "number": 74,
+      "family": "tree",
+      "pace": "hard",
+      "seed": 30766356,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 86,
+        "dots": 1026,
+        "coverage": 0.99317738791423,
+        "initialFree": 10,
+        "depth": 23,
+        "edges": 328,
+        "meanLength": 10.848837209302326,
+        "meanBends": 4.6976744186046515,
+        "initialFreeFraction": 0.11627906976744186,
+        "meanEarlyFreeFraction": 0.1056166754931123,
+        "peakEarlyFreeFraction": 0.3023255813953488,
+        "largestHole": 1,
+        "straightFraction": 0.11627906976744186
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 61,
+        "remoteRayCells": 208,
+        "unlockBursts": 17,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5492063492063493
+    },
+    {
+      "number": 75,
+      "family": "crab",
+      "pace": "nightmare",
+      "seed": 30776363,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 153,
+        "dots": 1812,
+        "coverage": 0.9955849889624724,
+        "initialFree": 10,
+        "depth": 32,
+        "edges": 847,
+        "meanLength": 10.790849673202615,
+        "meanBends": 4.771241830065359,
+        "initialFreeFraction": 0.06535947712418301,
+        "meanEarlyFreeFraction": 0.05286918525017485,
+        "peakEarlyFreeFraction": 0.10256410256410256,
+        "largestHole": 1,
+        "straightFraction": 0.09803921568627451
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 123,
+        "remoteRayCells": 688,
+        "unlockBursts": 29,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.4446280991735537
+    },
+    {
+      "number": 76,
+      "family": "flame",
+      "pace": "breather",
+      "seed": 30778451,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 19,
+        "dots": 201,
+        "coverage": 0.9900497512437811,
+        "initialFree": 6,
+        "depth": 5,
+        "edges": 36,
+        "meanLength": 9.473684210526315,
+        "meanBends": 4.578947368421052,
+        "initialFreeFraction": 0.3157894736842105,
+        "meanEarlyFreeFraction": 0.34980655309602676,
+        "peakEarlyFreeFraction": 0.7272727272727273,
+        "largestHole": 1,
+        "straightFraction": 0.15789473684210525
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 9,
+        "remoteRayCells": 27,
+        "unlockBursts": 2,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.5120732722731057
+    },
+    {
+      "number": 77,
+      "family": "crown",
+      "pace": "hard",
+      "seed": 30796377,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 84,
+        "dots": 1032,
+        "coverage": 1,
+        "initialFree": 12,
+        "depth": 25,
+        "edges": 387,
+        "meanLength": 11.285714285714286,
+        "meanBends": 4.9523809523809526,
+        "initialFreeFraction": 0.14285714285714285,
+        "meanEarlyFreeFraction": 0.08564075202090903,
+        "peakEarlyFreeFraction": 0.3333333333333333,
+        "largestHole": 0,
+        "straightFraction": 0.21428571428571427
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 66,
+        "remoteRayCells": 235,
+        "unlockBursts": 19,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.6695205479452054
+    },
+    {
+      "number": 78,
+      "family": "diamond",
+      "pace": "normal",
+      "seed": 30798465,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 52,
+        "dots": 521,
+        "coverage": 0.9904030710172744,
+        "initialFree": 13,
+        "depth": 13,
+        "edges": 151,
+        "meanLength": 8.923076923076923,
+        "meanBends": 4.173076923076923,
+        "initialFreeFraction": 0.25,
+        "meanEarlyFreeFraction": 0.23726325784265573,
+        "peakEarlyFreeFraction": 0.5925925925925926,
+        "largestHole": 1,
+        "straightFraction": 0.23076923076923078
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 29,
+        "remoteRayCells": 82,
+        "unlockBursts": 7,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.6134020618556701
+    },
+    {
+      "number": 79,
+      "family": "planet",
+      "pace": "hard",
+      "seed": 30800553,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 83,
+        "dots": 1057,
+        "coverage": 0.9971617786187322,
+        "initialFree": 10,
+        "depth": 22,
+        "edges": 362,
+        "meanLength": 11.698795180722891,
+        "meanBends": 5,
+        "initialFreeFraction": 0.12048192771084337,
+        "meanEarlyFreeFraction": 0.08944282188893043,
+        "peakEarlyFreeFraction": 0.19047619047619047,
+        "largestHole": 1,
+        "straightFraction": 0.1566265060240964
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 63,
+        "remoteRayCells": 229,
+        "unlockBursts": 14,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.6606170598911071
+    },
+    {
+      "number": 80,
+      "family": "hourglass",
+      "pace": "nightmare",
+      "seed": 30826398,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 153,
+        "dots": 1824,
+        "coverage": 0.9983552631578947,
+        "initialFree": 11,
+        "depth": 38,
+        "edges": 819,
+        "meanLength": 10.901960784313726,
+        "meanBends": 4.6797385620915035,
+        "initialFreeFraction": 0.0718954248366013,
+        "meanEarlyFreeFraction": 0.05418806765737439,
+        "peakEarlyFreeFraction": 0.13636363636363635,
+        "largestHole": 1,
+        "straightFraction": 0.16993464052287582
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 124,
+        "remoteRayCells": 686,
+        "unlockBursts": 35,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.5598755832037325
+    },
+    {
+      "number": 81,
+      "family": "cross",
+      "pace": "normal",
+      "seed": 30844324,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 47,
+        "dots": 580,
+        "coverage": 1,
+        "initialFree": 11,
+        "depth": 15,
+        "edges": 166,
+        "meanLength": 11.340425531914894,
+        "meanBends": 5.0212765957446805,
+        "initialFreeFraction": 0.23404255319148937,
+        "meanEarlyFreeFraction": 0.14618827282433247,
+        "peakEarlyFreeFraction": 0.3333333333333333,
+        "largestHole": 0,
+        "straightFraction": 0.1702127659574468
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 33,
+        "remoteRayCells": 145,
+        "unlockBursts": 6,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.4264705882352941
+    },
+    {
+      "number": 82,
+      "family": "bat",
+      "pace": "hard",
+      "seed": 30846412,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 102,
+        "dots": 1217,
+        "coverage": 0.9917830731306492,
+        "initialFree": 12,
+        "depth": 23,
+        "edges": 492,
+        "meanLength": 10.833333333333334,
+        "meanBends": 4.764705882352941,
+        "initialFreeFraction": 0.11764705882352941,
+        "meanEarlyFreeFraction": 0.09546418922666239,
+        "peakEarlyFreeFraction": 0.19607843137254902,
+        "largestHole": 1,
+        "straightFraction": 0.18627450980392157
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 77,
+        "remoteRayCells": 374,
+        "unlockBursts": 17,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.6372881355932203
+    },
+    {
+      "number": 83,
+      "family": "rocket",
+      "pace": "normal",
+      "seed": 30848500,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 54,
+        "dots": 572,
+        "coverage": 1,
+        "initialFree": 12,
+        "depth": 11,
+        "edges": 159,
+        "meanLength": 9.592592592592593,
+        "meanBends": 4.592592592592593,
+        "initialFreeFraction": 0.2222222222222222,
+        "meanEarlyFreeFraction": 0.17026312140800742,
+        "peakEarlyFreeFraction": 0.4444444444444444,
+        "largestHole": 0,
+        "straightFraction": 0.2222222222222222
+      },
+      "situations": {
+        "interiorRoots": 5,
+        "sharedBlockers": 34,
+        "remoteRayCells": 137,
+        "unlockBursts": 8,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.41379310344827586
+    },
+    {
+      "number": 84,
+      "family": "crescent",
+      "pace": "hard",
+      "seed": 30850588,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 104,
+        "dots": 1225,
+        "coverage": 0.9975510204081632,
+        "initialFree": 12,
+        "depth": 24,
+        "edges": 482,
+        "meanLength": 10.75,
+        "meanBends": 4.5576923076923075,
+        "initialFreeFraction": 0.11538461538461539,
+        "meanEarlyFreeFraction": 0.10409155176647193,
+        "peakEarlyFreeFraction": 0.25,
+        "largestHole": 1,
+        "straightFraction": 0.18269230769230768
+      },
+      "situations": {
+        "interiorRoots": 5,
+        "sharedBlockers": 78,
+        "remoteRayCells": 296,
+        "unlockBursts": 17,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.3081395348837209
+    },
+    {
+      "number": 85,
+      "family": "fish",
+      "pace": "nightmare",
+      "seed": 30876433,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 173,
+        "dots": 2090,
+        "coverage": 0.9952153110047847,
+        "initialFree": 16,
+        "depth": 41,
+        "edges": 1065,
+        "meanLength": 11.023121387283236,
+        "meanBends": 4.676300578034682,
+        "initialFreeFraction": 0.09248554913294797,
+        "meanEarlyFreeFraction": 0.05670111302229028,
+        "peakEarlyFreeFraction": 0.21839080459770116,
+        "largestHole": 1,
+        "straightFraction": 0.17341040462427745
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 141,
+        "remoteRayCells": 753,
+        "unlockBursts": 34,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.32868352223190933
+    },
+    {
+      "number": 86,
+      "family": "castle",
+      "pace": "breather",
+      "seed": 30886440,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 18,
+        "dots": 200,
+        "coverage": 1,
+        "initialFree": 6,
+        "depth": 6,
+        "edges": 36,
+        "meanLength": 10.11111111111111,
+        "meanBends": 4.722222222222222,
+        "initialFreeFraction": 0.3333333333333333,
+        "meanEarlyFreeFraction": 0.24568647583353467,
+        "peakEarlyFreeFraction": 0.5555555555555556,
+        "largestHole": 0,
+        "straightFraction": 0.2777777777777778
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 10,
+        "remoteRayCells": 47,
+        "unlockBursts": 2,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.520336605890603
+    },
+    {
+      "number": 87,
+      "family": "flower",
+      "pace": "hard",
+      "seed": 30896447,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 107,
+        "dots": 1230,
+        "coverage": 0.9983739837398374,
+        "initialFree": 11,
+        "depth": 24,
+        "edges": 542,
+        "meanLength": 10.476635514018692,
+        "meanBends": 4.766355140186916,
+        "initialFreeFraction": 0.102803738317757,
+        "meanEarlyFreeFraction": 0.08478004571513674,
+        "peakEarlyFreeFraction": 0.2,
+        "largestHole": 1,
+        "straightFraction": 0.18691588785046728
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 89,
+        "remoteRayCells": 418,
+        "unlockBursts": 17,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5158045977011494
+    },
+    {
+      "number": 88,
+      "family": "sword",
+      "pace": "normal",
+      "seed": 30906454,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 45,
+        "dots": 586,
+        "coverage": 1,
+        "initialFree": 11,
+        "depth": 10,
+        "edges": 131,
+        "meanLength": 12.022222222222222,
+        "meanBends": 5.2,
+        "initialFreeFraction": 0.24444444444444444,
+        "meanEarlyFreeFraction": 0.19466195840621747,
+        "peakEarlyFreeFraction": 0.391304347826087,
+        "largestHole": 0,
+        "straightFraction": 0.17777777777777778
+      },
+      "situations": {
+        "interiorRoots": 7,
+        "sharedBlockers": 30,
+        "remoteRayCells": 121,
+        "unlockBursts": 7,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.3711967545638945
+    },
+    {
+      "number": 89,
+      "family": "owl",
+      "pace": "hard",
+      "seed": 30924380,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 107,
+        "dots": 1224,
+        "coverage": 0.9950980392156863,
+        "initialFree": 12,
+        "depth": 29,
+        "edges": 549,
+        "meanLength": 10.383177570093459,
+        "meanBends": 4.429906542056075,
+        "initialFreeFraction": 0.11214953271028037,
+        "meanEarlyFreeFraction": 0.07922592020829688,
+        "peakEarlyFreeFraction": 0.234375,
+        "largestHole": 1,
+        "straightFraction": 0.205607476635514
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 84,
+        "remoteRayCells": 485,
+        "unlockBursts": 19,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.3968253968253968
+    },
+    {
+      "number": 90,
+      "family": "gear",
+      "pace": "nightmare",
+      "seed": 30910630,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 166,
+        "dots": 2064,
+        "coverage": 0.997577519379845,
+        "initialFree": 13,
+        "depth": 37,
+        "edges": 858,
+        "meanLength": 11.403614457831326,
+        "meanBends": 5.036144578313253,
+        "initialFreeFraction": 0.0783132530120482,
+        "meanEarlyFreeFraction": 0.06525075579805026,
+        "peakEarlyFreeFraction": 0.23255813953488372,
+        "largestHole": 1,
+        "straightFraction": 0.14457831325301204
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 129,
+        "remoteRayCells": 584,
+        "unlockBursts": 37,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.5246422893481717
+    },
+    {
+      "number": 91,
+      "family": "boat",
+      "pace": "breather",
+      "seed": 30920637,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 29,
+        "dots": 217,
+        "coverage": 1,
+        "initialFree": 8,
+        "depth": 5,
+        "edges": 59,
+        "meanLength": 6.482758620689655,
+        "meanBends": 2.9655172413793105,
+        "initialFreeFraction": 0.27586206896551724,
+        "meanEarlyFreeFraction": 0.29070862824610616,
+        "peakEarlyFreeFraction": 0.4666666666666667,
+        "largestHole": 0,
+        "straightFraction": 0.3793103448275862
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 12,
+        "remoteRayCells": 45,
+        "unlockBursts": 4,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.44
+    },
+    {
+      "number": 92,
+      "family": "cactus",
+      "pace": "hard",
+      "seed": 30946482,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 95,
+        "dots": 1197,
+        "coverage": 0.9991645781119465,
+        "initialFree": 11,
+        "depth": 23,
+        "edges": 388,
+        "meanLength": 11.589473684210526,
+        "meanBends": 5.063157894736842,
+        "initialFreeFraction": 0.11578947368421053,
+        "meanEarlyFreeFraction": 0.0734790672147546,
+        "peakEarlyFreeFraction": 0.16,
+        "largestHole": 1,
+        "straightFraction": 0.09473684210526316
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 70,
+        "remoteRayCells": 281,
+        "unlockBursts": 18,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.2917726887192536
+    },
+    {
+      "number": 93,
+      "family": "infinity",
+      "pace": "normal",
+      "seed": 30964408,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 52,
+        "dots": 588,
+        "coverage": 0.9965986394557823,
+        "initialFree": 11,
+        "depth": 14,
+        "edges": 182,
+        "meanLength": 10.26923076923077,
+        "meanBends": 4.673076923076923,
+        "initialFreeFraction": 0.21153846153846154,
+        "meanEarlyFreeFraction": 0.1263738489701518,
+        "peakEarlyFreeFraction": 0.34615384615384615,
+        "largestHole": 1,
+        "straightFraction": 0.15384615384615385
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 36,
+        "remoteRayCells": 182,
+        "unlockBursts": 5,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.41752988047808764
+    },
+    {
+      "number": 94,
+      "family": "umbrella",
+      "pace": "hard",
+      "seed": 30974415,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 89,
+        "dots": 1241,
+        "coverage": 0.9975825946817083,
+        "initialFree": 11,
+        "depth": 27,
+        "edges": 446,
+        "meanLength": 12.910112359550562,
+        "meanBends": 5.865168539325842,
+        "initialFreeFraction": 0.12359550561797752,
+        "meanEarlyFreeFraction": 0.06413135316140571,
+        "peakEarlyFreeFraction": 0.15555555555555556,
+        "largestHole": 1,
+        "straightFraction": 0.07865168539325842
+      },
+      "situations": {
+        "interiorRoots": 1,
+        "sharedBlockers": 73,
+        "remoteRayCells": 322,
+        "unlockBursts": 16,
+        "maxUnlock": 5
+      },
+      "neighborSimilarity": 0.449438202247191
+    },
+    {
+      "number": 95,
+      "family": "key",
+      "pace": "nightmare",
+      "seed": 30968584,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 129,
+        "dots": 1628,
+        "coverage": 0.9975429975429976,
+        "initialFree": 9,
+        "depth": 39,
+        "edges": 575,
+        "meanLength": 11.589147286821705,
+        "meanBends": 4.744186046511628,
+        "initialFreeFraction": 0.06976744186046512,
+        "meanEarlyFreeFraction": 0.06388489038371113,
+        "peakEarlyFreeFraction": 0.15151515151515152,
+        "largestHole": 1,
+        "straightFraction": 0.17054263565891473
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 94,
+        "remoteRayCells": 259,
+        "unlockBursts": 21,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.47876106194690266
+    },
+    {
+      "number": 96,
+      "family": "magnet",
+      "pace": "breather",
+      "seed": 30978591,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 17,
+        "dots": 216,
+        "coverage": 1,
+        "initialFree": 6,
+        "depth": 5,
+        "edges": 27,
+        "meanLength": 11.705882352941176,
+        "meanBends": 5.882352941176471,
+        "initialFreeFraction": 0.35294117647058826,
+        "meanEarlyFreeFraction": 0.2974920806620153,
+        "peakEarlyFreeFraction": 0.4666666666666667,
+        "largestHole": 0,
+        "straightFraction": 0.17647058823529413
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 6,
+        "remoteRayCells": 48,
+        "unlockBursts": 2,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.32581648522550544
+    },
+    {
+      "number": 97,
+      "family": "mushroom",
+      "pace": "hard",
+      "seed": 30980679,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 92,
+        "dots": 1228,
+        "coverage": 0.999185667752443,
+        "initialFree": 11,
+        "depth": 26,
+        "edges": 436,
+        "meanLength": 12.33695652173913,
+        "meanBends": 5.173913043478261,
+        "initialFreeFraction": 0.11956521739130435,
+        "meanEarlyFreeFraction": 0.06774645298824826,
+        "peakEarlyFreeFraction": 0.15217391304347827,
+        "largestHole": 1,
+        "straightFraction": 0.08695652173913043
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 75,
+        "remoteRayCells": 265,
+        "unlockBursts": 18,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.3191489361702128
+    },
+    {
+      "number": 98,
+      "family": "star",
+      "pace": "normal",
+      "seed": 30998605,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 50,
+        "dots": 602,
+        "coverage": 1,
+        "initialFree": 12,
+        "depth": 15,
+        "edges": 173,
+        "meanLength": 11.04,
+        "meanBends": 5.12,
+        "initialFreeFraction": 0.24,
+        "meanEarlyFreeFraction": 0.10964180669558495,
+        "peakEarlyFreeFraction": 0.24,
+        "largestHole": 0,
+        "straightFraction": 0.14
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 35,
+        "remoteRayCells": 101,
+        "unlockBursts": 5,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.4956521739130435
+    },
+    {
+      "number": 99,
+      "family": "whale",
+      "pace": "hard",
+      "seed": 31016531,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 96,
+        "dots": 1232,
+        "coverage": 0.9983766233766234,
+        "initialFree": 11,
+        "depth": 29,
+        "edges": 447,
+        "meanLength": 11.8125,
+        "meanBends": 5.427083333333333,
+        "initialFreeFraction": 0.11458333333333333,
+        "meanEarlyFreeFraction": 0.06431844599530763,
+        "peakEarlyFreeFraction": 0.19230769230769232,
+        "largestHole": 1,
+        "straightFraction": 0.10416666666666667
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 75,
+        "remoteRayCells": 372,
+        "unlockBursts": 17,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.4821256038647343
+    },
+    {
+      "number": 100,
+      "family": "shield",
+      "pace": "nightmare",
+      "seed": 31034457,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 174,
+        "dots": 2056,
+        "coverage": 0.9980544747081712,
+        "initialFree": 12,
+        "depth": 41,
+        "edges": 1052,
+        "meanLength": 10.793103448275861,
+        "meanBends": 4.609195402298851,
+        "initialFreeFraction": 0.06896551724137931,
+        "meanEarlyFreeFraction": 0.05828634950139384,
+        "peakEarlyFreeFraction": 0.16853932584269662,
+        "largestHole": 1,
+        "straightFraction": 0.1724137931034483
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 148,
+        "remoteRayCells": 796,
+        "unlockBursts": 28,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.5511751326762699
+    },
+    {
+      "number": 101,
+      "family": "dragonfly",
+      "pace": "normal",
+      "seed": 31020707,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 54,
+        "dots": 674,
+        "coverage": 0.9955489614243324,
+        "initialFree": 14,
+        "depth": 15,
+        "edges": 176,
+        "meanLength": 11.425925925925926,
+        "meanBends": 5,
+        "initialFreeFraction": 0.25925925925925924,
+        "meanEarlyFreeFraction": 0.1793212323766027,
+        "peakEarlyFreeFraction": 0.3333333333333333,
+        "largestHole": 1,
+        "straightFraction": 0.2222222222222222
+      },
+      "situations": {
+        "interiorRoots": 6,
+        "sharedBlockers": 31,
+        "remoteRayCells": 150,
+        "unlockBursts": 7,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.5453100158982512
+    },
+    {
+      "number": 102,
+      "family": "coffee",
+      "pace": "hard",
+      "seed": 31054471,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 115,
+        "dots": 1350,
+        "coverage": 0.9992592592592593,
+        "initialFree": 14,
+        "depth": 26,
+        "edges": 554,
+        "meanLength": 10.730434782608695,
+        "meanBends": 4.321739130434783,
+        "initialFreeFraction": 0.12173913043478261,
+        "meanEarlyFreeFraction": 0.10354640950137019,
+        "peakEarlyFreeFraction": 0.22413793103448276,
+        "largestHole": 1,
+        "straightFraction": 0.24347826086956523
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 84,
+        "remoteRayCells": 454,
+        "unlockBursts": 20,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.5062320230105465
+    },
+    {
+      "number": 103,
+      "family": "snowflake",
+      "pace": "normal",
+      "seed": 31191182,
+      "candidates": 20,
+      "metrics": {
+        "arrows": 67,
+        "dots": 668,
+        "coverage": 0.9835329341317365,
+        "initialFree": 15,
+        "depth": 14,
+        "edges": 238,
+        "meanLength": 8.805970149253731,
+        "meanBends": 3.7761194029850746,
+        "initialFreeFraction": 0.22388059701492538,
+        "meanEarlyFreeFraction": 0.16744058172646523,
+        "peakEarlyFreeFraction": 0.3783783783783784,
+        "largestHole": 1,
+        "straightFraction": 0.208955223880597
+      },
+      "situations": {
+        "interiorRoots": 5,
+        "sharedBlockers": 41,
+        "remoteRayCells": 228,
+        "unlockBursts": 12,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5134892086330936
+    },
+    {
+      "number": 104,
+      "family": "mountain",
+      "pace": "hard",
+      "seed": 31058647,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 114,
+        "dots": 1392,
+        "coverage": 0.9985632183908046,
+        "initialFree": 13,
+        "depth": 27,
+        "edges": 544,
+        "meanLength": 11.192982456140351,
+        "meanBends": 4.947368421052632,
+        "initialFreeFraction": 0.11403508771929824,
+        "meanEarlyFreeFraction": 0.06948937446177816,
+        "peakEarlyFreeFraction": 0.22807017543859648,
+        "largestHole": 1,
+        "straightFraction": 0.13157894736842105
+      },
+      "situations": {
+        "interiorRoots": 5,
+        "sharedBlockers": 87,
+        "remoteRayCells": 376,
+        "unlockBursts": 18,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.4175170068027211
+    },
+    {
+      "number": 105,
+      "family": "octopus",
+      "pace": "nightmare",
+      "seed": 31068654,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 189,
+        "dots": 2342,
+        "coverage": 0.9982920580700256,
+        "initialFree": 14,
+        "depth": 49,
+        "edges": 1139,
+        "meanLength": 11.37037037037037,
+        "meanBends": 4.582010582010582,
+        "initialFreeFraction": 0.07407407407407407,
+        "meanEarlyFreeFraction": 0.03983582531253456,
+        "peakEarlyFreeFraction": 0.10185185185185185,
+        "largestHole": 1,
+        "straightFraction": 0.19047619047619047
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 159,
+        "remoteRayCells": 783,
+        "unlockBursts": 33,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5831285831285832
+    },
+    {
+      "number": 106,
+      "family": "lightning",
+      "pace": "breather",
+      "seed": 31078661,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 24,
+        "dots": 265,
+        "coverage": 1,
+        "initialFree": 9,
+        "depth": 5,
+        "edges": 53,
+        "meanLength": 10.041666666666666,
+        "meanBends": 4.833333333333333,
+        "initialFreeFraction": 0.375,
+        "meanEarlyFreeFraction": 0.35153450457133023,
+        "peakEarlyFreeFraction": 0.5714285714285714,
+        "largestHole": 0,
+        "straightFraction": 0.25
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 11,
+        "remoteRayCells": 34,
+        "unlockBursts": 3,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.43238587424633934
+    },
+    {
+      "number": 107,
+      "family": "bell",
+      "pace": "hard",
+      "seed": 31104506,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 109,
+        "dots": 1378,
+        "coverage": 0.9970972423802612,
+        "initialFree": 13,
+        "depth": 29,
+        "edges": 556,
+        "meanLength": 11.605504587155963,
+        "meanBends": 5.073394495412844,
+        "initialFreeFraction": 0.11926605504587157,
+        "meanEarlyFreeFraction": 0.06952743570745516,
+        "peakEarlyFreeFraction": 0.18181818181818182,
+        "largestHole": 1,
+        "straightFraction": 0.1559633027522936
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 85,
+        "remoteRayCells": 393,
+        "unlockBursts": 15,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.49577167019027485
+    },
+    {
+      "number": 108,
+      "family": "leaf",
+      "pace": "normal",
+      "seed": 31090756,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 53,
+        "dots": 626,
+        "coverage": 1,
+        "initialFree": 12,
+        "depth": 15,
+        "edges": 189,
+        "meanLength": 10.81132075471698,
+        "meanBends": 4.90566037735849,
+        "initialFreeFraction": 0.22641509433962265,
+        "meanEarlyFreeFraction": 0.1519812669822805,
+        "peakEarlyFreeFraction": 0.2962962962962963,
+        "largestHole": 0,
+        "straightFraction": 0.16981132075471697
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 39,
+        "remoteRayCells": 161,
+        "unlockBursts": 11,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.710820895522388
+    },
+    {
+      "number": 109,
+      "family": "trophy",
+      "pace": "hard",
+      "seed": 31124520,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 108,
+        "dots": 1344,
+        "coverage": 0.9977678571428571,
+        "initialFree": 12,
+        "depth": 28,
+        "edges": 516,
+        "meanLength": 11.416666666666666,
+        "meanBends": 4.777777777777778,
+        "initialFreeFraction": 0.1111111111111111,
+        "meanEarlyFreeFraction": 0.08016587100270879,
+        "peakEarlyFreeFraction": 0.15151515151515152,
+        "largestHole": 1,
+        "straightFraction": 0.1574074074074074
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 77,
+        "remoteRayCells": 533,
+        "unlockBursts": 19,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5347280334728034
+    },
+    {
+      "number": 110,
+      "family": "spiral",
+      "pace": "nightmare",
+      "seed": 31134527,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 155,
+        "dots": 2185,
+        "coverage": 1,
+        "initialFree": 12,
+        "depth": 42,
+        "edges": 889,
+        "meanLength": 13.096774193548388,
+        "meanBends": 5.354838709677419,
+        "initialFreeFraction": 0.07741935483870968,
+        "meanEarlyFreeFraction": 0.03338575694349632,
+        "peakEarlyFreeFraction": 0.07746478873239436,
+        "largestHole": 0,
+        "straightFraction": 0.07096774193548387
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 128,
+        "remoteRayCells": 1008,
+        "unlockBursts": 23,
+        "maxUnlock": 5
+      },
+      "neighborSimilarity": 0.4892037786774629
+    },
+    {
+      "number": 111,
+      "family": "bulb",
+      "pace": "breather",
+      "seed": 31128696,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 21,
+        "dots": 242,
+        "coverage": 0.9958677685950413,
+        "initialFree": 7,
+        "depth": 5,
+        "edges": 34,
+        "meanLength": 10.476190476190476,
+        "meanBends": 5.142857142857143,
+        "initialFreeFraction": 0.3333333333333333,
+        "meanEarlyFreeFraction": 0.3249240145454613,
+        "peakEarlyFreeFraction": 0.5833333333333334,
+        "largestHole": 1,
+        "straightFraction": 0.2857142857142857
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 10,
+        "remoteRayCells": 24,
+        "unlockBursts": 3,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.6318572372769332
+    },
+    {
+      "number": 112,
+      "family": "tree",
+      "pace": "hard",
+      "seed": 31154541,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 110,
+        "dots": 1380,
+        "coverage": 0.9942028985507246,
+        "initialFree": 17,
+        "depth": 25,
+        "edges": 572,
+        "meanLength": 11.472727272727273,
+        "meanBends": 5.045454545454546,
+        "initialFreeFraction": 0.15454545454545454,
+        "meanEarlyFreeFraction": 0.11120797354955547,
+        "peakEarlyFreeFraction": 0.18333333333333332,
+        "largestHole": 1,
+        "straightFraction": 0.12727272727272726
+      },
+      "situations": {
+        "interiorRoots": 6,
+        "sharedBlockers": 86,
+        "remoteRayCells": 440,
+        "unlockBursts": 18,
+        "maxUnlock": 5
+      },
+      "neighborSimilarity": 0.5492063492063493
+    },
+    {
+      "number": 113,
+      "family": "crab",
+      "pace": "normal",
+      "seed": 31164548,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 53,
+        "dots": 622,
+        "coverage": 1,
+        "initialFree": 12,
+        "depth": 15,
+        "edges": 192,
+        "meanLength": 10.735849056603774,
+        "meanBends": 4.622641509433962,
+        "initialFreeFraction": 0.22641509433962265,
+        "meanEarlyFreeFraction": 0.16143114936847783,
+        "peakEarlyFreeFraction": 0.35714285714285715,
+        "largestHole": 0,
+        "straightFraction": 0.11320754716981132
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 37,
+        "remoteRayCells": 155,
+        "unlockBursts": 8,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.4446280991735537
+    },
+    {
+      "number": 114,
+      "family": "flame",
+      "pace": "hard",
+      "seed": 31150798,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 113,
+        "dots": 1387,
+        "coverage": 0.9956741167988464,
+        "initialFree": 14,
+        "depth": 26,
+        "edges": 584,
+        "meanLength": 11.221238938053098,
+        "meanBends": 4.68141592920354,
+        "initialFreeFraction": 0.12389380530973451,
+        "meanEarlyFreeFraction": 0.08394113004470813,
+        "peakEarlyFreeFraction": 0.29310344827586204,
+        "largestHole": 1,
+        "straightFraction": 0.19469026548672566
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 89,
+        "remoteRayCells": 435,
+        "unlockBursts": 22,
+        "maxUnlock": 4
+      },
+      "neighborSimilarity": 0.5120732722731057
+    },
+    {
+      "number": 115,
+      "family": "crown",
+      "pace": "nightmare",
+      "seed": 31168724,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 194,
+        "dots": 2354,
+        "coverage": 0.9991503823279524,
+        "initialFree": 13,
+        "depth": 36,
+        "edges": 1211,
+        "meanLength": 11.123711340206185,
+        "meanBends": 4.644329896907217,
+        "initialFreeFraction": 0.06701030927835051,
+        "meanEarlyFreeFraction": 0.04965119635167754,
+        "peakEarlyFreeFraction": 0.13274336283185842,
+        "largestHole": 1,
+        "straightFraction": 0.16494845360824742
+      },
+      "situations": {
+        "interiorRoots": 0,
+        "sharedBlockers": 162,
+        "remoteRayCells": 889,
+        "unlockBursts": 40,
+        "maxUnlock": 5
+      },
+      "neighborSimilarity": 0.6695205479452054
+    },
+    {
+      "number": 116,
+      "family": "diamond",
+      "pace": "breather",
+      "seed": 31178731,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 21,
+        "dots": 240,
+        "coverage": 0.9875,
+        "initialFree": 9,
+        "depth": 4,
+        "edges": 42,
+        "meanLength": 10.285714285714286,
+        "meanBends": 4.761904761904762,
+        "initialFreeFraction": 0.42857142857142855,
+        "meanEarlyFreeFraction": 0.4027636942286535,
+        "peakEarlyFreeFraction": 0.75,
+        "largestHole": 1,
+        "straightFraction": 0.19047619047619047
+      },
+      "situations": {
+        "interiorRoots": 2,
+        "sharedBlockers": 9,
+        "remoteRayCells": 36,
+        "unlockBursts": 3,
+        "maxUnlock": 2
+      },
+      "neighborSimilarity": 0.6134020618556701
+    },
+    {
+      "number": 117,
+      "family": "planet",
+      "pace": "hard",
+      "seed": 31196657,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 121,
+        "dots": 1408,
+        "coverage": 0.9992897727272727,
+        "initialFree": 13,
+        "depth": 30,
+        "edges": 700,
+        "meanLength": 10.62809917355372,
+        "meanBends": 4.4958677685950414,
+        "initialFreeFraction": 0.10743801652892562,
+        "meanEarlyFreeFraction": 0.0732112775645243,
+        "peakEarlyFreeFraction": 0.27692307692307694,
+        "largestHole": 1,
+        "straightFraction": 0.2231404958677686
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 102,
+        "remoteRayCells": 512,
+        "unlockBursts": 18,
+        "maxUnlock": 6
+      },
+      "neighborSimilarity": 0.6606170598911071
+    },
+    {
+      "number": 118,
+      "family": "hourglass",
+      "pace": "normal",
+      "seed": 31214583,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 48,
+        "dots": 641,
+        "coverage": 1,
+        "initialFree": 12,
+        "depth": 13,
+        "edges": 158,
+        "meanLength": 12.354166666666666,
+        "meanBends": 5.666666666666667,
+        "initialFreeFraction": 0.25,
+        "meanEarlyFreeFraction": 0.122200190679919,
+        "peakEarlyFreeFraction": 0.25,
+        "largestHole": 0,
+        "straightFraction": 0.125
+      },
+      "situations": {
+        "interiorRoots": 3,
+        "sharedBlockers": 33,
+        "remoteRayCells": 171,
+        "unlockBursts": 5,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.5598755832037325
+    },
+    {
+      "number": 119,
+      "family": "cross",
+      "pace": "hard",
+      "seed": 31224590,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 111,
+        "dots": 1440,
+        "coverage": 1,
+        "initialFree": 13,
+        "depth": 29,
+        "edges": 514,
+        "meanLength": 11.972972972972974,
+        "meanBends": 4.837837837837838,
+        "initialFreeFraction": 0.11711711711711711,
+        "meanEarlyFreeFraction": 0.0639439819673331,
+        "peakEarlyFreeFraction": 0.14705882352941177,
+        "largestHole": 0,
+        "straightFraction": 0.1891891891891892
+      },
+      "situations": {
+        "interiorRoots": 5,
+        "sharedBlockers": 86,
+        "remoteRayCells": 398,
+        "unlockBursts": 19,
+        "maxUnlock": 6
+      },
+      "neighborSimilarity": 0.4264705882352941
+    },
+    {
+      "number": 120,
+      "family": "bat",
+      "pace": "nightmare",
+      "seed": 31234597,
+      "candidates": 4,
+      "metrics": {
+        "arrows": 204,
+        "dots": 2356,
+        "coverage": 0.9927843803056027,
+        "initialFree": 17,
+        "depth": 46,
+        "edges": 1406,
+        "meanLength": 10.465686274509803,
+        "meanBends": 4.436274509803922,
+        "initialFreeFraction": 0.08333333333333333,
+        "meanEarlyFreeFraction": 0.04833724305542072,
+        "peakEarlyFreeFraction": 0.17647058823529413,
+        "largestHole": 1,
+        "straightFraction": 0.16176470588235295
+      },
+      "situations": {
+        "interiorRoots": 4,
+        "sharedBlockers": 172,
+        "remoteRayCells": 1030,
+        "unlockBursts": 41,
+        "maxUnlock": 3
+      },
+      "neighborSimilarity": 0.6372881355932203
+    }
+  ]
+}

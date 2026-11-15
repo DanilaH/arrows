@@ -1,5 +1,5 @@
 import {describe,it,expect} from 'vitest';
-import {campaign} from '../../src/content/campaign';
+import {campaign} from '../fixtures/campaignV4';
 import {Board,canExit} from '../../src/domain/board';
 import {chooseSingle,cascadePlan,predictHelp,singlePlan,validatePlan} from '../../src/domain/assistance';
 
