@@ -31,3 +31,7 @@ The previously pending0.27 full web CI43697247492 finished372/394, with22 failur
 Run final full browser suite, native sync,19 JVM and both Android assemblies. Verify same-cert com.danilah.arrows.playtest/code41, demo ads/empty analytics key and exact APK/capture bytes. Include real A1/A2/A4 GIFs and actual game-output audio with seed/controlled transport/browser provenance. Hardware speaker/haptics/frame pacing/install/update and live SDK/AppMetrica/money remain separate NOT RUN here. No kit/store publication or pin changes.
 
 Research SELECT: pinned durable receipt writer/ack coordination and stable initial-action/scroll ownership. Current serialized ProgressStore/DurableReceiptQueue and owned UI motion suffice. KIT IMPACT:REUSE — local help-offer policy, existing kit storage/receipt/activity seams and current game motion; no general director, SDK upgrade or extraction.
+
+Delivered evidence/artifact identities: [evidence/combined-028/ACCEPTANCE.md](evidence/combined-028/ACCEPTANCE.md). Android19/JVM/sync/both APK builds PASS; verified same-certcode41/demo ads/analytics OFF and18 captured files identical to APK. Full browser conclusions appended after completion.
+
+Final frozen-payload local full browser408/408 PASS in14.4min (204 phone-emulated/204 desktop),184 unit/type/build PASS and19 JVM/both native assemblies/sync PASS. Hosted Android job green; full hosted web43704030764 still in progress at preparation. Saved artifacts/signature/payload/media facts are in the delivery evidence.

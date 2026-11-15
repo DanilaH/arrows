@@ -1,0 +1,27 @@
+[
+  {
+    "file": "Arrows-0.28.0-playtest.apk",
+    "sha256": "748da5e25554a840d7529f0300fda560a27d804d74d8d1907a3a388b628f9f25",
+    "bytes": 10519092
+  },
+  {
+    "file": "Arrows-0.28.0-choices.gif",
+    "sha256": "58be3aa0c913216c1fa96731db1096342912cfc1673f890bd0a61bce03fe3061",
+    "bytes": 1347297
+  },
+  {
+    "file": "Arrows-0.28.0-continue.gif",
+    "sha256": "64b2b3e03ca1c4e73658b9609ec87b1b543f81243796f9c101ce7f538426e378",
+    "bytes": 265876
+  },
+  {
+    "file": "Arrows-0.28.0-choices-audio.mp4",
+    "sha256": "f35a4a5e65601c2e528bce7edcbb27493e973c110bad2a00829f5bf6420153b9",
+    "bytes": 197876
+  },
+  {
+    "file": "Arrows-0.28.0-continue-audio.mp4",
+    "sha256": "58b7c03a8f669fad36070141dd3d3dfc0c5cef46029b56ce2134503e954f8f7f",
+    "bytes": 64702
+  }
+]

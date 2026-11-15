@@ -1,0 +1,38 @@
+{
+  "source": "0970f9b3462820dbd46a1d866f103ffcc42e7619",
+  "version": "0.28.0",
+  "code": 41,
+  "check": {
+    "unitPassed": 184,
+    "files": 26,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "productionExclusion": "PASS"
+  },
+  "fullBrowser": {
+    "passed": 408,
+    "failed": 0,
+    "duration": "14.4m",
+    "phoneEmulation": 204,
+    "desktop": 204,
+    "payload": "frozen final dist"
+  },
+  "native": {
+    "jvmPassed": 19,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "sync": "PASS",
+    "debug": "PASS",
+    "playtest": "PASS"
+  },
+  "hosted": {
+    "run": 43704030764,
+    "androidJob": 132781132187,
+    "android": "success",
+    "webJob": 132781132374,
+    "web": "in_progress at preparation"
+  },
+  "physical": "NOT RUN",
+  "liveSdkDashboardMoney": "NOT RUN"
+}

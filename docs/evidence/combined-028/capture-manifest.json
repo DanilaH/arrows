@@ -1,0 +1,105 @@
+{
+  "source": "0970f9b3462820dbd46a1d866f103ffcc42e7619",
+  "version": "0.28.0/code41",
+  "method": "Real Chromium390x844 DPR1.5 frames and actual WebAudio output. Seeded canonical c40 progress and isolated controlled native reward transport; no SDK ad video, no phone/performance claim. Timestamps retained; labels outside real frames.",
+  "payload": {
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "4e937a587311c6603d2e82e54b0db16b69f3dcbbd13f91faa01aaddbbac79555",
+    "target-lab.html": "27cdf9fd74a2fd024ad3eb2a29519fee4676b6c8bf85dc2774a00e758d4c7e0b",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+    "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/gestures-CWFwzMsm.js": "ac1d97aed09cbc1048c500305794b3a5401932e47dfe8d0b6b657aaed0004cd3",
+    "assets/gestures-Dsj4Ro4y.css": "93fd22ac716095bb4d315b3a8cdaf5182463586105764eecbf4cfcd3173e4150",
+    "assets/main-BmVO_8-t.js": "89e330f4207b13a4143823579648dab0e762ac2f1734b6752b2fb709a6a30a32",
+    "assets/targetLab-B1VW-o9Q.js": "0a0ebfed23e9fe4975ff8ce3ac809da226223c38f9984d9cc6727cd276049e9c",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7"
+  },
+  "clips": [
+    {
+      "name": "ordinary",
+      "frames": 106,
+      "durationMs": 3832.7051299999994,
+      "errors": [],
+      "result": {
+        "kind": "single-v2",
+        "status": "used",
+        "operation": {
+          "id": "f055ec1e-5630-4f04-bf88-3e31abb03a6b",
+          "manual": [
+            "c40-22"
+          ],
+          "native": [],
+          "bonus": []
+        },
+        "lives": 3,
+        "errors": [],
+        "hint": null,
+        "requests": 1
+      }
+    },
+    {
+      "name": "cascade",
+      "frames": 168,
+      "durationMs": 6512.620797,
+      "errors": [],
+      "result": {
+        "kind": "cascade-v1",
+        "status": "used",
+        "operation": {
+          "id": "d4b385c0-82db-448b-a6e3-58e6036228ea",
+          "manual": [
+            "c40-22"
+          ],
+          "native": [],
+          "bonus": [
+            "c40-23",
+            "c40-24",
+            "c40-27"
+          ]
+        },
+        "lives": 3,
+        "errors": [],
+        "hint": null,
+        "requests": 1
+      }
+    },
+    {
+      "name": "continue",
+      "frames": 88,
+      "durationMs": 5366.035613,
+      "errors": [],
+      "result": {
+        "kind": "continue-single-v1",
+        "status": "active",
+        "bundle": {
+          "lives": "applied",
+          "single": "active",
+          "retainedAtOffer": false,
+          "livesOwner": {
+            "attempt": "b1bffc5e-3019-4531-b3d2-2f4a1b3da2d8",
+            "mode": "campaign",
+            "levelId": "c40",
+            "contentVersion": 4,
+            "contentKey": "content-2cdc3a9d57c9bc4d"
+          }
+        },
+        "lives": 3,
+        "errors": [
+          "c40-23",
+          "c40-24",
+          "c40-27"
+        ],
+        "hint": "c40-22",
+        "requests": 1
+      }
+    }
+  ]
+}
