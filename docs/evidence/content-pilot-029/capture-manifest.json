@@ -1,0 +1,992 @@
+{
+  "source": "4c0956c744c638148f7cdb97d697d7ea1241ea98",
+  "version": "0.29.0/code42",
+  "method": "Unmodified production web payload in real Chromium390x844 DPR1.5; isolated content pilot and scripted legal clicks, not a human playtest. Controlled native storage/audio observation only; pilot uses disabled ads/analytics. Actual WebAudio captured separately, no generated gameplay frames or SDK ad video. No phone/FPS claim.",
+  "payload": {
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "content-pilot.html": "b8894f4278d00ff8e683fb03c5455fdfe5bc63854a028a5e584044330e6fd173",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "a193630e23b41911466396fd034aea9a462c4153bccfe0a444da1018b52b0286",
+    "target-lab.html": "8c516dc331bb8ebabdecba5fb79115bb180accac4b24fcd2c4151e66be7d1218",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+    "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+    "assets/bootstrap-DIO8OUWi.js": "2d7acf49178df0e4dc25d904b498aed4f041958182676d7e5cf32fb0f0dcee83",
+    "assets/contentPilot-CVfrvdF7.js": "d936e9cc7701e63198d8f17bc95ef0a4ae03fadcedc62c01f6cfea088445fe36",
+    "assets/contentPilot-JrrfdKDM.css": "d90ddb250320fc90bf098669fff979ff40b965f534393d695c3a34d6dca4ffab",
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/gestures-BpcQuhp6.js": "c2920ccf32a4e3e623bf7be13690bcf7a94d2f02974eb5519f04781f9d4382db",
+    "assets/gestures-Dsj4Ro4y.css": "93fd22ac716095bb4d315b3a8cdaf5182463586105764eecbf4cfcd3173e4150",
+    "assets/main-DXUR2TZa.js": "3cee05a289895d1f3368de826b51539fdf85cedc5193122e01474c0c2a1a4585",
+    "assets/targetLab-CsHy45MX.js": "f1926172d790e78253118f0fd1bb31208732a1bef161fbd27c294166cfff28ff",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7"
+  },
+  "clips": [
+    {
+      "name": "daily-current",
+      "frames": 122,
+      "durationMs": 4308.617329,
+      "errors": [],
+      "state": {
+        "main": {
+          "schema": 2,
+          "revision": 0,
+          "catalogVersion": 5,
+          "index": 0,
+          "campaign": {
+            "level": {
+              "id": "c01",
+              "contentVersion": 3,
+              "width": 6,
+              "height": 6,
+              "difficulty": "normal",
+              "arrows": [
+                {
+                  "id": "c01-0",
+                  "path": [
+                    {
+                      "x": 0,
+                      "y": 0
+                    },
+                    {
+                      "x": 5,
+                      "y": 0
+                    },
+                    {
+                      "x": 5,
+                      "y": 5
+                    },
+                    {
+                      "x": 0,
+                      "y": 5
+                    }
+                  ]
+                },
+                {
+                  "id": "c01-1",
+                  "path": [
+                    {
+                      "x": 1,
+                      "y": 4
+                    },
+                    {
+                      "x": 4,
+                      "y": 4
+                    },
+                    {
+                      "x": 4,
+                      "y": 1
+                    },
+                    {
+                      "x": 0,
+                      "y": 1
+                    },
+                    {
+                      "x": 0,
+                      "y": 4
+                    }
+                  ]
+                },
+                {
+                  "id": "c01-2",
+                  "path": [
+                    {
+                      "x": 2,
+                      "y": 3
+                    },
+                    {
+                      "x": 3,
+                      "y": 3
+                    },
+                    {
+                      "x": 3,
+                      "y": 2
+                    },
+                    {
+                      "x": 1,
+                      "y": 2
+                    },
+                    {
+                      "x": 1,
+                      "y": 3
+                    }
+                  ]
+                }
+              ],
+              "mask": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 1,
+                  "y": 0
+                },
+                {
+                  "x": 2,
+                  "y": 0
+                },
+                {
+                  "x": 3,
+                  "y": 0
+                },
+                {
+                  "x": 4,
+                  "y": 0
+                },
+                {
+                  "x": 5,
+                  "y": 0
+                },
+                {
+                  "x": 5,
+                  "y": 1
+                },
+                {
+                  "x": 5,
+                  "y": 2
+                },
+                {
+                  "x": 5,
+                  "y": 3
+                },
+                {
+                  "x": 5,
+                  "y": 4
+                },
+                {
+                  "x": 5,
+                  "y": 5
+                },
+                {
+                  "x": 4,
+                  "y": 5
+                },
+                {
+                  "x": 3,
+                  "y": 5
+                },
+                {
+                  "x": 2,
+                  "y": 5
+                },
+                {
+                  "x": 1,
+                  "y": 5
+                },
+                {
+                  "x": 0,
+                  "y": 5
+                },
+                {
+                  "x": 1,
+                  "y": 4
+                },
+                {
+                  "x": 2,
+                  "y": 4
+                },
+                {
+                  "x": 3,
+                  "y": 4
+                },
+                {
+                  "x": 4,
+                  "y": 4
+                },
+                {
+                  "x": 4,
+                  "y": 3
+                },
+                {
+                  "x": 4,
+                  "y": 2
+                },
+                {
+                  "x": 4,
+                  "y": 1
+                },
+                {
+                  "x": 3,
+                  "y": 1
+                },
+                {
+                  "x": 2,
+                  "y": 1
+                },
+                {
+                  "x": 1,
+                  "y": 1
+                },
+                {
+                  "x": 0,
+                  "y": 1
+                },
+                {
+                  "x": 0,
+                  "y": 2
+                },
+                {
+                  "x": 0,
+                  "y": 3
+                },
+                {
+                  "x": 0,
+                  "y": 4
+                },
+                {
+                  "x": 2,
+                  "y": 3
+                },
+                {
+                  "x": 3,
+                  "y": 3
+                },
+                {
+                  "x": 3,
+                  "y": 2
+                },
+                {
+                  "x": 2,
+                  "y": 2
+                },
+                {
+                  "x": 1,
+                  "y": 2
+                },
+                {
+                  "x": 1,
+                  "y": 3
+                }
+              ]
+            },
+            "board": {
+              "id": "006b3f14-c613-45f4-b586-f86e59ffb63e",
+              "levelId": "c01",
+              "contentVersion": 3,
+              "removed": [],
+              "errors": [],
+              "lives": 3
+            },
+            "view": null,
+            "guides": false,
+            "freeUsed": false,
+            "continuations": 0,
+            "hint": null,
+            "started": false,
+            "activeMs": 0
+          },
+          "daily": {},
+          "wins": [],
+          "tutorials": [],
+          "receipts": [],
+          "reservedRewards": [],
+          "dailyCatalogVersion": 3,
+          "dailyWins": {},
+          "cups": [],
+          "facts": [],
+          "seenAwards": [],
+          "collectionSeen": false,
+          "trophyDesigns": {},
+          "seenUnlocks": [],
+          "adCadence": {
+            "version": 1,
+            "activeMs": 0,
+            "nextRequestMs": 150000,
+            "progressAtRequest": 0
+          },
+          "freeContinueUsed": false,
+          "helpLedger": {
+            "version": 1,
+            "installId": "1519a03d-04d2-4409-963a-c611ca6eaa7e",
+            "policyVersion": 1,
+            "nextVariant": "combined-v1",
+            "candidateEnabled": true,
+            "assignments": {
+              "006b3f14-c613-45f4-b586-f86e59ffb63e": "combined-v1"
+            },
+            "requests": {},
+            "rights": {},
+            "unresolved": [],
+            "enrollments": {},
+            "continues": {}
+          }
+        },
+        "pilot": {
+          "version": 1,
+          "index": 20,
+          "boards": {
+            "baseline:20": {
+              "id": "36c0294c-09b3-434b-a403-14955faa3575",
+              "levelId": "d20261116",
+              "contentVersion": 1,
+              "removed": [
+                "d20261116-0",
+                "d20261116-2",
+                "d20261116-3"
+              ],
+              "errors": [],
+              "lives": 3
+            }
+          }
+        },
+        "events": []
+      }
+    },
+    {
+      "name": "daily-pilot",
+      "frames": 123,
+      "durationMs": 5442.562600000001,
+      "errors": [],
+      "state": {
+        "main": {
+          "schema": 2,
+          "revision": 0,
+          "catalogVersion": 5,
+          "index": 0,
+          "campaign": {
+            "level": {
+              "id": "c01",
+              "contentVersion": 3,
+              "width": 6,
+              "height": 6,
+              "difficulty": "normal",
+              "arrows": [
+                {
+                  "id": "c01-0",
+                  "path": [
+                    {
+                      "x": 0,
+                      "y": 0
+                    },
+                    {
+                      "x": 5,
+                      "y": 0
+                    },
+                    {
+                      "x": 5,
+                      "y": 5
+                    },
+                    {
+                      "x": 0,
+                      "y": 5
+                    }
+                  ]
+                },
+                {
+                  "id": "c01-1",
+                  "path": [
+                    {
+                      "x": 1,
+                      "y": 4
+                    },
+                    {
+                      "x": 4,
+                      "y": 4
+                    },
+                    {
+                      "x": 4,
+                      "y": 1
+                    },
+                    {
+                      "x": 0,
+                      "y": 1
+                    },
+                    {
+                      "x": 0,
+                      "y": 4
+                    }
+                  ]
+                },
+                {
+                  "id": "c01-2",
+                  "path": [
+                    {
+                      "x": 2,
+                      "y": 3
+                    },
+                    {
+                      "x": 3,
+                      "y": 3
+                    },
+                    {
+                      "x": 3,
+                      "y": 2
+                    },
+                    {
+                      "x": 1,
+                      "y": 2
+                    },
+                    {
+                      "x": 1,
+                      "y": 3
+                    }
+                  ]
+                }
+              ],
+              "mask": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 1,
+                  "y": 0
+                },
+                {
+                  "x": 2,
+                  "y": 0
+                },
+                {
+                  "x": 3,
+                  "y": 0
+                },
+                {
+                  "x": 4,
+                  "y": 0
+                },
+                {
+                  "x": 5,
+                  "y": 0
+                },
+                {
+                  "x": 5,
+                  "y": 1
+                },
+                {
+                  "x": 5,
+                  "y": 2
+                },
+                {
+                  "x": 5,
+                  "y": 3
+                },
+                {
+                  "x": 5,
+                  "y": 4
+                },
+                {
+                  "x": 5,
+                  "y": 5
+                },
+                {
+                  "x": 4,
+                  "y": 5
+                },
+                {
+                  "x": 3,
+                  "y": 5
+                },
+                {
+                  "x": 2,
+                  "y": 5
+                },
+                {
+                  "x": 1,
+                  "y": 5
+                },
+                {
+                  "x": 0,
+                  "y": 5
+                },
+                {
+                  "x": 1,
+                  "y": 4
+                },
+                {
+                  "x": 2,
+                  "y": 4
+                },
+                {
+                  "x": 3,
+                  "y": 4
+                },
+                {
+                  "x": 4,
+                  "y": 4
+                },
+                {
+                  "x": 4,
+                  "y": 3
+                },
+                {
+                  "x": 4,
+                  "y": 2
+                },
+                {
+                  "x": 4,
+                  "y": 1
+                },
+                {
+                  "x": 3,
+                  "y": 1
+                },
+                {
+                  "x": 2,
+                  "y": 1
+                },
+                {
+                  "x": 1,
+                  "y": 1
+                },
+                {
+                  "x": 0,
+                  "y": 1
+                },
+                {
+                  "x": 0,
+                  "y": 2
+                },
+                {
+                  "x": 0,
+                  "y": 3
+                },
+                {
+                  "x": 0,
+                  "y": 4
+                },
+                {
+                  "x": 2,
+                  "y": 3
+                },
+                {
+                  "x": 3,
+                  "y": 3
+                },
+                {
+                  "x": 3,
+                  "y": 2
+                },
+                {
+                  "x": 2,
+                  "y": 2
+                },
+                {
+                  "x": 1,
+                  "y": 2
+                },
+                {
+                  "x": 1,
+                  "y": 3
+                }
+              ]
+            },
+            "board": {
+              "id": "5bdaabc1-68eb-4675-a3c8-5f7caf595400",
+              "levelId": "c01",
+              "contentVersion": 3,
+              "removed": [],
+              "errors": [],
+              "lives": 3
+            },
+            "view": null,
+            "guides": false,
+            "freeUsed": false,
+            "continuations": 0,
+            "hint": null,
+            "started": false,
+            "activeMs": 0
+          },
+          "daily": {},
+          "wins": [],
+          "tutorials": [],
+          "receipts": [],
+          "reservedRewards": [],
+          "dailyCatalogVersion": 3,
+          "dailyWins": {},
+          "cups": [],
+          "facts": [],
+          "seenAwards": [],
+          "collectionSeen": false,
+          "trophyDesigns": {},
+          "seenUnlocks": [],
+          "adCadence": {
+            "version": 1,
+            "activeMs": 0,
+            "nextRequestMs": 150000,
+            "progressAtRequest": 0
+          },
+          "freeContinueUsed": false,
+          "helpLedger": {
+            "version": 1,
+            "installId": "181a3771-02b6-4e05-9a61-3cb6d7de9d52",
+            "policyVersion": 1,
+            "nextVariant": "combined-v1",
+            "candidateEnabled": true,
+            "assignments": {
+              "5bdaabc1-68eb-4675-a3c8-5f7caf595400": "combined-v1"
+            },
+            "requests": {},
+            "rights": {},
+            "unresolved": [],
+            "enrollments": {},
+            "continues": {}
+          }
+        },
+        "pilot": {
+          "version": 1,
+          "index": 20,
+          "boards": {
+            "candidate:20": {
+              "id": "f2f1636e-bfa3-45b4-95db-11b6bc2532b2",
+              "levelId": "pd20261116",
+              "contentVersion": 4,
+              "removed": [
+                "pd20261116-0",
+                "pd20261116-1",
+                "pd20261116-2",
+                "pd20261116-3"
+              ],
+              "errors": [],
+              "lives": 3
+            }
+          }
+        },
+        "events": []
+      }
+    },
+    {
+      "name": "campaign-rhythm",
+      "frames": 403,
+      "durationMs": 12134.269577999996,
+      "errors": [],
+      "state": {
+        "main": {
+          "schema": 2,
+          "revision": 0,
+          "catalogVersion": 5,
+          "index": 0,
+          "campaign": {
+            "level": {
+              "id": "c01",
+              "contentVersion": 3,
+              "width": 6,
+              "height": 6,
+              "difficulty": "normal",
+              "arrows": [
+                {
+                  "id": "c01-0",
+                  "path": [
+                    {
+                      "x": 0,
+                      "y": 0
+                    },
+                    {
+                      "x": 5,
+                      "y": 0
+                    },
+                    {
+                      "x": 5,
+                      "y": 5
+                    },
+                    {
+                      "x": 0,
+                      "y": 5
+                    }
+                  ]
+                },
+                {
+                  "id": "c01-1",
+                  "path": [
+                    {
+                      "x": 1,
+                      "y": 4
+                    },
+                    {
+                      "x": 4,
+                      "y": 4
+                    },
+                    {
+                      "x": 4,
+                      "y": 1
+                    },
+                    {
+                      "x": 0,
+                      "y": 1
+                    },
+                    {
+                      "x": 0,
+                      "y": 4
+                    }
+                  ]
+                },
+                {
+                  "id": "c01-2",
+                  "path": [
+                    {
+                      "x": 2,
+                      "y": 3
+                    },
+                    {
+                      "x": 3,
+                      "y": 3
+                    },
+                    {
+                      "x": 3,
+                      "y": 2
+                    },
+                    {
+                      "x": 1,
+                      "y": 2
+                    },
+                    {
+                      "x": 1,
+                      "y": 3
+                    }
+                  ]
+                }
+              ],
+              "mask": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 1,
+                  "y": 0
+                },
+                {
+                  "x": 2,
+                  "y": 0
+                },
+                {
+                  "x": 3,
+                  "y": 0
+                },
+                {
+                  "x": 4,
+                  "y": 0
+                },
+                {
+                  "x": 5,
+                  "y": 0
+                },
+                {
+                  "x": 5,
+                  "y": 1
+                },
+                {
+                  "x": 5,
+                  "y": 2
+                },
+                {
+                  "x": 5,
+                  "y": 3
+                },
+                {
+                  "x": 5,
+                  "y": 4
+                },
+                {
+                  "x": 5,
+                  "y": 5
+                },
+                {
+                  "x": 4,
+                  "y": 5
+                },
+                {
+                  "x": 3,
+                  "y": 5
+                },
+                {
+                  "x": 2,
+                  "y": 5
+                },
+                {
+                  "x": 1,
+                  "y": 5
+                },
+                {
+                  "x": 0,
+                  "y": 5
+                },
+                {
+                  "x": 1,
+                  "y": 4
+                },
+                {
+                  "x": 2,
+                  "y": 4
+                },
+                {
+                  "x": 3,
+                  "y": 4
+                },
+                {
+                  "x": 4,
+                  "y": 4
+                },
+                {
+                  "x": 4,
+                  "y": 3
+                },
+                {
+                  "x": 4,
+                  "y": 2
+                },
+                {
+                  "x": 4,
+                  "y": 1
+                },
+                {
+                  "x": 3,
+                  "y": 1
+                },
+                {
+                  "x": 2,
+                  "y": 1
+                },
+                {
+                  "x": 1,
+                  "y": 1
+                },
+                {
+                  "x": 0,
+                  "y": 1
+                },
+                {
+                  "x": 0,
+                  "y": 2
+                },
+                {
+                  "x": 0,
+                  "y": 3
+                },
+                {
+                  "x": 0,
+                  "y": 4
+                },
+                {
+                  "x": 2,
+                  "y": 3
+                },
+                {
+                  "x": 3,
+                  "y": 3
+                },
+                {
+                  "x": 3,
+                  "y": 2
+                },
+                {
+                  "x": 2,
+                  "y": 2
+                },
+                {
+                  "x": 1,
+                  "y": 2
+                },
+                {
+                  "x": 1,
+                  "y": 3
+                }
+              ]
+            },
+            "board": {
+              "id": "061b1c91-df8e-4605-8c4b-2eae6703b5c8",
+              "levelId": "c01",
+              "contentVersion": 3,
+              "removed": [],
+              "errors": [],
+              "lives": 3
+            },
+            "view": null,
+            "guides": false,
+            "freeUsed": false,
+            "continuations": 0,
+            "hint": null,
+            "started": false,
+            "activeMs": 0
+          },
+          "daily": {},
+          "wins": [],
+          "tutorials": [],
+          "receipts": [],
+          "reservedRewards": [],
+          "dailyCatalogVersion": 3,
+          "dailyWins": {},
+          "cups": [],
+          "facts": [],
+          "seenAwards": [],
+          "collectionSeen": false,
+          "trophyDesigns": {},
+          "seenUnlocks": [],
+          "adCadence": {
+            "version": 1,
+            "activeMs": 0,
+            "nextRequestMs": 150000,
+            "progressAtRequest": 0
+          },
+          "freeContinueUsed": false,
+          "helpLedger": {
+            "version": 1,
+            "installId": "e251e20b-1bab-4ebb-8d23-d60e04506834",
+            "policyVersion": 1,
+            "nextVariant": "combined-v1",
+            "candidateEnabled": true,
+            "assignments": {
+              "061b1c91-df8e-4605-8c4b-2eae6703b5c8": "combined-v1"
+            },
+            "requests": {},
+            "rights": {},
+            "unresolved": [],
+            "enrollments": {},
+            "continues": {}
+          }
+        },
+        "pilot": {
+          "version": 1,
+          "index": 14,
+          "boards": {
+            "candidate:10": {
+              "id": "77c95e88-2d33-4f48-b294-ffbf041e497d",
+              "levelId": "pc31",
+              "contentVersion": 4,
+              "removed": [
+                "pc31-0",
+                "pc31-1",
+                "pc31-2",
+                "pc31-3",
+                "pc31-4",
+                "pc31-5",
+                "pc31-6",
+                "pc31-7",
+                "pc31-8",
+                "pc31-9",
+                "pc31-10"
+              ],
+              "errors": [],
+              "lives": 3
+            },
+            "candidate:11": {
+              "id": "0f5c2e2c-5b84-434d-99ba-671d6b34c055",
+              "levelId": "pc32",
+              "contentVersion": 4,
+              "removed": [],
+              "errors": [],
+              "lives": 3
+            },
+            "candidate:14": {
+              "id": "b707a01d-f7df-4199-8c19-0f600a76dd34",
+              "levelId": "pc35",
+              "contentVersion": 4,
+              "removed": [
+                "pc35-0",
+                "pc35-1"
+              ],
+              "errors": [],
+              "lives": 3
+            }
+          }
+        },
+        "events": []
+      }
+    }
+  ]
+}

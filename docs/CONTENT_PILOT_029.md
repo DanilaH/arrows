@@ -16,7 +16,7 @@ Published daily constructor mostly makes straight, initially available arrows: a
 
 Reuse the existing dense offline constructor,24bounded seeds per field,648candidates. Reject illegal/self-blocked/overlapping/cyclic geometry, holes and existing density/frontier/bend/depth gate failures. Keep at least two initial alternatives. Select contrasting compositions: interior legal heads, shared ray blockers, multi-unlock moves and two-wing silhouettes. `remoteRayCells` counts distant occupied cells, not independent blockers. Interior-head and greedy-unlock signatures are explicit proxies; neither proves what a player notices. Full nomination/baseline table: `evidence/content-pilot-029/content-report.json`.
 
-Candidate dailies42–85arrows,4–14initial exits, depths10–23. Ordinary Hard is not an85%-free cleanup. Breathers11/13/16arrows. Campaign peaks51–64arrows instead of inflating all fields to136. Distinctness is still HOLD until blind/matched human play; all are the same monotone removal rules, and no honest oracle can turn that into evidence of pleasure.
+Candidate dailies42–85arrows,4–14initial exits (~7–17%), depths10–23. Ordinary Hard is not an85%-free cleanup. Breathers11/13/16arrows. Campaign peaks51–64arrows instead of inflating all fields to136. Distinctness is still HOLD until blind/matched human play; all are the same monotone removal rules, and no honest oracle can turn that into evidence of pleasure.
 
 ## Research selection
 
@@ -40,6 +40,10 @@ The placeholder surface ProgressStore uses `arrows.qa.content-pilot.v1.*`; actua
 ## Human check before rollout
 
 Start with three matched comparisons, alternating which bank is played first: daily1, daily4, daily6; then campaign24–26 and34–36 (peak plus recovery). Same3hearts/no assistance conditions in both banks. Do not show solver order/motif labels beforehand. Ask what blocked progress, which move opened something meaningful, where they stopped reasoning and just cleared, whether the recovery felt earned, whether they voluntarily chose another. Record time to first confident move, first error, requests for help, final-quarter cleanup, frustration and voluntary next. Small owner/3–5player feedback discovers concrete defects, not retention statistics.
+
+Additional cleanup check: three legal policies (first/reverse/unlock-greedy), using the domain blocker predicate, are recorded in `evidence/content-pilot-029/tail-review.json`. Median entirely-free end suffix across field/policy pairs: daily baseline16.7%→candidate6.4%; campaign10.7%→10.4% (essentially unchanged). These are policy traces, not human duration; meaningful dependency changes can still hide visual-search tedium. This does not establish perceived variety.
+
+Borderline pairs to inspect explicitly: pc37Hard (51arrows/8roots/depth11) versus pc38Normal (39/7/depth12) overlap on depth/frontier; neither label certifies human difficulty. pd20261119Hard (47/6/depth10) is the lightest nominated daily and tests whether a difficult daily can still offer a satisfying shorter solve. pc24Hard→pc25Nightmare→pc26breather tests fatigue/recovery; do not infer a good rhythm from the labels alone.
 
 Accept a candidate only if its increased reasoning is understandable/fair and it avoids a longer mechanical tail; reject on confusing thin exits, exhausting zoom-search or many arbitrary mistakes. Do not tune gates on the same fields and call that independent validation. Iterate weak candidates locally. After acceptance: separately version fresh campaign assignments and a future daily algorithm boundary; old embedded attempts/archive/results/rights stay frozen. Real help/ads balancing is a later independent check.
 

@@ -1,0 +1,29 @@
+{
+  "source": "4c0956c744c638148f7cdb97d697d7ea1241ea98",
+  "unit": {
+    "files": 27,
+    "passed": 215
+  },
+  "typecheck": "PASS",
+  "productionBuild": "PASS; dedicated pilot chunk; test harness excluded",
+  "publishedSources": "four SHA256 identical to53a761a",
+  "generatorReproduction": "648 candidates,27 selected fields reproduce byte-for-byte",
+  "browser": {
+    "existingFocusedPassed": 26,
+    "pilotFinalPassed": 10,
+    "uniqueFinalCovered": 36,
+    "earlierRuns": [
+      "5/6: reload while dist concurrently rebuilding; isolated6/6 pass",
+      "34/36: two new entry observers compared fresh seed before normal receipt processing; corrected pre-entry snapshot and fixture scope; final10/10 pass"
+    ]
+  },
+  "native": {
+    "sync": "PASS",
+    "jvm": 19,
+    "androidJob132828343836": "success",
+    "webJob132828343672": "in progress at evidence preparation"
+  },
+  "physical": "NOT RUN: install/update,haptics,speaker/audio-focus,FPS/thermal",
+  "humanInterest": "HOLD; no bot-human equivalence",
+  "realServices": "NOT RUN: SDK inventory/AppMetrica/money"
+}
