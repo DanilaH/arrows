@@ -1,3 +1,9 @@
+## Challenge content pilot —0.29.0/code42
+
+Implemented over53a761a, retaining0.28 and all newer fixes. Read CONTENT_PILOT_029.md. Isolated20-level/7-daily candidate vs published counterpart, more frequent peaks and dense dependencies; actual Board/feel/3hearts, equal no-help/no-ad conditions. Separate resumable QA histories, no main progress/cadence/rights changes; no native earned inbox/analytics registration.215 unit/type/build PASS; final browser/CI/APK and evidence are tracked in evidence/content-pilot-029/ACCEPTANCE.md. Human value and main-bank rollout HOLD. KIT IMPACT REUSE.
+
+Previous hosted0.28 run43704030764 has now been checked completed/success; the older pending note below is historical.
+
 ## Combined normal assistance —0.28.0/code41, verified test delivery
 
 Owner accepted A1 primary/A2 separate/A4 after loss/A3 lab. Read COMBINED_HELP_028.md. New combined-v1 normal profile has a compact ordinary direct Hint and quiet Cascade opening existing explicit count/video dialog; A4 uses existing three-life/single bundle. One-time policyVersion1 upgrade changes NEXT attempts only, preserving old board/profile/descriptors/rights. Late assistance closes obsolete cascade choice. Separate offer episodes and experiment context, no cadence/content/native/pin changes. Cascade graph optimization matches718 baseline plans exactly.184 unit/type/build and focused16 phone/desktop checks pass.19 JVM/sync/both APK builds PASS; same-certcode41/demo ads/analytics off and18-file capture match verified. Saved APK/real A1/A2/A4 GIF/audio links and facts: evidence/combined-028/ACCEPTANCE.md. Final frozen-payload local full suite408/408 PASS in14.4min; hosted web43704030764 still running at preparation, not labelled green.

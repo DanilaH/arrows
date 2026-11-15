@@ -1,0 +1,2 @@
+.content-pilot #game-dialog {max-height:calc(100dvh - var(--safe-top,0px) - var(--safe-bottom,0px) - 48px);overflow-y:auto;overscroll-behavior:contain;}
+.content-pilot #app-title {font-size:clamp(14px,4.1vw,18px);}

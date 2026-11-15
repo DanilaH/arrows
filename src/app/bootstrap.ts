@@ -14,9 +14,10 @@ import { BoardScene, GAME_PRESENTABLE_EVENT } from '../game/BoardScene';
 import { installGameSurface } from '../game/surface';
 
 import type { Level } from '../domain/board';
+import type {GameReviewOptions} from '../pilot/review';
 
 /** Isolated tests may supply geometry/host dependencies; the normal entry uses production defaults. */
-export function startGame(reviewFields: readonly Level[] = [], platformFactory: typeof createPlatformRuntime = createPlatformRuntime, reviewOptions: { scaleContext?: boolean } = {}): void {
+export function startGame(reviewFields: readonly Level[] = [], platformFactory: typeof createPlatformRuntime = createPlatformRuntime, reviewOptions: GameReviewOptions = {}): void {
   const language = normalizeGameLanguage(navigator.language);
   const text = copy[language];
   document.documentElement.lang = language;

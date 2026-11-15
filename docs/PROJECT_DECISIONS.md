@@ -1,5 +1,9 @@
 # Project decisions — 2026-11-09
 
+## 2026-11-15 — bounded challenge content pilot0.29.0
+
+Owner approved the first campaign fragment/week comparison after reporting easy dailies and sparse peaks. Build an isolated20-position/7-daily fixed shortlist with baseline toggle, same3hearts/no-help/no-ad controls. No universal director, production rollout or silent published-bank rewrite. Disable native receipt/analytics transport at construction, scope placeholder writer and optional bounded QA resume, preserve normal0.28 help/ads/rights/pins. Offline solvability/frontier/motif checks qualify candidates only; human interest and compatibility-aware future assignment rollout remain separate gates. Same-cert code42, real recordings. See CONTENT_PILOT_029.md. KIT IMPACT REUSE; no kit/store write.
+
 ## 2026-11-15 — approved normal assistance0.28.0
 
 Owner accepted A1 primary, separate explicit A2, contextual A4 and A3 lab. Implement COMBINED_HELP_028.md overa357483. New combined-v1/policyVersion1 changes future defaults only; preserve all old attempts/assignments/requests/earned/reserved meanings, gift and errors. Explicit cascade count/video confirmation freezes the offer, existing exact-group presenter/atomic domain activation remain. One compact row, no new timer/economy/cadence. Separate normal experiment context; export scope parameter prevents cross-version cohort mixing. Reuse dependency graph without altering718 compared plans. Same-cert code41 and genuine recordings; no kit/store write.

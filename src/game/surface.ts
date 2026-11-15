@@ -17,9 +17,10 @@ import { earnedAwards } from '../progression/collection';
 import { createHelpOffers } from './helpOffers';
 import type {HelpOffer} from '../progression/helpLedger';
 import type { BoardScene } from './BoardScene';
+import type {GameReviewOptions} from '../pilot/review';
 
 type Platform = ReturnType<typeof createPlatformRuntime>;
-export function installGameSurface(scene: BoardScene, platform: Platform, language: GameLanguage, reviewFields: readonly Level[] = [], reviewOptions: { scaleContext?: boolean } = {}) {
+export function installGameSurface(scene: BoardScene, platform: Platform, language: GameLanguage, reviewFields: readonly Level[] = [], reviewOptions: GameReviewOptions = {}) {
   let text = copy[language];
   const motion = createUiMotion();
   const root = document.querySelector<HTMLElement>('#game-root')!;
@@ -33,7 +34,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const helpOffers=createHelpOffers(progress,platform.ads,platform.analytics,()=>language,()=>scene.visibleHelpCandidates());
   let alive = true, loaded = false, loadSlow = false, control = false, requestingAd = false;
   let selectedControl = 0;
-  const loadControl = (index: number): void => { const level = reviewFields[index]; if (!level) return; selectedControl = index; scene.loadAttempt(new Board(level, crypto.randomUUID())); };
+  const pilot=reviewOptions.pilot;
+  const loadControl = (index: number, restart=false): void => { const level = reviewFields[index]; if (!level) return; selectedControl = index; const saved=restart?undefined:pilot?.restore(index); scene.loadAttempt(new Board(level, saved?.id??crypto.randomUUID(),saved),null,false,null,false,!!saved);pilot?.save(index,scene.board.snapshot()); };
   let activeDate: string | null = null, calendarDay = localDate();
   const active = () => activeDate ? progress.state.daily[activeDate]! : progress.state.campaign;
   const gameMode = () => activeDate ? 'daily' as const : 'campaign' as const;
@@ -108,7 +110,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     },
     activate(id) {
       if (requestingAd || motion.routeBusy || platform.activity.isBlocked()) return;
-      if (control) { scene.activate(id); return; }
+      if (control) { scene.activate(id); pilot?.save(selectedControl,scene.board.snapshot());return; }
       helpOffers.choice('continued_play');
       const expected = scene.board.attemptId;
       const cueBefore = errorCue.beforeMove(); // Before takeTime/sample can reveal Hint.
@@ -169,9 +171,9 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       platform.analytics.track('daily_open', { date, attempt, resumed: active().started });
     },
   });
-  const settingsSurface = installSettingsSurface(platform.settings, platform.activity, platform.feedback, () => { cancel(); saveView(); }, motion,()=>{const section = helpOffers.renderQA(), cue = cueQA.render(language, active().board.id); if (section && cue) section.append(cue); return section;});
+  const settingsSurface = installSettingsSurface(platform.settings, platform.activity, platform.feedback, () => { cancel(); saveView(); }, motion,()=>{if(pilot)return null;const section = helpOffers.renderQA(), cue = cueQA.render(language, active().board.id); if (section && cue) section.append(cue); return section;});
   let celebratedAttempt = '', pendingAward = false, freshWinAttempt = '', dailyReturnAttempt = '';
-  const backToMenu = (): void => { if (requestingAd || transition.busy) return; if (activeDate && !control) meta.show('calendar', activeDate); else meta.show('home'); close(); sync(); };
+  const backToMenu = (): void => { if (requestingAd || transition.busy) return;if(pilot){open('controls');return;} if (activeDate && !control) meta.show('calendar', activeDate); else meta.show('home'); close(); sync(); };
   let rewardIntent = 0, lastPreload = -Infinity, pendingRewardKey = '';
   const cancelAd = (): void => {
     if (platform.ads.state.phase !== 'idle') { platform.ads.cancel(); return; }
@@ -205,7 +207,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     } finally { if (alive && rewardIntent === intent) { requestingAd = false; pendingRewardKey = ''; adSurface.endPreparation(); sync(); } }
   };
   const advanceWin = (): void => {
-    if (control) { open('controls'); return; }
+    if (control) {if(pilot&&scene.board.complete&&scene.finished&&selectedControl+1<reviewFields.length){loadControl(selectedControl+1);sync();}else open('controls'); return; }
     if (!scene.board.complete || !scene.finished || requestingAd || transition.busy) return;
     platform.feedback.resetGameplay();
     const attempt = scene.board.attemptId, date = activeDate, mode = gameMode(), levelId = scene.board.level.id, freshWin = freshWinAttempt === scene.board.attemptId, animateDaily = !!date && dailyReturnAttempt===attempt, finalCampaign = !date && progress.state.index===campaign.length-1; freshWinAttempt = ""; dailyReturnAttempt="";
@@ -246,11 +248,12 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       if (control) button('campaign', text.toCampaign, () => { close(); enterCampaign(); });
       if (reviewFields.length) button('controls', text.controlFields, () => open('controls'));
     } else if (kind === 'controls') {
-      for (let index = 0; index < reviewFields.length; index++) button(`field-${index}`, names[index]!, () => { close(); saveView(); control = true; idleMs = 0; meta.show('game'); loadControl(index); sync(); }, index === selectedControl && control);
-      button('campaign', text.toCampaign, () => { close(); enterCampaign(); });
+      if(pilot){paragraph(pilot.description(language));button('compare',language==='ru'?'Сравнить с другим банком':'Compare the other bank',()=>pilot.compare(selectedControl));}
+      for (let index = 0; index < reviewFields.length; index++) button(`field-${index}`, pilot?.label(index,language)??names[index]!, () => { close(); saveView(); control = true; idleMs = 0; meta.show('game'); loadControl(index); sync(); }, index === selectedControl && control);
+      button('campaign', text.toCampaign, () => {if(pilot){pilot.exit();return;} close(); enterCampaign(); });
     } else if (kind === 'restart') {
       button('confirm-restart', text.restart, () => {
-        close(); if (control) loadControl(selectedControl);
+        close(); if (control) loadControl(selectedControl,true);
         else {
           const a = scene.board, mode = gameMode(),beforeMs=active().activeMs, cueMode=cueQA.next, date=activeDate;run(progress.restart(a.attemptId).then(changed => { if (changed) {cueQA.bindNew(mode === 'daily' ? progress.state.daily[date!]!.board.id : progress.state.campaign.board.id, cueMode);helpOffers.choice('restart','',confirmedChoice,a.attemptId);platform.analytics.track('level_restart', { mode, level_id: a.level.id, attempt: a.attemptId });platform.analytics.track('attempt_final',{event_id:`${a.attemptId}-restart`,attempt:a.attemptId,mode,outcome:'restart',active_ms:beforeMs});} }));
         }
@@ -287,9 +290,9 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const board = scene.board, a = active(), remaining = board.remaining.length;
     const dailyLabel = activeDate ? new Intl.DateTimeFormat(language, { day: 'numeric', month: 'long', timeZone: 'UTC' }).format(new Date(activeDate + 'T12:00:00Z')) : '';
 
-    document.querySelector('#app-title')!.textContent = control ? text.title : activeDate ? dailyLabel : `${text.level} ${progress.state.index + 1}`;
+    document.querySelector('#app-title')!.textContent = control ? pilot?.label(selectedControl,language)??text.title : activeDate ? dailyLabel : `${text.level} ${progress.state.index + 1}`;
     document.querySelector('#choose-field')!.setAttribute('aria-label', activeDate && !control ? text.toCalendar : text.home);
-    document.querySelector('#field-name')!.textContent = control ? names[selectedControl]! : activeDate ? dailyLabel : `${progress.state.index + 1} / ${campaign.length}`;
+    document.querySelector('#field-name')!.textContent = control ? pilot?`${selectedControl+1} / ${reviewFields.length}`:names[selectedControl]! : activeDate ? dailyLabel : `${progress.state.index + 1} / ${campaign.length}`;
     const difficulty = document.querySelector<HTMLElement>('#difficulty')!;
     difficulty.textContent = board.level.difficulty === 'normal' ? '' : board.level.difficulty === 'hard' ? 'Hard' : 'Nightmare';
     difficulty.dataset.difficulty = board.level.difficulty;
@@ -308,7 +311,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const exhausted = !control && !activeDate && progress.state.index === campaign.length - 1;
     const winTitle=document.querySelector('#win-title')!, title=exhausted ? text.chapterComplete : activeDate ? text.dailyWin : text.win;
     if(winTitle.textContent!==title)winTitle.textContent=title;
-    document.querySelector<HTMLButtonElement>('#next')!.textContent = control ? text.chooseField : activeDate || exhausted ? text.toCalendar : text.next;
+    document.querySelector<HTMLButtonElement>('#next')!.textContent = control ? pilot&&selectedControl+1<reviewFields.length?text.next:text.chooseField : activeDate || exhausted ? text.toCalendar : text.next;
     document.querySelector<HTMLButtonElement>('#next')!.disabled = transition.busy || requestingAd;
     document.querySelector<HTMLButtonElement>('#restart')!.disabled = !control && board.complete || board.hearts === 0;
     document.querySelector<HTMLButtonElement>('#game-settings')!.disabled = board.hearts === 0;
@@ -434,6 +437,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const finishLoad = (): void => {
     clearTimeout(slowLoad); if (!alive || loaded) return; loaded = true; loadSlow = false; meta.ready();
     platform.activity.setBlocked('save-load', false);
+    if(pilot){control=true;meta.show('game');loadControl(pilot.initial);sync();return;}
     platform.ads.installRewardCommit(async receipt => {
       const result = await progress.commitReward(receipt);
       const recovered = !requestedRewards.delete(`${receipt.attempt}:${receipt.placement}`);

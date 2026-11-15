@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#1e1e2c" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/nunito-variable.ttf" as="font" type="font/ttf" crossorigin />
+    <title>Стрелки</title>
+  </head>
+  <body>
+    <main id="game-shell" data-status="starting">
+      <div id="game-root" tabindex="0" role="application" aria-label="Arrow puzzle"><div class="board-edge-fade" aria-hidden="true"></div></div>
+      <section id="meta-screen" aria-label="Game menu"></section>
+      <nav id="meta-nav" hidden></nav>
+      <div id="tutorial-pointer" hidden aria-hidden="true"></div>
+      <header id="game-header">
+        <div class="top-row">
+          <div class="top-actions">
+            <button id="choose-field" class="circle" type="button" aria-label="Choose a board"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+            <button id="restart" class="circle" type="button" aria-label="Restart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8a8 8 0 1 1-1 7M5 3v6h6"/></svg></button>
+          </div>
+          <div class="heading"><h1 id="app-title">Стрелки</h1><span id="difficulty"></span><div class="level-status"><div id="hearts" aria-label="Lives: 3"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.3c-.35 0-.7-.12-1-.36C7.15 16.75 3 13.25 3 8.9 3 5.8 5 3.9 7.6 3.9c1.8 0 3.3.9 4.4 2.3 1.1-1.4 2.6-2.3 4.4-2.3 2.6 0 4.6 1.9 4.6 5 0 4.35-4.15 7.85-8 11.04-.3.24-.65.36-1 .36Z"/></svg></span><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.3c-.35 0-.7-.12-1-.36C7.15 16.75 3 13.25 3 8.9 3 5.8 5 3.9 7.6 3.9c1.8 0 3.3.9 4.4 2.3 1.1-1.4 2.6-2.3 4.4-2.3 2.6 0 4.6 1.9 4.6 5 0 4.35-4.15 7.85-8 11.04-.3.24-.65.36-1 .36Z"/></svg></span><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.3c-.35 0-.7-.12-1-.36C7.15 16.75 3 13.25 3 8.9 3 5.8 5 3.9 7.6 3.9c1.8 0 3.3.9 4.4 2.3 1.1-1.4 2.6-2.3 4.4-2.3 2.6 0 4.6 1.9 4.6 5 0 4.35-4.15 7.85-8 11.04-.3.24-.65.36-1 .36Z"/></svg></span></div></div></div>
+          <div class="top-spacer"><button id="game-settings" class="circle settings-button" type="button" aria-label="Settings"></button></div>
+        </div>
+        <div id="board-progress" role="progressbar" aria-label="Board progress" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><div id="progress-fill"></div></div>
+      </header>
+      <footer id="game-footer">
+        <section id="win" hidden><span class="win-emblem" aria-hidden="true"><svg viewBox="0 0 72 72"><circle class="win-orbit" cx="36" cy="36" r="31"/><circle class="win-ring" cx="36" cy="36" r="23"/><path class="win-check" d="m25 36 8 8 16-18"/><path class="win-rays" d="M36 1v4m0 62v4M1 36h4m62 0h4M11 11l3 3m44 44 3 3M11 61l3-3m44-44 3-3"/></svg></span><strong id="win-title" role="status" aria-live="polite" aria-atomic="true"></strong><span id="win-detail" class="win-detail"></span><button id="next" class="primary" type="button"></button></section>
+        <p id="app-status"></p>
+        <div class="board-actions"><button id="hint" class="hint-button" type="button" hidden></button>
+        <button id="cascade" class="cascade-button" type="button" hidden></button>
+        <button id="guides" class="circle" type="button" aria-pressed="false" aria-label="Show exit directions" aria-describedby="guides-label">#</button><span id="guides-label" hidden></span></div>
+        <span id="field-name"></span>
+      </footer>
+      <aside id="save-status" hidden role="status"><span id="save-message"></span><button id="save-retry" type="button"></button><button id="session-play" type="button" hidden></button></aside>
+      <dialog id="trophy-viewer" aria-labelledby="trophy-viewer-title"></dialog>
+      <dialog id="settings-dialog" aria-labelledby="settings-title"></dialog>
+      <dialog id="ad-dialog" aria-labelledby="ad-title" aria-describedby="ad-description"></dialog>
+      <dialog id="game-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
+      <section id="startup-preload" data-state="visible" aria-hidden="false">
+        <div class="startup-card">
+          <img class="startup-mark" src="/brand-mark.svg" width="288" height="288" alt="" aria-hidden="true" />
+          <strong id="startup-preload-heading">Загрузка</strong>
+          <span id="startup-preload-status">Подготавливаем игру…</span>
+          <div id="startup-preload-progress-bar" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="startup-preload-progress-fill"></div></div>
+          <span id="startup-preload-progress-percent">00%</span>
+        </div>
+      </section>
+      <aside id="debug-root" hidden></aside>
+    </main>
+    <script type="module" src="/src/pilot/main.ts"></script>
+  </body>
+</html>
