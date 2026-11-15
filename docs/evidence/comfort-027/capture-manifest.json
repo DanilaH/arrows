@@ -1,0 +1,150 @@
+{
+  "source": "e3b287f4f72829b97ef59f1913b300508a71bd56",
+  "baseline": "5c01687fc44bc98e64f19613bc9d1b6e567b3e55",
+  "version": "0.27.0/code40",
+  "method": "Real Chromium390x844 DPR1.5 frames/timestamps and actual game WebAudio output; seeded canonical progress and controlled native transport. Not physical Android/SDK video.",
+  "payload": {
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "index.html": "28014a1d6585c091b03295408b89306a1c8c54f87012a00e72ccf83bf1bc09c0",
+    "target-lab.html": "04e23e563c3ef28cf162d65eb736e8cdc41adeb5ca903ec33fe8a9d7eb46d04b",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+    "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/gestures-B6-kr56S.css": "b3d3512f37c14d27654e1f101aea57bdc4d2659640a1d4e2785fddc74be19a5f",
+    "assets/gestures-E7xyOzrz.js": "5ff649c33d1d5ad61720a122eec0b93319b8c6740e31c692625c0a3108f98dd6",
+    "assets/main-BTj3HjAp.js": "d76c1d111743a041eb2459cf26de544174061dcf07ab149530d1dd5cd6a086b0",
+    "assets/targetLab-BL0rqQcC.js": "a6c0c4837e3f91773a9232622beffe7dd80a25346277ec591a6b24b0038c68dc",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7"
+  },
+  "clips": [
+    {
+      "name": "settings-before",
+      "side": "before",
+      "frames": 19,
+      "durationMs": 4173.322675,
+      "errors": [],
+      "result": {
+        "initial": {
+          "x": 19,
+          "y": 14,
+          "width": 352,
+          "height": 816
+        }
+      }
+    },
+    {
+      "name": "camera-before",
+      "side": "before",
+      "frames": 139,
+      "durationMs": 6808.9884219999985,
+      "errors": [],
+      "result": {
+        "fit": {
+          "x": 109.5,
+          "y": 321,
+          "scale": 19
+        },
+        "zoom": {
+          "x": -37.413096333248376,
+          "y": 141.43954892602977,
+          "scale": 51.64735474072186
+        },
+        "moved": {
+          "x": 42.586903666751624,
+          "y": 141.43954892602977,
+          "scale": 51.64735474072186
+        },
+        "reverse": {
+          "x": -107.41309633324838,
+          "y": 141.43954892602977,
+          "scale": 51.64735474072186
+        },
+        "restored": {
+          "x": -107.4130963332484,
+          "y": 141.43954892602977,
+          "scale": 51.64735474072186
+        }
+      }
+    },
+    {
+      "name": "sound-before",
+      "side": "before",
+      "frames": 349,
+      "durationMs": 8497.634072,
+      "errors": [],
+      "result": {
+        "steps": 5,
+        "errors": 1,
+        "complete": true
+      }
+    },
+    {
+      "name": "settings-after",
+      "side": "after",
+      "frames": 44,
+      "durationMs": 4514.738496000001,
+      "errors": [],
+      "result": {
+        "initial": {
+          "x": 14,
+          "y": 166.5,
+          "width": 362,
+          "height": 511
+        }
+      }
+    },
+    {
+      "name": "camera-after",
+      "side": "after",
+      "frames": 128,
+      "durationMs": 6731.278656999999,
+      "errors": [],
+      "result": {
+        "fit": {
+          "x": 109.5,
+          "y": 321,
+          "scale": 19
+        },
+        "zoom": {
+          "x": -37.413096333248376,
+          "y": 116.52446241337361,
+          "scale": 51.64735474072186
+        },
+        "moved": {
+          "x": 42.586903666751624,
+          "y": 226.5244624133736,
+          "scale": 51.64735474072186
+        },
+        "reverse": {
+          "x": -107.41309633324838,
+          "y": 36.52446241337361,
+          "scale": 51.64735474072186
+        },
+        "restored": {
+          "x": -107.4130963332484,
+          "y": 36.52446241337361,
+          "scale": 51.64735474072186
+        }
+      }
+    },
+    {
+      "name": "sound-after",
+      "side": "after",
+      "frames": 357,
+      "durationMs": 8176.683850000001,
+      "errors": [],
+      "result": {
+        "steps": 5,
+        "errors": 1,
+        "complete": true
+      }
+    }
+  ]
+}

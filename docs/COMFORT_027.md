@@ -28,3 +28,5 @@ Run npm run check, affected real-browser Settings/zoom/restoration/soft-edge/man
 No content, generator, schema, embedded attempts, lives/errors/flawless, lifetime gift, reward meaning/reservations, commercial cadence, runtime/guidance pins or native SDK changes. Physical install/update, insets/keyboard/TalkBack, haptics, perceived speaker quality/frame pacing and actual SDK inventory remain NOT RUN here. AppMetrica dashboard/real money stay separate.
 
 Research SELECT: pinned Stable Progress UI/Viewport initial-action and scroll ownership guidance; pinned OneShotPlayer synchronous provider/freshness lifecycle. No additional framework or director. KIT IMPACT: REUSE — existing OneShotPlayer@a932526 and stable-layout acceptance; Arrows-owned bank/layout/pan policy, no upstream or store publication.
+
+Final delivered evidence: [evidence/comfort-027/ACCEPTANCE.md](evidence/comfort-027/ACCEPTANCE.md).175 unit/type/build,140 affected browsers,19 JVM and Android builds/sync PASS; full hosted web pending at preparation. Same-cert code40 APK and real saved GIF/audio verified against18 packaged files.
