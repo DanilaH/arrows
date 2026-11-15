@@ -125,7 +125,31 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
 
 /* One surface per dialog. */
 #settings-dialog, #game-dialog, #trophy-viewer { border: 0; box-shadow: 0 16px 48px #090c262b; background: var(--surface); border-radius: 24px; }
-#settings-dialog { width: min(380px,calc(100vw - 28px)); padding: 22px; }
+#settings-dialog {
+  --settings-top: max(14px,env(safe-area-inset-top));
+  --settings-bottom: max(14px,env(safe-area-inset-bottom));
+  --settings-left: max(14px,env(safe-area-inset-left));
+  --settings-right: max(14px,env(safe-area-inset-right));
+  inset: var(--settings-top) var(--settings-right) var(--settings-bottom) var(--settings-left);
+  width: min(380px,calc(100% - var(--settings-left) - var(--settings-right)));
+  max-width: none; max-height: calc(100% - var(--settings-top) - var(--settings-bottom));
+  padding: 0; overflow: hidden;
+}
+#settings-dialog[open] { display: flex; flex-direction: column; }
+#settings-dialog .settings-heading { flex: none; padding: 16px 20px 8px; margin: 0; }
+#close-settings { flex: none; width: 44px; height: 44px; }
+.settings-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 0 20px 8px; }
+#settings-dialog .settings-save { flex: none; margin: 0; padding: 8px 20px 12px; }
+#settings-testing { border-top: 1px solid var(--border); margin-top: 12px; }
+#settings-testing > summary { min-height: 44px; display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12px; color: var(--muted); list-style: none; }
+#settings-testing > summary::before { content: '›'; font-size: 20px; transform: rotate(0); transition: transform 160ms; }
+#settings-testing[open] > summary::before { transform: rotate(90deg); }
+#settings-testing > summary::-webkit-details-marker { display: none; }
+.settings-body .language-setting { flex-wrap: wrap; gap: 4px 12px; }
+.help-qa select { font: inherit; font-size: 12px; min-height: 44px; max-width: 100%; width: 100%; min-width: 0; color: var(--ink); background: var(--control); border: 0; border-radius: 10px; padding: 8px; }
+.settings-body .feedback-previews { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 4px; }
+.settings-body .sound-preview { font-size: 11px; }
+@media(prefers-reduced-motion:reduce) { #settings-testing > summary::before { transition: none; } }
 .settings-heading { margin-bottom: 14px; }
 .settings-heading h2 { font-size: 23px; }
 .settings-eyebrow { display: none; }

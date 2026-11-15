@@ -1,0 +1,123 @@
+{
+  "author": "Kenney",
+  "license": "CC0-1.0",
+  "sources": [
+    "https://kenney.nl/assets/ui-audio",
+    "https://kenney.nl/assets/interface-sounds"
+  ],
+  "retrievedFrom": "https://github.com/GeorgeQLe/assets-sfx-ui",
+  "mirrorRevision": "760afd035e8fc3cd7fb5bc58d49a967649875e3e",
+  "format": "mono PCM16LE, base64,22050Hz",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "clips": {
+    "tap": {
+      "pack": "ui-audio",
+      "file": "click2.ogg",
+      "originalSha256": "c394b46bc6737f7f7edfbfa3031ce621b7a43d498d456d6198364eee9cd3e306",
+      "speed": 0.9,
+      "highpassHz": 100,
+      "lowpassHz": 1800,
+      "maxSeconds": 0.13,
+      "fadeInMs": 4,
+      "fadeOutMs": 35,
+      "derivedPcmSha256": "feb3e5f011ed2ce0d5e0786411894f9ec75be9c5a9a86161402a1fc52d0ab735",
+      "frames": 1295
+    },
+    "remove": {
+      "pack": "interface-sounds",
+      "file": "drop_003.ogg",
+      "originalSha256": "43d086d50f90493a98cd2e09aa6dbf150d164f1578e1ec768d21cb185571ad87",
+      "speed": 1,
+      "highpassHz": 100,
+      "lowpassHz": 1800,
+      "maxSeconds": 0.19,
+      "fadeInMs": 4,
+      "fadeOutMs": 35,
+      "derivedPcmSha256": "2ae89a8ee3bb3008323590248f7dc477bf0ad6dfb54bb1165ef84b485a945bbb",
+      "frames": 4150
+    },
+    "air": {
+      "pack": "interface-sounds",
+      "file": "scroll_003.ogg",
+      "originalSha256": "c2fecaa6e37c73d7141d0bd303d1c2231428d97c19ce83d50236a56804818643",
+      "speed": 1,
+      "highpassHz": 100,
+      "lowpassHz": 1200,
+      "maxSeconds": 0.12,
+      "fadeInMs": 4,
+      "fadeOutMs": 35,
+      "derivedPcmSha256": "2f03ca9ebd6e65e33a5f7fc18ce950d424e2a84e621ce6f77e9341da2dd49064",
+      "frames": 2646
+    },
+    "error": {
+      "pack": "interface-sounds",
+      "file": "bong_001.ogg",
+      "originalSha256": "d21d0f0b782445db579d11e2506b24cd1ac9d664ee33aeaf807761aa7b6fd710",
+      "speed": 0.82,
+      "highpassHz": 100,
+      "lowpassHz": 1500,
+      "maxSeconds": 0.18,
+      "fadeInMs": 4,
+      "fadeOutMs": 35,
+      "derivedPcmSha256": "2a8bf33d7d5b57f3b6267bcc8323236b8f9299ec1ea581e42506c3290da65829",
+      "frames": 3225
+    },
+    "hint": {
+      "pack": "interface-sounds",
+      "file": "confirmation_001.ogg",
+      "originalSha256": "063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a",
+      "speed": 1,
+      "highpassHz": 100,
+      "lowpassHz": 1800,
+      "maxSeconds": 0.32,
+      "fadeInMs": 4,
+      "fadeOutMs": 35,
+      "derivedPcmSha256": "32a2e62e295d02b02c52384d3feb7f00370ea3aed754719d1a10c2431fb42ec6",
+      "frames": 6391
+    },
+    "life": {
+      "pack": "interface-sounds",
+      "file": "confirmation_004.ogg",
+      "originalSha256": "568967a3d9f8a8f6af54ea01729c4882284308f2a27d78c07ffd7ee0d6951661",
+      "speed": 0.92,
+      "highpassHz": 100,
+      "lowpassHz": 1800,
+      "maxSeconds": 0.56,
+      "fadeInMs": 4,
+      "fadeOutMs": 35,
+      "derivedPcmSha256": "f4dc4a3c5685f74b52edcbed83fefd03b9bc10d17f0f67f44147a574745b272d",
+      "frames": 11754
+    },
+    "win": {
+      "pack": "interface-sounds",
+      "file": "confirmation_004.ogg",
+      "originalSha256": "568967a3d9f8a8f6af54ea01729c4882284308f2a27d78c07ffd7ee0d6951661",
+      "speed": 1,
+      "highpassHz": 100,
+      "lowpassHz": 2100,
+      "maxSeconds": 0.58,
+      "fadeInMs": 4,
+      "fadeOutMs": 35,
+      "derivedPcmSha256": "803d14ed136a1b58d20f0aba0ea377ea4437ba8dfe494539bf1822a15f9f26af",
+      "frames": 10814
+    },
+    "glint": {
+      "pack": "interface-sounds",
+      "file": "glass_001.ogg",
+      "originalSha256": "183eebee20eb0a532b0b85104d139cbf2673eb66d95c3cc733ac9ea98362e7e8",
+      "speed": 0.78,
+      "highpassHz": 100,
+      "lowpassHz": 1800,
+      "maxSeconds": 0.38,
+      "fadeInMs": 4,
+      "fadeOutMs": 35,
+      "derivedPcmSha256": "db4c0d9bcb0898abc25a77804c095647e9e64852458ec008f4353521fd3abc81",
+      "frames": 7790
+    },
+    "perfect": {
+      "mix": "win \u00d7 .8 + glint \u00d7 .32 at180ms; peak .18",
+      "derivedPcmSha256": "d5f4e76ada63b81327fdefb2ebd97279cf4cd9f54175e324454fd10e1127464e",
+      "frames": 16317
+    }
+  }
+}

@@ -85,9 +85,11 @@ describe('CSS/world camera coordinates', () => {
     expect(camera.screen({ x: 23, y: 20 })).toEqual({ x: 195, y: 400 });
     camera.zoom({ x: 195, y: 400 }, { x: 195, y: 400 }, 100);
     camera.pan(1e9, 1e9);
-    expect(camera.screen({ x: 4, y: 0 })).toEqual({ x: 48, y: 148 });
+    expect(camera.screen({ x: 4, y: 0 }).x).toBeCloseTo(163.8);
+    expect(camera.screen({ x: 4, y: 0 }).y).toBeCloseTo(340);
     camera.pan(-1e9, -1e9);
-    expect(camera.screen({ x: 42, y: 40 })).toEqual({ x: 342, y: 652 });
+    expect(camera.screen({ x: 42, y: 40 }).x).toBeCloseTo(226.2);
+    expect(camera.screen({ x: 42, y: 40 }).y).toBeCloseTo(460);
   });
   it('bounds zoom and pan, and keeps the board reachable after orientation changes', () => {
     const camera = new BoardCamera(47, 55);
@@ -95,10 +97,23 @@ describe('CSS/world camera coordinates', () => {
     camera.zoom({ x: 195, y: 400 }, { x: 195, y: 400 }, 100);
     expect(camera.scale).toBe(camera.maxScale);
     camera.pan(1e9, -1e9);
-    expect(camera.x).toBeLessThanOrEqual(48);
+    expect(camera.x).toBeLessThan(195);
     camera.layout({ x: 0, y: 80, width: 800, height: 200 });
     expect([camera.x, camera.y, camera.scale].every(Number.isFinite)).toBe(true);
     camera.zoom({ x: 400, y: 180 }, { x: 400, y: 180 }, .00001);
     expect(camera.scale).toBe(camera.minScale);
+  });
+  it('lets a zoomed compact figure move on BOTH axes and restores that view without drift', () => {
+    const view={x:0,y:100,width:390,height:600};
+    const camera=new BoardCamera(6,6);camera.layout(view,true);
+    const fit=camera.snapshot();camera.pan(180,200);expect(camera.snapshot()).toEqual(fit);
+    camera.zoom({x:195,y:400},{x:195,y:400},2);
+    const before=camera.screen({x:2.5,y:2.5});camera.pan(90,140);
+    expect(camera.screen({x:2.5,y:2.5})).toEqual({x:before.x+90,y:before.y+140});
+    const saved=camera.snapshot(),restored=new BoardCamera(6,6);restored.layout(view,true);restored.restore(saved);
+    expect(restored.snapshot()).toEqual(saved);
+    camera.pan(1e9,-1e9);const bounds=[camera.screen({x:0,y:0}),camera.screen({x:5,y:5})];
+    expect(bounds[0]!.x).toBeLessThan(390);expect(bounds[1]!.y).toBeGreaterThan(100);
+    camera.zoom({x:195,y:400},{x:195,y:400},.01);expect(camera.snapshot()).toEqual(fit);
   });
 });

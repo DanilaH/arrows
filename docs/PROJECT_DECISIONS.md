@@ -1,5 +1,9 @@
 # Project decisions — 2026-11-09
 
+## 2026-11-15 — phone comfort0.27.0
+
+Implement COMFORT_027.md over main5c01687: replace negatively reviewed procedural sounds with licensed small synchronous PCM samples via existing OneShotPlayer, preserve all lifecycle budgets; safe-inset constrained settings with independent body/pinned Close/recovery and collapsed QA; continuous bounded zoom pan on both original-field axes without changing saved-view meaning. No assistance combination/rollout yet: recommend A1 ordinary/A2 stronger explicit/A4 contextual and A3 HOLD, retaining exclusive assignments and earned rights. Same-cert playtestcode40, test ads/analytics off; actual capture and physical acceptance separate. KIT IMPACT REUSE.
+
 ## 2026-11-14 — approved independent UI/feel audit package
 
 Implement UI_POLISH_025.md on current main6b2598e, preserving later work. Button hit targets and authored transforms stay stable while a separate finite face acknowledges press. Dialog replacements start from displayed state; cancelled completions cannot mutate newer windows/focus. Locked nav retains feature identity plus compact thresholds. Existing primary fill/identity stays; dark on-accent becomes white. Earned A3/A2 overviews are separate presentation changes: frame complete participant paths/goal with safe padding, preserve exact plans, quiet restores and manual-camera priority. No game/reward/content/ads policy changes. Update research guidance deliberately to e04a3fe87ca93d506e01df4acc5afe690408cefa; runtime remains a9325265e87583a4872cf6a158e1e881a0d7508e. Reviewed new OwnedDomMotion is not in that installed pin, so no implicit import/upgrade. Same signed .playtest update path,0.25.0/code37. Physical acceptance and commercial dashboards stay distinct from engineering checks. KIT IMPACT REUSE guidance only.

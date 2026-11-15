@@ -52,9 +52,15 @@ export class BoardCamera {
     this.clamp();
   }
   private clamp(): void {
+    // Keep the fit view quiet. Zoom gradually opens a wider exploration band,
+    // including the shorter axis, while retaining the ORIGINAL field on screen.
+    const freedom = Math.max(0, Math.min(1, (this.scale / this.minScale - 1) / .6));
     const limit = (offset: number, span: number, start: number, size: number): number => {
-      if (span <= size - 32) return start + (size - span) / 2;
-      return Math.max(start + size - span - 48, Math.min(start + 48, offset));
+      const center = start + (size - span) / 2;
+      const fitTravel = Math.max(0, (span - size) / 2 + 48);
+      const zoomTravel = Math.max(size * .3, (span - size) / 2 + Math.min(240, size * .42));
+      const travel = fitTravel + (zoomTravel - fitTravel) * freedom;
+      return Math.max(center - travel, Math.min(center + travel, offset));
     };
     // Bounds belong to the original field, never its shrinking remaining arrows.
     // Ignore catalogue padding while preserving world coordinates and saved zoom.

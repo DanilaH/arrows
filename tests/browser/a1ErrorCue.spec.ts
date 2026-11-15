@@ -152,7 +152,7 @@ test('Q18 reload after error does not replay and retains exact board/camera',asy
   expect(await count(page,'shown')).toBe(1);expect(await page.evaluate(()=>Reflect.get(window,'cueMotion').length)).toBe(0);
 });
 for(const old of [false,true])test(`Q19 future choice never reassigns ${old?'old missing metadata':'bound control'} attempt across reload`,async({page})=>{
-  const initial=await boot(page,'control',{old});await page.locator('#game-settings').click();await page.locator('#a1-cue-qa-mode:enabled').selectOption('cue');await page.locator('#help-qa-variant').selectOption('single-v2');await expect.poll(async()=>(await notes(page))?.next).toBe('cue');
+  const initial=await boot(page,'control',{old});await page.locator('#game-settings').click();await page.locator('#settings-testing > summary').click();await page.locator('#a1-cue-qa-mode:enabled').selectOption('cue');await page.locator('#help-qa-variant').selectOption('single-v2');await expect.poll(async()=>(await notes(page))?.next).toBe('cue');
   await page.reload();await page.locator('#home-play').click();await settled(page);await error(page);await page.waitForTimeout(1700);
   expect(await count(page,'opportunity')).toBe(old?0:1);expect(await count(page,'shown')).toBe(0);
   await page.locator('#restart').click();await page.locator('[data-action=confirm-restart]').click();
