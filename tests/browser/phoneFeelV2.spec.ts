@@ -1,3 +1,4 @@
+import {observeAudio,audioEvents} from './helpers/audioObservation';
 import {test,expect,type Page} from '@playwright/test';
 import {campaign} from '../../src/content/campaign';
 import {Board,canExit} from '../../src/domain/board';
@@ -24,19 +25,19 @@ test('spends its one lifetime gift durably and offers video after restarting and
 });
 
 test('fits the whole completed zoomed diagram before its finish cue and never replays on restore',async({page},info)=>{
- await page.addInitScript(()=>{const cues:unknown[]=[];Reflect.set(window,'finishViews',cues);const start=AudioBufferSourceNode.prototype.start;AudioBufferSourceNode.prototype.start=function(...args){if(this.buffer&&this.buffer.duration>=.55)cues.push({duration:this.buffer.duration,camera:JSON.parse(document.querySelector('#game-root')!.getAttribute('data-camera')!)});return start.apply(this,args);};});
+ await observeAudio(page,'finishAudio');
  const s=base(19),b=new Board(s.campaign.level,s.campaign.board.id);while(b.remaining.length>1)b.activate(b.hint()!);s.campaign.board=b.snapshot();s.campaign.started=true;const last=b.remaining[0]!,head=last.path.at(-1)!;s.campaign.view={centerX:head.x,centerY:head.y,zoom:2.6};await seed(page,s);
  const before=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await tap(page,last.path);await expect(page.locator('#game-shell')).toHaveAttribute('data-state','complete');await expect(page.locator('#win')).not.toBeVisible();await expect(page.locator('#win')).toBeVisible();await expect(page.locator('#win')).toHaveAttribute('data-flawless','true');
  const final=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);expect(final.scale).toBeLessThan(before.scale*.5);
  const header=(await page.locator('#game-header').boundingBox())!,footer=(await page.locator('#game-footer').boundingBox())!;for(const p of s.campaign.level.mask){expect(final.x+p.x*final.scale).toBeGreaterThanOrEqual(12);expect(final.x+p.x*final.scale).toBeLessThanOrEqual(page.viewportSize()!.width-12);expect(final.y+p.y*final.scale).toBeGreaterThanOrEqual(header.y+header.height+12);expect(final.y+p.y*final.scale).toBeLessThanOrEqual(footer.y-12);}
- const cues=await page.evaluate(()=>Reflect.get(window,'finishViews') as {duration:number;camera:{scale:number}}[]);expect(cues).toHaveLength(1);expect(cues[0]!.duration).toBeCloseTo(.8,2);expect(cues[0]!.camera.scale).toBeCloseTo(final.scale,3);await page.screenshot({path:info.outputPath('fitted-perfect.png')});await page.waitForTimeout(2500);const result=await saved(page);expect(result.campaign.view!.zoom).toBeCloseTo(1,5);
+ const cues=await audioEvents(page,'finishAudio').then(c=>c.filter(v=>v.cues.includes('perfect')));expect(cues).toHaveLength(1);expect(cues[0]!.camera!.scale).toBeCloseTo(final.scale,3);await page.screenshot({path:info.outputPath('fitted-perfect.png')});await page.waitForTimeout(2500);const result=await saved(page);expect(result.campaign.view!.zoom).toBeCloseTo(1,5);
  const point=s.campaign.level.mask[Math.floor(s.campaign.level.mask.length/2)]!;
  const clip={x:Math.floor(final.x+point.x*final.scale)-2,y:Math.floor(final.y+point.y*final.scale)-2,width:5,height:5};
  const png=await page.screenshot({clip});
  const contrast=await page.evaluate(async encoded=>{const bytes=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0)),bitmap=await createImageBitmap(new Blob([bytes],{type:'image/png'}));const canvas=new OffscreenCanvas(bitmap.width,bitmap.height),ctx=canvas.getContext('2d')!;ctx.drawImage(bitmap,0,0);const pixels=ctx.getImageData(0,0,bitmap.width,bitmap.height).data;let max=0;for(let i=0;i<pixels.length;i+=4)max=Math.max(max,pixels[i]!-30,pixels[i+1]!-30,pixels[i+2]!-44);return max;},png.toString('base64'));
  expect(contrast).toBeGreaterThan(12);await page.screenshot({path:info.outputPath('settled-dot-silhouette.png')});
 
- await page.reload();await page.locator('#home-play:enabled').click();expect(await page.evaluate(()=>Reflect.get(window,'finishViews'))).toEqual([]);
+ await page.reload();await page.locator('#home-play:enabled').click();expect(await audioEvents(page,'finishAudio').then(c=>c.filter(v=>v.cues.includes('perfect')))).toEqual([]);
 });
 
 test('gives Hint a contrasting solid accent and a finite arrival, with thicker held/grid guides',async({page},info)=>{

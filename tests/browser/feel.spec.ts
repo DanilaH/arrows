@@ -1,13 +1,12 @@
+import {observeAudio,audioEvents} from './helpers/audioObservation';
 import { test, expect, type Page } from '@playwright/test';
 import { campaign } from '../../src/content/campaign';
 import { Board, canExit } from '../../src/domain/board';
 import { freshSave, freshAttempt, decodeSave, SAVE_KEY } from '../../src/progression/save';
 
 async function observe(page: Page) {
+  await observeAudio(page,'__feelCues');
   await page.addInitScript(() => {
-    const cues: { duration: number; at: number }[] = []; Reflect.set(window, '__feelCues', cues);
-    const start = AudioBufferSourceNode.prototype.start;
-    AudioBufferSourceNode.prototype.start = function (...args) { if (this.buffer) cues.push({ duration: this.buffer.duration, at: performance.now() }); return start.apply(this, args); };
     let frames = 0; const raf = requestAnimationFrame.bind(window);
     window.requestAnimationFrame = fn => raf(t => { frames++; fn(t); });
     Object.defineProperty(window, '__feelFrames', { get: () => frames });
@@ -17,27 +16,27 @@ async function tap(page: Page, path: readonly { x: number; y: number }[]) {
   const c = JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!), p = path.at(-1)!;
   await page.mouse.click(c.x+p.x*c.scale, c.y+p.y*c.scale);
 }
-const cues = (page: Page) => page.evaluate(() => Reflect.get(window, '__feelCues') as { duration: number; at: number }[]);
+const cues = (page: Page) => audioEvents(page,'__feelCues');
 
 test('times collision feedback at contact, accepts an unblock during return, celebrates once and sleeps', async ({ page }, info) => {
   await observe(page); await page.goto('/'); await page.locator('#home-play:enabled').click(); await page.waitForTimeout(450);
   const level=campaign[0]!, free=level.arrows.find(a=>canExit(a,level.arrows))!, blocked=level.arrows.find(a=>!canExit(a,level.arrows))!;
   await tap(page,blocked.path);
-  await expect.poll(async()=> (await cues(page)).some(c=>Math.abs(c.duration-.2)<.001)).toBe(true);
-  const sounds=await cues(page), slide=sounds.find(c=>Math.abs(c.duration-.12)<.001)!, impact=sounds.find(c=>Math.abs(c.duration-.2)<.001)!;
+  await expect.poll(async()=> (await cues(page)).some(c=>c.cues.includes('error'))).toBe(true);
+  const sounds=await cues(page), slide=sounds.find(c=>c.cues.includes('slide'))!, impact=sounds.find(c=>c.cues.includes('error'))!;
   expect(impact.at-slide.at).toBeGreaterThanOrEqual(75);
   await tap(page,blocked.path); await expect(page.locator('#game-shell')).toHaveAttribute('data-lives','2');
   await tap(page,free.path); await tap(page,blocked.path);
   await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','1');
   const remaining=level.arrows.find(a=>a!==free&&a!==blocked)!; await tap(page,remaining.path);
   await expect(page.locator('#win')).toBeVisible(); await page.screenshot({path:info.outputPath('victory.png')});
-  await expect.poll(async()=> (await cues(page)).filter(c=>c.duration>=.55).length).toBe(1);
+  await expect.poll(async()=> (await cues(page)).filter(c=>c.cues.includes('win')||c.cues.includes('perfect')).length).toBe(1);
   await page.waitForTimeout(2400);
   expect(await page.evaluate(()=>document.getAnimations().length)).toBe(0);
   const before=await page.evaluate(()=>Reflect.get(window,'__feelFrames') as number); await page.waitForTimeout(350);
   expect(await page.evaluate(()=>Reflect.get(window,'__feelFrames') as number)-before).toBeLessThan(5);
   await page.reload(); await page.locator('#home-play:enabled').click(); await expect(page.locator('#game-shell')).toHaveAttribute('data-level','c02');
-  await page.waitForTimeout(650); expect((await cues(page)).filter(c=>c.duration>=.55)).toHaveLength(0);
+  await page.waitForTimeout(650); expect((await cues(page)).filter(c=>c.cues.includes('win')||c.cues.includes('perfect'))).toHaveLength(0);
 });
 
 test('finishes the last collision before opening the loss modal', async ({ page }) => {

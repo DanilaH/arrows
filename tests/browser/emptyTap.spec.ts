@@ -1,3 +1,4 @@
+import {observeAudio,type ObservedAudio} from './helpers/audioObservation';
 import { test, expect, type Page } from '@playwright/test';
 import { campaign } from '../../src/content/campaign';
 import { freshSave, freshAttempt, SAVE_KEY } from '../../src/progression/save';
@@ -7,15 +8,14 @@ import { openAssistanceReview } from './helpers/assistanceReview';
 
 test.use({ hasTouch: true });
 async function observe(page: Page) {
+  await observeAudio(page,'__emptyAudio');
   await page.addInitScript(() => {
-    const sounds: number[] = [], taps: {x:number;y:number}[] = [];
-    Reflect.set(window, '__emptyTapQA', { sounds, taps });
-    const start = AudioBufferSourceNode.prototype.start;
-    AudioBufferSourceNode.prototype.start = function (...args) { if (this.buffer) sounds.push(this.buffer.duration); return start.apply(this,args); };
+    const taps: {x:number;y:number}[] = [];
+    Reflect.set(window, '__emptyTapQA', { taps });
     new MutationObserver(records => { for (const r of records) for (const n of r.addedNodes) if(n instanceof HTMLElement && n.classList.contains('empty-tap'))taps.push({x:parseFloat(n.style.left),y:parseFloat(n.style.top)}); }).observe(document,{childList:true,subtree:true});
   });
 }
-const observed = (page: Page) => page.evaluate(() => Reflect.get(window,'__emptyTapQA') as { sounds:number[];taps:{x:number;y:number}[] });
+const observed = (page: Page) => page.evaluate(() => ({...Reflect.get(window,'__emptyTapQA'),sounds:Reflect.get(window,'__emptyAudio')}) as { sounds:ObservedAudio[];taps:{x:number;y:number}[] });
 const board = (page: Page) => page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).campaign, SAVE_KEY);
 async function enter(page:Page, review=false) {
   await observe(page); if(review)await openAssistanceReview(page);else await page.goto('/');
@@ -28,7 +28,7 @@ test('acknowledges empty touches once with bounded visual/audio feedback and no 
   await page.touchscreen.tap(p.x,p.y);
   await expect.poll(async()=>(await observed(page)).taps.length).toBe(seen.taps.length+1);
   const added=(await observed(page)).taps.at(-1)!;expect(added.x).toBeCloseTo(p.x);expect(added.y).toBeCloseTo(p.y);
-  await expect.poll(async()=>(await observed(page)).sounds.filter(d=>Math.abs(d-.055)<.001).length).toBeGreaterThan(seen.sounds.filter(d=>Math.abs(d-.055)<.001).length);
+  await expect.poll(async()=>(await observed(page)).sounds.filter(d=>d.cues.includes('button')).length).toBeGreaterThan(seen.sounds.filter(d=>d.cues.includes('button')).length);
   expect((await board(page)).board).toEqual(before.board);expect((await board(page)).started).toBe(before.started);
   // Actual completed touches stress the budget; synthetic click must not duplicate them.
   for(let i=0;i<8;i++){await page.touchscreen.tap(p.x+i,p.y);expect(await page.locator('.empty-tap').count()).toBeLessThanOrEqual(4);}

@@ -1,5 +1,9 @@
 # Project decisions — 2026-11-09
 
+## 2026-11-15 — approved normal assistance0.28.0
+
+Owner accepted A1 primary, separate explicit A2, contextual A4 and A3 lab. Implement COMBINED_HELP_028.md overa357483. New combined-v1/policyVersion1 changes future defaults only; preserve all old attempts/assignments/requests/earned/reserved meanings, gift and errors. Explicit cascade count/video confirmation freezes the offer, existing exact-group presenter/atomic domain activation remain. One compact row, no new timer/economy/cadence. Separate normal experiment context; export scope parameter prevents cross-version cohort mixing. Reuse dependency graph without altering718 compared plans. Same-cert code41 and genuine recordings; no kit/store write.
+
 ## 2026-11-15 — phone comfort0.27.0
 
 Implement COMFORT_027.md over main5c01687: replace negatively reviewed procedural sounds with licensed small synchronous PCM samples via existing OneShotPlayer, preserve all lifecycle budgets; safe-inset constrained settings with independent body/pinned Close/recovery and collapsed QA; continuous bounded zoom pan on both original-field axes without changing saved-view meaning. No assistance combination/rollout yet: recommend A1 ordinary/A2 stronger explicit/A4 contextual and A3 HOLD, retaining exclusive assignments and earned rights. Same-cert playtestcode40, test ads/analytics off; actual capture and physical acceptance separate. KIT IMPACT REUSE.

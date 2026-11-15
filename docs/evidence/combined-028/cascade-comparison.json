@@ -1,0 +1,5762 @@
+{
+  "baseline": "a357483da4808eed7d190fed953d7302b8af3a3c",
+  "cases": 718,
+  "exactPlanMatches": 718,
+  "method": "Node single-run comparison, every campaign at0/25/75 percent normal and marked. Not phone performance or enjoyment proof.",
+  "oldTotalMs": 608.4754720000005,
+  "newTotalMs": 261.27508300000954,
+  "maxNewMs": 4.320784999999887,
+  "rows": [
+    {
+      "level": "c01",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.4104749999996784,
+      "newMs": 1.2311200000003737,
+      "amount": 2
+    },
+    {
+      "level": "c01",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.1329659999996693,
+      "newMs": 0.07913600000028964,
+      "amount": 0
+    },
+    {
+      "level": "c01",
+      "step": 2,
+      "marked": false,
+      "oldMs": 0.03218800000013289,
+      "newMs": 0.05091499999980442,
+      "amount": 0
+    },
+    {
+      "level": "c01",
+      "step": 2,
+      "marked": true,
+      "oldMs": 0.01920800000016243,
+      "newMs": 0.02545799999961673,
+      "amount": 0
+    },
+    {
+      "level": "c02",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.0995469999998022,
+      "newMs": 1.3661700000002384,
+      "amount": 3
+    },
+    {
+      "level": "c02",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.23283300000002782,
+      "newMs": 0.2523310000001402,
+      "amount": 2
+    },
+    {
+      "level": "c02",
+      "step": 1,
+      "marked": false,
+      "oldMs": 0.783723000000009,
+      "newMs": 0.15941399999974237,
+      "amount": 2
+    },
+    {
+      "level": "c02",
+      "step": 1,
+      "marked": true,
+      "oldMs": 0.4167229999998199,
+      "newMs": 0.12344200000006822,
+      "amount": 0
+    },
+    {
+      "level": "c02",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.02240299999994022,
+      "newMs": 0.015693000000283064,
+      "amount": 0
+    },
+    {
+      "level": "c02",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.020991000000321947,
+      "newMs": 0.015051999999741383,
+      "amount": 0
+    },
+    {
+      "level": "c03",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.21004899999979898,
+      "newMs": 0.1579620000002251,
+      "amount": 3
+    },
+    {
+      "level": "c03",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.1516630000000987,
+      "newMs": 0.15401599999995597,
+      "amount": 3
+    },
+    {
+      "level": "c03",
+      "step": 1,
+      "marked": false,
+      "oldMs": 0.1255250000003798,
+      "newMs": 0.12398199999961435,
+      "amount": 3
+    },
+    {
+      "level": "c03",
+      "step": 1,
+      "marked": true,
+      "oldMs": 0.16450199999962933,
+      "newMs": 0.9815240000002632,
+      "amount": 3
+    },
+    {
+      "level": "c03",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.08997299999964525,
+      "newMs": 0.03537200000027951,
+      "amount": 0
+    },
+    {
+      "level": "c03",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.044975999999678606,
+      "newMs": 0.029032000000370317,
+      "amount": 0
+    },
+    {
+      "level": "c04",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.34267399999998815,
+      "newMs": 0.12287100000003193,
+      "amount": 3
+    },
+    {
+      "level": "c04",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.20303800000010597,
+      "newMs": 0.14853899999980058,
+      "amount": 3
+    },
+    {
+      "level": "c04",
+      "step": 1,
+      "marked": false,
+      "oldMs": 0.1673759999998765,
+      "newMs": 0.19467700000041077,
+      "amount": 3
+    },
+    {
+      "level": "c04",
+      "step": 1,
+      "marked": true,
+      "oldMs": 0.19289400000025125,
+      "newMs": 0.12479399999983798,
+      "amount": 3
+    },
+    {
+      "level": "c04",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.03334900000027119,
+      "newMs": 0.02662899999995716,
+      "amount": 0
+    },
+    {
+      "level": "c04",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.03664400000025125,
+      "newMs": 0.021331999999802065,
+      "amount": 0
+    },
+    {
+      "level": "c05",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.9692210000002888,
+      "newMs": 1.254135000000133,
+      "amount": 3
+    },
+    {
+      "level": "c05",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.224420999999893,
+      "newMs": 0.374000000000251,
+      "amount": 3
+    },
+    {
+      "level": "c05",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.41322700000000623,
+      "newMs": 0.37152700000024197,
+      "amount": 3
+    },
+    {
+      "level": "c05",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.3083630000000994,
+      "newMs": 0.2277049999997871,
+      "amount": 3
+    },
+    {
+      "level": "c05",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.18649399999958405,
+      "newMs": 0.04908300000033705,
+      "amount": 0
+    },
+    {
+      "level": "c05",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.041009999999914726,
+      "newMs": 0.02694999999994252,
+      "amount": 0
+    },
+    {
+      "level": "c06",
+      "step": 0,
+      "marked": false,
+      "oldMs": 2.183962000000065,
+      "newMs": 1.067761000000246,
+      "amount": 2
+    },
+    {
+      "level": "c06",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.1382849999999962,
+      "newMs": 1.0109270000002653,
+      "amount": 0
+    },
+    {
+      "level": "c06",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.8796540000003006,
+      "newMs": 0.41985799999974915,
+      "amount": 3
+    },
+    {
+      "level": "c06",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.8720929999999498,
+      "newMs": 0.6351540000000568,
+      "amount": 3
+    },
+    {
+      "level": "c06",
+      "step": 23,
+      "marked": false,
+      "oldMs": 0.21571700000004057,
+      "newMs": 0.12083799999982148,
+      "amount": 0
+    },
+    {
+      "level": "c06",
+      "step": 23,
+      "marked": true,
+      "oldMs": 0.18388099999992846,
+      "newMs": 0.1435710000000654,
+      "amount": 0
+    },
+    {
+      "level": "c07",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.16462200000023586,
+      "newMs": 0.10678700000016761,
+      "amount": 0
+    },
+    {
+      "level": "c07",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.189487999999983,
+      "newMs": 0.16584400000010646,
+      "amount": 0
+    },
+    {
+      "level": "c07",
+      "step": 2,
+      "marked": false,
+      "oldMs": 0.11460799999986193,
+      "newMs": 0.11042300000008254,
+      "amount": 3
+    },
+    {
+      "level": "c07",
+      "step": 2,
+      "marked": true,
+      "oldMs": 0.10923000000002503,
+      "newMs": 0.13956599999983155,
+      "amount": 3
+    },
+    {
+      "level": "c07",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.028711999999813997,
+      "newMs": 0.023936000000048807,
+      "amount": 0
+    },
+    {
+      "level": "c07",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.026389000000108354,
+      "newMs": 0.022211999999854015,
+      "amount": 0
+    },
+    {
+      "level": "c08",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.2618250000000444,
+      "newMs": 0.13645099999985177,
+      "amount": 0
+    },
+    {
+      "level": "c08",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.23303199999963908,
+      "newMs": 0.17532800000026327,
+      "amount": 0
+    },
+    {
+      "level": "c08",
+      "step": 2,
+      "marked": false,
+      "oldMs": 0.17146200000024692,
+      "newMs": 0.09363699999994424,
+      "amount": 2
+    },
+    {
+      "level": "c08",
+      "step": 2,
+      "marked": true,
+      "oldMs": 0.09711300000026313,
+      "newMs": 0.06037900000001173,
+      "amount": 0
+    },
+    {
+      "level": "c08",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.0442550000002484,
+      "newMs": 0.1652329999997164,
+      "amount": 0
+    },
+    {
+      "level": "c08",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.044385000000147556,
+      "newMs": 0.03117599999995946,
+      "amount": 0
+    },
+    {
+      "level": "c09",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.2015369999999166,
+      "newMs": 0.11414800000011383,
+      "amount": 0
+    },
+    {
+      "level": "c09",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.16382100000009814,
+      "newMs": 0.0721760000001268,
+      "amount": 0
+    },
+    {
+      "level": "c09",
+      "step": 2,
+      "marked": false,
+      "oldMs": 0.11091299999998228,
+      "newMs": 0.07347799999979543,
+      "amount": 3
+    },
+    {
+      "level": "c09",
+      "step": 2,
+      "marked": true,
+      "oldMs": 0.10504500000024564,
+      "newMs": 0.21405499999991662,
+      "amount": 2
+    },
+    {
+      "level": "c09",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.03149599999960628,
+      "newMs": 0.022353000000293832,
+      "amount": 0
+    },
+    {
+      "level": "c09",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.07055399999990186,
+      "newMs": 0.036203000000114116,
+      "amount": 0
+    },
+    {
+      "level": "c10",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.3229649999998401,
+      "newMs": 0.1944459999999708,
+      "amount": 0
+    },
+    {
+      "level": "c10",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.36677899999995134,
+      "newMs": 0.19968400000016118,
+      "amount": 0
+    },
+    {
+      "level": "c10",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.28772299999991446,
+      "newMs": 0.2098190000001523,
+      "amount": 3
+    },
+    {
+      "level": "c10",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.24927700000034747,
+      "newMs": 0.19339399999989837,
+      "amount": 3
+    },
+    {
+      "level": "c10",
+      "step": 11,
+      "marked": false,
+      "oldMs": 0.08246099999996659,
+      "newMs": 0.04844100000036633,
+      "amount": 0
+    },
+    {
+      "level": "c10",
+      "step": 11,
+      "marked": true,
+      "oldMs": 0.05554200000005949,
+      "newMs": 0.043994000000111555,
+      "amount": 0
+    },
+    {
+      "level": "c11",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.33772599999974773,
+      "newMs": 0.17499799999995957,
+      "amount": 0
+    },
+    {
+      "level": "c11",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.28238499999997657,
+      "newMs": 0.18898799999988114,
+      "amount": 0
+    },
+    {
+      "level": "c11",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.23241200000029494,
+      "newMs": 0.1681269999999131,
+      "amount": 3
+    },
+    {
+      "level": "c11",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.2503679999999804,
+      "newMs": 0.15072200000031444,
+      "amount": 3
+    },
+    {
+      "level": "c11",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.09975600000007034,
+      "newMs": 0.05051499999990483,
+      "amount": 0
+    },
+    {
+      "level": "c11",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.056062000000110856,
+      "newMs": 0.04145100000005186,
+      "amount": 0
+    },
+    {
+      "level": "c12",
+      "step": 0,
+      "marked": false,
+      "oldMs": 2.8765999999995984,
+      "newMs": 0.4823300000002746,
+      "amount": 3
+    },
+    {
+      "level": "c12",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.1921229999998104,
+      "newMs": 0.3603400000001784,
+      "amount": 3
+    },
+    {
+      "level": "c12",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.7684800000001815,
+      "newMs": 0.21637799999962226,
+      "amount": 3
+    },
+    {
+      "level": "c12",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.7219519999998738,
+      "newMs": 0.2729819999999563,
+      "amount": 3
+    },
+    {
+      "level": "c12",
+      "step": 28,
+      "marked": false,
+      "oldMs": 0.23709899999994377,
+      "newMs": 0.16470200000003388,
+      "amount": 2
+    },
+    {
+      "level": "c12",
+      "step": 28,
+      "marked": true,
+      "oldMs": 0.2549650000000838,
+      "newMs": 0.1706210000002102,
+      "amount": 2
+    },
+    {
+      "level": "c13",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.45870400000012523,
+      "newMs": 0.25155999999969936,
+      "amount": 0
+    },
+    {
+      "level": "c13",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.4790649999999914,
+      "newMs": 0.2538229999995565,
+      "amount": 0
+    },
+    {
+      "level": "c13",
+      "step": 5,
+      "marked": false,
+      "oldMs": 0.2996109999999135,
+      "newMs": 0.23663800000031188,
+      "amount": 3
+    },
+    {
+      "level": "c13",
+      "step": 5,
+      "marked": true,
+      "oldMs": 0.15905400000019654,
+      "newMs": 0.1383139999998093,
+      "amount": 3
+    },
+    {
+      "level": "c13",
+      "step": 16,
+      "marked": false,
+      "oldMs": 0.043303999999807274,
+      "newMs": 0.07377900000028603,
+      "amount": 0
+    },
+    {
+      "level": "c13",
+      "step": 16,
+      "marked": true,
+      "oldMs": 0.038356000000021595,
+      "newMs": 0.03377999999975145,
+      "amount": 0
+    },
+    {
+      "level": "c14",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.3973040000000765,
+      "newMs": 0.2880040000000008,
+      "amount": 2
+    },
+    {
+      "level": "c14",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.34976499999993393,
+      "newMs": 0.18741499999987354,
+      "amount": 2
+    },
+    {
+      "level": "c14",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.21592699999973775,
+      "newMs": 0.20852700000023106,
+      "amount": 3
+    },
+    {
+      "level": "c14",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.3203820000003361,
+      "newMs": 0.1752169999999751,
+      "amount": 3
+    },
+    {
+      "level": "c14",
+      "step": 14,
+      "marked": false,
+      "oldMs": 0.11313600000039514,
+      "newMs": 0.1531159999999545,
+      "amount": 2
+    },
+    {
+      "level": "c14",
+      "step": 14,
+      "marked": true,
+      "oldMs": 0.07495999999991909,
+      "newMs": 0.03981800000019575,
+      "amount": 0
+    },
+    {
+      "level": "c15",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.29831899999999223,
+      "newMs": 0.20024400000011155,
+      "amount": 3
+    },
+    {
+      "level": "c15",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.18754600000011123,
+      "newMs": 0.1380829999998241,
+      "amount": 2
+    },
+    {
+      "level": "c15",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.14379200000030323,
+      "newMs": 0.09075299999994968,
+      "amount": 3
+    },
+    {
+      "level": "c15",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.1292099999996026,
+      "newMs": 0.0881800000001931,
+      "amount": 3
+    },
+    {
+      "level": "c15",
+      "step": 11,
+      "marked": false,
+      "oldMs": 0.020489999999881547,
+      "newMs": 0.0201799999999821,
+      "amount": 0
+    },
+    {
+      "level": "c15",
+      "step": 11,
+      "marked": true,
+      "oldMs": 0.017686000000139757,
+      "newMs": 0.01640399999996589,
+      "amount": 0
+    },
+    {
+      "level": "c16",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.44927999999981694,
+      "newMs": 0.3285040000000663,
+      "amount": 2
+    },
+    {
+      "level": "c16",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.8029710000000705,
+      "newMs": 0.27046800000016447,
+      "amount": 2
+    },
+    {
+      "level": "c16",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.19576799999958894,
+      "newMs": 0.12393199999996796,
+      "amount": 3
+    },
+    {
+      "level": "c16",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.20081500000014785,
+      "newMs": 0.5333040000000437,
+      "amount": 3
+    },
+    {
+      "level": "c16",
+      "step": 13,
+      "marked": false,
+      "oldMs": 0.10282099999994898,
+      "newMs": 0.12267100000008213,
+      "amount": 2
+    },
+    {
+      "level": "c16",
+      "step": 13,
+      "marked": true,
+      "oldMs": 0.045006000000284985,
+      "newMs": 0.07064399999990201,
+      "amount": 0
+    },
+    {
+      "level": "c17",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.26156399999990754,
+      "newMs": 0.14389200000005076,
+      "amount": 0
+    },
+    {
+      "level": "c17",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.21687900000006266,
+      "newMs": 0.15094200000021374,
+      "amount": 0
+    },
+    {
+      "level": "c17",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.24377899999990404,
+      "newMs": 0.1719029999999293,
+      "amount": 3
+    },
+    {
+      "level": "c17",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.21753000000035172,
+      "newMs": 0.15243399999963003,
+      "amount": 2
+    },
+    {
+      "level": "c17",
+      "step": 12,
+      "marked": false,
+      "oldMs": 0.06797000000005937,
+      "newMs": 0.026598999999805528,
+      "amount": 0
+    },
+    {
+      "level": "c17",
+      "step": 12,
+      "marked": true,
+      "oldMs": 0.028501999999662075,
+      "newMs": 0.024306000000251515,
+      "amount": 0
+    },
+    {
+      "level": "c18",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.157322000000022,
+      "newMs": 0.4918929999998909,
+      "amount": 0
+    },
+    {
+      "level": "c18",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.0755319999998392,
+      "newMs": 0.5458720000001449,
+      "amount": 0
+    },
+    {
+      "level": "c18",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.49718099999972765,
+      "newMs": 0.34453700000040044,
+      "amount": 3
+    },
+    {
+      "level": "c18",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.43775400000004083,
+      "newMs": 0.6354040000001078,
+      "amount": 3
+    },
+    {
+      "level": "c18",
+      "step": 29,
+      "marked": false,
+      "oldMs": 0.565501999999924,
+      "newMs": 0.3951609999999164,
+      "amount": 3
+    },
+    {
+      "level": "c18",
+      "step": 29,
+      "marked": true,
+      "oldMs": 0.5497089999998934,
+      "newMs": 0.3383170000001883,
+      "amount": 3
+    },
+    {
+      "level": "c19",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.7144309999998768,
+      "newMs": 0.20172599999978047,
+      "amount": 3
+    },
+    {
+      "level": "c19",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.43660300000010466,
+      "newMs": 0.182318000000123,
+      "amount": 3
+    },
+    {
+      "level": "c19",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.22025399999984074,
+      "newMs": 0.19807100000025457,
+      "amount": 3
+    },
+    {
+      "level": "c19",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.24563099999977567,
+      "newMs": 0.16911900000013702,
+      "amount": 3
+    },
+    {
+      "level": "c19",
+      "step": 13,
+      "marked": false,
+      "oldMs": 0.047981000000163476,
+      "newMs": 0.03327900000022055,
+      "amount": 0
+    },
+    {
+      "level": "c19",
+      "step": 13,
+      "marked": true,
+      "oldMs": 0.0397490000000289,
+      "newMs": 0.02919300000030489,
+      "amount": 0
+    },
+    {
+      "level": "c20",
+      "step": 0,
+      "marked": false,
+      "oldMs": 18.575050999999803,
+      "newMs": 3.4514360000002853,
+      "amount": 2
+    },
+    {
+      "level": "c20",
+      "step": 0,
+      "marked": true,
+      "oldMs": 13.433228999999756,
+      "newMs": 3.1581350000001294,
+      "amount": 0
+    },
+    {
+      "level": "c20",
+      "step": 34,
+      "marked": false,
+      "oldMs": 1.6304979999999887,
+      "newMs": 1.1632309999999961,
+      "amount": 3
+    },
+    {
+      "level": "c20",
+      "step": 34,
+      "marked": true,
+      "oldMs": 1.5608760000000075,
+      "newMs": 1.1738070000001244,
+      "amount": 3
+    },
+    {
+      "level": "c20",
+      "step": 102,
+      "marked": false,
+      "oldMs": 2.706340999999611,
+      "newMs": 2.3035079999999653,
+      "amount": 2
+    },
+    {
+      "level": "c20",
+      "step": 102,
+      "marked": true,
+      "oldMs": 3.0890840000001845,
+      "newMs": 1.9820849999996426,
+      "amount": 2
+    },
+    {
+      "level": "c21",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.11208500000020649,
+      "newMs": 0.07093399999985195,
+      "amount": 2
+    },
+    {
+      "level": "c21",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.06845999999995911,
+      "newMs": 0.039649000000281376,
+      "amount": 0
+    },
+    {
+      "level": "c21",
+      "step": 2,
+      "marked": false,
+      "oldMs": 0.06781899999987218,
+      "newMs": 0.05219699999997829,
+      "amount": 2
+    },
+    {
+      "level": "c21",
+      "step": 2,
+      "marked": true,
+      "oldMs": 0.0427230000000236,
+      "newMs": 0.03001399999993737,
+      "amount": 0
+    },
+    {
+      "level": "c21",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.011947999999847525,
+      "newMs": 0.01120600000012928,
+      "amount": 0
+    },
+    {
+      "level": "c21",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.008952999999564781,
+      "newMs": 0.008663000000069587,
+      "amount": 0
+    },
+    {
+      "level": "c22",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.37174700000014127,
+      "newMs": 0.6211129999996956,
+      "amount": 3
+    },
+    {
+      "level": "c22",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.33693600000015067,
+      "newMs": 0.20985800000016752,
+      "amount": 2
+    },
+    {
+      "level": "c22",
+      "step": 5,
+      "marked": false,
+      "oldMs": 0.16450200000008408,
+      "newMs": 0.09083300000020245,
+      "amount": 3
+    },
+    {
+      "level": "c22",
+      "step": 5,
+      "marked": true,
+      "oldMs": 0.15381600000000617,
+      "newMs": 0.08480499999996027,
+      "amount": 3
+    },
+    {
+      "level": "c22",
+      "step": 15,
+      "marked": false,
+      "oldMs": 0.0277299999997922,
+      "newMs": 0.06191100000023653,
+      "amount": 0
+    },
+    {
+      "level": "c22",
+      "step": 15,
+      "marked": true,
+      "oldMs": 0.023555000000214932,
+      "newMs": 0.019518000000061875,
+      "amount": 0
+    },
+    {
+      "level": "c23",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.6671220000002904,
+      "newMs": 0.6381379999997989,
+      "amount": 0
+    },
+    {
+      "level": "c23",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.7903230000001713,
+      "newMs": 0.6884329999998045,
+      "amount": 0
+    },
+    {
+      "level": "c23",
+      "step": 13,
+      "marked": false,
+      "oldMs": 1.5093999999999141,
+      "newMs": 0.5769689999997354,
+      "amount": 3
+    },
+    {
+      "level": "c23",
+      "step": 13,
+      "marked": true,
+      "oldMs": 0.8144979999997304,
+      "newMs": 0.33984000000009473,
+      "amount": 3
+    },
+    {
+      "level": "c23",
+      "step": 41,
+      "marked": false,
+      "oldMs": 0.6505870000000868,
+      "newMs": 0.46504400000003443,
+      "amount": 2
+    },
+    {
+      "level": "c23",
+      "step": 41,
+      "marked": true,
+      "oldMs": 0.4804269999999633,
+      "newMs": 0.34744099999988975,
+      "amount": 2
+    },
+    {
+      "level": "c24",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.7423919999996542,
+      "newMs": 0.27316200000041135,
+      "amount": 3
+    },
+    {
+      "level": "c24",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.6091559999999845,
+      "newMs": 0.2951039999998102,
+      "amount": 2
+    },
+    {
+      "level": "c24",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.3116280000003826,
+      "newMs": 0.24895699999979115,
+      "amount": 3
+    },
+    {
+      "level": "c24",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.2895760000001246,
+      "newMs": 0.24867600000015955,
+      "amount": 2
+    },
+    {
+      "level": "c24",
+      "step": 21,
+      "marked": false,
+      "oldMs": 0.15176399999973,
+      "newMs": 0.043844000000262895,
+      "amount": 0
+    },
+    {
+      "level": "c24",
+      "step": 21,
+      "marked": true,
+      "oldMs": 0.05390900000020338,
+      "newMs": 0.13276600000017424,
+      "amount": 0
+    },
+    {
+      "level": "c25",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.11698200000000725,
+      "newMs": 0.07827499999984866,
+      "amount": 2
+    },
+    {
+      "level": "c25",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.08037899999999354,
+      "newMs": 0.06609699999989971,
+      "amount": 2
+    },
+    {
+      "level": "c25",
+      "step": 2,
+      "marked": false,
+      "oldMs": 0.155467999999928,
+      "newMs": 0.05999900000006164,
+      "amount": 3
+    },
+    {
+      "level": "c25",
+      "step": 2,
+      "marked": true,
+      "oldMs": 0.1012590000000273,
+      "newMs": 0.05059399999981906,
+      "amount": 3
+    },
+    {
+      "level": "c25",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.012148000000252068,
+      "newMs": 0.01054599999997663,
+      "amount": 0
+    },
+    {
+      "level": "c25",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.010244999999940774,
+      "newMs": 0.008962999999766907,
+      "amount": 0
+    },
+    {
+      "level": "c26",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.34190300000000207,
+      "newMs": 0.3017430000004424,
+      "amount": 2
+    },
+    {
+      "level": "c26",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.2554360000003726,
+      "newMs": 0.1256439999997383,
+      "amount": 0
+    },
+    {
+      "level": "c26",
+      "step": 5,
+      "marked": false,
+      "oldMs": 0.2761470000000372,
+      "newMs": 0.3025649999999587,
+      "amount": 2
+    },
+    {
+      "level": "c26",
+      "step": 5,
+      "marked": true,
+      "oldMs": 0.19605899999987741,
+      "newMs": 0.4199069999999665,
+      "amount": 2
+    },
+    {
+      "level": "c26",
+      "step": 15,
+      "marked": false,
+      "oldMs": 0.03810600000042541,
+      "newMs": 0.0271799999995892,
+      "amount": 0
+    },
+    {
+      "level": "c26",
+      "step": 15,
+      "marked": true,
+      "oldMs": 0.028792000000066764,
+      "newMs": 0.07028300000001764,
+      "amount": 0
+    },
+    {
+      "level": "c27",
+      "step": 0,
+      "marked": false,
+      "oldMs": 2.2901889999998275,
+      "newMs": 0.6804900000001908,
+      "amount": 3
+    },
+    {
+      "level": "c27",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.6809119999998074,
+      "newMs": 0.556789000000208,
+      "amount": 3
+    },
+    {
+      "level": "c27",
+      "step": 13,
+      "marked": false,
+      "oldMs": 0.8292200000000776,
+      "newMs": 0.5427879999997458,
+      "amount": 3
+    },
+    {
+      "level": "c27",
+      "step": 13,
+      "marked": true,
+      "oldMs": 0.672298999999839,
+      "newMs": 0.3457889999999679,
+      "amount": 3
+    },
+    {
+      "level": "c27",
+      "step": 39,
+      "marked": false,
+      "oldMs": 0.20222699999976612,
+      "newMs": 0.1819180000002234,
+      "amount": 2
+    },
+    {
+      "level": "c27",
+      "step": 39,
+      "marked": true,
+      "oldMs": 0.07636300000012852,
+      "newMs": 0.059297000000242406,
+      "amount": 0
+    },
+    {
+      "level": "c28",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.1641410000001997,
+      "newMs": 0.12109800000007453,
+      "amount": 2
+    },
+    {
+      "level": "c28",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.1206979999997202,
+      "newMs": 0.0674090000002252,
+      "amount": 0
+    },
+    {
+      "level": "c28",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.15549899999996342,
+      "newMs": 0.06602700000030381,
+      "amount": 3
+    },
+    {
+      "level": "c28",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.12440300000025672,
+      "newMs": 0.06577599999991435,
+      "amount": 3
+    },
+    {
+      "level": "c28",
+      "step": 12,
+      "marked": false,
+      "oldMs": 0.02326500000026499,
+      "newMs": 0.021520999999665946,
+      "amount": 0
+    },
+    {
+      "level": "c28",
+      "step": 12,
+      "marked": true,
+      "oldMs": 0.0200499999996282,
+      "newMs": 0.0336090000000695,
+      "amount": 0
+    },
+    {
+      "level": "c29",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.6192810000002282,
+      "newMs": 0.3013229999996838,
+      "amount": 3
+    },
+    {
+      "level": "c29",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.5428480000000491,
+      "newMs": 0.32869399999981397,
+      "amount": 2
+    },
+    {
+      "level": "c29",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.1987619999999879,
+      "newMs": 0.20928800000001502,
+      "amount": 3
+    },
+    {
+      "level": "c29",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.18575300000020434,
+      "newMs": 0.229928999999629,
+      "amount": 3
+    },
+    {
+      "level": "c29",
+      "step": 21,
+      "marked": false,
+      "oldMs": 0.046968999999990046,
+      "newMs": 0.03811600000017279,
+      "amount": 0
+    },
+    {
+      "level": "c29",
+      "step": 21,
+      "marked": true,
+      "oldMs": 0.04474600000003193,
+      "newMs": 0.034870999999839114,
+      "amount": 0
+    },
+    {
+      "level": "c30",
+      "step": 0,
+      "marked": false,
+      "oldMs": 10.324325000000044,
+      "newMs": 4.119279000000006,
+      "amount": 3
+    },
+    {
+      "level": "c30",
+      "step": 0,
+      "marked": true,
+      "oldMs": 5.560248000000229,
+      "newMs": 1.8878159999999298,
+      "amount": 3
+    },
+    {
+      "level": "c30",
+      "step": 24,
+      "marked": false,
+      "oldMs": 1.2044209999999111,
+      "newMs": 0.8103820000001178,
+      "amount": 3
+    },
+    {
+      "level": "c30",
+      "step": 24,
+      "marked": true,
+      "oldMs": 1.1337079999998423,
+      "newMs": 0.6950019999999313,
+      "amount": 3
+    },
+    {
+      "level": "c30",
+      "step": 72,
+      "marked": false,
+      "oldMs": 1.1256050000001778,
+      "newMs": 0.44003699999984747,
+      "amount": 3
+    },
+    {
+      "level": "c30",
+      "step": 72,
+      "marked": true,
+      "oldMs": 1.1875069999996413,
+      "newMs": 0.8753070000002481,
+      "amount": 3
+    },
+    {
+      "level": "c31",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.3345119999999042,
+      "newMs": 0.12563500000032946,
+      "amount": 0
+    },
+    {
+      "level": "c31",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.29475400000001173,
+      "newMs": 0.12498300000015661,
+      "amount": 0
+    },
+    {
+      "level": "c31",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.1396460000000843,
+      "newMs": 0.10832899999968504,
+      "amount": 3
+    },
+    {
+      "level": "c31",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.0795269999998709,
+      "newMs": 0.07036400000015419,
+      "amount": 3
+    },
+    {
+      "level": "c31",
+      "step": 12,
+      "marked": false,
+      "oldMs": 0.01829699999962031,
+      "newMs": 0.01567300000033356,
+      "amount": 0
+    },
+    {
+      "level": "c31",
+      "step": 12,
+      "marked": true,
+      "oldMs": 0.015432000000146218,
+      "newMs": 0.013559999999870342,
+      "amount": 0
+    },
+    {
+      "level": "c32",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.7559220000002824,
+      "newMs": 0.38418499999988853,
+      "amount": 0
+    },
+    {
+      "level": "c32",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.9042600000002494,
+      "newMs": 0.23804999999993015,
+      "amount": 0
+    },
+    {
+      "level": "c32",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.34722099999999045,
+      "newMs": 0.16117700000040713,
+      "amount": 3
+    },
+    {
+      "level": "c32",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.399087000000236,
+      "newMs": 0.19019899999966583,
+      "amount": 3
+    },
+    {
+      "level": "c32",
+      "step": 21,
+      "marked": false,
+      "oldMs": 0.12002699999993638,
+      "newMs": 0.10867999999982203,
+      "amount": 2
+    },
+    {
+      "level": "c32",
+      "step": 21,
+      "marked": true,
+      "oldMs": 0.03859699999975419,
+      "newMs": 0.031476999999995314,
+      "amount": 0
+    },
+    {
+      "level": "c33",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.39949799999976676,
+      "newMs": 0.2440790000000561,
+      "amount": 2
+    },
+    {
+      "level": "c33",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.4115849999998318,
+      "newMs": 0.23820000000023356,
+      "amount": 0
+    },
+    {
+      "level": "c33",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.24821499999961816,
+      "newMs": 0.1437410000003183,
+      "amount": 3
+    },
+    {
+      "level": "c33",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.1493599999998878,
+      "newMs": 0.16271899999992456,
+      "amount": 3
+    },
+    {
+      "level": "c33",
+      "step": 21,
+      "marked": false,
+      "oldMs": 0.03895700000020952,
+      "newMs": 0.0352020000000266,
+      "amount": 0
+    },
+    {
+      "level": "c33",
+      "step": 21,
+      "marked": true,
+      "oldMs": 0.03358899999966525,
+      "newMs": 0.031106000000363565,
+      "amount": 0
+    },
+    {
+      "level": "c34",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.742301999999654,
+      "newMs": 0.5594430000001012,
+      "amount": 0
+    },
+    {
+      "level": "c34",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.5359189999999217,
+      "newMs": 0.907144999999673,
+      "amount": 0
+    },
+    {
+      "level": "c34",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.5656120000003284,
+      "newMs": 0.3933790000000954,
+      "amount": 3
+    },
+    {
+      "level": "c34",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.5167200000000776,
+      "newMs": 0.3713760000000548,
+      "amount": 3
+    },
+    {
+      "level": "c34",
+      "step": 31,
+      "marked": false,
+      "oldMs": 0.28170399999999063,
+      "newMs": 0.30030200000010154,
+      "amount": 2
+    },
+    {
+      "level": "c34",
+      "step": 31,
+      "marked": true,
+      "oldMs": 0.12844900000027337,
+      "newMs": 0.061631000000033964,
+      "amount": 0
+    },
+    {
+      "level": "c35",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.34161200000016834,
+      "newMs": 0.1129559999999401,
+      "amount": 3
+    },
+    {
+      "level": "c35",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.3888520000000426,
+      "newMs": 0.10792899999978545,
+      "amount": 3
+    },
+    {
+      "level": "c35",
+      "step": 5,
+      "marked": false,
+      "oldMs": 0.17887300000029427,
+      "newMs": 0.10747799999990093,
+      "amount": 2
+    },
+    {
+      "level": "c35",
+      "step": 5,
+      "marked": true,
+      "oldMs": 0.11046200000009776,
+      "newMs": 0.060930000000098516,
+      "amount": 0
+    },
+    {
+      "level": "c35",
+      "step": 15,
+      "marked": false,
+      "oldMs": 0.026378999999906227,
+      "newMs": 0.021111000000018976,
+      "amount": 0
+    },
+    {
+      "level": "c35",
+      "step": 15,
+      "marked": true,
+      "oldMs": 0.023003999999673397,
+      "newMs": 0.019008000000212633,
+      "amount": 0
+    },
+    {
+      "level": "c36",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.9095980000001873,
+      "newMs": 0.4711130000000594,
+      "amount": 3
+    },
+    {
+      "level": "c36",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.2251209999999446,
+      "newMs": 0.6157459999999446,
+      "amount": 3
+    },
+    {
+      "level": "c36",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.42214100000001054,
+      "newMs": 0.22743499999978667,
+      "amount": 0
+    },
+    {
+      "level": "c36",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.42027799999959825,
+      "newMs": 0.21070000000008804,
+      "amount": 0
+    },
+    {
+      "level": "c36",
+      "step": 26,
+      "marked": false,
+      "oldMs": 0.1193249999996624,
+      "newMs": 0.0889910000000782,
+      "amount": 0
+    },
+    {
+      "level": "c36",
+      "step": 26,
+      "marked": true,
+      "oldMs": 0.11206499999980224,
+      "newMs": 0.08760900000015681,
+      "amount": 0
+    },
+    {
+      "level": "c37",
+      "step": 0,
+      "marked": false,
+      "oldMs": 6.03940300000022,
+      "newMs": 1.5130749999998443,
+      "amount": 3
+    },
+    {
+      "level": "c37",
+      "step": 0,
+      "marked": true,
+      "oldMs": 5.342407999999978,
+      "newMs": 1.1707519999999931,
+      "amount": 3
+    },
+    {
+      "level": "c37",
+      "step": 19,
+      "marked": false,
+      "oldMs": 0.9678239999998368,
+      "newMs": 0.5130739999999605,
+      "amount": 3
+    },
+    {
+      "level": "c37",
+      "step": 19,
+      "marked": true,
+      "oldMs": 1.3267919999998412,
+      "newMs": 0.5004260000000613,
+      "amount": 3
+    },
+    {
+      "level": "c37",
+      "step": 57,
+      "marked": false,
+      "oldMs": 0.8199460000000727,
+      "newMs": 0.6868599999997969,
+      "amount": 2
+    },
+    {
+      "level": "c37",
+      "step": 57,
+      "marked": true,
+      "oldMs": 0.6088850000001003,
+      "newMs": 0.5502900000001318,
+      "amount": 2
+    },
+    {
+      "level": "c38",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.7489919999998165,
+      "newMs": 0.30193400000007387,
+      "amount": 0
+    },
+    {
+      "level": "c38",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.683676000000105,
+      "newMs": 0.23290199999973993,
+      "amount": 0
+    },
+    {
+      "level": "c38",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.33867899999995643,
+      "newMs": 0.2432570000000851,
+      "amount": 2
+    },
+    {
+      "level": "c38",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.24108499999965716,
+      "newMs": 0.1263160000003154,
+      "amount": 0
+    },
+    {
+      "level": "c38",
+      "step": 23,
+      "marked": false,
+      "oldMs": 0.12040699999988647,
+      "newMs": 0.11062300000003233,
+      "amount": 2
+    },
+    {
+      "level": "c38",
+      "step": 23,
+      "marked": true,
+      "oldMs": 0.04187100000035571,
+      "newMs": 0.03775599999971746,
+      "amount": 0
+    },
+    {
+      "level": "c39",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.8905090000002929,
+      "newMs": 0.5029999999997017,
+      "amount": 2
+    },
+    {
+      "level": "c39",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.7329079999999522,
+      "newMs": 0.5000949999998738,
+      "amount": 2
+    },
+    {
+      "level": "c39",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.4951980000000731,
+      "newMs": 0.1661140000001069,
+      "amount": 3
+    },
+    {
+      "level": "c39",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.5278159999998024,
+      "newMs": 0.20210799999995288,
+      "amount": 3
+    },
+    {
+      "level": "c39",
+      "step": 22,
+      "marked": false,
+      "oldMs": 0.12205900000026304,
+      "newMs": 0.10687800000005154,
+      "amount": 3
+    },
+    {
+      "level": "c39",
+      "step": 22,
+      "marked": true,
+      "oldMs": 0.1050639999998566,
+      "newMs": 0.209248000000116,
+      "amount": 3
+    },
+    {
+      "level": "c40",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.8388439999998809,
+      "newMs": 0.6713279999999031,
+      "amount": 2
+    },
+    {
+      "level": "c40",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.7254470000002584,
+      "newMs": 0.4005290000000059,
+      "amount": 2
+    },
+    {
+      "level": "c40",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.3657170000001315,
+      "newMs": 0.3081339999998818,
+      "amount": 3
+    },
+    {
+      "level": "c40",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.32227400000010675,
+      "newMs": 0.23185100000000602,
+      "amount": 3
+    },
+    {
+      "level": "c40",
+      "step": 30,
+      "marked": false,
+      "oldMs": 0.28906499999993684,
+      "newMs": 0.13438799999994444,
+      "amount": 3
+    },
+    {
+      "level": "c40",
+      "step": 30,
+      "marked": true,
+      "oldMs": 0.15921400000024732,
+      "newMs": 0.12332100000003265,
+      "amount": 3
+    },
+    {
+      "level": "c41",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.21228299999984301,
+      "newMs": 0.09529999999995198,
+      "amount": 0
+    },
+    {
+      "level": "c41",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.1461549999999079,
+      "newMs": 0.07399899999973059,
+      "amount": 0
+    },
+    {
+      "level": "c41",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.0735779999999977,
+      "newMs": 0.2862009999998918,
+      "amount": 0
+    },
+    {
+      "level": "c41",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.07224700000006123,
+      "newMs": 0.08761899999990419,
+      "amount": 0
+    },
+    {
+      "level": "c41",
+      "step": 11,
+      "marked": false,
+      "oldMs": 0.017945999999938067,
+      "newMs": 0.01586300000008123,
+      "amount": 0
+    },
+    {
+      "level": "c41",
+      "step": 11,
+      "marked": true,
+      "oldMs": 0.01615399999991496,
+      "newMs": 0.06074899999975969,
+      "amount": 0
+    },
+    {
+      "level": "c42",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.3754840000001423,
+      "newMs": 0.663626000000022,
+      "amount": 2
+    },
+    {
+      "level": "c42",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.2541540000001987,
+      "newMs": 0.35374099999989994,
+      "amount": 0
+    },
+    {
+      "level": "c42",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.3787870000001021,
+      "newMs": 0.21054899999990084,
+      "amount": 3
+    },
+    {
+      "level": "c42",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.3227340000003096,
+      "newMs": 0.24997799999982817,
+      "amount": 3
+    },
+    {
+      "level": "c42",
+      "step": 29,
+      "marked": false,
+      "oldMs": 0.16133700000000317,
+      "newMs": 0.13500800000019808,
+      "amount": 2
+    },
+    {
+      "level": "c42",
+      "step": 29,
+      "marked": true,
+      "oldMs": 0.06704800000034083,
+      "newMs": 0.04164099999979953,
+      "amount": 0
+    },
+    {
+      "level": "c43",
+      "step": 0,
+      "marked": false,
+      "oldMs": 2.7302859999999782,
+      "newMs": 0.6651979999996911,
+      "amount": 3
+    },
+    {
+      "level": "c43",
+      "step": 0,
+      "marked": true,
+      "oldMs": 2.495860999999877,
+      "newMs": 0.6332710000001498,
+      "amount": 3
+    },
+    {
+      "level": "c43",
+      "step": 15,
+      "marked": false,
+      "oldMs": 0.692667999999685,
+      "newMs": 0.3824730000001182,
+      "amount": 3
+    },
+    {
+      "level": "c43",
+      "step": 15,
+      "marked": true,
+      "oldMs": 0.620632999999998,
+      "newMs": 0.3720969999999397,
+      "amount": 3
+    },
+    {
+      "level": "c43",
+      "step": 46,
+      "marked": false,
+      "oldMs": 0.3264600000002247,
+      "newMs": 0.4013509999999769,
+      "amount": 2
+    },
+    {
+      "level": "c43",
+      "step": 46,
+      "marked": true,
+      "oldMs": 0.21368399999983012,
+      "newMs": 0.088640999999825,
+      "amount": 0
+    },
+    {
+      "level": "c44",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.34286400000019057,
+      "newMs": 0.12152900000000955,
+      "amount": 3
+    },
+    {
+      "level": "c44",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.2174299999996947,
+      "newMs": 0.09502000000020416,
+      "amount": 3
+    },
+    {
+      "level": "c44",
+      "step": 5,
+      "marked": false,
+      "oldMs": 0.18756600000006074,
+      "newMs": 0.07609199999978955,
+      "amount": 3
+    },
+    {
+      "level": "c44",
+      "step": 5,
+      "marked": true,
+      "oldMs": 0.20938799999976254,
+      "newMs": 0.07197600000017701,
+      "amount": 3
+    },
+    {
+      "level": "c44",
+      "step": 15,
+      "marked": false,
+      "oldMs": 0.02257400000007692,
+      "newMs": 0.015592000000197004,
+      "amount": 0
+    },
+    {
+      "level": "c44",
+      "step": 15,
+      "marked": true,
+      "oldMs": 0.019258999999692605,
+      "newMs": 0.014962000000195985,
+      "amount": 0
+    },
+    {
+      "level": "c45",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.7781740000000354,
+      "newMs": 0.4403379999998833,
+      "amount": 2
+    },
+    {
+      "level": "c45",
+      "step": 0,
+      "marked": true,
+      "oldMs": 5.200849999999718,
+      "newMs": 0.38045000000010987,
+      "amount": 2
+    },
+    {
+      "level": "c45",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.3160649999999805,
+      "newMs": 0.17020000000002256,
+      "amount": 3
+    },
+    {
+      "level": "c45",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.3057200000002922,
+      "newMs": 0.16680499999984022,
+      "amount": 3
+    },
+    {
+      "level": "c45",
+      "step": 21,
+      "marked": false,
+      "oldMs": 0.12005700000008801,
+      "newMs": 0.0810989999999947,
+      "amount": 3
+    },
+    {
+      "level": "c45",
+      "step": 21,
+      "marked": true,
+      "oldMs": 0.09753300000011222,
+      "newMs": 0.08736899999985326,
+      "amount": 2
+    },
+    {
+      "level": "c46",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.4642640000001848,
+      "newMs": 0.4115950000000339,
+      "amount": 3
+    },
+    {
+      "level": "c46",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.2735130000000936,
+      "newMs": 0.3916659999999865,
+      "amount": 3
+    },
+    {
+      "level": "c46",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.5983599999999569,
+      "newMs": 0.20404000000007727,
+      "amount": 3
+    },
+    {
+      "level": "c46",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.618970999999874,
+      "newMs": 0.17602899999974397,
+      "amount": 3
+    },
+    {
+      "level": "c46",
+      "step": 28,
+      "marked": false,
+      "oldMs": 0.16769700000031662,
+      "newMs": 0.1308219999996254,
+      "amount": 2
+    },
+    {
+      "level": "c46",
+      "step": 28,
+      "marked": true,
+      "oldMs": 0.2875930000000153,
+      "newMs": 0.13168399999995017,
+      "amount": 2
+    },
+    {
+      "level": "c47",
+      "step": 0,
+      "marked": false,
+      "oldMs": 3.347663999999895,
+      "newMs": 1.4797069999999621,
+      "amount": 3
+    },
+    {
+      "level": "c47",
+      "step": 0,
+      "marked": true,
+      "oldMs": 3.756906000000072,
+      "newMs": 1.1265869999997449,
+      "amount": 3
+    },
+    {
+      "level": "c47",
+      "step": 16,
+      "marked": false,
+      "oldMs": 1.0525079999997615,
+      "newMs": 0.4048160000002099,
+      "amount": 0
+    },
+    {
+      "level": "c47",
+      "step": 16,
+      "marked": true,
+      "oldMs": 0.931981000000178,
+      "newMs": 0.35269800000014584,
+      "amount": 0
+    },
+    {
+      "level": "c47",
+      "step": 48,
+      "marked": false,
+      "oldMs": 0.2262829999999667,
+      "newMs": 0.1004769999999553,
+      "amount": 0
+    },
+    {
+      "level": "c47",
+      "step": 48,
+      "marked": true,
+      "oldMs": 0.1769810000000689,
+      "newMs": 0.10199999999986176,
+      "amount": 0
+    },
+    {
+      "level": "c48",
+      "step": 0,
+      "marked": false,
+      "oldMs": 2.23571899999979,
+      "newMs": 0.5020280000003368,
+      "amount": 0
+    },
+    {
+      "level": "c48",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.6603319999999258,
+      "newMs": 0.4675379999998768,
+      "amount": 0
+    },
+    {
+      "level": "c48",
+      "step": 11,
+      "marked": false,
+      "oldMs": 0.672649999999976,
+      "newMs": 0.3349920000000566,
+      "amount": 3
+    },
+    {
+      "level": "c48",
+      "step": 11,
+      "marked": true,
+      "oldMs": 0.5072260000001734,
+      "newMs": 0.2980689999999413,
+      "amount": 3
+    },
+    {
+      "level": "c48",
+      "step": 34,
+      "marked": false,
+      "oldMs": 0.5772589999996853,
+      "newMs": 0.14777700000013283,
+      "amount": 3
+    },
+    {
+      "level": "c48",
+      "step": 34,
+      "marked": true,
+      "oldMs": 0.292721000000256,
+      "newMs": 0.36774100000002363,
+      "amount": 2
+    },
+    {
+      "level": "c49",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.0663179999996828,
+      "newMs": 0.3952510000003713,
+      "amount": 2
+    },
+    {
+      "level": "c49",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.9415249999997286,
+      "newMs": 0.42724900000030175,
+      "amount": 2
+    },
+    {
+      "level": "c49",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.32805299999972704,
+      "newMs": 0.31296999999995023,
+      "amount": 3
+    },
+    {
+      "level": "c49",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.6271130000000085,
+      "newMs": 0.4139479999998912,
+      "amount": 2
+    },
+    {
+      "level": "c49",
+      "step": 24,
+      "marked": false,
+      "oldMs": 0.11559999999963111,
+      "newMs": 0.05779500000016924,
+      "amount": 0
+    },
+    {
+      "level": "c49",
+      "step": 24,
+      "marked": true,
+      "oldMs": 0.10146900000017922,
+      "newMs": 0.06331300000010742,
+      "amount": 0
+    },
+    {
+      "level": "c50",
+      "step": 0,
+      "marked": false,
+      "oldMs": 8.937214999999924,
+      "newMs": 2.7567850000000362,
+      "amount": 0
+    },
+    {
+      "level": "c50",
+      "step": 0,
+      "marked": true,
+      "oldMs": 10.40401299999985,
+      "newMs": 2.109502000000248,
+      "amount": 0
+    },
+    {
+      "level": "c50",
+      "step": 27,
+      "marked": false,
+      "oldMs": 1.6153959999996914,
+      "newMs": 0.9433570000001055,
+      "amount": 3
+    },
+    {
+      "level": "c50",
+      "step": 27,
+      "marked": true,
+      "oldMs": 1.8572220000000925,
+      "newMs": 1.4216710000000603,
+      "amount": 3
+    },
+    {
+      "level": "c50",
+      "step": 83,
+      "marked": false,
+      "oldMs": 2.4853149999999005,
+      "newMs": 1.2205650000000787,
+      "amount": 3
+    },
+    {
+      "level": "c50",
+      "step": 83,
+      "marked": true,
+      "oldMs": 1.8032920000000559,
+      "newMs": 1.3067320000000109,
+      "amount": 3
+    },
+    {
+      "level": "c51",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.16313999999965745,
+      "newMs": 0.051926000000094064,
+      "amount": 3
+    },
+    {
+      "level": "c51",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.08693700000003446,
+      "newMs": 0.11383799999975963,
+      "amount": 2
+    },
+    {
+      "level": "c51",
+      "step": 1,
+      "marked": false,
+      "oldMs": 0.08073899999999412,
+      "newMs": 0.07238600000027873,
+      "amount": 2
+    },
+    {
+      "level": "c51",
+      "step": 1,
+      "marked": true,
+      "oldMs": 0.05934799999977258,
+      "newMs": 0.047409000000243395,
+      "amount": 2
+    },
+    {
+      "level": "c51",
+      "step": 5,
+      "marked": false,
+      "oldMs": 0.009334000000308151,
+      "newMs": 0.007049999999708234,
+      "amount": 0
+    },
+    {
+      "level": "c51",
+      "step": 5,
+      "marked": true,
+      "oldMs": 0.007742000000234839,
+      "newMs": 0.006429000000025553,
+      "amount": 0
+    },
+    {
+      "level": "c52",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.9532619999999952,
+      "newMs": 0.37826600000016697,
+      "amount": 3
+    },
+    {
+      "level": "c52",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.9584289999997964,
+      "newMs": 0.5383520000000317,
+      "amount": 2
+    },
+    {
+      "level": "c52",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.48963999999978114,
+      "newMs": 0.3387680000000728,
+      "amount": 3
+    },
+    {
+      "level": "c52",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.49548900000036156,
+      "newMs": 0.36981299999979456,
+      "amount": 3
+    },
+    {
+      "level": "c52",
+      "step": 21,
+      "marked": false,
+      "oldMs": 0.0709740000002057,
+      "newMs": 0.03729499999963082,
+      "amount": 0
+    },
+    {
+      "level": "c52",
+      "step": 21,
+      "marked": true,
+      "oldMs": 0.05381900000020323,
+      "newMs": 0.03516200000012759,
+      "amount": 0
+    },
+    {
+      "level": "c53",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.1100530000003346,
+      "newMs": 0.5246319999996558,
+      "amount": 3
+    },
+    {
+      "level": "c53",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.6918190000001232,
+      "newMs": 0.5700590000001284,
+      "amount": 3
+    },
+    {
+      "level": "c53",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.4058669999999438,
+      "newMs": 0.4224309999999605,
+      "amount": 3
+    },
+    {
+      "level": "c53",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.40815100000008897,
+      "newMs": 0.34051099999987855,
+      "amount": 3
+    },
+    {
+      "level": "c53",
+      "step": 28,
+      "marked": false,
+      "oldMs": 0.25840000000016516,
+      "newMs": 0.186685000000125,
+      "amount": 3
+    },
+    {
+      "level": "c53",
+      "step": 28,
+      "marked": true,
+      "oldMs": 0.2713490000001002,
+      "newMs": 0.18241900000020905,
+      "amount": 3
+    },
+    {
+      "level": "c54",
+      "step": 0,
+      "marked": false,
+      "oldMs": 3.4229339999997137,
+      "newMs": 0.6129020000003038,
+      "amount": 0
+    },
+    {
+      "level": "c54",
+      "step": 0,
+      "marked": true,
+      "oldMs": 2.0527289999999994,
+      "newMs": 0.4864860000002409,
+      "amount": 0
+    },
+    {
+      "level": "c54",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.7027229999998781,
+      "newMs": 0.370274999999765,
+      "amount": 3
+    },
+    {
+      "level": "c54",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.9484349999997903,
+      "newMs": 0.332868999999846,
+      "amount": 3
+    },
+    {
+      "level": "c54",
+      "step": 32,
+      "marked": false,
+      "oldMs": 0.39069500000005064,
+      "newMs": 0.27064799999971,
+      "amount": 2
+    },
+    {
+      "level": "c54",
+      "step": 32,
+      "marked": true,
+      "oldMs": 0.2757059999999001,
+      "newMs": 0.22725400000035734,
+      "amount": 2
+    },
+    {
+      "level": "c55",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.1802149999998619,
+      "newMs": 0.08909100000028047,
+      "amount": 0
+    },
+    {
+      "level": "c55",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.13587999999981548,
+      "newMs": 0.07309699999996155,
+      "amount": 0
+    },
+    {
+      "level": "c55",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.07762400000001435,
+      "newMs": 0.12527399999999034,
+      "amount": 0
+    },
+    {
+      "level": "c55",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.13617999999996755,
+      "newMs": 0.16004599999996572,
+      "amount": 0
+    },
+    {
+      "level": "c55",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.023654000000078668,
+      "newMs": 0.01611400000001595,
+      "amount": 0
+    },
+    {
+      "level": "c55",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.018947000000025582,
+      "newMs": 0.01668500000005224,
+      "amount": 0
+    },
+    {
+      "level": "c56",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.1568820000002233,
+      "newMs": 0.4421599999996033,
+      "amount": 0
+    },
+    {
+      "level": "c56",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.2527620000000752,
+      "newMs": 0.49874399999998786,
+      "amount": 0
+    },
+    {
+      "level": "c56",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.4045449999998709,
+      "newMs": 0.1446019999998498,
+      "amount": 0
+    },
+    {
+      "level": "c56",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.33458199999995486,
+      "newMs": 0.12198000000034881,
+      "amount": 0
+    },
+    {
+      "level": "c56",
+      "step": 24,
+      "marked": false,
+      "oldMs": 0.15814200000022538,
+      "newMs": 0.14961999999968612,
+      "amount": 2
+    },
+    {
+      "level": "c56",
+      "step": 24,
+      "marked": true,
+      "oldMs": 0.08683800000017072,
+      "newMs": 0.05434999999988577,
+      "amount": 0
+    },
+    {
+      "level": "c57",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.115961999999854,
+      "newMs": 0.44166900000027454,
+      "amount": 0
+    },
+    {
+      "level": "c57",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.7197390000001178,
+      "newMs": 0.42102899999963483,
+      "amount": 0
+    },
+    {
+      "level": "c57",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.383734000000004,
+      "newMs": 0.24771499999997104,
+      "amount": 3
+    },
+    {
+      "level": "c57",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.3921170000003258,
+      "newMs": 0.24539099999992686,
+      "amount": 2
+    },
+    {
+      "level": "c57",
+      "step": 32,
+      "marked": false,
+      "oldMs": 0.2865120000001298,
+      "newMs": 0.3298749999999018,
+      "amount": 3
+    },
+    {
+      "level": "c57",
+      "step": 32,
+      "marked": true,
+      "oldMs": 0.3428840000001401,
+      "newMs": 0.3436349999997219,
+      "amount": 3
+    },
+    {
+      "level": "c58",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.3488240000001497,
+      "newMs": 0.40079900000000634,
+      "amount": 0
+    },
+    {
+      "level": "c58",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.1109440000000177,
+      "newMs": 0.4780329999998685,
+      "amount": 0
+    },
+    {
+      "level": "c58",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.7780139999999847,
+      "newMs": 0.5341060000000653,
+      "amount": 3
+    },
+    {
+      "level": "c58",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.6279730000001109,
+      "newMs": 0.41857600000003004,
+      "amount": 3
+    },
+    {
+      "level": "c58",
+      "step": 26,
+      "marked": false,
+      "oldMs": 0.15059100000007675,
+      "newMs": 0.12353200000006836,
+      "amount": 2
+    },
+    {
+      "level": "c58",
+      "step": 26,
+      "marked": true,
+      "oldMs": 0.13790300000027855,
+      "newMs": 0.12235999999984415,
+      "amount": 2
+    },
+    {
+      "level": "c59",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.6332210000000487,
+      "newMs": 0.2860209999998915,
+      "amount": 2
+    },
+    {
+      "level": "c59",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.4580240000000231,
+      "newMs": 0.1593740000002981,
+      "amount": 0
+    },
+    {
+      "level": "c59",
+      "step": 5,
+      "marked": false,
+      "oldMs": 0.31868800000029296,
+      "newMs": 0.1465459999999439,
+      "amount": 3
+    },
+    {
+      "level": "c59",
+      "step": 5,
+      "marked": true,
+      "oldMs": 0.3101160000001073,
+      "newMs": 0.23170099999970262,
+      "amount": 3
+    },
+    {
+      "level": "c59",
+      "step": 15,
+      "marked": false,
+      "oldMs": 0.05412000000023909,
+      "newMs": 0.02535699999998542,
+      "amount": 0
+    },
+    {
+      "level": "c59",
+      "step": 15,
+      "marked": true,
+      "oldMs": 0.02756100000033257,
+      "newMs": 0.019738999999844964,
+      "amount": 0
+    },
+    {
+      "level": "c60",
+      "step": 0,
+      "marked": false,
+      "oldMs": 5.671030999999857,
+      "newMs": 1.8369320000001608,
+      "amount": 3
+    },
+    {
+      "level": "c60",
+      "step": 0,
+      "marked": true,
+      "oldMs": 6.099721000000045,
+      "newMs": 1.4456770000001598,
+      "amount": 3
+    },
+    {
+      "level": "c60",
+      "step": 22,
+      "marked": false,
+      "oldMs": 0.948765000000094,
+      "newMs": 0.5834289999997964,
+      "amount": 3
+    },
+    {
+      "level": "c60",
+      "step": 22,
+      "marked": true,
+      "oldMs": 0.8933940000001712,
+      "newMs": 0.6934999999998581,
+      "amount": 3
+    },
+    {
+      "level": "c60",
+      "step": 66,
+      "marked": false,
+      "oldMs": 0.9648999999999432,
+      "newMs": 0.45858399999997346,
+      "amount": 3
+    },
+    {
+      "level": "c60",
+      "step": 66,
+      "marked": true,
+      "oldMs": 1.6384800000000723,
+      "newMs": 0.35889799999995375,
+      "amount": 3
+    },
+    {
+      "level": "c61",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.5024889999999687,
+      "newMs": 3.9127660000003743,
+      "amount": 2
+    },
+    {
+      "level": "c61",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.2207250000001295,
+      "newMs": 0.10716800000000148,
+      "amount": 2
+    },
+    {
+      "level": "c61",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.092616999999791,
+      "newMs": 0.11243500000000495,
+      "amount": 2
+    },
+    {
+      "level": "c61",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.08966199999986202,
+      "newMs": 0.06888200000003053,
+      "amount": 2
+    },
+    {
+      "level": "c61",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.021801999999752297,
+      "newMs": 0.08252100000026985,
+      "amount": 0
+    },
+    {
+      "level": "c61",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.015934000000015658,
+      "newMs": 0.010545000000092841,
+      "amount": 0
+    },
+    {
+      "level": "c62",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.23282300000028044,
+      "newMs": 0.14215899999999237,
+      "amount": 3
+    },
+    {
+      "level": "c62",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.26499999999987267,
+      "newMs": 0.12069800000017494,
+      "amount": 3
+    },
+    {
+      "level": "c62",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.1196460000001025,
+      "newMs": 0.06414399999994203,
+      "amount": 3
+    },
+    {
+      "level": "c62",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.1044329999999718,
+      "newMs": 0.06040900000016336,
+      "amount": 2
+    },
+    {
+      "level": "c62",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.016103999999813823,
+      "newMs": 0.011516000000028725,
+      "amount": 0
+    },
+    {
+      "level": "c62",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.016564999999900465,
+      "newMs": 0.009743999999955122,
+      "amount": 0
+    },
+    {
+      "level": "c63",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.209599000000253,
+      "newMs": 0.3184679999999389,
+      "amount": 3
+    },
+    {
+      "level": "c63",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.1318550000000869,
+      "newMs": 0.262246000000232,
+      "amount": 3
+    },
+    {
+      "level": "c63",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.7246059999997669,
+      "newMs": 0.19869199999993725,
+      "amount": 3
+    },
+    {
+      "level": "c63",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.6770150000002104,
+      "newMs": 0.18146699999988414,
+      "amount": 3
+    },
+    {
+      "level": "c63",
+      "step": 26,
+      "marked": false,
+      "oldMs": 0.06629700000030425,
+      "newMs": 0.042022000000088156,
+      "amount": 0
+    },
+    {
+      "level": "c63",
+      "step": 26,
+      "marked": true,
+      "oldMs": 0.06143000000020038,
+      "newMs": 0.03765500000008615,
+      "amount": 0
+    },
+    {
+      "level": "c64",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.5032699999997021,
+      "newMs": 0.19039000000020678,
+      "amount": 3
+    },
+    {
+      "level": "c64",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.5194739999997182,
+      "newMs": 0.16638500000044587,
+      "amount": 3
+    },
+    {
+      "level": "c64",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.3760730000003605,
+      "newMs": 0.10006699999985358,
+      "amount": 3
+    },
+    {
+      "level": "c64",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.21544700000004013,
+      "newMs": 0.12390199999981633,
+      "amount": 3
+    },
+    {
+      "level": "c64",
+      "step": 19,
+      "marked": false,
+      "oldMs": 0.10630600000013146,
+      "newMs": 0.07148499999993874,
+      "amount": 3
+    },
+    {
+      "level": "c64",
+      "step": 19,
+      "marked": true,
+      "oldMs": 0.07404900000028647,
+      "newMs": 0.06943199999977878,
+      "amount": 2
+    },
+    {
+      "level": "c65",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.2376990000002479,
+      "newMs": 0.07586200000014287,
+      "amount": 0
+    },
+    {
+      "level": "c65",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.12844899999981862,
+      "newMs": 0.08384300000034273,
+      "amount": 0
+    },
+    {
+      "level": "c65",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.06395399999973961,
+      "newMs": 0.04014899999992849,
+      "amount": 0
+    },
+    {
+      "level": "c65",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.06266199999981836,
+      "newMs": 0.03550300000006246,
+      "amount": 0
+    },
+    {
+      "level": "c65",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.015903999999864027,
+      "newMs": 0.01135599999997794,
+      "amount": 0
+    },
+    {
+      "level": "c65",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.013740999999754422,
+      "newMs": 0.009574000000156957,
+      "amount": 0
+    },
+    {
+      "level": "c66",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.6645770000000084,
+      "newMs": 0.19607900000028167,
+      "amount": 0
+    },
+    {
+      "level": "c66",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.41926599999987957,
+      "newMs": 0.22071499999992739,
+      "amount": 0
+    },
+    {
+      "level": "c66",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.13735200000019177,
+      "newMs": 0.09731299999975818,
+      "amount": 0
+    },
+    {
+      "level": "c66",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.19336500000008527,
+      "newMs": 0.08614699999998265,
+      "amount": 0
+    },
+    {
+      "level": "c66",
+      "step": 20,
+      "marked": false,
+      "oldMs": 0.037273999999797525,
+      "newMs": 0.02406600000040271,
+      "amount": 0
+    },
+    {
+      "level": "c66",
+      "step": 20,
+      "marked": true,
+      "oldMs": 0.03351999999995314,
+      "newMs": 0.023603999999977532,
+      "amount": 0
+    },
+    {
+      "level": "c67",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.4279499999997824,
+      "newMs": 0.8754880000001322,
+      "amount": 3
+    },
+    {
+      "level": "c67",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.3565749999997934,
+      "newMs": 0.5720020000003387,
+      "amount": 3
+    },
+    {
+      "level": "c67",
+      "step": 11,
+      "marked": false,
+      "oldMs": 0.6359050000000934,
+      "newMs": 0.6783080000000155,
+      "amount": 3
+    },
+    {
+      "level": "c67",
+      "step": 11,
+      "marked": true,
+      "oldMs": 0.4264069999999265,
+      "newMs": 0.33633499999996275,
+      "amount": 3
+    },
+    {
+      "level": "c67",
+      "step": 35,
+      "marked": false,
+      "oldMs": 0.26187499999969077,
+      "newMs": 0.10966099999996004,
+      "amount": 0
+    },
+    {
+      "level": "c67",
+      "step": 35,
+      "marked": true,
+      "oldMs": 0.30268500000011045,
+      "newMs": 0.3585969999999179,
+      "amount": 0
+    },
+    {
+      "level": "c68",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.9985490000003665,
+      "newMs": 0.4335679999999229,
+      "amount": 3
+    },
+    {
+      "level": "c68",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.8416379999998753,
+      "newMs": 0.3215130000003228,
+      "amount": 3
+    },
+    {
+      "level": "c68",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.653150000000096,
+      "newMs": 0.20049500000004628,
+      "amount": 0
+    },
+    {
+      "level": "c68",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.4267179999997097,
+      "newMs": 0.19737000000031912,
+      "amount": 0
+    },
+    {
+      "level": "c68",
+      "step": 19,
+      "marked": false,
+      "oldMs": 0.3560639999996056,
+      "newMs": 0.08703800000012052,
+      "amount": 3
+    },
+    {
+      "level": "c68",
+      "step": 19,
+      "marked": true,
+      "oldMs": 0.2140150000000176,
+      "newMs": 0.18600400000013906,
+      "amount": 2
+    },
+    {
+      "level": "c69",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.7484300000000985,
+      "newMs": 0.3230260000000271,
+      "amount": 0
+    },
+    {
+      "level": "c69",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.6523600000000442,
+      "newMs": 0.2360369999996692,
+      "amount": 0
+    },
+    {
+      "level": "c69",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.4137679999998909,
+      "newMs": 0.27937100000008286,
+      "amount": 3
+    },
+    {
+      "level": "c69",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.43682300000000396,
+      "newMs": 0.25837000000001353,
+      "amount": 3
+    },
+    {
+      "level": "c69",
+      "step": 18,
+      "marked": false,
+      "oldMs": 0.09802399999989575,
+      "newMs": 0.0664270000002034,
+      "amount": 0
+    },
+    {
+      "level": "c69",
+      "step": 18,
+      "marked": true,
+      "oldMs": 0.11803400000007969,
+      "newMs": 0.06322300000010728,
+      "amount": 0
+    },
+    {
+      "level": "c70",
+      "step": 0,
+      "marked": false,
+      "oldMs": 2.567146000000321,
+      "newMs": 1.0853259999998954,
+      "amount": 3
+    },
+    {
+      "level": "c70",
+      "step": 0,
+      "marked": true,
+      "oldMs": 2.0295649999998204,
+      "newMs": 1.353661000000102,
+      "amount": 3
+    },
+    {
+      "level": "c70",
+      "step": 13,
+      "marked": false,
+      "oldMs": 0.9252509999996619,
+      "newMs": 1.2915100000000166,
+      "amount": 3
+    },
+    {
+      "level": "c70",
+      "step": 13,
+      "marked": true,
+      "oldMs": 0.6740119999999479,
+      "newMs": 0.9665610000001834,
+      "amount": 3
+    },
+    {
+      "level": "c70",
+      "step": 39,
+      "marked": false,
+      "oldMs": 0.44419299999981376,
+      "newMs": 0.4165330000000722,
+      "amount": 2
+    },
+    {
+      "level": "c70",
+      "step": 39,
+      "marked": true,
+      "oldMs": 0.8301810000002661,
+      "newMs": 0.4351599999999962,
+      "amount": 2
+    },
+    {
+      "level": "c71",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.4051359999998567,
+      "newMs": 0.21708900000021458,
+      "amount": 2
+    },
+    {
+      "level": "c71",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.31996099999969374,
+      "newMs": 0.15980500000023312,
+      "amount": 0
+    },
+    {
+      "level": "c71",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.22950800000035088,
+      "newMs": 0.13354600000002392,
+      "amount": 3
+    },
+    {
+      "level": "c71",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.2561569999998028,
+      "newMs": 0.14784800000006726,
+      "amount": 2
+    },
+    {
+      "level": "c71",
+      "step": 12,
+      "marked": false,
+      "oldMs": 0.06477500000028158,
+      "newMs": 0.04236200000013923,
+      "amount": 0
+    },
+    {
+      "level": "c71",
+      "step": 12,
+      "marked": true,
+      "oldMs": 0.023845000000164873,
+      "newMs": 0.016845000000103028,
+      "amount": 0
+    },
+    {
+      "level": "c72",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.5814860000000408,
+      "newMs": 0.5057739999997466,
+      "amount": 0
+    },
+    {
+      "level": "c72",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.100488999999925,
+      "newMs": 0.3930279999999584,
+      "amount": 0
+    },
+    {
+      "level": "c72",
+      "step": 8,
+      "marked": false,
+      "oldMs": 2.584842000000208,
+      "newMs": 0.2578690000000279,
+      "amount": 3
+    },
+    {
+      "level": "c72",
+      "step": 8,
+      "marked": true,
+      "oldMs": 6.413303000000269,
+      "newMs": 0.21619799999962197,
+      "amount": 3
+    },
+    {
+      "level": "c72",
+      "step": 24,
+      "marked": false,
+      "oldMs": 0.054020000000036816,
+      "newMs": 0.03382000000010521,
+      "amount": 0
+    },
+    {
+      "level": "c72",
+      "step": 24,
+      "marked": true,
+      "oldMs": 0.043593999999757216,
+      "newMs": 0.031617000000096596,
+      "amount": 0
+    },
+    {
+      "level": "c73",
+      "step": 0,
+      "marked": false,
+      "oldMs": 3.4649759999997514,
+      "newMs": 0.7484610000001339,
+      "amount": 3
+    },
+    {
+      "level": "c73",
+      "step": 0,
+      "marked": true,
+      "oldMs": 3.7261100000000624,
+      "newMs": 0.8024499999996806,
+      "amount": 3
+    },
+    {
+      "level": "c73",
+      "step": 16,
+      "marked": false,
+      "oldMs": 0.9067329999998037,
+      "newMs": 0.47323600000027,
+      "amount": 3
+    },
+    {
+      "level": "c73",
+      "step": 16,
+      "marked": true,
+      "oldMs": 0.9589899999996305,
+      "newMs": 0.5238710000003266,
+      "amount": 3
+    },
+    {
+      "level": "c73",
+      "step": 49,
+      "marked": false,
+      "oldMs": 5.920869000000039,
+      "newMs": 0.2267029999998158,
+      "amount": 3
+    },
+    {
+      "level": "c73",
+      "step": 49,
+      "marked": true,
+      "oldMs": 1.0145219999999426,
+      "newMs": 0.5193739999999707,
+      "amount": 2
+    },
+    {
+      "level": "c74",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.8752869999998438,
+      "newMs": 0.4226720000001478,
+      "amount": 0
+    },
+    {
+      "level": "c74",
+      "step": 0,
+      "marked": true,
+      "oldMs": 3.7844669999999496,
+      "newMs": 0.39317799999980707,
+      "amount": 0
+    },
+    {
+      "level": "c74",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.2500279999999293,
+      "newMs": 0.2657710000003135,
+      "amount": 0
+    },
+    {
+      "level": "c74",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.2559059999998681,
+      "newMs": 0.12514400000009118,
+      "amount": 0
+    },
+    {
+      "level": "c74",
+      "step": 25,
+      "marked": false,
+      "oldMs": 0.05987800000002608,
+      "newMs": 0.04109000000016749,
+      "amount": 0
+    },
+    {
+      "level": "c74",
+      "step": 25,
+      "marked": true,
+      "oldMs": 0.06909100000029866,
+      "newMs": 0.03722499999958018,
+      "amount": 0
+    },
+    {
+      "level": "c75",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.10965100000021266,
+      "newMs": 0.11700299999984054,
+      "amount": 2
+    },
+    {
+      "level": "c75",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.066287999999986,
+      "newMs": 1.5857829999999922,
+      "amount": 2
+    },
+    {
+      "level": "c75",
+      "step": 2,
+      "marked": false,
+      "oldMs": 0.07807500000035361,
+      "newMs": 0.08029799999985698,
+      "amount": 2
+    },
+    {
+      "level": "c75",
+      "step": 2,
+      "marked": true,
+      "oldMs": 3.2088199999998324,
+      "newMs": 0.13177399999995032,
+      "amount": 2
+    },
+    {
+      "level": "c75",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.015613000000030297,
+      "newMs": 0.007450999999946362,
+      "amount": 0
+    },
+    {
+      "level": "c75",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.007911999999578256,
+      "newMs": 0.005909000000428932,
+      "amount": 0
+    },
+    {
+      "level": "c76",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.4520250000000487,
+      "newMs": 0.6086460000001352,
+      "amount": 0
+    },
+    {
+      "level": "c76",
+      "step": 0,
+      "marked": true,
+      "oldMs": 2.2073169999998754,
+      "newMs": 0.480837000000065,
+      "amount": 0
+    },
+    {
+      "level": "c76",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.8705700000000434,
+      "newMs": 0.27094899999974587,
+      "amount": 3
+    },
+    {
+      "level": "c76",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.6520599999998922,
+      "newMs": 2.9479849999997896,
+      "amount": 3
+    },
+    {
+      "level": "c76",
+      "step": 32,
+      "marked": false,
+      "oldMs": 0.11216500000000451,
+      "newMs": 0.1099619999999959,
+      "amount": 0
+    },
+    {
+      "level": "c76",
+      "step": 32,
+      "marked": true,
+      "oldMs": 0.4125370000001567,
+      "newMs": 0.24532099999987622,
+      "amount": 0
+    },
+    {
+      "level": "c77",
+      "step": 0,
+      "marked": false,
+      "oldMs": 9.938728999999967,
+      "newMs": 3.741037999999662,
+      "amount": 3
+    },
+    {
+      "level": "c77",
+      "step": 0,
+      "marked": true,
+      "oldMs": 5.080273000000034,
+      "newMs": 1.2992199999998775,
+      "amount": 3
+    },
+    {
+      "level": "c77",
+      "step": 16,
+      "marked": false,
+      "oldMs": 2.8124869999996918,
+      "newMs": 0.47177400000009584,
+      "amount": 3
+    },
+    {
+      "level": "c77",
+      "step": 16,
+      "marked": true,
+      "oldMs": 2.841179000000011,
+      "newMs": 0.7510739999997895,
+      "amount": 3
+    },
+    {
+      "level": "c77",
+      "step": 50,
+      "marked": false,
+      "oldMs": 0.7129490000002079,
+      "newMs": 0.881155999999919,
+      "amount": 3
+    },
+    {
+      "level": "c77",
+      "step": 50,
+      "marked": true,
+      "oldMs": 0.5692180000000917,
+      "newMs": 0.8228500000000167,
+      "amount": 2
+    },
+    {
+      "level": "c78",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.7809390000002168,
+      "newMs": 0.8702499999999418,
+      "amount": 2
+    },
+    {
+      "level": "c78",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.8342469999997775,
+      "newMs": 0.48864899999989575,
+      "amount": 2
+    },
+    {
+      "level": "c78",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.26258599999982835,
+      "newMs": 0.1373319999997875,
+      "amount": 0
+    },
+    {
+      "level": "c78",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.3572950000002493,
+      "newMs": 0.10928100000000995,
+      "amount": 0
+    },
+    {
+      "level": "c78",
+      "step": 21,
+      "marked": false,
+      "oldMs": 0.04838100000006307,
+      "newMs": 0.03054500000007465,
+      "amount": 0
+    },
+    {
+      "level": "c78",
+      "step": 21,
+      "marked": true,
+      "oldMs": 0.04051000000026761,
+      "newMs": 0.028792000000066764,
+      "amount": 0
+    },
+    {
+      "level": "c79",
+      "step": 0,
+      "marked": false,
+      "oldMs": 3.2653129999998782,
+      "newMs": 0.6293960000002699,
+      "amount": 0
+    },
+    {
+      "level": "c79",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.7062290000003486,
+      "newMs": 0.6282839999998941,
+      "amount": 0
+    },
+    {
+      "level": "c79",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.6732900000001791,
+      "newMs": 0.28174399999988964,
+      "amount": 3
+    },
+    {
+      "level": "c79",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.5844390000002022,
+      "newMs": 0.26571100000001024,
+      "amount": 3
+    },
+    {
+      "level": "c79",
+      "step": 28,
+      "marked": false,
+      "oldMs": 0.052977999999711756,
+      "newMs": 0.03761500000018714,
+      "amount": 0
+    },
+    {
+      "level": "c79",
+      "step": 28,
+      "marked": true,
+      "oldMs": 0.10516400000005888,
+      "newMs": 0.30172399999992194,
+      "amount": 0
+    },
+    {
+      "level": "c80",
+      "step": 0,
+      "marked": false,
+      "oldMs": 9.50141500000018,
+      "newMs": 4.145758000000114,
+      "amount": 0
+    },
+    {
+      "level": "c80",
+      "step": 0,
+      "marked": true,
+      "oldMs": 8.462747000000036,
+      "newMs": 2.670618000000104,
+      "amount": 0
+    },
+    {
+      "level": "c80",
+      "step": 26,
+      "marked": false,
+      "oldMs": 4.7301870000001145,
+      "newMs": 1.0268309999996745,
+      "amount": 3
+    },
+    {
+      "level": "c80",
+      "step": 26,
+      "marked": true,
+      "oldMs": 2.9920310000002246,
+      "newMs": 0.8923230000000331,
+      "amount": 3
+    },
+    {
+      "level": "c80",
+      "step": 78,
+      "marked": false,
+      "oldMs": 1.2783100000001468,
+      "newMs": 0.7212110000000393,
+      "amount": 3
+    },
+    {
+      "level": "c80",
+      "step": 78,
+      "marked": true,
+      "oldMs": 1.1081189999999879,
+      "newMs": 0.7319870000001174,
+      "amount": 3
+    },
+    {
+      "level": "c81",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.03738500000008571,
+      "newMs": 0.02466599999979735,
+      "amount": 0
+    },
+    {
+      "level": "c81",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.026199000000360684,
+      "newMs": 0.07385799999974552,
+      "amount": 0
+    },
+    {
+      "level": "c81",
+      "step": 2,
+      "marked": false,
+      "oldMs": 0.03955900000028123,
+      "newMs": 0.030463999999938096,
+      "amount": 2
+    },
+    {
+      "level": "c81",
+      "step": 2,
+      "marked": true,
+      "oldMs": 0.039508000000296306,
+      "newMs": 0.01396100000010847,
+      "amount": 0
+    },
+    {
+      "level": "c81",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.00563800000008996,
+      "newMs": 0.004586999999901309,
+      "amount": 0
+    },
+    {
+      "level": "c81",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.004456000000118365,
+      "newMs": 0.0055889999998726125,
+      "amount": 0
+    },
+    {
+      "level": "c82",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.9510690000001887,
+      "newMs": 0.40283199999976205,
+      "amount": 2
+    },
+    {
+      "level": "c82",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.4158530000004248,
+      "newMs": 0.4850429999996777,
+      "amount": 2
+    },
+    {
+      "level": "c82",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.5042319999997744,
+      "newMs": 0.2493970000000445,
+      "amount": 3
+    },
+    {
+      "level": "c82",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.369452999999794,
+      "newMs": 0.20016500000019732,
+      "amount": 3
+    },
+    {
+      "level": "c82",
+      "step": 27,
+      "marked": false,
+      "oldMs": 0.06609700000035446,
+      "newMs": 0.06366299999990588,
+      "amount": 0
+    },
+    {
+      "level": "c82",
+      "step": 27,
+      "marked": true,
+      "oldMs": 0.05782499999986612,
+      "newMs": 0.047159000000192464,
+      "amount": 0
+    },
+    {
+      "level": "c83",
+      "step": 0,
+      "marked": false,
+      "oldMs": 2.0871799999999894,
+      "newMs": 0.6867300000003524,
+      "amount": 3
+    },
+    {
+      "level": "c83",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.5004870000002484,
+      "newMs": 1.0123690000000352,
+      "amount": 3
+    },
+    {
+      "level": "c83",
+      "step": 13,
+      "marked": false,
+      "oldMs": 0.8277979999998024,
+      "newMs": 0.5229589999999007,
+      "amount": 3
+    },
+    {
+      "level": "c83",
+      "step": 13,
+      "marked": true,
+      "oldMs": 0.6203729999997449,
+      "newMs": 0.3909850000000006,
+      "amount": 3
+    },
+    {
+      "level": "c83",
+      "step": 39,
+      "marked": false,
+      "oldMs": 0.26096400000005815,
+      "newMs": 0.08712800000012066,
+      "amount": 0
+    },
+    {
+      "level": "c83",
+      "step": 39,
+      "marked": true,
+      "oldMs": 0.19592800000009447,
+      "newMs": 0.103291999999783,
+      "amount": 0
+    },
+    {
+      "level": "c84",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.180286000000251,
+      "newMs": 1.7315770000000157,
+      "amount": 2
+    },
+    {
+      "level": "c84",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.5483370000001742,
+      "newMs": 0.5084679999999935,
+      "amount": 2
+    },
+    {
+      "level": "c84",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.64850400000023,
+      "newMs": 0.2365469999999732,
+      "amount": 3
+    },
+    {
+      "level": "c84",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.420238000000154,
+      "newMs": 0.2460120000000643,
+      "amount": 3
+    },
+    {
+      "level": "c84",
+      "step": 27,
+      "marked": false,
+      "oldMs": 0.2292170000000624,
+      "newMs": 0.13358599999992293,
+      "amount": 2
+    },
+    {
+      "level": "c84",
+      "step": 27,
+      "marked": true,
+      "oldMs": 0.05426899999974921,
+      "newMs": 0.036063000000012835,
+      "amount": 0
+    },
+    {
+      "level": "c85",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.28894499999978507,
+      "newMs": 0.49946500000032756,
+      "amount": 2
+    },
+    {
+      "level": "c85",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.1774209999998675,
+      "newMs": 0.10006699999985358,
+      "amount": 2
+    },
+    {
+      "level": "c85",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.4058769999996912,
+      "newMs": 0.044165000000248256,
+      "amount": 0
+    },
+    {
+      "level": "c85",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.060578999999961525,
+      "newMs": 0.03553199999987555,
+      "amount": 0
+    },
+    {
+      "level": "c85",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.013429999999971187,
+      "newMs": 0.010375000000294676,
+      "amount": 0
+    },
+    {
+      "level": "c85",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.01120600000012928,
+      "newMs": 0.008842999999615131,
+      "amount": 0
+    },
+    {
+      "level": "c86",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.2100789999999506,
+      "newMs": 0.12346200000001772,
+      "amount": 3
+    },
+    {
+      "level": "c86",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.1745069999997213,
+      "newMs": 0.10923000000002503,
+      "amount": 3
+    },
+    {
+      "level": "c86",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.19885299999987183,
+      "newMs": 0.08530500000006214,
+      "amount": 3
+    },
+    {
+      "level": "c86",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.13084299999991345,
+      "newMs": 0.07708300000012969,
+      "amount": 3
+    },
+    {
+      "level": "c86",
+      "step": 13,
+      "marked": false,
+      "oldMs": 0.06204199999956472,
+      "newMs": 0.11570000000028813,
+      "amount": 2
+    },
+    {
+      "level": "c86",
+      "step": 13,
+      "marked": true,
+      "oldMs": 0.014390999999704945,
+      "newMs": 0.011246999999912077,
+      "amount": 0
+    },
+    {
+      "level": "c87",
+      "step": 0,
+      "marked": false,
+      "oldMs": 5.012731999999687,
+      "newMs": 1.0937290000001667,
+      "amount": 0
+    },
+    {
+      "level": "c87",
+      "step": 0,
+      "marked": true,
+      "oldMs": 3.4025250000004235,
+      "newMs": 1.8628199999998287,
+      "amount": 0
+    },
+    {
+      "level": "c87",
+      "step": 17,
+      "marked": false,
+      "oldMs": 1.7127690000002076,
+      "newMs": 0.5674349999999322,
+      "amount": 3
+    },
+    {
+      "level": "c87",
+      "step": 17,
+      "marked": true,
+      "oldMs": 1.5803240000000187,
+      "newMs": 0.6565160000000105,
+      "amount": 3
+    },
+    {
+      "level": "c87",
+      "step": 51,
+      "marked": false,
+      "oldMs": 0.38196200000038516,
+      "newMs": 0.4208690000000388,
+      "amount": 2
+    },
+    {
+      "level": "c87",
+      "step": 51,
+      "marked": true,
+      "oldMs": 0.19884200000024066,
+      "newMs": 0.2241399999998066,
+      "amount": 0
+    },
+    {
+      "level": "c88",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.10335299999997,
+      "newMs": 0.4024920000001657,
+      "amount": 0
+    },
+    {
+      "level": "c88",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.08676800000012,
+      "newMs": 0.34426699999994526,
+      "amount": 0
+    },
+    {
+      "level": "c88",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.423862999999983,
+      "newMs": 0.18267900000000736,
+      "amount": 3
+    },
+    {
+      "level": "c88",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.40215100000023085,
+      "newMs": 0.20659399999976813,
+      "amount": 3
+    },
+    {
+      "level": "c88",
+      "step": 29,
+      "marked": false,
+      "oldMs": 0.14488299999993615,
+      "newMs": 0.12446300000010524,
+      "amount": 3
+    },
+    {
+      "level": "c88",
+      "step": 29,
+      "marked": true,
+      "oldMs": 0.26682199999959266,
+      "newMs": 0.1255949999999757,
+      "amount": 3
+    },
+    {
+      "level": "c89",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.0798979999999574,
+      "newMs": 0.3195099999998092,
+      "amount": 0
+    },
+    {
+      "level": "c89",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.9012859999998,
+      "newMs": 0.27175000000033833,
+      "amount": 0
+    },
+    {
+      "level": "c89",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.2872419999998783,
+      "newMs": 0.29655700000012075,
+      "amount": 3
+    },
+    {
+      "level": "c89",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.2824550000000272,
+      "newMs": 0.207524999999805,
+      "amount": 2
+    },
+    {
+      "level": "c89",
+      "step": 24,
+      "marked": false,
+      "oldMs": 0.05737500000032014,
+      "newMs": 0.03316799999993236,
+      "amount": 0
+    },
+    {
+      "level": "c89",
+      "step": 24,
+      "marked": true,
+      "oldMs": 0.042823000000225875,
+      "newMs": 0.02899200000001656,
+      "amount": 0
+    },
+    {
+      "level": "c90",
+      "step": 0,
+      "marked": false,
+      "oldMs": 11.171691999999894,
+      "newMs": 2.477784000000156,
+      "amount": 3
+    },
+    {
+      "level": "c90",
+      "step": 0,
+      "marked": true,
+      "oldMs": 10.559291999999914,
+      "newMs": 2.62371899999971,
+      "amount": 3
+    },
+    {
+      "level": "c90",
+      "step": 28,
+      "marked": false,
+      "oldMs": 1.875358000000233,
+      "newMs": 1.0849359999997432,
+      "amount": 3
+    },
+    {
+      "level": "c90",
+      "step": 28,
+      "marked": true,
+      "oldMs": 1.7782449999999699,
+      "newMs": 1.2371800000000803,
+      "amount": 3
+    },
+    {
+      "level": "c90",
+      "step": 84,
+      "marked": false,
+      "oldMs": 1.5518620000002556,
+      "newMs": 0.3851369999997587,
+      "amount": 3
+    },
+    {
+      "level": "c90",
+      "step": 84,
+      "marked": true,
+      "oldMs": 1.5799839999999676,
+      "newMs": 0.3949410000000171,
+      "amount": 3
+    },
+    {
+      "level": "c91",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.13674099999980172,
+      "newMs": 0.07519100000035905,
+      "amount": 0
+    },
+    {
+      "level": "c91",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.14572499999985666,
+      "newMs": 0.05646299999989424,
+      "amount": 0
+    },
+    {
+      "level": "c91",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.05058499999995547,
+      "newMs": 0.03729400000020178,
+      "amount": 0
+    },
+    {
+      "level": "c91",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.04451500000004671,
+      "newMs": 0.03190700000004654,
+      "amount": 0
+    },
+    {
+      "level": "c91",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.01726600000029066,
+      "newMs": 0.011696999999912805,
+      "amount": 0
+    },
+    {
+      "level": "c91",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.012287999999898602,
+      "newMs": 0.00928299999986848,
+      "amount": 0
+    },
+    {
+      "level": "c92",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.2544050000001334,
+      "newMs": 0.7896009999999478,
+      "amount": 0
+    },
+    {
+      "level": "c92",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.1279190000000199,
+      "newMs": 0.37681400000019494,
+      "amount": 0
+    },
+    {
+      "level": "c92",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.4113649999999325,
+      "newMs": 0.24038400000017646,
+      "amount": 3
+    },
+    {
+      "level": "c92",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.33206799999970826,
+      "newMs": 0.2871530000002167,
+      "amount": 3
+    },
+    {
+      "level": "c92",
+      "step": 30,
+      "marked": false,
+      "oldMs": 0.08935199999996257,
+      "newMs": 0.0555410000001757,
+      "amount": 0
+    },
+    {
+      "level": "c92",
+      "step": 30,
+      "marked": true,
+      "oldMs": 0.07744300000013027,
+      "newMs": 0.05011400000012145,
+      "amount": 0
+    },
+    {
+      "level": "c93",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.4610679999996137,
+      "newMs": 0.21025900000040565,
+      "amount": 3
+    },
+    {
+      "level": "c93",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.28860500000018874,
+      "newMs": 0.21713899999986097,
+      "amount": 3
+    },
+    {
+      "level": "c93",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.10799900000029083,
+      "newMs": 0.06948199999987992,
+      "amount": 0
+    },
+    {
+      "level": "c93",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.09387799999967683,
+      "newMs": 0.07339799999999741,
+      "amount": 0
+    },
+    {
+      "level": "c93",
+      "step": 18,
+      "marked": false,
+      "oldMs": 0.09486900000001697,
+      "newMs": 0.07479000000012093,
+      "amount": 3
+    },
+    {
+      "level": "c93",
+      "step": 18,
+      "marked": true,
+      "oldMs": 0.08474499999965701,
+      "newMs": 0.07749400000011519,
+      "amount": 3
+    },
+    {
+      "level": "c94",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.757614999999987,
+      "newMs": 0.30723200000011275,
+      "amount": 3
+    },
+    {
+      "level": "c94",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.0493440000000192,
+      "newMs": 0.5915099999997437,
+      "amount": 3
+    },
+    {
+      "level": "c94",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.4556000000002314,
+      "newMs": 0.17874299999994037,
+      "amount": 3
+    },
+    {
+      "level": "c94",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.3231660000001284,
+      "newMs": 0.15705099999968297,
+      "amount": 3
+    },
+    {
+      "level": "c94",
+      "step": 23,
+      "marked": false,
+      "oldMs": 0.1050439999999071,
+      "newMs": 0.11124400000016976,
+      "amount": 2
+    },
+    {
+      "level": "c94",
+      "step": 23,
+      "marked": true,
+      "oldMs": 0.09797400000024936,
+      "newMs": 0.09043299999984811,
+      "amount": 2
+    },
+    {
+      "level": "c95",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.10914999999977226,
+      "newMs": 0.07822500000020227,
+      "amount": 2
+    },
+    {
+      "level": "c95",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.061560000000099535,
+      "newMs": 0.039588999999978114,
+      "amount": 0
+    },
+    {
+      "level": "c95",
+      "step": 2,
+      "marked": false,
+      "oldMs": 0.04274299999997311,
+      "newMs": 0.027880999999979394,
+      "amount": 0
+    },
+    {
+      "level": "c95",
+      "step": 2,
+      "marked": true,
+      "oldMs": 0.04026900000008027,
+      "newMs": 0.024055000000316795,
+      "amount": 0
+    },
+    {
+      "level": "c95",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.008763000000271859,
+      "newMs": 0.007790999999997439,
+      "amount": 0
+    },
+    {
+      "level": "c95",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.006790000000364671,
+      "newMs": 0.006098999999721855,
+      "amount": 0
+    },
+    {
+      "level": "c96",
+      "step": 0,
+      "marked": false,
+      "oldMs": 2.0009430000000066,
+      "newMs": 0.3930479999999079,
+      "amount": 3
+    },
+    {
+      "level": "c96",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.3336819999999534,
+      "newMs": 0.3922170000000733,
+      "amount": 3
+    },
+    {
+      "level": "c96",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.5802929999999833,
+      "newMs": 0.37968899999987116,
+      "amount": 3
+    },
+    {
+      "level": "c96",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.8472560000000158,
+      "newMs": 0.3533590000001823,
+      "amount": 2
+    },
+    {
+      "level": "c96",
+      "step": 31,
+      "marked": false,
+      "oldMs": 0.17509800000016185,
+      "newMs": 0.14915900000005422,
+      "amount": 2
+    },
+    {
+      "level": "c96",
+      "step": 31,
+      "marked": true,
+      "oldMs": 0.4691100000000006,
+      "newMs": 0.152274000000034,
+      "amount": 2
+    },
+    {
+      "level": "c97",
+      "step": 0,
+      "marked": false,
+      "oldMs": 2.815791999999874,
+      "newMs": 0.6648079999999936,
+      "amount": 3
+    },
+    {
+      "level": "c97",
+      "step": 0,
+      "marked": true,
+      "oldMs": 2.4658469999999397,
+      "newMs": 0.6042090000000826,
+      "amount": 3
+    },
+    {
+      "level": "c97",
+      "step": 14,
+      "marked": false,
+      "oldMs": 1.085026000000198,
+      "newMs": 0.5100600000000668,
+      "amount": 3
+    },
+    {
+      "level": "c97",
+      "step": 14,
+      "marked": true,
+      "oldMs": 1.7991010000000642,
+      "newMs": 0.9723200000003089,
+      "amount": 2
+    },
+    {
+      "level": "c97",
+      "step": 43,
+      "marked": false,
+      "oldMs": 0.19982400000026246,
+      "newMs": 0.09418799999957628,
+      "amount": 0
+    },
+    {
+      "level": "c97",
+      "step": 43,
+      "marked": true,
+      "oldMs": 0.24938699999984237,
+      "newMs": 0.15377600000010716,
+      "amount": 0
+    },
+    {
+      "level": "c98",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.0039960000003703,
+      "newMs": 0.9257119999997485,
+      "amount": 0
+    },
+    {
+      "level": "c98",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.9621950000000652,
+      "newMs": 0.40854099999978644,
+      "amount": 0
+    },
+    {
+      "level": "c98",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.19391499999983353,
+      "newMs": 0.18663500000002387,
+      "amount": 0
+    },
+    {
+      "level": "c98",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.18612400000029083,
+      "newMs": 0.21153099999992264,
+      "amount": 0
+    },
+    {
+      "level": "c98",
+      "step": 24,
+      "marked": false,
+      "oldMs": 0.3235859999999775,
+      "newMs": 0.167355999999927,
+      "amount": 3
+    },
+    {
+      "level": "c98",
+      "step": 24,
+      "marked": true,
+      "oldMs": 0.21016899999995076,
+      "newMs": 0.2747340000000804,
+      "amount": 3
+    },
+    {
+      "level": "c99",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.7200390000002699,
+      "newMs": 0.4406979999998839,
+      "amount": 0
+    },
+    {
+      "level": "c99",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.612681000000066,
+      "newMs": 0.4069880000001831,
+      "amount": 0
+    },
+    {
+      "level": "c99",
+      "step": 7,
+      "marked": false,
+      "oldMs": 0.706930000000284,
+      "newMs": 1.45241599999963,
+      "amount": 2
+    },
+    {
+      "level": "c99",
+      "step": 7,
+      "marked": true,
+      "oldMs": 0.5882350000001679,
+      "newMs": 0.358777999999802,
+      "amount": 2
+    },
+    {
+      "level": "c99",
+      "step": 22,
+      "marked": false,
+      "oldMs": 0.12645599999996193,
+      "newMs": 0.1543269999997392,
+      "amount": 2
+    },
+    {
+      "level": "c99",
+      "step": 22,
+      "marked": true,
+      "oldMs": 0.04581700000017008,
+      "newMs": 0.03015499999992244,
+      "amount": 0
+    },
+    {
+      "level": "c100",
+      "step": 0,
+      "marked": false,
+      "oldMs": 9.301621999999952,
+      "newMs": 4.320784999999887,
+      "amount": 2
+    },
+    {
+      "level": "c100",
+      "step": 0,
+      "marked": true,
+      "oldMs": 9.233020000000124,
+      "newMs": 2.47232699999995,
+      "amount": 2
+    },
+    {
+      "level": "c100",
+      "step": 23,
+      "marked": false,
+      "oldMs": 1.7743199999999888,
+      "newMs": 1.115099999999984,
+      "amount": 3
+    },
+    {
+      "level": "c100",
+      "step": 23,
+      "marked": true,
+      "oldMs": 2.010547000000315,
+      "newMs": 1.0999879999999393,
+      "amount": 3
+    },
+    {
+      "level": "c100",
+      "step": 70,
+      "marked": false,
+      "oldMs": 1.5893379999997705,
+      "newMs": 0.8573410000003605,
+      "amount": 3
+    },
+    {
+      "level": "c100",
+      "step": 70,
+      "marked": true,
+      "oldMs": 0.828429000000142,
+      "newMs": 0.630247000000054,
+      "amount": 3
+    },
+    {
+      "level": "c101",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.4072590000000673,
+      "newMs": 0.20370999999977357,
+      "amount": 0
+    },
+    {
+      "level": "c101",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.33083699999997407,
+      "newMs": 0.12909999999965294,
+      "amount": 0
+    },
+    {
+      "level": "c101",
+      "step": 5,
+      "marked": false,
+      "oldMs": 0.133335999999872,
+      "newMs": 0.10747800000035568,
+      "amount": 0
+    },
+    {
+      "level": "c101",
+      "step": 5,
+      "marked": true,
+      "oldMs": 0.12170900000000984,
+      "newMs": 0.0626220000003741,
+      "amount": 0
+    },
+    {
+      "level": "c101",
+      "step": 17,
+      "marked": false,
+      "oldMs": 0.02611800000022413,
+      "newMs": 0.018687999999656313,
+      "amount": 0
+    },
+    {
+      "level": "c101",
+      "step": 17,
+      "marked": true,
+      "oldMs": 0.02097100000037244,
+      "newMs": 0.01600399999961155,
+      "amount": 0
+    },
+    {
+      "level": "c102",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.38386399999990317,
+      "newMs": 0.18343999999979133,
+      "amount": 0
+    },
+    {
+      "level": "c102",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.714390000000094,
+      "newMs": 0.5142369999998664,
+      "amount": 0
+    },
+    {
+      "level": "c102",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.1349579999996422,
+      "newMs": 0.2788500000001477,
+      "amount": 3
+    },
+    {
+      "level": "c102",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.12010599999985061,
+      "newMs": 0.18630400000029113,
+      "amount": 3
+    },
+    {
+      "level": "c102",
+      "step": 18,
+      "marked": false,
+      "oldMs": 0.06619799999998577,
+      "newMs": 0.044504999999844586,
+      "amount": 0
+    },
+    {
+      "level": "c102",
+      "step": 18,
+      "marked": true,
+      "oldMs": 0.059496999999737454,
+      "newMs": 0.04215199999998731,
+      "amount": 0
+    },
+    {
+      "level": "c103",
+      "step": 0,
+      "marked": false,
+      "oldMs": 2.435602999999901,
+      "newMs": 0.8819469999998546,
+      "amount": 3
+    },
+    {
+      "level": "c103",
+      "step": 0,
+      "marked": true,
+      "oldMs": 2.9407750000000306,
+      "newMs": 1.4996660000001611,
+      "amount": 3
+    },
+    {
+      "level": "c103",
+      "step": 15,
+      "marked": false,
+      "oldMs": 0.9955939999999828,
+      "newMs": 0.405236000000059,
+      "amount": 3
+    },
+    {
+      "level": "c103",
+      "step": 15,
+      "marked": true,
+      "oldMs": 0.5768489999995836,
+      "newMs": 1.023084000000381,
+      "amount": 3
+    },
+    {
+      "level": "c103",
+      "step": 47,
+      "marked": false,
+      "oldMs": 0.2625359999997272,
+      "newMs": 0.14738700000043536,
+      "amount": 0
+    },
+    {
+      "level": "c103",
+      "step": 47,
+      "marked": true,
+      "oldMs": 0.2763669999999365,
+      "newMs": 0.1465859999998429,
+      "amount": 0
+    },
+    {
+      "level": "c104",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.23767899999984365,
+      "newMs": 0.14867899999990186,
+      "amount": 2
+    },
+    {
+      "level": "c104",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.2341639999999643,
+      "newMs": 0.14206899999999223,
+      "amount": 2
+    },
+    {
+      "level": "c104",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.0893820000001142,
+      "newMs": 0.05237699999997858,
+      "amount": 0
+    },
+    {
+      "level": "c104",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.0823219999997491,
+      "newMs": 0.049993000000085885,
+      "amount": 0
+    },
+    {
+      "level": "c104",
+      "step": 10,
+      "marked": false,
+      "oldMs": 0.01960800000006202,
+      "newMs": 0.015833999999813386,
+      "amount": 0
+    },
+    {
+      "level": "c104",
+      "step": 10,
+      "marked": true,
+      "oldMs": 0.01752600000008897,
+      "newMs": 0.014591999999993277,
+      "amount": 0
+    },
+    {
+      "level": "c105",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.21554699999978766,
+      "newMs": 0.1420379999999568,
+      "amount": 3
+    },
+    {
+      "level": "c105",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.2371090000001459,
+      "newMs": 0.16662499999983993,
+      "amount": 2
+    },
+    {
+      "level": "c105",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.10745799999995143,
+      "newMs": 0.0493930000002365,
+      "amount": 0
+    },
+    {
+      "level": "c105",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.106836999999814,
+      "newMs": 0.04734999999982392,
+      "amount": 0
+    },
+    {
+      "level": "c105",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.014211000000159402,
+      "newMs": 0.01148700000021563,
+      "amount": 0
+    },
+    {
+      "level": "c105",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.012978999999631924,
+      "newMs": 0.01021500000024389,
+      "amount": 0
+    },
+    {
+      "level": "c106",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.5810750000000553,
+      "newMs": 0.2826959999997598,
+      "amount": 3
+    },
+    {
+      "level": "c106",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.4547090000000935,
+      "newMs": 0.20299800000020696,
+      "amount": 3
+    },
+    {
+      "level": "c106",
+      "step": 5,
+      "marked": false,
+      "oldMs": 0.31357200000002194,
+      "newMs": 0.13804300000037983,
+      "amount": 3
+    },
+    {
+      "level": "c106",
+      "step": 5,
+      "marked": true,
+      "oldMs": 0.43851500000027954,
+      "newMs": 0.1384530000000268,
+      "amount": 3
+    },
+    {
+      "level": "c106",
+      "step": 16,
+      "marked": false,
+      "oldMs": 0.04063900000028298,
+      "newMs": 0.031736999999793625,
+      "amount": 0
+    },
+    {
+      "level": "c106",
+      "step": 16,
+      "marked": true,
+      "oldMs": 0.03591299999970943,
+      "newMs": 0.02782100000013088,
+      "amount": 0
+    },
+    {
+      "level": "c107",
+      "step": 0,
+      "marked": false,
+      "oldMs": 6.021335999999792,
+      "newMs": 2.493949000000157,
+      "amount": 3
+    },
+    {
+      "level": "c107",
+      "step": 0,
+      "marked": true,
+      "oldMs": 6.261089999999967,
+      "newMs": 2.1862059999998564,
+      "amount": 3
+    },
+    {
+      "level": "c107",
+      "step": 18,
+      "marked": false,
+      "oldMs": 1.7391280000001643,
+      "newMs": 0.5567689999998038,
+      "amount": 3
+    },
+    {
+      "level": "c107",
+      "step": 18,
+      "marked": true,
+      "oldMs": 1.2371989999996913,
+      "newMs": 0.47004199999992125,
+      "amount": 3
+    },
+    {
+      "level": "c107",
+      "step": 54,
+      "marked": false,
+      "oldMs": 0.2787900000002992,
+      "newMs": 0.12651599999981045,
+      "amount": 0
+    },
+    {
+      "level": "c107",
+      "step": 54,
+      "marked": true,
+      "oldMs": 0.22715400000015507,
+      "newMs": 0.12156800000002477,
+      "amount": 0
+    },
+    {
+      "level": "c108",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.6725589999996373,
+      "newMs": 0.39541100000042206,
+      "amount": 3
+    },
+    {
+      "level": "c108",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.9502279999996972,
+      "newMs": 0.4428609999999935,
+      "amount": 3
+    },
+    {
+      "level": "c108",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.4287610000001223,
+      "newMs": 0.20427999999992608,
+      "amount": 3
+    },
+    {
+      "level": "c108",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.3999289999997018,
+      "newMs": 0.22496099999989383,
+      "amount": 3
+    },
+    {
+      "level": "c108",
+      "step": 20,
+      "marked": false,
+      "oldMs": 0.07218599999987418,
+      "newMs": 0.0448660000001837,
+      "amount": 0
+    },
+    {
+      "level": "c108",
+      "step": 20,
+      "marked": true,
+      "oldMs": 0.062251000000287604,
+      "newMs": 0.04159200000003693,
+      "amount": 0
+    },
+    {
+      "level": "c109",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.4665260000001581,
+      "newMs": 0.18997999999965032,
+      "amount": 0
+    },
+    {
+      "level": "c109",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.42866099999992,
+      "newMs": 0.183299000000261,
+      "amount": 0
+    },
+    {
+      "level": "c109",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.2241199999998571,
+      "newMs": 0.10503400000015972,
+      "amount": 0
+    },
+    {
+      "level": "c109",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.2151770000000397,
+      "newMs": 0.0990750000000844,
+      "amount": 0
+    },
+    {
+      "level": "c109",
+      "step": 14,
+      "marked": false,
+      "oldMs": 0.143970999999965,
+      "newMs": 0.13305599999966944,
+      "amount": 3
+    },
+    {
+      "level": "c109",
+      "step": 14,
+      "marked": true,
+      "oldMs": 0.23534599999993588,
+      "newMs": 0.1008879999999408,
+      "amount": 2
+    },
+    {
+      "level": "c110",
+      "step": 0,
+      "marked": false,
+      "oldMs": 4.333342999999786,
+      "newMs": 1.115451000000121,
+      "amount": 3
+    },
+    {
+      "level": "c110",
+      "step": 0,
+      "marked": true,
+      "oldMs": 4.02192500000001,
+      "newMs": 1.4205090000000382,
+      "amount": 3
+    },
+    {
+      "level": "c110",
+      "step": 21,
+      "marked": false,
+      "oldMs": 2.191624000000047,
+      "newMs": 0.8666950000001634,
+      "amount": 3
+    },
+    {
+      "level": "c110",
+      "step": 21,
+      "marked": true,
+      "oldMs": 2.2721819999997024,
+      "newMs": 0.8031720000003588,
+      "amount": 3
+    },
+    {
+      "level": "c110",
+      "step": 63,
+      "marked": false,
+      "oldMs": 0.859353999999712,
+      "newMs": 0.5626780000002327,
+      "amount": 3
+    },
+    {
+      "level": "c110",
+      "step": 63,
+      "marked": true,
+      "oldMs": 1.0339109999999891,
+      "newMs": 0.8274670000000697,
+      "amount": 3
+    },
+    {
+      "level": "c111",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.3143929999996544,
+      "newMs": 0.1386130000000776,
+      "amount": 3
+    },
+    {
+      "level": "c111",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.36050999999997657,
+      "newMs": 0.23192100000005667,
+      "amount": 2
+    },
+    {
+      "level": "c111",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.15554900000006455,
+      "newMs": 0.14962999999988824,
+      "amount": 2
+    },
+    {
+      "level": "c111",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.19061099999998987,
+      "newMs": 0.09862500000008367,
+      "amount": 2
+    },
+    {
+      "level": "c111",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.018346999999721447,
+      "newMs": 0.01498200000014549,
+      "amount": 0
+    },
+    {
+      "level": "c111",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.01301999999986947,
+      "newMs": 0.010896000000229833,
+      "amount": 0
+    },
+    {
+      "level": "c112",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.25440400000024965,
+      "newMs": 0.15516799999977593,
+      "amount": 3
+    },
+    {
+      "level": "c112",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.3435349999999744,
+      "newMs": 0.10210999999981141,
+      "amount": 3
+    },
+    {
+      "level": "c112",
+      "step": 4,
+      "marked": false,
+      "oldMs": 0.12208899999995992,
+      "newMs": 0.06927200000018274,
+      "amount": 3
+    },
+    {
+      "level": "c112",
+      "step": 4,
+      "marked": true,
+      "oldMs": 0.11542899999994916,
+      "newMs": 0.06648799999993571,
+      "amount": 3
+    },
+    {
+      "level": "c112",
+      "step": 13,
+      "marked": false,
+      "oldMs": 0.018176999999923282,
+      "newMs": 0.01407100000005812,
+      "amount": 0
+    },
+    {
+      "level": "c112",
+      "step": 13,
+      "marked": true,
+      "oldMs": 0.014752000000044063,
+      "newMs": 0.012087000000065018,
+      "amount": 0
+    },
+    {
+      "level": "c113",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.2579200000000128,
+      "newMs": 0.5188630000002377,
+      "amount": 0
+    },
+    {
+      "level": "c113",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.1698410000003605,
+      "newMs": 0.6606609999998909,
+      "amount": 0
+    },
+    {
+      "level": "c113",
+      "step": 13,
+      "marked": false,
+      "oldMs": 0.9072339999997894,
+      "newMs": 0.2978579999999056,
+      "amount": 3
+    },
+    {
+      "level": "c113",
+      "step": 13,
+      "marked": true,
+      "oldMs": 0.7529680000002372,
+      "newMs": 0.27666699999963384,
+      "amount": 3
+    },
+    {
+      "level": "c113",
+      "step": 39,
+      "marked": false,
+      "oldMs": 0.38953300000002855,
+      "newMs": 0.31077700000014374,
+      "amount": 2
+    },
+    {
+      "level": "c113",
+      "step": 39,
+      "marked": true,
+      "oldMs": 0.24879600000031132,
+      "newMs": 0.18654399999968518,
+      "amount": 2
+    },
+    {
+      "level": "c114",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.7999660000000404,
+      "newMs": 0.27001700000027995,
+      "amount": 3
+    },
+    {
+      "level": "c114",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.8730949999999211,
+      "newMs": 0.2915090000001328,
+      "amount": 3
+    },
+    {
+      "level": "c114",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.43797399999994013,
+      "newMs": 0.14866900000015448,
+      "amount": 3
+    },
+    {
+      "level": "c114",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.5327339999998912,
+      "newMs": 0.20206700000017008,
+      "amount": 3
+    },
+    {
+      "level": "c114",
+      "step": 26,
+      "marked": false,
+      "oldMs": 0.18545300000005227,
+      "newMs": 0.1649720000000343,
+      "amount": 3
+    },
+    {
+      "level": "c114",
+      "step": 26,
+      "marked": true,
+      "oldMs": 0.10929100000021208,
+      "newMs": 0.09143399999993562,
+      "amount": 3
+    },
+    {
+      "level": "c115",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.1006680000000415,
+      "newMs": 0.14543400000002293,
+      "amount": 0
+    },
+    {
+      "level": "c115",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.09392800000023271,
+      "newMs": 0.06499600000006467,
+      "amount": 0
+    },
+    {
+      "level": "c115",
+      "step": 3,
+      "marked": false,
+      "oldMs": 0.08489499999996042,
+      "newMs": 0.06259200000022247,
+      "amount": 3
+    },
+    {
+      "level": "c115",
+      "step": 3,
+      "marked": true,
+      "oldMs": 0.07553099999995538,
+      "newMs": 0.05897700000014083,
+      "amount": 2
+    },
+    {
+      "level": "c115",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.008792999999968742,
+      "newMs": 0.007311000000299828,
+      "amount": 0
+    },
+    {
+      "level": "c115",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.006530000000111613,
+      "newMs": 0.006069000000024971,
+      "amount": 0
+    },
+    {
+      "level": "c116",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.9958739999997306,
+      "newMs": 0.3334810000001198,
+      "amount": 0
+    },
+    {
+      "level": "c116",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.0522180000002663,
+      "newMs": 0.36882199999990917,
+      "amount": 0
+    },
+    {
+      "level": "c116",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.21455599999990227,
+      "newMs": 0.16338999999970838,
+      "amount": 3
+    },
+    {
+      "level": "c116",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.18876799999998184,
+      "newMs": 0.17699999999967986,
+      "amount": 3
+    },
+    {
+      "level": "c116",
+      "step": 27,
+      "marked": false,
+      "oldMs": 0.1251640000000407,
+      "newMs": 0.09195499999987078,
+      "amount": 3
+    },
+    {
+      "level": "c116",
+      "step": 27,
+      "marked": true,
+      "oldMs": 0.11298600000009174,
+      "newMs": 0.10847899999998845,
+      "amount": 2
+    },
+    {
+      "level": "c117",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.33247899999969377,
+      "newMs": 0.29114800000024843,
+      "amount": 3
+    },
+    {
+      "level": "c117",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.28128400000014153,
+      "newMs": 0.21305299999994531,
+      "amount": 3
+    },
+    {
+      "level": "c117",
+      "step": 6,
+      "marked": false,
+      "oldMs": 0.25977199999988443,
+      "newMs": 0.11038200000029974,
+      "amount": 3
+    },
+    {
+      "level": "c117",
+      "step": 6,
+      "marked": true,
+      "oldMs": 0.19157199999972363,
+      "newMs": 0.1030310000001009,
+      "amount": 3
+    },
+    {
+      "level": "c117",
+      "step": 19,
+      "marked": false,
+      "oldMs": 0.03187600000001112,
+      "newMs": 0.024597000000085245,
+      "amount": 0
+    },
+    {
+      "level": "c117",
+      "step": 19,
+      "marked": true,
+      "oldMs": 0.08240099999966333,
+      "newMs": 0.024386000000049535,
+      "amount": 0
+    },
+    {
+      "level": "c118",
+      "step": 0,
+      "marked": false,
+      "oldMs": 1.70761100000027,
+      "newMs": 1.0313469999996414,
+      "amount": 2
+    },
+    {
+      "level": "c118",
+      "step": 0,
+      "marked": true,
+      "oldMs": 1.7951610000000073,
+      "newMs": 0.6043480000003001,
+      "amount": 2
+    },
+    {
+      "level": "c118",
+      "step": 9,
+      "marked": false,
+      "oldMs": 0.6767449999997552,
+      "newMs": 0.27097900000035224,
+      "amount": 3
+    },
+    {
+      "level": "c118",
+      "step": 9,
+      "marked": true,
+      "oldMs": 0.6334910000000491,
+      "newMs": 0.31277000000000044,
+      "amount": 3
+    },
+    {
+      "level": "c118",
+      "step": 29,
+      "marked": false,
+      "oldMs": 0.24916600000005928,
+      "newMs": 0.228226000000177,
+      "amount": 2
+    },
+    {
+      "level": "c118",
+      "step": 29,
+      "marked": true,
+      "oldMs": 0.14368199999989884,
+      "newMs": 0.13216400000010253,
+      "amount": 2
+    },
+    {
+      "level": "c119",
+      "step": 0,
+      "marked": false,
+      "oldMs": 0.8618779999997059,
+      "newMs": 0.3894230000000789,
+      "amount": 2
+    },
+    {
+      "level": "c119",
+      "step": 0,
+      "marked": true,
+      "oldMs": 0.7530780000001869,
+      "newMs": 0.8004470000000765,
+      "amount": 2
+    },
+    {
+      "level": "c119",
+      "step": 8,
+      "marked": false,
+      "oldMs": 0.5010569999999461,
+      "newMs": 0.2341350000001512,
+      "amount": 3
+    },
+    {
+      "level": "c119",
+      "step": 8,
+      "marked": true,
+      "oldMs": 0.6322000000000116,
+      "newMs": 0.19999400000006062,
+      "amount": 3
+    },
+    {
+      "level": "c119",
+      "step": 24,
+      "marked": false,
+      "oldMs": 0.052317000000130065,
+      "newMs": 0.03702399999974659,
+      "amount": 0
+    },
+    {
+      "level": "c119",
+      "step": 24,
+      "marked": true,
+      "oldMs": 0.04592800000000352,
+      "newMs": 0.10765799999990122,
+      "amount": 0
+    },
+    {
+      "level": "c120",
+      "step": 0,
+      "marked": false,
+      "oldMs": 6.75319300000001,
+      "newMs": 2.1921940000001996,
+      "amount": 2
+    },
+    {
+      "level": "c120",
+      "step": 0,
+      "marked": true,
+      "oldMs": 7.692137999999886,
+      "newMs": 2.7701349999997547,
+      "amount": 2
+    },
+    {
+      "level": "c120",
+      "step": 24,
+      "marked": false,
+      "oldMs": 2.9580009999999675,
+      "newMs": 1.194847000000209,
+      "amount": 3
+    },
+    {
+      "level": "c120",
+      "step": 24,
+      "marked": true,
+      "oldMs": 3.4157139999997526,
+      "newMs": 1.21263399999998,
+      "amount": 3
+    },
+    {
+      "level": "c120",
+      "step": 72,
+      "marked": false,
+      "oldMs": 0.46139899999980116,
+      "newMs": 0.24002300000029209,
+      "amount": 0
+    },
+    {
+      "level": "c120",
+      "step": 72,
+      "marked": true,
+      "oldMs": 0.6701860000002853,
+      "newMs": 0.47557899999992514,
+      "amount": 0
+    }
+  ],
+  "priorRunSummary": {
+    "cases": 718,
+    "exactPlanMatches": 718,
+    "oldTotalMs": 749.0565220000003,
+    "newTotalMs": 328.9156089999978,
+    "maxNewMs": 23.784337999999934
+  }
+}

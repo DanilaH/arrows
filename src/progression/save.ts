@@ -9,7 +9,7 @@ import { parseReceipt, type EarnedReceipt } from '../platform/ads';
 import { availableUnlocks, type UnlockId } from './collection';
 import { decodeAdCadence, deferAds, freshAdCadence, interstitialReason, type AdCadence } from './adCadence';
 import { predictHelp, routePending, routeCurrent, validatePlan, localIdentity, type HelpVariant } from '../domain/assistance';
-import { freshHelpLedger, decodeHelpLedger, lifeEffect, activeRight, ownerOf, makeOffer, sameOwner, applyRight, reserveAttempt, compatibleReserve, fact, assignmentId, beginContinue, continueFacts, beginHelpFollowUp, finishHelpFollowUps, type ContinueFact, type HelpLedger, type HelpOffer, type HelpRequest, type HelpFact, type HelpRight } from './helpLedger';
+import { freshHelpLedger, decodeHelpLedger, lifeEffect, activeRight, ownerOf, makeOffer, sameOwner, applyRight, reserveAttempt, compatibleReserve, fact, assignmentId, beginContinue, continueFacts, beginHelpFollowUp, finishHelpFollowUps, type ContinueFact, type HelpLedger, type HelpOffer, type HelpRequest, type HelpFact, type HelpRight, type HelpPlacement } from './helpLedger';
 
 export const SAVE_KEY = 'arrows.progress.v1';
 export interface ViewState { centerX: number; centerY: number; zoom: number; }
@@ -361,7 +361,7 @@ export class ProgressStore {
     if (!result) throw Error('Reward not committed');
     return result;
   }
-  public helpOffer(expected:string,placement:'hint'|'lives'='hint',visible?:ReadonlySet<string>):HelpOffer|null{
+  public helpOffer(expected:string,placement:HelpPlacement='hint',visible?:ReadonlySet<string>):HelpOffer|null{
     const target=this.findAttempt(expected);return target?makeOffer(this.state,target.saved,target.mode,placement,visible):null;
   }
   public currentHelp(expected:string):HelpRight|null{return activeRight(this.state,expected);}
@@ -369,8 +369,8 @@ export class ProgressStore {
   public prepareHelpRequest(offer:HelpOffer):Promise<HelpRequest|undefined>{
     return this.update(next=>{
       const target=this.findAttempt(offer.owner.attempt,next);if(!target||!sameOwner(offer.owner,ownerOf(target.saved,target.mode)))return null;
-      const a=target.saved,current=makeOffer(next,a,target.mode,lifeEffect(offer.kind)?'lives':'hint');
-      if(!current||current.kind!==offer.kind||current.amount!==offer.amount||
+      const a=target.saved,current=makeOffer(next,a,target.mode,lifeEffect(offer.kind)?'lives':offer.variant==='combined-v1'&&offer.kind==='cascade-v1'?'cascade':'hint');
+      if(!current||current.variant!==offer.variant||current.kind!==offer.kind||current.amount!==offer.amount||
         JSON.stringify(offer.bundle)!==JSON.stringify(current.bundle)||offer.plan&&JSON.stringify(offer.plan.basis)!==JSON.stringify(lifeEffect(offer.kind)?{...a.board,lives:3}:a.board))return null;
       if(offer.plan)validatePlan(a.level,offer.plan);
       const requestId=crypto.randomUUID();
@@ -390,7 +390,7 @@ export class ProgressStore {
   }
   /** Native .playtest UI is the only production caller; applies to future attempts. */
   public setNextHelpVariant(value:HelpVariant):Promise<boolean|undefined>{
-    if(!['legacy','single-v2','cascade-v1','route-v1','continue-single-v1'].includes(value))return Promise.resolve(undefined);
+    if(!['legacy','single-v2','cascade-v1','route-v1','continue-single-v1','combined-v1'].includes(value))return Promise.resolve(undefined);
     return this.update(next=>{
       for(const a of [next.campaign,...Object.values(next.daily)])next.helpLedger.assignments[a.board.id]??=next.helpLedger.nextVariant;
       next.helpLedger.nextVariant=value;return {value:true};

@@ -18,6 +18,8 @@ export interface HelpRight {
 }
 export interface HelpLedger {
   version: 1; installId: string; nextVariant: HelpVariant; candidateEnabled: boolean;
+  /** New offers only. Existing attempts, descriptors and earned rights keep their policy. */
+  policyVersion?: 1;
   assignments: Record<string,HelpVariant>; requests: Record<string,HelpRequest>; rights: Record<string,HelpRight>;
   unresolved: EarnedReceipt[];
   enrollments:Record<string,{variant:HelpVariant;at:number;qa:boolean}>;
@@ -41,9 +43,11 @@ export function beginHelpFollowUp(r:HelpRight,a:SavedAttempt,complete:boolean):C
 }
 export interface HelpFact { id:string; phase:'request'|'grant'|'reserve'|'claim'|'use'|'unresolved'|'assignment'|'progress'; entitlement:string; request:string; sourceAttempt:string; attempt:string; kind:string; variant:string; manual:number; native:number; bonus:number; }
 const validId=(v:unknown):v is string=>typeof v==='string'&&/^[a-zA-Z0-9_-]{1,100}$/.test(v);
-const variant=(v:unknown):v is HelpVariant=>v==='legacy'||v==='single-v2'||v==='cascade-v1'||v==='route-v1'||v==='continue-single-v1';
+const variant=(v:unknown):v is HelpVariant=>v==='legacy'||v==='single-v2'||v==='cascade-v1'||v==='route-v1'||v==='continue-single-v1'||v==='combined-v1';
 const kind=(v:unknown):v is HelpRight['kind']=>v==='lives'||v==='legacy-single'||v==='single-v2'||v==='cascade-v1'||v==='route-v1'||v==='continue-single-v1';
-export function freshHelpLedger(installId:string=crypto.randomUUID()):HelpLedger{return {version:1,installId,nextVariant:'single-v2',candidateEnabled:true,assignments:{},requests:{},rights:{},unresolved:[],enrollments:{},continues:{}};}
+export function freshHelpLedger(installId:string=crypto.randomUUID()):HelpLedger{return {version:1,installId,policyVersion:1,nextVariant:'combined-v1',candidateEnabled:true,assignments:{},requests:{},rights:{},unresolved:[],enrollments:{},continues:{}};}
+export type HelpPlacement = 'hint'|'cascade'|'lives';
+export const assistanceExperiment=(variant:HelpVariant):string=>variant==='combined-v1'?'assistance-combined-v1':'assistance-v1';
 export const assignmentId=(ledger:HelpLedger,variant:HelpVariant):string=>`assignment-${localIdentity(ledger.installId+':'+variant)}`;
 export function beginContinue(ledger:HelpLedger,a:SavedAttempt,id:string):void{ledger.continues[id]??={attempt:a.board.id,startedAt:a.activeMs,firstMove:false,closed:false};}
 export function continueFacts(ledger:HelpLedger,a:SavedAttempt,outcome:'first_move'|'repeat_loss'|'exit'|'restart'|'completed'):ContinueFact[]{
@@ -62,12 +66,12 @@ export function activeRight(save:GameSave,attempt:string):HelpRight|null{return 
 export function fact(phase:HelpFact['phase'],r:HelpRight,target=r.owner?.attempt??r.originalOwner.attempt):HelpFact{
   const op=r.operation;return {id:`${r.id}-${phase}-${phase==='claim'?r.claimId??'0':phase==='use'||phase==='progress'?op?.id??'0':'0'}`,phase,entitlement:r.id,request:r.requestId??'',sourceAttempt:r.originalOwner.attempt,attempt:target,kind:r.kind,variant:'',manual:op?.manual.length??0,native:op?.native.length??0,bonus:op?.bonus.length??0};
 }
-export function makeOffer(save:GameSave,a:SavedAttempt,mode:HelpOwner['mode'],placement:'hint'|'lives',visible?:ReadonlySet<string>):HelpOffer|null{
+export function makeOffer(save:GameSave,a:SavedAttempt,mode:HelpOwner['mode'],placement:HelpPlacement,visible?:ReadonlySet<string>):HelpOffer|null{
   const ledger=save.helpLedger,owner=ownerOf(a,mode),assigned=ledger.assignments[a.board.id]??'single-v2',b=new Board(a.level,a.board.id,a.board);
   if(b.complete)return null;
   if(placement==='lives'){
     if(b.hearts!==0)return null;
-    if(assigned==='continue-single-v1'&&ledger.candidateEnabled){
+    if((assigned==='combined-v1'||assigned==='continue-single-v1'&&ledger.candidateEnabled)){
       const occupied=!!a.hint||!!activeRight(save,a.board.id),plan=occupied?null:singlePlan(new Board(a.level,a.board.id,{...a.board,lives:3}),false,visible);
       if(!occupied&&!plan)return null;
       return {id:`offer-${localIdentity(JSON.stringify([owner,a.board,occupied,plan]))}`,owner,variant:assigned,kind:'continue-single-v1',amount:3,plan,fallback:occupied?'occupied_help_retained':'',bundle:{hint:occupied?'retain':'new-single'}};
@@ -75,6 +79,11 @@ export function makeOffer(save:GameSave,a:SavedAttempt,mode:HelpOwner['mode'],pl
     return {id:`offer-${localIdentity(a.board.id+'-lives')}`,owner,variant:assigned,kind:'lives',amount:3,plan:null,fallback:assigned==='continue-single-v1'?'candidate_disabled':''};
   }
   if(b.hearts===0||a.hint||activeRight(save,a.board.id))return null;
+  // Deliberate secondary choice, never an automatic upgrade/fallback to a single.
+  if(placement==='cascade'){
+    if(assigned!=='combined-v1'||!ledger.candidateEnabled||compatibleReserve(save,a,mode))return null;
+    const plan=cascadePlan(b);return plan?{id:`offer-${localIdentity(JSON.stringify([owner,assigned,plan]))}`,owner,variant:assigned,kind:'cascade-v1',amount:plan.budget,plan,fallback:''}:null;
+  }
   let plan:HelpPlan|null=null,fallback='';
   if(assigned==='route-v1'&&ledger.candidateEnabled){plan=routePlan(b);if(!plan)fallback='no_short_route';}
   else if(assigned==='route-v1')fallback='candidate_disabled';
@@ -116,6 +125,12 @@ export function decodeHelpLedger(value:unknown,campaign:SavedAttempt,daily:Recor
     if(r.status==='active'&&(!r.owner||r.kind==='lives'||!r.plan||r.plan.kind!==(r.kind==='continue-single-v1'?'single-v2':r.kind)))throw Error('Invalid active help');
   }
   const attempts:[SavedAttempt,HelpOwner['mode']][]=[[campaign,'campaign'],...Object.values(daily).map(a=>[a,'daily'] as [SavedAttempt,HelpOwner['mode']])];
+  if(ledger.policyVersion!==undefined&&ledger.policyVersion!==1)throw Error('Invalid help policy');
+  // Bind old attempts BEFORE changing the next-attempt default. A pre-ledger
+  // attempt had ordinary A1; old pending requests and rights are never rewritten.
+  const previousVariant=value===undefined?'single-v2':ledger.nextVariant;
+  for(const [a]of attempts)ledger.assignments[a.board.id]??=previousVariant;
+  if(value===undefined||ledger.policyVersion===undefined){ledger.policyVersion=1;ledger.nextVariant='combined-v1';}
   for(const [a,mode]of attempts){
     ledger.assignments[a.board.id]??=ledger.nextVariant;
     const active=Object.values(ledger.rights).filter(r=>r.status==='active'&&r.owner?.attempt===a.board.id);

@@ -8,7 +8,7 @@ export function exportEnvironment(p={}){
   if(['playtest','debug'].includes(p.build_environment)||p.ad_environment==='test'||p.ad_environment==='disabled'||p.analytics_environment==='off'||p.analytics_environment==='debug')return 'test';
   return 'unknown';
 }
-export function revenueCohorts(rows,asOf){
+export function revenueCohorts(rows,asOf,experimentId='assistance-v1'){
   const assignments=new Map(),sessions=new Map(),impressions=new Map();let duplicates=0,unknown=0,missingJoin=0,immature=0;
   const environmentRows={live:0,test:0,unknown:0},sdk=new Map(),values=new Map(),health=new Map();let diagnosticSnapshots=0;
   for(const r of rows){const p=r.params??{},env=exportEnvironment(p);environmentRows[env]++;
@@ -19,7 +19,7 @@ export function revenueCohorts(rows,asOf){
     }
     // QA=false is only a UI hint. Old/missing provenance is deliberately unknown.
     if(env!=='live')continue;
-    if(r.event==='assistance_assignment'&&!assignments.has(p.assignment_id))assignments.set(p.assignment_id,p);
+    if(r.event==='assistance_assignment'&&(p.experiment_id??'assistance-v1')===experimentId&&!assignments.has(p.assignment_id))assignments.set(p.assignment_id,p);
     if(r.event==='ad_session')sessions.set(p.request_id,p);
     if(r.event==='ad_impression_value'){if(impressions.has(p.event_id))duplicates++;else impressions.set(p.event_id,r);}
   }
@@ -29,7 +29,7 @@ export function revenueCohorts(rows,asOf){
   for(const p of byInstall.values()){if(!cohorts.has(p.variant))cohorts.set(p.variant,{variant:p.variant,installs:0,revenue:{},impressions:0});cohorts.get(p.variant).installs++;}
   let joined=0;
   for(const r of impressions.values()){
-    const p=r.params,s=sessions.get(p.request_id);if(!s){missingJoin++;continue;}
+    const p=r.params,s=sessions.get(p.request_id);if(s&&(s.experiment_id??'assistance-v1')!==experimentId)continue;if(!s){missingJoin++;continue;}
     const a=mature.get(s.assignment_id);if(!a){if(!assignments.has(s.assignment_id))missingJoin++;continue;}
     if(s.install_id&&s.install_id!==a.install_id||s.variant&&s.variant!==a.variant){missingJoin++;continue;}
     if(r.at<a.eligible_at||r.at>=a.eligible_at+7*86400000)continue;

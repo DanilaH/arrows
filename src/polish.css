@@ -41,6 +41,20 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
 #hint .video-mark { width: 14px; height: 14px; }
 #hint:not([data-help-reserved='true']) > .hint-bulb { display: none; }
 #hint > .ui-press-feedback, #hint > .a1-error-cue { inset: 4px 0; }
+.board-actions { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.board-actions > #hint { margin-right: 0; min-width: 0; }
+.board-actions > #guides { flex: none; }
+.cascade-button { position: relative; isolation: isolate; min-height: 44px; padding: 8px; border-radius: 20px; color: var(--accent-soft); background: transparent; font-size: 12px; font-weight: 750; flex: none; }
+.cascade-button::before { content: ''; position: absolute; inset: 4px 0; border: 1px solid var(--border); border-radius: inherit; pointer-events: none; }
+.cascade-button > .ui-press-feedback { inset: 4px 0; }
+#game-dialog[data-kind='cascade'] {
+  --cascade-room: calc(100dvh - max(24px,env(safe-area-inset-top)) - max(24px,env(safe-area-inset-bottom)));
+  inset: max(24px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));
+  max-height: var(--cascade-room); overflow: hidden;
+}
+#game-dialog[data-kind='cascade'] #dialog-content { max-height: calc(var(--cascade-room) - 48px); }
+#game-dialog[data-kind='cascade'] h2, #game-dialog[data-kind='cascade'] button { flex: none; }
+#game-dialog[data-kind='cascade'] p { overflow-y: auto; min-height: 0; flex: 1 1 auto; overscroll-behavior: contain; }
 .help-qa p { color: var(--secondary); font-size: 11px; line-height: 1.5; }
 #save-status { top: calc(70px + env(safe-area-inset-top)); }
 

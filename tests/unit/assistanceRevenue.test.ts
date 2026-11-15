@@ -10,3 +10,8 @@ it('joins the one monetary stream to all mature assigned installs, not viewers',
   expect(result.cohorts).toEqual([{variant:'single-v2',installs:2,revenue:{RUB:{amount:'0.25',perAssignedInstall:.125}},impressions:2}]);
   expect(result).toMatchObject({duplicates:1,unknown:1,missingJoin:1,liveVerified:false});
 });
+it('keeps a legitimate combined-policy upgrade out of the historical experiment cohort',()=>{
+ const row=(event:string,params:object)=>({event,at:3000,params:{...live,...params}});
+ const rows=['assistance-v1','assistance-combined-v1'].flatMap((experiment,i)=>[row('assistance_assignment',{assignment_id:`a${i}`,install_id:'same-install',variant:i?'combined-v1':'single-v2',eligible_at:1000,qa:false,experiment_id:experiment}),row('ad_session',{request_id:`r${i}`,assignment_id:`a${i}`,experiment_id:experiment}),row('ad_impression_value',{event_id:`v${i}`,request_id:`r${i}`,amount:'0.25',currency:'RUB',known:true,precision:'estimated'})]);
+ expect(revenueCohorts(rows,8*86400000).cohorts).toMatchObject([{variant:'single-v2',installs:1,impressions:1}]);expect(revenueCohorts(rows,8*86400000,'assistance-combined-v1').cohorts).toMatchObject([{variant:'combined-v1',installs:1,impressions:1}]);
+});

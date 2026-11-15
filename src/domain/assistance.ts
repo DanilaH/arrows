@@ -2,7 +2,7 @@ import { Board, canExit, type Attempt, type Level, type MoveResult } from './boa
 import { measurePath, rayHitsPath } from './geometry';
 
 export type HelpKind = 'legacy-single' | 'single-v2' | 'cascade-v1' | 'route-v1';
-export type HelpVariant = 'legacy' | 'single-v2' | 'cascade-v1' | 'route-v1' | 'continue-single-v1';
+export type HelpVariant = 'legacy' | 'single-v2' | 'cascade-v1' | 'route-v1' | 'continue-single-v1' | 'combined-v1';
 export interface HelpPlan {
   kind: HelpKind;
   root: string;
@@ -84,7 +84,7 @@ export function chooseSingle(board: Board, visible: ReadonlySet<string> = new Se
 }
 
 /** Current ray dependencies; this is computed on state changes, never per frame. */
-function descendants(board: Board, root: string): Set<string> {
+function dependencyGraph(board: Board): Map<string,string[]> {
   const remaining=board.remaining,dependents=new Map<string,string[]>();
   for(const arrow of remaining){
     const head=arrow.path.at(-1)!,direction=measurePath(arrow.path).direction;
@@ -92,6 +92,9 @@ function descendants(board: Board, root: string): Set<string> {
       const rows=dependents.get(blocker.id)??[];rows.push(arrow.id);dependents.set(blocker.id,rows);
     }
   }
+  return dependents;
+}
+function descendants(board: Board, root: string, dependents=dependencyGraph(board)): Set<string> {
   const result=new Set<string>(),queue=[root];
   for(let i=0;i<queue.length;i++)for(const id of dependents.get(queue[i]!)??[])if(!result.has(id)){result.add(id);queue.push(id);}
   result.delete(root);return result;
@@ -107,9 +110,10 @@ export function cascadePlan(board: Board, options: {root?:string;budget?:number}
   if(board.hearts===0||board.complete || options.budget!==undefined&&(!Number.isInteger(options.budget)||options.budget<2||options.budget>4))return null;
   const remaining=board.remaining,initiallyFree=new Set(freeIds(board));
   const roots=remaining.filter(a=>initiallyFree.has(a.id)&&!board.isError(a.id)&&(!options.root||a.id===options.root));
+  const graph=dependencyGraph(board);
   let best:HelpPlan|null=null;
   for(const root of roots){
-    const causal=descendants(board,root.id),candidate=copy(board),bonus:string[]=[];
+    const causal=descendants(board,root.id,graph),candidate=copy(board),bonus:string[]=[];
     candidate.activate(root.id);
     const budget=options.budget??3;
     while(bonus.length<budget){
@@ -120,6 +124,8 @@ export function cascadePlan(board: Board, options: {root?:string;budget?:number}
     }
     if(bonus.length<2 || options.budget!==undefined&&bonus.length!==options.budget)continue;
     const plan:HelpPlan={kind:'cascade-v1',root:root.id,bonus,budget:bonus.length,basis:board.snapshot(),contentKey:contentKey(board.level)};
+    // The previous exhaustive ranking retained the FIRST full-budget group too.
+    if(bonus.length===budget)return plan;
     if(!best||plan.bonus.length>best.bonus.length)best=plan;
   }
   return best;

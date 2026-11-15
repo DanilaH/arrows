@@ -15,6 +15,7 @@ import { interstitialReason } from '../progression/adCadence';
 import { localDate } from '../progression/calendar';
 import { earnedAwards } from '../progression/collection';
 import { createHelpOffers } from './helpOffers';
+import type {HelpOffer} from '../progression/helpLedger';
 import type { BoardScene } from './BoardScene';
 
 type Platform = ReturnType<typeof createPlatformRuntime>;
@@ -24,7 +25,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const root = document.querySelector<HTMLElement>('#game-root')!;
   const shell = document.querySelector<HTMLElement>('#game-shell')!, dialog = document.querySelector<HTMLDialogElement>('#game-dialog')!;
   const content = document.querySelector<HTMLElement>('#dialog-content')!, status = document.querySelector<HTMLElement>('#app-status')!;
-  const hintButton = document.querySelector<HTMLButtonElement>('#hint')!, pointer = document.querySelector<HTMLElement>('#tutorial-pointer')!;
+  const hintButton = document.querySelector<HTMLButtonElement>('#hint')!, cascadeButton=document.querySelector<HTMLButtonElement>('#cascade')!, pointer = document.querySelector<HTMLElement>('#tutorial-pointer')!;
   const warning = document.querySelector<HTMLElement>('#save-status')!, retry = document.querySelector<HTMLButtonElement>('#save-retry')!;
   const sessionPlay = document.querySelector<HTMLButtonElement>('#session-play')!;
   const progress = new ProgressStore(platform.storage), listeners: Array<() => void> = [];
@@ -39,7 +40,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const activeBoard = () => { const a = active(); return new Board(a.level, a.board.id, a.board); };
   const requestedRewards = new Set<string>();
   let holdTimer: ReturnType<typeof setTimeout> | undefined, cameraTimer: ReturnType<typeof setTimeout> | undefined;
-  let modal: 'pause' | 'controls' | 'restart' | 'lost' | null = null;
+  let modal: 'pause' | 'controls' | 'restart' | 'lost' | 'cascade' | null = null;
+  let cascadeOffer:HelpOffer|null=null;
   let restartChoice:ReturnType<typeof helpOffers.captureChoice>=null;
   let notice = '', idleMs = 0, pendingTime = 0, pendingAdTime = 0, lastTime = performance.now(), wasActive = false, lastFlush = lastTime;
   let lastSaveError: string | null = null;
@@ -125,7 +127,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     pinch: manualZoom,
   });
   const cancel = (): void => { errorCue.cancel(); if (holdTimer !== undefined) clearTimeout(holdTimer); holdTimer = undefined; gestures.cancel(); motion.clearTaps(); };
-  const close = (after: ()=>void = () => {}): void => { modal = null;restartChoice=null; motion.close(dialog, () => { platform.activity.setBlocked('dialog', false); if(meta.screen === 'game')root.focus({ preventScroll: true }); after(); }); };
+  const close = (after: ()=>void = () => {}): void => { modal = null;restartChoice=null;cascadeOffer=null; motion.close(dialog, () => { platform.activity.setBlocked('dialog', false); if(meta.screen === 'game')root.focus({ preventScroll: true }); after(); }); };
   const loadActive = (): void => {
     cancel(); pendingTime = 0; pendingAdTime = 0; wasActive = false; freshWinAttempt = ''; dailyReturnAttempt=''; idleMs = 0; notice = '';
     const a = active(); celebratedAttempt = a.board.removed.length === a.level.arrows.length ? a.board.id : ''; pendingAward = false;
@@ -177,13 +179,16 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   };
   const adSurface = installAdSurface(platform.ads, () => language, cancelAd);
   const transition = createAdTransition(platform.activity, () => sync(), () => { notice = text.saveFailed; sync(); });
-  const requestReward = async (placement: 'hint' | 'lives'): Promise<void> => {
+  const requestReward = async (placement: 'hint' | 'lives',cascade?:HelpOffer): Promise<void> => {
     errorCue.cancel('help-activation');
     if (requestingAd || transition.busy || !progress.available || progress.uncertain) return;
-    const selected=helpOffers.snapshot(scene.board.attemptId,placement);
+    const selected=helpOffers.snapshot(scene.board.attemptId,cascade?'cascade':placement);
+    // The described group is frozen while the dialog is open. Late assistance
+    // takes priority; never substitute a different offer on the confirmation tap.
+    if(cascade&&(!selected.offer||selected.reserve||selected.offer.id!==cascade.id)){close();return;}
     if(selected.reserve){helpOffers.choice('claim');await progress.claimHelp(scene.board.attemptId,selected.reserve.id);return;}
     if(!selected.offer)return;
-    const offer=selected.offer;helpOffers.choice('accept');
+    const offer=selected.offer;helpOffers.choice('accept','',helpOffers.captureChoice(cascade?'cascade':placement));
     const intent = ++rewardIntent, attempt = scene.board.attemptId, mode = gameMode(); requestingAd = true;
     const dialogClosed = new Promise<void>(resolve => close(resolve)); adSurface.prepare();
     const requestKey = `${attempt}:${placement}`; requestedRewards.add(requestKey); pendingRewardKey = requestKey;
@@ -218,16 +223,23 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if (kind === 'controls' && !reviewFields.length) return;
     restartChoice=kind==='restart'?(modal==='restart'?restartChoice:helpOffers.captureChoice()):null;
     const confirmedChoice=restartChoice;
-    cancel(); saveView(); modal = kind; platform.activity.setBlocked('dialog', true); content.replaceChildren();
+    cascadeOffer=kind==='cascade'?helpOffers.snapshot(scene.board.attemptId,'cascade').offer:null;
+    if(kind==='cascade'&&!cascadeOffer)return;
+    const confirmedCascade=cascadeOffer;
+    cancel(); saveView(); modal = kind;dialog.dataset.kind=kind; platform.activity.setBlocked('dialog', true); content.replaceChildren();
     const title = document.createElement('h2'); title.id = 'dialog-title';
-    title.textContent = kind === 'pause' ? `${text.level} ${progress.state.index + 1}` : kind === 'controls' ? text.chooseField : kind === 'lost' ? text.noLives : text.restartQuestion;
+    title.textContent = kind==='cascade'?(language==='ru'?'Каскад':'Cascade'):kind === 'pause' ? `${text.level} ${progress.state.index + 1}` : kind === 'controls' ? text.chooseField : kind === 'lost' ? text.noLives : text.restartQuestion;
     content.append(title);
     const button = (key: string, label: string, action: () => void, primary = false): void => {
       const el = document.createElement('button'); el.type = 'button'; el.dataset.action = key; el.textContent = label;
       if (primary) el.className = 'primary'; el.addEventListener('click', action); content.append(el);
     };
     const paragraph = (value: string): void => { const p = document.createElement('p'); p.textContent = value; content.append(p); };
-    if (kind === 'pause') {
+    if(kind==='cascade'&&confirmedCascade){
+      paragraph(language==='ru'?`После видео покажем пусковую стрелку и точную группу. Нажмите пусковую — следом автоматически уйдут ещё ${confirmedCascade.amount} стрелки.`:`After the video, see the trigger and exact group. Tap the trigger to remove ${confirmedCascade.amount} more arrows automatically.`);
+      button('rewarded-cascade',language==='ru'?`Каскад +${confirmedCascade.amount} · видео`:`Cascade +${confirmedCascade.amount} · video`,()=>run(requestReward('hint',confirmedCascade)),true);
+      button('cancel',text.cancel,()=>close());
+    } else if (kind === 'pause') {
       paragraph(control ? text.controlMode : activeDate ? activeDate : `${text.chapter}: ${progress.state.wins.length} / ${campaign.length}`);
       button('home', activeDate ? text.challenge : text.home, backToMenu);
       button('resume', text.resume, () => close(), true);
@@ -311,6 +323,11 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const hintWasHidden = hintButton.hidden;
     hintButton.hidden = !loaded || control || board.complete || board.hearts === 0 || !!step || idleMs < 3000 || a.hint !== null;
     if (hintWasHidden && !hintButton.hidden) motion.hintReady(hintButton);
+    const cascadeWasHidden=cascadeButton.hidden;
+    cascadeButton.hidden=hintButton.hidden||!helpOffers.snapshot(a.board.id,'cascade').offer;
+    const cascadeLabel=language==='ru'?'Каскад':'Cascade';if(cascadeButton.textContent!==cascadeLabel)cascadeButton.textContent=cascadeLabel;
+    cascadeButton.setAttribute('aria-label',language==='ru'?'Каскад за видео — узнать подробнее':'Cascade for a video — details');
+    if(cascadeWasHidden&&!cascadeButton.hidden)motion.hintReady(cascadeButton);
     if(loaded&&!control&&meta.screen==='game'){
       const label=helpOffers.label(a.board.id),copy=hintButton.querySelector('[data-help-label]');
       if(copy&&copy.textContent!==label.text)copy.textContent=label.text;
@@ -324,6 +341,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if(status.textContent!==statusText)status.textContent=statusText;
     const guideLabel=document.querySelector<HTMLElement>('#guides-label')!; guideLabel.hidden = step !== 'guides'; guideLabel.textContent=text.guideShort;
     hintButton.disabled = requestingAd || !progress.available || progress.uncertain;
+    cascadeButton.disabled=hintButton.disabled;
     warning.hidden = progress.error === null && !loadSlow;
     document.querySelector('#save-message')!.textContent = loadSlow ? text.restoring : progress.error === 'load' ? text.sessionOnly : progress.error === 'uncertain' ? text.saveUncertain : text.saveFailed;
     retry.hidden = loadSlow; sessionPlay.hidden = !loadSlow;
@@ -335,12 +353,14 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     }
     platform.activity.setGameplayDesired(loaded && meta.screen === 'game' && !board.complete && board.hearts > 0);
     if (modal === 'lost' && board.hearts > 0) close();
+    if(modal==='cascade'&&cascadeOffer){const current=helpOffers.snapshot(board.attemptId,'cascade');if(current.reserve||current.offer?.id!==cascadeOffer.id)close();}
     if (loaded && meta.screen === 'game' && board.hearts === 0 && !scene.hasErrorMotion && modal === null && !requestingAd && !motion.routeBusy) open('lost');
     if(modal==='lost'&&content.querySelector('[data-action=rewarded-continue]')){const offer=helpOffers.livesLabel(board.attemptId),p=content.querySelector('p'),button=content.querySelector<HTMLElement>('[data-action=rewarded-continue]')!;if(p&&p.textContent!==offer.detail)p.textContent=offer.detail;if(button.textContent!==offer.text)button.textContent=offer.text;}
     const foreground=!document.hidden&&platform.activity.getBlockReasons().every(reason=>reason==='dialog');
     const showHint=loaded&&!control&&meta.screen==='game'&&!hintButton.hidden&&!requestingAd&&!motion.routeBusy&&!platform.activity.isBlocked();
     const showLives=loaded&&!control&&meta.screen==='game'&&modal==='lost'&&dialog.open&&!requestingAd&&!motion.routeBusy&&foreground&&!!content.querySelector('[data-action="rewarded-continue"]');
     helpOffers.visible(showHint||showLives,board.attemptId,showLives?'lives':'hint');
+    helpOffers.visible(showHint&&!cascadeButton.hidden||modal==='cascade'&&dialog.open&&foreground&&!requestingAd&&!motion.routeBusy&&!!cascadeOffer,board.attemptId,'cascade');
     platform.ads.setRewardedDemand(loaded&&!control&&meta.screen==='game'&&!board.complete&&(!a.hint||showLives)&&!step&&!requestingAd&&!motion.routeBusy&&progress.available&&!progress.uncertain&&(showLives||!platform.activity.isBlocked()&&board.hearts>0));
     scheduleAssistance();
     meta.presentArrivals();
@@ -455,6 +475,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   on(hintButton, 'pointerdown', () => errorCue.cancel('hint-press'));
   on(hintButton, 'keydown', () => errorCue.cancel('hint-key'));
   on(hintButton, 'click', () => { if (!hintButton.hidden && !hintButton.disabled && meta.screen === 'game' && !platform.activity.isBlocked() && !motion.routeBusy) run(requestReward('hint')); });
+  on(cascadeButton,'click',()=>{if(!cascadeButton.hidden&&!cascadeButton.disabled&&meta.screen==='game'&&!platform.activity.isBlocked()&&!motion.routeBusy)open('cascade');});
   on(retry, 'click', () => { retry.disabled = true; run(progress.recover().finally(() => { retry.disabled = false; notice = ''; sync(); })); });
   sessionPlay.textContent = text.sessionPlay;
   on(sessionPlay, 'click', () => { progress.startSessionOnly(); finishLoad(); });

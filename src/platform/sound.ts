@@ -1,6 +1,6 @@
 import { OneShotPlayer, type OneShotChannel } from '@danilah/mini-games-kit/audio';
 export type SoundCue = 'button' | 'remove' | 'slide' | 'exit' | 'error' | 'hint' | 'life' | 'win' | 'perfect' | 'award' | 'auto' | 'repeat-error' | 'help-final';
-import bank from './soundBank.json';
+import bank from './soundBank.json' with {type:'json'};
 type Clip = keyof typeof bank.clips;
 const clips: Record<SoundCue, Clip> = {button:'tap',remove:'remove',slide:'air',exit:'air',error:'error',hint:'hint',life:'life',win:'win',perfect:'perfect',award:'perfect',auto:'remove','repeat-error':'error','help-final':'hint'};
 const decoded = new Map<Clip, Float32Array>();

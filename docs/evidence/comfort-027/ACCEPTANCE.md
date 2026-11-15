@@ -31,3 +31,5 @@ Provenance: real unmodified production web payload,Chromium390×844/DPR1.5,seede
 Physical install/update/safe insets/TalkBack/speaker/haptics/frame pacing:NOT RUN here. Actual SDK inventory/AppMetrica dashboard/real money:NOT RUN, separate gate. No published content, schema, embedded attempts, lives/errors/flawless/lifetime gift, earned/reserved receipt meaning, cadence, native SDK or runtime/guidance pins changed. No kit/store publication.
 
 KIT IMPACT:REUSE — existing pinned OneShotPlayer synchronous provider/voice/freshness lifecycle and Stable Progress UI initial-action/scroll acceptance; bank,Settings composition and camera policy remain Arrows-owned. No new general engine or extraction.
+
+Follow-up2026-11-15: full hosted web completed372/394;22 old audio-duration identification assertions failed after sampled audio replacement. This is not a green full run. Local reproduction and current PCM/gain-observer correction are documented in COMBINED_HELP_028.md. The previously delivered APK/18-file hashes/signature and successful native job remain unchanged.
