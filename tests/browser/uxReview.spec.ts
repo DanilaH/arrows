@@ -52,7 +52,11 @@ test('keeps a six-row month and its action reachable without a covering footer a
     await page.setViewportSize(size); await page.locator('#home-calendar').click();
     while (!(await page.locator('[data-date]').first().getAttribute('data-date'))!.startsWith('2026-08')) await page.locator('[data-shift="-1"]').click();
     await page.waitForTimeout(400);
-    await expect(page.locator('[data-date="2026-08-01"]')).toBeInViewport();
+    // Returning to this month restores the player's scroll (possibly day31),
+    // rather than forcing day1 into view. Its essential action must be visible
+    // before any of the date interactions below can auto-scroll the month.
+    await expect(page.locator('#start-daily')).toBeInViewport({ratio:1});
+    expect(await page.locator('#start-daily').evaluate(el=>{const r=el.getBoundingClientRect();return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));})).toBe(true);
     expect(await page.locator('#meta-screen').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
     for (const date of ['2026-08-01', '2026-08-15', '2026-08-31']) {
       const day = page.locator(`[data-date="${date}"]`); await unobscured(day); await day.click(); await expect(day).toHaveAttribute('aria-pressed', 'true');
