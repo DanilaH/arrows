@@ -21,6 +21,18 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
     let entry=cache.get(placement);if(entry?.key!==key){entry={key,value:{offer:progress.helpOffer(attempt,placement,visible),reserve:progress.savedHelp(attempt)}};cache.set(placement,entry);}
     return entry!.value;
   };
+  // Change the unaccepted UI choice, never a stored request or earned effect.
+  // The normal profile already owns both concrete offers; older QA assignments
+  // keep their own semantics and compatible saved help always goes first.
+  const primary=(attempt:string)=>{
+    const assigned=progress.state.helpLedger.assignments[attempt]??progress.state.helpLedger.nextVariant;
+    let placement:HelpPlacement='hint';
+    if(assigned==='combined-v1'){
+      const cascade=snapshot(attempt,'cascade');
+      if(cascade.offer&&!cascade.reserve)placement='cascade';
+    }
+    return {placement,...snapshot(attempt,placement)};
+  };
   const visible=(show:boolean,attempt:string,placement:HelpPlacement='hint'):void=>{
     if(placement!=='cascade'){currentPlacement=placement;episodes.delete(placement==='hint'?'lives':'hint');}
     if(!show){episodes.delete(placement);return;}
@@ -35,7 +47,12 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
     }
   };
   return {
-    context,snapshot,visible,
+    context,snapshot,primary,visible,
+    visiblePrimary(show:boolean,attempt:string,placement:HelpPlacement=primary(attempt).placement):void{
+      for(const other of ['hint','cascade','lives'] as const)if(other!==placement)episodes.delete(other);
+      currentPlacement=placement;
+      visible(show,attempt,placement);
+    },
     captureChoice(placement:HelpPlacement=currentPlacement){return episodes.get(placement)??null;},
     choice(choice:string,requestId='',captured=episodes.get(currentPlacement)??null,sourceAttempt=captured?.attempt):void{if(captured&&captured.attempt===sourceAttempt&&!captured.choices.has(choice)){captured.choices.add(choice);analytics.track('assistance_choice',{event_id:`${captured.id}-${choice}`,offer_id:captured.offerId,attempt:captured.attempt,choice,request_id:requestId});}},
     reveal(attempt:string,phase:'reveal_started'|'reveal_ready'):void{
@@ -49,7 +66,7 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
       return {text:ru?'Смотреть видео':'Watch video',detail,reserved:false};
     },
     label(attempt:string):{text:string;detail:string;reserved:boolean;kind:string}{
-      const ru=language()==='ru',{offer,reserve}=snapshot(attempt),effect=reserve??offer;
+      const ru=language()==='ru',{offer,reserve}=primary(attempt),effect=reserve??offer;
       if(!effect)return {text:copy[language()].hint,detail:'',reserved:false,kind:'none'};
       if(reserve&&effect.kind==='continue-single-v1'&&'bundle' in effect&&effect.bundle&&'lives' in effect.bundle&&effect.bundle.lives==='applied')return {text:ru?'Использовать подсказку':'Use saved hint',detail:ru?'Один полезный ход · без видео':'One useful move · no video',reserved:true,kind:effect.kind};
       if(reserve&&effect.kind==='route-v1')return {text:ru?'Продолжить маршрут':'Resume route',detail:ru?`До ${effect.amount} ${effect.amount===1?'шага':'шагов'} · без видео`:`Up to ${effect.amount} steps · no video`,reserved:true,kind:effect.kind};
@@ -77,7 +94,7 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
       const title=document.createElement('h3');title.textContent=ru?'Тестирование помощи':'Assistance playtest';section.append(title);
       const label=document.createElement('label');label.className='language-setting';label.htmlFor='help-qa-variant';label.textContent=ru?'Для новых попыток':'For new attempts';
       const select=document.createElement('select');select.id='help-qa-variant';
-      for(const [value,name]of [['combined-v1',ru?'Обычная игра · подсказка и каскад':'Normal game · hint and cascade'],['legacy',ru?'Лаб · исходная подсказка':'Lab · legacy single'],['single-v2',ru?'Лаб · A1 · полезный ход':'Lab · A1 · useful single'],['cascade-v1',ru?'Лаб · A2 · каскад':'Lab · A2 · cascade'],['route-v1',ru?'Лаб · A3 · маршрут до цели':'Lab · A3 · route to target'],['continue-single-v1',ru?'Лаб · A4 · продолжение с подсказкой':'Lab · A4 · continue with a single']]){const option=document.createElement('option');option.value=value!;option.textContent=name!;select.append(option);}
+      for(const [value,name]of [['combined-v1',ru?'Обычная игра · каскад':'Normal game · cascade'],['legacy',ru?'Лаб · исходная подсказка':'Lab · legacy single'],['single-v2',ru?'Лаб · A1 · полезный ход':'Lab · A1 · useful single'],['cascade-v1',ru?'Лаб · A2 · каскад':'Lab · A2 · cascade'],['route-v1',ru?'Лаб · A3 · маршрут до цели':'Lab · A3 · route to target'],['continue-single-v1',ru?'Лаб · A4 · продолжение с подсказкой':'Lab · A4 · continue with a single']]){const option=document.createElement('option');option.value=value!;option.textContent=name!;select.append(option);}
       select.value=progress.state.helpLedger.nextVariant;select.disabled=!progress.available||progress.uncertain;
       select.addEventListener('change',()=>{select.disabled=true;void progress.setNextHelpVariant(select.value as HelpVariant).catch(()=>{select.value=progress.state.helpLedger.nextVariant;}).finally(()=>{select.disabled=progress.uncertain||!progress.available;});});label.append(select);section.append(label);
       const detail=document.createElement('p');detail.textContent=ru?'Применится после «Заново» или на следующем уровне. Полученная помощь сохранится.':'Applies after Restart or on the next level. Earned help is preserved.';section.append(detail);

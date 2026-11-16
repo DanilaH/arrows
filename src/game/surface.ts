@@ -26,7 +26,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const root = document.querySelector<HTMLElement>('#game-root')!;
   const shell = document.querySelector<HTMLElement>('#game-shell')!, dialog = document.querySelector<HTMLDialogElement>('#game-dialog')!;
   const content = document.querySelector<HTMLElement>('#dialog-content')!, status = document.querySelector<HTMLElement>('#app-status')!;
-  const hintButton = document.querySelector<HTMLButtonElement>('#hint')!, cascadeButton=document.querySelector<HTMLButtonElement>('#cascade')!, pointer = document.querySelector<HTMLElement>('#tutorial-pointer')!;
+  const hintButton = document.querySelector<HTMLButtonElement>('#hint')!, pointer = document.querySelector<HTMLElement>('#tutorial-pointer')!;
   const warning = document.querySelector<HTMLElement>('#save-status')!, retry = document.querySelector<HTMLButtonElement>('#save-retry')!;
   const sessionPlay = document.querySelector<HTMLButtonElement>('#session-play')!;
   const progress = new ProgressStore(platform.storage), listeners: Array<() => void> = [];
@@ -326,11 +326,6 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const hintWasHidden = hintButton.hidden;
     hintButton.hidden = !loaded || control || board.complete || board.hearts === 0 || !!step || idleMs < 3000 || a.hint !== null;
     if (hintWasHidden && !hintButton.hidden) motion.hintReady(hintButton);
-    const cascadeWasHidden=cascadeButton.hidden;
-    cascadeButton.hidden=hintButton.hidden||!helpOffers.snapshot(a.board.id,'cascade').offer;
-    const cascadeLabel=language==='ru'?'Каскад':'Cascade';if(cascadeButton.textContent!==cascadeLabel)cascadeButton.textContent=cascadeLabel;
-    cascadeButton.setAttribute('aria-label',language==='ru'?'Каскад за видео — узнать подробнее':'Cascade for a video — details');
-    if(cascadeWasHidden&&!cascadeButton.hidden)motion.hintReady(cascadeButton);
     if(loaded&&!control&&meta.screen==='game'){
       const label=helpOffers.label(a.board.id),copy=hintButton.querySelector('[data-help-label]');
       if(copy&&copy.textContent!==label.text)copy.textContent=label.text;
@@ -344,7 +339,6 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if(status.textContent!==statusText)status.textContent=statusText;
     const guideLabel=document.querySelector<HTMLElement>('#guides-label')!; guideLabel.hidden = step !== 'guides'; guideLabel.textContent=text.guideShort;
     hintButton.disabled = requestingAd || !progress.available || progress.uncertain;
-    cascadeButton.disabled=hintButton.disabled;
     warning.hidden = progress.error === null && !loadSlow;
     document.querySelector('#save-message')!.textContent = loadSlow ? text.restoring : progress.error === 'load' ? text.sessionOnly : progress.error === 'uncertain' ? text.saveUncertain : text.saveFailed;
     retry.hidden = loadSlow; sessionPlay.hidden = !loadSlow;
@@ -362,8 +356,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const foreground=!document.hidden&&platform.activity.getBlockReasons().every(reason=>reason==='dialog');
     const showHint=loaded&&!control&&meta.screen==='game'&&!hintButton.hidden&&!requestingAd&&!motion.routeBusy&&!platform.activity.isBlocked();
     const showLives=loaded&&!control&&meta.screen==='game'&&modal==='lost'&&dialog.open&&!requestingAd&&!motion.routeBusy&&foreground&&!!content.querySelector('[data-action="rewarded-continue"]');
-    helpOffers.visible(showHint||showLives,board.attemptId,showLives?'lives':'hint');
-    helpOffers.visible(showHint&&!cascadeButton.hidden||modal==='cascade'&&dialog.open&&foreground&&!requestingAd&&!motion.routeBusy&&!!cascadeOffer,board.attemptId,'cascade');
+    const showCascade=modal==='cascade'&&dialog.open&&foreground&&!requestingAd&&!motion.routeBusy&&!!cascadeOffer;
+    helpOffers.visiblePrimary(showHint||showLives||showCascade,board.attemptId,showLives?'lives':showCascade?'cascade':helpOffers.primary(board.attemptId).placement);
     platform.ads.setRewardedDemand(loaded&&!control&&meta.screen==='game'&&!board.complete&&(!a.hint||showLives)&&!step&&!requestingAd&&!motion.routeBusy&&progress.available&&!progress.uncertain&&(showLives||!platform.activity.isBlocked()&&board.hearts>0));
     scheduleAssistance();
     meta.presentArrivals();
@@ -478,8 +472,11 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   on(document.querySelector<HTMLElement>('#next')!, 'click', advanceWin);
   on(hintButton, 'pointerdown', () => errorCue.cancel('hint-press'));
   on(hintButton, 'keydown', () => errorCue.cancel('hint-key'));
-  on(hintButton, 'click', () => { if (!hintButton.hidden && !hintButton.disabled && meta.screen === 'game' && !platform.activity.isBlocked() && !motion.routeBusy) run(requestReward('hint')); });
-  on(cascadeButton,'click',()=>{if(!cascadeButton.hidden&&!cascadeButton.disabled&&meta.screen==='game'&&!platform.activity.isBlocked()&&!motion.routeBusy)open('cascade');});
+  on(hintButton, 'click', () => {
+    if (hintButton.hidden || hintButton.disabled || meta.screen !== 'game' || platform.activity.isBlocked() || motion.routeBusy) return;
+    if(helpOffers.primary(scene.board.attemptId).placement==='cascade')open('cascade');
+    else run(requestReward('hint'));
+  });
   on(retry, 'click', () => { retry.disabled = true; run(progress.recover().finally(() => { retry.disabled = false; notice = ''; sync(); })); });
   sessionPlay.textContent = text.sessionPlay;
   on(sessionPlay, 'click', () => { progress.startSessionOnly(); finishLoad(); });

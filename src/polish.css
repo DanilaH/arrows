@@ -44,9 +44,6 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
 .board-actions { display: flex; align-items: center; justify-content: center; gap: 8px; }
 .board-actions > #hint { margin-right: 0; min-width: 0; }
 .board-actions > #guides { flex: none; }
-.cascade-button { position: relative; isolation: isolate; min-height: 44px; padding: 8px; border-radius: 20px; color: var(--accent-soft); background: transparent; font-size: 12px; font-weight: 750; flex: none; }
-.cascade-button::before { content: ''; position: absolute; inset: 4px 0; border: 1px solid var(--border); border-radius: inherit; pointer-events: none; }
-.cascade-button > .ui-press-feedback { inset: 4px 0; }
 #game-dialog[data-kind='cascade'] {
   --cascade-room: calc(100dvh - max(24px,env(safe-area-inset-top)) - max(24px,env(safe-area-inset-bottom)));
   inset: max(24px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));

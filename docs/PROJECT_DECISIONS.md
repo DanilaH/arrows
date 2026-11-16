@@ -1,5 +1,9 @@
 # Project decisions — 2026-11-09
 
+## 2026-11-16 — one primary help action0.31.0
+
+Owner accepted cascade as the normal video offer, ordinary A1 for no-group fallback/onboarding/A4 and preservation of old earned Hints. Reuse existing combined-v1 offers; change only the unaccepted primary UI selection, remove the competing CTA, preserve frozen confirmation and receipt meanings. No new profile/migration/cadence or content change. Saved help takes priority, historical labs stay separate. Keep compact gold styling, exact group/one-trigger operation, native marked release and lifetime free lives-only. See CASCADE_PRIMARY_031.md; same-cert code44 and genuine APK-web recordings; phone/services acceptance remains separate. KIT IMPACT REUSE.
+
 ## 2026-11-15 — main content rollout0.30.0
 
 Owner explicitly accepted replacing fresh assignments throughout main campaign and calendar, demanded large dailies and changing recognizable silhouettes. Supersedes pilot-only HOLD for rollout; human enjoyment remains unproven. Forty original masks, no nearby family repeats, frequent peaks/breathers, progressively larger later fields; all unopened archive/future dates select deterministic largev2, old constructors and embedded attempts retained. Campaign catalogue6/daily4 within schema2, no reward/life/cadence/pin change. Bounded Worker plus identical cooperative transport fallback, cancellation/unknown retry; optimize local planning only with exact frozen-reference equivalence. See CONTENT_ROLLOUT_030.md. Compatiblecode43 and actual recordings, KIT IMPACT REUSE, no kit/store publication.

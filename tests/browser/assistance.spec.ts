@@ -19,7 +19,7 @@ async function seed(page: Page, lost: boolean, continued=false) {
   const index=campaign.findIndex((l,i)=>i>=4&&l.arrows.filter(a=>!canExit(a,l.arrows)).length>=6),level=campaign[index]!;
   const state=freshSave(),attempt=freshAttempt(level),board=new Board(level,attempt.board.id);
   if(lost){const errors=level.arrows.filter(a=>!canExit(a,level.arrows)).slice(0,continued?6:3).map(a=>a.id);attempt.board={...board.snapshot(),errors,lives:0};attempt.freeUsed=continued;attempt.continuations=continued?1:0;}
-  attempt.started=true;state.index=index;state.campaign=attempt;
+  attempt.started=true;state.index=index;state.campaign=attempt;state.helpLedger.assignments[attempt.board.id]='single-v2';
   state.wins=campaign.slice(0,index).map((l,i)=>({attempt:`fixture-${i}`,levelId:l.id,activeMs:1000,completedAt:i*1000,localDate:'1970-01-01',mistakes:0}));decodeSave(state);
   await page.addInitScript(({key,state})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(state));},{key:SAVE_KEY,state});return state;
 }
