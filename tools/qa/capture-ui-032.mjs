@@ -17,9 +17,18 @@ state.seenUnlocks=['calendar','collection'];state.tutorials=['tap','turns','bloc
 state.daily['2026-11-02']=freshAttempt(dailyLevel('2026-11-02'));
 async function geometry(p,selector){return p.locator(selector).evaluate(e=>{const r=e.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height,hit:e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2))};});}
 async function click(p,selector){const r=await geometry(p,selector);assert(r.hit,selector);await p.mouse.click(r.x+r.w/2,r.y+r.h/2);}
-async function clip(name,before,viewport,prepare,actions){
+async function clip(name,before,viewport,prepare,actions,delayFirstWorker=false){
  const context=await browser.newContext({viewport,deviceScaleFactor:1.5,isMobile:true,hasTouch:true});
  await context.addInitScript(controlledNative,{save:state,preserve:true,settings:{version:1,language:'ru',theme:'dark',sound:true,vibration:true}});
+ if(delayFirstWorker)await context.addInitScript(()=>{
+  const Original=window.Worker;let first=true;
+  window.uiCaptureWorker={terminated:false};
+  window.Worker=class {
+   constructor(...args){if(!first)return new Original(...args);first=false;this.onmessage=this.onerror=this.onmessageerror=null;}
+   postMessage(){} // Hold only the first construction; retry uses the real Worker.
+   terminate(){window.uiCaptureWorker.terminated=true;}
+  };
+ });
  const p=await context.newPage(),errors=[];p.setDefaultTimeout(10000);p.on('pageerror',e=>errors.push(e.message));await p.clock.setFixedTime(new Date('2026-11-16T12:00:00+05:00'));
  await p.goto(`http://127.0.0.1:${before?4262:4261}/`);await p.locator('#home-calendar:enabled').click();await p.waitForFunction(()=>!document.querySelector('.route-snapshot'));await sleep(400);await prepare(p);
  await p.evaluate(()=>document.querySelector('#qa-recording-source')?.remove());await p.evaluate(()=>assistanceQA.startAudio());
@@ -37,9 +46,9 @@ async function clip(name,before,viewport,prepare,actions){
  await writeFile(`${dir}/actual-output.webm`,Buffer.from(audio));await writeFile(`${dir}/prepared-save.json`,JSON.stringify(state));
  await writeFile(`${dir}/frames.txt`,frames.map((f,i)=>`file '${String(i).padStart(5,'0')}.jpg'\nduration ${Math.max(.01,((frames[i+1]?.at??end)-f.at)/1000)}`).join('\n')+`\nfile '${String(frames.length-1).padStart(5,'0')}.jpg'\n`);
  const source=before?manifest.beforeSource:manifest.source,w=viewport.width,h=viewport.height;
- const caption=`fps=30,scale=${w}:${h},pad=${w}:${h+36}:0:0:color=0x1e1e2c,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='${before?'BEFORE 0.31':'CURRENT 0.32'} ${source.slice(0,7)} - real APK web frames':x=(w-tw)/2:y=${h+5}:fontsize=9:fontcolor=white,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='Actual audio - prepared QA - Chromium - not a phone':x=(w-tw)/2:y=${h+20}:fontsize=9:fontcolor=white`;
+ const caption=`fps=30,scale=${w}:${h},pad=${w}:${h+36}:0:0:color=0x1e1e2c,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='${before?'BEFORE 0.31':'CURRENT 0.32'} ${source.slice(0,7)} - ${name}':x=(w-tw)/2:y=${h+5}:fontsize=9:fontcolor=white,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='Actual audio - prepared QA - Chromium - not a phone':x=(w-tw)/2:y=${h+20}:fontsize=9:fontcolor=white`;
  execFileSync('ffmpeg',['-y','-v','error','-f','concat','-safe','0','-i',`${dir}/frames.txt`,'-i',`${dir}/actual-output.webm`,'-vf',caption,'-c:v','libx264','-pix_fmt','yuv420p','-c:a','aac','-shortest',`${out}/${name}-audio.mp4`]);
- manifest.clips.push({name,source,viewport,dpr:1.5,frames:frames.length,initialFrame:'Actual viewport screenshot at recording start; subsequent CDP frames with elapsed timing',durationMs:end,facts,errors});await writeFile(`${out}/capture-manifest.json`,JSON.stringify(manifest,null,2)+'\n');
+ manifest.clips.push({name,source,viewport,dpr:1.5,frames:frames.length,controlledFirstWorkerDelay:delayFirstWorker,initialFrame:'Actual viewport screenshot at recording start; subsequent CDP frames with elapsed timing',durationMs:end,facts,errors});await writeFile(`${out}/capture-manifest.json`,JSON.stringify(manifest,null,2)+'\n');
  await context.close();console.log(name,frames.length,'actual frames',Math.round(end)+'ms');
 }
 function combine(names,name){const args=['-y','-v','error'];for(const n of names)args.push('-i',`${out}/${n}-audio.mp4`);args.push('-filter_complex',names.map((_,i)=>`[${i}:v][${i}:a]`).join('')+`concat=n=${names.length}:v=1:a=1[v][a]`,'-map','[v]','-map','[a]','-c:v','libx264','-pix_fmt','yuv420p','-c:a','aac',`${out}/${name}-audio.mp4`);execFileSync('ffmpeg',args);}
@@ -64,6 +73,14 @@ try{
   await click(p,'#choose-field');await sleep(450);const returned=await geometry(p,'#start-daily');assert(returned.hit);
   return{initial,scrolled,during,returned,date,startedDate:'2026-11-02',sameEmbeddedLevel:true,freeContinueUsed:s.freeContinueUsed};
  });
+ await clip('calendar-cancel-retry',false,{width:320,height:568},async()=>{},async p=>{
+  await click(p,'[data-date="2026-11-15"]');await click(p,'#start-daily');await p.locator('#start-daily[aria-busy="true"]').waitFor();await sleep(500);
+  await click(p,'#view-trophy');await sleep(550);await click(p,'[data-close-trophy]');await p.locator('#trophy-viewer').waitFor({state:'hidden'});
+  await p.locator('#start-daily:enabled').waitFor();const recovered=await geometry(p,'#start-daily');assert(recovered.hit);assert(await p.evaluate(()=>uiCaptureWorker.terminated));
+  await sleep(350);await click(p,'#start-daily');await p.waitForFunction(()=>document.querySelector('#game-shell').dataset.level==='d20261115');await sleep(500);
+  const s=await p.evaluate(()=>JSON.parse(localStorage.getItem('arrows.progress.v1')));assert.deepEqual(s.daily['2026-11-15'].level,dailyLevel('2026-11-15'));assert.deepEqual(s.receipts,[]);
+  return{firstWorker:'Explicit QA delay, cancelled by trophy entry',retry:'Real production Worker and actual dated level',recovered,receipts:0,freeContinueUsed:s.freeContinueUsed};
+ },true);
  const trophy=async p=>{await p.locator('#view-trophy').click();await sleep(400);};
  await clip('trophy-before',true,{width:568,height:320},trophy,async p=>{
   const initial=await geometry(p,'[data-open-month]');assert(!initial.hit);await sleep(850);
@@ -76,10 +93,10 @@ try{
   await click(p,'[data-open-month]');await p.locator('#trophy-viewer').waitFor({state:'hidden'});await sleep(550);
   const play=await geometry(p,'#start-daily');assert(play.hit);return{open,close,play,interruptedEntranceAccepted:true};
  });
- combine(['calendar-before','calendar-after'],'calendar-before-after');gif('calendar-before-after',320,568);
+ combine(['calendar-before','calendar-after','calendar-cancel-retry'],'calendar-before-after');gif('calendar-before-after',320,568);
  combine(['trophy-before','trophy-after'],'trophy-before-after');gif('trophy-before-after',568,320);
  // One short audible recording, with only current-build UI sounds.
- await writeFile(`${out}/ui-audio.mp4`,await readFile(`${out}/calendar-after-audio.mp4`));
+ combine(['calendar-after','calendar-cancel-retry'],'ui');
  manifest.comparison={samePreparedSave:true,calendarViewport:'320x568',trophyViewport:'568x320',before:'signed0.31APK web',after:'signed0.32APK web'};
  await writeFile(`${out}/capture-manifest.json`,JSON.stringify(manifest,null,2)+'\n');
 }finally{await browser.close();for(const server of servers)server.kill();}

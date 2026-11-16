@@ -26,7 +26,9 @@ async function action(page:Page,selector:string,min=44){
   const r=e.getBoundingClientRect(),points=[[.5,.5],[.2,.2],[.8,.2],[.2,.8],[.8,.8]];
   return{x:r.x,y:r.y,w:r.width,h:r.height,inside:r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight,hit:points.every(([x,y])=>e.contains(document.elementFromPoint(r.x+r.width*x!,r.y+r.height*y!)))};
  });
- expect(result.inside,selector).toBe(true);expect(result.hit,selector).toBe(true);expect(result.w,selector).toBeGreaterThanOrEqual(min);expect(result.h,selector).toBeGreaterThanOrEqual(min);return result;
+ // Fractional compositor translations can report44px as43.99997; tolerate
+ // numerical rounding, while still rejecting the former38px target.
+ expect(result.inside,selector).toBe(true);expect(result.hit,selector).toBe(true);expect(result.w+.01,selector).toBeGreaterThanOrEqual(min);expect(result.h+.01,selector).toBeGreaterThanOrEqual(min);return result;
 }
 const cases=[
  {width:320,height:568,language:'ru',theme:'dark',scale:1},
