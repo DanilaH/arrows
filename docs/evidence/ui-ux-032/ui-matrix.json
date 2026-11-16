@@ -1,0 +1,2387 @@
+{
+  "source": "c1fa9215e5bd6812d49ff995b96da683d5d711e0 /0.32.0-code45 signed-APK web; Chromium,DPR1.5,prepared progress,controlled native transport; not a phone",
+  "states": 78,
+  "appErrors": 0,
+  "method": "Initial viewport before auto-scrolling the measured action; viewport and clipping-ancestor bounds, interior hit tests; actual final signed APK web/DPR1.5. Seeded progress/controlled native transport. Not a phone.",
+  "rows": [
+    {
+      "name": "home",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 492,
+        "client": 492
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 1,
+        "height": 437,
+        "client": 344
+      },
+      "critical": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 237.390625,
+          "y": 428,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-six-rows",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 344
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 344
+      },
+      "critical": [
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 242,
+          "y": 64.265625,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 34,
+          "y": 453.71875,
+          "w": 252,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "collection",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1307,
+        "client": 492
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "settings",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1307,
+        "client": 492
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 138,
+          "y": 508,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "help",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "restart",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "home",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 0,
+        "height": 564,
+        "client": 564
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 416
+      },
+      "critical": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 277.390625,
+          "y": 500,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-six-rows",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 416
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 416
+      },
+      "critical": [
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 282,
+          "y": 96.109375,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 34,
+          "y": 493.890625,
+          "w": 292,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "collection",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1306,
+        "client": 564
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "settings",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1306,
+        "client": 564
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 158,
+          "y": 580,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "help",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "restart",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "home",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 768,
+        "client": 768
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 437
+      },
+      "critical": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 301.390625,
+          "y": 521.375,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-six-rows",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 437
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 437
+      },
+      "critical": [
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 312,
+          "y": 176.296875,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 34,
+          "y": 617.6875,
+          "w": 322,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "collection",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1378,
+        "client": 768
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "settings",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1378,
+        "client": 768
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 173,
+          "y": 784,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "help",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "restart",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "home",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 0,
+        "height": 684,
+        "client": 684
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 437
+      },
+      "critical": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 323.390625,
+          "y": 521.375,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-six-rows",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 437
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 437
+      },
+      "critical": [
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 334,
+          "y": 134.5,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 34,
+          "y": 575.484375,
+          "w": 344,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "collection",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1378,
+        "client": 684
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "settings",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1378,
+        "client": 684
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 184,
+          "y": 700,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "help",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "restart",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "home",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 264,
+        "client": 264
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 127,
+        "height": 347,
+        "client": 128
+      },
+      "critical": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 479.390625,
+          "y": 200,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-six-rows",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 347,
+        "client": 128
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 347,
+        "client": 128
+      },
+      "critical": [
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 415,
+          "y": 48,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 109,
+          "y": 222,
+          "w": 350,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "collection",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1360,
+        "client": 264
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "settings",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1360,
+        "client": 264
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 262,
+          "y": 268,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "help",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "restart",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "home",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 0,
+        "height": 304,
+        "client": 304
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 87,
+        "height": 347,
+        "client": 168
+      },
+      "critical": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 601.390625,
+          "y": 240,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-six-rows",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 0,
+        "height": 347,
+        "client": 168
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 0,
+        "height": 347,
+        "client": 168
+      },
+      "critical": [
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 521,
+          "y": 68,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 215,
+          "y": 242,
+          "w": 350,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "collection",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1360,
+        "client": 304
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "settings",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1360,
+        "client": 304
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 368,
+          "y": 308,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "help",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "restart",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "home",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1204,
+        "client": 1204
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 437
+      },
+      "critical": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 551.390625,
+          "y": 521.375,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-six-rows",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 437
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 437,
+        "client": 437
+      },
+      "critical": [
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 531,
+          "y": 394.296875,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 225,
+          "y": 835.6875,
+          "w": 350,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "collection",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1378,
+        "client": 1204
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "settings",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1378,
+        "client": 1204
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 378,
+          "y": 1220,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "help",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "restart",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "ftue",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "loss-gift",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "free-continue",
+          "label": "Продолжить бесплатно",
+          "disabled": false,
+          "x": 44,
+          "y": 246.49734497070312,
+          "w": 232,
+          "h": 72,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "home",
+          "label": "На главную",
+          "disabled": false,
+          "x": 44,
+          "y": 382.4973449707031,
+          "w": 232,
+          "h": 48,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "loss-video",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "rewarded-continue",
+          "label": "Смотреть видео",
+          "disabled": false,
+          "x": 44,
+          "y": 258.5940856933594,
+          "w": 232,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "home",
+          "label": "На главную",
+          "disabled": false,
+          "x": 44,
+          "y": 372.5940856933594,
+          "w": 232,
+          "h": 48,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "finish-flawless",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "next",
+          "label": "Дальше",
+          "disabled": false,
+          "x": 50,
+          "y": 470,
+          "w": 220,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "finish-errors",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "next",
+          "label": "Дальше",
+          "disabled": false,
+          "x": 50,
+          "y": 470,
+          "w": 220,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "ftue",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "loss-gift",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "free-continue",
+          "label": "Продолжить бесплатно",
+          "disabled": false,
+          "x": 49,
+          "y": 386.1848449707031,
+          "w": 292,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "home",
+          "label": "На главную",
+          "disabled": false,
+          "x": 49,
+          "y": 500.1848449707031,
+          "w": 292,
+          "h": 47.999969482421875,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "loss-video",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "rewarded-continue",
+          "label": "Смотреть видео",
+          "disabled": false,
+          "x": 49,
+          "y": 384.4424133300781,
+          "w": 292,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "home",
+          "label": "На главную",
+          "disabled": false,
+          "x": 49,
+          "y": 498.4424133300781,
+          "w": 292,
+          "h": 47.999969482421875,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "finish-flawless",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "next",
+          "label": "Дальше",
+          "disabled": false,
+          "x": 85,
+          "y": 746,
+          "w": 220,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "finish-errors",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "next",
+          "label": "Дальше",
+          "disabled": false,
+          "x": 85,
+          "y": 746,
+          "w": 220,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "ftue",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [],
+      "errors": []
+    },
+    {
+      "name": "loss-gift",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "free-continue",
+          "label": "Продолжить бесплатно",
+          "disabled": false,
+          "x": 138,
+          "y": 135.58587646484375,
+          "w": 292,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "home",
+          "label": "На главную",
+          "disabled": false,
+          "x": 138,
+          "y": 249.58587646484375,
+          "w": 292,
+          "h": 48,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "loss-video",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "rewarded-continue",
+          "label": "Смотреть видео",
+          "disabled": false,
+          "x": 138,
+          "y": 137.53273010253906,
+          "w": 292,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        },
+        {
+          "id": "home",
+          "label": "На главную",
+          "disabled": false,
+          "x": 138,
+          "y": 251.53273010253906,
+          "w": 292,
+          "h": 47.99998474121094,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "finish-flawless",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "next",
+          "label": "Дальше",
+          "disabled": false,
+          "x": 291,
+          "y": 238,
+          "w": 150,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "finish-errors",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "critical": [
+        {
+          "id": "next",
+          "label": "Дальше",
+          "disabled": false,
+          "x": 291,
+          "y": 238,
+          "w": 150,
+          "h": 50,
+          "visible": true,
+          "unclipped": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "baseline": [
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 673,
+        "client": 492
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 237.390625,
+          "y": 581.296875,
+          "w": 68.609375,
+          "h": 46,
+          "visible": false,
+          "hit": false
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 84,
+        "height": 673,
+        "client": 492
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 237.390625,
+          "y": 497.296875,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "hit": false
+        },
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 235,
+          "y": 40,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 41,
+          "y": 482.984375,
+          "w": 238,
+          "h": 50,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "controls": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 138,
+          "y": 508,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 0,
+        "height": 673,
+        "client": 564
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 277.390625,
+          "y": 581.296875,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "hit": false
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 63,
+        "height": 673,
+        "client": 564
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 277.390625,
+          "y": 518.296875,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "hit": false
+        },
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 275,
+          "y": 82.296875,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 41,
+          "y": 507.6875,
+          "w": 278,
+          "h": 50,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "controls": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 158,
+          "y": 580,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 803,
+        "client": 768
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 301.390625,
+          "y": 710.6875,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 803,
+        "client": 768
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 301.390625,
+          "y": 710.6875,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "hit": false
+        },
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 305,
+          "y": 184.296875,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 41,
+          "y": 609.6875,
+          "w": 308,
+          "h": 50,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "controls": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 173,
+          "y": 784,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 0,
+        "height": 803,
+        "client": 684
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 323.390625,
+          "y": 710.6875,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "hit": false
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 70,
+        "height": 803,
+        "client": 684
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 323.390625,
+          "y": 640.6875,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "hit": false
+        },
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 327,
+          "y": 142.296875,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 41,
+          "y": 567.6875,
+          "w": 330,
+          "h": 50,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 412,
+        "height": 760
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "controls": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 184,
+          "y": 700,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 402,
+        "client": 264
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 20,
+          "y": 190,
+          "w": 160,
+          "h": 46,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 60,
+        "height": 402,
+        "client": 264
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 20,
+          "y": 130,
+          "w": 160,
+          "h": 46,
+          "visible": true,
+          "hit": false
+        },
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 419,
+          "y": 40,
+          "w": 38,
+          "h": 38,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 111,
+          "y": 459.390625,
+          "w": 346,
+          "h": 50,
+          "visible": false,
+          "hit": false
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "controls": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 265,
+          "y": 274,
+          "w": 38,
+          "h": 38,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 0,
+        "height": 402,
+        "client": 304
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 40,
+          "y": 190,
+          "w": 160,
+          "h": 46,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 60,
+        "height": 402,
+        "client": 304
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 40,
+          "y": 130,
+          "w": 160,
+          "h": 46,
+          "visible": true,
+          "hit": false
+        },
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 525,
+          "y": 40,
+          "w": 38,
+          "h": 38,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 217,
+          "y": 459.390625,
+          "w": 346,
+          "h": 50,
+          "visible": false,
+          "hit": false
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 780,
+        "height": 360
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "controls": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 371,
+          "y": 314,
+          "w": 38,
+          "h": 38,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "calendar-initial",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1204,
+        "client": 1204
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 611.390625,
+          "y": 710.6875,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "trophy",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1204,
+        "client": 1204
+      },
+      "controls": [
+        {
+          "id": "start-daily",
+          "label": "Играть",
+          "disabled": false,
+          "x": 611.390625,
+          "y": 710.6875,
+          "w": 68.609375,
+          "h": 46,
+          "visible": true,
+          "hit": false
+        },
+        {
+          "id": "circle",
+          "label": "Закрыть",
+          "disabled": false,
+          "x": 529,
+          "y": 402.296875,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "primary",
+          "label": "Открыть месяц",
+          "disabled": false,
+          "x": 227,
+          "y": 827.6875,
+          "w": 346,
+          "h": 50,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "game",
+      "viewport": {
+        "width": 800,
+        "height": 1280
+      },
+      "scroll": {
+        "top": 0,
+        "height": 0,
+        "client": 0
+      },
+      "controls": [
+        {
+          "id": "guides",
+          "label": "Показать направления выхода",
+          "disabled": false,
+          "x": 378,
+          "y": 1220,
+          "w": 44,
+          "h": 44,
+          "visible": true,
+          "hit": true
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

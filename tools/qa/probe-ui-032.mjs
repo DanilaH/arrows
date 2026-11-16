@@ -20,7 +20,12 @@ const geometry=async page=>page.evaluate(()=>{
  const controls=[...document.querySelectorAll('button,summary,select')].filter(e=>e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden'&&!e.closest('[hidden]'));
  const scroller=document.querySelector('.calendar-scroll')??document.querySelector('#meta-screen');
  return {viewport:{w:innerWidth,h:innerHeight},scroll:{top:scroller?.scrollTop,height:scroller?.scrollHeight,client:scroller?.clientHeight},controls:controls.map(e=>{
-  const r=e.getBoundingClientRect();return {id:e.id||e.dataset.date||e.dataset.action||e.className,label:e.getAttribute('aria-label')||e.textContent.trim().slice(0,70),disabled:e.disabled??false,x:r.x,y:r.y,w:r.width,h:r.height,visible:r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight,hit:[[.5,.5],[.2,.2],[.8,.8]].every(([x,y])=>e.contains(document.elementFromPoint(r.x+r.width*x,r.y+r.height*y)))};
+  const r=e.getBoundingClientRect();let unclipped=r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight;
+  for(let p=e.parentElement;p;p=p.parentElement){const s=getComputedStyle(p),a=p.getBoundingClientRect();
+   if(/auto|scroll|hidden|clip/.test(s.overflowX))unclipped&&=r.left>=a.left+p.clientLeft-.01&&r.right<=a.left+p.clientLeft+p.clientWidth+.01;
+   if(/auto|scroll|hidden|clip/.test(s.overflowY))unclipped&&=r.top>=a.top+p.clientTop-.01&&r.bottom<=a.top+p.clientTop+p.clientHeight+.01;
+  }
+  return {id:e.id||e.dataset.date||e.dataset.action||e.className,label:e.getAttribute('aria-label')||e.textContent.trim().slice(0,70),disabled:e.disabled??false,x:r.x,y:r.y,w:r.width,h:r.height,visible:r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight,unclipped,hit:[[.5,.5],[.2,.2],[.8,.8]].every(([x,y])=>e.contains(document.elementFromPoint(r.x+r.width*x,r.y+r.height*y)))};
  })};
 });
 try {

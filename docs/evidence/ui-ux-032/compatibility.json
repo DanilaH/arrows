@@ -1,0 +1,31 @@
+{
+  "base": "978fa67ffbe6cc0453f4b7edd50c442302391ffa",
+  "source": "c1fa9215e5bd6812d49ff995b96da683d5d711e0",
+  "trees": {
+    "domain": {
+      "before": "d49e14dc2ccfc8e5a67f4bceece8ce51cebf483a",
+      "after": "d49e14dc2ccfc8e5a67f4bceece8ce51cebf483a",
+      "identical": true
+    },
+    "progression": {
+      "before": "712c8b3022a2954f7b65ec9f3c1e874a59722cde",
+      "after": "712c8b3022a2954f7b65ec9f3c1e874a59722cde",
+      "identical": true
+    },
+    "content": {
+      "before": "c6b7cee4e920a6f13b10a461ef623c9267d2700e",
+      "after": "c6b7cee4e920a6f13b10a461ef623c9267d2700e",
+      "identical": true
+    },
+    "app": {
+      "before": "bdcb9c335eb91c5f82916fa606941c62228d7769",
+      "after": "bdcb9c335eb91c5f82916fa606941c62228d7769",
+      "identical": true
+    }
+  },
+  "dependencyVersionsUnchanged": true,
+  "runtimeKitPin": "github:DanilaH/mini-games-kit#a9325265e87583a4872cf6a158e1e881a0d7508e",
+  "nativeGradleChange": "versionName/code only,0.31.0/44\u21920.32.0/45",
+  "noSaveSchemaMigration": true,
+  "proofLimit": "Exact unchanged source trees plus passing old-attempt/reward regression tests and same APK package/certificate. Actual physical install/update not run."
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Arrows-0.32.0-playtest.apk",
+    "bytes": 11006193,
+    "sha256": "84f59720dc11e059b19181ea23f73cc8063bcdad51ece4f19175859a310b4b01"
+  },
+  {
+    "name": "Arrows-0.32.0-calendar-before-after.gif",
+    "bytes": 1414064,
+    "sha256": "ca1f0c18ae71fdc5efd55564203ac2839f882ccc2ead5391443c8295d6d90dc7"
+  },
+  {
+    "name": "Arrows-0.32.0-trophy-before-after.gif",
+    "bytes": 438637,
+    "sha256": "062e7a74938de6bde896157ed36b446fb2cc9355657ff40b63950f94f832a76c"
+  },
+  {
+    "name": "Arrows-0.32.0-ui-audio.mp4",
+    "bytes": 273549,
+    "sha256": "12f08ee34556304d5499dfe8936fac9609810bdcda3c87d5f65d9d61bbf515e6"
+  }
+]

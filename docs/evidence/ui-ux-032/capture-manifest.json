@@ -1,0 +1,285 @@
+{
+  "source": "c1fa9215e5bd6812d49ff995b96da683d5d711e0",
+  "version": "0.32.0/code45",
+  "beforeSource": "d6815e8b74c65a42412f7a5d5f0c693ae2f96540",
+  "beforeMatchedPreviousApkFiles": [
+    "favicon.svg",
+    "brand-mark.svg",
+    "cordova.js",
+    "target-lab.html",
+    "cordova_plugins.js",
+    "content-pilot.html",
+    "index.html",
+    "fonts/README.txt",
+    "fonts/nunito-variable.ttf",
+    "fonts/Nunito-OFL.txt",
+    "ui/daily-v1.webp",
+    "ui/collection-v1.webp",
+    "audio/KENNEY-INTERFACE-CC0.txt",
+    "audio/KENNEY-UI-CC0.txt",
+    "assets/targetLab-B4h0H2OE.js",
+    "assets/gestures-BZk33dGK.css",
+    "assets/contentPilot-VWhwCspC.js",
+    "assets/contentPilot-JrrfdKDM.css",
+    "assets/dailyDense-Vqm9rv7l.js",
+    "assets/board-CdgtGkmQ.js",
+    "assets/bootstrap-CDvHGCnk.js",
+    "assets/dailyDense-DThArHyA.js",
+    "assets/web-BPw_vKHZ.js",
+    "assets/targetLab-DIPOQB4j.css",
+    "assets/dailyWorker-CzSU8cF9.js",
+    "assets/main-BbddNG3q.js",
+    "assets/gestures-gXskii5a.js",
+    "assets/dist-BNQ5r8k5.js"
+  ],
+  "method": "Actual final signed-APK web in Chromium/DPR1.5; viewport recorded per clip. Before web extracted from previous signed0.31APK. Prepared progress and controlled reward transport, no physical-phone/SDK footage.",
+  "payload": {
+    "assets/board-CdgtGkmQ.js": "884b082a117269d6905502e5d145c01f17e6750fae07d926262e0119c57a0fd8",
+    "assets/bootstrap-DgjXxzeH.js": "9f9c751d3df30bea6d83e8861a3fcc32592063c79745153607402add8f3e3bc4",
+    "assets/contentPilot-BBefd5Xa.js": "6407bbd9c848f0b10ddbb4f28fe146a8ce14d77754ac5098ed8610acf302844f",
+    "assets/contentPilot-JrrfdKDM.css": "d90ddb250320fc90bf098669fff979ff40b965f534393d695c3a34d6dca4ffab",
+    "assets/dailyDense-DThArHyA.js": "8572768d8355a5aa35db1ee46e6fb30ed115bc37340b4a99a07d542d137b775a",
+    "assets/dailyDense-Vqm9rv7l.js": "703055c749cb9207ac525f271175d6ee77e792f6281f9b22bebd2955c47d4b24",
+    "assets/dailyWorker-CzSU8cF9.js": "d5bccec7c03886e299341ebc7ea268c0ad07e9bdea399381957158a2710b95f9",
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/gestures-CqMOTyc-.js": "15bce2102423e587f7d87880f071d3c9c0cdedebcec8490d66639cdf583fa2b9",
+    "assets/gestures-Cs1jHz9m.css": "08d4c8065f47aba7ceb9d441a4ad72cceba310f2cb14eedd26c52a7d4f8c2240",
+    "assets/main-W6vz_897.js": "081fcceb2b719250a92b4a48b4839d19deb27ce1d16230530a0631077a70f78f",
+    "assets/targetLab-BjWsUGbM.js": "99950d23a401ae0d6e79f7d2502e9bf5708b0ba192c1763456d79ccbdc9d96f5",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7",
+    "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+    "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "content-pilot.html": "27ffc8f41ee83f6ee369f038cf80340a0a8b1df64b58cef5d7cdac8385702b5a",
+    "cordova.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cordova_plugins.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "index.html": "247220218d1c4f9821be11672b39c87a7560db9d988cf3c131a2961717d08db6",
+    "target-lab.html": "6bd0a6e565f739d3aeff18f2b5537171af7bff112110e1b1b52629384d1c9eee",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "localDistMatched": [
+    "favicon.svg",
+    "brand-mark.svg",
+    "target-lab.html",
+    "content-pilot.html",
+    "index.html",
+    "fonts/README.txt",
+    "fonts/nunito-variable.ttf",
+    "fonts/Nunito-OFL.txt",
+    "ui/daily-v1.webp",
+    "ui/collection-v1.webp",
+    "audio/KENNEY-INTERFACE-CC0.txt",
+    "audio/KENNEY-UI-CC0.txt",
+    "assets/main-W6vz_897.js",
+    "assets/gestures-CqMOTyc-.js",
+    "assets/contentPilot-JrrfdKDM.css",
+    "assets/dailyDense-Vqm9rv7l.js",
+    "assets/targetLab-BjWsUGbM.js",
+    "assets/board-CdgtGkmQ.js",
+    "assets/dailyDense-DThArHyA.js",
+    "assets/contentPilot-BBefd5Xa.js",
+    "assets/bootstrap-DgjXxzeH.js",
+    "assets/web-BPw_vKHZ.js",
+    "assets/gestures-Cs1jHz9m.css",
+    "assets/targetLab-DIPOQB4j.css",
+    "assets/dailyWorker-CzSU8cF9.js",
+    "assets/dist-BNQ5r8k5.js"
+  ],
+  "clips": [
+    {
+      "name": "calendar-before",
+      "source": "d6815e8b74c65a42412f7a5d5f0c693ae2f96540",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "dpr": 1.5,
+      "frames": 21,
+      "controlledFirstWorkerDelay": false,
+      "initialFrame": "Actual viewport screenshot at recording start; subsequent CDP frames with elapsed timing",
+      "durationMs": 4290.319099,
+      "facts": {
+        "initial": {
+          "x": 237.390625,
+          "y": 581.296875,
+          "w": 68.609375,
+          "h": 46,
+          "hit": false
+        },
+        "revealed": {
+          "x": 237.390625,
+          "y": 400.296875,
+          "w": 68.609375,
+          "h": 46,
+          "hit": true
+        },
+        "initialRootScroll": 0,
+        "explanation": "Play starts below the fold; real wheel scroll exposes it. Date fixture matches after."
+      },
+      "errors": []
+    },
+    {
+      "name": "calendar-after",
+      "source": "c1fa9215e5bd6812d49ff995b96da683d5d711e0",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "dpr": 1.5,
+      "frames": 78,
+      "controlledFirstWorkerDelay": false,
+      "initialFrame": "Actual viewport screenshot at recording start; subsequent CDP frames with elapsed timing",
+      "durationMs": 5203.004078,
+      "facts": {
+        "initial": {
+          "x": 237.390625,
+          "y": 428,
+          "w": 68.609375,
+          "h": 46,
+          "hit": true
+        },
+        "scrolled": {
+          "x": 237.390625,
+          "y": 428,
+          "w": 68.609375,
+          "h": 46,
+          "hit": true
+        },
+        "during": {
+          "x": 237.390625,
+          "y": 428,
+          "w": 68.609375,
+          "h": 46,
+          "hit": true
+        },
+        "returned": {
+          "x": 237.390625,
+          "y": 428,
+          "w": 68.609375,
+          "h": 46,
+          "hit": true
+        },
+        "date": {
+          "x": 14,
+          "y": 280.375,
+          "w": 40,
+          "h": 44,
+          "hit": true
+        },
+        "startedDate": "2026-11-02",
+        "sameEmbeddedLevel": true,
+        "freeContinueUsed": false
+      },
+      "errors": []
+    },
+    {
+      "name": "calendar-cancel-retry",
+      "source": "c1fa9215e5bd6812d49ff995b96da683d5d711e0",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "dpr": 1.5,
+      "frames": 54,
+      "controlledFirstWorkerDelay": true,
+      "initialFrame": "Actual viewport screenshot at recording start; subsequent CDP frames with elapsed timing",
+      "durationMs": 5230.923127000002,
+      "facts": {
+        "firstWorker": "Explicit QA delay, cancelled by trophy entry",
+        "retry": "Real production Worker and actual dated level",
+        "recovered": {
+          "x": 237.390625,
+          "y": 428,
+          "w": 68.609375,
+          "h": 46,
+          "hit": true
+        },
+        "receipts": 0,
+        "freeContinueUsed": false
+      },
+      "errors": []
+    },
+    {
+      "name": "trophy-before",
+      "source": "d6815e8b74c65a42412f7a5d5f0c693ae2f96540",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "dpr": 1.5,
+      "frames": 4,
+      "controlledFirstWorkerDelay": false,
+      "initialFrame": "Actual viewport screenshot at recording start; subsequent CDP frames with elapsed timing",
+      "durationMs": 3748.163719,
+      "facts": {
+        "initial": {
+          "x": 111,
+          "y": 459.390625,
+          "w": 346,
+          "h": 50,
+          "hit": false
+        },
+        "revealed": {
+          "x": 111,
+          "y": 230.390625,
+          "w": 346,
+          "h": 50,
+          "hit": true
+        },
+        "explanation": "Before: large portrait pushes Open month outside the initial dialog."
+      },
+      "errors": []
+    },
+    {
+      "name": "trophy-after",
+      "source": "c1fa9215e5bd6812d49ff995b96da683d5d711e0",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "dpr": 1.5,
+      "frames": 29,
+      "controlledFirstWorkerDelay": false,
+      "initialFrame": "Actual viewport screenshot at recording start; subsequent CDP frames with elapsed timing",
+      "durationMs": 3788.144742999997,
+      "facts": {
+        "open": {
+          "x": 109,
+          "y": 222,
+          "w": 350,
+          "h": 50,
+          "hit": true
+        },
+        "close": {
+          "x": 415,
+          "y": 48,
+          "w": 44,
+          "h": 44,
+          "hit": true
+        },
+        "play": {
+          "x": 479.390625,
+          "y": 200,
+          "w": 68.609375,
+          "h": 46,
+          "hit": true
+        },
+        "interruptedEntranceAccepted": true
+      },
+      "errors": []
+    }
+  ],
+  "comparison": {
+    "samePreparedSave": true,
+    "calendarViewport": "320x568",
+    "trophyViewport": "568x320",
+    "before": "signed0.31APK web",
+    "after": "signed0.32APK web"
+  }
+}

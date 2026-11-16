@@ -1,0 +1,52 @@
+{
+  "source": "c1fa9215e5bd6812d49ff995b96da683d5d711e0",
+  "application": "46554912f0c16a44a93e54bc5703c53b62271d79",
+  "workflow": 43910122488,
+  "webJob": 133449435786,
+  "androidJob": 133449435965,
+  "local": {
+    "typecheck": true,
+    "unit": {
+      "files": 29,
+      "passed": 232
+    },
+    "productionBuild": true,
+    "focusedBrowserPassed": 66,
+    "geometryRoundingRepeatsPassed": 5,
+    "pendingBugBefore": {
+      "failed": 2,
+      "reason": "Play remains disabled/aria-busy=true after trophy cancellation"
+    },
+    "pendingBugAfterPassed": 2
+  },
+  "native": {
+    "unitPassed": 19,
+    "sync": true,
+    "debugApk": true,
+    "playtestApk": true,
+    "officialV2SameCertificate": true,
+    "testAds": true,
+    "analyticsKeyEmpty": true,
+    "localWebFilesMatched": 26,
+    "allApkPublicFiles": 28
+  },
+  "wholeBrowserCI": {
+    "status": "success",
+    "passed": 458,
+    "failed": 0,
+    "duration": "23.4m",
+    "typeAndBuildPassed": true,
+    "webSyncPassed": true,
+    "androidJob": "success",
+    "webJob": "success"
+  },
+  "device": {
+    "physicalInstallUpdate": "NOT RUN",
+    "physicalHapticsSpeaker": "NOT RUN in0.32 pass; owner qualitative0.31accepted",
+    "measuredFpsThermal": "NOT RUN"
+  },
+  "commercial": {
+    "realSdkAccountOrMoney": "NOT RUN",
+    "appMetricaDashboard": "NOT RUN; playtest analytics intentionally disabled"
+  }
+}
