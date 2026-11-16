@@ -15,7 +15,7 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
 #game-header .circle { width: 44px; height: 44px; flex-basis: 44px; }
 #game-header .circle svg { width: 22px; height: 22px; }
 #board-overview { color: var(--secondary); }
-#board-overview > svg { stroke-width: 1.6; animation: overview-appear 160ms ease-out both; }
+#board-overview > svg { stroke-width: 1.6; animation: overview-appear 160ms ease-out; }
 @keyframes overview-appear { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { #board-overview > svg { animation: none; } }
 .heading h1 { font-size: 13px; line-height: 18px; color: var(--secondary); }

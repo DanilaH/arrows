@@ -27,6 +27,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const shell = document.querySelector<HTMLElement>('#game-shell')!, dialog = document.querySelector<HTMLDialogElement>('#game-dialog')!;
   const content = document.querySelector<HTMLElement>('#dialog-content')!, status = document.querySelector<HTMLElement>('#app-status')!;
   const hintButton = document.querySelector<HTMLButtonElement>('#hint')!, pointer = document.querySelector<HTMLElement>('#tutorial-pointer')!;
+  // Archived control/pilot documents intentionally have no normal-game overview.
+  const overviewButton=document.querySelector<HTMLButtonElement>('#board-overview');
   const warning = document.querySelector<HTMLElement>('#save-status')!, retry = document.querySelector<HTMLButtonElement>('#save-retry')!;
   const sessionPlay = document.querySelector<HTMLButtonElement>('#session-play')!;
   const progress = new ProgressStore(platform.storage), listeners: Array<() => void> = [];
@@ -306,9 +308,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     Object.assign(shell.dataset, { mode: control ? 'control' : gameMode(), level: board.level.id, remaining: String(remaining), lives: String(board.hearts), attempt: board.attemptId,
       state: board.complete ? 'complete' : board.hearts === 0 ? 'lost' : 'playing', progress: loaded ? 'ready' : 'loading', save: progress.uncertain ? 'uncertain' : progress.available ? 'available' : 'session-only' });
     root.dataset.camera = JSON.stringify({ x: scene.boardCamera.x, y: scene.boardCamera.y, scale: scene.boardCamera.scale });
-    const overview=document.querySelector<HTMLButtonElement>('#board-overview')!;
-    overview.hidden=!loaded || control || meta.screen!=='game' || board.hearts===0 || !scene.overviewAvailable;
-    overview.disabled=requestingAd;
+    if(overviewButton){
+      overviewButton.hidden=!loaded || control || meta.screen!=='game' || board.hearts===0 || !scene.overviewAvailable;
+      overviewButton.disabled=requestingAd;
+    }
     document.querySelector('#guides')!.setAttribute('aria-pressed', String(scene.guides));
     document.querySelector<HTMLElement>('#guides')!.hidden = board.complete;
     document.querySelector<HTMLElement>('#win')!.hidden = !scene.finished;
@@ -473,7 +476,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   on(document.querySelector<HTMLElement>('#choose-field')!, 'click', backToMenu);
   on(document.querySelector<HTMLElement>('#restart')!, 'click', () => open('restart'));
   on(document.querySelector<HTMLElement>('#guides')!, 'click', () => { cancel(); scene.setGuides(!scene.guides); if (!control) { saveView(); finishTutorial('guides'); } });
-  on(document.querySelector<HTMLElement>('#board-overview')!, 'click', () => {
+  if(overviewButton)on(overviewButton, 'click', () => {
     if(control || meta.screen!=='game' || scene.board.hearts===0 || requestingAd || motion.routeBusy || platform.activity.isBlocked())return;
     cancel();overviewAttempt=scene.board.attemptId;scene.showOverview();
   });
@@ -537,8 +540,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     document.querySelector('#choose-field')!.setAttribute('aria-label', text.home);
     document.querySelector('#restart')!.setAttribute('aria-label', text.restart);
     document.querySelector('#guides')!.setAttribute('aria-label', text.guides);
-    const overview=document.querySelector<HTMLElement>('#board-overview')!;
-    overview.setAttribute('aria-label',text.overview);overview.title=text.overview;
+    if(overviewButton){overviewButton.setAttribute('aria-label',text.overview);overviewButton.title=text.overview;}
     hintButton.innerHTML = `<svg class="hint-bulb" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 3H9c0-1 0-2-1-3Z"/></svg><span class="hint-copy"><span data-help-label>${text.hint}</span></span><svg class="video-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg>`; sessionPlay.textContent = text.sessionPlay;
   };
   status.setAttribute('data-help-readiness','');
