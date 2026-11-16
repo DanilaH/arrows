@@ -1,6 +1,6 @@
 ## Portrait-only Android —0.32.1/code46
 
-Owner understood screenshot was BEFORE and chose fixed portrait instead of landscape gameplay. Native manifest MainActivity portrait plus appCategory game; no more UI/cup redesign. Existing resize/safe-area defenses retained. Read PORTRAIT_0321.md. Same .playtest package/key, test ads/analytics off; final signed APK manifest/payload proof pending. npm check/native build next; physical rotation/launch/resume NOT RUN, do not substitute browser resizing.0.32full458browser/232unit/19JVM baseline stays valid; new web bytes must match exactly. KIT IMPACT NONE; no kit/store writes.
+Owner understood screenshot was BEFORE and chose fixed portrait, not more cup/UI changes. Source c072973, current MainActivity portrait + application game category; existing resize/safe-area defenses retained. Read PORTRAIT_0321.md and evidence/portrait-0321/ACCEPTANCE.md.232unit/type/build PASS; hosted Android43920386155SUCCESS,19JVM/sync/both APKs. Official SDK V2 same-cert, exact package/code46, demo units/empty analytics key, actual decoded MainActivity portrait/application category game verified. All28web files byte-identical to accepted0.32 and its458browser baseline. Fresh full web CI43920386155 still RUNNING at delivery; do not label it PASS. Signed compatible APK saved. Physical/emulator rotation/launch/resume NOT RUN; no browser GIF presented as proof of native locking. Prior owner qualitative0.31playtest remains accepted. KIT IMPACT NONE; no kit/store writes.
 
 ## Independent UI / UX / feel corrections —0.32.0/code45
 
