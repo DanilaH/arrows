@@ -30,3 +30,5 @@ CI now retains official SDK apksigner/aapt/SHA256 evidence for the isolated play
 ## KIT IMPACT
 
 **REUSE:** pinned UX & Art System §§1–6 / UI Motion Recipes §§2,5 for one truthful primary and preserved hit/press/dialog ownership; pinned durable-receipt contract for concrete promised effect + exact commit/ack. Existing local help resolver/cache, ProgressStore and kit storage/activity/receipt seams suffice. Runtime `a9325265e87583a4872cf6a158e1e881a0d7508e`, guidance `e04a3fe87ca93d506e01df4acc5afe690408cefa` unchanged. No generic director, new kit API or upstream/store write.
+
+Final delivery: applicationd6815e8, hosted43827301690SUCCESS/232units/436browser/19JVM/sync/both APKs. Same-certcode44/test ads/analytics off,517real frames of actual APK web, eight scoped UI states. Saved links/exact hashes/physical limitations in evidence/cascade-primary-031/ACCEPTANCE.md.

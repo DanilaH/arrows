@@ -1,0 +1,30 @@
+{
+  "source": "d6815e8b74c65a42412f7a5d5f0c693ae2f96540",
+  "version": "0.31.0/code44",
+  "files": [
+    {
+      "name": "Arrows-0.31.0-playtest.apk",
+      "bytes": 11005661,
+      "sha256": "7cc443becacdb7cf16214138b8200a7e92035df8256e7ca5e0f4e58c4b879095"
+    },
+    {
+      "name": "primary-cascade.gif",
+      "bytes": 2730826,
+      "sha256": "40d467f125f02945f40f981404e5cc934e5a9326e6f8c9a89d314a7cf495a2ea"
+    },
+    {
+      "name": "ordinary-context.gif",
+      "bytes": 525536,
+      "sha256": "07da851b19e1a5f3b8e7da9b53fafc1345b236bd336f931e29b70b38fef8632a"
+    },
+    {
+      "name": "primary-help-audio.mp4",
+      "bytes": 448652,
+      "sha256": "3a168f684dd6798cf72ec051ac02ff9dea22368ac71f40bb761dee5e15a5f5ab"
+    }
+  ],
+  "actualAudio": {
+    "meanDbfs": -38.0,
+    "maxDbfs": -16.9
+  }
+}

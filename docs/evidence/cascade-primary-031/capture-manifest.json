@@ -1,0 +1,415 @@
+{
+  "source": "d6815e8b74c65a42412f7a5d5f0c693ae2f96540",
+  "version": "0.31.0/code44",
+  "beforeSource": "2e1cfeb3809727d20312cfdd729370f82b7fad94",
+  "beforeMatchedPreviousApkFiles": [
+    "favicon.svg",
+    "brand-mark.svg",
+    "target-lab.html",
+    "content-pilot.html",
+    "index.html",
+    "fonts/README.txt",
+    "fonts/nunito-variable.ttf",
+    "fonts/Nunito-OFL.txt",
+    "ui/daily-v1.webp",
+    "ui/collection-v1.webp",
+    "audio/KENNEY-INTERFACE-CC0.txt",
+    "audio/KENNEY-UI-CC0.txt",
+    "assets/contentPilot-CwcCog8N.js",
+    "assets/targetLab-B8zeQjPC.js",
+    "assets/contentPilot-JrrfdKDM.css",
+    "assets/gestures-DZAHKm1z.js",
+    "assets/dailyDense-Vqm9rv7l.js",
+    "assets/board-CdgtGkmQ.js",
+    "assets/dailyDense-DThArHyA.js",
+    "assets/bootstrap-xKRgOJYe.js",
+    "assets/web-BPw_vKHZ.js",
+    "assets/gestures-Dsj4Ro4y.css",
+    "assets/targetLab-DIPOQB4j.css",
+    "assets/dailyWorker-CzSU8cF9.js",
+    "assets/main-Ch1-wVpE.js",
+    "assets/dist-BNQ5r8k5.js"
+  ],
+  "method": "Actual final signed-APK web in Chromium390x844/DPR1.5. Before reconstructed web byte-matches previous signed0.30APK. Prepared progress and controlled reward transport, no physical-phone/SDK footage.",
+  "payload": {
+    "assets/board-CdgtGkmQ.js": "884b082a117269d6905502e5d145c01f17e6750fae07d926262e0119c57a0fd8",
+    "assets/bootstrap-CDvHGCnk.js": "5b593b0aeb36bf5a3d3101c52a8ed2da6b76bb5ad34316b00bf4560040c22bb5",
+    "assets/contentPilot-JrrfdKDM.css": "d90ddb250320fc90bf098669fff979ff40b965f534393d695c3a34d6dca4ffab",
+    "assets/contentPilot-VWhwCspC.js": "1b707ae86f0111a4ae0bd30ed96e83ead4f787b583b7eb91532c9e1b6e69e2f0",
+    "assets/dailyDense-DThArHyA.js": "8572768d8355a5aa35db1ee46e6fb30ed115bc37340b4a99a07d542d137b775a",
+    "assets/dailyDense-Vqm9rv7l.js": "703055c749cb9207ac525f271175d6ee77e792f6281f9b22bebd2955c47d4b24",
+    "assets/dailyWorker-CzSU8cF9.js": "d5bccec7c03886e299341ebc7ea268c0ad07e9bdea399381957158a2710b95f9",
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/gestures-BZk33dGK.css": "577ccf84a253ae0d9f547d1b21aec49124758444442e99419ff95a7bdf62fad6",
+    "assets/gestures-gXskii5a.js": "edc475554efe87d7158adb07cc8ff5e43dd676c1c5825d8bfa2e5c7c9aa3c97e",
+    "assets/main-BbddNG3q.js": "54e9cfb858f5bc1d4f79ed86a9269ecaea0d8bbc0fe927b1ddcb05235b884c66",
+    "assets/targetLab-B4h0H2OE.js": "7b009120a41ab628b6790f2ef3c59e6b5bbcd07b6f98f0b0435453d4116ee68a",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7",
+    "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+    "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "content-pilot.html": "aa2eed5e7ed76e2f5068479586503f98cb24d6ecda1f2dea8b293671000d9923",
+    "cordova.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cordova_plugins.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "index.html": "ad15a9f69f9a0c7474ec4ad9404bb678d27d5d6fd1e60f53cee4abb783bf299d",
+    "target-lab.html": "042ac39cfe8a310aa93d0f72284601cd9c1d4cb86ac79ba3af2d57a79642a6ce",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "localDistMatched": [
+    "favicon.svg",
+    "brand-mark.svg",
+    "target-lab.html",
+    "content-pilot.html",
+    "index.html",
+    "fonts/README.txt",
+    "fonts/nunito-variable.ttf",
+    "fonts/Nunito-OFL.txt",
+    "ui/daily-v1.webp",
+    "ui/collection-v1.webp",
+    "audio/KENNEY-INTERFACE-CC0.txt",
+    "audio/KENNEY-UI-CC0.txt",
+    "assets/targetLab-B4h0H2OE.js",
+    "assets/gestures-BZk33dGK.css",
+    "assets/contentPilot-VWhwCspC.js",
+    "assets/contentPilot-JrrfdKDM.css",
+    "assets/dailyDense-Vqm9rv7l.js",
+    "assets/board-CdgtGkmQ.js",
+    "assets/bootstrap-CDvHGCnk.js",
+    "assets/dailyDense-DThArHyA.js",
+    "assets/web-BPw_vKHZ.js",
+    "assets/targetLab-DIPOQB4j.css",
+    "assets/dailyWorker-CzSU8cF9.js",
+    "assets/main-BbddNG3q.js",
+    "assets/gestures-gXskii5a.js",
+    "assets/dist-BNQ5r8k5.js"
+  ],
+  "clips": [
+    {
+      "name": "before-choice",
+      "source": "2e1cfeb3809727d20312cfdd729370f82b7fad94",
+      "frames": 39,
+      "durationMs": 2999.7151749999994,
+      "errors": [],
+      "mode": "daily",
+      "level": {
+        "id": "d20261114",
+        "contentVersion": 3,
+        "arrows": 289
+      },
+      "board": {
+        "id": "6d0ae32d-40cb-4dc1-9f99-8adfb3815852",
+        "levelId": "d20261114",
+        "contentVersion": 3,
+        "removed": [],
+        "errors": [],
+        "lives": 3
+      },
+      "rights": [],
+      "requests": [],
+      "freeContinueUsed": true
+    },
+    {
+      "name": "primary-cascade-use",
+      "source": "d6815e8b74c65a42412f7a5d5f0c693ae2f96540",
+      "frames": 150,
+      "durationMs": 6615.399369999999,
+      "errors": [],
+      "mode": "daily",
+      "level": {
+        "id": "d20261114",
+        "contentVersion": 3,
+        "arrows": 289
+      },
+      "board": {
+        "id": "6e9174c1-db34-4c01-8627-d5d02a658af5",
+        "levelId": "d20261114",
+        "contentVersion": 3,
+        "removed": [
+          "d20261114-4",
+          "d20261114-278",
+          "d20261114-281",
+          "d20261114-285"
+        ],
+        "errors": [],
+        "lives": 3
+      },
+      "rights": [
+        {
+          "id": "aea389b5-4871-4d24-86b2-1d905d2e6d06",
+          "kind": "cascade-v1",
+          "status": "used",
+          "amount": 3,
+          "operation": {
+            "id": "52e46583-8611-4cc9-9986-5f7dc4b6c2b5",
+            "manual": [
+              "d20261114-4"
+            ],
+            "native": [],
+            "bonus": [
+              "d20261114-278",
+              "d20261114-281",
+              "d20261114-285"
+            ]
+          }
+        }
+      ],
+      "requests": [
+        {
+          "id": "aea389b5-4871-4d24-86b2-1d905d2e6d06",
+          "kind": "cascade-v1",
+          "amount": 3
+        }
+      ],
+      "freeContinueUsed": true
+    },
+    {
+      "name": "ordinary-fallback",
+      "source": "d6815e8b74c65a42412f7a5d5f0c693ae2f96540",
+      "frames": 100,
+      "durationMs": 2829.7896120000005,
+      "errors": [],
+      "mode": "campaign",
+      "level": {
+        "id": "c40",
+        "contentVersion": 4,
+        "arrows": 40
+      },
+      "board": {
+        "id": "91a60611-4e86-4def-b38c-5223d752ee7d",
+        "levelId": "c40",
+        "contentVersion": 4,
+        "removed": [
+          "c40-0",
+          "c40-1",
+          "c40-2",
+          "c40-3",
+          "c40-4",
+          "c40-5",
+          "c40-6",
+          "c40-7",
+          "c40-8",
+          "c40-9",
+          "c40-10",
+          "c40-11",
+          "c40-12",
+          "c40-13",
+          "c40-14",
+          "c40-15",
+          "c40-16",
+          "c40-17",
+          "c40-18",
+          "c40-19",
+          "c40-20",
+          "c40-21",
+          "c40-22",
+          "c40-23",
+          "c40-24",
+          "c40-25",
+          "c40-26",
+          "c40-27",
+          "c40-28",
+          "c40-29",
+          "c40-30",
+          "c40-31",
+          "c40-32",
+          "c40-33",
+          "c40-34",
+          "c40-35",
+          "c40-36",
+          "c40-37",
+          "c40-38"
+        ],
+        "errors": [],
+        "lives": 3
+      },
+      "rights": [
+        {
+          "id": "c9ffcb05-dd69-4eb3-a6e6-51fbfb831073",
+          "kind": "single-v2",
+          "status": "used",
+          "amount": 1,
+          "operation": {
+            "id": "da6d788c-108e-4274-bd6b-e74a30fd1cc2",
+            "manual": [
+              "c40-38"
+            ],
+            "native": [],
+            "bonus": []
+          }
+        }
+      ],
+      "requests": [
+        {
+          "id": "c9ffcb05-dd69-4eb3-a6e6-51fbfb831073",
+          "kind": "single-v2",
+          "amount": 1
+        }
+      ],
+      "freeContinueUsed": true
+    },
+    {
+      "name": "saved-ordinary",
+      "source": "d6815e8b74c65a42412f7a5d5f0c693ae2f96540",
+      "frames": 98,
+      "durationMs": 2639.1084399999963,
+      "errors": [],
+      "mode": "campaign",
+      "level": {
+        "id": "c40",
+        "contentVersion": 4,
+        "arrows": 40
+      },
+      "board": {
+        "id": "e0a50297-715f-42c1-9a64-51fe55863a6e",
+        "levelId": "c40",
+        "contentVersion": 4,
+        "removed": [
+          "c40-0",
+          "c40-1",
+          "c40-2",
+          "c40-3",
+          "c40-4",
+          "c40-5",
+          "c40-6",
+          "c40-7",
+          "c40-8",
+          "c40-9",
+          "c40-10",
+          "c40-11",
+          "c40-12",
+          "c40-13",
+          "c40-14",
+          "c40-15",
+          "c40-16",
+          "c40-17",
+          "c40-18",
+          "c40-19",
+          "c40-20",
+          "c40-22"
+        ],
+        "errors": [],
+        "lives": 3
+      },
+      "rights": [
+        {
+          "id": "77f05561-6473-410b-b3cb-4cf9f925f356",
+          "kind": "single-v2",
+          "status": "used",
+          "amount": 1,
+          "operation": {
+            "id": "7bc76dc2-846a-4c91-a812-9bc14dcf210b",
+            "manual": [
+              "c40-22"
+            ],
+            "native": [],
+            "bonus": []
+          }
+        }
+      ],
+      "requests": [
+        {
+          "id": "77f05561-6473-410b-b3cb-4cf9f925f356",
+          "kind": "single-v2",
+          "amount": 1
+        }
+      ],
+      "freeContinueUsed": true
+    },
+    {
+      "name": "continue-single",
+      "source": "d6815e8b74c65a42412f7a5d5f0c693ae2f96540",
+      "frames": 130,
+      "durationMs": 3539.085598000005,
+      "errors": [],
+      "mode": "campaign",
+      "level": {
+        "id": "c40",
+        "contentVersion": 4,
+        "arrows": 40
+      },
+      "board": {
+        "id": "e013113f-8a4d-4e51-b9ef-2abdf70ab757",
+        "levelId": "c40",
+        "contentVersion": 4,
+        "removed": [
+          "c40-0",
+          "c40-1",
+          "c40-2",
+          "c40-3",
+          "c40-4",
+          "c40-5",
+          "c40-6",
+          "c40-7",
+          "c40-8",
+          "c40-9",
+          "c40-10",
+          "c40-11",
+          "c40-12",
+          "c40-13",
+          "c40-14",
+          "c40-15",
+          "c40-16",
+          "c40-17",
+          "c40-18",
+          "c40-19",
+          "c40-20",
+          "c40-22",
+          "c40-23",
+          "c40-24"
+        ],
+        "errors": [
+          "c40-23",
+          "c40-24",
+          "c40-25"
+        ],
+        "lives": 3
+      },
+      "rights": [
+        {
+          "id": "9544d95f-2c4f-4a31-977e-337bcc7c1acf",
+          "kind": "continue-single-v1",
+          "status": "used",
+          "amount": 3,
+          "operation": {
+            "id": "c967cb46-cfe7-443d-9a86-96c9c4552e26",
+            "manual": [
+              "c40-22"
+            ],
+            "native": [
+              "c40-23",
+              "c40-24"
+            ],
+            "bonus": []
+          },
+          "bundle": {
+            "lives": "applied",
+            "single": "used",
+            "retainedAtOffer": false,
+            "livesOwner": {
+              "attempt": "e013113f-8a4d-4e51-b9ef-2abdf70ab757",
+              "mode": "campaign",
+              "levelId": "c40",
+              "contentVersion": 4,
+              "contentKey": "content-2cdc3a9d57c9bc4d"
+            }
+          }
+        }
+      ],
+      "requests": [
+        {
+          "id": "9544d95f-2c4f-4a31-977e-337bcc7c1acf",
+          "kind": "continue-single-v1",
+          "amount": 3
+        }
+      ],
+      "freeContinueUsed": true
+    }
+  ],
+  "beforeAfterSameLevel": true
+}

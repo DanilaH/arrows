@@ -1,0 +1,43 @@
+{
+  "source": "d6815e8b74c65a42412f7a5d5f0c693ae2f96540",
+  "workflow": 43827301690,
+  "url": "https://github.com/DanilaH/arrows/actions/runs/43827301690",
+  "jobs": [
+    {
+      "id": 133164066984,
+      "name": "android",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 133164067016,
+      "name": "web",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "unit": {
+    "files": 29,
+    "passed": 232
+  },
+  "browser": {
+    "passed": 436,
+    "failed": 0,
+    "skipped": 0,
+    "workers": 2,
+    "reportedDuration": "23.8m"
+  },
+  "native": {
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0
+  },
+  "webSync": true,
+  "evidenceLines": [
+    "2026-11-16T07:56:50.5971155Z  Test Files  29 passed (29)",
+    "2026-11-16T07:56:50.5984192Z       Tests  232 passed (232)",
+    "2026-11-16T07:57:18.7186966Z Running 436 tests using 2 workers",
+    "2026-11-16T08:21:07.5166339Z   436 passed (23.8m)",
+    "2026-11-16T08:21:13.1103788Z [info] Sync finished in 0.055s"
+  ]
+}

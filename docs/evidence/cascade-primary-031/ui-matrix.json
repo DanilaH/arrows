@@ -1,0 +1,318 @@
+{
+  "source": "d6815e8b74c65a42412f7a5d5f0c693ae2f96540",
+  "method": "Actual extracted-APK Chromium/DPR1.5; initial unscrolled viewport, CSS button text150% simulation, reduced motion, actual elementFromPoint hits. Not Android system font scaling or physical accessibility proof.",
+  "rows": [
+    {
+      "name": "cascade-ru-320",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "theme": "dark",
+      "language": "ru",
+      "simulatedButtonTextScale": 1.5,
+      "reducedMotion": true,
+      "legacyGuideMinimum": 44,
+      "geometry": [
+        {
+          "id": "hint",
+          "label": "Каскад +3 · видео",
+          "rect": {
+            "x": 35,
+            "y": 508,
+            "width": 198,
+            "height": 44
+          },
+          "hit": true,
+          "font": "18px"
+        },
+        {
+          "id": "guides",
+          "label": "#",
+          "rect": {
+            "x": 241,
+            "y": 508,
+            "width": 44,
+            "height": 44
+          },
+          "hit": true,
+          "font": "24px"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "cascade-ru-568",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "theme": "light",
+      "language": "ru",
+      "simulatedButtonTextScale": 1.5,
+      "reducedMotion": true,
+      "legacyGuideMinimum": 38,
+      "geometry": [
+        {
+          "id": "hint",
+          "label": "Каскад +3 · видео",
+          "rect": {
+            "x": 162,
+            "y": 268,
+            "width": 198,
+            "height": 44
+          },
+          "hit": true,
+          "font": "18px"
+        },
+        {
+          "id": "guides",
+          "label": "#",
+          "rect": {
+            "x": 368,
+            "y": 271,
+            "width": 38,
+            "height": 38
+          },
+          "hit": true,
+          "font": "24px"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "cascade-en-320",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "theme": "light",
+      "language": "en",
+      "simulatedButtonTextScale": 1.5,
+      "reducedMotion": true,
+      "legacyGuideMinimum": 44,
+      "geometry": [
+        {
+          "id": "hint",
+          "label": "Cascade +3 · video",
+          "rect": {
+            "x": 34,
+            "y": 508,
+            "width": 200,
+            "height": 44
+          },
+          "hit": true,
+          "font": "18px"
+        },
+        {
+          "id": "guides",
+          "label": "#",
+          "rect": {
+            "x": 242,
+            "y": 508,
+            "width": 44,
+            "height": 44
+          },
+          "hit": true,
+          "font": "24px"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "cascade-en-568",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "theme": "dark",
+      "language": "en",
+      "simulatedButtonTextScale": 1.5,
+      "reducedMotion": true,
+      "legacyGuideMinimum": 38,
+      "geometry": [
+        {
+          "id": "hint",
+          "label": "Cascade +3 · video",
+          "rect": {
+            "x": 161,
+            "y": 268,
+            "width": 200,
+            "height": 44
+          },
+          "hit": true,
+          "font": "18px"
+        },
+        {
+          "id": "guides",
+          "label": "#",
+          "rect": {
+            "x": 369,
+            "y": 271,
+            "width": 38,
+            "height": 38
+          },
+          "hit": true,
+          "font": "24px"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "saved-ru-320",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "theme": "dark",
+      "language": "ru",
+      "simulatedButtonTextScale": 1.5,
+      "reducedMotion": true,
+      "legacyGuideMinimum": 44,
+      "geometry": [
+        {
+          "id": "hint",
+          "label": "Использовать сохранённую помощь",
+          "rect": {
+            "x": 22,
+            "y": 494,
+            "width": 224,
+            "height": 58
+          },
+          "hit": true,
+          "font": "18px"
+        },
+        {
+          "id": "guides",
+          "label": "#",
+          "rect": {
+            "x": 254,
+            "y": 501,
+            "width": 44,
+            "height": 44
+          },
+          "hit": true,
+          "font": "24px"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "saved-ru-568",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "theme": "light",
+      "language": "ru",
+      "simulatedButtonTextScale": 1.5,
+      "reducedMotion": true,
+      "legacyGuideMinimum": 38,
+      "geometry": [
+        {
+          "id": "hint",
+          "label": "Использовать сохранённую помощь",
+          "rect": {
+            "x": 76.5,
+            "y": 268,
+            "width": 369,
+            "height": 44
+          },
+          "hit": true,
+          "font": "18px"
+        },
+        {
+          "id": "guides",
+          "label": "#",
+          "rect": {
+            "x": 453.5,
+            "y": 271,
+            "width": 38,
+            "height": 38
+          },
+          "hit": true,
+          "font": "24px"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "saved-en-320",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "theme": "light",
+      "language": "en",
+      "simulatedButtonTextScale": 1.5,
+      "reducedMotion": true,
+      "legacyGuideMinimum": 44,
+      "geometry": [
+        {
+          "id": "hint",
+          "label": "Use saved help",
+          "rect": {
+            "x": 48,
+            "y": 508,
+            "width": 172,
+            "height": 44
+          },
+          "hit": true,
+          "font": "18px"
+        },
+        {
+          "id": "guides",
+          "label": "#",
+          "rect": {
+            "x": 228,
+            "y": 508,
+            "width": 44,
+            "height": 44
+          },
+          "hit": true,
+          "font": "24px"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "saved-en-568",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "theme": "dark",
+      "language": "en",
+      "simulatedButtonTextScale": 1.5,
+      "reducedMotion": true,
+      "legacyGuideMinimum": 38,
+      "geometry": [
+        {
+          "id": "hint",
+          "label": "Use saved help",
+          "rect": {
+            "x": 175,
+            "y": 268,
+            "width": 172,
+            "height": 44
+          },
+          "hit": true,
+          "font": "18px"
+        },
+        {
+          "id": "guides",
+          "label": "#",
+          "rect": {
+            "x": 355,
+            "y": 271,
+            "width": 38,
+            "height": 38
+          },
+          "hit": true,
+          "font": "24px"
+        }
+      ],
+      "errors": []
+    }
+  ]
+}
