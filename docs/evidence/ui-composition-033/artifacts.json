@@ -1,0 +1,20 @@
+[
+  {
+    "name": "playtest",
+    "id": 14265547286,
+    "bytes": 10309484,
+    "sha256": "39eb97afd30c7a2d106cfc462a31d96542707debf992e56fe1136d1a05b69125"
+  },
+  {
+    "name": "verification",
+    "id": 14265512444,
+    "bytes": 4168,
+    "sha256": "2095858f5d65e9e1423687a3138acd0c6f564710d72931357928b29682f66e60"
+  },
+  {
+    "name": "native-tests",
+    "id": 14265312695,
+    "bytes": 4647,
+    "sha256": "b9e7e7d35a02d09b7994441dee71f795584cbe2bd0c2c08a7e21b98c3a6db4ad"
+  }
+]

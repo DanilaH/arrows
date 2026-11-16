@@ -1,0 +1,509 @@
+Source5220131; run43941196967; web job133558826766. Full run is NOT GREEN.
+1) [phone] › tests/browser/contentPilot.spec.ts:45:1 › pilot resumes errors, compares independent boards and never invokes native ads/analytics or mutates main save
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#game-shell')
+    Expected: "control"
+    Received: "campaign"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('#game-shell')
+        9 × locator resolved to <main data-lives="3" id="game-shell" data-level="c01" data-screen="home" data-remaining="3" data-mode="campaign" data-state="playing" class="content-pilot" data-save="available" data-status="starting" data-progress="loading" data-attempt="9edb986f-659a-4ad0-b904-20309747fae9">…</main>
+          - unexpected value "campaign"
+
+
+       7 | async function boot(page:Page,index=0){const save=freshSave();save.freeContinueUsed=true;
+       8 |  await page.addInitScript({content:`${transport}\ncontrolledNative(${JSON.stringify({save,preserve:true,settings:{version:1,language:'ru',theme:'dark',sound:true,vibration:true}})});if(location.pathname.includes('content-pilot'))assistanceQA.late({schema:1,id:'main-earned',attempt:'main-attempt',mode:'campaign',placement:'hint'});window.serviceCalls=[];const original=Capacitor.nativePromise;Capacitor.nativePromise=async function(p,m,o){window.serviceCalls.push(p+'.'+m);return original(p,m,o);};`});
+    >  9 |  await page.goto(`/content-pilot.html?field=${index}`);await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','control');await expect(page.locator('#game-shell')).toHaveAttribute('data-progress','ready');await page.waitForTimeout(350);return JSON.stringify(save);
+         |                                                                                                  ^
+      10 | }
+      11 | async function tap(page:Page,level:Level,id:string){const a=level.arrows.find(a=>a.id===id)!,p=a.path.at(-1)!,q=a.path.at(-2)!,c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await page.mouse.click(c.x+(p.x*.7+q.x*.3)*c.scale,c.y+(p.y*.7+q.y*.3)*c.scale);}
+      12 | async function snapshot(page:Page,variant='candidate',index=0){return page.evaluate(({variant,index})=>JSON.parse(localStorage.getItem('arrows.qa.content-pilot.boards.v1')!).boards[`${variant}:${index}`],{variant,index});}
+        at boot (/home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:9:98)
+        at /home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:14:15
+
+    Error Context: test-results/contentPilot-pilot-resumes-7b00b-lytics-or-mutates-main-save-phone/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/contentPilot-pilot-resumes-7b00b-lytics-or-mutates-main-save-phone/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/contentPilot-pilot-resumes-7b00b-lytics-or-mutates-main-save-phone/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [phone] › tests/browser/contentPilot.spec.ts:71:1 › playtest settings opens the pilot and returns to the same main attempt
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#game-shell')
+    Expected: "control"
+    Received: "campaign"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('#game-shell')
+        9 × locator resolved to <main data-lives="3" id="game-shell" data-level="c01" data-screen="home" data-remaining="3" data-mode="campaign" data-state="playing" class="content-pilot" data-save="available" data-status="starting" data-progress="loading" data-attempt="bd6bb5bf-0e9a-4f53-8e90-da9bf2d8974b">…</main>
+          - unexpected value "campaign"
+
+
+       7 | async function boot(page:Page,index=0){const save=freshSave();save.freeContinueUsed=true;
+       8 |  await page.addInitScript({content:`${transport}\ncontrolledNative(${JSON.stringify({save,preserve:true,settings:{version:1,language:'ru',theme:'dark',sound:true,vibration:true}})});if(location.pathname.includes('content-pilot'))assistanceQA.late({schema:1,id:'main-earned',attempt:'main-attempt',mode:'campaign',placement:'hint'});window.serviceCalls=[];const original=Capacitor.nativePromise;Capacitor.nativePromise=async function(p,m,o){window.serviceCalls.push(p+'.'+m);return original(p,m,o);};`});
+    >  9 |  await page.goto(`/content-pilot.html?field=${index}`);await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','control');await expect(page.locator('#game-shell')).toHaveAttribute('data-progress','ready');await page.waitForTimeout(350);return JSON.stringify(save);
+         |                                                                                                  ^
+      10 | }
+      11 | async function tap(page:Page,level:Level,id:string){const a=level.arrows.find(a=>a.id===id)!,p=a.path.at(-1)!,q=a.path.at(-2)!,c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await page.mouse.click(c.x+(p.x*.7+q.x*.3)*c.scale,c.y+(p.y*.7+q.y*.3)*c.scale);}
+      12 | async function snapshot(page:Page,variant='candidate',index=0){return page.evaluate(({variant,index})=>JSON.parse(localStorage.getItem('arrows.qa.content-pilot.boards.v1')!).boards[`${variant}:${index}`],{variant,index});}
+        at boot (/home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:9:98)
+        at /home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:26:2
+
+    Error Context: test-results/contentPilot-playtest-sett-d9143-ns-to-the-same-main-attempt-phone/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/contentPilot-playtest-sett-d9143-ns-to-the-same-main-attempt-phone/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/contentPilot-playtest-sett-d9143-ns-to-the-same-main-attempt-phone/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [phone] › tests/browser/contentPilot.spec.ts:87:1 › narrow light Canvas fallback and reduced motion keep all fields and exit reachable
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#game-shell')
+    Expected: "control"
+    Received: "campaign"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('#game-shell')
+        9 × locator resolved to <main data-lives="3" id="game-shell" data-level="c01" data-screen="home" data-remaining="3" data-mode="campaign" data-state="playing" class="content-pilot" data-save="available" data-status="starting" data-progress="loading" data-attempt="67d7d0b5-7a46-46c9-9acb-560010645294">…</main>
+          - unexpected value "campaign"
+
+
+       7 | async function boot(page:Page,index=0){const save=freshSave();save.freeContinueUsed=true;
+       8 |  await page.addInitScript({content:`${transport}\ncontrolledNative(${JSON.stringify({save,preserve:true,settings:{version:1,language:'ru',theme:'dark',sound:true,vibration:true}})});if(location.pathname.includes('content-pilot'))assistanceQA.late({schema:1,id:'main-earned',attempt:'main-attempt',mode:'campaign',placement:'hint'});window.serviceCalls=[];const original=Capacitor.nativePromise;Capacitor.nativePromise=async function(p,m,o){window.serviceCalls.push(p+'.'+m);return original(p,m,o);};`});
+    >  9 |  await page.goto(`/content-pilot.html?field=${index}`);await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','control');await expect(page.locator('#game-shell')).toHaveAttribute('data-progress','ready');await page.waitForTimeout(350);return JSON.stringify(save);
+         |                                                                                                  ^
+      10 | }
+      11 | async function tap(page:Page,level:Level,id:string){const a=level.arrows.find(a=>a.id===id)!,p=a.path.at(-1)!,q=a.path.at(-2)!,c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await page.mouse.click(c.x+(p.x*.7+q.x*.3)*c.scale,c.y+(p.y*.7+q.y*.3)*c.scale);}
+      12 | async function snapshot(page:Page,variant='candidate',index=0){return page.evaluate(({variant,index})=>JSON.parse(localStorage.getItem('arrows.qa.content-pilot.boards.v1')!).boards[`${variant}:${index}`],{variant,index});}
+        at boot (/home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:9:98)
+        at /home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:33:2
+
+    Error Context: test-results/contentPilot-narrow-light--b9b54-l-fields-and-exit-reachable-phone/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/contentPilot-narrow-light--b9b54-l-fields-and-exit-reachable-phone/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/contentPilot-narrow-light--b9b54-l-fields-and-exit-reachable-phone/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [phone] › tests/browser/contentPilot.spec.ts:125:1 › actual legal clicks complete a breather, Next enters Hard and selector reaches seventh daily
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#game-shell')
+    Expected: "control"
+    Received: "campaign"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('#game-shell')
+        9 × locator resolved to <main data-lives="3" id="game-shell" data-level="c01" data-screen="home" data-remaining="3" data-mode="campaign" data-state="playing" class="content-pilot" data-save="available" data-status="starting" data-progress="loading" data-attempt="ce562926-bd43-406a-97c4-b2b2fb4af828">…</main>
+          - unexpected value "campaign"
+
+
+       7 | async function boot(page:Page,index=0){const save=freshSave();save.freeContinueUsed=true;
+       8 |  await page.addInitScript({content:`${transport}\ncontrolledNative(${JSON.stringify({save,preserve:true,settings:{version:1,language:'ru',theme:'dark',sound:true,vibration:true}})});if(location.pathname.includes('content-pilot'))assistanceQA.late({schema:1,id:'main-earned',attempt:'main-attempt',mode:'campaign',placement:'hint'});window.serviceCalls=[];const original=Capacitor.nativePromise;Capacitor.nativePromise=async function(p,m,o){window.serviceCalls.push(p+'.'+m);return original(p,m,o);};`});
+    >  9 |  await page.goto(`/content-pilot.html?field=${index}`);await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','control');await expect(page.locator('#game-shell')).toHaveAttribute('data-progress','ready');await page.waitForTimeout(350);return JSON.stringify(save);
+         |                                                                                                  ^
+      10 | }
+      11 | async function tap(page:Page,level:Level,id:string){const a=level.arrows.find(a=>a.id===id)!,p=a.path.at(-1)!,q=a.path.at(-2)!,c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await page.mouse.click(c.x+(p.x*.7+q.x*.3)*c.scale,c.y+(p.y*.7+q.y*.3)*c.scale);}
+      12 | async function snapshot(page:Page,variant='candidate',index=0){return page.evaluate(({variant,index})=>JSON.parse(localStorage.getItem('arrows.qa.content-pilot.boards.v1')!).boards[`${variant}:${index}`],{variant,index});}
+        at boot (/home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:9:98)
+        at /home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:37:2
+
+    Error Context: test-results/contentPilot-actual-legal--103a5-ector-reaches-seventh-daily-phone/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/contentPilot-actual-legal--103a5-ector-reaches-seventh-daily-phone/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/contentPilot-actual-legal--103a5-ector-reaches-seventh-daily-phone/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [phone] › tests/browser/contentPilot.spec.ts:150:1 › three different errors lose the pilot, no free or paid continuation is offered
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#game-shell')
+    Expected: "control"
+    Received: "campaign"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('#game-shell')
+        9 × locator resolved to <main data-lives="3" id="game-shell" data-level="c01" data-screen="home" data-remaining="3" data-mode="campaign" data-state="playing" class="content-pilot" data-save="available" data-status="starting" data-progress="loading" data-attempt="5a6557a2-bd64-4885-a55e-e3bd4f352bfb">…</main>
+          - unexpected value "campaign"
+
+
+       7 | async function boot(page:Page,index=0){const save=freshSave();save.freeContinueUsed=true;
+       8 |  await page.addInitScript({content:`${transport}\ncontrolledNative(${JSON.stringify({save,preserve:true,settings:{version:1,language:'ru',theme:'dark',sound:true,vibration:true}})});if(location.pathname.includes('content-pilot'))assistanceQA.late({schema:1,id:'main-earned',attempt:'main-attempt',mode:'campaign',placement:'hint'});window.serviceCalls=[];const original=Capacitor.nativePromise;Capacitor.nativePromise=async function(p,m,o){window.serviceCalls.push(p+'.'+m);return original(p,m,o);};`});
+    >  9 |  await page.goto(`/content-pilot.html?field=${index}`);await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','control');await expect(page.locator('#game-shell')).toHaveAttribute('data-progress','ready');await page.waitForTimeout(350);return JSON.stringify(save);
+         |                                                                                                  ^
+      10 | }
+      11 | async function tap(page:Page,level:Level,id:string){const a=level.arrows.find(a=>a.id===id)!,p=a.path.at(-1)!,q=a.path.at(-2)!,c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await page.mouse.click(c.x+(p.x*.7+q.x*.3)*c.scale,c.y+(p.y*.7+q.y*.3)*c.scale);}
+      12 | async function snapshot(page:Page,variant='candidate',index=0){return page.evaluate(({variant,index})=>JSON.parse(localStorage.getItem('arrows.qa.content-pilot.boards.v1')!).boards[`${variant}:${index}`],{variant,index});}
+        at boot (/home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:9:98)
+        at /home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:44:2
+
+    Error Context: test-results/contentPilot-three-differe-b7c8d-aid-continuation-is-offered-phone/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/contentPilot-three-differe-b7c8d-aid-continuation-is-offered-phone/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/contentPilot-three-differe-b7c8d-aid-continuation-is-offered-phone/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [phone] › tests/browser/phoneFeelV2.spec.ts:113:1 › fits the whole completed zoomed diagram before its finish cue and never replays on restore
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+       6 | import {defaultSettings,SETTINGS_KEY} from '../../src/app/settings';
+       7 | function base(index:number){const s=freshSave();s.index=index;s.campaign=freshAttempt(campaign[index]!);s.wins=campaign.slice(0,index).map((l,i)=>({attempt:`past-${i}`,levelId:l.id,activeMs:1000,completedAt:i*1000,localDate:'2026-11-01',mistakes:0}));s.tutorials=['tap','turns','blockers','guides','zoom','hint'];return s;}
+    >  8 | async function seed(page:Page,s:GameSave){decodeSave(s);await page.addInitScript(({key,s})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(s));},{key:SAVE_KEY,s});await page.goto('/');await page.locator('#home-play:enabled').click();await expect(page.locator('.route-snapshot,.board-transition')).toHaveCount(0);await expect.poll(()=>page.locator('#game-root,#game-header,#game-footer').evaluateAll(elements=>elements.reduce((sum,e)=>sum+e.getAnimations({subtree:true}).length,0))).toBe(0);}
+         |                                                                                                                                                                                                                                                                                                                                                 ^
+       9 | const saved=(page:Page)=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)!) as GameSave,SAVE_KEY);
+      10 | async function tap(page:Page,path:readonly{x:number;y:number}[]){const c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),p=path.at(-1)!;await page.mouse.click(c.x+p.x*c.scale,c.y+p.y*c.scale);}
+      11 | async function pressCancel(page:Page,selector:string){const button=page.locator(selector).first();await button.evaluate(e=>{const animations:Animation[]=[];for(let n:Element|null=e;n;n=n.parentElement)animations.push(...n.getAnimations());return Promise.all(animations.map(a=>a.finished.catch(()=>{})));});const box=(await button.boundingBox())!;await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await expect(button).toHaveAttribute('data-pressed','true');await expect.poll(()=>button.locator('.ui-press-feedback').evaluate(e=>Number(getComputedStyle(e).opacity))).toBeGreaterThan(.1);expect(await button.boundingBox()).toEqual(box);await page.mouse.move(2,2);await page.mouse.up();await expect(button).not.toHaveAttribute('data-pressed','true');}
+        at seed (/home/runner/work/arrows/arrows/tests/browser/phoneFeelV2.spec.ts:8:337)
+        at /home/runner/work/arrows/arrows/tests/browser/phoneFeelV2.spec.ts:29:279
+
+    Error Context: test-results/phoneFeelV2-fits-the-whole-27f55-nd-never-replays-on-restore-phone/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/phoneFeelV2-fits-the-whole-27f55-nd-never-replays-on-restore-phone/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/phoneFeelV2-fits-the-whole-27f55-nd-never-replays-on-restore-phone/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [phone] › tests/browser/phoneFeelV2.spec.ts:233:1 › acknowledges icon, nav, calendar, disclosure and settings presses, including reduced motion and cancel
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('[data-medal] summary').first()
+    Expected: "true"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('[data-medal] summary').first()
+        9 × locator resolved to <summary id="medal-legend">…</summary>
+          - unexpected value "null"
+
+
+       9 | const saved=(page:Page)=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)!) as GameSave,SAVE_KEY);
+      10 | async function tap(page:Page,path:readonly{x:number;y:number}[]){const c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),p=path.at(-1)!;await page.mouse.click(c.x+p.x*c.scale,c.y+p.y*c.scale);}
+    > 11 | async function pressCancel(page:Page,selector:string){const button=page.locator(selector).first();await button.evaluate(e=>{const animations:Animation[]=[];for(let n:Element|null=e;n;n=n.parentElement)animations.push(...n.getAnimations());return Promise.all(animations.map(a=>a.finished.catch(()=>{})));});const box=(await button.boundingBox())!;await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await expect(button).toHaveAttribute('data-pressed','true');await expect.poll(()=>button.locator('.ui-press-feedback').evaluate(e=>Number(getComputedStyle(e).opacity))).toBeGreaterThan(.1);expect(await button.boundingBox()).toEqual(box);await page.mouse.move(2,2);await page.mouse.up();await expect(button).not.toHaveAttribute('data-pressed','true');}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
+      12 |
+      13 | test('automatically flies the screenshot c03 red arrow after its blocker, without another tap or life refund',async({page},info)=>{
+      14 |  const s=base(2);await seed(page,s);await tap(page,campaign[2]!.arrows[1]!.path);await expect(page.locator('#game-shell')).toHaveAttribute('data-lives','2');await page.waitForTimeout(600);
+        at pressCancel (/home/runner/work/arrows/arrows/tests/browser/phoneFeelV2.spec.ts:11:452)
+        at /home/runner/work/arrows/arrows/tests/browser/phoneFeelV2.spec.ts:52:243
+
+    Error Context: test-results/phoneFeelV2-acknowledges-i-2a04a-g-reduced-motion-and-cancel-phone/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/phoneFeelV2-acknowledges-i-2a04a-g-reduced-motion-and-cancel-phone/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/phoneFeelV2-acknowledges-i-2a04a-g-reduced-motion-and-cancel-phone/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [desktop] › tests/browser/contentPilot.spec.ts:45:1 › pilot resumes errors, compares independent boards and never invokes native ads/analytics or mutates main save
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#game-shell')
+    Expected: "control"
+    Received: "campaign"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('#game-shell')
+        9 × locator resolved to <main data-lives="3" id="game-shell" data-level="c01" data-screen="home" data-remaining="3" data-mode="campaign" data-state="playing" class="content-pilot" data-save="available" data-status="starting" data-progress="loading" data-attempt="015c5157-bd24-4e0d-85c6-2d68b1ba465d">…</main>
+          - unexpected value "campaign"
+
+
+       7 | async function boot(page:Page,index=0){const save=freshSave();save.freeContinueUsed=true;
+       8 |  await page.addInitScript({content:`${transport}\ncontrolledNative(${JSON.stringify({save,preserve:true,settings:{version:1,language:'ru',theme:'dark',sound:true,vibration:true}})});if(location.pathname.includes('content-pilot'))assistanceQA.late({schema:1,id:'main-earned',attempt:'main-attempt',mode:'campaign',placement:'hint'});window.serviceCalls=[];const original=Capacitor.nativePromise;Capacitor.nativePromise=async function(p,m,o){window.serviceCalls.push(p+'.'+m);return original(p,m,o);};`});
+    >  9 |  await page.goto(`/content-pilot.html?field=${index}`);await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','control');await expect(page.locator('#game-shell')).toHaveAttribute('data-progress','ready');await page.waitForTimeout(350);return JSON.stringify(save);
+         |                                                                                                  ^
+      10 | }
+      11 | async function tap(page:Page,level:Level,id:string){const a=level.arrows.find(a=>a.id===id)!,p=a.path.at(-1)!,q=a.path.at(-2)!,c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await page.mouse.click(c.x+(p.x*.7+q.x*.3)*c.scale,c.y+(p.y*.7+q.y*.3)*c.scale);}
+      12 | async function snapshot(page:Page,variant='candidate',index=0){return page.evaluate(({variant,index})=>JSON.parse(localStorage.getItem('arrows.qa.content-pilot.boards.v1')!).boards[`${variant}:${index}`],{variant,index});}
+        at boot (/home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:9:98)
+        at /home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:14:15
+
+    Error Context: test-results/contentPilot-pilot-resumes-7b00b-lytics-or-mutates-main-save-desktop/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/contentPilot-pilot-resumes-7b00b-lytics-or-mutates-main-save-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/contentPilot-pilot-resumes-7b00b-lytics-or-mutates-main-save-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [desktop] › tests/browser/contentPilot.spec.ts:71:1 › playtest settings opens the pilot and returns to the same main attempt
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#game-shell')
+    Expected: "control"
+    Received: "campaign"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('#game-shell')
+        9 × locator resolved to <main data-lives="3" id="game-shell" data-level="c01" data-screen="home" data-remaining="3" data-mode="campaign" data-state="playing" class="content-pilot" data-save="available" data-status="starting" data-progress="loading" data-attempt="713ff6a5-ec1c-407e-b577-d8056697aa8d">…</main>
+          - unexpected value "campaign"
+
+
+       7 | async function boot(page:Page,index=0){const save=freshSave();save.freeContinueUsed=true;
+       8 |  await page.addInitScript({content:`${transport}\ncontrolledNative(${JSON.stringify({save,preserve:true,settings:{version:1,language:'ru',theme:'dark',sound:true,vibration:true}})});if(location.pathname.includes('content-pilot'))assistanceQA.late({schema:1,id:'main-earned',attempt:'main-attempt',mode:'campaign',placement:'hint'});window.serviceCalls=[];const original=Capacitor.nativePromise;Capacitor.nativePromise=async function(p,m,o){window.serviceCalls.push(p+'.'+m);return original(p,m,o);};`});
+    >  9 |  await page.goto(`/content-pilot.html?field=${index}`);await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','control');await expect(page.locator('#game-shell')).toHaveAttribute('data-progress','ready');await page.waitForTimeout(350);return JSON.stringify(save);
+         |                                                                                                  ^
+      10 | }
+      11 | async function tap(page:Page,level:Level,id:string){const a=level.arrows.find(a=>a.id===id)!,p=a.path.at(-1)!,q=a.path.at(-2)!,c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await page.mouse.click(c.x+(p.x*.7+q.x*.3)*c.scale,c.y+(p.y*.7+q.y*.3)*c.scale);}
+      12 | async function snapshot(page:Page,variant='candidate',index=0){return page.evaluate(({variant,index})=>JSON.parse(localStorage.getItem('arrows.qa.content-pilot.boards.v1')!).boards[`${variant}:${index}`],{variant,index});}
+        at boot (/home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:9:98)
+        at /home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:26:2
+
+    Error Context: test-results/contentPilot-playtest-sett-d9143-ns-to-the-same-main-attempt-desktop/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/contentPilot-playtest-sett-d9143-ns-to-the-same-main-attempt-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/contentPilot-playtest-sett-d9143-ns-to-the-same-main-attempt-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) [desktop] › tests/browser/contentPilot.spec.ts:87:1 › narrow light Canvas fallback and reduced motion keep all fields and exit reachable
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#game-shell')
+    Expected: "control"
+    Received: "campaign"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('#game-shell')
+        9 × locator resolved to <main data-lives="3" id="game-shell" data-level="c01" data-screen="home" data-remaining="3" data-mode="campaign" data-state="playing" class="content-pilot" data-save="available" data-status="starting" data-progress="loading" data-attempt="4e69dd57-2ed5-4407-b754-e2a4ad705bcf">…</main>
+          - unexpected value "campaign"
+
+
+       7 | async function boot(page:Page,index=0){const save=freshSave();save.freeContinueUsed=true;
+       8 |  await page.addInitScript({content:`${transport}\ncontrolledNative(${JSON.stringify({save,preserve:true,settings:{version:1,language:'ru',theme:'dark',sound:true,vibration:true}})});if(location.pathname.includes('content-pilot'))assistanceQA.late({schema:1,id:'main-earned',attempt:'main-attempt',mode:'campaign',placement:'hint'});window.serviceCalls=[];const original=Capacitor.nativePromise;Capacitor.nativePromise=async function(p,m,o){window.serviceCalls.push(p+'.'+m);return original(p,m,o);};`});
+    >  9 |  await page.goto(`/content-pilot.html?field=${index}`);await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','control');await expect(page.locator('#game-shell')).toHaveAttribute('data-progress','ready');await page.waitForTimeout(350);return JSON.stringify(save);
+         |                                                                                                  ^
+      10 | }
+      11 | async function tap(page:Page,level:Level,id:string){const a=level.arrows.find(a=>a.id===id)!,p=a.path.at(-1)!,q=a.path.at(-2)!,c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await page.mouse.click(c.x+(p.x*.7+q.x*.3)*c.scale,c.y+(p.y*.7+q.y*.3)*c.scale);}
+      12 | async function snapshot(page:Page,variant='candidate',index=0){return page.evaluate(({variant,index})=>JSON.parse(localStorage.getItem('arrows.qa.content-pilot.boards.v1')!).boards[`${variant}:${index}`],{variant,index});}
+        at boot (/home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:9:98)
+        at /home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:33:2
+
+    Error Context: test-results/contentPilot-narrow-light--b9b54-l-fields-and-exit-reachable-desktop/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/contentPilot-narrow-light--b9b54-l-fields-and-exit-reachable-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/contentPilot-narrow-light--b9b54-l-fields-and-exit-reachable-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) [desktop] › tests/browser/contentPilot.spec.ts:125:1 › actual legal clicks complete a breather, Next enters Hard and selector reaches seventh daily
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#game-shell')
+    Expected: "control"
+    Received: "campaign"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('#game-shell')
+        9 × locator resolved to <main data-lives="3" id="game-shell" data-level="c01" data-screen="home" data-remaining="3" data-mode="campaign" data-state="playing" class="content-pilot" data-save="available" data-status="starting" data-progress="loading" data-attempt="df8d03bb-b813-4802-b171-1516d199a943">…</main>
+          - unexpected value "campaign"
+
+
+       7 | async function boot(page:Page,index=0){const save=freshSave();save.freeContinueUsed=true;
+       8 |  await page.addInitScript({content:`${transport}\ncontrolledNative(${JSON.stringify({save,preserve:true,settings:{version:1,language:'ru',theme:'dark',sound:true,vibration:true}})});if(location.pathname.includes('content-pilot'))assistanceQA.late({schema:1,id:'main-earned',attempt:'main-attempt',mode:'campaign',placement:'hint'});window.serviceCalls=[];const original=Capacitor.nativePromise;Capacitor.nativePromise=async function(p,m,o){window.serviceCalls.push(p+'.'+m);return original(p,m,o);};`});
+    >  9 |  await page.goto(`/content-pilot.html?field=${index}`);await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','control');await expect(page.locator('#game-shell')).toHaveAttribute('data-progress','ready');await page.waitForTimeout(350);return JSON.stringify(save);
+         |                                                                                                  ^
+      10 | }
+      11 | async function tap(page:Page,level:Level,id:string){const a=level.arrows.find(a=>a.id===id)!,p=a.path.at(-1)!,q=a.path.at(-2)!,c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await page.mouse.click(c.x+(p.x*.7+q.x*.3)*c.scale,c.y+(p.y*.7+q.y*.3)*c.scale);}
+      12 | async function snapshot(page:Page,variant='candidate',index=0){return page.evaluate(({variant,index})=>JSON.parse(localStorage.getItem('arrows.qa.content-pilot.boards.v1')!).boards[`${variant}:${index}`],{variant,index});}
+        at boot (/home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:9:98)
+        at /home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:37:2
+
+    Error Context: test-results/contentPilot-actual-legal--103a5-ector-reaches-seventh-daily-desktop/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/contentPilot-actual-legal--103a5-ector-reaches-seventh-daily-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/contentPilot-actual-legal--103a5-ector-reaches-seventh-daily-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) [desktop] › tests/browser/contentPilot.spec.ts:150:1 › three different errors lose the pilot, no free or paid continuation is offered
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#game-shell')
+    Expected: "control"
+    Received: "campaign"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('#game-shell')
+        9 × locator resolved to <main data-lives="3" id="game-shell" data-level="c01" data-screen="home" data-remaining="3" data-mode="campaign" data-state="playing" class="content-pilot" data-save="available" data-status="starting" data-progress="loading" data-attempt="d9e22145-d9bc-476a-8801-b2e58819a869">…</main>
+          - unexpected value "campaign"
+
+
+       7 | async function boot(page:Page,index=0){const save=freshSave();save.freeContinueUsed=true;
+       8 |  await page.addInitScript({content:`${transport}\ncontrolledNative(${JSON.stringify({save,preserve:true,settings:{version:1,language:'ru',theme:'dark',sound:true,vibration:true}})});if(location.pathname.includes('content-pilot'))assistanceQA.late({schema:1,id:'main-earned',attempt:'main-attempt',mode:'campaign',placement:'hint'});window.serviceCalls=[];const original=Capacitor.nativePromise;Capacitor.nativePromise=async function(p,m,o){window.serviceCalls.push(p+'.'+m);return original(p,m,o);};`});
+    >  9 |  await page.goto(`/content-pilot.html?field=${index}`);await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','control');await expect(page.locator('#game-shell')).toHaveAttribute('data-progress','ready');await page.waitForTimeout(350);return JSON.stringify(save);
+         |                                                                                                  ^
+      10 | }
+      11 | async function tap(page:Page,level:Level,id:string){const a=level.arrows.find(a=>a.id===id)!,p=a.path.at(-1)!,q=a.path.at(-2)!,c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await page.mouse.click(c.x+(p.x*.7+q.x*.3)*c.scale,c.y+(p.y*.7+q.y*.3)*c.scale);}
+      12 | async function snapshot(page:Page,variant='candidate',index=0){return page.evaluate(({variant,index})=>JSON.parse(localStorage.getItem('arrows.qa.content-pilot.boards.v1')!).boards[`${variant}:${index}`],{variant,index});}
+        at boot (/home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:9:98)
+        at /home/runner/work/arrows/arrows/tests/browser/contentPilot.spec.ts:44:2
+
+    Error Context: test-results/contentPilot-three-differe-b7c8d-aid-continuation-is-offered-desktop/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/contentPilot-three-differe-b7c8d-aid-continuation-is-offered-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/contentPilot-three-differe-b7c8d-aid-continuation-is-offered-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) [desktop] › tests/browser/phoneFeelV2.spec.ts:113:1 › fits the whole completed zoomed diagram before its finish cue and never replays on restore
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+       6 | import {defaultSettings,SETTINGS_KEY} from '../../src/app/settings';
+       7 | function base(index:number){const s=freshSave();s.index=index;s.campaign=freshAttempt(campaign[index]!);s.wins=campaign.slice(0,index).map((l,i)=>({attempt:`past-${i}`,levelId:l.id,activeMs:1000,completedAt:i*1000,localDate:'2026-11-01',mistakes:0}));s.tutorials=['tap','turns','blockers','guides','zoom','hint'];return s;}
+    >  8 | async function seed(page:Page,s:GameSave){decodeSave(s);await page.addInitScript(({key,s})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(s));},{key:SAVE_KEY,s});await page.goto('/');await page.locator('#home-play:enabled').click();await expect(page.locator('.route-snapshot,.board-transition')).toHaveCount(0);await expect.poll(()=>page.locator('#game-root,#game-header,#game-footer').evaluateAll(elements=>elements.reduce((sum,e)=>sum+e.getAnimations({subtree:true}).length,0))).toBe(0);}
+         |                                                                                                                                                                                                                                                                                                                                                 ^
+       9 | const saved=(page:Page)=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)!) as GameSave,SAVE_KEY);
+      10 | async function tap(page:Page,path:readonly{x:number;y:number}[]){const c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),p=path.at(-1)!;await page.mouse.click(c.x+p.x*c.scale,c.y+p.y*c.scale);}
+      11 | async function pressCancel(page:Page,selector:string){const button=page.locator(selector).first();await button.evaluate(e=>{const animations:Animation[]=[];for(let n:Element|null=e;n;n=n.parentElement)animations.push(...n.getAnimations());return Promise.all(animations.map(a=>a.finished.catch(()=>{})));});const box=(await button.boundingBox())!;await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await expect(button).toHaveAttribute('data-pressed','true');await expect.poll(()=>button.locator('.ui-press-feedback').evaluate(e=>Number(getComputedStyle(e).opacity))).toBeGreaterThan(.1);expect(await button.boundingBox()).toEqual(box);await page.mouse.move(2,2);await page.mouse.up();await expect(button).not.toHaveAttribute('data-pressed','true');}
+        at seed (/home/runner/work/arrows/arrows/tests/browser/phoneFeelV2.spec.ts:8:337)
+        at /home/runner/work/arrows/arrows/tests/browser/phoneFeelV2.spec.ts:29:279
+
+    Error Context: test-results/phoneFeelV2-fits-the-whole-27f55-nd-never-replays-on-restore-desktop/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/phoneFeelV2-fits-the-whole-27f55-nd-never-replays-on-restore-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/phoneFeelV2-fits-the-whole-27f55-nd-never-replays-on-restore-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) [desktop] › tests/browser/phoneFeelV2.spec.ts:233:1 › acknowledges icon, nav, calendar, disclosure and settings presses, including reduced motion and cancel
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('[data-medal] summary').first()
+    Expected: "true"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('[data-medal] summary').first()
+        9 × locator resolved to <summary id="medal-legend">…</summary>
+          - unexpected value "null"
+
+
+       9 | const saved=(page:Page)=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)!) as GameSave,SAVE_KEY);
+      10 | async function tap(page:Page,path:readonly{x:number;y:number}[]){const c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),p=path.at(-1)!;await page.mouse.click(c.x+p.x*c.scale,c.y+p.y*c.scale);}
+    > 11 | async function pressCancel(page:Page,selector:string){const button=page.locator(selector).first();await button.evaluate(e=>{const animations:Animation[]=[];for(let n:Element|null=e;n;n=n.parentElement)animations.push(...n.getAnimations());return Promise.all(animations.map(a=>a.finished.catch(()=>{})));});const box=(await button.boundingBox())!;await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await expect(button).toHaveAttribute('data-pressed','true');await expect.poll(()=>button.locator('.ui-press-feedback').evaluate(e=>Number(getComputedStyle(e).opacity))).toBeGreaterThan(.1);expect(await button.boundingBox()).toEqual(box);await page.mouse.move(2,2);await page.mouse.up();await expect(button).not.toHaveAttribute('data-pressed','true');}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
+      12 |
+      13 | test('automatically flies the screenshot c03 red arrow after its blocker, without another tap or life refund',async({page},info)=>{
+      14 |  const s=base(2);await seed(page,s);await tap(page,campaign[2]!.arrows[1]!.path);await expect(page.locator('#game-shell')).toHaveAttribute('data-lives','2');await page.waitForTimeout(600);
+        at pressCancel (/home/runner/work/arrows/arrows/tests/browser/phoneFeelV2.spec.ts:11:452)
+        at /home/runner/work/arrows/arrows/tests/browser/phoneFeelV2.spec.ts:52:243
+
+    Error Context: test-results/phoneFeelV2-acknowledges-i-2a04a-g-reduced-motion-and-cancel-desktop/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/phoneFeelV2-acknowledges-i-2a04a-g-reduced-motion-and-cancel-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/phoneFeelV2-acknowledges-i-2a04a-g-reduced-motion-and-cancel-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14 failed
+    [phone] › tests/browser/contentPilot.spec.ts:45:1 › pilot resumes errors, compares independent boards and never invokes native ads/analytics or mutates main save
+    [phone] › tests/browser/contentPilot.spec.ts:71:1 › playtest settings opens the pilot and returns to the same main attempt
+    [phone] › tests/browser/contentPilot.spec.ts:87:1 › narrow light Canvas fallback and reduced motion keep all fields and exit reachable
+    [phone] › tests/browser/contentPilot.spec.ts:125:1 › actual legal clicks complete a breather, Next enters Hard and selector reaches seventh daily
+    [phone] › tests/browser/contentPilot.spec.ts:150:1 › three different errors lose the pilot, no free or paid continuation is offered
+    [phone] › tests/browser/phoneFeelV2.spec.ts:113:1 › fits the whole completed zoomed diagram before its finish cue and never replays on restore
+    [phone] › tests/browser/phoneFeelV2.spec.ts:233:1 › acknowledges icon, nav, calendar, disclosure and settings presses, including reduced motion and cancel
+    [desktop] › tests/browser/contentPilot.spec.ts:45:1 › pilot resumes errors, compares independent boards and never invokes native ads/analytics or mutates main save
+    [desktop] › tests/browser/contentPilot.spec.ts:71:1 › playtest settings opens the pilot and returns to the same main attempt
+    [desktop] › tests/browser/contentPilot.spec.ts:87:1 › narrow light Canvas fallback and reduced motion keep all fields and exit reachable
+    [desktop] › tests/browser/contentPilot.spec.ts:125:1 › actual legal clicks complete a breather, Next enters Hard and selector reaches seventh daily
+    [desktop] › tests/browser/contentPilot.spec.ts:150:1 › three different errors lose the pilot, no free or paid continuation is offered
+    [desktop] › tests/browser/phoneFeelV2.spec.ts:113:1 › fits the whole completed zoomed diagram before its finish cue and never replays on restore
+    [desktop] › tests/browser/phoneFeelV2.spec.ts:233:1 › acknowledges icon, nav, calendar, disclosure and settings presses, including reduced motion and cancel
+  466 passed (21.3m)

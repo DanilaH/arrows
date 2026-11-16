@@ -1,0 +1,112 @@
+[
+  {
+    "name": "home",
+    "durationSeconds": 5.52,
+    "bytes": 75315,
+    "sha256": "5fdef5c6776a81e8d3e999f8df6ed0d51c8bfb2b214d82db87329f14deb907dd",
+    "audioVolumeDb": {
+      "mean_volume": "-46.1",
+      "max_volume": "-16.9"
+    },
+    "streams": [
+      {
+        "type": "video",
+        "codec": "h264",
+        "duration": "5.500000",
+        "width": 390,
+        "height": 884
+      },
+      {
+        "type": "audio",
+        "codec": "aac",
+        "duration": "5.520000",
+        "width": null,
+        "height": null
+      }
+    ],
+    "actualFrames": 137,
+    "frameSetSha256": "49aa1f9b9f312f3ab683e23d7dd16d50ba781f9f67d27f576eb3a717ec37dc5f"
+  },
+  {
+    "name": "overview",
+    "durationSeconds": 6.489,
+    "bytes": 401828,
+    "sha256": "ad6737b94a694c78f7cac149055ee5bb2292a8ff95e0169bcaa8492ec0f31395",
+    "audioVolumeDb": {
+      "mean_volume": "-50.8",
+      "max_volume": "-18.7"
+    },
+    "streams": [
+      {
+        "type": "video",
+        "codec": "h264",
+        "duration": "6.466667",
+        "width": 390,
+        "height": 884
+      },
+      {
+        "type": "audio",
+        "codec": "aac",
+        "duration": "6.489000",
+        "width": null,
+        "height": null
+      }
+    ],
+    "actualFrames": 90,
+    "frameSetSha256": "d2dd0238064fb742c4e41d81586bfb452887e1b79fa945fb8236a7d1c50c1ff0"
+  },
+  {
+    "name": "collection",
+    "durationSeconds": 8.709,
+    "bytes": 412783,
+    "sha256": "4d86a8f14b5d6694344550a84e49440fe56a30ebb6118f0a7ce044d05f400fc2",
+    "audioVolumeDb": {
+      "mean_volume": "-46.6",
+      "max_volume": "-18.6"
+    },
+    "streams": [
+      {
+        "type": "video",
+        "codec": "h264",
+        "duration": "8.700000",
+        "width": 390,
+        "height": 884
+      },
+      {
+        "type": "audio",
+        "codec": "aac",
+        "duration": "8.709000",
+        "width": null,
+        "height": null
+      }
+    ],
+    "actualFrames": 136,
+    "frameSetSha256": "5055452d8878223627cb4e77f7e0468485fe8007092248bc746d0f39af45e905"
+  },
+  {
+    "name": "ui",
+    "durationSeconds": 12.02,
+    "bytes": 437558,
+    "sha256": "04ec7db93041d94b2fbeca20f82410822ce1a7774bf8e97a04063b35d80f5f0e",
+    "audioVolumeDb": {
+      "mean_volume": "-48.0",
+      "max_volume": "-16.9"
+    },
+    "streams": [
+      {
+        "type": "video",
+        "codec": "h264",
+        "duration": "12.000000",
+        "width": 390,
+        "height": 884
+      },
+      {
+        "type": "audio",
+        "codec": "aac",
+        "duration": "12.020000",
+        "width": null,
+        "height": null
+      }
+    ]
+  }
+]

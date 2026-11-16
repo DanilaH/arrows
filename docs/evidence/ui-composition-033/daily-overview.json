@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "source": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+  "apkSha256": "5631b7f6b9fe28029ff000a86385128b3a3146c8c12f41344c4176b0e5e6ab7d",
+  "date": "2026-11-16",
+  "arrows": 200,
+  "contentVersion": 3,
+  "realWorkerOrCooperativeClient": true,
+  "actualWheelAndOverviewButton": true,
+  "fit": {
+    "x": 24.320987654321016,
+    "y": 233.05555555555557,
+    "scale": 4.320987654320987
+  },
+  "finalCamera": {
+    "x": 24.320987654321016,
+    "y": 233.05555555555557,
+    "scale": 4.320987654320987
+  },
+  "campaignUnchanged": true,
+  "dailyBoardUnchanged": true,
+  "sameAttemptAfterReload": true,
+  "persistedZoom": 1,
+  "errors": [],
+  "method": "Actual signed APK web in Chromium; prepared campaign progress/controlled native transport; no ad/help used; not phone evidence"
+}

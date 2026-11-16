@@ -1,0 +1,126 @@
+{
+  "source": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+  "application": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+  "version": "0.33.0/code47",
+  "apkSha256": "5631b7f6b9fe28029ff000a86385128b3a3146c8c12f41344c4176b0e5e6ab7d",
+  "payload": {
+    "assets/board-CdgtGkmQ.js": "884b082a117269d6905502e5d145c01f17e6750fae07d926262e0119c57a0fd8",
+    "assets/bootstrap-CaOvb_DP.js": "ffaad91583c32f0430b91862622779ca1193f062a1d8d4bb5ac54a7e31b9e69d",
+    "assets/contentPilot-Cy9-7_w1.js": "562f145e526f04170c663d5e40abee4a45484b38682c494d2a4aa1c505827575",
+    "assets/contentPilot-JrrfdKDM.css": "d90ddb250320fc90bf098669fff979ff40b965f534393d695c3a34d6dca4ffab",
+    "assets/dailyDense-DThArHyA.js": "8572768d8355a5aa35db1ee46e6fb30ed115bc37340b4a99a07d542d137b775a",
+    "assets/dailyDense-Vqm9rv7l.js": "703055c749cb9207ac525f271175d6ee77e792f6281f9b22bebd2955c47d4b24",
+    "assets/dailyWorker-CzSU8cF9.js": "d5bccec7c03886e299341ebc7ea268c0ad07e9bdea399381957158a2710b95f9",
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/gestures-BcA6kmQd.css": "25b7b5a97e03f2d3a1b3d67eb3700592b44ae0e03931f9252f661297f8960ed4",
+    "assets/gestures-X_xIniX6.js": "72cc790aef0a1e5a9ad11668f1c5d55da6776b90b2eeaa488b892fac345a7d3a",
+    "assets/main-BOtpZHpe.js": "73595f60b57dfb3721807b3a65d2fca40d8a1024a6271f3416743c153c86244c",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/targetLab-_-ch8QL2.js": "2df302bb2238f70f73f493676afdcc266a77090d811fc7d3b07653b46b8f67ec",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7",
+    "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+    "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "content-pilot.html": "e4137f19077b3e876e5391b4af393d89393d5a4b839ca6d8904e6608cb1eefcc",
+    "cordova.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cordova_plugins.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "index.html": "1577a75f589852dabc51e0dc6ecc39895d9773a6acdf14787ecd6281a3ddeb7c",
+    "target-lab.html": "14e25da1f492d84fed6db0b4f704c249ab9cb255b6f793ef0c08612db1881166",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "method": "Actual signed APK web in Chromium; prepared QA/controlled native transport; portrait; not Android/SDK footage",
+  "clips": [
+    {
+      "name": "home",
+      "source": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+      "application": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dpr": 1.5,
+      "frames": 137,
+      "frameDirectory": ".test-output/ui-033/record-home-960d6ff",
+      "durationMs": 5531.6242330000005,
+      "facts": {
+        "fixture": "Fresh save; no seeded victories; audio preview before recording only",
+        "initialHiddenSlotHeight": 0,
+        "actualMove": true,
+        "removed": [
+          "c01-0"
+        ],
+        "remainingLabel": "Осталось 2 стрелки"
+      },
+      "errors": [],
+      "initialFrame": "Actual viewport screenshot; later CDP JPEG frames held for elapsed times",
+      "input": "Real pointer and wheel input; prepared progress; no synthetic UI frames or overdub"
+    },
+    {
+      "name": "overview",
+      "source": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+      "application": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dpr": 1.5,
+      "frames": 90,
+      "frameDirectory": ".test-output/ui-033/record-overview-960d6ff",
+      "durationMs": 6506.162639999999,
+      "facts": {
+        "fixture": "Prepared current c120 with8legal removals, no paid help used",
+        "actualWheelZoom": true,
+        "actualPanInterruptedFit": true,
+        "fit": {
+          "x": 25.30303030303031,
+          "y": 218.68181818181822,
+          "scale": 5.303030303030303
+        },
+        "interrupted": {
+          "x": -36.07742864271631,
+          "y": 150.32911321402645,
+          "scale": 9.096169645084885
+        },
+        "final": {
+          "x": 25.30303030303031,
+          "y": 218.68181818181822,
+          "scale": 5.303030303030303
+        },
+        "boardUnchanged": true,
+        "persistedZoom": 1
+      },
+      "errors": [],
+      "initialFrame": "Actual viewport screenshot; later CDP JPEG frames held for elapsed times",
+      "input": "Real pointer and wheel input; prepared progress; no synthetic UI frames or overdub"
+    },
+    {
+      "name": "collection",
+      "source": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+      "application": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dpr": 1.5,
+      "frames": 136,
+      "frameDirectory": ".test-output/ui-033/record-collection-960d6ff",
+      "durationMs": 8716.236115,
+      "facts": {
+        "fixture": "Prepared current c40,6completed November dates, owned August legacy cup; no rewards granted by this recording",
+        "currentMonth": "2026-11",
+        "currentDays": 6,
+        "earnedViewerMonth": "2026-08",
+        "earnedCopy": "Все дни месяца пройдены",
+        "realWheelScroll": true
+      },
+      "errors": [],
+      "initialFrame": "Actual viewport screenshot; later CDP JPEG frames held for elapsed times",
+      "input": "Real pointer and wheel input; prepared progress; no synthetic UI frames or overdub"
+    }
+  ]
+}

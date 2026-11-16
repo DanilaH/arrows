@@ -1,0 +1,4487 @@
+{
+  "source": {
+    "source": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+    "application": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+    "version": "0.33.0/code47",
+    "apkSha256": "5631b7f6b9fe28029ff000a86385128b3a3146c8c12f41344c4176b0e5e6ab7d",
+    "payload": {
+      "assets/board-CdgtGkmQ.js": "884b082a117269d6905502e5d145c01f17e6750fae07d926262e0119c57a0fd8",
+      "assets/bootstrap-CaOvb_DP.js": "ffaad91583c32f0430b91862622779ca1193f062a1d8d4bb5ac54a7e31b9e69d",
+      "assets/contentPilot-Cy9-7_w1.js": "562f145e526f04170c663d5e40abee4a45484b38682c494d2a4aa1c505827575",
+      "assets/contentPilot-JrrfdKDM.css": "d90ddb250320fc90bf098669fff979ff40b965f534393d695c3a34d6dca4ffab",
+      "assets/dailyDense-DThArHyA.js": "8572768d8355a5aa35db1ee46e6fb30ed115bc37340b4a99a07d542d137b775a",
+      "assets/dailyDense-Vqm9rv7l.js": "703055c749cb9207ac525f271175d6ee77e792f6281f9b22bebd2955c47d4b24",
+      "assets/dailyWorker-CzSU8cF9.js": "d5bccec7c03886e299341ebc7ea268c0ad07e9bdea399381957158a2710b95f9",
+      "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+      "assets/gestures-BcA6kmQd.css": "25b7b5a97e03f2d3a1b3d67eb3700592b44ae0e03931f9252f661297f8960ed4",
+      "assets/gestures-X_xIniX6.js": "72cc790aef0a1e5a9ad11668f1c5d55da6776b90b2eeaa488b892fac345a7d3a",
+      "assets/main-BOtpZHpe.js": "73595f60b57dfb3721807b3a65d2fca40d8a1024a6271f3416743c153c86244c",
+      "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+      "assets/targetLab-_-ch8QL2.js": "2df302bb2238f70f73f493676afdcc266a77090d811fc7d3b07653b46b8f67ec",
+      "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7",
+      "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+      "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+      "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+      "content-pilot.html": "e4137f19077b3e876e5391b4af393d89393d5a4b839ca6d8904e6608cb1eefcc",
+      "cordova.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cordova_plugins.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+      "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+      "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+      "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+      "index.html": "1577a75f589852dabc51e0dc6ecc39895d9773a6acdf14787ecd6281a3ddeb7c",
+      "target-lab.html": "14e25da1f492d84fed6db0b4f704c249ab9cb255b6f793ef0c08612db1881166",
+      "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+      "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+    },
+    "method": "Actual signed APK web in Chromium; prepared QA/controlled native transport; portrait; not Android/SDK footage",
+    "clips": []
+  },
+  "profiles": [
+    {
+      "id": "dark",
+      "w": 390,
+      "h": 844,
+      "theme": "dark",
+      "lang": "ru"
+    },
+    {
+      "id": "light",
+      "w": 390,
+      "h": 844,
+      "theme": "light",
+      "lang": "ru"
+    },
+    {
+      "id": "small",
+      "w": 320,
+      "h": 568,
+      "theme": "dark",
+      "lang": "ru"
+    },
+    {
+      "id": "english",
+      "w": 430,
+      "h": 932,
+      "theme": "light",
+      "lang": "en"
+    },
+    {
+      "id": "tablet",
+      "w": 800,
+      "h": 1280,
+      "theme": "dark",
+      "lang": "ru"
+    },
+    {
+      "id": "font150",
+      "w": 320,
+      "h": 568,
+      "theme": "dark",
+      "lang": "ru",
+      "font": 1.5,
+      "reduced": true
+    }
+  ],
+  "states": [
+    {
+      "profile": "dark",
+      "name": "home-fresh",
+      "file": "dark-home-fresh.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c01",
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Играть",
+          "x": 75,
+          "y": 396,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 146.5,
+          "y": 460,
+          "w": 97,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "dark",
+      "name": "home-upcoming",
+      "file": "dark-home-upcoming.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c120",
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Играть",
+          "x": 75,
+          "y": 420.5,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 139.5,
+          "y": 484.5,
+          "w": 111,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "dark",
+      "name": "home-last-arrow",
+      "file": "dark-home-last-arrow.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c03",
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Продолжить",
+          "x": 75,
+          "y": 586.8125,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 146.5,
+          "y": 650.8125,
+          "w": 97,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "dark",
+      "name": "home-active",
+      "file": "dark-home-active.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c40",
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Продолжить",
+          "x": 75,
+          "y": 591.3125,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 143,
+          "y": 655.3125,
+          "w": 104,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "dark",
+      "name": "collection-current",
+      "file": "dark-collection-current.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 20,
+          "y": 130.625,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Открыть месяц",
+          "x": 148,
+          "y": 246.265625,
+          "w": 150,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 123,
+          "w": 350,
+          "h": 167.265625,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 211.390625,
+          "w": 222,
+          "h": 31.875,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "dark",
+      "name": "trophy-preview",
+      "file": "dark-trophy-preview.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 312,
+          "y": 176.296875,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Открыть месяц",
+          "x": 34,
+          "y": 617.6875,
+          "w": 322,
+          "h": 50,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 123,
+          "w": 350,
+          "h": 167.265625,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 211.390625,
+          "w": 222,
+          "h": 31.875,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "dark",
+      "name": "calendar",
+      "file": "dark-calendar.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#view-trophy",
+          "text": "XI · 26\n    \n    Рассмотреть кубок",
+          "x": 20,
+          "y": 72,
+          "w": 76,
+          "h": 82.375,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#start-daily",
+          "text": "Играть",
+          "x": 301.390625,
+          "y": 521.375,
+          "w": 68.609375,
+          "h": 46,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 20,
+          "y": 130,
+          "w": 76,
+          "h": 24.375,
+          "font": "9px",
+          "color": "rgb(146, 152, 188)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "dark",
+      "name": "trophy-earned",
+      "file": "dark-trophy-earned.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 312,
+          "y": 176.296875,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Открыть месяц",
+          "x": 34,
+          "y": 617.6875,
+          "w": 322,
+          "h": 50,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 20,
+          "y": 130,
+          "w": 76,
+          "h": 24.375,
+          "font": "9px",
+          "color": "rgb(146, 152, 188)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "dark",
+      "name": "game-fit",
+      "file": "dark-game-fit.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 26.73076923076923,
+        "y": 237.03846153846155,
+        "scale": 6.730769230769231
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 14,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 331.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 249.5,
+          "y": 784,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 96.34590911865234,
+          "y": 783.9532470703125,
+          "w": 145.30816650390625,
+          "h": 44.093505859375,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "dark",
+      "name": "game-zoom",
+      "file": "dark-game-zoom.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": -262.40319228878167,
+        "y": -80.77758896382875,
+        "scale": 18.296127691551266
+      },
+      "controls": [
+        {
+          "key": "#board-overview",
+          "text": "",
+          "x": 287.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 331.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 249.5,
+          "y": 784,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 96.5,
+          "y": 784,
+          "w": 145,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "dark",
+      "name": "game-overview",
+      "file": "dark-game-overview.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 26.73076923076923,
+        "y": 237.03846153846155,
+        "scale": 6.730769230769231
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 14,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 331.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 249.5,
+          "y": 784,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 96.5,
+          "y": 784,
+          "w": 145,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "dark",
+      "name": "collection-locked",
+      "file": "dark-collection-locked.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 344,
+          "w": 350,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 432.71875,
+          "w": 222,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "dark",
+      "name": "collection-earned",
+      "file": "dark-collection-earned.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 20,
+          "y": 123,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Открыть месяц",
+          "x": 148,
+          "y": 230.65625,
+          "w": 150,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 123,
+          "w": 350,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 211.71875,
+          "w": 222,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "light",
+      "name": "home-fresh",
+      "file": "light-home-fresh.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c01",
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Играть",
+          "x": 75,
+          "y": 396,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 146.5,
+          "y": 460,
+          "w": 97,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "light",
+      "name": "home-upcoming",
+      "file": "light-home-upcoming.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c120",
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Играть",
+          "x": 75,
+          "y": 420.5,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 139.5,
+          "y": 484.5,
+          "w": 111,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "light",
+      "name": "home-last-arrow",
+      "file": "light-home-last-arrow.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c03",
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Продолжить",
+          "x": 75,
+          "y": 586.8125,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 146.5,
+          "y": 650.8125,
+          "w": 97,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "light",
+      "name": "home-active",
+      "file": "light-home-active.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c40",
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Продолжить",
+          "x": 75,
+          "y": 591.3125,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 143,
+          "y": 655.3125,
+          "w": 104,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "light",
+      "name": "collection-current",
+      "file": "light-collection-current.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 20,
+          "y": 130.625,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Открыть месяц",
+          "x": 148,
+          "y": 246.265625,
+          "w": 150,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 123,
+          "w": 350,
+          "h": 167.265625,
+          "font": "16px",
+          "color": "rgb(55, 68, 104)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 211.390625,
+          "w": 222,
+          "h": 31.875,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "light",
+      "name": "trophy-preview",
+      "file": "light-trophy-preview.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 312,
+          "y": 176.296875,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Открыть месяц",
+          "x": 34,
+          "y": 617.6875,
+          "w": 322,
+          "h": 50,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 123,
+          "w": 350,
+          "h": 167.265625,
+          "font": "16px",
+          "color": "rgb(55, 68, 104)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 211.390625,
+          "w": 222,
+          "h": 31.875,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "light",
+      "name": "calendar",
+      "file": "light-calendar.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#view-trophy",
+          "text": "XI · 26\n    \n    Рассмотреть кубок",
+          "x": 20,
+          "y": 72,
+          "w": 76,
+          "h": 82.375,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#start-daily",
+          "text": "Играть",
+          "x": 301.390625,
+          "y": 521.375,
+          "w": 68.609375,
+          "h": 46,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 20,
+          "y": 130,
+          "w": 76,
+          "h": 24.375,
+          "font": "9px",
+          "color": "rgb(98, 113, 139)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "light",
+      "name": "trophy-earned",
+      "file": "light-trophy-earned.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 312,
+          "y": 176.296875,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Открыть месяц",
+          "x": 34,
+          "y": 617.6875,
+          "w": 322,
+          "h": 50,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 20,
+          "y": 130,
+          "w": 76,
+          "h": 24.375,
+          "font": "9px",
+          "color": "rgb(98, 113, 139)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "light",
+      "name": "game-fit",
+      "file": "light-game-fit.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 26.73076923076923,
+        "y": 237.03846153846155,
+        "scale": 6.730769230769231
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 14,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 331.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 249.5,
+          "y": 784,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 96.10736846923828,
+          "y": 783.880859375,
+          "w": 145.7852783203125,
+          "h": 44.23828125,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "light",
+      "name": "game-zoom",
+      "file": "light-game-zoom.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": -262.40319228878167,
+        "y": -80.77758896382875,
+        "scale": 18.296127691551266
+      },
+      "controls": [
+        {
+          "key": "#board-overview",
+          "text": "",
+          "x": 287.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 331.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 249.5,
+          "y": 784,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 96.5,
+          "y": 784,
+          "w": 145,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "light",
+      "name": "game-overview",
+      "file": "light-game-overview.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 26.73076923076923,
+        "y": 237.03846153846155,
+        "scale": 6.730769230769231
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 14,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 331.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 249.5,
+          "y": 784,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 96.5,
+          "y": 784,
+          "w": 145,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "light",
+      "name": "collection-locked",
+      "file": "light-collection-locked.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 344,
+          "w": 350,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(55, 68, 104)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 432.71875,
+          "w": 222,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "light",
+      "name": "collection-earned",
+      "file": "light-collection-earned.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 147.5,
+        "y": 378,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 20,
+          "y": 123,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Открыть месяц",
+          "x": 148,
+          "y": 230.65625,
+          "w": 150,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 123,
+          "w": 350,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(55, 68, 104)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 211.71875,
+          "w": 222,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 768
+    },
+    {
+      "profile": "small",
+      "name": "home-fresh",
+      "file": "small-home-fresh.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c01",
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Играть",
+          "x": 40,
+          "y": 261.640625,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 111.5,
+          "y": 325.640625,
+          "w": 97,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "small",
+      "name": "home-upcoming",
+      "file": "small-home-upcoming.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c120",
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Играть",
+          "x": 40,
+          "y": 286.140625,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 104.5,
+          "y": 350.140625,
+          "w": 111,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "small",
+      "name": "home-last-arrow",
+      "file": "small-home-last-arrow.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c03",
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Продолжить",
+          "x": 40,
+          "y": 387,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 111.5,
+          "y": 451,
+          "w": 97,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "small",
+      "name": "home-active",
+      "file": "small-home-active.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c40",
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Продолжить",
+          "x": 40,
+          "y": 387,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 108,
+          "y": 451,
+          "w": 104,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "small",
+      "name": "collection-current",
+      "file": "small-collection-current.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 14,
+          "y": 130.625,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Открыть месяц",
+          "x": 142,
+          "y": 246.265625,
+          "w": 150,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 14,
+          "y": 123,
+          "w": 292,
+          "h": 167.265625,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 142,
+          "y": 211.390625,
+          "w": 164,
+          "h": 31.875,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "small",
+      "name": "trophy-preview",
+      "file": "small-trophy-preview.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 242,
+          "y": 64.265625,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Открыть месяц",
+          "x": 34,
+          "y": 453.71875,
+          "w": 252,
+          "h": 50,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 14,
+          "y": 123,
+          "w": 292,
+          "h": 167.265625,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 142,
+          "y": 211.390625,
+          "w": 164,
+          "h": 31.875,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "small",
+      "name": "calendar",
+      "file": "small-calendar.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#view-trophy",
+          "text": "XI · 26\n    \n    Рассмотреть кубок",
+          "x": 14,
+          "y": 71,
+          "w": 76,
+          "h": 82.375,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#start-daily",
+          "text": "Играть",
+          "x": 237.390625,
+          "y": 428,
+          "w": 68.609375,
+          "h": 46,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 14,
+          "y": 129,
+          "w": 76,
+          "h": 24.375,
+          "font": "9px",
+          "color": "rgb(146, 152, 188)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "small",
+      "name": "trophy-earned",
+      "file": "small-trophy-earned.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 242,
+          "y": 73.0625,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Открыть месяц",
+          "x": 34,
+          "y": 444.921875,
+          "w": 252,
+          "h": 50,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 14,
+          "y": 129,
+          "w": 76,
+          "h": 24.375,
+          "font": "9px",
+          "color": "rgb(146, 152, 188)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "small",
+      "name": "game-fit",
+      "file": "small-game-fit.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 25.384615384615387,
+        "y": 136.73076923076923,
+        "scale": 5.384615384615385
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 8,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 267.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 214.5,
+          "y": 508,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 61.43605041503906,
+          "y": 507.9805908203125,
+          "w": 145.12789916992188,
+          "h": 44.038818359375,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "small",
+      "name": "game-zoom",
+      "file": "small-game-zoom.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": -205.9225538310253,
+        "y": -116.31927389114168,
+        "scale": 14.636902153241014
+      },
+      "controls": [
+        {
+          "key": "#board-overview",
+          "text": "",
+          "x": 223.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 267.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 214.5,
+          "y": 508,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 61.5,
+          "y": 508,
+          "w": 145,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "small",
+      "name": "game-overview",
+      "file": "small-game-overview.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 25.384615384615387,
+        "y": 136.73076923076923,
+        "scale": 5.384615384615385
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 8,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 267.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 214.5,
+          "y": 508,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 61.5,
+          "y": 508,
+          "w": 145,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "small",
+      "name": "collection-locked",
+      "file": "small-collection-locked.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 14,
+          "y": 344.78125,
+          "w": 292,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 142,
+          "y": 433.5,
+          "w": 164,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "small",
+      "name": "collection-earned",
+      "file": "small-collection-earned.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 14,
+          "y": 123,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Открыть месяц",
+          "x": 142,
+          "y": 230.65625,
+          "w": 150,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 14,
+          "y": 123,
+          "w": 292,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 142,
+          "y": 211.71875,
+          "w": 164,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "english",
+      "name": "home-fresh",
+      "file": "english-home-fresh.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c01",
+      "camera": {
+        "x": 167.5,
+        "y": 422,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Play",
+          "x": 95,
+          "y": 437.796875,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 165.5,
+          "y": 501.796875,
+          "w": 99,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 856
+    },
+    {
+      "profile": "english",
+      "name": "home-upcoming",
+      "file": "english-home-upcoming.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c120",
+      "camera": {
+        "x": 167.5,
+        "y": 422,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Play",
+          "x": 95,
+          "y": 462.296875,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 158.5,
+          "y": 526.296875,
+          "w": 113,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 856
+    },
+    {
+      "profile": "english",
+      "name": "home-last-arrow",
+      "file": "english-home-last-arrow.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c03",
+      "camera": {
+        "x": 167.5,
+        "y": 422,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Continue",
+          "x": 95,
+          "y": 646.65625,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 165.5,
+          "y": 710.65625,
+          "w": 99,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 856
+    },
+    {
+      "profile": "english",
+      "name": "home-active",
+      "file": "english-home-active.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c40",
+      "camera": {
+        "x": 167.5,
+        "y": 422,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Continue",
+          "x": 95,
+          "y": 651.15625,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 162,
+          "y": 715.15625,
+          "w": 106,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 856
+    },
+    {
+      "profile": "english",
+      "name": "collection-current",
+      "file": "english-collection-current.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 167.5,
+        "y": 422,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 20,
+          "y": 130.625,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Open month",
+          "x": 148,
+          "y": 246.265625,
+          "w": 128,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 123,
+          "w": 390,
+          "h": 167.265625,
+          "font": "16px",
+          "color": "rgb(55, 68, 104)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 211.390625,
+          "w": 262,
+          "h": 31.875,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 856
+    },
+    {
+      "profile": "english",
+      "name": "trophy-preview",
+      "file": "english-trophy-preview.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 167.5,
+        "y": 422,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 346,
+          "y": 220.296875,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Open month",
+          "x": 40,
+          "y": 661.6875,
+          "w": 350,
+          "h": 50,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 123,
+          "w": 390,
+          "h": 167.265625,
+          "font": "16px",
+          "color": "rgb(55, 68, 104)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 211.390625,
+          "w": 262,
+          "h": 31.875,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 856
+    },
+    {
+      "profile": "english",
+      "name": "calendar",
+      "file": "english-calendar.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 167.5,
+        "y": 422,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#view-trophy",
+          "text": "XI · 26\n    \n    Inspect trophy",
+          "x": 20,
+          "y": 72,
+          "w": 76,
+          "h": 70.6875,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#start-daily",
+          "text": "Play",
+          "x": 358.59375,
+          "y": 509.6875,
+          "w": 51.40625,
+          "h": 46,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 30,
+          "y": 130,
+          "w": 56,
+          "h": 12.6875,
+          "font": "9px",
+          "color": "rgb(98, 113, 139)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 856
+    },
+    {
+      "profile": "english",
+      "name": "trophy-earned",
+      "file": "english-trophy-earned.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 167.5,
+        "y": 422,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 346,
+          "y": 220.296875,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Open month",
+          "x": 40,
+          "y": 661.6875,
+          "w": 350,
+          "h": 50,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 30,
+          "y": 130,
+          "w": 56,
+          "h": 12.6875,
+          "font": "9px",
+          "color": "rgb(98, 113, 139)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 856
+    },
+    {
+      "profile": "english",
+      "name": "game-fit",
+      "file": "english-game-fit.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 27.5,
+        "y": 259.5,
+        "scale": 7.5
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 14,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 371.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 269,
+          "y": 872,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Cascade +2 · video",
+          "x": 115.68782806396484,
+          "y": 871.5990600585938,
+          "w": 146.62432861328125,
+          "h": 44.8018798828125,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "english",
+      "name": "game-zoom",
+      "file": "english-game-zoom.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": -294.6778428360709,
+        "y": -95.32519757679279,
+        "scale": 20.387113713442837
+      },
+      "controls": [
+        {
+          "key": "#board-overview",
+          "text": "",
+          "x": 327.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 371.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 269,
+          "y": 872,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Cascade +2 · video",
+          "x": 116.99829864501953,
+          "y": 871.99951171875,
+          "w": 144.00341796875,
+          "h": 44.0009765625,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "english",
+      "name": "game-overview",
+      "file": "english-game-overview.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 27.5,
+        "y": 259.5,
+        "scale": 7.5
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 14,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 371.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 269,
+          "y": 872,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Cascade +2 · video",
+          "x": 117,
+          "y": 872,
+          "w": 144,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "english",
+      "name": "collection-locked",
+      "file": "english-collection-locked.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 167.5,
+        "y": 422,
+        "scale": 19
+      },
+      "controls": [],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 344,
+          "w": 390,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(55, 68, 104)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 432.71875,
+          "w": 262,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 856
+    },
+    {
+      "profile": "english",
+      "name": "collection-earned",
+      "file": "english-collection-earned.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 167.5,
+        "y": 422,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 20,
+          "y": 123,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Open month",
+          "x": 148,
+          "y": 230.65625,
+          "w": 128,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 20,
+          "y": 123,
+          "w": 390,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(55, 68, 104)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 148,
+          "y": 211.71875,
+          "w": 262,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(89, 105, 133)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 856
+    },
+    {
+      "profile": "tablet",
+      "name": "home-fresh",
+      "file": "tablet-home-fresh.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c01",
+      "camera": {
+        "x": 352.5,
+        "y": 596,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Играть",
+          "x": 280,
+          "y": 609.09375,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 351.5,
+          "y": 673.09375,
+          "w": 97,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 1204
+    },
+    {
+      "profile": "tablet",
+      "name": "home-upcoming",
+      "file": "tablet-home-upcoming.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c120",
+      "camera": {
+        "x": 352.5,
+        "y": 596,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Играть",
+          "x": 280,
+          "y": 633.59375,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 344.5,
+          "y": 697.59375,
+          "w": 111,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 1204
+    },
+    {
+      "profile": "tablet",
+      "name": "home-last-arrow",
+      "file": "tablet-home-last-arrow.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c03",
+      "camera": {
+        "x": 352.5,
+        "y": 596,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Продолжить",
+          "x": 280,
+          "y": 822.890625,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 351.5,
+          "y": 886.890625,
+          "w": 97,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 1204
+    },
+    {
+      "profile": "tablet",
+      "name": "home-active",
+      "file": "tablet-home-active.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c40",
+      "camera": {
+        "x": 352.5,
+        "y": 596,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Продолжить",
+          "x": 280,
+          "y": 827.390625,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 348,
+          "y": 891.390625,
+          "w": 104,
+          "h": 15,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 1204
+    },
+    {
+      "profile": "tablet",
+      "name": "collection-current",
+      "file": "tablet-collection-current.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 352.5,
+        "y": 596,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 120,
+          "y": 123,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Открыть месяц",
+          "x": 248,
+          "y": 230.65625,
+          "w": 150,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 120,
+          "y": 123,
+          "w": 560,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 248,
+          "y": 211.71875,
+          "w": 432,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 1204
+    },
+    {
+      "profile": "tablet",
+      "name": "trophy-preview",
+      "file": "tablet-trophy-preview.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 352.5,
+        "y": 596,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 531,
+          "y": 394.296875,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Открыть месяц",
+          "x": 225,
+          "y": 835.6875,
+          "w": 350,
+          "h": 50,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 120,
+          "y": 123,
+          "w": 560,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 248,
+          "y": 211.71875,
+          "w": 432,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 1204
+    },
+    {
+      "profile": "tablet",
+      "name": "calendar",
+      "file": "tablet-calendar.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 352.5,
+        "y": 596,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#view-trophy",
+          "text": "XI · 26\n    \n    Рассмотреть кубок",
+          "x": 180,
+          "y": 72,
+          "w": 76,
+          "h": 82.375,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#start-daily",
+          "text": "Играть",
+          "x": 551.390625,
+          "y": 521.375,
+          "w": 68.609375,
+          "h": 46,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 180,
+          "y": 130,
+          "w": 76,
+          "h": 24.375,
+          "font": "9px",
+          "color": "rgb(146, 152, 188)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 1204
+    },
+    {
+      "profile": "tablet",
+      "name": "trophy-earned",
+      "file": "tablet-trophy-earned.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 352.5,
+        "y": 596,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 531,
+          "y": 394.296875,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Открыть месяц",
+          "x": 225,
+          "y": 835.6875,
+          "w": 350,
+          "h": 50,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 180,
+          "y": 130,
+          "w": 76,
+          "h": 24.375,
+          "font": "9px",
+          "color": "rgb(146, 152, 188)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 1204
+    },
+    {
+      "profile": "tablet",
+      "name": "game-fit",
+      "file": "tablet-game-fit.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 34.61538461538461,
+        "y": 234.26923076923077,
+        "scale": 14.615384615384615
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 174,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 581.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 454.5,
+          "y": 1220,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 301.345947265625,
+          "y": 1219.9532470703125,
+          "w": 145.30810546875,
+          "h": 44.093505859375,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "tablet",
+      "name": "game-zoom",
+      "file": "tablet-game-zoom.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": -593.2183603984972,
+        "y": -462.89057724671034,
+        "scale": 39.72873441593989
+      },
+      "controls": [
+        {
+          "key": "#board-overview",
+          "text": "",
+          "x": 537.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 581.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 454.5,
+          "y": 1220,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 301.5,
+          "y": 1220,
+          "w": 145,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "tablet",
+      "name": "game-overview",
+      "file": "tablet-game-overview.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 34.61538461538461,
+        "y": 234.26923076923077,
+        "scale": 14.615384615384615
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 174,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 581.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 454.5,
+          "y": 1220,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 301.5,
+          "y": 1220,
+          "w": 145,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "tablet",
+      "name": "collection-locked",
+      "file": "tablet-collection-locked.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 352.5,
+        "y": 596,
+        "scale": 19
+      },
+      "controls": [],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 120,
+          "y": 344,
+          "w": 560,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 248,
+          "y": 432.71875,
+          "w": 432,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 1204
+    },
+    {
+      "profile": "tablet",
+      "name": "collection-earned",
+      "file": "tablet-collection-earned.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 352.5,
+        "y": 596,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 120,
+          "y": 123,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Открыть месяц",
+          "x": 248,
+          "y": 230.65625,
+          "w": 150,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 120,
+          "y": 123,
+          "w": 560,
+          "h": 152,
+          "font": "16px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 248,
+          "y": 211.71875,
+          "w": 432,
+          "h": 15.9375,
+          "font": "11px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 1204
+    },
+    {
+      "profile": "font150",
+      "name": "home-fresh",
+      "file": "font150-home-fresh.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c01",
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Играть",
+          "x": 40,
+          "y": 271.3125,
+          "w": 240,
+          "h": 63,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 88.5,
+          "y": 346.3125,
+          "w": 143,
+          "h": 23,
+          "font": "16.5px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "font150",
+      "name": "home-upcoming",
+      "file": "font150-home-upcoming.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c120",
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Играть",
+          "x": 40,
+          "y": 299.8125,
+          "w": 240,
+          "h": 63,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 78.5,
+          "y": 374.8125,
+          "w": 163,
+          "h": 23,
+          "font": "16.5px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "font150",
+      "name": "home-last-arrow",
+      "file": "font150-home-last-arrow.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c03",
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Продолжить",
+          "x": 40,
+          "y": 379,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 88.5,
+          "y": 443,
+          "w": 143,
+          "h": 23,
+          "font": "16.5px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "font150",
+      "name": "home-active",
+      "file": "font150-home-active.png",
+      "mode": "home",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": "c40",
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#home-play",
+          "text": "Продолжить",
+          "x": 40,
+          "y": 379,
+          "w": 240,
+          "h": 52,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 83.5,
+          "y": 443,
+          "w": 153,
+          "h": 23,
+          "font": "16.5px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "font150",
+      "name": "collection-current",
+      "file": "font150-collection-current.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 14,
+          "y": 216.96875,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Открыть месяц",
+          "x": 142,
+          "y": 384.953125,
+          "w": 164,
+          "h": 66,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 14,
+          "y": 135,
+          "w": 292,
+          "h": 315.953125,
+          "font": "24px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 142,
+          "y": 310.1875,
+          "w": 164,
+          "h": 71.765625,
+          "font": "16.5px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "font150",
+      "name": "trophy-preview",
+      "file": "font150-trophy-preview.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 242,
+          "y": 49,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Открыть месяц",
+          "x": 34,
+          "y": 446,
+          "w": 252,
+          "h": 92,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 14,
+          "y": 135,
+          "w": 292,
+          "h": 315.953125,
+          "font": "24px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 142,
+          "y": 310.1875,
+          "w": 164,
+          "h": 71.765625,
+          "font": "16.5px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "font150",
+      "name": "calendar",
+      "file": "font150-calendar.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#view-trophy",
+          "text": "XI · 26\n    \n    Рассмотреть кубок",
+          "x": 14,
+          "y": 97.1875,
+          "w": 76,
+          "h": 94.09375,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#start-daily",
+          "text": "Играть",
+          "x": 213.390625,
+          "y": 420.5,
+          "w": 92.609375,
+          "h": 49,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 14,
+          "y": 155.1875,
+          "w": 76,
+          "h": 36.09375,
+          "font": "13.5px",
+          "color": "rgb(146, 152, 188)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "font150",
+      "name": "trophy-earned",
+      "file": "font150-trophy-earned.png",
+      "mode": "calendar",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "[data-close-trophy]",
+          "text": "×",
+          "x": 242,
+          "y": 49,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "[data-open-month]",
+          "text": "Открыть месяц",
+          "x": 34,
+          "y": 446,
+          "w": 252,
+          "h": 92,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": {
+          "x": 14,
+          "y": 155.1875,
+          "w": 76,
+          "h": 36.09375,
+          "font": "13.5px",
+          "color": "rgb(146, 152, 188)",
+          "overflow": false
+        }
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "font150",
+      "name": "game-fit",
+      "file": "font150-game-fit.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 25.384615384615387,
+        "y": 136.73076923076923,
+        "scale": 5.384615384615385
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 8,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 267.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 241,
+          "y": 508,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 35,
+          "y": 508,
+          "w": 198,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "16.5px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "font150",
+      "name": "game-zoom",
+      "file": "font150-game-zoom.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": -205.9225538310253,
+        "y": -116.31927389114168,
+        "scale": 14.636902153241014
+      },
+      "controls": [
+        {
+          "key": "#board-overview",
+          "text": "",
+          "x": 223.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 267.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 241,
+          "y": 508,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 35,
+          "y": 508,
+          "w": 198,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "16.5px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "font150",
+      "name": "game-overview",
+      "file": "font150-game-overview.png",
+      "mode": "game",
+      "level": "c40",
+      "remaining": "112",
+      "homePreview": "c40",
+      "camera": {
+        "x": 25.384615384615387,
+        "y": 136.73076923076923,
+        "scale": 5.384615384615385
+      },
+      "controls": [
+        {
+          "key": "#choose-field",
+          "text": "",
+          "x": 8,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#game-settings",
+          "text": "",
+          "x": 267.984375,
+          "y": 8,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#guides",
+          "text": "#",
+          "x": 241,
+          "y": 508,
+          "w": 44,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#hint",
+          "text": "Каскад +2 · видео",
+          "x": 35,
+          "y": 508,
+          "w": 198,
+          "h": 44,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0,
+          "font": "16.5px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        ".collection-current": null,
+        ".collection-goal-note": null,
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 0
+    },
+    {
+      "profile": "font150",
+      "name": "collection-locked",
+      "file": "font150-collection-locked.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 14,
+          "y": 392.1875,
+          "w": 292,
+          "h": 292.03125,
+          "font": "24px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 142,
+          "y": 567.375,
+          "w": 164,
+          "h": 47.84375,
+          "font": "16.5px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    },
+    {
+      "profile": "font150",
+      "name": "collection-earned",
+      "file": "font150-collection-earned.png",
+      "mode": "collection",
+      "level": "c01",
+      "remaining": "3",
+      "homePreview": null,
+      "camera": {
+        "x": 112.5,
+        "y": 240,
+        "scale": 19
+      },
+      "controls": [
+        {
+          "key": "#collection-current-trophy",
+          "text": "XI · 26",
+          "x": 14,
+          "y": 205.015625,
+          "w": 112,
+          "h": 152,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        },
+        {
+          "key": "#collection-open-month",
+          "text": "Открыть месяц",
+          "x": 142,
+          "y": 361.03125,
+          "w": 164,
+          "h": 66,
+          "disabled": false,
+          "hit": true,
+          "overflow": false
+        }
+      ],
+      "styles": {
+        ".home-progress": null,
+        ".collection-current": {
+          "x": 14,
+          "y": 135,
+          "w": 292,
+          "h": 292.03125,
+          "font": "24px",
+          "color": "rgb(185, 192, 249)",
+          "overflow": false
+        },
+        ".collection-goal-note": {
+          "x": 142,
+          "y": 310.1875,
+          "w": 164,
+          "h": 47.84375,
+          "font": "16.5px",
+          "color": "rgb(153, 159, 198)",
+          "overflow": false
+        },
+        "#view-trophy > span": null
+      },
+      "horizontalOverflow": false,
+      "navTop": 492
+    }
+  ],
+  "errors": []
+}

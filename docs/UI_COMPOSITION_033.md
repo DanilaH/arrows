@@ -18,6 +18,8 @@ The existing BoardScene focus interpolation performs the320ms return from the ac
 
 Explicit fit takes manual-camera priority over an already earned assistance reveal. It does not consume, overwrite or replay that assistance. An attempt-owned settled notification schedules the final displayed view through the existing save debounce; the original400ms gesture timer alone can sample a mid-animation view on slow rendering. Early Back/background still save the actually displayed state through the existing direct save. A changed attempt cannot receive the previous attempt's pending view. None of this owns lives, moves, flawless, reward commits or results.
 
+Archived control/pilot HTML intentionally has no normal-game overview element. Shared surface registration/sync/localization treat that optional DOM control accordingly, preserving its boot and service isolation. The icon's finite160ms CSS arrival has no retained fill/animation after it ends. These regressions were reproduced by full CI and focused local failures before correction; keep both existing pilot and settled-animation checks.
+
 ## Reward hierarchy and copy
 
 Collection begins with the existing year selector and, only for the current supported year/date, its current month trophy/progress. Inspect opens the existing viewer; Open month enters the existing Calendar. Both stay disabled before level20; Collection still opens at10. No new monthly goal, reward, route or daily assignment exists. Earlier years show their complete12-month archive without a misleading current-month feature. All current-year12months remain visible as previously agreed; future years stay hidden.

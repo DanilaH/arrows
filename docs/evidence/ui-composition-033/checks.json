@@ -1,0 +1,122 @@
+{
+  "baseline": "6e5a3fbb047b136d6ba26ab4b6596e2773ec1dce",
+  "application": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+  "builtSource": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+  "local": {
+    "check": {
+      "status": "PASS",
+      "unitTests": 234,
+      "files": 29,
+      "typecheck": true,
+      "build": true,
+      "productionPayloadBoundary": true
+    },
+    "focused54": {
+      "status": "PASS",
+      "tests": 54,
+      "note": "Before the final early-Collection ordering change; not a claim about a later source."
+    },
+    "broad68": {
+      "status": "67 PASS / 1 observer failure",
+      "tests": 68,
+      "failure": "Exact floating-point comparison: y50.62402046306023 versus50.62402046306018. Corrected to1e-6 and made the early-Back race deterministic; no product change for that observer correction."
+    },
+    "repeated12": {
+      "status": "PASS",
+      "tests": 12,
+      "repeat": 3,
+      "projects": [
+        "phone",
+        "desktop"
+      ],
+      "cases": [
+        "manual camera interruption and quick Home round trip",
+        "locked Collection and historical/current year routing"
+      ]
+    },
+    "qaToolsSyntax": "4 Node syntax checks and Python compile PASS",
+    "signedApkMatrix": {
+      "status": "PASS",
+      "states": 78,
+      "profiles": 6,
+      "runtimeErrors": 0,
+      "documentHorizontalOverflow": 0,
+      "method": "Actual signed APK web in Chromium; synthetic CSS font150 is not native system font-scale evidence"
+    },
+    "recordings": {
+      "status": "PASS",
+      "clips": 3,
+      "actualFrames": 363,
+      "runtimeErrors": 0,
+      "currentOnly": true,
+      "audio": "Actual captured game WebAudio, no overdub; mean/peak analysis in media.json, not phone loudness proof"
+    },
+    "dailyOverview": {
+      "status": "PASS",
+      "arrows": 200,
+      "contentVersion": 3,
+      "date": "2026-11-16",
+      "actualCurrentGenerator": true,
+      "campaignUnchanged": true,
+      "sameDailyAfterReload": true,
+      "persistedZoom": 1,
+      "note": "Supplementary actual-APK probe; no application changes after source CI commit."
+    },
+    "correctedFocused": {
+      "status": "PASS",
+      "tests": 46,
+      "duration": "1.8min",
+      "suites": [
+        "contentPilot",
+        "phoneFeelV2",
+        "uiComposition033"
+      ],
+      "note": "Includes all14 CI failures and new normal-game composition scenarios."
+    },
+    "additionalFullAttempt": {
+      "status": "NO TERMINAL RESULT; NOT COUNTED",
+      "workers": 4,
+      "observedPasses": 20,
+      "note": "Managed command session disappeared before a terminal result; its partial log is not a full-suite pass. Corrected hosted full run is independent and authoritative."
+    }
+  },
+  "hosted": {
+    "firstRun": 43941196967,
+    "firstAndroid": "SUCCESS",
+    "firstWeb": "466 PASS / 14 FAIL (21.3min); not green",
+    "correctedRun": 43946078829,
+    "correctedSource": "960d6ffb2498acc4a954c15616e0e65a851a2476",
+    "finalStatus": "IN PROGRESS",
+    "android": "SUCCESS",
+    "jvm": 19
+  },
+  "earlierInfrastructureFailures": [
+    {
+      "run": 43939462377,
+      "status": "Both jobs failed at npm ci before compile, private pinned kit SSH read access absent"
+    },
+    {
+      "run": 43940727159,
+      "status": "Both jobs failed at npm ci: raw cache path did not match setup-node cache version"
+    }
+  ],
+  "workingMatrixDriver": "Pre-APK diagnostic pass stopped on a QA bootstrap navigation race in the final font profile; boot now awaits settled route. It is not claimed PASS. The complete78-state signed-APK pass is final evidence.",
+  "compatibility": "No schema/content/right/rule/ad-cadence/pin changes; signed package+certificate retained, code47 > code46; physical update NOT RUN",
+  "physicalAndroid": "NOT RUN: install/update/rotation/haptics/speaker/audio focus/FPS/thermal/system font scale",
+  "externalServices": "NOT RUN: real native SDK account/AppMetrica/money",
+  "ownerPreviousQualitativeAcceptance": "Retained; no new quantitative human enjoyment claim",
+  "kitImpact": "REUSE: existing state hierarchy, stable targets, owned motion, viewport/audio/runtime seams. Separate cold-CI credential/cache recipe CANDIDATE; no kit changes, upgrades or publishing.",
+  "reproducedCiFailures": {
+    "localBefore": "3/3 selected reproductions failed before fixing",
+    "realRegressions": [
+      "Archived pilot has no overview element; shared surface addEventListener/hidden access throws. CI trace confirms both null failures.",
+      "Overview SVG retained a filled CSS animation after160ms, breaking settled-animation contract. Removed unnecessary fill."
+    ],
+    "testObserver": "Achievements now below the trophy shelf. Raw press coordinates were offscreen; helper now scrolls into view and asserts actual centre hit before keeping the same press/cancel/stable-geometry assertions.",
+    "correctedFocused": "46/46 PASS on phone+desktop; includes all pilot, phoneFeelV2 and uiComposition033 cases",
+    "firstFailureArtifact": 14264127598,
+    "firstFailureArtifactSha256": "12ba8c956b5a39018e8fb3d91c3d32cf94a8280b5e7da3a3370811dd984c4fd9"
+  },
+  "initialApplication": "bade6fa4bea55633cc885b25d4d1be98a3482cc9",
+  "finalApkSha256": "5631b7f6b9fe28029ff000a86385128b3a3146c8c12f41344c4176b0e5e6ab7d"
+}
