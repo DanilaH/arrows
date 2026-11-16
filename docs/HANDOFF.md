@@ -1,3 +1,7 @@
+## Portrait-only Android —0.32.1/code46
+
+Owner understood screenshot was BEFORE and chose fixed portrait instead of landscape gameplay. Native manifest MainActivity portrait plus appCategory game; no more UI/cup redesign. Existing resize/safe-area defenses retained. Read PORTRAIT_0321.md. Same .playtest package/key, test ads/analytics off; final signed APK manifest/payload proof pending. npm check/native build next; physical rotation/launch/resume NOT RUN, do not substitute browser resizing.0.32full458browser/232unit/19JVM baseline stays valid; new web bytes must match exactly. KIT IMPACT NONE; no kit/store writes.
+
 ## Independent UI / UX / feel corrections —0.32.0/code45
 
 Delivered over978fa67, application4655491, final source/QA c1fa921. Read UI_UX_FEEL_032.md and evidence/ui-ux-032/ACCEPTANCE.md. Baseline63production-browser states; Play beyond/behind nav on320×568,360×640,412×760, trophy Open offscreen and38px secondary targets in short landscape. Compact Calendar has independent month scroll and sibling date/difficulty/Play; detail-only reveal never moves Play; exact scroll restoration/outgoing snapshot;44px Guides/meta Back/viewer Close; trophy actions outside scrolling details. Independently found/reproduced pending-daily→trophy→Close stuck Loading: reuse cancellation+refresh, ignore late output, real same-date retry. No gameplay/save/right/content/ads/pin change.

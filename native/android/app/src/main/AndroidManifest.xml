@@ -4,6 +4,7 @@
     <application
         android:name="com.danilah.arrows.ArrowsApplication"
         android:allowBackup="true"
+        android:appCategory="game"
         android:icon="@mipmap/ic_launcher"
         android:label="${arrowsAppLabel}"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -18,6 +19,7 @@
             android:label="${arrowsAppLabel}"
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:exported="true">
 
             <intent-filter>

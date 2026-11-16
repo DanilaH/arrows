@@ -1,5 +1,9 @@
 # Project decisions — 2026-11-09
 
+## 2026-11-16 — portrait-only Android0.32.1
+
+Owner chose portrait after seeing the before/after landscape trophy clip. Supersedes portrait-first/native-landscape support: MainActivity screenOrientation=portrait, application appCategory=game (actual game; Android16/API36 game exception). No late JS/fullscreen lock or repeated Activity setters. Keep responsive fallback for browser/small windows/system overrides; no layout/content/save/SDK/cadence or dependency change. Same signed .playtest code46, actual merged-manifest/signature/DEX and identical web payload verification; physical rotation/resume NOT RUN unless separately measured. Read PORTRAIT_0321.md. KIT IMPACT NONE; project Android manifest policy only.
+
 ## 2026-11-16 — initial-action UI audit0.32.0
 
 Calendar Play reproduced below/behind nav on320×568,360×640,412×760; old locator test scrolled past the fault. Compact award, independently scrolling month and sibling selected date/Play fix the actual flow without shrinking44px day rows. Preserve real nested scroll through refresh/route snapshots; selecting a date animates details only, never moves Play. Trophy Close/Open stay outside scrollable art/details, short-landscape image shrinks first. Restore44CSSpx Guides/meta Back/viewer Close. Independently reproduced pending-daily→trophy→Close stuck Loading; reuse the Settings cancellation/refresh path and reject late Worker output, retry the same real date. No gameplay/save/reward/content/ad/pin change; owner0.31playtest remains accepted. Read UI_UX_FEEL_032.md. Same-cert code45, test ads/analytics off, actual evidence and distinct physical status. KIT IMPACT REUSE initial-viewport/UI/motion guidance.
@@ -40,7 +44,7 @@ Scope clarification, 2026-11-09: the game-kit review covers the complete built A
 | --- | --- | --- |
 | Yandex web SDK, mock runtime and LoadingAPI/GamePlayAPI | Capacitor lifecycle/browser development runtime, later extended with native Android service plugins | Spec sections 11–12 target native Android/RuStore; the kit's web SDK is not the native integration |
 | Yandex env modes, upload audit and DRAFT checklist | Normal production build, cap sync, Android CI/build/release checklist | Native packaging target; web assets are local to APK |
-| Landscape gate | Portrait-first responsive surface; short landscape supported by init shell | Reference is portrait; spec requires resize safety, not a forced landscape game |
+| Orientation | Native portrait-only since0.32.1; responsive browser/short-window fallback retained | Owner explicitly selected vertical gameplay; Android manifest owns orientation before launch |
 | AVIF/WebP probe at every startup | Procedural rendering; no raster probe yet | No raster runtime assets exist at initialization |
 | Continuous default Phaser loop | Stop after first/final dirty frame; resize/foreground request repaint | Kit idle-paint production guidance; browser RAF smoke verifies boot scene only |
 | Debug env toggle | Development-only dynamic import | No shipped diagnostic control or global mock switch |

@@ -80,6 +80,7 @@ jobs:
           mkdir -p .test-output/playtest-verification
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs native/android/app/build/outputs/apk/debug/app-debug.apk > .test-output/playtest-verification/signing.txt
           "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging native/android/app/build/outputs/apk/debug/app-debug.apk > .test-output/playtest-verification/manifest.txt
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump xmltree native/android/app/build/outputs/apk/debug/app-debug.apk AndroidManifest.xml > .test-output/playtest-verification/manifest-tree.txt
           sha256sum native/android/app/build/outputs/apk/debug/app-debug.apk > .test-output/playtest-verification/apk.sha256
           python3 -c "import json,re; from pathlib import Path; expected=json.loads(Path('docs/evidence/content-rollout-030/build-verification.json').read_text())['signature']['certificateSha256']; actual=Path('.test-output/playtest-verification/signing.txt').read_text(); assert re.search(r'Signer #1 certificate SHA-256 digest: ([0-9a-fA-F:]+)',actual)[1].replace(':','').lower()==expected; assert 'Verified using v2 scheme (APK Signature Scheme v2): true' in actual"
       - uses: actions/upload-artifact@v4
