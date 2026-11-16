@@ -7,7 +7,7 @@ Owner selected fixed vertical Android gameplay; source `c0729730da9cf7b5c64f6aac
 - `npm run check`: typecheck/232unit in29files/production build PASS.
 - Hosted [CI43920386155](https://github.com/DanilaH/arrows/actions/runs/43920386155): Android job SUCCESS;19JVM tests, sync, debug and signed playtest builds PASS.
 - Actual APK decoded manifest: MainActivity orientation portrait(enum1), application game(enum0), targetSdk36. Checked compiled manifest, not just source XML. Official SDK signature/manifest/SHA proof and DEX BuildConfig verified.
-- All28public web files are byte-identical to verified0.32;26local dist hashes also match that payload. Existing0.32full458browser PASS remains the unchanged-web baseline. Fresh complete web CI is RUNNING at evidence preparation, **not declared PASS**.
+- All28public web files are byte-identical to verified0.32;26local dist hashes also match that payload. At original delivery the fresh web CI was still running. Subsequently verified completed CI43920386155: **web SUCCESS,458/458browser in21.6min**,232unit/29files, final type/build/sync PASS; Android SUCCESS unchanged. Actual completed-job excerpts are saved in [the later audit evidence](../ui-composition-0321/ci-web-summary.txt).
 - Native/emulator/physical rotation, launch and resume behavior **NOT RUN**. Manifest verifies the Activity's persistent requested policy, not every OEM/window-manager override. Browser resizing is not native rotation evidence. No new browser GIF is offered for this native-only change; the0.32UI recordings remain the identical web behavior.
 - Physical haptics/FPS/live services were not retested; old owner gameplay acceptance is retained. No store publication.
 

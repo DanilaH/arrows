@@ -1,0 +1,36 @@
+{
+  "applicationSource": "c0729730da9cf7b5c64f6aac7b0418a697ac8e36",
+  "workingHeadAtAudit": "21736b58e2ddd7e9ff9fe50a64e35ba64a064230",
+  "applicationChanged": false,
+  "matrixStates": 127,
+  "focusStates": 39,
+  "matrixErrors": [],
+  "focusErrors": [],
+  "inputProbeErrors": [],
+  "uiActionsWithAudioAndPulse": 7,
+  "keyboardEscapeSeparatelyObserved": true,
+  "snapshotHorizontalOverflow": 0,
+  "actualRecordings": 3,
+  "actualCapturedFrames": 414,
+  "sourceCI": {
+    "run": 43920386155,
+    "webJob": 133485770247,
+    "androidJob": 133485769863,
+    "web": "success",
+    "android": "success",
+    "browserPassed": 458,
+    "browserMinutes": 21.6,
+    "unitPassed": 232,
+    "jvmPassed": 19
+  },
+  "rawMatrixSha256": "a9d009a1cec45cff0935dfc8c9b8a5ddd1290b86405599d94e627a49ee6eb770",
+  "rawFocusSha256": "e0ef456da7d133b0bf45d0fc9253839d6d1853c36a35b77f73335fe9492e5b02",
+  "auditDriverCorrections": [
+    "Removed QA-only caption from viewport before final screenshots",
+    "Settled bootstrap before raw coordinate clicks, then completed39focused states; first run is not claimed as a pass"
+  ],
+  "phonePhysicalPerformanceHaptics": "NOT RUN",
+  "realSdkMoneyAppMetrica": "NOT RUN",
+  "ownerPriorQualitativePlaytest": "ACCEPTED, retained",
+  "kitImpact": "REUSE guidance only; no kit/runtime/store changes"
+}

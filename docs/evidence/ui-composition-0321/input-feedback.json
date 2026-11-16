@@ -1,0 +1,171 @@
+{
+  "actions": [
+    {
+      "name": "enter",
+      "audio": [
+        {
+          "at": 1369,
+          "context": 1,
+          "length": 2590,
+          "duration": 0.05873015873015873
+        }
+      ],
+      "pulses": [
+        {
+          "method": "cancel",
+          "generation": 6,
+          "at": 1323.3000000044703
+        },
+        {
+          "method": "pulse",
+          "cue": "button",
+          "issuedAt": 1794853708687,
+          "generation": 6,
+          "at": 1369.2000000029802
+        }
+      ]
+    },
+    {
+      "name": "guides",
+      "audio": [
+        {
+          "at": 2314.5,
+          "context": 1,
+          "length": 2590,
+          "duration": 0.05873015873015873
+        }
+      ],
+      "pulses": [
+        {
+          "method": "pulse",
+          "cue": "button",
+          "issuedAt": 1794853709633,
+          "generation": 6,
+          "at": 2314.60000000149
+        }
+      ]
+    },
+    {
+      "name": "back",
+      "audio": [
+        {
+          "at": 2948.8000000044703,
+          "context": 1,
+          "length": 2590,
+          "duration": 0.05873015873015873
+        }
+      ],
+      "pulses": [
+        {
+          "method": "cancel",
+          "generation": 7,
+          "at": 2937.39999999851
+        },
+        {
+          "method": "pulse",
+          "cue": "button",
+          "issuedAt": 1794853710267,
+          "generation": 7,
+          "at": 2948.8000000044703
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "audio": [
+        {
+          "at": 3793.8000000044703,
+          "context": 1,
+          "length": 2590,
+          "duration": 0.05873015873015873
+        }
+      ],
+      "pulses": [
+        {
+          "method": "pulse",
+          "cue": "button",
+          "issuedAt": 1794853711112,
+          "generation": 7,
+          "at": 3793.89999999851
+        }
+      ]
+    },
+    {
+      "name": "collection",
+      "audio": [
+        {
+          "at": 4495.89999999851,
+          "context": 1,
+          "length": 2590,
+          "duration": 0.05873015873015873
+        }
+      ],
+      "pulses": [
+        {
+          "method": "pulse",
+          "cue": "button",
+          "issuedAt": 1794853711814,
+          "generation": 7,
+          "at": 4495.89999999851
+        }
+      ]
+    },
+    {
+      "name": "settings",
+      "audio": [
+        {
+          "at": 5157.60000000149,
+          "context": 1,
+          "length": 2590,
+          "duration": 0.05873015873015873
+        }
+      ],
+      "pulses": [
+        {
+          "method": "cancel",
+          "generation": 8,
+          "at": 5157.30000000447
+        },
+        {
+          "method": "pulse",
+          "cue": "button",
+          "issuedAt": 1794853712476,
+          "generation": 8,
+          "at": 5157.60000000149
+        }
+      ]
+    },
+    {
+      "name": "light",
+      "audio": [
+        {
+          "at": 5671,
+          "context": 1,
+          "length": 2590,
+          "duration": 0.05873015873015873
+        }
+      ],
+      "pulses": [
+        {
+          "method": "pulse",
+          "cue": "button",
+          "issuedAt": 1794853712989,
+          "generation": 8,
+          "at": 5671
+        }
+      ]
+    },
+    {
+      "name": "close",
+      "audio": [],
+      "pulses": [
+        {
+          "method": "cancel",
+          "generation": 9,
+          "at": 6297.89999999851
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

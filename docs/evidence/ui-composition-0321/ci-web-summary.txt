@@ -1,0 +1,6 @@
+Source CI https://github.com/DanilaH/arrows/actions/runs/43920386155
+Job web 133485770247: completed/success; Android 133485769863: completed/success.
+Retrieved completed job logs during this audit, not inferred from the older458 baseline.
+2026-11-16T17:38:27.7797433Z  Test Files  29 passed (29)
+2026-11-16T17:38:27.7798339Z       Tests  232 passed (232)
+2026-11-16T18:00:27.8968321Z   458 passed (21.6m)

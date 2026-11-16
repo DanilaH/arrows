@@ -1,0 +1,152 @@
+{
+  "source": "source.json",
+  "method": "Actual current signed APK web in Chromium; initial actual screenshot and timed CDP JPEG frames; no before-version frames, no synthetic effects or overdub",
+  "recordings": [
+    {
+      "name": "home-current",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dpr": 1.5,
+      "frames": 148,
+      "durationMs": 6185.566993,
+      "facts": {
+        "fixture": "Fresh save, no prior wins. Settings audio preview only before recording.",
+        "initialPreviewSelected": "false",
+        "afterPreviewSelected": "true",
+        "actualRemoved": [
+          "c01-0"
+        ],
+        "actualArrowTap": true
+      },
+      "source": "Only current signed0.32.1 APK web; real pointer/wheel input and game WebAudio; initial actual screenshot plus timed CDP JPEG frames; no synthetic effects or native phone claims"
+    },
+    {
+      "name": "navigation-current",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dpr": 1.5,
+      "frames": 80,
+      "durationMs": 6693.937856999997,
+      "facts": {
+        "fixture": "Prepared c120, eight legal removals, original content; no hint/ad used",
+        "input": "Actual mouse wheel zoom and pointer drag, not a physical pinch",
+        "fit": {
+          "x": 25.30303030303031,
+          "y": 218.68181818181822,
+          "scale": 5.303030303030303
+        },
+        "zoom": {
+          "x": -266.28418907183794,
+          "y": -130.67611903169575,
+          "scale": 14.415130908494936
+        },
+        "pan": {
+          "x": -357.28418907183794,
+          "y": 16.323880968304252,
+          "scale": 14.415130908494936
+        },
+        "boardUnchanged": true,
+        "overviewControlPresent": 0
+      },
+      "source": "Only current signed0.32.1 APK web; real pointer/wheel input and game WebAudio; initial actual screenshot plus timed CDP JPEG frames; no synthetic effects or native phone claims"
+    },
+    {
+      "name": "finish-current",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dpr": 1.5,
+      "frames": 186,
+      "durationMs": 6575.7181659999915,
+      "facts": {
+        "fixture": "Prepared flawless c03 with one remaining legal arrow; recorded last move and Next are real input",
+        "nextLevel": "c04",
+        "recordedGameAudio": true
+      },
+      "source": "Only current signed0.32.1 APK web; real pointer/wheel input and game WebAudio; initial actual screenshot plus timed CDP JPEG frames; no synthetic effects or native phone claims"
+    }
+  ],
+  "media": [
+    {
+      "name": "home-current",
+      "encodedDurationSeconds": 5.88,
+      "streams": [
+        {
+          "type": "video",
+          "codec": "h264",
+          "duration": "5.866667",
+          "width": 390,
+          "height": 884
+        },
+        {
+          "type": "audio",
+          "codec": "aac",
+          "duration": "5.880000",
+          "width": null,
+          "height": null
+        }
+      ],
+      "audioVolumeDb": {
+        "mean_volume": "-46.4",
+        "max_volume": "-17.3"
+      },
+      "actualFrames": 148
+    },
+    {
+      "name": "navigation-current",
+      "encodedDurationSeconds": 6.637,
+      "streams": [
+        {
+          "type": "video",
+          "codec": "h264",
+          "duration": "6.633333",
+          "width": 390,
+          "height": 884
+        },
+        {
+          "type": "audio",
+          "codec": "aac",
+          "duration": "6.637000",
+          "width": null,
+          "height": null
+        }
+      ],
+      "audioVolumeDb": {
+        "mean_volume": "-91.0",
+        "max_volume": "-91.0"
+      },
+      "actualFrames": 80
+    },
+    {
+      "name": "finish-current",
+      "encodedDurationSeconds": 6.45,
+      "streams": [
+        {
+          "type": "video",
+          "codec": "h264",
+          "duration": "6.433333",
+          "width": 390,
+          "height": 884
+        },
+        {
+          "type": "audio",
+          "codec": "aac",
+          "duration": "6.450000",
+          "width": null,
+          "height": null
+        }
+      ],
+      "audioVolumeDb": {
+        "mean_volume": "-37.7",
+        "max_volume": "-16.0"
+      },
+      "actualFrames": 186
+    }
+  ],
+  "note": "Navigation MP4 audio is not offered as proof of silence; independent real AudioBufferSourceNode observation confirms UI sounds. Delivered navigation is a silent GIF."
+}
