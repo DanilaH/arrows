@@ -42,6 +42,19 @@ test('worker failure offers a retry on the same date, without substituting an ea
  await page.locator('#start-daily').click();expect(await page.evaluate(()=>(window as any).qaWorkers[1].request.date)).toBe('2026-11-15');const level=dailyLevel('2026-11-15')!;await page.evaluate(level=>(window as any).qaWorkers[1].onmessage({data:{date:'2026-11-15',result:{level}}}),level);await expect(page.locator('#game-shell')).toHaveAttribute('data-level','d20261115');expect((await saved(page)).daily['2026-11-15'].level).toEqual(level);
 });
 
+test('inspecting a trophy cancels pending daily construction and restores Play after closing',async({page})=>{
+ await fakeWorker(page);await boot(page);await choose(page,'2026-11-15');await expect(page.locator('#start-daily')).toHaveAttribute('aria-busy','true');
+ await page.locator('#view-trophy').click();await expect(page.locator('#trophy-viewer')).toBeVisible();
+ expect(await page.evaluate(()=>(window as any).qaWorkers[0].terminated)).toBe(1);
+ await page.locator('[data-close-trophy]').click();await expect(page.locator('#trophy-viewer')).not.toBeVisible();
+ await expect(page.locator('#start-daily')).toBeEnabled();await expect(page.locator('#start-daily')).toHaveAttribute('aria-busy','false');
+ const level=dailyLevel('2026-11-15')!;await page.evaluate(level=>(window as any).qaWorkers[0].late({data:{date:'2026-11-15',result:{level}}}),level);
+ expect((await saved(page)).daily).toEqual({});expect((await saved(page)).receipts).toEqual([]);
+ await page.locator('#start-daily').click();expect(await page.evaluate(()=>(window as any).qaWorkers[1].request.date)).toBe('2026-11-15');
+ await page.evaluate(level=>(window as any).qaWorkers[1].onmessage({data:{date:'2026-11-15',result:{level}}}),level);
+ await expect(page.locator('#game-shell')).toHaveAttribute('data-level','d20261115');expect((await saved(page)).daily['2026-11-15'].level).toEqual(level);
+});
+
 test('without Worker the same large dated board is prepared cooperatively while the calendar keeps painting',async({page})=>{
  await page.addInitScript(()=>{(window as any).Worker=undefined;let frames=0;const frame=()=>{frames++;(window as any).qaPaints=frames;requestAnimationFrame(frame);};requestAnimationFrame(frame);});
  await boot(page);const before=await page.evaluate(()=>(window as any).qaPaints);await choose(page,'2026-11-15');await expect(page.locator('#game-shell')).toHaveAttribute('data-level','d20261115');expect((await saved(page)).daily['2026-11-15'].level).toEqual(dailyLevel('2026-11-15'));expect(await page.evaluate(()=>(window as any).qaPaints)).toBeGreaterThan(before+1);

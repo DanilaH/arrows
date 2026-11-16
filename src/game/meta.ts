@@ -224,7 +224,8 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     });
     return true;
   };
-  const openTrophy = (key: string): void => {cancelDailyWork();
+  const openTrophy = (key: string): void => {
+    const wasBusy=busy;cancelDailyWork();if(wasBusy)refresh();
     if (!dailyMonths.includes(key)) return;
     trophyFocus = document.activeElement as HTMLElement | null;
     const save = progress.state, owned = save.cups.includes(key), done = monthDates(key).filter(d => save.dailyWins[d]).length;

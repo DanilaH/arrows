@@ -2,7 +2,7 @@
 
 ## 2026-11-16 — initial-action UI audit0.32.0
 
-Calendar Play reproduced below/behind nav on320×568,360×640,412×760; old locator test scrolled past the fault. Compact award, independently scrolling month and sibling selected date/Play fix the actual flow without shrinking44px day rows. Preserve real nested scroll through refresh/route snapshots; selecting a date animates details only, never moves Play. Trophy Close/Open stay outside scrollable art/details, short-landscape image shrinks first. Restore44CSSpx Guides/meta Back/viewer Close. No gameplay/save/reward/content/ad/pin change; owner0.31playtest remains accepted. Read UI_UX_FEEL_032.md. Same-cert code45, test ads/analytics off, actual evidence and distinct physical status. KIT IMPACT REUSE initial-viewport/UI/motion guidance.
+Calendar Play reproduced below/behind nav on320×568,360×640,412×760; old locator test scrolled past the fault. Compact award, independently scrolling month and sibling selected date/Play fix the actual flow without shrinking44px day rows. Preserve real nested scroll through refresh/route snapshots; selecting a date animates details only, never moves Play. Trophy Close/Open stay outside scrollable art/details, short-landscape image shrinks first. Restore44CSSpx Guides/meta Back/viewer Close. Independently reproduced pending-daily→trophy→Close stuck Loading; reuse the Settings cancellation/refresh path and reject late Worker output, retry the same real date. No gameplay/save/reward/content/ad/pin change; owner0.31playtest remains accepted. Read UI_UX_FEEL_032.md. Same-cert code45, test ads/analytics off, actual evidence and distinct physical status. KIT IMPACT REUSE initial-viewport/UI/motion guidance.
 
 ## 2026-11-16 — one primary help action0.31.0
 
