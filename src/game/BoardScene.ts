@@ -145,7 +145,7 @@ export class BoardScene extends Phaser.Scene {
   private heightCss = 1;
   private readonly listeners = new Set<() => void>();
   private stableDirty = true;
-  private focusMotion: { from: ViewState; to: ViewState; elapsed: number } | null = null;
+  private focusMotion: { from: ViewState; to: ViewState; elapsed: number; kind?: 'overview' } | null = null;
   private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   public constructor(private readonly options: SceneOptions) { super('board'); }
   public create(): void {
@@ -272,7 +272,11 @@ export class BoardScene extends Phaser.Scene {
   public layout(reset = false): void {
     const ratio = 1 / this.scale.zoom;
     this.widthCss = this.scale.width / ratio; this.heightCss = this.scale.height / ratio;
-    this.playArea = this.measureView();
+    const view=this.measureView();
+    // Cancel only for an actual geometry change. A repeated settled-layout
+    // notification must not stop a newly requested overview half way through.
+    if(this.focusMotion?.kind==='overview' && (['x','y','width','height'] as const).some(key=>Math.abs(view[key]-this.playArea[key])>.5))this.focusMotion=null;
+    this.playArea = view;
     this.boardCamera.layout(this.playArea, reset);
     this.renderArea = {x:0,y:0,width:this.widthCss,height:this.heightCss};
     const root=document.querySelector<HTMLElement>('#game-root')!;
@@ -288,6 +292,16 @@ export class BoardScene extends Phaser.Scene {
     this.world.setPosition(camera.x * ratio, camera.y * ratio).setScale(camera.scale * ratio);
   }
   public pan(dx: number, dy: number): void { if(this.presentationComplete)return; this.focusMotion = null;this.manualCamera=true; this.boardCamera.pan(dx, dy); this.transform(); this.changed(); }
+  public get overviewMoving(): boolean { return this.focusMotion?.kind==='overview'; }
+  public get overviewAvailable(): boolean { return !this.presentationComplete && (this.overviewMoving || this.boardCamera.needsOverview); }
+  public showOverview(): void {
+    if(this.presentationComplete)return;
+    this.manualCamera=true;
+    const to=this.boardCamera.overview();
+    if(this.reducedMotion){this.focusMotion=null;this.boardCamera.restore(to);this.transform();}
+    else this.focusMotion={from:this.boardCamera.snapshot(),to,elapsed:0,kind:'overview'};
+    this.stableDirty=true;this.changed();
+  }
   public zoom(previous: Point, current: Point, ratio: number): void {
     if(this.presentationComplete)return; this.focusMotion = null;this.manualCamera=true; this.boardCamera.zoom(previous, current, ratio); this.transform(); this.stableDirty = true; this.changed();
   }

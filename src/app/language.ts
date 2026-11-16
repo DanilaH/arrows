@@ -6,6 +6,8 @@ export const copy = {
   ru: {
     navHome: 'Главная', navDaily: 'Календарь', navLabel: 'Разделы игры', guideShort: 'Направления', newAward: 'Новая награда',
     flawless: 'Без ошибок!', cleared: 'Путь свободен',
+    remainingOne: 'Осталась {count} стрелка', remainingFew: 'Осталось {count} стрелки', remainingMany: 'Осталось {count} стрелок',
+    overview: 'Поле целиком', currentTrophy: 'Кубок месяца', records: 'Рекорды', cupComplete: 'Все дни месяца пройдены',
     adPreparing: 'Подготавливаем видео…', adLoading: 'Загружаем видео…', adOpening: 'Открываем видео…', adDescription: 'Поле и прогресс сохраняются', cancelAd: 'Отменить', videoCancelled: 'Просмотр отменён.', videoClosed: 'Видео закрыто. Награда выдаётся после подтверждения просмотра.', rewardPending: 'Подтверждаем награду…',
     settings: 'Настройки', appearance: 'Оформление', darkTheme: 'Тёмная', lightTheme: 'Светлая', feedback: 'Звук и отклик', sounds: 'Звуки', vibrations: 'Вибрация', language: 'Язык', soundDescription: 'Стрелки, ошибки и победы', vibrationDescription: 'Короткий отклик на действия', previewSound: 'Проверить звук', previewVibration: 'Вибрация', settingsSaved: 'Настройки сохранены', savingSettings: 'Сохраняем…', loadingSettings: 'Загружаем настройки…', settingsSaveError: 'Не удалось сохранить настройки', retrySettings: 'Повторить', boardProgress: 'Прогресс поля',
     campaign: 'Кампания', title: 'Стрелки', status: 'Нажимай на свободные стрелки',
@@ -49,6 +51,8 @@ export const copy = {
   en: {
     navHome: 'Home', navDaily: 'Calendar', navLabel: 'Game sections', guideShort: 'Directions', newAward: 'New award',
     flawless: 'No mistakes!', cleared: 'Path cleared',
+    remainingOne: '{count} arrow left', remainingFew: '{count} arrows left', remainingMany: '{count} arrows left',
+    overview: 'Show whole board', currentTrophy: 'This month’s trophy', records: 'Records', cupComplete: 'Every day of this month completed',
     adPreparing: 'Preparing video…', adLoading: 'Loading video…', adOpening: 'Opening video…', adDescription: 'Your board and progress are saved', cancelAd: 'Cancel', videoCancelled: 'Video cancelled.', videoClosed: 'Video closed. Rewards require viewing confirmation.', rewardPending: 'Confirming your reward…',
     settings: 'Settings', appearance: 'Appearance', darkTheme: 'Dark', lightTheme: 'Light', feedback: 'Sound & feedback', sounds: 'Sounds', vibrations: 'Vibration', language: 'Language', soundDescription: 'Arrows, mistakes and victories', vibrationDescription: 'Brief feedback for your actions', previewSound: 'Preview sound', previewVibration: 'Test vibration', settingsSaved: 'Settings saved', savingSettings: 'Saving…', loadingSettings: 'Loading settings…', settingsSaveError: 'Could not save settings', retrySettings: 'Retry', boardProgress: 'Board progress',
     campaign: 'Campaign', title: 'Arrows', status: 'Tap the arrows with a clear exit',

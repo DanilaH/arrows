@@ -116,4 +116,24 @@ describe('CSS/world camera coordinates', () => {
     expect(bounds[0]!.x).toBeLessThan(390);expect(bounds[1]!.y).toBeGreaterThan(100);
     camera.zoom({x:195,y:400},{x:195,y:400},.01);expect(camera.snapshot()).toEqual(fit);
   });
+  it('returns to the original overview after exploring padded content without mutating the live view on inspection', () => {
+    const camera=new BoardCamera(47,51,{x:4,y:0,width:38,height:40});
+    camera.layout({x:0,y:100,width:390,height:600},true);const original=camera.snapshot();
+    expect(camera.needsOverview).toBe(false);
+    camera.zoom({x:195,y:400},{x:195,y:400},3);camera.pan(90,-140);
+    const explored=camera.snapshot(),target=camera.overview();
+    expect(camera.snapshot()).toEqual(explored);expect(target).toEqual(original);expect(camera.needsOverview).toBe(true);
+    camera.restore(target);expect(camera.needsOverview).toBe(false);
+    expect(camera.snapshot().centerX).toBeCloseTo(original.centerX,10);expect(camera.snapshot().centerY).toBeCloseTo(original.centerY,10);
+    for(const p of[{x:4,y:0},{x:42,y:40}]){const at=camera.screen(p);expect(at.x).toBeGreaterThanOrEqual(0);expect(at.x).toBeLessThanOrEqual(390);expect(at.y).toBeGreaterThanOrEqual(100);expect(at.y).toBeLessThanOrEqual(700);}
+  });
+  it('recomputes overview for a resized viewport while retaining saved world-centre and relative-zoom semantics', () => {
+    const camera=new BoardCamera(47,51,{x:4,y:0,width:38,height:40});camera.layout({x:0,y:100,width:390,height:600},true);
+    camera.zoom({x:195,y:400},{x:195,y:400},2);camera.pan(40,-70);const saved=camera.snapshot();
+    camera.layout({x:0,y:70,width:800,height:240});expect(camera.snapshot().zoom).toBeCloseTo(saved.zoom,10);
+    camera.restore(camera.overview());expect(camera.snapshot().zoom).toBe(1);expect(camera.needsOverview).toBe(false);
+    const restored=new BoardCamera(47,51,{x:4,y:0,width:38,height:40});restored.layout({x:0,y:70,width:800,height:240},true);restored.restore(camera.snapshot());
+    expect(restored.snapshot()).toEqual(camera.snapshot());
+    const top=camera.screen({x:4,y:0}),bottom=camera.screen({x:42,y:40});expect(top.x).toBeGreaterThanOrEqual(0);expect(bottom.x).toBeLessThanOrEqual(800);expect(top.y).toBeGreaterThanOrEqual(70);expect(bottom.y).toBeLessThanOrEqual(310);
+  });
 });

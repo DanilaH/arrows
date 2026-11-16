@@ -42,6 +42,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const activeBoard = () => { const a = active(); return new Board(a.level, a.board.id, a.board); };
   const requestedRewards = new Set<string>();
   let holdTimer: ReturnType<typeof setTimeout> | undefined, cameraTimer: ReturnType<typeof setTimeout> | undefined;
+  let overviewAttempt='';
   let modal: 'pause' | 'controls' | 'restart' | 'lost' | 'cascade' | null = null;
   let cascadeOffer:HelpOffer|null=null;
   let restartChoice:ReturnType<typeof helpOffers.captureChoice>=null;
@@ -305,6 +306,9 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     Object.assign(shell.dataset, { mode: control ? 'control' : gameMode(), level: board.level.id, remaining: String(remaining), lives: String(board.hearts), attempt: board.attemptId,
       state: board.complete ? 'complete' : board.hearts === 0 ? 'lost' : 'playing', progress: loaded ? 'ready' : 'loading', save: progress.uncertain ? 'uncertain' : progress.available ? 'available' : 'session-only' });
     root.dataset.camera = JSON.stringify({ x: scene.boardCamera.x, y: scene.boardCamera.y, scale: scene.boardCamera.scale });
+    const overview=document.querySelector<HTMLButtonElement>('#board-overview')!;
+    overview.hidden=!loaded || control || meta.screen!=='game' || board.hearts===0 || !scene.overviewAvailable;
+    overview.disabled=requestingAd;
     document.querySelector('#guides')!.setAttribute('aria-pressed', String(scene.guides));
     document.querySelector<HTMLElement>('#guides')!.hidden = board.complete;
     document.querySelector<HTMLElement>('#win')!.hidden = !scene.finished;
@@ -469,6 +473,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   on(document.querySelector<HTMLElement>('#choose-field')!, 'click', backToMenu);
   on(document.querySelector<HTMLElement>('#restart')!, 'click', () => open('restart'));
   on(document.querySelector<HTMLElement>('#guides')!, 'click', () => { cancel(); scene.setGuides(!scene.guides); if (!control) { saveView(); finishTutorial('guides'); } });
+  on(document.querySelector<HTMLElement>('#board-overview')!, 'click', () => {
+    if(control || meta.screen!=='game' || scene.board.hearts===0 || requestingAd || motion.routeBusy || platform.activity.isBlocked())return;
+    cancel();overviewAttempt=scene.board.attemptId;scene.showOverview();
+  });
   on(document.querySelector<HTMLElement>('#next')!, 'click', advanceWin);
   on(hintButton, 'pointerdown', () => errorCue.cancel('hint-press'));
   on(hintButton, 'keydown', () => errorCue.cancel('hint-key'));
@@ -484,6 +492,11 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   listeners.push(platform.activity.onBlockedChange(value => { sample(); if (value) { motion.stopRoute(); cancel(); saveView(); if (scene.board.complete) { celebratedAttempt = scene.board.attemptId; pendingAward = false; } scene.settlePresentation(); } }));
   listeners.push(platform.activity.onBlockReasonsChange(() => { if (platform.activity.getBlockReasons().some(reason => !['menu','dialog','settings','trophy-preview'].includes(reason))) { motion.finish(); meta.discardAward(); if(!transition.busy){meta.discardArrivals();dailyReturnAttempt='';} if(!requestingAd)assistance=null; } }));
   listeners.push(scene.subscribe(sync));
+  listeners.push(scene.subscribe(()=>{
+    if(!overviewAttempt || scene.overviewMoving)return;
+    const attempt=overviewAttempt;overviewAttempt='';
+    if(meta.screen==='game' && scene.board.attemptId===attempt)scheduleView();
+  }));
   listeners.push(scene.subscribeFeedback(event => {
     if (!loaded || meta.screen !== 'game' || scene.board.attemptId !== event.attempt) return;
     if(event.kind==='route-step')platform.feedback.routeStep(event.routeStep??1);
@@ -524,6 +537,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     document.querySelector('#choose-field')!.setAttribute('aria-label', text.home);
     document.querySelector('#restart')!.setAttribute('aria-label', text.restart);
     document.querySelector('#guides')!.setAttribute('aria-label', text.guides);
+    const overview=document.querySelector<HTMLElement>('#board-overview')!;
+    overview.setAttribute('aria-label',text.overview);overview.title=text.overview;
     hintButton.innerHTML = `<svg class="hint-bulb" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 3H9c0-1 0-2-1-3Z"/></svg><span class="hint-copy"><span data-help-label>${text.hint}</span></span><svg class="video-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg>`; sessionPlay.textContent = text.sessionPlay;
   };
   status.setAttribute('data-help-readiness','');

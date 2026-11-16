@@ -1,5 +1,9 @@
 # Project decisions — 2026-11-09
 
+## 2026-11-16 — approved composition package0.33.0
+
+Owner accepted the independent UI audit's C01–C05 on current6e5a3fb. Upcoming Home removes the blank preview slot and groups its action; selected preview/original bounds/seamless continuity and final c120 stay intact, with a localized near-finish count. One contextual44px overview fits the unused HUD slot without shifting existing controls, uses the current viewport's original clamped fit, existing320ms camera motion/manual interruption/reduced-motion path and attempt-owned final displayed-view persistence. Repeated unchanged layout notifications cannot cancel the fit; snapshots keep visual layout state. Current reward/progress leads Collection once daily access is open; before20 the usable achievements lead rather than a wall of locked trophies. Preserve archive/gating/calculations/design bindings; add small owned check and truthful earned copy, readable Home progress and wrapping Calendar label. No new rules/meta/help experiment/ad policy/pin change. Read UI_COMPOSITION_033.md. Same-cert code47 test APK and genuine current-only GIF/audio; physical/services acceptance separate. KIT IMPACT REUSE.
+
 ## 2026-11-16 — portrait-only Android0.32.1
 
 Owner chose portrait after seeing the before/after landscape trophy clip. Supersedes portrait-first/native-landscape support: MainActivity screenOrientation=portrait, application appCategory=game (actual game; Android16/API36 game exception). No late JS/fullscreen lock or repeated Activity setters. Keep responsive fallback for browser/small windows/system overrides; no layout/content/save/SDK/cadence or dependency change. Same signed .playtest code46, actual merged-manifest/signature/DEX and identical web payload verification; physical rotation/resume NOT RUN unless separately measured. Read PORTRAIT_0321.md. KIT IMPACT NONE; project Android manifest policy only.

@@ -171,7 +171,9 @@ export function createUiMotion() {
         for (const el of snapshot.querySelectorAll('*')) for (const attr of [...el.attributes]) {
           let value = attr.value;
           for (const [oldId, newId] of ids) value = value.replaceAll(`url(#${oldId})`, `url(#${newId})`);
-          if (attr.name.startsWith('data-') && attr.name !== 'data-difficulty') el.removeAttribute(attr.name);
+          // Keep only visual state, never action/ownership IDs. These selectors
+          // must retain the outgoing composition while its inert copy fades.
+          if (attr.name.startsWith('data-') && !['data-difficulty','data-field','data-owned'].includes(attr.name)) el.removeAttribute(attr.name);
           else if (value !== attr.value) el.setAttribute(attr.name, value);
         }
         snapshot.className = `route-snapshot ${root.className}`; snapshot.inert = true; snapshot.setAttribute('aria-hidden', 'true');
@@ -214,7 +216,7 @@ export function createUiMotion() {
       if(snapshot)owned.push(animate(snapshot,[{opacity:1},{opacity:0}],160,()=>snapshot?.remove()));
       if(to!=='game'){
         const bounds=root.getBoundingClientRect();
-        const items=[...root.querySelectorAll<HTMLElement>('.home-heading,.campaign-heading,.home-board,#home-play,.home-progress,.meta-header,.record-grid>article,.record-rules,.meta-content>h2,.medal,.month-trophy,.month-award,.month-heading,.calendar-grid,.selected-day')]
+        const items=[...root.querySelectorAll<HTMLElement>('.home-heading,.campaign-heading,.home-board,#home-play,.home-remaining,.home-progress,.meta-header,.record-grid>article,.record-rules,.meta-content>h2,.collection-current,.medal,.month-trophy,.month-award,.month-heading,.calendar-grid,.selected-day')]
           .filter(el=>{const r=el.getBoundingClientRect();return !(bridge && el.classList.contains('home-board')) && r.width>0&&r.bottom>bounds.top&&r.top<bounds.bottom;}).slice(0,12);
         items.forEach((el,i)=>owned.push(animate(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],220,undefined,Math.min(64,i*18))));
       } else {

@@ -101,23 +101,37 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     const viewBox=`${left} ${top} ${width} ${height}`;
     const previewStroke=Math.max(2.35,Math.min(4.7,5.2-Math.max(width,height)*.05));
     const difficulty=final || preview.difficulty === 'normal' ? '' : preview.difficulty === 'hard' ? 'Hard' : 'Nightmare';
-    return `<div class="home-layout"><header class="home-heading"><h1 id="menu-title" tabindex="-1">${text.title}</h1>${stats.current ? `<span class="streak-chip">${text.streakShort} ${stats.current}</span>` : ''}</header>
+    const remaining=a.level.arrows.length-a.board.removed.length;
+    const plural=new Intl.PluralRules(locale).select(remaining),remainingCopy=plural==='one'?text.remainingOne:plural==='few'?text.remainingFew:text.remainingMany;
+    const nearFinish=selected && a.started && remaining<=3;
+    return `<div class="home-layout" data-field="${final?'complete':selected?'active':'upcoming'}"><header class="home-heading"><h1 id="menu-title" tabindex="-1">${text.title}</h1>${stats.current ? `<span class="streak-chip">${text.streakShort} ${stats.current}</span>` : ''}</header>
       <section class="home-current"><div class="campaign-heading"><h2>${final ? text.chapterComplete : `${text.level} ${nextIndex+1}`}</h2><span class="home-difficulty" data-difficulty="${preview.difficulty}" ${difficulty ? '' : 'hidden'}>${difficulty}</span></div>
       <svg style="--preview-line:${previewStroke}px;${selected || final ? '' : 'visibility:hidden'}" data-level="${preview.id}" data-selected="${selected}" class="home-board${final ? ' home-finish' : ''}" viewBox="${final ? '0 0 72 72' : viewBox}" aria-hidden="true">${final ? '<circle cx="36" cy="36" r="28"/><path d="m24 36 8 8 17-18"/>' : selected ? paths : ''}</svg>
-      <button id="home-play" class="primary home-play" type="button" ${!ready || busy ? 'disabled' : ''}>${final ? text.viewResult : cleared ? text.next : a.started ? text.resume : text.play}<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></button>
+      ${nearFinish?`<p class="home-remaining">${remainingCopy.replace('{count}',String(remaining))}</p>`:''}<button id="home-play" class="primary home-play" type="button" ${!ready || busy ? 'disabled' : ''}>${final ? text.viewResult : cleared ? text.next : a.started ? text.resume : text.play}<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></button>
       <p class="home-progress">${text.chapter}: ${save.wins.length} / ${campaign.length}</p></section>${options.controls ? `<button id="home-controls" class="review-link" type="button">${text.controlFields}</button>` : ''}</div>`;
   };
   const collection = (): string => {
     const save = progress.state, stats = collectionStats(save);
     const records = [[text.longest, stats.longest, stats.longestDate], [text.highest, stats.highest, stats.highestDate], [text.most, stats.most, stats.mostDate]] as const;
-    return title(text.collection) + `<div class="meta-content"><section class="record-grid">${records.map(([label, value, date]) => `<article><span>${label}</span><strong>${value}</strong><small>${dateLabel(date)}</small></article>`).join('')}</section>
-      <details id="record-rules" class="record-rules"><summary>${text.recordRules}</summary><p>${text.recordRulesText}</p></details>
-      <h2>${text.achievements}</h2><section class="medal-grid">${medals(save).map(m => `<details class="medal ${m.earned ? 'earned' : ''}" data-medal="${m.id}" data-earned="${m.earned}"><summary id="medal-${m.id}">${badge(m.id)}<h3>${text[`${m.id}Name` as keyof typeof text]}</h3><progress aria-label="${text[`${m.id}Name` as keyof typeof text]}" value="${Math.min(m.target, m.progress)}" max="${m.target}"></progress><small>${Math.min(m.target, m.progress)} / ${m.target}<svg class="medal-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></small></summary><p>${text[`${m.id}Rule` as keyof typeof text]}</p></details>`).join('')}</section>
-      <h2 class="trophy-heading">${text.challengeTrophies}${installedYears.length > 1 ? `<label class="trophy-year"><select id="trophy-year" aria-label="${text.collectionYear}">${installedYears.map(y => `<option value="${y}" ${y === collectionYear ? 'selected' : ''}>${y}</option>`).join('')}</select></label>` : `<span class="trophy-year">${collectionYear}</span>`}</h2>
-      ${!challengeOpen(save) ? `<p class="trophy-availability">${text.unlock20}</p>` : ''}<div class="trophy-list">${dailyMonths.filter(m => m.startsWith(collectionYear + '-')).map(m => {
+    const currentMonth=boundedDate(calendarToday).slice(0,7),available=challengeOpen(save);
+    const dates=monthDates(currentMonth),done=dates.filter(d=>save.dailyWins[d]).length,owned=save.cups.includes(currentMonth);
+    const current=supportsDailyDate(calendarToday) && collectionYear===calendarToday.slice(0,4)?`<section class="collection-current" data-collection-month="${currentMonth}" data-owned="${owned}" aria-labelledby="collection-month-title">
+      <button id="collection-current-trophy" class="collection-current-art" data-inspect-month="${currentMonth}" type="button" aria-label="${text.inspectTrophy}" ${available?'':'disabled'}>${trophy(currentMonth,owned,{...(owned?{binding:save.trophyDesigns[currentMonth]!}:{}),scope:'collection-current'})}</button>
+      <div class="collection-goal"><p class="collection-goal-caption">${owned?text.cupEarned:text.currentTrophy}</p><h3 id="collection-month-title">${monthFormat.format(calendarDate(currentMonth+'-01'))}</h3>
+      <p class="collection-goal-count">${done} / ${dates.length} · ${text.daysDone}</p><progress aria-label="${text.daysDone}" value="${done}" max="${dates.length}"></progress>
+      <p class="collection-goal-note${available?'':' trophy-availability'}">${available?owned?text.cupComplete:text.cupRule:text.unlock20}</p>
+      <button id="collection-open-month" class="collection-month-open" data-open-collection-month="${currentMonth}" type="button" ${available?'':'disabled'}>${text.openMonth}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></button></div></section>`:'';
+    const rewards=`<h2 class="trophy-heading">${text.challengeTrophies}${installedYears.length > 1 ? `<label class="trophy-year"><select id="trophy-year" aria-label="${text.collectionYear}">${installedYears.map(y => `<option value="${y}" ${y === collectionYear ? 'selected' : ''}>${y}</option>`).join('')}</select></label>` : `<span class="trophy-year">${collectionYear}</span>`}</h2>
+      ${current}${!available&&!current ? `<p class="trophy-availability">${text.unlock20}</p>` : ''}<div class="trophy-list">${dailyMonths.filter(m => m.startsWith(collectionYear + '-')).map(m => {
         const dates = monthDates(m), done = dates.filter(d => save.dailyWins[d]).length, earned = save.cups.includes(m);
-        return `<button class="month-trophy ${earned ? 'earned' : ''}" type="button" data-month="${m}" aria-label="${monthFormat.format(calendarDate(m + '-01'))}: ${done} / ${dates.length}" ${!challengeOpen(save) ? 'disabled' : ''}>${trophy(m, earned, { ...(earned ? { binding: save.trophyDesigns[m]! } : {}), scope: 'collection' })}<span><strong>${monthNameFormat.format(calendarDate(m + '-01'))}</strong><small>${earned ? text.cupEarned : `${done} / ${dates.length}`}</small><progress value="${done}" max="${dates.length}"></progress></span><b aria-hidden="true">${earned ? '✓' : ''}</b></button>`;
-      }).join('')}</div></div>`;
+        return `<button class="month-trophy ${earned ? 'earned' : ''}" type="button" data-month="${m}" aria-label="${monthFormat.format(calendarDate(m + '-01'))}: ${earned?text.cupEarned:`${done} / ${dates.length}`}" ${!available ? 'disabled' : ''}>${trophy(m, earned, { ...(earned ? { binding: save.trophyDesigns[m]! } : {}), scope: 'collection' })}<span><strong>${monthNameFormat.format(calendarDate(m + '-01'))}</strong><small>${earned ? text.cupEarned : `${done} / ${dates.length}`}</small><progress value="${done}" max="${dates.length}"></progress></span><b aria-hidden="true">${earned ? '✓' : ''}</b></button>`;
+      }).join('')}</div>`;
+    const achievements=`<h2>${text.achievements}</h2><section class="medal-grid">${medals(save).map(m => `<details class="medal ${m.earned ? 'earned' : ''}" data-medal="${m.id}" data-earned="${m.earned}"><summary id="medal-${m.id}">${badge(m.id)}<h3>${text[`${m.id}Name` as keyof typeof text]}</h3><progress aria-label="${text[`${m.id}Name` as keyof typeof text]}" value="${Math.min(m.target, m.progress)}" max="${m.target}"></progress><small>${Math.min(m.target, m.progress)} / ${m.target}<svg class="medal-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></small></summary><p>${text[`${m.id}Rule` as keyof typeof text]}</p></details>`).join('')}</section>`;
+    // Before level20, the usable achievements lead; a locked daily shelf must
+    // not displace the very rewards for which Collection just unlocked.
+    return title(text.collection)+`<div class="meta-content collection-content">${available?rewards+achievements:achievements+rewards}
+      <h2>${text.records}</h2><section class="record-grid">${records.map(([label, value, date]) => `<article><span>${label}</span><strong>${value}</strong><small>${dateLabel(date)}</small></article>`).join('')}</section>
+      <details id="record-rules" class="record-rules"><summary>${text.recordRules}</summary><p>${text.recordRulesText}</p></details></div>`;
   };
   const calendar = (): string => {
     const save = progress.state, today = localDate(), index = dailyMonths.indexOf(month), dates = monthDates(month);
@@ -233,7 +247,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       <div class="trophy-viewer-body"><div class="trophy-portrait">${trophy(key, true, { ...(owned ? { binding: save.trophyDesigns[key]! } : {}), scope: 'viewer' })}</div>
       <div class="trophy-viewer-details"><span class="trophy-preview-label">${owned ? text.cupEarned : text.rewardPreview}</span>
       <p>${done} / ${monthDates(key).length} · ${text.daysDone}</p>
-      <p class="trophy-rule">${text.cupRule}</p></div></div><button class="primary" type="button" data-open-month="${key}">${text.openMonth}</button>`;
+      <p class="trophy-rule">${owned?text.cupComplete:text.cupRule}</p></div></div><button class="primary" type="button" data-open-month="${key}">${text.openMonth}</button>`;
     options.previewBlocked(true); options.motion.open(trophyDialog);
   };
   const viewerClick = (event: MouseEvent): void => {
@@ -258,6 +272,8 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     else if (target.id === 'home-collection') {
       show('collection'); void progress.markCollectionSeen(earnedAwards(progress.state)).catch(() => refresh());
     } else if (target.id === 'home-calendar') show('calendar');
+    else if (target.dataset.inspectMonth && challengeOpen(progress.state) && dailyMonths.includes(target.dataset.inspectMonth)) openTrophy(target.dataset.inspectMonth);
+    else if (target.dataset.openCollectionMonth && challengeOpen(progress.state) && dailyMonths.includes(target.dataset.openCollectionMonth)) { month=target.dataset.openCollectionMonth; show('calendar'); }
     else if (target.dataset.month && dailyMonths.includes(target.dataset.month)) { month = target.dataset.month; show('calendar'); }
     else if (target.id === 'view-trophy') openTrophy(month);
     else if (target.dataset.shift) { const next = dailyMonths[dailyMonths.indexOf(month) + Number(target.dataset.shift)]; if (!next) return;cancelDailyWork(); month = next; calendarNotice = ''; refresh(); scrollPort().scrollTop=0; options.motion.reveal(scrollPort()); }
