@@ -57,7 +57,10 @@ test('keeps a six-row month and its action reachable without a covering footer a
     for (const date of ['2026-08-01', '2026-08-15', '2026-08-31']) {
       const day = page.locator(`[data-date="${date}"]`); await unobscured(day); await day.click(); await expect(day).toHaveAttribute('aria-pressed', 'true');
     }
-    await unobscured(page.locator('#start-daily'));
+    // Inspect the initially available action, without the old helper's scroll.
+    const play=await page.locator('#start-daily').boundingBox();
+    expect(play!.y).toBeGreaterThanOrEqual(0);expect(play!.y+play!.height).toBeLessThanOrEqual(size.height);
+    expect(await page.locator('#start-daily').evaluate(el=>{const r=el.getBoundingClientRect();return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));})).toBe(true);
     await page.screenshot({ path: info.outputPath(`calendar-action-${size.width}.png`) });
     await page.locator('#start-daily').click();
     await expect(page.locator('#game-shell')).toHaveAttribute('data-level', dailyCatalog['2026-08-31']!.id);

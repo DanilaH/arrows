@@ -1,5 +1,9 @@
 # Project decisions — 2026-11-09
 
+## 2026-11-16 — initial-action UI audit0.32.0
+
+Calendar Play reproduced below/behind nav on320×568,360×640,412×760; old locator test scrolled past the fault. Compact award, independently scrolling month and sibling selected date/Play fix the actual flow without shrinking44px day rows. Preserve real nested scroll through refresh/route snapshots; selecting a date animates details only, never moves Play. Trophy Close/Open stay outside scrollable art/details, short-landscape image shrinks first. Restore44CSSpx Guides/meta Back/viewer Close. No gameplay/save/reward/content/ad/pin change; owner0.31playtest remains accepted. Read UI_UX_FEEL_032.md. Same-cert code45, test ads/analytics off, actual evidence and distinct physical status. KIT IMPACT REUSE initial-viewport/UI/motion guidance.
+
 ## 2026-11-16 — one primary help action0.31.0
 
 Owner accepted cascade as the normal video offer, ordinary A1 for no-group fallback/onboarding/A4 and preservation of old earned Hints. Reuse existing combined-v1 offers; change only the unaccepted primary UI selection, remove the competing CTA, preserve frozen confirmation and receipt meanings. No new profile/migration/cadence or content change. Saved help takes priority, historical labs stay separate. Keep compact gold styling, exact group/one-trigger operation, native marked release and lifetime free lives-only. See CASCADE_PRIMARY_031.md; same-cert code44 and genuine APK-web recordings; phone/services acceptance remains separate. KIT IMPACT REUSE.

@@ -1,3 +1,7 @@
+## Independent UI / UX / feel corrections —0.32.0/code45
+
+Owner requested a whole-game pass and reported hidden daily Play. Implemented over978fa67; read UI_UX_FEEL_032.md. Baseline63current production-browser states, seven sizes; Calendar Play beyond/behind nav on320×568,360×640,412×760, trophy Open offscreen in short landscape,38px Guides/Back/Close. Compact Calendar with separate month scroll and pinned sibling selected date/Play; larger trophy actions/art yields on short screens;44px secondary controls; details-only reveal and exact outgoing nested scroll. No gameplay/save/right/content/ads/pin changes.232units/type/build PASS; new20calendar-browser cases PASS before final month-reset/bump. Final CI/APK/capture evidence pending; do not call this delivery verified until evidence/ui-ux-032/ACCEPTANCE.md exists. Prior owner qualitative0.31playtest acceptance remains valid; new hardware/services checks separate. KIT IMPACT REUSE, no kit/store writes.
+
 ## One primary help action —0.31.0/code44
 
 Owner manual playtest accepted on2026-11-16: reports having played/tested and finding the game good. Treat qualitative gameplay/feel acceptance as PASSED on owner report; do not request another general playtest merely because agent captures were browser-only. Device/build/scenarios and numerical benchmarks were not itemized. Production signing/live configuration, service/dashboard verification and store packaging remain the next release work.

@@ -174,10 +174,14 @@ export function createUiMotion() {
           if (attr.name.startsWith('data-') && attr.name !== 'data-difficulty') el.removeAttribute(attr.name);
           else if (value !== attr.value) el.setAttribute(attr.name, value);
         }
-        snapshot.className = 'route-snapshot'; snapshot.inert = true; snapshot.setAttribute('aria-hidden', 'true');
+        snapshot.className = `route-snapshot ${root.className}`; snapshot.inert = true; snapshot.setAttribute('aria-hidden', 'true');
         const style = getComputedStyle(root), rect = root.getBoundingClientRect(); snapshot.style.padding = style.padding;
         Object.assign(snapshot.style,{left:`${rect.x}px`,top:`${rect.y}px`,width:`${rect.width}px`,height:`${rect.height}px`,right:'auto',bottom:'auto'});
         root.parentElement!.append(snapshot); snapshot.scrollTop = root.scrollTop;
+        // cloneNode preserves markup, not the visible position of nested scroll
+        // regions. Keep the outgoing calendar still while its snapshot fades.
+        const scrolls=root.querySelectorAll<HTMLElement>('.calendar-scroll');
+        snapshot.querySelectorAll<HTMLElement>('.calendar-scroll').forEach((el,i)=>{el.scrollTop=scrolls[i]!.scrollTop;});
       }
       const owned: (() => void)[] = [];
       let done=false, painted=!entering || !art, moved=false, blending=false;
