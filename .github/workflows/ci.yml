@@ -18,7 +18,8 @@ jobs:
       - name: Restore pinned dependency cache
         uses: actions/cache/restore@v4
         with:
-          path: ~/.npm
+          # Match setup-node's raw cache path; '~/.npm' has a different cache version.
+          path: /home/runner/.npm
           key: node-cache-${{ runner.os }}-x64-npm-${{ hashFiles('package-lock.json') }}
           restore-keys: node-cache-${{ runner.os }}-x64-npm-
       - run: npm ci --prefer-offline
@@ -52,7 +53,7 @@ jobs:
       - name: Restore pinned dependency cache
         uses: actions/cache/restore@v4
         with:
-          path: ~/.npm
+          path: /home/runner/.npm
           key: node-cache-${{ runner.os }}-x64-npm-${{ hashFiles('package-lock.json') }}
           restore-keys: node-cache-${{ runner.os }}-x64-npm-
       - run: npm ci --prefer-offline
