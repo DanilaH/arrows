@@ -48,6 +48,8 @@ Reproduce from CI APK/proof/native-test archives: install QA androguard target; 
 
 ## Separate status / KIT IMPACT
 
-Physical install/update, haptics, speaker/audio focus, touch readability and phone FPS/thermal **NOT RUN**. Real SDK fill/reward delivery, AppMetrica dashboard and actual money **NOT RUN**, separate stage. No store publication.
+**Owner manual playtest accepted,2026-11-16:** the owner reports having played/tested the game and finding it good. Qualitative gameplay/feel acceptance is **PASS on owner report**. Device/build and individual scenarios were not itemized; numerical frame-pacing/thermal measurements were not supplied. Earlier NOT RUN statements describe agent-side device evidence at delivery and must not erase this later human acceptance.
+
+Production signing/live service configuration, AppMetrica dashboard and store packaging remain separate release work; live revenue is unverified. No store publication.
 
 **KIT IMPACT: REUSE.** Pinned UX & Art System §§1–6 / UI Motion Recipes §§2,5 for one clear action and owned transitions; durable-receipt contract for exact promised kind and commit-before-ack. Concrete evidence: primary episode excludes a hidden A1 sale; old ordinary claim and late receipt retain zero bonus removals; existing explicit A2 domain/native-release checks pass. Existing resolver/cache, ProgressStore, kit storage/activity/receipt and local motion suffice. Runtime `a9325265e87583a4872cf6a158e1e881a0d7508e` / guidance `e04a3fe87ca93d506e01df4acc5afe690408cefa` unchanged. No kit write or new general framework.
