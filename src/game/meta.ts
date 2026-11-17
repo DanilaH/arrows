@@ -1,3 +1,5 @@
+import type { GameTheme } from '../app/settings';
+import {createThemePreview} from './themePreview';
 import type { UiMotion } from './uiMotion';
 import type { BoardArtwork } from './boardTransition';
 import { roundedRoute, roundedTip, svgPoints } from './arrowArt';
@@ -26,6 +28,7 @@ const badge = (key: string): string => `<svg class="medal-icon" viewBox="0 0 72 
 </svg>`;
 
 export function installMetaSurface(progress: ProgressStore, language: GameLanguage, options: {
+  themeIntro?: { eligible(): boolean; theme(): GameTheme; choose(theme: GameTheme): void; finish(): void };
   motion: UiMotion; canPresent(): boolean; blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; artwork(): BoardArtwork | null; controls?(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string,signal?:AbortSignal): Promise<void>;
 }) {
   const nav = document.querySelector<HTMLElement>('#meta-nav')!;
@@ -43,7 +46,10 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   const emblem=createHomeEmblem(root,()=>ready&&screen==='home'&&!busy&&!presenting&&!changingScreen&&!options.motion.routeBusy&&options.canPresent());
   let dailyWork:AbortController|undefined,dailyWorkId=0;
   const cancelDailyWork=():void=>{dailyWork?.abort();dailyWork=undefined;dailyWorkId++;busy=false;};
-  let selectedCampaign = '';
+  let selectedCampaign = '', themeIntro = false;
+  const themePreview=createThemePreview();
+  const refreshThemeChoices=():void=>{for(const button of root.querySelectorAll<HTMLButtonElement>('[data-welcome-theme]'))button.setAttribute('aria-pressed',String(button.dataset.welcomeTheme===options.themeIntro?.theme()));};
+  const themeChoices=():string=>`<div class="welcome-themes" role="group" aria-labelledby="welcome-theme-title">${(['light','dark'] as const).map(theme=>`<button id="welcome-${theme}" data-welcome-theme="${theme}" aria-pressed="${options.themeIntro?.theme()===theme}" type="button"><svg viewBox="0 0 24 24" aria-hidden="true">${theme==='light'?'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/>':'<path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z"/>'}</svg><span>${theme==='light'?text.lightTheme:text.darkTheme}</span></button>`).join('')}</div>`;
   let calendarToday = localDate(), dailyMonths = availableDailyMonths(calendarToday);
   const boundedDate = (date: string): string => date < '2026-01-01' ? '2026-01-01' : date > '2200-12-31' ? '2200-12-31' : date;
   let selected = boundedDate(calendarToday), month = selected.slice(0, 7);
@@ -106,11 +112,12 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     const remaining=a.level.arrows.length-a.board.removed.length;
     const plural=new Intl.PluralRules(locale).select(remaining),remainingCopy=plural==='one'?text.remainingOne:plural==='few'?text.remainingFew:text.remainingMany;
     const nearFinish=selected && a.started && remaining<=3;
-    return `<div class="home-layout" data-field="${final?'complete':selected?'active':'upcoming'}"><header class="home-heading"><h1 id="menu-title" tabindex="-1">${text.title}</h1>${stats.current ? `<span class="streak-chip">${text.streakShort} ${stats.current}</span>` : ''}</header>
-      <section class="home-current">${!selected&&!final?homeEmblemMarkup():''}<div class="campaign-heading"><h2>${final ? text.chapterComplete : `${text.level} ${nextIndex+1}`}</h2><span class="home-difficulty" data-difficulty="${preview.difficulty}" ${difficulty ? '' : 'hidden'}>${difficulty}</span></div>
+    return `<div class="home-layout" data-theme-intro="${themeIntro}" data-field="${final?'complete':selected?'active':'upcoming'}"><header class="home-heading"><h1 id="menu-title" tabindex="-1">${text.title}</h1>${stats.current ? `<span class="streak-chip">${text.streakShort} ${stats.current}</span>` : ''}</header>
+      <section class="home-current">${!selected&&!final?homeEmblemMarkup():''}<div class="campaign-heading"><h2 ${themeIntro?'id="welcome-theme-title"':''}>${themeIntro ? text.chooseTheme : final ? text.chapterComplete : `${text.level} ${nextIndex+1}`}</h2><span class="home-difficulty" data-difficulty="${preview.difficulty}" ${difficulty && !themeIntro ? '' : 'hidden'}>${difficulty}</span></div>
       <svg style="--preview-line:${previewStroke}px;${selected || final ? '' : 'visibility:hidden'}" data-level="${preview.id}" data-selected="${selected}" class="home-board${final ? ' home-finish' : ''}" viewBox="${final ? '0 0 72 72' : viewBox}" aria-hidden="true">${final ? '<circle cx="36" cy="36" r="28"/><path d="m24 36 8 8 17-18"/>' : selected ? paths : ''}</svg>
+      ${themeIntro?`<p class="welcome-theme-note">${text.changeThemeLater}</p>${themeChoices()}`:''}
       ${nearFinish?`<p class="home-remaining">${remainingCopy.replace('{count}',String(remaining))}</p>`:''}<button id="home-play" class="primary home-play" type="button" ${!ready || busy ? 'disabled' : ''}>${final ? text.viewResult : cleared ? text.next : a.started ? text.resume : text.play}<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></button>
-      <p class="home-progress">${text.chapter}: ${save.wins.length} / ${campaign.length}</p></section>${options.controls ? `<button id="home-controls" class="review-link" type="button">${text.controlFields}</button>` : ''}</div>`;
+      <p class="home-progress" ${themeIntro?'hidden':''}>${text.chapter}: ${save.wins.length} / ${campaign.length}</p></section>${options.controls ? `<button id="home-controls" class="review-link" type="button">${text.controlFields}</button>` : ''}</div>`;
   };
   const collection = (): string => {
     const save = progress.state, stats = collectionStats(save);
@@ -271,7 +278,8 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     else if (target.id === 'home-tab') show('home');
     else if (target.id === 'home-settings') {const wasBusy=busy;cancelDailyWork();if(wasBusy)refresh();options.settings();}
     else if (target.id === 'home-controls') options.controls?.();
-    else if (target.id === 'home-play') options.enterCampaign();
+    else if (target.dataset.welcomeTheme==='light'||target.dataset.welcomeTheme==='dark'){themePreview.begin();options.themeIntro?.choose(target.dataset.welcomeTheme);refreshThemeChoices();}
+    else if (target.id === 'home-play') {if(themeIntro){themeIntro=false;options.themeIntro?.finish();}options.enterCampaign();}
     else if (target.id === 'home-collection') {
       show('collection'); void progress.markCollectionSeen(earnedAwards(progress.state)).catch(() => refresh());
     } else if (target.id === 'home-calendar') show('calendar');
@@ -295,7 +303,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     queueDailyArrival(date: string, attempt: string): void {if(attempt!==lastDailyArrival && progress.state.dailyWins[date]?.attempt===attempt)pendingDaily={date,attempt};},
     discardArrivals(): void {arrivalEpoch++;pendingUnlocks.clear();pendingDaily=null;if(presenting)options.motion.finish();},
     presentArrivals, updateEmblem:emblem.update,
-    queueAward(): void { pendingAward=true; }, discardAward(): void { pendingAward=false; }, get screen() { return screen; }, get revision() { return revision; }, refresh, show, back, closeTrophy,
+    queueAward(): void { pendingAward=true; }, discardAward(): void { pendingAward=false; }, get screen() { return screen; }, get revision() { return revision; }, refresh, refreshThemeChoices, show, back, closeTrophy,
     selectCampaign(): void { selectedCampaign = progress.state.campaign.board.id; },
     setLanguage(value: GameLanguage): void {
       language = value; text = copy[value]; locale = value === 'ru' ? 'ru-RU' : 'en-US';
@@ -304,7 +312,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       dayFormat = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', timeZone: 'UTC' });
       shortDate = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', timeZone: 'UTC' }); refresh();
     },
-    ready(): void { ready = true; refresh(); options.motion.reveal(nav); },
-    destroy(): void {emblem.destroy();cancelDailyWork(); alive = false; pendingDaily=null;pendingUnlocks.clear();closeTrophy(); root.removeEventListener('scroll',scrolled,true);root.removeEventListener('click', click); nav.removeEventListener('click', click); nav.replaceChildren(); nav.hidden=true; root.removeEventListener('change', changeYear); trophyDialog.removeEventListener('click', viewerClick); trophyDialog.removeEventListener('cancel', viewerCancel); trophyDialog.replaceChildren(); root.replaceChildren();root.classList.remove('calendar-screen'); },
+    ready(): void { ready = true; themeIntro=options.themeIntro?.eligible()??false; refresh(); options.motion.reveal(nav); },
+    destroy(): void {themePreview.destroy();emblem.destroy();cancelDailyWork(); alive = false; pendingDaily=null;pendingUnlocks.clear();closeTrophy(); root.removeEventListener('scroll',scrolled,true);root.removeEventListener('click', click); nav.removeEventListener('click', click); nav.replaceChildren(); nav.hidden=true; root.removeEventListener('change', changeYear); trophyDialog.removeEventListener('click', viewerClick); trophyDialog.removeEventListener('cancel', viewerCancel); trophyDialog.replaceChildren(); root.replaceChildren();root.classList.remove('calendar-screen'); },
   };
 }

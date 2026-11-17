@@ -167,6 +167,12 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   };
   const meta = installMetaSurface(progress, language, {
     motion,
+    ...(!pilot&&!reviewFields.length?{themeIntro:{
+      eligible:()=>platform.settings.firstVisit&&progress.available&&progress.state.revision===0&&progress.state.index===0&&!progress.state.campaign.started&&!progress.state.campaign.view&&!progress.state.tutorials.length,
+      theme:()=>platform.settings.state.theme,
+      choose:(theme:import('../app/settings').GameTheme)=>{void platform.settings.update({theme});},
+      finish:()=>{void platform.settings.save();},
+    }}:{}),
     canPresent: () => !document.hidden && !requestingAd && platform.activity.getBlockReasons().every(reason=>reason==='menu'),
     blocked: value => platform.activity.setBlocked('menu', value),
     previewBlocked: value => platform.activity.setBlocked('trophy-preview', value), leaveGame, enterCampaign,
@@ -567,6 +573,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   hintButton.setAttribute('aria-describedby','app-status');
   localize();
   listeners.push(platform.settings.subscribe(() => {
+    meta.refreshThemeChoices();
     const next = platform.settings.state.language;
     if (language === next) return;
     errorCue.cancel('language');

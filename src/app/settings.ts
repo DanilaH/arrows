@@ -23,14 +23,16 @@ export class SettingsStore {
   private disposed = false;
   private finishLoad: (() => void) | undefined;
   public status: SettingsStatus = 'loading';
+  public firstVisit = false;
   public readonly ready: Promise<void>;
   public constructor(storage: StorageAdapter, language?: string, deadlineMs = 1500) {
-    const defaults = defaultSettings(language); this.current = Object.freeze(defaults);
-    this.repository = new JsonStorageRepository({ storage, key: SETTINGS_KEY, createDefault: () => ({ ...defaults }), codec: { decode: decodeSettings, encode: s => s } });
+    const defaults = defaultSettings(language); this.current = Object.freeze(defaults); let missing = false;
+    this.repository = new JsonStorageRepository({ storage, key: SETTINGS_KEY, createDefault: () => { missing = true; return { ...defaults }; }, codec: { decode: decodeSettings, encode: s => s } });
     this.ready = new Promise(resolve => {
       let finished = false;
       const finish = (saved?: GameSettings): void => {
         if (finished) return; finished = true; clearTimeout(timer); this.finishLoad = undefined;
+        this.firstVisit = !!saved && missing;
         if (saved) {
           const merged = { ...saved }; for (const key of this.touched) Object.assign(merged, { [key]: this.current[key] });
           this.current = Object.freeze(merged);

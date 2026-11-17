@@ -68,3 +68,10 @@ it('starts a fresh profile light while retaining an explicit saved dark preferen
  expect(defaultSettings('ru').theme).toBe('light');const empty=memory(),fresh=new SettingsStore(empty.storage,'ru');await fresh.ready;expect(fresh.state.theme).toBe('light');fresh.destroy();
  const previous=JSON.stringify({...defaultSettings('en'),theme:'dark'}),old=memory(previous),store=new SettingsStore(old.storage,'ru');await store.ready;expect(store.state.theme).toBe('dark');expect(old.writes).toEqual([]);store.destroy();
 });
+it('offers first-visit theme choice only after confirmed missing preferences',async()=>{
+ const fresh=new SettingsStore(memory().storage,'ru');expect(fresh.firstVisit).toBe(false);await fresh.ready;expect(fresh.firstVisit).toBe(true);fresh.destroy();
+ for(const raw of [JSON.stringify({...defaultSettings('ru'),theme:'dark'}),'unreadable']){const q=new SettingsStore(memory(raw).storage,'ru');await q.ready;expect(q.firstVisit).toBe(false);q.destroy();}
+});
+it('a missing-preferences read after the deadline cannot introduce a late welcome screen',async()=>{
+ vi.useFakeTimers();try{const m=memory();let release!:(value:null)=>void;m.storage.getItem=()=>new Promise(r=>{release=r;});const q=new SettingsStore(m.storage,'ru',100);await vi.advanceTimersByTimeAsync(101);await q.ready;expect(q.firstVisit).toBe(false);release(null);await Promise.resolve();await Promise.resolve();expect(q.firstVisit).toBe(false);q.destroy();}finally{vi.useRealTimers();}
+});
