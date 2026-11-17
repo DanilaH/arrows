@@ -1,0 +1,352 @@
+{
+  "source": "6efbb270dffbe68c0d45f05221a56005f1c054f7",
+  "productionGate": "BLOCKED_SAVE_CAPACITY",
+  "nativeLimitBytes": 4194304,
+  "firstFailure": {
+    "date": "2026-02-24",
+    "openedBefore": 54,
+    "requestedCount": 55,
+    "beforeBytes": 4187443,
+    "candidateBytes": 4254201,
+    "plannedProfileBytes": 4253726,
+    "rejectedByActualWriter": true,
+    "confirmedError": "write",
+    "priorProgressPreserved": true,
+    "beforeSha256": "7aa670faa9f724ff2d95a41c67bb2219d5671e95babfe0813866fec02eb37c43"
+  },
+  "samples": [
+    {
+      "date": "2026-01-01",
+      "arrows": 211,
+      "levelBytes": 69285,
+      "profileBytes": 103861
+    },
+    {
+      "date": "2026-01-02",
+      "arrows": 209,
+      "levelBytes": 68920,
+      "profileBytes": 173091
+    },
+    {
+      "date": "2026-01-03",
+      "arrows": 263,
+      "levelBytes": 85386,
+      "profileBytes": 258787
+    },
+    {
+      "date": "2026-01-04",
+      "arrows": 193,
+      "levelBytes": 65065,
+      "profileBytes": 324162
+    },
+    {
+      "date": "2026-01-05",
+      "arrows": 212,
+      "levelBytes": 71968,
+      "profileBytes": 396440
+    },
+    {
+      "date": "2026-01-06",
+      "arrows": 229,
+      "levelBytes": 74846,
+      "profileBytes": 471596
+    },
+    {
+      "date": "2026-01-07",
+      "arrows": 280,
+      "levelBytes": 89377,
+      "profileBytes": 561283
+    },
+    {
+      "date": "2026-01-08",
+      "arrows": 213,
+      "levelBytes": 70888,
+      "profileBytes": 632481
+    },
+    {
+      "date": "2026-01-09",
+      "arrows": 232,
+      "levelBytes": 75515,
+      "profileBytes": 708306
+    },
+    {
+      "date": "2026-01-10",
+      "arrows": 264,
+      "levelBytes": 89479,
+      "profileBytes": 798096
+    },
+    {
+      "date": "2026-01-11",
+      "arrows": 209,
+      "levelBytes": 71145,
+      "profileBytes": 869551
+    },
+    {
+      "date": "2026-01-12",
+      "arrows": 219,
+      "levelBytes": 73732,
+      "profileBytes": 943593
+    },
+    {
+      "date": "2026-01-13",
+      "arrows": 177,
+      "levelBytes": 62872,
+      "profileBytes": 1006775
+    },
+    {
+      "date": "2026-01-14",
+      "arrows": 268,
+      "levelBytes": 92187,
+      "profileBytes": 1099272
+    },
+    {
+      "date": "2026-01-15",
+      "arrows": 230,
+      "levelBytes": 72886,
+      "profileBytes": 1172468
+    },
+    {
+      "date": "2026-01-16",
+      "arrows": 205,
+      "levelBytes": 66955,
+      "profileBytes": 1239733
+    },
+    {
+      "date": "2026-01-17",
+      "arrows": 288,
+      "levelBytes": 93103,
+      "profileBytes": 1333146
+    },
+    {
+      "date": "2026-01-18",
+      "arrows": 223,
+      "levelBytes": 73118,
+      "profileBytes": 1406574
+    },
+    {
+      "date": "2026-01-19",
+      "arrows": 197,
+      "levelBytes": 64829,
+      "profileBytes": 1471713
+    },
+    {
+      "date": "2026-01-20",
+      "arrows": 211,
+      "levelBytes": 72044,
+      "profileBytes": 1544067
+    },
+    {
+      "date": "2026-01-21",
+      "arrows": 292,
+      "levelBytes": 98131,
+      "profileBytes": 1642508
+    },
+    {
+      "date": "2026-01-22",
+      "arrows": 198,
+      "levelBytes": 67236,
+      "profileBytes": 1710054
+    },
+    {
+      "date": "2026-01-23",
+      "arrows": 223,
+      "levelBytes": 73250,
+      "profileBytes": 1783614
+    },
+    {
+      "date": "2026-01-24",
+      "arrows": 293,
+      "levelBytes": 98110,
+      "profileBytes": 1882034
+    },
+    {
+      "date": "2026-01-25",
+      "arrows": 197,
+      "levelBytes": 66226,
+      "profileBytes": 1948570
+    },
+    {
+      "date": "2026-01-26",
+      "arrows": 216,
+      "levelBytes": 71798,
+      "profileBytes": 2020678
+    },
+    {
+      "date": "2026-01-27",
+      "arrows": 238,
+      "levelBytes": 74716,
+      "profileBytes": 2095704
+    },
+    {
+      "date": "2026-01-28",
+      "arrows": 281,
+      "levelBytes": 90942,
+      "profileBytes": 2186956
+    },
+    {
+      "date": "2026-01-29",
+      "arrows": 216,
+      "levelBytes": 71403,
+      "profileBytes": 2258669
+    },
+    {
+      "date": "2026-01-30",
+      "arrows": 251,
+      "levelBytes": 79380,
+      "profileBytes": 2338359
+    },
+    {
+      "date": "2026-01-31",
+      "arrows": 268,
+      "levelBytes": 87984,
+      "profileBytes": 2426653
+    },
+    {
+      "date": "2026-02-01",
+      "arrows": 217,
+      "levelBytes": 71606,
+      "profileBytes": 2498569
+    },
+    {
+      "date": "2026-02-02",
+      "arrows": 211,
+      "levelBytes": 73313,
+      "profileBytes": 2572192
+    },
+    {
+      "date": "2026-02-03",
+      "arrows": 228,
+      "levelBytes": 68307,
+      "profileBytes": 2640809
+    },
+    {
+      "date": "2026-02-04",
+      "arrows": 286,
+      "levelBytes": 92641,
+      "profileBytes": 2733760
+    },
+    {
+      "date": "2026-02-05",
+      "arrows": 235,
+      "levelBytes": 76220,
+      "profileBytes": 2810290
+    },
+    {
+      "date": "2026-02-06",
+      "arrows": 206,
+      "levelBytes": 68289,
+      "profileBytes": 2878889
+    },
+    {
+      "date": "2026-02-07",
+      "arrows": 278,
+      "levelBytes": 91169,
+      "profileBytes": 2970368
+    },
+    {
+      "date": "2026-02-08",
+      "arrows": 220,
+      "levelBytes": 72257,
+      "profileBytes": 3042935
+    },
+    {
+      "date": "2026-02-09",
+      "arrows": 185,
+      "levelBytes": 64186,
+      "profileBytes": 3107431
+    },
+    {
+      "date": "2026-02-10",
+      "arrows": 209,
+      "levelBytes": 69287,
+      "profileBytes": 3177028
+    },
+    {
+      "date": "2026-02-11",
+      "arrows": 280,
+      "levelBytes": 96020,
+      "profileBytes": 3273358
+    },
+    {
+      "date": "2026-02-12",
+      "arrows": 191,
+      "levelBytes": 65195,
+      "profileBytes": 3338863
+    },
+    {
+      "date": "2026-02-13",
+      "arrows": 220,
+      "levelBytes": 71189,
+      "profileBytes": 3410362
+    },
+    {
+      "date": "2026-02-14",
+      "arrows": 296,
+      "levelBytes": 97404,
+      "profileBytes": 3508076
+    },
+    {
+      "date": "2026-02-15",
+      "arrows": 200,
+      "levelBytes": 66648,
+      "profileBytes": 3575034
+    },
+    {
+      "date": "2026-02-16",
+      "arrows": 223,
+      "levelBytes": 72686,
+      "profileBytes": 3648030
+    },
+    {
+      "date": "2026-02-17",
+      "arrows": 205,
+      "levelBytes": 72264,
+      "profileBytes": 3720604
+    },
+    {
+      "date": "2026-02-18",
+      "arrows": 257,
+      "levelBytes": 86606,
+      "profileBytes": 3807520
+    },
+    {
+      "date": "2026-02-19",
+      "arrows": 208,
+      "levelBytes": 71245,
+      "profileBytes": 3879075
+    },
+    {
+      "date": "2026-02-20",
+      "arrows": 222,
+      "levelBytes": 73331,
+      "profileBytes": 3952716
+    },
+    {
+      "date": "2026-02-21",
+      "arrows": 275,
+      "levelBytes": 89973,
+      "profileBytes": 4042999
+    },
+    {
+      "date": "2026-02-22",
+      "arrows": 202,
+      "levelBytes": 69377,
+      "profileBytes": 4112686
+    },
+    {
+      "date": "2026-02-23",
+      "arrows": 232,
+      "levelBytes": 74447,
+      "profileBytes": 4187443
+    },
+    {
+      "date": "2026-02-24",
+      "arrows": 200,
+      "levelBytes": 65973,
+      "profileBytes": 4253726
+    }
+  ],
+  "elapsedMs": 9498,
+  "provenance": "Real current dailyLevel/date mapping and schema2 ProgressStore; legal opened-but-unplayed archive state after19campaign wins, no fabricated geometry. Controlled storage adapter reproduces the exact native UTF8 budget; not a physical phone or Java bridge execution.",
+  "notChanged": "No game/level/save/generator/monetization code changed by this probe."
+}

@@ -1,0 +1,56 @@
+{
+  "source": "6efbb270dffbe68c0d45f05221a56005f1c054f7",
+  "run": 44051537203,
+  "retention": "7days from2026-11-17; compiled summaries and SHA evidence retained in Git",
+  "artifacts": [
+    {
+      "id": 14314346324,
+      "name": "releasecheck-verification",
+      "zipBytes": 3487300,
+      "zipDigest": "sha256:75452f2f99d87f3dad04dcb4591303e1a40324fefb5df5cbeda665e43d78baf6",
+      "url": "https://github.com/DanilaH/arrows/actions/runs/44051537203/artifacts/14314346324"
+    },
+    {
+      "id": 14314082234,
+      "name": "native-unit-results",
+      "zipBytes": 5315,
+      "zipDigest": "sha256:23db306cac58275273e597deca9ae2be3b1c8e696b6497d5b12c355e76bbef52",
+      "url": "https://github.com/DanilaH/arrows/actions/runs/44051537203/artifacts/14314082234"
+    },
+    {
+      "id": 14313922776,
+      "name": "arrows-debug",
+      "zipBytes": 10314667,
+      "zipDigest": "sha256:82a131b9a51386e64e431baa4c5f8a0f301da86476fe2b2098c9eff58ad3c5f8",
+      "url": "https://github.com/DanilaH/arrows/actions/runs/44051537203/artifacts/14313922776"
+    },
+    {
+      "id": 14313842135,
+      "name": "production-readiness-audit",
+      "zipBytes": 2297950,
+      "zipDigest": "sha256:9129907f03e63fbe0e55c125302e18a92b28b52b9b6b0530d49e0f835ccc49ee",
+      "url": "https://github.com/DanilaH/arrows/actions/runs/44051537203/artifacts/14313842135"
+    },
+    {
+      "id": 14313344256,
+      "name": "arrows-playtest",
+      "zipBytes": 10314782,
+      "zipDigest": "sha256:7d8f2f3490e21b82aa3b06ab37d8438d8218bfcb5851c117ca9083a98fd86bd0",
+      "url": "https://github.com/DanilaH/arrows/actions/runs/44051537203/artifacts/14313344256"
+    },
+    {
+      "id": 14313049985,
+      "name": "playtest-verification",
+      "zipBytes": 4166,
+      "zipDigest": "sha256:6e0f7c185d73aee7928f5c876ed547d6f6492cfb5992dc0f3f2c28a13141b2b2",
+      "url": "https://github.com/DanilaH/arrows/actions/runs/44051537203/artifacts/14313049985"
+    },
+    {
+      "id": 14312939862,
+      "name": "arrows-releasecheck-NOT-PRODUCTION",
+      "zipBytes": 4904397,
+      "zipDigest": "sha256:8c4bfed1084a211cff77d2776e4f01e565dc92d6928a79b56f0b37aab4067d44",
+      "url": "https://github.com/DanilaH/arrows/actions/runs/44051537203/artifacts/14312939862"
+    }
+  ]
+}

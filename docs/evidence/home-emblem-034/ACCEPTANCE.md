@@ -18,7 +18,7 @@ The existing surface tick drives bounded WAAPI bursts, without a new timer/RAF o
 | Input during animation | Browser observation35.2ms from release to game; functional tests accept input during motion; not a phone latency benchmark |
 | Native |19JVM/0failures, sync and normal+.playtest assemblies PASS |
 | Initial full hosted CI44038986372 |492/492browser PASS before final short-window adaptation; both jobs SUCCESS, see [completed excerpt](ci-initial-summary.txt) |
-| Final hosted CI44040646713 | Android SUCCESS; full web IN PROGRESS at delivery, never labelled GREEN without completion |
+| Final hosted CI44040646713 | Android SUCCESS; final web completed SUCCESS:492/492browser,21.1min,234unit/type/build/sync. See ci-final-summary.txt |
 | QA tools | Node syntax/Python parse and actual verifier/capture execution PASS |
 
 Package com.danilah.arrows.playtest,0.34.0/code48; same official V2 certificate as0.33,533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36. APK SHA256 **a97a083a3b60d5ce77485aed1b95569f6025dc342c95205c8b3188c155b9fb75**,11010009bytes. Compiled MainActivity portrait/application game, DEX test/demo rewarded+interstitial units/empty analytics key verified.28public web files extracted;26local production files match byte for byte, two empty Capacitor adapters; shared font/audio/brand/trophy assets unchanged.

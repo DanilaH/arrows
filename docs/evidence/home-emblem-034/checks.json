@@ -45,7 +45,7 @@
     "initialRun": 44038986372,
     "finalRun": 44040646713,
     "android": "SUCCESS",
-    "web": "IN PROGRESS at delivery; not called GREEN",
+    "web": "SUCCESS:492/492,21.1min, completed on final decbfaf source",
     "initialWeb": "SUCCESS:492/492,22.4min, before short-window adaptation"
   },
   "qaSyntax": "Node and Python parse/actual execution PASS",

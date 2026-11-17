@@ -1,5 +1,7 @@
 # Android / RuStore acceptance
 
+**Known blocking gate (2026-11-17):** current large daily archive exceeds native4MiB on the55th opened daily in the verified profile. See PRODUCTION_READINESS_0341.md and evidence/production-readiness-0341/capacity.json. Old progress is preserved, but production acceptance is FAIL until compatible bounded archive storage and its recovery tests pass. IDs/signing/green unit tests do not close this gate.
+
 This is a future release gate, not a claim of completion. The reuse/implementation map is [KIT_REUSE.md](KIT_REUSE.md). Record each result against a source revision and artifact; unresolved or untested items do not pass because CI is green.
 
 ## Game, progress and recovery

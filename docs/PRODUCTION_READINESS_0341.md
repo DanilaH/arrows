@@ -1,95 +1,116 @@
-# Production readiness / 0.34.1-code49
+# Предрелизный аудит — 0.34.1 / code49
 
-Owner request 2026-11-17: audit translations, production packaging and measurement against current mini-games-kit before supplying service IDs. Base main63ac429 / applicationdecbfaf (0.34.0-code48), no reset or pin upgrade. This is preparation, **not a published or device-accepted production release**. Previous application CI44040646713 is now confirmed completed SUCCESS:234 unit,492/492 browser (21.1min), native builds/19JVM.
+**Статус: BLOCKED_SAVE_CAPACITY. Выпускать в магазин пока рано.** Проверка переводов, метрик и release-пакета проведена; небольшие подтверждённые дефекты исправлены. Обнаружен отдельный блокер долгого прогресса: 55-я открываемая ежедневка превышает нативный лимит сохранения. Старое сохранение остаётся целым, но новая задача не записывается. Получение рекламных ID эту проблему не устраняет.
 
-## Sources and selection
+База: main63ac429 / приложениеdecbfaf,0.34.0-code48. Последний проверенный источник:6efbb270dffbe68c0d45f05221a56005f1c054f7. Новая версия0.34.1-code49. Сохранены более свежая работа, живущая эмблема и принятые UI/feel-решения. Полный протокол и контрольные суммы: [evidence/production-readiness-0341/ACCEPTANCE.md](evidence/production-readiness-0341/ACCEPTANCE.md).
 
-Read current kit at **5a0836cbf562013201ec842376d7a84998f89e48**: API, task router, Arrows research index, Android Release Acceptance, Committed Analytics, Localization and Authentic Store Media; current Arrows decisions, release checklist, C/MEASUREMENT and later commercial audit/fixes. Installed runtimea932526 and consumer guidancee04a3fe remain unchanged. These are reviewed newer documents, not an implicit runtime upgrade or a renewed execution of old assistance experiments.
+## Что исправлено
 
-Primary platform sources checked2026-11-17:
+| Проблема | Результат |
+| --- | --- |
+| Hard/Nightmare в русском Home, поле и календаре | Общие переводы «Сложный» / «Кошмар»; английские названия и смысловые цвета сохранены |
+| Смена языка оставляет прежние document.lang/title | Метаданные следуют выбранному языку; переведён accessibility label загрузки, добавлено английское имя Android-приложения |
+| «5 шага» и некорректные формы маршрутной помощи | Локальные форматтеры количества стрелок и шагов, включая родительный падеж после «до». Проверены0/1/2/4/5/11/14/21/22/25/101/111 |
+| Обычный повторный вход в начатый уровень не даёт level_resume | Событие на явном входе в незавершённую начатую campaign/daily попытку; Settings/фон/нетронутое поле не создают новый старт |
+| Время выхода/рестарта снимается до последней записи | Exit читает значение после своего сохранения; Restart передаёт старое время в transient SaveChange после успешного commit. Ожидающая/неуспешная запись не выдаётся за подтверждённую |
+| Время запуска только в debug; нет контекста старого embedded уровня | Один startup_timing после реально открытого ready; attempt_context после первого подтверждённого действия: версия, сложность, число стрелок, стабильный attempt ID, без геометрии |
+| Sender допускает неверные поля до runtime | Точные TS-типы генерируются из общего JSON, drift проверяется до компиляции. Реальный native-валидатор проверяется на всех38 схемах |
+| Release не покрыт отдельной сборкой, подпись не настроена, shrinking выключен | Release-only web без лабораторий/технических controls; R8+resource shrinking, scoped bridge rules, явная production-подпись и отказ без live-конфигурации. Отдельный test-signed .releasecheck |
+| Исключённый модуль AppMetrica8.6 ломает R8 | Восстановлена зависимость appsetid на той же версии SDK. Ошибки отсутствующих типов не подавлены через dontwarn или заглушки |
 
+У AppMetrica остаются выключены advertising-ID/location tracking и native-crash reporting. AppSet SDK identity — отдельная возможность, теперь присутствующая в графе зависимостей: её фактическое поведение нужно учесть при проверке данных SDK. Yandex Ads добавляет AD_ID permission. Чистые custom payloads не означают отсутствия сбора данных всеми SDK.
+
+## Блокер сохранений: воспроизводимый результат
+
+На настоящих текущих dailyLevel для дат2026-01-01…2026-02-24 создан допустимый профиль после19 побед кампании: ежедневки открыты, геометрия не подменена, действия на них не сделаны. Native-бюджет взят из действующего ArrowsStoragePlugin, операция выполняется настоящим ProgressStore.openDaily через storage adapter с тем же UTF8-пределом.
+
+| Факт | Значение |
+| --- | --- |
+| Нативный лимит одного значения | 4 194 304 байта |
+| Записано ежедневок до отказа | 54 |
+| Последний хороший профиль | 4 187 443 байта |
+| Открытие55-й,2026-02-24 | 4 254 201 байт; подтверждённая ошибка write |
+| Предыдущий raw-профиль и revision | Сохранены без изменений |
+| Время воспроизводителя | 9 498 мс |
+
+Это точная граница данного минимального тестового профиля, а не универсальный номер дня для всех игроков. Другой прогресс и помощь меняют размер. Пройденные ежедневки также остаются в архиве. Проверка не была физическим выполнением Java bridge на телефоне.
+
+[CI44051537203 / release-audit](https://github.com/DanilaH/arrows/actions/runs/44051537203/job/133930316155) намеренно **FAIL** по реальному production gate. Reproducer сам завершился успешно; это не означает прохождение продуктовой приёмки. Полные55 измерений и исходная ошибка — [capacity.json](evidence/production-readiness-0341/capacity.json). Генераторы, поля и сохранения ради аудита не переписывались.
+
+Следующий необходимый пакет — отделить растущий архив от постоянно перезаписываемого активного профиля. Перед реализацией выбрать формат хранения и атомарную границу: сохранить embedded геометрию/attempt IDs/историю ошибок/результаты/кубки/камеру, lifetime free continue и earned receipts; effect+dedup по-прежнему подтверждаются одной авторитетной транзакцией до ack. Миграция должна читать старый schema2 и переживать прерывания до/после записи и readback. Проверять год/два года архива, много незавершённых полей, pending receipt и провал записи. Простое повышение лимита оставляет рост полной сериализации и повторных записей; это не принято за решение. Большой рефактор хранения в этот аудит не включён.
+
+## Метрики: что уже учитывается
+
+Общий контракт38 событий, bounded transport32 outstanding. Состояния и награды сначала подтверждаются writer; SDK acceptance не равен доставке в кабинет. Нет поштучного лога каждого tap/кадра, нового outbox или повторного определения старых Hint-наград.
+
+| Задача | Источник / смысл | Ограничение |
+| --- | --- | --- |
+| Installs, DAU/WAU/MAU, sessions, session duration, D1/D7 | Автоматическая AppMetrica activity/session tracking | Кабинет/export ещё не проверены; зафиксировать timezone и календарную либо24h-дефиницию retention |
+| Запуск и первый доступный экран | app_ready, startup_timing | Время от JS-модуля, не полный OS cold start и не benchmark телефона |
+| Туториал | tutorial_step после persisted completion | Показ подсказки не считается освоением |
+| Воронка campaign/daily и сложность | level_start/context/error/complete/restart/exit/resume, attempt_final | Уникальные attempt, mode/id/content_version; фон/меню не равны окончательному уходу. Старые попытки не получают вымышленного backfill |
+| Время и ошибки | Подтверждённые active_ms, mistakes, first/lives | Меню/фон/реклама исключены; незавершённые попытки учитывать как незавершённые, а не удалять из выборки |
+| Возврат в daily и награды | daily_open/complete, collection_unlock, SDK session dates | Дата архивной задачи отличается от даты события |
+| Предложение→выбор→запрос помощи | assistance_assignment/offer/choice/request | Эпизоды видимости и frozen offer; assignment/offer/request/attempt IDs, отдельные qa/native environment |
+| Рекламная воронка / ожидание | ad_preload/event/session/result/opportunity | Различать load, invoke, show, impression, dismiss, earned; preload не получает фиктивного attempt |
+| Earned→право→резерв/claim→использование | ad_reward_granted/reserved, assistance_fact | Ручные/native/bonus удаления разделены. hint_applied остаётся сохранённой подсветкой |
+| Полезность помощи/продолжения | assistance_followup, continue_outcome | Один терминальный исход на право; анимация не считается действием. Free gift отдельно через continue_applied/source=free |
+| Деньги, eCPM,7-дневная ценность eligible группы | Реальный SDK ILRD→ad_impression_value→session→assignment | Только release/live/production, dedup, валюты отдельно, отсутствующие суммы unknown. Автоматические SDK-итоги к тем же ILRD не прибавлять |
+| Общий ARPU/ARPDAU, ROAS, LTV | Общий SDK denominator + доход сети; внешние attribution/spend и зрелые окна | Текущий cohort helper один этого не считает. Выручка, оценочный LTV и выплата различаются |
+| Надёжность | save_error, sanitized runtime_error, analytics_health, Java crashes | Потери наблюдаются, но полнота доставки неизвестна; native crashes OFF, ANR NOT VERIFIED; нужен mapping для optimized crash reports |
+| Производительность/feel | Имеющаяся диагностика + профиль целевого телефона | Физические FPS/frame pacing/memory/audio/haptics на финальном SDK-enabled release ещё NOT RUN |
+
+Для нормальной текущей политики revenueCohorts вызывается с experimentId=assistance-combined-v1; исторический default assistance-v1 намеренно отделён. Знаменатель eligible-assigned installs не равен всем установкам. SDK installation/session ID и локальный helpLedger.installId не считаются одинаковыми: соединение проверяется на реальной выгрузке. Персональные данные, полные поля/сейвы, ключи и произвольные error strings в custom события не передаются.
+
+## Что фактически проверено
+
+| Проверка | Результат |
+| --- | --- |
+| Unit/type/build | 239 /30 файлов PASS |
+| Финальные затронутые браузерные сценарии | 80/80 PASS,2.9мин |
+| Полный браузерный прогон приложения673713c | 496/496 PASS,26.1мин; web133919531913 SUCCESS. Web source/assets после этого не менялись |
+| Hosted release-web RU/EN, обе темы, малые экраны, synthetic150%, reduced motion, loss | 32 состояния /5 профилей /0 runtime errors; лабораторий нет. Не Android system-font scaling |
+| JVM из скачанных XML | 21 /7 файлов,0 failures/errors |
+| Android6efbb27 | debug + совместимая .playtest + optimized releaseCheck, sync, official payload checks PASS |
+| .releasecheck | 5 408 972 байта; подписьV2, debuggable=false, portrait, zipalign16KB,15 web-файлов совпали;4 bridge classes/methods сохранены в итоговом DEX |
+| Production без live-конфигурации | Сборка правильно отклонена |
+| Публикация, настоящая production-подпись, live SDK/dashboard/money, физический телефон | NOT RUN |
+
+ReleaseCheck — com.danilah.arrows.releasecheck с тестовой подписью, demo ads и пустым analytics key. Это не production APK и не пакет обновления .playtest. Последняя .playtest сохраняет com.danilah.arrows.playtest, code49, прежний проверенный сертификат, test ads / analytics OFF; реальная установка обновления на телефоне не выполнялась. Прогресс тестового пакета автоматически в production не переносится.
+
+Предыдущая0.34 также проверена: CI44040646713 завершён SUCCESS,492 браузерных,234unit и оба native build; старый pending-статус закрыт. Текущий общий CI не объявляется зелёным: archive gate красный, последний повтор полного web ещё может идти. История исправленных observer/CI ошибок сохранена в evidence, не засчитана в PASS.
+
+## Что потребуется после архива
+
+| Назначение | Конфигурация |
+| --- | --- |
+| Rewarded | YANDEX_REWARDED_AD_UNIT_ID |
+| Interstitial | YANDEX_INTERSTITIAL_AD_UNIT_ID |
+| AppMetrica production app | APPMETRICA_API_KEY; отдельный debug app/key при необходимости внешнего smoke |
+| Режим | ARROWS_AD_MODE=live |
+| Production signing | ARROWS_RELEASE_KEYSTORE, ARROWS_RELEASE_STORE_PASSWORD, ARROWS_RELEASE_KEY_ALIAS, ARROWS_RELEASE_KEY_PASSWORD, ARROWS_RELEASE_CERT_SHA256 — через защищённую конфигурацию |
+| Карточка магазина и mapping | RuStore listing identity, support/privacy URL, фактические данные/аудитория SDK, доступ к AppMetrica для mapping и выгрузок |
+| Воспроизводимый cold build | Авторизованное чтение private mini-games-kit на точном pin; тёплый CI cache не заменяет постоянный read credential |
+
+После исправления архива и конфигурации: настоящий signed/shrunk release, проверка fingerprint/hash/manifest/payload, install/update без очистки данных, offline/process interruption/Back/portrait, реальные rewarded/interstitial/возврат, события/export и crash mapping, замеры большого поля на телефоне. Предыдущая положительная оценка игры владельцем сохраняется; общий плейтест заново не назначается.
+
+## Основание и KIT IMPACT
+
+**KIT IMPACT: REUSE.** Применены Android Release Acceptance, Committed Analytics и Localization and Authentic Store Media: проверка точного optimized payload, TS/native parity, события после save и смысл перевода в контексте. Использованы существующие StartupTimeline, activity/transport/save seams. Новые generic API не потребовались; в kit ничего не пушилось, store не менялся.
+
+Изученный kit:5a0836cbf562013201ec842376d7a84998f89e48 — API/task router/Arrows index и указанные playbooks. Runtime pin a9325265e87583a4872cf6a158e1e881a0d7508e и consumer guidance e04a3fe87ca93d506e01df4acc5afe690408cefa сохранены. Из исследований SELECT — конкретная проверка релиза/семантики/контракта; HOLD — durable analytics outbox, новые SDK/ANR/эксперименты без доказанной необходимости; REJECT — смешение debug, device, dashboard и paid delivery в один статус.
+
+Первичные внешние источники, проверены2026-11-17:
+
+- https://github.com/DanilaH/mini-games-kit/blob/5a0836cbf562013201ec842376d7a84998f89e48/docs/ANDROID_RELEASE_ACCEPTANCE.md
+- https://github.com/DanilaH/mini-games-kit/blob/5a0836cbf562013201ec842376d7a84998f89e48/docs/platform/COMMITTED_ANALYTICS.md
+- https://github.com/DanilaH/mini-games-kit/blob/5a0836cbf562013201ec842376d7a84998f89e48/docs/LOCALIZATION_AND_STORE_MEDIA.md
 - https://developer.android.com/topic/performance/app-optimization/enable-app-optimization
-- https://ads.yandex.com/helpcenter/en/dev/android/rewarded
 - https://ads.yandex.com/helpcenter/en/monetization/ad-unit/rewarded
 - https://appmetrica.yandex.ru/docs/en/data-collection/basic-events
 - https://appmetrica.yandex.ru/docs/en/mobile-api/logs/endpoints
 - https://appmetrica.yandex.ru/docs/en/data-collection/upload-mapping
+- https://github.com/appmetrica/appmetrica-sdk-android/blob/v8.6.0/analytics/src/main/java/io/appmetrica/analytics/impl/id/AppSetIdGetter.kt
+- https://github.com/appmetrica/appmetrica-sdk-android/blob/v8.6.0/appsetid/README.MD
 
-SELECT: contextual locale review, exact TS/native schema checks, correct explicit re-entry reporting, small startup/content diagnostics, fail-closed release/signing and separate optimized test payload. HOLD: globally exactly-once analytics/outbox, additional experiment framework, ANR/native-crash changes without need, automatic SDK/pin upgrades. REJECT: treating debug/playtest success as production/device/dashboard proof; new ad placements/cadence or simultaneous product experiments.
-
-## Reproduced findings and bounded changes
-
-| Finding | Before | Implemented |
-| --- | --- | --- |
-| Russian difficulty labels | Home/board/calendar hardcode Hard/Nightmare | Shared RU Сложный/Кошмар, EN unchanged; same difficulty keys/colors/layout |
-| Locale metadata | Changing language updates visible strings but leaves document lang/title at initial browser language | Update document lang/title with the accepted setting; localize startup progress accessibility label; EN launcher label uses Android locale |
-| Counted assistance copy | Route amount5 reads «5 шага»; reserved1 and future amounts inconsistent | Consumer-local counted arrows and route nominative/genitive; test0/1/2/4/5/11/14/21/22/25/101/111. No reward amount change |
-| Meaningful re-entry | level_resume sent for recovery while already in game, absent for normal Home→started board | Report explicit entry into unfinished started campaign/daily. Opening untouched/result board, Settings and background do not fabricate a start/resume |
-| Exit/restart timing | Exit reports a pre-write active_ms; restart can sample before a queued presentation write | Exit waits for its exact time/view save, then reads the captured attempt; restart carries old attempt timing in the post-commit transient SaveChange. No save-schema field or durable outbox added |
-| Startup/content measurement | Startup timing exists only in debug; start carries version but no embedded historical difficulty/size | One startup_timing after uncovered ready; attempt_context after first committed meaningful action, stable attempt-context ID, difficulty/arrow count/version, no geometry |
-| Sender/native contract | Shared JSON/runtime validators exist, but sender AnalyticsParams allows wrong fields until runtime | Generate exact sender types from JSON and check drift before compilation; real native plugin uses testable validator; all38 schemas tested including negative fields/types |
-| Production packaging | CI only debug/playtest; release unconfigured signing, minify=false, all three HTML entries bundled | Separate release-only web build; labs/QA controls excluded; R8+resource shrinking, consumer/scoped bridge keep rules, explicit env signing, required live config/signer fingerprint. No substitute production key |
-| Pinned AppMetrica dependency | Real R8 run44048341230 fails on missing AppSetIdListener / AppSetIdRetriever / IAppSetIdRetriever after excluding analytics-appsetid | Restore the SDK8.6 dependency graph; advertising-ID/location settings stay disabled. AppSet SDK identity is separate and now present: reflect actual configured SDK behavior in disclosures. No blanket dontwarn, fabricated stubs or SDK upgrade |
-| Missing native optimized coverage | Debug assembly says nothing about optimizer output | Isolated .releasecheck with same optimizer/rules, debuggable=false, test ads/key empty and debug test signer; official APK/manifest/DEX/16KB ZIP-alignment/payload inspection. This cannot be mistaken for production credentials/signature |
-
-Fresh browser reproducer against unmodified baseline:4/4 expected failures (two scenarios ×phone/desktop). Base unit/type/build234PASS. Preserve failed and corrected test runs explicitly in evidence; do not infer phone feel or complete translations from a dictionary parity test.
-
-## Metrics: instrumented versus externally verified
-
-Custom events are a best-effort diagnostic transport after semantic/durable actions. Native SDK acceptance means local enqueue, not dashboard delivery. The32-outstanding budget/drop diagnostics remain; no per-tap/per-frame reporting or new durable telemetry queue. Existing save schema2, content, reward ledger, hints, lives, lifetime gift, error/flawless history and ad cadence remain unchanged.
-
-| Question / metric | Actual source and definition | Engineering status / external limit |
-| --- | --- | --- |
-| Installs, active users, DAU/WAU/MAU, sessions, session duration, ordinary D1/D7 | AppMetrica automatic install/session tracking via enableActivityAutoTracking; use SDK installation/session identity and chosen dashboard timezone/calendar or24h definition | SDK integration present; real dashboard/session/export rows NOT VERIFIED. No duplicate custom session SDK |
-| First usable screen / startup | app_ready plus startup_timing module→first presentable and uncovered-ready ms; one launch, version/code native envelope | Implemented; excludes OS process/native pre-WebView startup. Not a phone cold-start benchmark |
-| Onboarding | tutorial_step after persisted completion, step/outcome | Existing; completion never inferred from seeing a tooltip |
-| Campaign/daily funnel, difficulty and drop-off | level_start at first accepted committed action; attempt_context links version/difficulty/arrow count; level_error first flag/lives; level_complete+attempt_final stable attempt; level_exit is a menu exit, level_resume a real re-entry | Existing plus fixes. Group by mode/id/content_version, unique attempt; exit/background are not permanent abandonment. Censor unfinished observation windows |
-| Time and mistakes | completion active_ms and mistakes; active game clock excludes menu/background/ad blockers; errors retained on continue | Existing; use started-attempt denominators, completion rate and censored unfinished attempts together, not just mean time among winners |
-| Daily return and rewards | daily_open/date/resumed, daily_complete, collection_unlock; SDK return dates | Existing; distinguish selected archive date from SDK event date; opening daily is not winning it |
-| Help visibility→choice→request | assistance_assignment/offer/choice/request linked install/assignment/offer/request/attempt; variant+effect fixed before show | Existing; actual visibility episodes; same existing combined-v1 policy. QA/prod separated by native envelope, not qa=false alone |
-| Ads: request/load/show/impression/dismiss/failure/wait | ad_preload, ad_event, ad_session, ad_result, ad_opportunity; SDK phases and timestamps by request | Existing; derive request→invocation/show latency and outcome. Preload has no fictitious attempt owner; invoke is not impression |
-| Earned→durable right→reserve/claim→reveal/use | SDK earned, ad_reward_granted/reserved, assistance_fact phases; request/entitlement IDs and manual/native/bonus split | Existing; old hint_applied remains saved highlight, never redefined as consumption/cascade. Animations never authorize rights/results |
-| Value of help / continue | assistance_followup, continue_outcome (ordinary manual move, completion, new help, loss/exit/restart as applicable), active-time delta | Existing one-terminal per right. No replay on reload; use is distinct from effect animation |
-| Revenue / eCPM / eligible-cohort7d value | Canonical custom ad_impression_value from real SDK ILRD by request + ad_session + assignment; tools/assistance-revenue.mjs | Existing; explicit release/live/production only, dedup event IDs, currencies separate, missing amounts unknown. For the current normal profile call revenueCohorts with explicit assistance-combined-v1; the historical default assistance-v1 intentionally excludes this policy. Eligible-assigned install denominator is NOT all-install ARPU. Automatic SDK totals must not be added to same ILRD income |
-| Total ARPU/ARPDAU/ROAS/LTV | Network income + all SDK installs/active users; attribution/spend externally for ROAS; measured cohort window for LTV | Dashboard/export/account stage. Current cohort tool alone cannot calculate all these. No prediction presented as observed LTV/payout |
-| Reliability / loss | save_error, sanitized runtime_error, analytics_health; native Java crash reporting | Existing; latest cumulative health per transport, missing diagnostics unknown. Native crashes explicitly OFF; ANR reporting NOT VERIFIED; mapping upload required for readable optimized crash reports |
-| Performance / feel | Named-phone startup, frame pacing, memory, idle/large-field repeated-entry; actual audio/haptics | Browser diagnostics and automated checks exist. Physical optimized build and SDK-enabled profiling NOT RUN; not replaceable with a green CI counter |
-
-No event contains full board/save, raw SDK configuration, signer material or arbitrary error messages. Native environment_version/build/ad/analytics/app-version envelope cannot be relabeled by JS. Sessions/identity come from the SDK/export; assistance install_id is not silently assumed to equal AppMetrica installation_id. Join export rows using their SDK identity first; prove that mapping in the live smoke test.
-
-## Release configuration and next concrete external stage
-
-`npm run build:release` emits only main game and channel stamp. `npm run android:sync:release` prepares that exact web payload. Production `assembleRelease` requires live SDK values and all signing configuration; `npm run release:config` reports **names only** for missing/invalid fields. `releaseCheck` is a separate test-signed .releasecheck package and never a production update. Compatible .playtest remains .playtest/code49/same cached signer/test ads/analytics OFF.
-
-Required owner configuration:
-
-| Purpose | Configuration name / needed item |
-| --- | --- |
-| Rewarded / interstitial | YANDEX_REWARDED_AD_UNIT_ID / YANDEX_INTERSTITIAL_AD_UNIT_ID, correct format and app binding |
-| Production AppMetrica | APPMETRICA_API_KEY for com.danilah.arrows; separate debug app/key only if dashboard smoke needs it |
-| Production signer | ARROWS_RELEASE_KEYSTORE, ARROWS_RELEASE_STORE_PASSWORD, ARROWS_RELEASE_KEY_ALIAS, ARROWS_RELEASE_KEY_PASSWORD, ARROWS_RELEASE_CERT_SHA256; keep actual private material in protected CI/local configuration |
-| Explicit paid mode | ARROWS_AD_MODE=live; no demo/default fallback |
-| Store package / mapping | RuStore application/listing identity, support contact/privacy URL and actual data/audience declarations; AppMetrica application access for mapping and event/export verification |
-| Reproducible cold build | Authorized read access to private mini-games-kit at exact pinned SHA; warm CI cache is currently sufficient, not a permanent credential |
-
-After configuration: build+inspect actual production-signed shrunk APK, compare expected signer/hash/manifest/config/payload, install/update on named phone without clearing saves, offline/relaunch/process interruption/Back/portrait checks, real rewarded/error/return and interstitial, debug/production dashboard export smoke, crash mapping, physical large-field performance/audio/haptics. Current owner gameplay acceptance is retained; this is targeted release integration work, not a mandatory repeat of generic product playtesting. No automatic store submission or spend.
-
-## Validation record
-
-Implementation checkpoint:238unit/30files/typecheck/standard build PASS. Final affected browser, release web/matrix, optimized native and full hosted CI are being run; status must be replaced with actual results before final delivery. IDs/dashboard/money/phone remain NOT RUN, not implied by source checks. No production key created, live SDK traffic sent or store change made.
-
-KIT IMPACT **REUSE**: Android release, shared-schema parity, contextual localization and committed-analytics guidance; reuse installed StartupTimeline and existing lifecycle/transport/save seams. No new kit API necessary and no upstream writes. Current game intentionally keeps bounded best-effort analytics; the kit's optional committed journal recipe does not mandate a second durable subsystem.
-
-## Exact SDK dependency finding / remote continuation
-
-Actual R8 on source673713c, run44048341230/android133919531662, fails on three missing appsetid types. Generic current module docs say optional; inspected SDK tagv8.6.0 (tree d3363343944cdeeed3d1989869abcf1c524aa66c) contains direct AppSetIdGetter/DummyAppSetIdRetriever type references and an appsetid README marked required. The tag's generated API dump says8.7, so it is not used as binary8.6 proof; pinned Gradle/R8 is the independent compiled evidence. Restore the SDK dependency and re-run optimization, rather than silencing a real missing-type failure. This can add AppSet identity capability; it is distinct from advertising-ID tracking, which remains disabled for AppMetrica. The Yandex ad SDK still contributes AD_ID permission: custom payload hygiene is not a blanket no-data-collection claim.
-
-Sources: https://github.com/appmetrica/appmetrica-sdk-android/blob/v8.6.0/analytics/src/main/java/io/appmetrica/analytics/impl/id/AppSetIdGetter.kt and https://github.com/appmetrica/appmetrica-sdk-android/blob/v8.6.0/appsetid/README.MD; current https://appmetrica.yandex.ru/docs/en/sdk/android/android-modules .
-
-The local environment became unavailable after source673713c and final239unit/type/build PASS,22/22 focused browser PASS and32 release-web states/5profiles/0 runtime errors. A final80-case browser command was observed partially through64passes and has no terminal result; do not call it80PASS. Local screenshot originals were viewed (including settled English Settings) but are not a new downloadable media deliverable. Continue available engineering and official artifact inspection through GitHub CI; physical phone, dashboard, money and actual production signer remain NOT RUN. Later CI results supersede pending counts only when directly read.
-
-## Additional long-profile capacity gate / reproduction pending
-
-Native ArrowsStoragePlugin currently rejects a UTF8 value above4MiB. Schema2 retains every opened daily's full geometry. Published dense fallback fields alone are78,150/78,263/101,647/100,975 serialized ASCII bytes each; this is a concrete capacity risk, not evidence of a particular real date cutoff. The read-only tools/qa/audit-save-growth.mjs now generates actual past dates, validates the before profile, then exercises ProgressStore.openDaily against the native source's exact byte budget and preserves the last good raw profile. Its report distinguishes reproducer success from product acceptance: BLOCKED_SAVE_CAPACITY remains an open release finding if confirmed. No storage cap increase, compression/migration or content rewrite has been made speculatively. A durable-data architecture change is a separate bounded package after the cutoff and compatibility fixture are known.
-
-The R8 compilation after restoring the pinned dependency succeeded on run44049678024, but the new official-dexdump observer failed to decode modified-UTF8 text. It now decodes diagnostic text with replacement for non-UTF8 SDK string bytes; ASCII class/method checks stay exact and configuration string checks use raw DEX bytes. This is a verifier correction, not a suppressed R8/compiler failure. Final artifact verification still needs a completed run.
+Текущий общий SDK module guide называет appsetid optional, но точный pinned R8 выдаёт missing types; source tag содержит прямые type references и required-module README. Generated API dump внутри тега указывает8.7 и не используется как доказательство бинарного8.6. Решение принято по фактическому Gradle/R8 и исходнику, без blanket dontwarn.

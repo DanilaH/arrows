@@ -1,0 +1,38 @@
+{
+  "kind": "releasecheck",
+  "package": "com.danilah.arrows.releasecheck",
+  "version": "0.34.1",
+  "versionCode": 49,
+  "bytes": 5408972,
+  "sha256": "89d138165ef38d6fd2b1051d48b4fac9514dcb63d95594120d1caf5930c2579b",
+  "certificateSha256": "1fbd42420d4844d2c655c43181c9733161a09abfca777da203c0bcefcc26fede",
+  "v2": true,
+  "debuggable": false,
+  "zipalign16k": true,
+  "shrunkMapping": {
+    "bytes": 21737725,
+    "sha256": "5504ba6ec59e2fa169c93aed6c65e364a927d4b1f22aa26402a06d6b60a1615e"
+  },
+  "webPayload": {
+    "arrows-build.json": "319e55d799457587803ba5e111d4176c77219843c4fd8bec6dc4cc85662e4084",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "index.html": "75d795bda71bb7bc7f7b2ff58effcb78a3b64f3054503b8732308221984e9c3f",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+    "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+    "assets/main-BVnI5lK5.css": "ecfa661ee2b2305835e751e98eb49a7ffcb9e7c315a37fbdcdb47fa7781ca33b",
+    "assets/web-Qc_0K70q.js": "eb43c34a15630995aa0019d96fa76848944fec475a543aeb757856402fbdfce7",
+    "assets/dailyWorker-CzSU8cF9.js": "d5bccec7c03886e299341ebc7ea268c0ad07e9bdea399381957158a2710b95f9",
+    "assets/main-D6zlZzeW.js": "2eee0727a33ddac2d679b8808b060b9abe2c792dac729e7aa4f07212f1ab4f65",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21"
+  },
+  "contractSha256": "c986cd1fb8f6fe08b93ecd9d75ec59728c0dc177d37a3319cf57a8000ed71244",
+  "source": "6efbb270dffbe68c0d45f05221a56005f1c054f7",
+  "physicalRuntime": "NOT RUN",
+  "services": "NOT RUN",
+  "productionSigner": false
+}

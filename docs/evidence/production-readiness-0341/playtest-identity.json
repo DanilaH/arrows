@@ -1,0 +1,13 @@
+{
+  "source": "6efbb270dffbe68c0d45f05221a56005f1c054f7",
+  "run": 44051537203,
+  "version": "0.34.1",
+  "code": 49,
+  "package": "com.danilah.arrows.playtest",
+  "certificateSha256": "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36",
+  "apkSha256": "b2fdad7ad695d58dae162d7bc1bb2d966befdb7c8ab03a7a058c954f5f86ef6a",
+  "v2": true,
+  "testAds": true,
+  "analytics": "OFF (forced playtest BuildConfig)",
+  "actualPhoneInstallUpdate": "NOT RUN"
+}

@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Arrows Playtest, O=Arrows, C=RU
+Signer #1 certificate SHA-256 digest: 533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36
+Signer #1 certificate SHA-1 digest: 08c242c82ec85e511bb1a40d4079f24cd36f7d1c
+Signer #1 certificate MD5 digest: 0f1a94b324f4af3176176bf934f95bb0
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+Signer #1 public key SHA-256 digest: 968d40fde5441376b5e79a624f1fd6bb49af5937c3760017ddfb36a67a985dee
+Signer #1 public key SHA-1 digest: 5448e2e5f5c03f271c30e54c49aaacb198c37982
+Signer #1 public key MD5 digest: f4d902e2f7911123dcacb2267c1be0ab

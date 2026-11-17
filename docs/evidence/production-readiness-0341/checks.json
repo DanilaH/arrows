@@ -1,0 +1,94 @@
+{
+  "source": "6efbb270dffbe68c0d45f05221a56005f1c054f7",
+  "productionStatus": "BLOCKED_SAVE_CAPACITY",
+  "unit": {
+    "tests": 239,
+    "files": 30,
+    "status": "PASS"
+  },
+  "affectedBrowser": {
+    "tests": 80,
+    "status": "PASS",
+    "duration": "2.9min",
+    "note": "Final terminal log recovered and read after environment reconnected"
+  },
+  "fullBrowser": {
+    "source": "673713c8799ffd88f5c49716f74fb06ae9a484d7",
+    "run": 44048341230,
+    "job": 133919531913,
+    "tests": 496,
+    "status": "SUCCESS",
+    "duration": "26.1min",
+    "webSourcesUnchangedSince": true
+  },
+  "hostedMatrix": {
+    "run": 44051537203,
+    "job": 133930316155,
+    "states": 32,
+    "profiles": 5,
+    "runtimeErrors": 0,
+    "labEntriesAbsent": true,
+    "source": "actual release-mode web in Chromium with controlled native transport; not phone/SDK inventory"
+  },
+  "native": {
+    "run": 44051537203,
+    "job": 133930316565,
+    "status": "SUCCESS",
+    "JVM": 21,
+    "files": 7,
+    "failures": 0,
+    "errors": 0,
+    "debugPlaytestReleaseCheck": "PASS",
+    "officialArtifactChecks": "PASS",
+    "productionWithoutLiveConfig": "correctly rejected"
+  },
+  "capacity": {
+    "run": 44051537203,
+    "job": 133930316155,
+    "status": "FAIL production acceptance; reproducer succeeds",
+    "limit": 4194304,
+    "openedBefore": 54,
+    "failsAt": 55,
+    "candidateBytes": 4254201,
+    "priorProgressPreserved": true
+  },
+  "history": [
+    {
+      "source": "baseline63ac429",
+      "result": "4/4 new browser cases fail before implementation (RU difficulty and missing events)"
+    },
+    {
+      "result": "Initial local broad77/80; one observer raced a mutable build, two new tests aimed at pre-layout camera. Not a final green run. Settled-coordinate observer corrected."
+    },
+    {
+      "result": "Exit-time repro2/2FAIL: level_exit emitted while its500ms write was still pending; product ordering fixed."
+    },
+    {
+      "result": "Corrected focused22/22PASS, final affected80/80PASS;239unit and496fullbrowser PASS."
+    },
+    {
+      "source": "85ec3d8",
+      "result": "New JVM observer used Files.readString/JSONObject.keySet absent from Android compile stubs; corrected to compatible methods."
+    },
+    {
+      "source": "706338f",
+      "result": "CI observer assumed rg installed on runner; switched to Python exact expected-error check."
+    },
+    {
+      "source": "673713c",
+      "result": "Actual R8 missing appsetid types; corrected pinned SDK graph."
+    },
+    {
+      "source": "294eb96",
+      "result": "R8 compiles; official dexdump output contains modified UTF8 and text decoder failed. Diagnostic decoder corrected; raw DEX configuration checks remain byte-exact."
+    },
+    {
+      "source": "6efbb27",
+      "result": "Native complete SUCCESS; release-audit deliberately FAILS on reproducible existing capacity defect. Latest full repeat web still in progress when recorded; not a green aggregate."
+    }
+  ],
+  "physicalPhone": "NOT RUN",
+  "productionSignerLiveSDKDashboardMoney": "NOT RUN",
+  "ownerPriorQualitativeAcceptance": "retained",
+  "KIT_IMPACT": "REUSE; Android release/localization/committed-event guidance and current runtime seams; no kit/store writes"
+}
