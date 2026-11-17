@@ -167,6 +167,7 @@ export class ProgressStore {
     this.repository = new ArchiveRepository(storage,SAVE_KEY,decodeSave,freshSave);
   }
   public get board(): Board { const a = this.state.campaign; return new Board(a.level, a.board.id, a.board); }
+  public get durableWitness(): string | null | undefined { return this.available && !this.uncertain && !this.error ? this.repository.witness : undefined; }
   public findAttempt(expected: string, state = this.state): { saved: SavedAttempt; mode: 'campaign' | 'daily'; date?: string } | null {
     if (state.campaign.board.id === expected) return { saved: state.campaign, mode: 'campaign' };
     if(this.indexedState!==this.state){this.attemptDates=new Map(Object.entries(this.state.daily).map(([date,a])=>[a.board.id,date]));this.indexedState=this.state;}

@@ -26,6 +26,8 @@ async function parallel<T,R>(items:T[],work:(item:T)=>Promise<R>):Promise<R[]>{c
  * entire result+receipt ledger. Unpublished/old blocks never authorize effects. */
 export class ArchiveRepository{
   private token:string|null|undefined;
+  /** Exact durable root, for optional read projections. Never an optimistic draft. */
+  public get witness(): string | null | undefined { return this.token; }
   private sharded=false;
   private alive=true;
   private graph=new Map<Hash,Hash[]>();

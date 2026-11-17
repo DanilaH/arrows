@@ -21,8 +21,12 @@ manifest = run('aapt', 'dump', 'badging', a.apk)
 tree = run('aapt', 'dump', 'xmltree', a.apk, 'AndroidManifest.xml')
 package = 'com.danilah.arrows' + ('.releasecheck' if a.kind == 'releasecheck' else '')
 assert f"package: name='{package}'" in manifest
-assert "versionCode='53'" in manifest and "versionName='0.37.1'" in manifest
+assert "versionCode='54'" in manifest and "versionName='0.38.0'" in manifest
 assert 'application-debuggable' not in manifest
+assert 'android.permission.POST_NOTIFICATIONS' in manifest
+assert 'android.permission.RECEIVE_BOOT_COMPLETED' in manifest
+assert 'android.permission.SCHEDULE_EXACT_ALARM' not in manifest
+assert 'android.permission.USE_EXACT_ALARM' not in manifest
 assert re.search(r'android:screenOrientation[^\n]*\(type 0x10\)0x1(?:\s|$)', tree)
 files = {}
 with zipfile.ZipFile(a.apk) as z:
@@ -48,6 +52,8 @@ with zipfile.ZipFile(a.apk) as z:
         'ArrowsAnalyticsPlugin':['report','flush','status'],
         'ArrowsStoragePlugin':['get','set','remove','list'],
         'ArrowsFeedbackPlugin':['pulse','cancel'],
+        'ArrowsDailyPlugin':['status','sync','configure','request','openSettings','consume','markOffered','notificationPermission'],
+        'DailyReminderReceiver':['onReceive'],
     }.items():
         blocks=[b for b in re.split(r'(?=Class #\d+)',output) if re.search(r"Class descriptor\s*:\s*'Lcom/danilah/arrows/"+cls+";'",b)]
         assert blocks, cls
@@ -61,6 +67,6 @@ with zipfile.ZipFile(a.apk) as z:
 mapping=Path('native/android/app/build/outputs/mapping')/('releaseCheck' if a.kind=='releasecheck' else 'release')/'mapping.txt'
 assert mapping.is_file() and mapping.stat().st_size>1000
 for name,body in [('signing.txt',sign),('badging.txt',manifest),('manifest-tree.txt',tree),('alignment.txt',alignment)]: (a.out/name).write_text(body)
-report={'kind':a.kind,'package':package,'version':'0.37.1','versionCode':53,'bytes':a.apk.stat().st_size,'sha256':hashlib.sha256(a.apk.read_bytes()).hexdigest(),'certificateSha256':cert,'v2':True,'debuggable':False,'zipalign16k':True,'shrunkMapping':{'bytes':mapping.stat().st_size,'sha256':hashlib.sha256(mapping.read_bytes()).hexdigest()},'webPayload':files,'contractSha256':hashlib.sha256(Path('src/platform/analytics-contract.json').read_bytes()).hexdigest(),'source':os.environ.get('GITHUB_SHA','local'),'physicalRuntime':'NOT RUN','services':'NOT RUN','productionSigner':a.kind=='release'}
+report={'kind':a.kind,'package':package,'version':'0.38.0','versionCode':54,'bytes':a.apk.stat().st_size,'sha256':hashlib.sha256(a.apk.read_bytes()).hexdigest(),'certificateSha256':cert,'v2':True,'debuggable':False,'zipalign16k':True,'shrunkMapping':{'bytes':mapping.stat().st_size,'sha256':hashlib.sha256(mapping.read_bytes()).hexdigest()},'webPayload':files,'contractSha256':hashlib.sha256(Path('src/platform/analytics-contract.json').read_bytes()).hexdigest(),'source':os.environ.get('GITHUB_SHA','local'),'physicalRuntime':'NOT RUN','services':'NOT RUN','productionSigner':a.kind=='release'}
 (a.out/'verification.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps({k:v for k,v in report.items() if k!='webPayload'},indent=2))

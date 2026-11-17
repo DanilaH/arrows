@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 /** A process-wide disk queue; game codecs and the single coordinated save writer live in TS. */
 @CapacitorPlugin(name = "ArrowsStorage")
 public class ArrowsStoragePlugin extends Plugin {
-    private static final ExecutorService IO = Executors.newSingleThreadExecutor();
+    static final ExecutorService IO = Executors.newSingleThreadExecutor();
     private AtomicFile file(PluginCall call) {
         String key = call.getString("key", "");
         if (!key.matches("[a-zA-Z0-9_.-]{1,100}")) throw new IllegalArgumentException("Invalid storage key");
@@ -40,6 +40,9 @@ public class ArrowsStoragePlugin extends Plugin {
             if (bytes.length > 4 * 1024 * 1024) throw new IllegalArgumentException("Save too large");
             file = file(call); out = file.startWrite(); out.write(bytes); file.finishWrite(out); out = null;
             if (!Arrays.equals(file.readFully(), bytes)) throw new IOException("Write verification failed");
+            if ("arrows.progress.v1".equals(call.getString("key"))) {
+                try { new DailyReminderEngine(getContext()).invalidate(); } catch (Exception optional) { /* Never fail a committed save. */ }
+            }
             call.resolve();
         } catch (Exception error) { if (file != null && out != null) file.failWrite(out); call.reject("Storage write failed"); }
     }); }

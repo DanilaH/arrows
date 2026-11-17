@@ -260,5 +260,10 @@
     "transport_id": "string",
     "boundary": "string",
     "delivery": "string"
+  },
+  "daily_entry": {
+    "date": "string",
+    "attempt": "string",
+    "source": "string"
   }
 }

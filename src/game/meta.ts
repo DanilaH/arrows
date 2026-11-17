@@ -12,6 +12,7 @@ import { trophy } from './trophies';
 import { settingsIcon } from './settings';
 import { copy, type GameLanguage } from '../app/language';
 import { createHomeEmblem, homeEmblemMarkup } from './homeEmblem';
+import {dailyDestination,dailyEntryLabel} from '../progression/dailyEntry';
 
 export type AppScreen = 'home' | 'collection' | 'calendar' | 'game';
 const navIcons = {
@@ -29,7 +30,7 @@ const badge = (key: string): string => `<svg class="medal-icon" viewBox="0 0 72 
 
 export function installMetaSurface(progress: ProgressStore, language: GameLanguage, options: {
   themeIntro?: { eligible(): boolean; theme(): GameTheme; choose(theme: GameTheme): void; finish(): void };
-  motion: UiMotion; canPresent(): boolean; blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; artwork(): BoardArtwork | null; controls?(): void; settings(): void; leaveGame(): void; enterCampaign(): void; enterDaily(date: string,signal?:AbortSignal): Promise<void>;
+  motion: UiMotion; canPresent(): boolean; blocked(value: boolean): void; previewBlocked(value: boolean): void; visited(screen: AppScreen): void; artwork(): BoardArtwork | null; controls?(): void; settings(): void; leaveGame(): void; enterCampaign(): void; dailyShortcut?(): void; enterDaily(date: string,signal?:AbortSignal,source?:'calendar'|'home'|'result'|'notification'): Promise<void>;
 }) {
   const nav = document.querySelector<HTMLElement>('#meta-nav')!;
   const root = document.querySelector<HTMLElement>('#meta-screen')!, shell = document.querySelector<HTMLElement>('#game-shell')!;
@@ -117,7 +118,8 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       <svg style="--preview-line:${previewStroke}px;${selected || final ? '' : 'visibility:hidden'}" data-level="${preview.id}" data-selected="${selected}" class="home-board${final ? ' home-finish' : ''}" viewBox="${final ? '0 0 72 72' : viewBox}" aria-hidden="true">${final ? '<circle cx="36" cy="36" r="28"/><path d="m24 36 8 8 17-18"/>' : selected ? paths : ''}</svg>
       ${themeIntro?`<p class="welcome-theme-note">${text.changeThemeLater}</p>${themeChoices()}`:''}
       ${nearFinish?`<p class="home-remaining">${remainingCopy.replace('{count}',String(remaining))}</p>`:''}<button id="home-play" class="primary home-play" type="button" ${!ready || busy ? 'disabled' : ''}>${final ? text.viewResult : cleared ? text.next : a.started ? text.resume : text.play}<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></button>
-      <p class="home-progress" ${themeIntro?'hidden':''}>${text.chapter}: ${save.wins.length} / ${campaign.length}</p></section>${options.controls ? `<button id="home-controls" class="review-link" type="button">${text.controlFields}</button>` : ''}</div>`;
+      <p class="home-progress" ${themeIntro?'hidden':''}>${text.chapter}: ${save.wins.length} / ${campaign.length}</p>
+      ${!themeIntro&&options.dailyShortcut&&challengeOpen(save)?`<button id="home-daily" class="daily-shortcut" type="button" ${!ready||busy?'disabled':''} aria-busy="${busy}">${navIcons.calendar}<span>${busy?text.loading:dailyEntryLabel(dailyDestination(save,calendarToday),language)}</span><span aria-hidden="true">↗</span></button><p class="daily-entry-notice" role="status">${calendarNotice}</p>`:''}</section>${options.controls ? `<button id="home-controls" class="review-link" type="button">${text.controlFields}</button>` : ''}</div>`;
   };
   const collection = (): string => {
     const save = progress.state, stats = collectionStats(save);
@@ -281,6 +283,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     else if (target.id === 'home-controls') options.controls?.();
     else if (target.dataset.welcomeTheme==='light'||target.dataset.welcomeTheme==='dark'){themePreview.begin();options.themeIntro?.choose(target.dataset.welcomeTheme);refreshThemeChoices();}
     else if (target.id === 'home-play') {if(themeIntro){themeIntro=false;options.themeIntro?.finish();}options.enterCampaign();}
+    else if (target.id === 'home-daily') options.dailyShortcut?.();
     else if (target.id === 'home-collection') {
       show('collection'); void progress.markCollectionSeen(earnedAwards(progress.state)).catch(() => refresh());
     } else if (target.id === 'home-calendar') show('calendar');
@@ -291,15 +294,21 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     else if (target.dataset.shift) { const next = dailyMonths[dailyMonths.indexOf(month) + Number(target.dataset.shift)]; if (!next) return;cancelDailyWork(); month = next; calendarNotice = ''; refresh(); scrollPort().scrollTop=0; options.motion.reveal(scrollPort()); }
     else if (target.dataset.date) {cancelDailyWork(); selected = target.dataset.date; calendarNotice = ''; refresh(); for(const el of root.querySelectorAll('.selected-day > h3,.selected-day > span'))options.motion.reveal(el); }
     else if (target.id === 'start-daily') {
-      cancelDailyWork();const controller=new AbortController(),work=++dailyWorkId;dailyWork=controller;busy = true; calendarNotice = ''; refresh();
-      void options.enterDaily(selected,controller.signal).catch(() => {if(!controller.signal.aborted&&work===dailyWorkId) calendarNotice = text.dailyUnavailable; }).finally(() => {if(work===dailyWorkId&&alive){dailyWork=undefined;busy = false; refresh();} });
+      void startDaily(selected);
     }
   };
   const scrolled=():void=>{if(presenting && scrollPort().scrollTop!==presentationScroll)options.motion.finish();};
   root.addEventListener('scroll',scrolled,{passive:true,capture:true});
   root.addEventListener('click', click); nav.addEventListener('click', click); root.addEventListener('change', changeYear);
   trophyDialog.addEventListener('click', viewerClick); trophyDialog.addEventListener('cancel', viewerCancel); show('home');
+  const startDaily=async(date:string,source:'calendar'|'home'|'result'|'notification'='calendar'):Promise<boolean>=>{
+    cancelDailyWork();const controller=new AbortController(),work=++dailyWorkId;dailyWork=controller;busy=true;calendarNotice='';refresh();
+    try{await options.enterDaily(date,controller.signal,source);return alive&&screen==='game';}
+    catch{if(!controller.signal.aborted&&work===dailyWorkId)calendarNotice=text.dailyUnavailable;return false;}
+    finally{if(work===dailyWorkId&&alive){dailyWork=undefined;busy=false;refresh();}}
+  };
   return {
+    startDaily,
     queueUnlock(key: UnlockId): void {pendingUnlocks.add(key);},
     queueDailyArrival(date: string, attempt: string): void {if(attempt!==lastDailyArrival && progress.state.dailyWins[date]?.attempt===attempt)pendingDaily={date,attempt};},
     discardArrivals(): void {arrivalEpoch++;pendingUnlocks.clear();pendingDaily=null;if(presenting)options.motion.finish();},
