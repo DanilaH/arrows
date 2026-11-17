@@ -86,9 +86,18 @@
     "firstWeb": "466 PASS / 14 FAIL (21.3min); not green",
     "correctedRun": 43946078829,
     "correctedSource": "960d6ffb2498acc4a954c15616e0e65a851a2476",
-    "finalStatus": "IN PROGRESS",
+    "finalStatus": "SUCCESS",
     "android": "SUCCESS",
-    "jvm": 19
+    "jvm": 19,
+    "web": "SUCCESS",
+    "webBrowserTests": 480,
+    "webDuration": "21.1min",
+    "unitTests": 234,
+    "typeBuild": "PASS",
+    "finalWebSync": "PASS",
+    "bothAndroidAssemblies": "PASS",
+    "verifiedOn": "2026-11-17",
+    "applicationApkMediaChangedByStatusUpdate": false
   },
   "earlierInfrastructureFailures": [
     {

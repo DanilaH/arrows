@@ -1,0 +1,9 @@
+Workflow43946078829 / source960d6ffb2498acc4a954c15616e0e65a851a2476
+Both web and android jobs completed SUCCESS; verified2026-11-17.
+No application or APK bytes changed by this verification update.
+2026-11-16T20:06:07.7580263Z  Test Files  29 passed (29)
+2026-11-16T20:06:07.7581209Z       Tests  234 passed (234)
+2026-11-16T20:06:11.0542943Z Production payload excludes control catalogue and isolated test harnesses.
+2026-11-16T20:28:00.9294044Z   480 passed (21.1m)
+2026-11-16T20:28:04.4145573Z Production payload excludes control catalogue and isolated test harnesses.
+2026-11-16T20:28:04.6584491Z [info] Sync finished in 0.037s
