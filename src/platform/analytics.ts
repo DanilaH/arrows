@@ -1,6 +1,7 @@
 import { Capacitor, registerPlugin } from '@capacitor/core';
 import type { AnalyticsParams } from '@danilah/mini-games-kit/platform';
 import contract from './analytics-contract.json';
+import type {AnalyticsPayloads} from './analytics-schema';
 
 export type AnalyticsEvent = keyof typeof contract;
 export interface AnalyticsBridge {
@@ -48,7 +49,7 @@ export function createAnalytics(bridge?: AnalyticsBridge) {
       if(!native.flush||flushFlight)return;
       try{flushFlight=native.flush().catch(()=>{counts.flush_failure++;}).finally(()=>{flushFlight=undefined;});}catch{counts.flush_failure++;}
     },
-    track(event: AnalyticsEvent, params: AnalyticsParams): void {
+    track<E extends AnalyticsEvent>(event: E, params: AnalyticsPayloads[E]): void {
       if (disposed || !native) return;
       if (!validEvent(event,params)) {counts.dropped++;counts.invalid++;return;}
       if (outstanding >= 32) { counts.dropped++;counts.overflow++;return; }

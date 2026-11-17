@@ -36,7 +36,7 @@ test('narrow light Canvas fallback and reduced motion keep all fields and exit r
 test('actual legal clicks complete a breather, Next enters Hard and selector reaches seventh daily',async({page})=>{
  await boot(page,10);const level=candidateFields[10]!,remaining=[...level.arrows];
  while(remaining.length){const a=remaining.find(a=>canExit(a,remaining))!;await tap(page,level,a.id);remaining.splice(remaining.indexOf(a),1);await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining',String(remaining.length));}
- await expect(page.locator('#next')).toBeVisible({timeout:10000});await page.locator('#next').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-level','pc32');await expect(page.locator('#difficulty')).toHaveText('Hard');
+ await expect(page.locator('#next')).toBeVisible({timeout:10000});await page.locator('#next').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-level','pc32');await expect(page.locator('#difficulty')).toHaveText('Сложный');
  await page.locator('#choose-field').click();await page.locator('[data-action=field-26]').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-level','pd20261122');
  await page.locator('#choose-field').click();await page.locator('[data-action=campaign]').click();await expect(page.locator('#home-play')).toBeVisible();
 });

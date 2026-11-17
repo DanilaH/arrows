@@ -5,7 +5,7 @@ import { createAds, type AdEvent, type AdOutcome, type AdRequest, type EarnedRec
 startGame([], onBack => {
   const base = createPlatformRuntime(onBack); base.ads.destroy();
   const helpPhases: string[] = [], track = base.analytics.track;
-  base.analytics.track = (event, params) => { if(event === 'assistance_fact' && typeof params.phase === 'string') helpPhases.push(params.phase); track(event, params); };
+  base.analytics.track = (event, params) => { if(event === 'assistance_fact' && 'phase' in params && typeof params.phase === 'string') helpPhases.push(params.phase); track(event, params); };
   let listener: (event: AdEvent) => void = () => {}, settle: ((result: AdOutcome) => void) | undefined;
   let request: (AdRequest & { requestId?: string }) | undefined, last: EarnedReceipt | undefined;
   let receipts: EarnedReceipt[] = [], shows = 0;

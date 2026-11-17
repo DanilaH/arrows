@@ -63,7 +63,7 @@ test('uses a direct settled frame with reduced motion, keeping the same board an
 
 test('gives Hard and Nightmare the main compact heading above lives and retains the daily date',async({page})=>{
  await page.setViewportSize({width:320,height:568});await opened(page,19);await expect(page.locator('.home-difficulty')).toHaveCSS('font-size','15px');await page.locator('#home-play').click();await settled(page);
- const difficulty=page.locator('#difficulty'),hearts=page.locator('#hearts');await expect(difficulty).toHaveText('Nightmare');await expect(difficulty).toHaveCSS('font-size','15px');
+ const difficulty=page.locator('#difficulty'),hearts=page.locator('#hearts');await expect(difficulty).toHaveText('Кошмар');await expect(difficulty).toHaveCSS('font-size','15px');
  const d=(await difficulty.boundingBox())!,h=(await hearts.boundingBox())!;expect(d.y+d.height).toBeLessThanOrEqual(h.y+1);expect((await page.locator('#game-header').boundingBox())!.height).toBeLessThanOrEqual(64);
  await page.locator('#choose-field').click();await settled(page);await page.locator('#home-calendar').click();await page.locator('[data-date="2026-11-08"]').click();await page.locator('#start-daily').click();await settled(page);
  await expect(page.locator('#app-title')).toHaveText('8 ноября');await expect(page.locator('#app-title')).toBeVisible();expect((await page.locator('#game-header').boundingBox())!.height).toBeLessThanOrEqual(64);

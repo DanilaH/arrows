@@ -64,7 +64,11 @@ export function startGame(reviewFields: readonly Level[] = [], platformFactory: 
   try {
     let handleBack = (): boolean => false;
     const platform = platformFactory(() => handleBack());
-    reportReady = () => platform.analytics.track('app_ready', { language: platform.settings.state.language });
+    reportReady = () => {
+      platform.analytics.track('app_ready', { language: platform.settings.state.language });
+      const timing = getStartupSnapshot();
+      if(timing.moduleToPresentableMs !== undefined && timing.moduleToReadyMs !== undefined) platform.analytics.track('startup_timing', {platform:platform.kind,presentable_ms:Math.round(timing.moduleToPresentableMs),ready_ms:Math.round(timing.moduleToReadyMs)});
+    };
     disposers.push(() => platform.destroy());
     const runtimeError = (): void => platform.analytics.track('runtime_error', { operation: 'javascript', reason: 'uncaught_exception' });
     const rejected = (): void => platform.analytics.track('runtime_error', { operation: 'javascript', reason: 'unhandled_rejection' });

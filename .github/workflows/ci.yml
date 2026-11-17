@@ -109,3 +109,30 @@ jobs:
           name: arrows-playtest
           path: native/android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 7
+      - name: Prepare production-only web payload
+        run: npm run android:sync:release
+      - name: Verify production configuration fails closed
+        working-directory: native/android
+        run: |
+          if ./gradlew --no-daemon assembleRelease > release-negative.log 2>&1; then
+            echo 'Unexpected production build without live configuration/signing'; exit 1
+          fi
+          rg 'Release requires ARROWS_AD_MODE=live' release-negative.log
+      - name: Compile isolated optimized release check
+        working-directory: native/android
+        run: ./gradlew --no-daemon assembleReleaseCheck
+      - name: Inspect optimized release-check payload
+        run: python3 tools/qa/verify-release-payload.py native/android/app/build/outputs/apk/releaseCheck/app-releaseCheck.apk --kind releasecheck --out .test-output/releasecheck-verification
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: releasecheck-verification
+          path: |
+            .test-output/releasecheck-verification/
+            native/android/app/build/outputs/mapping/releaseCheck/
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arrows-releasecheck-NOT-PRODUCTION
+          path: native/android/app/build/outputs/apk/releaseCheck/app-releaseCheck.apk
+          retention-days: 7

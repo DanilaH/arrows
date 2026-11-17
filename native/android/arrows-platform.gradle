@@ -31,5 +31,12 @@ tasks.configureEach { task ->
     if (task.name == 'preReleaseBuild') task.doFirst {
         if (playtestBuild) throw new GradleException('Playtest cannot be released')
         if (adMode != 'live') throw new GradleException('Release requires ARROWS_AD_MODE=live and complete SDK configuration')
+        project.exec { workingDir rootProject.file('../..'); commandLine 'node', 'tools/release-config.mjs', '--check' }
+    }
+    if (task.name in ['preReleaseBuild','preReleaseCheckBuild']) task.doFirst {
+        if (playtestBuild) throw new GradleException('Isolated playtest cannot use release variants')
+        def stamp = file('src/main/assets/public/arrows-build.json')
+        if (!stamp.isFile() || new groovy.json.JsonSlurper().parse(stamp).channel != 'release')
+            throw new GradleException('Release variants require npm run android:sync:release')
     }
 }

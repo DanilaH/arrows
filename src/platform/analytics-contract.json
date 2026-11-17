@@ -1,4 +1,18 @@
 {
+  "startup_timing": {
+    "platform": "string",
+    "presentable_ms": "number",
+    "ready_ms": "number"
+  },
+  "attempt_context": {
+    "event_id": "string",
+    "attempt": "string",
+    "mode": "string",
+    "level_id": "string",
+    "content_version": "number",
+    "difficulty": "string",
+    "arrows": "number"
+  },
   "app_ready": {
     "language": "string"
   },

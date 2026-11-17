@@ -3,7 +3,7 @@ import {assignmentId,assistanceExperiment,type HelpOffer,type HelpRight,type Hel
 import type {HelpVariant} from '../domain/assistance';
 import type {createAds,AdContext} from '../platform/ads';
 import type {createAnalytics} from '../platform/analytics';
-import {copy,type GameLanguage} from '../app/language';
+import {copy,countedArrows,routeSteps,type GameLanguage} from '../app/language';
 
 /** One current-state cache and visibility episode; no frame/tween/reward authority. */
 export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof createAds>,analytics:ReturnType<typeof createAnalytics>,language:()=>GameLanguage,visibleCandidates:()=>ReadonlySet<string>=()=>new Set()){
@@ -69,10 +69,10 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
       const ru=language()==='ru',{offer,reserve}=primary(attempt),effect=reserve??offer;
       if(!effect)return {text:copy[language()].hint,detail:'',reserved:false,kind:'none'};
       if(reserve&&effect.kind==='continue-single-v1'&&'bundle' in effect&&effect.bundle&&'lives' in effect.bundle&&effect.bundle.lives==='applied')return {text:ru?'Использовать подсказку':'Use saved hint',detail:ru?'Один полезный ход · без видео':'One useful move · no video',reserved:true,kind:effect.kind};
-      if(reserve&&effect.kind==='route-v1')return {text:ru?'Продолжить маршрут':'Resume route',detail:ru?`До ${effect.amount} ${effect.amount===1?'шага':'шагов'} · без видео`:`Up to ${effect.amount} steps · no video`,reserved:true,kind:effect.kind};
-      if(effect.kind==='route-v1')return {text:ru?`Маршрут · ${effect.amount} шага · видео`:`Route · ${effect.amount} steps · video`,detail:ru?'Все стрелки убираете вы':'Every action is yours',reserved:false,kind:effect.kind};
+      if(reserve&&effect.kind==='route-v1')return {text:ru?'Продолжить маршрут':'Resume route',detail:`${routeSteps(language(),effect.amount,true)} · ${ru?'без видео':'no video'}`,reserved:true,kind:effect.kind};
+      if(effect.kind==='route-v1')return {text:`${ru?'Маршрут':'Route'} · ${routeSteps(language(),effect.amount)} · ${ru?'видео':'video'}`,detail:ru?'Все стрелки убираете вы':'Every action is yours',reserved:false,kind:effect.kind};
       if(reserve)return {text:ru?'Использовать сохранённую помощь':'Use saved help',detail:effect.kind==='cascade-v1'?`${ru?'Автоматически ещё':'Automatically'} ${effect.amount}`:ru?'Без нового видео':'No new video',reserved:true,kind:effect.kind};
-      return {text:effect.kind==='cascade-v1'?`${ru?'Каскад':'Cascade'} +${effect.amount} · ${ru?'видео':'video'}`:copy[language()].hint,detail:effect.kind==='cascade-v1'?ru?`Одна пусковая и ещё ${effect.amount} стрелки автоматически`:`One trigger and ${effect.amount} automatic arrows`:ru?'Один полезный ход':'One useful move',reserved:false,kind:effect.kind};
+      return {text:effect.kind==='cascade-v1'?`${ru?'Каскад':'Cascade'} +${effect.amount} · ${ru?'видео':'video'}`:copy[language()].hint,detail:effect.kind==='cascade-v1'?ru?`Одна пусковая и ещё ${countedArrows(language(),effect.amount)} автоматически`:`One trigger and ${countedArrows(language(),effect.amount)} automatically`:ru?'Один полезный ход':'One useful move',reserved:false,kind:effect.kind};
     },
     facts(change:SaveChange):void{
       for(const f of change.helpFacts??[]){
@@ -89,6 +89,7 @@ export function createHelpOffers(progress:ProgressStore,ads:ReturnType<typeof cr
       for(const f of change.followupFacts??[])analytics.track('assistance_followup',{event_id:f.id,entitlement_id:f.entitlement,attempt:f.attempt,outcome:f.outcome,active_ms:f.activeMs});
     },
     renderQA():HTMLElement|null{
+      if(import.meta.env.MODE==='release')return null;
       if(!ads.rewardedState.playtest)return null;
       const ru=language()==='ru',section=document.createElement('section');section.className='settings-section help-qa';section.id='help-qa';
       const title=document.createElement('h3');title.textContent=ru?'Тестирование помощи':'Assistance playtest';section.append(title);

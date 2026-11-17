@@ -83,6 +83,6 @@ for(const theme of ['dark','light'] as const)test(`uses readable distinct Hard/N
   await page.addInitScript(({key,state})=>localStorage.setItem(key,JSON.stringify(state)),{key:SAVE_KEY,state});await page.clock.setFixedTime(new Date('2026-11-12T12:00:00Z'));await page.goto('/');await page.locator('#home-calendar:enabled').click();
   for(const [i,difficulty] of ['hard','nightmare'].entries()){
     const day=Array.from({length:12},(_,j)=>`2026-11-${String(j+1).padStart(2,'0')}`).find(d=>dailyDifficulty(d)===difficulty)!;
-    await page.locator(`[data-date="${day}"]`).click();const label=page.locator('.selected-day > span');await expect(label).toHaveText(difficulty==='hard'?'Hard':'Nightmare');expect(await label.evaluate(e=>getComputedStyle(e).color)).toBe(colors[i]);
+    await page.locator(`[data-date="${day}"]`).click();const label=page.locator('.selected-day > span');await expect(label).toHaveText(difficulty==='hard'?'Сложный':'Кошмар');expect(await label.evaluate(e=>getComputedStyle(e).color)).toBe(colors[i]);
   }
 });

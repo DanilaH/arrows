@@ -3,7 +3,7 @@ import { createA1CueQA, createA1ErrorCue, type A1CueMoment } from './a1ErrorCue'
 import { campaign, tutorialFor } from '../content/campaign';
 import { distanceToPath, type Point } from '../domain/geometry';
 import { BoardGestures } from '../input/gestures';
-import { copy, type GameLanguage } from '../app/language';
+import { copy, countedArrows, type GameLanguage } from '../app/language';
 import type { createPlatformRuntime } from '../app/platform';
 import { ProgressStore, type SaveChange } from '../progression/save';
 import { Board, type Level } from '../domain/board';
@@ -32,7 +32,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const warning = document.querySelector<HTMLElement>('#save-status')!, retry = document.querySelector<HTMLButtonElement>('#save-retry')!;
   const sessionPlay = document.querySelector<HTMLButtonElement>('#session-play')!;
   const progress = new ProgressStore(platform.storage), listeners: Array<() => void> = [];
-  const cueQA = createA1CueQA(platform.storage, () => platform.ads.rewardedState.playtest);
+  const cueQA = createA1CueQA(platform.storage, () => import.meta.env.MODE!=='release' && platform.ads.rewardedState.playtest);
   const helpOffers=createHelpOffers(progress,platform.ads,platform.analytics,()=>language,()=>scene.visibleHelpCandidates());
   let alive = true, loaded = false, loadSlow = false, control = false, requestingAd = false;
   let selectedControl = 0;
@@ -143,12 +143,15 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     const apply=():void=>{if(alive && meta.screen==='game' && !control && !platform.activity.isBlocked() && scene.board.attemptId===attempt)run(progress.releaseReadyErrors(attempt));};
     if(!motion.deferRoute(apply))apply();
   };
+  const trackResume = (): void => {
+    if (!control && active().started && !activeBoard().complete) platform.analytics.track('level_resume', {mode:gameMode(),level_id:active().level.id,attempt:active().board.id});
+  };
   const enterCampaign = (): void => { const intent = meta.revision; run((async () => {
     await progress.flush();
     if (!alive || meta.revision !== intent) return;
     if (progress.board.complete && progress.state.index < campaign.length - 1) { const mode = cueQA.next; if (await progress.next(progress.board.attemptId)) cueQA.bindNew(progress.state.campaign.board.id, mode); }
     if (!alive || meta.revision !== intent) return; control = false; activeDate = null;
-    meta.selectCampaign(); loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true }); resumeErrors();
+    meta.selectCampaign(); loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true }); trackResume(); resumeErrors();
   })()); };
   const leaveGame = (): void => {
     helpOffers.choice('exit');
@@ -170,7 +173,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       const intent = meta.revision;
       await progress.flush(); const existed = !!progress.state.daily[date], mode = cueQA.next; const attempt = await progress.openDaily(date,signal); if (attempt && !existed) cueQA.bindNew(attempt, mode); if (!attempt || !alive||signal?.aborted) throw Error('Daily unavailable');
       if (meta.revision !== intent) return;
-      activeDate = date; control = false; loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true }); resumeErrors();
+      activeDate = date; control = false; loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true }); trackResume(); resumeErrors();
       platform.analytics.track('daily_open', { date, attempt, resumed: active().started });
     },
   });
@@ -241,7 +244,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     };
     const paragraph = (value: string): void => { const p = document.createElement('p'); p.textContent = value; content.append(p); };
     if(kind==='cascade'&&confirmedCascade){
-      paragraph(language==='ru'?`После видео покажем пусковую стрелку и точную группу. Нажмите пусковую — следом автоматически уйдут ещё ${confirmedCascade.amount} стрелки.`:`After the video, see the trigger and exact group. Tap the trigger to remove ${confirmedCascade.amount} more arrows automatically.`);
+      paragraph(language==='ru'?`После видео покажем пусковую стрелку и точную группу. Нажмите пусковую — следом автоматически уйдут ещё ${countedArrows(language,confirmedCascade.amount)}.`:`After the video, see the trigger and exact group. Tap the trigger to automatically remove another ${countedArrows(language,confirmedCascade.amount)}.`);
       button('rewarded-cascade',language==='ru'?`Каскад +${confirmedCascade.amount} · видео`:`Cascade +${confirmedCascade.amount} · video`,()=>run(requestReward('hint',confirmedCascade)),true);
       button('cancel',text.cancel,()=>close());
     } else if (kind === 'pause') {
@@ -297,7 +300,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     document.querySelector('#choose-field')!.setAttribute('aria-label', activeDate && !control ? text.toCalendar : text.home);
     document.querySelector('#field-name')!.textContent = control ? pilot?`${selectedControl+1} / ${reviewFields.length}`:names[selectedControl]! : activeDate ? dailyLabel : `${progress.state.index + 1} / ${campaign.length}`;
     const difficulty = document.querySelector<HTMLElement>('#difficulty')!;
-    difficulty.textContent = board.level.difficulty === 'normal' ? '' : board.level.difficulty === 'hard' ? 'Hard' : 'Nightmare';
+    difficulty.textContent = board.level.difficulty === 'normal' ? '' : text[board.level.difficulty];
     difficulty.dataset.difficulty = board.level.difficulty;
     document.querySelector<HTMLElement>('.heading')!.dataset.difficulty = board.level.difficulty;
     const hearts = document.querySelector<HTMLElement>('#hearts')!; hearts.setAttribute('aria-label', `${text.lives}: ${board.hearts}`);
@@ -409,7 +412,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if (event.kind === 'move' && event.result?.kind !== 'ignored' && event.attempt) {
       const owner = progress.findAttempt(event.attempt), moved = owner?.saved;
       if (moved && owner) {
-        if (event.startedNow) platform.analytics.track('level_start', { mode: owner.mode, level_id: moved.level.id, content_version: moved.level.contentVersion, attempt: moved.board.id, resumed: false });
+        if (event.startedNow) {
+          platform.analytics.track('level_start', { mode: owner.mode, level_id: moved.level.id, content_version: moved.level.contentVersion, attempt: moved.board.id, resumed: false });
+          platform.analytics.track('attempt_context', {event_id:`${moved.board.id}-context`,attempt:moved.board.id,mode:owner.mode,level_id:moved.level.id,content_version:moved.level.contentVersion,difficulty:moved.level.difficulty,arrows:moved.level.arrows.length});
+        }
         if (event.result?.kind === 'error') {platform.analytics.track('level_error', { mode: owner.mode, level_id: moved.level.id, attempt: moved.board.id, first: event.result.first, lives: moved.board.lives });if(event.result.first&&moved.board.lives===0)platform.analytics.track('attempt_loss',{event_id:`${moved.board.id}-loss-${moved.board.errors.length}`,attempt:moved.board.id,mode:owner.mode,mistakes:moved.board.errors.length});}
         if (event.result?.kind === 'removed') {
           if (scene.board.attemptId === moved.board.id) { idleMs = 0; notice = ''; const step = tutorial(); if (step && ['tap', 'turns', 'blockers'].includes(step)) finishTutorial(step); }
@@ -535,6 +541,9 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   document.querySelector('#game-settings')!.innerHTML = settingsIcon;
   on(document.querySelector<HTMLElement>('#game-settings')!, 'click', () => { if (!requestingAd && !transition.busy) settingsSurface.open(); });
   const localize = (): void => {
+    document.documentElement.lang = language;
+    document.title = text.title;
+    document.querySelector('#startup-preload-progress-bar')?.setAttribute('aria-label', text.loading);
     document.querySelector('#game-settings')!.setAttribute('aria-label', text.settings);
     document.querySelector('#game-root')!.setAttribute('aria-label', text.title);
     document.querySelector('#meta-screen')!.setAttribute('aria-label', text.home);

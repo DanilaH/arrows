@@ -5,7 +5,7 @@ export const normalizeGameLanguage = (value: string | undefined): GameLanguage =
 export const copy = {
   ru: {
     navHome: 'Главная', navDaily: 'Календарь', navLabel: 'Разделы игры', guideShort: 'Направления', newAward: 'Новая награда',
-    flawless: 'Без ошибок!', cleared: 'Путь свободен',
+    flawless: 'Без ошибок!', cleared: 'Путь свободен', hard: 'Сложный', nightmare: 'Кошмар',
     remainingOne: 'Осталась {count} стрелка', remainingFew: 'Осталось {count} стрелки', remainingMany: 'Осталось {count} стрелок',
     overview: 'Поле целиком', currentTrophy: 'Кубок месяца', records: 'Рекорды', cupComplete: 'Все дни месяца пройдены',
     adPreparing: 'Подготавливаем видео…', adLoading: 'Загружаем видео…', adOpening: 'Открываем видео…', adDescription: 'Поле и прогресс сохраняются', cancelAd: 'Отменить', videoCancelled: 'Просмотр отменён.', videoClosed: 'Видео закрыто. Награда выдаётся после подтверждения просмотра.', rewardPending: 'Подтверждаем награду…',
@@ -50,7 +50,7 @@ export const copy = {
   },
   en: {
     navHome: 'Home', navDaily: 'Calendar', navLabel: 'Game sections', guideShort: 'Directions', newAward: 'New award',
-    flawless: 'No mistakes!', cleared: 'Path cleared',
+    flawless: 'No mistakes!', cleared: 'Path cleared', hard: 'Hard', nightmare: 'Nightmare',
     remainingOne: '{count} arrow left', remainingFew: '{count} arrows left', remainingMany: '{count} arrows left',
     overview: 'Show whole board', currentTrophy: 'This month’s trophy', records: 'Records', cupComplete: 'Every day of this month completed',
     adPreparing: 'Preparing video…', adLoading: 'Loading video…', adOpening: 'Opening video…', adDescription: 'Your board and progress are saved', cancelAd: 'Cancel', videoCancelled: 'Video cancelled.', videoClosed: 'Video closed. Rewards require viewing confirmation.', rewardPending: 'Confirming your reward…',
@@ -94,3 +94,14 @@ export const copy = {
     teach_zoom: 'Pinch to zoom in. Drag with one finger to move the board',
   },
 } satisfies Record<GameLanguage, Record<string, string>>;
+
+/** Counted game nouns stay local; routes after «до» require the genitive. */
+export function countedArrows(language: GameLanguage, count: number): string {
+  const form = new Intl.PluralRules(language).select(count);
+  return `${count} ${language === 'ru' ? form === 'one' ? 'стрелка' : form === 'few' ? 'стрелки' : 'стрелок' : count === 1 ? 'arrow' : 'arrows'}`;
+}
+export function routeSteps(language: GameLanguage, count: number, upTo = false): string {
+  const form = new Intl.PluralRules(language).select(count);
+  const noun = language === 'ru' ? upTo ? form === 'one' ? 'шага' : 'шагов' : form === 'one' ? 'шаг' : form === 'few' ? 'шага' : 'шагов' : count === 1 ? 'step' : 'steps';
+  return `${upTo ? language === 'ru' ? 'До ' : 'Up to ' : ''}${count} ${noun}`;
+}

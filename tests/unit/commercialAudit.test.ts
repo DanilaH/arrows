@@ -39,7 +39,9 @@ it('F3 updates the unaccepted A1 on actual candidate membership, not every snaps
 it('F4 exports saturation once capacity exists, reports reasons, and does not recurse on diagnostic failure',async()=>{
  vi.useFakeTimers();const sent:{event:string;params:any}[]=[],resolve:((v:any)=>void)[]=[];
  const a=createAnalytics({report:o=>{expect(validEvent(o.event,o.params)).toBe(true);sent.push(o);if(o.event==='analytics_health')return Promise.reject(Error('health unavailable'));return new Promise(r=>resolve.push(r));}});
- for(let i=0;i<33;i++)a.track('app_ready',{language:'ru'});a.track('app_ready',{language:42});a.flush();expect(sent).toHaveLength(32);for(const r of resolve)r({accepted:true,disabled:false});await tick();
+ for(let i=0;i<33;i++)a.track('app_ready',{language:'ru'});
+ // @ts-expect-error Intentionally exercise the runtime rejection boundary.
+ a.track('app_ready',{language:42});a.flush();expect(sent).toHaveLength(32);for(const r of resolve)r({accepted:true,disabled:false});await tick();
  const h=sent.find(x=>x.event==='analytics_health')!;expect(h.params).toMatchObject({overflow:1,invalid:1,dropped:2,delivery:'sdk-acceptance-only'});expect(a.snapshot().health.failed).toBe(1);for(let i=0;i<100;i++)a.flush();await tick();expect(sent.filter(x=>x.event==='analytics_health')).toHaveLength(1);
  await vi.advanceTimersByTimeAsync(60000);a.flush();await tick();expect(sent.filter(x=>x.event==='analytics_health')).toHaveLength(2);expect(sent.at(-1)!.params.diagnostics_failed).toBe(1);a.destroy();vi.useRealTimers();
 });
