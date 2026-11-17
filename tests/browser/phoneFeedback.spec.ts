@@ -20,8 +20,16 @@ for (const index of [0, 8, 9, 18, 19]) test(`keeps destination names and readabl
     else await expect(button).toBeEnabled();
   }
   const box=await page.locator('.home-board').boundingBox(),nav=await page.locator('#meta-nav').boundingBox();
-  expect(box!.height).toBeGreaterThan(170);expect(box!.width).toBeGreaterThan(245);
+  // The unlocked daily action shares the compact Home with the selected board.
+  // Keep a readable preview and prove both actions clear the persistent nav.
+  expect(box!.height).toBeGreaterThan(index>=19?140:170);expect(box!.width).toBeGreaterThan(245);
   expect((await page.locator('#home-play').boundingBox())!.y+52).toBeLessThan(nav!.y);
+  if(index>=19){
+    const daily=page.locator('#home-daily');await expect(daily).toBeVisible();
+    const action=await daily.boundingBox();expect(action!.height).toBeGreaterThanOrEqual(44);
+    expect(action!.y+action!.height).toBeLessThan(nav!.y);
+    expect(await daily.evaluate(e=>{const r=e.getBoundingClientRect();return e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));})).toBe(true);
+  }
   expect(await page.locator('#meta-screen').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
 });
 

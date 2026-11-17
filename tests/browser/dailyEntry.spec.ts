@@ -50,7 +50,17 @@ test('a pending cold bridge entry re-resolves a completed today to yesterday wit
 test('daily shortcuts and the largest result remain visible and hittable in compact portrait and short browser windows',async({page},info)=>{
  const s=seed();nearly(s,true);await boot(page,s,true);
  const sizes=[{width:320,height:568},{width:390,height:844},{width:844,height:390}];
- const check=async(selectors:string[])=>{for(const key of selectors){const b=await page.locator(key).boundingBox();expect(b,key).toBeTruthy();expect(b!.x,key).toBeGreaterThanOrEqual(0);expect(b!.y,key).toBeGreaterThanOrEqual(0);expect(b!.x+b!.width,key).toBeLessThanOrEqual(page.viewportSize()!.width+1);expect(b!.y+b!.height,key).toBeLessThanOrEqual(page.viewportSize()!.height+1);expect(b!.height,key).toBeGreaterThanOrEqual(43);expect(await page.locator(key).evaluate(e=>{const r=e.getBoundingClientRect();return e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}),key).toBe(true);}};
+ // The viewport watcher and the first font/layout paint settle asynchronously.
+ // Observe the real bounds and hit target together; persistent clipping still fails.
+ const check=async(selectors:string[])=>{for(const key of selectors){
+  await expect.poll(()=>page.locator(key).evaluate(e=>{
+   const r=e.getBoundingClientRect();return {
+    usable:r.width>0&&r.height>=43,
+    inBounds:r.x>=0&&r.y>=0&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1,
+    hit:e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)),
+   };
+  }),{message:key+' at '+JSON.stringify(page.viewportSize())}).toEqual({usable:true,inBounds:true,hit:true});
+ }};
  for(const size of sizes){await page.setViewportSize(size);await check(['#home-play','#home-daily']);}
  await page.setViewportSize(sizes[1]!);await page.locator('#home-daily').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','daily');await last(page);await expect(page.locator('#daily-reminder-offer')).toBeVisible();await page.waitForTimeout(750);
  for(const size of sizes){await page.setViewportSize(size);await page.waitForTimeout(120);await check(['#next','#result-daily','#daily-reminder-offer']);await page.screenshot({path:info.outputPath('daily-result-'+size.width+'x'+size.height+'.png')});}
