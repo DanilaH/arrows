@@ -40,7 +40,7 @@
     "run": 44071681329,
     "android": "SUCCESS (debug,21JVM,.playtest,R8releaseCheck,official checks)",
     "releaseAudit": "SUCCESS (730dates/32release-web states)",
-    "fullBrowser": "RUNNING"
+    "fullBrowser": "SUCCESS (506 passed,21.5min)"
   },
   "source": "c74b7d63127b5fdcbf008372e7ca8fecd9ec594f",
   "earlierQaFailures": [

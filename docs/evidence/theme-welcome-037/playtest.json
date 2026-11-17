@@ -1,0 +1,21 @@
+{
+  "source": "99f1f9f3a9bcce73316b7d19813e9d5c160e98bc",
+  "run": 44074824413,
+  "version": "0.37.0/code52",
+  "package": "com.danilah.arrows.playtest",
+  "bytes": 11516038,
+  "apkSha256": "64fb88d0033b7b697b4db0fb3fa060a68bd20bf854c415b4c56b319a55c432bc",
+  "certificateSha256": "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36",
+  "v2": true,
+  "webFilesExact": 29,
+  "nativeContractExact": true,
+  "testAds": true,
+  "analytics": "OFF",
+  "nativeUnit": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "phone": "NOT RUN"
+}

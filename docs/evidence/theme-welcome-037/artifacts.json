@@ -1,0 +1,31 @@
+{
+  "source": "99f1f9f3a9bcce73316b7d19813e9d5c160e98bc",
+  "links": {
+    "apk": "https://chatgpt.com/library?file_id=libfile_fde3_f-69c38d1393d08191b5bfb915fc253793_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+    "audio": "https://chatgpt.com/library?file_id=libfile_fde3_f-37b1fee95db88191b2cf76b6ec647ebf_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+    "gif": "https://chatgpt.com/library?file_id=libfile_fde3_f-41f5ecf8b0948191abe26ba8ad8fa6b1_2841ca9da26c8191b7a266fa9b41a810&account_id=personal"
+  },
+  "files": {
+    "Arrows-0.37.0-playtest.apk": {
+      "bytes": 11516038,
+      "sha256": "64fb88d0033b7b697b4db0fb3fa060a68bd20bf854c415b4c56b319a55c432bc"
+    },
+    "Arrows-0.37.0-theme-audio.mp4": {
+      "bytes": 203765,
+      "sha256": "c2b7138a9793f649d28479d746e0b5b04f745eb9db4530752894ce7149db0fe2"
+    },
+    "Arrows-0.37.0-theme.gif": {
+      "bytes": 1177056,
+      "sha256": "4e8627be9bf343a6bc1ef36ca19b8e06af34ee6aaf9abab7d479b70f36887d25"
+    }
+  },
+  "audio": {
+    "actualGameOutput": true,
+    "meanDb": -44.2,
+    "maxDb": -16.9,
+    "videoSeconds": 6.119,
+    "codec": "AAC48000Hz",
+    "overdub": false
+  },
+  "physicalPhone": false
+}
