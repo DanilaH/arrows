@@ -368,6 +368,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     platform.ads.setRewardedDemand(loaded&&!control&&meta.screen==='game'&&!board.complete&&(!a.hint||showLives)&&!step&&!requestingAd&&!motion.routeBusy&&progress.available&&!progress.uncertain&&(showLives||!platform.activity.isBlocked()&&board.hearts>0));
     scheduleAssistance();
     meta.presentArrivals();
+    meta.updateEmblem();
     void cueQA.load();
     errorCue.refresh();
   };
@@ -495,6 +496,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   listeners.push(platform.activity.onBlockedChange(value => { sample(); if (value) { motion.stopRoute(); cancel(); saveView(); if (scene.board.complete) { celebratedAttempt = scene.board.attemptId; pendingAward = false; } scene.settlePresentation(); } }));
   listeners.push(platform.activity.onBlockReasonsChange(() => { if (platform.activity.getBlockReasons().some(reason => !['menu','dialog','settings','trophy-preview'].includes(reason))) { motion.finish(); meta.discardAward(); if(!transition.busy){meta.discardArrivals();dailyReturnAttempt='';} if(!requestingAd)assistance=null; } }));
   listeners.push(scene.subscribe(sync));
+  listeners.push(platform.activity.onBlockReasonsChange(()=>meta.updateEmblem()));
   listeners.push(scene.subscribe(()=>{
     if(!overviewAttempt || scene.overviewMoving)return;
     const attempt=overviewAttempt;overviewAttempt='';

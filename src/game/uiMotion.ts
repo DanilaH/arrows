@@ -1,4 +1,5 @@
 import { createBoardTransition, type BoardArtwork } from './boardTransition';
+import { freezeHomeEmblem } from './homeEmblem';
 /** Bounded presentation only. No progress, rewards or scene ownership lives here. */
 export function createUiMotion() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -157,6 +158,7 @@ export function createUiMotion() {
       let snapshot: HTMLElement | undefined;
       if (from !== 'game' && !root.hidden) {
         snapshot = root.cloneNode(true) as HTMLElement; snapshot.removeAttribute('id'); snapshot.hidden = false;
+        freezeHomeEmblem(root,snapshot);
         const prefix = `route-${++snapshotSerial}-`, ids = new Map<string, string>();
         for (const el of snapshot.querySelectorAll('[id]')) {
           const id=el.id;
@@ -216,7 +218,7 @@ export function createUiMotion() {
       if(snapshot)owned.push(animate(snapshot,[{opacity:1},{opacity:0}],160,()=>snapshot?.remove()));
       if(to!=='game'){
         const bounds=root.getBoundingClientRect();
-        const items=[...root.querySelectorAll<HTMLElement>('.home-heading,.campaign-heading,.home-board,#home-play,.home-remaining,.home-progress,.meta-header,.record-grid>article,.record-rules,.meta-content>h2,.collection-current,.medal,.month-trophy,.month-award,.month-heading,.calendar-grid,.selected-day')]
+        const items=[...root.querySelectorAll<HTMLElement>('.home-heading,.home-emblem,.campaign-heading,.home-board,#home-play,.home-remaining,.home-progress,.meta-header,.record-grid>article,.record-rules,.meta-content>h2,.collection-current,.medal,.month-trophy,.month-award,.month-heading,.calendar-grid,.selected-day')]
           .filter(el=>{const r=el.getBoundingClientRect();return !(bridge && el.classList.contains('home-board')) && r.width>0&&r.bottom>bounds.top&&r.top<bounds.bottom;}).slice(0,12);
         items.forEach((el,i)=>owned.push(animate(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],220,undefined,Math.min(64,i*18))));
       } else {

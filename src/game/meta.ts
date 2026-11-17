@@ -9,6 +9,7 @@ import { campaign } from '../content/campaign';
 import { trophy } from './trophies';
 import { settingsIcon } from './settings';
 import { copy, type GameLanguage } from '../app/language';
+import { createHomeEmblem, homeEmblemMarkup } from './homeEmblem';
 
 export type AppScreen = 'home' | 'collection' | 'calendar' | 'game';
 const navIcons = {
@@ -39,6 +40,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   const pendingUnlocks = new Set<UnlockId>();
   let pendingDaily: {date:string;attempt:string} | null = null, lastDailyArrival = '';
   let screen: AppScreen = 'home', alive = true, ready = false, busy = false, revision = 0;
+  const emblem=createHomeEmblem(root,()=>ready&&screen==='home'&&!busy&&!presenting&&!changingScreen&&!options.motion.routeBusy&&options.canPresent());
   let dailyWork:AbortController|undefined,dailyWorkId=0;
   const cancelDailyWork=():void=>{dailyWork?.abort();dailyWork=undefined;dailyWorkId++;busy=false;};
   let selectedCampaign = '';
@@ -105,7 +107,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     const plural=new Intl.PluralRules(locale).select(remaining),remainingCopy=plural==='one'?text.remainingOne:plural==='few'?text.remainingFew:text.remainingMany;
     const nearFinish=selected && a.started && remaining<=3;
     return `<div class="home-layout" data-field="${final?'complete':selected?'active':'upcoming'}"><header class="home-heading"><h1 id="menu-title" tabindex="-1">${text.title}</h1>${stats.current ? `<span class="streak-chip">${text.streakShort} ${stats.current}</span>` : ''}</header>
-      <section class="home-current"><div class="campaign-heading"><h2>${final ? text.chapterComplete : `${text.level} ${nextIndex+1}`}</h2><span class="home-difficulty" data-difficulty="${preview.difficulty}" ${difficulty ? '' : 'hidden'}>${difficulty}</span></div>
+      <section class="home-current">${!selected&&!final?homeEmblemMarkup():''}<div class="campaign-heading"><h2>${final ? text.chapterComplete : `${text.level} ${nextIndex+1}`}</h2><span class="home-difficulty" data-difficulty="${preview.difficulty}" ${difficulty ? '' : 'hidden'}>${difficulty}</span></div>
       <svg style="--preview-line:${previewStroke}px;${selected || final ? '' : 'visibility:hidden'}" data-level="${preview.id}" data-selected="${selected}" class="home-board${final ? ' home-finish' : ''}" viewBox="${final ? '0 0 72 72' : viewBox}" aria-hidden="true">${final ? '<circle cx="36" cy="36" r="28"/><path d="m24 36 8 8 17-18"/>' : selected ? paths : ''}</svg>
       ${nearFinish?`<p class="home-remaining">${remainingCopy.replace('{count}',String(remaining))}</p>`:''}<button id="home-play" class="primary home-play" type="button" ${!ready || busy ? 'disabled' : ''}>${final ? text.viewResult : cleared ? text.next : a.started ? text.resume : text.play}<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M7 6h11v11"/></svg></button>
       <p class="home-progress">${text.chapter}: ${save.wins.length} / ${campaign.length}</p></section>${options.controls ? `<button id="home-controls" class="review-link" type="button">${text.controlFields}</button>` : ''}</div>`;
@@ -171,6 +173,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     for (const el of root.querySelectorAll<HTMLDetailsElement>('details')) el.open = expanded.includes(el.dataset.medal || el.id);
     refreshNav(); scrollPort().scrollTop = oldScroll;
     if (key) Array.from(root.querySelectorAll<HTMLElement>('button,summary,[tabindex],select')).find(b => b.id === key || b.dataset.date === key || b.dataset.month === key || b.dataset.shift === key)?.focus({ preventScroll: true });
+    emblem.update();
   };
   const presentationEnded = (): void => {
     presenting=false;
@@ -227,7 +230,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
         root.querySelector<HTMLElement>('h1')?.focus({ preventScroll: true });
 
       }
-    }, art); } finally {changingScreen=false;}
+    }, art); } finally {changingScreen=false;emblem.update();}
   };
   const back = (): void => show(screen === 'calendar' ? calendarParent : 'home');
   const closeTrophy = (): boolean => {
@@ -291,7 +294,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     queueUnlock(key: UnlockId): void {pendingUnlocks.add(key);},
     queueDailyArrival(date: string, attempt: string): void {if(attempt!==lastDailyArrival && progress.state.dailyWins[date]?.attempt===attempt)pendingDaily={date,attempt};},
     discardArrivals(): void {arrivalEpoch++;pendingUnlocks.clear();pendingDaily=null;if(presenting)options.motion.finish();},
-    presentArrivals,
+    presentArrivals, updateEmblem:emblem.update,
     queueAward(): void { pendingAward=true; }, discardAward(): void { pendingAward=false; }, get screen() { return screen; }, get revision() { return revision; }, refresh, show, back, closeTrophy,
     selectCampaign(): void { selectedCampaign = progress.state.campaign.board.id; },
     setLanguage(value: GameLanguage): void {
@@ -302,6 +305,6 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       shortDate = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', timeZone: 'UTC' }); refresh();
     },
     ready(): void { ready = true; refresh(); options.motion.reveal(nav); },
-    destroy(): void {cancelDailyWork(); alive = false; pendingDaily=null;pendingUnlocks.clear();closeTrophy(); root.removeEventListener('scroll',scrolled,true);root.removeEventListener('click', click); nav.removeEventListener('click', click); nav.replaceChildren(); nav.hidden=true; root.removeEventListener('change', changeYear); trophyDialog.removeEventListener('click', viewerClick); trophyDialog.removeEventListener('cancel', viewerCancel); trophyDialog.replaceChildren(); root.replaceChildren();root.classList.remove('calendar-screen'); },
+    destroy(): void {emblem.destroy();cancelDailyWork(); alive = false; pendingDaily=null;pendingUnlocks.clear();closeTrophy(); root.removeEventListener('scroll',scrolled,true);root.removeEventListener('click', click); nav.removeEventListener('click', click); nav.replaceChildren(); nav.hidden=true; root.removeEventListener('change', changeYear); trophyDialog.removeEventListener('click', viewerClick); trophyDialog.removeEventListener('cancel', viewerCancel); trophyDialog.replaceChildren(); root.replaceChildren();root.classList.remove('calendar-screen'); },
   };
 }
