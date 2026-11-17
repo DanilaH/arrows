@@ -1,0 +1,204 @@
+{
+  "source": "decbfaf9e3c03c979d79f93a9cb27836c4cc9a43",
+  "apkSha256": "a97a083a3b60d5ce77485aed1b95569f6025dc342c95205c8b3188c155b9fb75",
+  "states": [
+    {
+      "profile": "dark",
+      "name": "unopened",
+      "emblem": true,
+      "button": {
+        "x": 75,
+        "y": 451.40625,
+        "w": 240,
+        "h": 52,
+        "hit": true
+      },
+      "navTop": 768,
+      "overflow": false
+    },
+    {
+      "profile": "dark",
+      "name": "selected",
+      "emblem": false,
+      "button": {
+        "x": 75,
+        "y": 566.8125,
+        "w": 240,
+        "h": 52,
+        "hit": true
+      },
+      "navTop": 768,
+      "overflow": false
+    },
+    {
+      "profile": "light",
+      "name": "unopened",
+      "emblem": true,
+      "button": {
+        "x": 75,
+        "y": 451.40625,
+        "w": 240,
+        "h": 52,
+        "hit": true
+      },
+      "navTop": 768,
+      "overflow": false
+    },
+    {
+      "profile": "light",
+      "name": "selected",
+      "emblem": false,
+      "button": {
+        "x": 75,
+        "y": 566.8125,
+        "w": 240,
+        "h": 52,
+        "hit": true
+      },
+      "navTop": 768,
+      "overflow": false
+    },
+    {
+      "profile": "small",
+      "name": "unopened",
+      "emblem": true,
+      "button": {
+        "x": 40,
+        "y": 304.765625,
+        "w": 240,
+        "h": 52,
+        "hit": true
+      },
+      "navTop": 492,
+      "overflow": false
+    },
+    {
+      "profile": "small",
+      "name": "selected",
+      "emblem": false,
+      "button": {
+        "x": 40,
+        "y": 372.875,
+        "w": 240,
+        "h": 52,
+        "hit": true
+      },
+      "navTop": 492,
+      "overflow": false
+    },
+    {
+      "profile": "english",
+      "name": "unopened",
+      "emblem": true,
+      "button": {
+        "x": 95,
+        "y": 494.09375,
+        "w": 240,
+        "h": 52,
+        "hit": true
+      },
+      "navTop": 856,
+      "overflow": false
+    },
+    {
+      "profile": "english",
+      "name": "selected",
+      "emblem": false,
+      "button": {
+        "x": 95,
+        "y": 626.65625,
+        "w": 240,
+        "h": 52,
+        "hit": true
+      },
+      "navTop": 856,
+      "overflow": false
+    },
+    {
+      "profile": "tablet",
+      "name": "unopened",
+      "emblem": true,
+      "button": {
+        "x": 280,
+        "y": 668.09375,
+        "w": 240,
+        "h": 52,
+        "hit": true
+      },
+      "navTop": 1204,
+      "overflow": false
+    },
+    {
+      "profile": "tablet",
+      "name": "selected",
+      "emblem": false,
+      "button": {
+        "x": 280,
+        "y": 802.890625,
+        "w": 240,
+        "h": 52,
+        "hit": true
+      },
+      "navTop": 1204,
+      "overflow": false
+    },
+    {
+      "profile": "font150",
+      "name": "unopened",
+      "emblem": true,
+      "button": {
+        "x": 40,
+        "y": 319.9375,
+        "w": 240,
+        "h": 52,
+        "hit": true
+      },
+      "navTop": 492,
+      "overflow": false
+    },
+    {
+      "profile": "font150",
+      "name": "selected",
+      "emblem": false,
+      "button": {
+        "x": 40,
+        "y": 371.671875,
+        "w": 240,
+        "h": 59.328125,
+        "hit": true
+      },
+      "navTop": 492,
+      "overflow": false
+    },
+    {
+      "profile": "short",
+      "name": "unopened",
+      "emblem": true,
+      "button": {
+        "x": 164,
+        "y": 138.4375,
+        "w": 240,
+        "h": 51,
+        "hit": true
+      },
+      "navTop": 264,
+      "overflow": false
+    },
+    {
+      "profile": "short",
+      "name": "selected",
+      "emblem": false,
+      "button": {
+        "x": 298,
+        "y": 123.75,
+        "w": 206,
+        "h": 51,
+        "hit": true
+      },
+      "navTop": 264,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "syntheticFontScaleNotNative": true
+}

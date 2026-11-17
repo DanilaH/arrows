@@ -1,0 +1,62 @@
+{
+  "source": "decbfaf9e3c03c979d79f93a9cb27836c4cc9a43",
+  "application": "decbfaf9e3c03c979d79f93a9cb27836c4cc9a43",
+  "version": "0.34.0/code48",
+  "apkSha256": "a97a083a3b60d5ce77485aed1b95569f6025dc342c95205c8b3188c155b9fb75",
+  "payload": {
+    "assets/board-CdgtGkmQ.js": "884b082a117269d6905502e5d145c01f17e6750fae07d926262e0119c57a0fd8",
+    "assets/bootstrap-hV8BQoDe.js": "3a85e74863bddb1b18ebecfd24d09a9780a5fc2e54c33227ef08542132f2667a",
+    "assets/contentPilot-CmX_QT2S.js": "916718f0d424e30c56eea90897b0d4f4a7c069eb7092e4648a9343d7a29bd66b",
+    "assets/contentPilot-JrrfdKDM.css": "d90ddb250320fc90bf098669fff979ff40b965f534393d695c3a34d6dca4ffab",
+    "assets/dailyDense-DThArHyA.js": "8572768d8355a5aa35db1ee46e6fb30ed115bc37340b4a99a07d542d137b775a",
+    "assets/dailyDense-Vqm9rv7l.js": "703055c749cb9207ac525f271175d6ee77e792f6281f9b22bebd2955c47d4b24",
+    "assets/dailyWorker-CzSU8cF9.js": "d5bccec7c03886e299341ebc7ea268c0ad07e9bdea399381957158a2710b95f9",
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/gestures-BVnI5lK5.css": "ecfa661ee2b2305835e751e98eb49a7ffcb9e7c315a37fbdcdb47fa7781ca33b",
+    "assets/gestures-Deg1NxRB.js": "1c91be7c95cb7e0c0fee8f45a87742ed81c29d99121e6b01bb55f40557b3e4ae",
+    "assets/main-DvxSQV2T.js": "a8abe5735798f7676f922250b763dd58f4a28a4b1b2cbdced89ed92155add0a8",
+    "assets/targetLab-8sPu1SqY.js": "bf307b41c33ba280d912606194a8f25791511811e36802d9459063f65963b63c",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7",
+    "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+    "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "content-pilot.html": "fc05f7531b7baed4a4d588d2851ac171b65349e045e92fe7815a3a4e6e39fd33",
+    "cordova.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cordova_plugins.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "index.html": "d9b32037d0b26d4cdea6e2ac2af0506b05355999ea092f0e89fca194e889cc8a",
+    "target-lab.html": "4c4e7c8eff564a1a242f34a86552156d93aab2efef2fc1860fb1b62f7eccfaa8",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "method": "Actual signed APK web in Chromium; prepared QA/controlled native transport; portrait; not Android/SDK footage",
+  "clips": [
+    {
+      "name": "living-home",
+      "source": "decbfaf9e3c03c979d79f93a9cb27836c4cc9a43",
+      "frames": 345,
+      "durationMs": 10238.162600000001,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dpr": 1.5,
+      "observedArrows": [
+        0,
+        1,
+        2
+      ],
+      "idleSaveUnchanged": true,
+      "actualPressAndLegalMove": true,
+      "playToGameMs": 35.174660000000586,
+      "selectedHomeReplacesEmblem": true,
+      "frameDirectory": ".test-output/home-emblem/record-decbfaf",
+      "errors": [],
+      "method": "Fresh progress/no seeded wins, actual pointer/CDP frames/game WebAudio; controlled native transport; not phone or SDK footage; no overdub"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+Run44038986372 / source013d188f6e798828297dfec3dd4f5a70110d3b2a
+Both web and Android completed SUCCESS; this precedes the final short-window adaptation.
+2026-11-17T07:29:15.2508880Z  Test Files  29 passed (29)
+2026-11-17T07:29:15.2509818Z       Tests  234 passed (234)
+2026-11-17T07:52:08.5079310Z   492 passed (22.4m)
+2026-11-17T07:52:13.1073841Z [info] Sync finished in 0.069s

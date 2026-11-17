@@ -1,0 +1,56 @@
+{
+  "source": "decbfaf9e3c03c979d79f93a9cb27836c4cc9a43",
+  "initialSource": "013d188f6e798828297dfec3dd4f5a70110d3b2a",
+  "unit": 234,
+  "unitFiles": 29,
+  "typeBuild": "PASS",
+  "initialBroad": {
+    "pass": 52,
+    "fail": 4,
+    "cause": "New QA observer called DOMMatrix outside browser and native background helper without its required boolean; corrected, no product bug for those errors."
+  },
+  "correctedBroad": {
+    "pass": 56,
+    "fail": 0,
+    "duration": "2.0min",
+    "note": "Before final short-window adaptation"
+  },
+  "finalAffected": {
+    "pass": 12,
+    "fail": 0,
+    "duration": "24.2s",
+    "includes": "actual short-window overlap regression and safe action after resize"
+  },
+  "realIssue": "568x320 placed emblem y11.56..99.56 over header y12..44.5; hidden and stopped at <=480px; final functional checks pass",
+  "actualApkMatrix": {
+    "states": 14,
+    "profiles": 7,
+    "runtimeErrors": 0
+  },
+  "capture": {
+    "actualFrames": 345,
+    "allThreeArrowsObserved": true,
+    "idleSaveUnchanged": true,
+    "actualPressMoveAndSelectedReturn": true,
+    "playToGameMs": 35.174660000000586,
+    "latencyIsBrowserObservationNotDeviceBenchmark": true
+  },
+  "native": {
+    "jvm": 19,
+    "failures": 0,
+    "sync": "PASS",
+    "normalAndPlaytestBuilds": "PASS"
+  },
+  "hosted": {
+    "initialRun": 44038986372,
+    "finalRun": 44040646713,
+    "android": "SUCCESS",
+    "web": "IN PROGRESS at delivery; not called GREEN",
+    "initialWeb": "SUCCESS:492/492,22.4min, before short-window adaptation"
+  },
+  "qaSyntax": "Node and Python parse/actual execution PASS",
+  "physicalPhone": "NOT RUN: install/update/haptics/speaker/audio focus/FPS/thermal",
+  "realSdkAppMetricaMoney": "NOT RUN, independent stage",
+  "ownerPreviousQualitativeAcceptance": "Retained",
+  "kitImpact": "REUSE: current rounded artwork, UI recipes, pinned activity/viewport/audio seams; no dependency/kit/store changes"
+}
