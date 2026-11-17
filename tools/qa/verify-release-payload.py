@@ -11,7 +11,7 @@ a = p.parse_args()
 a.out.mkdir(parents=True, exist_ok=True)
 sdk = Path(os.environ['ANDROID_HOME']) / 'build-tools' / '36.0.0'
 def run(name, *args):
-    return subprocess.check_output([str(sdk / name), *map(str,args)], text=True, stderr=subprocess.STDOUT)
+    return subprocess.check_output([str(sdk / name), *map(str,args)], text=True, errors='replace', stderr=subprocess.STDOUT)
 sign = run('apksigner', 'verify', '--verbose', '--print-certs', a.apk)
 cert = re.search(r'Signer #1 certificate SHA-256 digest: ([a-fA-F0-9:]+)', sign)[1].replace(':','').lower()
 assert 'Verified using v2 scheme (APK Signature Scheme v2): true' in sign
