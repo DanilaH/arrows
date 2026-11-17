@@ -41,7 +41,7 @@ public class ArrowsStoragePlugin extends Plugin {
             file = file(call); out = file.startWrite(); out.write(bytes); file.finishWrite(out); out = null;
             if (!Arrays.equals(file.readFully(), bytes)) throw new IOException("Write verification failed");
             if ("arrows.progress.v1".equals(call.getString("key"))) {
-                try { new DailyReminderEngine(getContext()).invalidate(); } catch (Exception optional) { /* Never fail a committed save. */ }
+                try { new DailyReminderEngine(getContext()).invalidateForProgress(); } catch (Exception optional) { /* Never fail a committed save. */ }
             }
             call.resolve();
         } catch (Exception error) { if (file != null && out != null) file.failWrite(out); call.reject("Storage write failed"); }

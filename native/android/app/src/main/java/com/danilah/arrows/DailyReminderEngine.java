@@ -17,20 +17,22 @@ final class DailyReminderEngine {
     static final String CHANNEL="arrows_daily_v1", ACTION="com.danilah.arrows.DAILY_ALARM", OPEN="com.danilah.arrows.OPEN_DAILY";
     static final int ID=2401;
     static volatile boolean foreground;
+    private static volatile Boolean enabled;
     private final Context context;
     DailyReminderEngine(Context context) { this.context=context.getApplicationContext(); }
     private AtomicFile file() { return new AtomicFile(new File(context.getNoBackupFilesDir(),"arrows-reminders-v1.json")); }
     JSONObject read() throws Exception {
         AtomicFile f=file();
-        if(!f.getBaseFile().exists()&&!new File(f.getBaseFile()+".bak").exists())return new JSONObject().put("version",1).put("enabled",false).put("time","19:00").put("offered",false);
+        if(!f.getBaseFile().exists()&&!new File(f.getBaseFile()+".bak").exists()){enabled=false;return new JSONObject().put("version",1).put("enabled",false).put("time","19:00").put("offered",false);}
         JSONObject s=new JSONObject(new String(f.readFully(),StandardCharsets.UTF_8));
-        if(s.optInt("version")!=1||!DailyReminderPolicy.time(s.optString("time")))throw new IOException("Unreadable reminder preferences"); return s;
+        if(s.optInt("version")!=1||!DailyReminderPolicy.time(s.optString("time")))throw new IOException("Unreadable reminder preferences"); enabled=s.optBoolean("enabled");return s;
     }
     void write(JSONObject s) throws Exception {
         byte[] bytes=s.toString().getBytes(StandardCharsets.UTF_8); if(bytes.length>32768)throw new IOException("Reminder state too large");
         AtomicFile f=file(); FileOutputStream out=null;
         try {out=f.startWrite();out.write(bytes);f.finishWrite(out);out=null;if(!Arrays.equals(bytes,f.readFully()))throw new IOException("Reminder write unverified");}
         finally {if(out!=null)f.failWrite(out);}
+        enabled=s.optBoolean("enabled");
     }
     void channel() {
         if(Build.VERSION.SDK_INT>=26)((NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(
@@ -48,6 +50,11 @@ final class DailyReminderEngine {
     }
     private PendingIntent alarm(long at) { return PendingIntent.getBroadcast(context,ID,new Intent(context,DailyReminderReceiver.class).setAction(ACTION).putExtra("at",at),PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE); }
     void invalidate() { ((AlarmManager)context.getSystemService(Context.ALARM_SERVICE)).cancel(alarm(0));NotificationManagerCompat.from(context).cancel(ID); }
+    void invalidateForProgress() {
+        // Default-off players incur no per-move alarm/notification Binder calls or preference reads.
+        if(enabled==null)try{read();}catch(Exception unreadable){invalidate();return;}
+        if(Boolean.TRUE.equals(enabled))invalidate();
+    }
     private boolean visible() {
         ActivityManager.RunningAppProcessInfo info=new ActivityManager.RunningAppProcessInfo();ActivityManager.getMyMemoryState(info);
         return foreground||info.importance<=ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE;
