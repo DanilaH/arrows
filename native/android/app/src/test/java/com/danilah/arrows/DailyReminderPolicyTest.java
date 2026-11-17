@@ -30,6 +30,12 @@ public class DailyReminderPolicyTest {
         assertTrue(DailyReminderPolicy.covers(p,"2027-03-16"));assertTrue(DailyReminderPolicy.covers(p,"2030-01-01"));
         assertFalse(DailyReminderPolicy.covers(p,"2026-10-31"));
     }
+    @Test public void deviceLocaleCannotChangeTheGregorianCupDenominator()throws Exception{
+        Locale old=Locale.getDefault();
+        try{Locale.setDefault(new Locale("th","TH"));JSONObject p=projection();JSONArray dates=p.getJSONArray("completed");for(int i=1;i<=28;i++)dates.put(String.format(Locale.ROOT,"2028-02-%02d",i));
+            JSONArray avoid=new JSONArray("[\"fresh\",\"challenge\",\"cup\",\"first\",\"progress\"]");assertEquals("last",DailyReminderPolicy.message(p,"2028-02-29","en",avoid)[0]);
+        }finally{Locale.setDefault(old);}
+    }
     @Test public void rotationAvoidsLastThreeAndNeverClaimsFalseCupOrDuration()throws Exception{
         for(String language:new String[]{"ru","en"}){
             JSONObject p=projection();JSONArray recent=new JSONArray();Set<String> used=new HashSet<>();

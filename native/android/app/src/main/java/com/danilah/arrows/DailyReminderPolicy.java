@@ -18,7 +18,7 @@ final class DailyReminderPolicy {
     static boolean time(String value) { return value.matches("(?:[01][0-9]|2[0-3]):[0-5][0-9]"); }
     static long next(long now, String time, boolean skipToday, TimeZone zone) {
         if (!time(time)) throw new IllegalArgumentException("Invalid time");
-        Calendar c = Calendar.getInstance(zone); c.setTimeInMillis(now);
+        Calendar c = Calendar.getInstance(zone, Locale.ROOT); c.setTimeInMillis(now);
         c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.substring(0, 2))); c.set(Calendar.MINUTE, Integer.parseInt(time.substring(3)));
         c.set(Calendar.SECOND, 0); c.set(Calendar.MILLISECOND, 0);
         if (skipToday || c.getTimeInMillis() <= now) { c.add(Calendar.DATE, 1); c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.substring(0, 2))); c.set(Calendar.MINUTE, Integer.parseInt(time.substring(3))); }
@@ -42,7 +42,7 @@ final class DailyReminderPolicy {
         choices.add(new String[]{"first",ru?"Найдём первую стрелку?":"Find the first arrow?",ru?"Сегодняшний узор ждёт своего решения.":"Today's pattern is waiting to be solved."});
         choices.add(new String[]{"cup",ru?"Ещё один шаг к кубку":"Another step toward the cup",ru?"Пройдите сегодняшний дэйлик и пополните месяц победой.":"Complete today's daily and add a win to your month."});
         if (contains(p.optJSONArray("started"),day)) choices.add(new String[]{"resume",ru?"Узор ждёт продолжения":"Your pattern is waiting",ru?"Сегодняшний дэйлик уже начат. Продолжим?":"Today's daily is already started. Pick up where you left off?"});
-        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("UTC")); c.set(Integer.parseInt(day.substring(0,4)),Integer.parseInt(day.substring(5,7))-1,1);
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("UTC"), Locale.ROOT); c.set(Integer.parseInt(day.substring(0,4)),Integer.parseInt(day.substring(5,7))-1,1);
         int total=c.getActualMaximum(Calendar.DAY_OF_MONTH),done=0; JSONArray dates=p.optJSONArray("completed");
         if(dates!=null)for(int i=0;i<dates.length();i++)if(dates.optString(i).startsWith(day.substring(0,7)))done++;
         if(done>0)choices.add(new String[]{"progress",ru?"Кубок становится ближе":"The cup is getting closer",ru?"Дней пройдено: "+done+" из "+total+". Сегодняшний ещё впереди.":"Days completed: "+done+" of "+total+". Today's daily is still waiting."});
