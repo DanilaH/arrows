@@ -37,11 +37,11 @@ with zipfile.ZipFile(a.apk) as z:
             files[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
     assert set(public)-set(files) <= {'cordova.js','cordova_plugins.js'}
     # Official dexdump inspects the optimizer's output, not pre-R8 class files.
-    dex=[]
+    dex=[]; dex_bytes=[]
     with tempfile.TemporaryDirectory() as t:
         for name in z.namelist():
             if re.fullmatch(r'classes\d*\.dex', name):
-                path=Path(t)/name;path.write_bytes(z.read(name));dex.append(run('dexdump',path))
+                path=Path(t)/name;data=z.read(name);dex_bytes.append(data);path.write_bytes(data);dex.append(run('dexdump',path))
     output='\n'.join(dex)
     for cls, methods in {
         'ArrowsAdsPlugin':['show','pending','acknowledge','status','prepareRewarded'],
@@ -49,11 +49,15 @@ with zipfile.ZipFile(a.apk) as z:
         'ArrowsStoragePlugin':['get','set','remove'],
         'ArrowsFeedbackPlugin':['pulse','cancel'],
     }.items():
-        blocks=[b for b in re.split(r'(?=Class #\d+)',output) if f"Lcom/danilah/arrows/{cls};" in b]
+        blocks=[b for b in re.split(r'(?=Class #\d+)',output) if re.search(r"Class descriptor\s*:\s*'Lcom/danilah/arrows/"+cls+";'",b)]
         assert blocks, cls
         for method in methods: assert any(re.search(r"name\s*:\s*'"+method+"'",b) for b in blocks), (cls,method)
-    if a.kind=='releasecheck':
-        assert 'demo-rewarded-yandex' in output and 'demo-interstitial-yandex' in output
+    expected={'AD_MODE':'test','REWARDED_AD_UNIT_ID':'demo-rewarded-yandex','INTERSTITIAL_AD_UNIT_ID':'demo-interstitial-yandex','ANALYTICS_API_KEY':''} if a.kind=='releasecheck' else {'AD_MODE':'live','REWARDED_AD_UNIT_ID':os.environ['YANDEX_REWARDED_AD_UNIT_ID'],'INTERSTITIAL_AD_UNIT_ID':os.environ['YANDEX_INTERSTITIAL_AD_UNIT_ID'],'ANALYTICS_API_KEY':os.environ['APPMETRICA_API_KEY']}
+    config=Path('native/android/app/build/generated/source/buildConfig')/('releaseCheck' if a.kind=='releasecheck' else 'release')/'com/danilah/arrows/BuildConfig.java'
+    config_text=config.read_text()
+    for field,value in expected.items():
+        assert f'{field} = {json.dumps(value)};' in config_text, field
+        if field in ['REWARDED_AD_UNIT_ID','INTERSTITIAL_AD_UNIT_ID','ANALYTICS_API_KEY'] and value: assert any(value.encode() in data for data in dex_bytes), field
 mapping=Path('native/android/app/build/outputs/mapping')/('releaseCheck' if a.kind=='releasecheck' else 'release')/'mapping.txt'
 assert mapping.is_file() and mapping.stat().st_size>1000
 for name,body in [('signing.txt',sign),('badging.txt',manifest),('manifest-tree.txt',tree),('alignment.txt',alignment)]: (a.out/name).write_text(body)

@@ -22,7 +22,12 @@ dependencies {
     implementation 'io.appmetrica.analytics:analytics:8.6.0'
 }
 configurations.configureEach {
-    ['identifiers', 'location', 'appsetid', 'ad-revenue', 'billing', 'screenshot', 'ndkcrashes'].each { module ->
+    // Pinned 8.6 analytics bytecode requires the appsetid interfaces even in its
+    // dummy fallback. Removing that module breaks R8/linkage; restore the SDK
+    // dependency rather than suppressing missing types. Advertising-ID and
+    // location tracking settings remain disabled; AppSet SDK identity is a
+    // separate capability to disclose/verify with the configured release.
+    ['identifiers', 'location', 'ad-revenue', 'billing', 'screenshot', 'ndkcrashes'].each { module ->
         exclude group: 'io.appmetrica.analytics', module: "analytics-${module}"
     }
 }
