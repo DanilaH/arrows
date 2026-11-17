@@ -62,7 +62,11 @@ export function installSettingsSurface(store: SettingsStore, activity: GameplayA
   dialog.addEventListener('click', click); dialog.addEventListener('change', change); dialog.addEventListener('cancel', cancel);
   const unsubscribe = store.subscribe(refresh);
   return {
-    refreshExtra(): void { if(!dialog.open)return;const current=dialog.querySelector('#reminder-settings'),next=playerExtra();if(current&&next)current.replaceWith(next);else if(current)current.remove();else if(next)dialog.querySelector('.settings-body')!.append(next); },
+    refreshExtra(): void {
+      if(!dialog.open)return;const current=dialog.querySelector('#reminder-settings'),next=playerExtra();
+      if(current&&next){if(current.innerHTML===next.innerHTML)return;const focus=current.contains(document.activeElement)?(document.activeElement as HTMLElement).id:'';current.replaceWith(next);if(focus)next.querySelector<HTMLElement>('#'+focus)?.focus({preventScroll:true});}
+      else if(current)current.remove();else if(next)dialog.querySelector('.settings-body')!.append(next);
+    },
     open(): void { if (dialog.open) return; beforeOpen(); focus = document.activeElement as HTMLElement | null; activity.setBlocked('settings', true); document.querySelector('#home-settings')?.setAttribute('aria-expanded','true'); render(); motion.open(dialog); refresh(); }, close,
     destroy(): void { close(); unsubscribe(); dialog.removeEventListener('click', click); dialog.removeEventListener('change', change); dialog.removeEventListener('cancel', cancel); dialog.replaceChildren(); },
   };

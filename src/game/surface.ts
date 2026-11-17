@@ -187,7 +187,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     ...(reviewFields.length ? { controls: () => open('controls') } : {}), settings: () => settingsSurface.open(),
     async enterDaily(date,signal,source='calendar') {
       const intent = meta.revision;
-      cancel(); saveView();
+      cancel(); const written=saveView(); if(written)await written;
       await progress.flush(); const existed = !!progress.state.daily[date], mode = cueQA.next; const attempt = await progress.openDaily(date,signal); if (attempt && !existed) cueQA.bindNew(attempt, mode); if (!attempt || !alive||signal?.aborted) throw Error('Daily unavailable');
       if (meta.revision !== intent) throw Error('Daily navigation superseded');
       activeDate = date; dailyOrigin=source; control = false; loadActive(); meta.show('game', undefined, scene.artwork()); sync(); root.focus({ preventScroll: true }); trackResume(); resumeErrors();
@@ -235,7 +235,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if(dailyEntryBusy)return;dailyEntryBusy=true;
     try{
       await progress.flush();
-      if(!alive||!loaded||!progress.available||progress.uncertain||progress.error)return;
+      if(!alive||!loaded||!progress.available||progress.uncertain)return;
       const destination=dailyDestination(progress.state);
       if(destination.kind==='daily'){if(!await meta.startDaily(destination.date,source)){dailyEntryRetryAt=performance.now()+5000;notice=text.dailyUnavailable;}else dailyEntryRetryAt=0;}
       else if(destination.kind==='tomorrow')meta.show('calendar');
@@ -376,7 +376,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if(cupProgress){cupProgress.hidden=control||!activeDate||!scene.finished;if(activeDate){const p=dailyCupProgress(progress.state,activeDate),month=new Intl.DateTimeFormat(language,{month:'long',timeZone:'UTC'}).format(new Date(activeDate+'T12:00:00Z'));cupProgress.textContent=language==='ru'?`${month} · ${p.earned?'Кубок получен':`К кубку: ${p.done} / ${p.total}`}`:`${month} · ${p.earned?'Cup earned':`Toward the cup: ${p.done} / ${p.total}`}`;}}
     if(reminderOffer){
       const show=!!reminderOfferAttempt&&reminderOfferAttempt===board.attemptId&&scene.finished&&!control&&reminders.available&&!reminders.state?.enabled;
-      reminderOffer.hidden=!show;reminderOffer.disabled=reminders.busy;reminderOffer.textContent=language==='ru'?'Напоминать о дэйлике':'Remind me about the daily';
+      reminderOffer.hidden=!show;reminderOffer.disabled=reminders.busy;reminderOffer.textContent=language==='ru'?`Напоминать в ${reminders.state?.time??'19:00'}`:`Remind me at ${reminders.state?.time??'19:00'}`;
       if(show&&reminderOfferMarked!==board.attemptId){reminderOfferMarked=board.attemptId;reminders.offered();}
     }
     const step = board.complete ? null : tutorial();

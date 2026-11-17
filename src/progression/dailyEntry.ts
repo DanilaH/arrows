@@ -35,7 +35,7 @@ export function reminderProjection(save: GameSave, today = localDate()) {
   if (!validDate(today) || today < '2026-01-01') return null;
   const from = today.slice(0, 7) + '-01', next = calendarDate(from);
   next.setUTCMonth(next.getUTCMonth() + 1);
-  const to = monthDates(next.toISOString().slice(0, 7)).at(-1)!;
+  const end = monthDates(next.toISOString().slice(0, 7)).at(-1)!, to = end > '2200-12-31' ? '2200-12-31' : end;
   const lastCompleted=Object.keys(save.dailyWins).reduce((last,date)=>date>last?date:last,'');
   return { version: 1, from, to, lastCompleted, unlocked: save.index >= 19,
     completed: Object.keys(save.dailyWins).filter(d => d >= from && d <= to).sort(),

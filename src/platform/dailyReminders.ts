@@ -38,7 +38,7 @@ export function createDailyReminders(progress: ProgressStore, language: () => st
         if (queued) continue;
         const rootHash = [...new Uint8Array(hash)].map(v => v.toString(16).padStart(2, '0')).join('');
         accepted(await native.sync({ language: item.language, snapshot: { ...item.snapshot, rootHash } }));
-      } catch { /* A concurrent durable write safely rejects an old projection. Next commit/resume retries. */ }
+      } catch { if(alive&&!queued&&progress.durableWitness===item.raw){error=true;changed();} /* A concurrent durable write safely rejects an old projection. */ }
     } } finally { publishing = false; }
   };
   const sync = (): void => {

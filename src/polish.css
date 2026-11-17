@@ -419,3 +419,15 @@ button, summary { position: relative; isolation: isolate; }
 @media(max-height:560px) { .home-layout[data-theme-intro='true'] .home-emblem { margin-bottom: 10px; width: 80px; height: 80px; } .welcome-themes { margin-top: 14px; } }
 
 #meta-screen.theme-intro-screen { bottom: 0; padding-bottom: max(20px,env(safe-area-inset-bottom)); }
+
+/* Extra daily actions retain readable lines in short web windows; native stays portrait. */
+@media (max-height: 500px) and (min-aspect-ratio: 13/10) {
+  #home-daily, .home-current > .daily-entry-notice { grid-column: 2; }
+  #home-daily { margin-top: 8px; justify-self: center; }
+  #win:has(#result-daily:not([hidden])) { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 6px 12px; width: min(460px,calc(100% - 32px)); }
+  #win:has(#result-daily:not([hidden])) .win-emblem { display: none; }
+  #win:has(#result-daily:not([hidden])) strong { grid-column: 1 / -1; max-width: none; font-size: 20px; }
+  #win .win-cup-progress, #win .reminder-offer { grid-column: 1 / -1; }
+  #win:has(#result-daily:not([hidden])) .primary { width: 100%; margin: 0; min-height: 44px; padding: 10px 12px; }
+  #win #result-daily { width: 100%; }
+}

@@ -159,6 +159,7 @@ export class ProgressStore {
   private tail: Promise<unknown> = Promise.resolve();
   private readonly listeners = new Set<(event: SaveChange) => void>();
   private readonly repository: ArchiveRepository;
+  private committedWitness: string | null | undefined;
   private indexedState:GameSave|undefined;
   private attemptDates=new Map<string,string>();
   private alive = true;
@@ -167,7 +168,7 @@ export class ProgressStore {
     this.repository = new ArchiveRepository(storage,SAVE_KEY,decodeSave,freshSave);
   }
   public get board(): Board { const a = this.state.campaign; return new Board(a.level, a.board.id, a.board); }
-  public get durableWitness(): string | null | undefined { return this.available && !this.uncertain && !this.error ? this.repository.witness : undefined; }
+  public get durableWitness(): string | null | undefined { return this.available && !this.uncertain && !this.error ? this.committedWitness : undefined; }
   public findAttempt(expected: string, state = this.state): { saved: SavedAttempt; mode: 'campaign' | 'daily'; date?: string } | null {
     if (state.campaign.board.id === expected) return { saved: state.campaign, mode: 'campaign' };
     if(this.indexedState!==this.state){this.attemptDates=new Map(Object.entries(this.state.daily).map(([date,a])=>[a.board.id,date]));this.indexedState=this.state;}
@@ -180,7 +181,7 @@ export class ProgressStore {
   private emit(event: SaveChange): void { if (this.alive) for (const fn of this.listeners) fn(event); }
   public async load(): Promise<void> {
     const epoch = ++this.loadEpoch;
-    try { const loaded = await this.repository.load(); if (!this.alive || epoch !== this.loadEpoch) return; this.state = loaded; }
+    try { const loaded = await this.repository.load(); if (!this.alive || epoch !== this.loadEpoch) return; this.state = loaded; this.committedWitness=this.repository.witness; }
     catch { if (!this.alive || epoch !== this.loadEpoch) return; this.available = false; this.error = 'load'; }
     this.emit({ kind: 'load' });
   }
@@ -214,14 +215,14 @@ export class ProgressStore {
       next.revision++;
       const snapshot=draft.finish();await this.persist(snapshot, requireDurable);
       if (!this.alive) throw Error('Disposed save');
-      this.state = snapshot; this.emit(result.event ?? { kind: 'state' }); return result.value;
+      this.state = snapshot; this.committedWitness=this.repository.witness; this.emit(result.event ?? { kind: 'state' }); return result.value;
     });
   }
   public async recover(): Promise<void> {
     return this.queue(async () => {
       const loaded = await this.repository.load();
       if (!this.alive) return;
-      this.state = loaded; this.available = true; this.uncertain = false; this.error = null; this.emit({ kind: 'load' });
+      this.state = loaded; this.committedWitness=this.repository.witness; this.available = true; this.uncertain = false; this.error = null; this.emit({ kind: 'load' });
     });
   }
   public move(expected: string, arrow: string, activeMs = 0, adActiveMs = activeMs): Promise<MoveResult | undefined> {

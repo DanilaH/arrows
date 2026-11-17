@@ -45,3 +45,11 @@ it('binds reminder data to the captured root and coalesces concurrent commits; o
  const raw=store.durableWitness!,bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(raw)),hash=[...new Uint8Array(bytes)].map(b=>b.toString(16).padStart(2,'0')).join('');
  await vi.waitFor(()=>expect(sent.at(-1)?.snapshot?.rootHash).toBe(hash));expect(store.error).toBeNull();expect(store.state.campaign.guides).toBe(false);reminders.destroy();store.destroy();
 });
+
+it('keeps the old state/proof pair during an in-flight publication and exposes the new pair together',async()=>{
+ const seed=unlocked();let raw=JSON.stringify(seed),hold:undefined|(()=>void),written=false;
+ const store=new ProgressStore({async getItem(){return raw;},async setItem(_key,value){raw=value;written=true;await new Promise<void>(resolve=>{hold=resolve;});},async removeItem(){}});await store.load();const before=store.durableWitness;
+ const moving=store.presentation(store.board.attemptId,{guides:true});await vi.waitFor(()=>expect(written).toBe(true));
+ expect(store.state.campaign.guides).toBe(false);expect(store.durableWitness===before).toBe(true);expect(raw===before).toBe(false);
+ hold!();await moving;expect(store.state.campaign.guides).toBe(true);expect(store.durableWitness===raw).toBe(true);store.destroy();
+});

@@ -1,11 +1,13 @@
 /** Isolated browser QA adapter. Inject before the UNMODIFIED production bundle.
  * Never imported by src or copied to Android assets. This is not a video SDK. */
-export function controlledNative({save,settings,preserve=false}) {
+export function controlledNative({save,settings,preserve=false,reminders=null}) {
   const listeners=new Map(),events=[],pulses=[];let serial=0,pending=[],request=null,resolveShow=null,loadPhase='ready',writeDelay=0,retryAt=0,readyUntil=performance.now()+300000;
+  const reminderCalls=[],reminderState={enabled:false,allowed:false,time:'19:00',offered:false,pending:'',...reminders};
   const emit=(plugin,name,value)=>{for(const l of listeners.values())if(l.plugin===plugin&&l.name===name)l.callback(value);};
   const readiness=()=>({configured:true,phase:loadPhase,ready:loadPhase==='ready',preloadId:'controlled-qa',loadedAt:1,expiresInMs:Math.max(0,readyUntil-performance.now()),retryInMs:Math.max(0,retryAt-performance.now()),playtest:true});
   if(!preserve||!localStorage.getItem('arrows.progress.v1'))localStorage.setItem('arrows.progress.v1',JSON.stringify(save));if(settings)localStorage.setItem('arrows.settings.v1',JSON.stringify(settings));
   const methods={ArrowsStorage:['get','set','remove','list'],ArrowsAnalytics:['report','flush'],ArrowsAds:['prepareRewarded','prepareInterstitial','status','show','pending','acknowledge','cancelPending'],ArrowsFeedback:['pulse','cancel'],App:['getState','minimizeApp'],SystemBars:['setStyle']};
+  if(reminders)methods.ArrowsDaily=['status','sync','configure','request','openSettings','consume','markOffered'];
   window.androidBridge={};window.Capacitor={PluginHeaders:Object.entries(methods).map(([name,names])=>({name,methods:[...names.map(name=>({name,rtype:'promise'})),{name:'addListener',rtype:'callback'},{name:'removeListener',rtype:'promise'}]})),
     nativeCallback(plugin,method,options,callback){const id=String(++serial);listeners.set(id,{plugin,name:options.eventName,callback});return id;},
     async nativePromise(plugin,method,o={}){
@@ -13,6 +15,7 @@ export function controlledNative({save,settings,preserve=false}) {
       if(plugin==='ArrowsStorage'){if(method==='list')return{keys:Object.keys(localStorage).filter(k=>k.startsWith(o.prefix))};if(method==='get')return{value:localStorage.getItem(o.key)};if(method==='set'){if(o.key==='arrows.progress.v1'&&writeDelay){const delay=writeDelay;writeDelay=0;await new Promise(r=>setTimeout(r,delay));}localStorage.setItem(o.key,o.value);}if(method==='remove')localStorage.removeItem(o.key);return;}
       if(plugin==='ArrowsAnalytics'){if(method==='report')events.push({...o,at:Date.now()});return{accepted:false,disabled:true};}
       if(plugin==='ArrowsFeedback'){pulses.push({method,...o,at:performance.now()});return;}
+      if(plugin==='ArrowsDaily'&&reminders){reminderCalls.push({method,...o});if(method==='configure'){if(typeof o.enabled==='boolean')reminderState.enabled=o.enabled;if(o.time)reminderState.time=o.time;reminderState.offered=true;}if(method==='request')reminderState.allowed=true;if(method==='markOffered')reminderState.offered=true;if(method==='consume'&&o.nonce===reminderState.pending)reminderState.pending='';return{...reminderState};}
       if(plugin==='App')return{isActive:true};if(plugin==='SystemBars')return;
       if(plugin==='ArrowsAds'){
         if(method==='status')return{rewardedState:readiness()};if(method==='prepareRewarded')return readiness();
@@ -29,7 +32,8 @@ export function controlledNative({save,settings,preserve=false}) {
   window.assistanceQA={
     deferProgressWrite(ms){writeDelay=ms;},
     back(){emit('App','backButton',{canGoBack:true});},
-    snapshot:()=>({request,events,pulses,pending,readiness:readiness()}),
+    snapshot:()=>({request,events,pulses,pending,readiness:readiness(),reminders:{...reminderState},reminderCalls}),
+    dailyTap(nonce){reminderState.pending=nonce;emit('ArrowsDaily','dailyEntry',{});},
     late(receipt){pending.push(receipt);emit('ArrowsAds','adEvent',{kind:'rewarded',phase:'receipt_pending',requestId:receipt.id,attempt:receipt.attempt,mode:receipt.mode,placement:receipt.placement});},
     earned(){if(!request)throw Error('No explicit saved ad request');const receipt={schema:2,intentVersion:1,id:request.requestId,requestId:request.requestId,attempt:request.attempt,mode:request.mode,placement:request.placement};pending.push(receipt);emit('ArrowsAds','adEvent',{...request,phase:'earned'});},
     shown(){emit('ArrowsAds','adEvent',{...request,phase:'show'});},

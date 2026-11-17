@@ -74,7 +74,7 @@ final class DailyReminderEngine {
             PendingIntent tap=PendingIntent.getActivity(context,ID,open,PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
             NotificationManagerCompat.from(context).notify(ID,new NotificationCompat.Builder(context,CHANNEL).setSmallIcon(com.danilah.arrows.R.drawable.arrows_mark_monochrome)
                 .setContentTitle(message[1]).setContentText(message[2]).setStyle(new NotificationCompat.BigTextStyle().bigText(message[2])).setContentIntent(tap)
-                .setAutoCancel(true).setOnlyAlertOnce(true).setCategory(NotificationCompat.CATEGORY_REMINDER).build());
+                .setAutoCancel(true).setCategory(NotificationCompat.CATEGORY_REMINDER).build());
         }
         reconcile(s);
     }
