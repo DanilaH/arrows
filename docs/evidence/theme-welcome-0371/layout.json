@@ -1,0 +1,198 @@
+{
+  "source": "bc363960beef86e62455d51923d9a361ec20efd5",
+  "states": [
+    {
+      "profile": {
+        "id": "ru",
+        "w": 390,
+        "h": 844,
+        "lang": "ru-RU"
+      },
+      "overflow": false,
+      "controls": [
+        {
+          "id": "welcome-light",
+          "x": 55,
+          "y": 500.25,
+          "w": 135,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "welcome-dark",
+          "x": 200,
+          "y": 500.25,
+          "w": 135,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "home-play",
+          "x": 75,
+          "y": 580.25,
+          "w": 240,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        }
+      ]
+    },
+    {
+      "profile": {
+        "id": "en",
+        "w": 430,
+        "h": 932,
+        "lang": "en-US"
+      },
+      "overflow": false,
+      "controls": [
+        {
+          "id": "welcome-light",
+          "x": 75,
+          "y": 546.296875,
+          "w": 135,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "welcome-dark",
+          "x": 220,
+          "y": 546.296875,
+          "w": 135,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "home-play",
+          "x": 95,
+          "y": 626.296875,
+          "w": 240,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        }
+      ]
+    },
+    {
+      "profile": {
+        "id": "small",
+        "w": 320,
+        "h": 568,
+        "lang": "ru-RU"
+      },
+      "overflow": false,
+      "controls": [
+        {
+          "id": "welcome-light",
+          "x": 20,
+          "y": 342.84375,
+          "w": 135,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "welcome-dark",
+          "x": 165,
+          "y": 342.84375,
+          "w": 135,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "home-play",
+          "x": 40,
+          "y": 422.84375,
+          "w": 240,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        }
+      ]
+    },
+    {
+      "profile": {
+        "id": "font150",
+        "w": 320,
+        "h": 568,
+        "lang": "en-US",
+        "font": 1.5
+      },
+      "overflow": false,
+      "controls": [
+        {
+          "id": "welcome-light",
+          "x": 20,
+          "y": 385.8125,
+          "w": 135,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "welcome-dark",
+          "x": 165,
+          "y": 385.8125,
+          "w": 135,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "home-play",
+          "x": 40,
+          "y": 465.8125,
+          "w": 240,
+          "h": 53.796875,
+          "visible": true,
+          "hit": true
+        }
+      ]
+    },
+    {
+      "profile": {
+        "id": "short",
+        "w": 568,
+        "h": 320,
+        "lang": "ru-RU"
+      },
+      "overflow": false,
+      "controls": [
+        {
+          "id": "welcome-light",
+          "x": 144,
+          "y": 139.640625,
+          "w": 135,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "welcome-dark",
+          "x": 289,
+          "y": 139.640625,
+          "w": 135,
+          "h": 52,
+          "visible": true,
+          "hit": true
+        },
+        {
+          "id": "home-play",
+          "x": 164,
+          "y": 219.640625,
+          "w": 240,
+          "h": 51,
+          "visible": true,
+          "hit": true
+        }
+      ]
+    }
+  ],
+  "syntheticFontScale": true,
+  "physical": false
+}
