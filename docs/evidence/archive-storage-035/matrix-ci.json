@@ -1,0 +1,3635 @@
+{
+  "source": "44a7da5778ef8abd5f8ff5af23cfdd2e761a83cc",
+  "payload": "/home/runner/work/arrows/arrows/.test-output/release-web",
+  "provenance": "Actual release-mode production web in headless Chromium; prepared possible progress and controlled native transport; not a phone or live SDK. Synthetic150% CSS is not Android system-font scaling.",
+  "states": [
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "home",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "home-play",
+          "text": "Играть",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция. Новая награда"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        }
+      ],
+      "screenshot": "ru-dark-320-568-home.png",
+      "sha256": "58d31ce1ea807774a47528eebd16acf53957fd71a9a7edcd64fb2252b77168bb"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "board",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "На главную"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Заново"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Настройки"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Показать направления выхода"
+        }
+      ],
+      "screenshot": "ru-dark-320-568-board.png",
+      "sha256": "7eb3579f8657535251d2031b23d22128f08bc52a47744ba176db5a716553a6ff"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "settings",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "На главную"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Заново"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Настройки"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Показать направления выхода"
+        },
+        {
+          "id": "close-settings",
+          "text": "",
+          "label": "Закрыть"
+        },
+        {
+          "id": "theme-dark",
+          "text": "Тёмная",
+          "label": null
+        },
+        {
+          "id": "theme-light",
+          "text": "Светлая",
+          "label": null
+        },
+        {
+          "id": "setting-sound",
+          "text": "ЗвукиСтрелки, ошибки и победы",
+          "label": null
+        },
+        {
+          "id": "setting-vibration",
+          "text": "ВибрацияКороткий отклик на действия",
+          "label": null
+        },
+        {
+          "id": "preview-sound",
+          "text": "♪Проверить звук",
+          "label": null
+        },
+        {
+          "id": "preview-vibration",
+          "text": "Вибрация",
+          "label": null
+        }
+      ],
+      "screenshot": "ru-dark-320-568-settings.png",
+      "sha256": "f28d5bf30747151b80f987a59b5fe14598526a88020aca5ef11dd7c35e8ee23b"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "collection",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Назад"
+        },
+        {
+          "id": "collection-current-trophy",
+          "text": "XI · 26",
+          "label": "Рассмотреть кубок"
+        },
+        {
+          "id": "collection-open-month",
+          "text": "Открыть месяц",
+          "label": null
+        },
+        {
+          "id": "",
+          "text": "I · 26\n    \n    январь0 / 31",
+          "label": "январь 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "II · 26\n    \n    февраль0 / 28",
+          "label": "февраль 2026 г.: 0 / 28"
+        },
+        {
+          "id": "",
+          "text": "III · 26\n    \n    март0 / 31",
+          "label": "март 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "IV · 26\n    \n    апрель0 / 30",
+          "label": "апрель 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "V · 26\n    \n    май0 / 31",
+          "label": "май 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "VI · 26\n    \n    июнь0 / 30",
+          "label": "июнь 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "VII · 26\n    \n    июль0 / 31",
+          "label": "июль 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "VIII · 26\n    \n    август0 / 31",
+          "label": "август 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "IX · 26\n    \n    сентябрь0 / 30",
+          "label": "сентябрь 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "X · 26\n    \n    октябрь0 / 31",
+          "label": "октябрь 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "XI · 26\n    \n    ноябрь0 / 30",
+          "label": "ноябрь 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "XII · 26\n    \n    декабрь0 / 31",
+          "label": "декабрь 2026 г.: 0 / 31"
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        }
+      ],
+      "screenshot": "ru-dark-320-568-collection.png",
+      "sha256": "1eb6d4e7ae8abf4ce08debeda929b38ed7e21783eefd675494da61c8568eb987"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "calendar",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Назад"
+        },
+        {
+          "id": "view-trophy",
+          "text": "XI · 26\n    \n    Рассмотреть кубок",
+          "label": "Рассмотреть кубок"
+        },
+        {
+          "id": "",
+          "text": "‹",
+          "label": "Предыдущий месяц"
+        },
+        {
+          "id": "",
+          "text": "›",
+          "label": "Следующий месяц"
+        },
+        {
+          "id": "",
+          "text": "1",
+          "label": "1 ноября"
+        },
+        {
+          "id": "",
+          "text": "2",
+          "label": "2 ноября"
+        },
+        {
+          "id": "",
+          "text": "3",
+          "label": "3 ноября"
+        },
+        {
+          "id": "",
+          "text": "4",
+          "label": "4 ноября"
+        },
+        {
+          "id": "",
+          "text": "5",
+          "label": "5 ноября"
+        },
+        {
+          "id": "",
+          "text": "6",
+          "label": "6 ноября"
+        },
+        {
+          "id": "",
+          "text": "7",
+          "label": "7 ноября"
+        },
+        {
+          "id": "",
+          "text": "8",
+          "label": "8 ноября"
+        },
+        {
+          "id": "",
+          "text": "9",
+          "label": "9 ноября"
+        },
+        {
+          "id": "",
+          "text": "10",
+          "label": "10 ноября"
+        },
+        {
+          "id": "",
+          "text": "11",
+          "label": "11 ноября"
+        },
+        {
+          "id": "",
+          "text": "12",
+          "label": "12 ноября"
+        },
+        {
+          "id": "",
+          "text": "13",
+          "label": "13 ноября"
+        },
+        {
+          "id": "",
+          "text": "14",
+          "label": "14 ноября"
+        },
+        {
+          "id": "",
+          "text": "15",
+          "label": "15 ноября"
+        },
+        {
+          "id": "",
+          "text": "16",
+          "label": "16 ноября"
+        },
+        {
+          "id": "",
+          "text": "17",
+          "label": "17 ноября"
+        },
+        {
+          "id": "",
+          "text": "18",
+          "label": "18 ноября"
+        },
+        {
+          "id": "",
+          "text": "19",
+          "label": "19 ноября"
+        },
+        {
+          "id": "",
+          "text": "20",
+          "label": "20 ноября"
+        },
+        {
+          "id": "",
+          "text": "21",
+          "label": "21 ноября"
+        },
+        {
+          "id": "",
+          "text": "22",
+          "label": "22 ноября"
+        },
+        {
+          "id": "",
+          "text": "23",
+          "label": "23 ноября"
+        },
+        {
+          "id": "",
+          "text": "24",
+          "label": "24 ноября"
+        },
+        {
+          "id": "",
+          "text": "25",
+          "label": "25 ноября"
+        },
+        {
+          "id": "",
+          "text": "26",
+          "label": "26 ноября"
+        },
+        {
+          "id": "",
+          "text": "27",
+          "label": "27 ноября"
+        },
+        {
+          "id": "",
+          "text": "28",
+          "label": "28 ноября"
+        },
+        {
+          "id": "",
+          "text": "29",
+          "label": "29 ноября"
+        },
+        {
+          "id": "",
+          "text": "30",
+          "label": "30 ноября"
+        },
+        {
+          "id": "start-daily",
+          "text": "Играть",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        }
+      ],
+      "screenshot": "ru-dark-320-568-calendar.png",
+      "sha256": "f9f0a3d1b305e60f81dea2cd9eb0f31a70e764a3c33f5ffeb8c01ce4b058c367"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "trophy",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Назад"
+        },
+        {
+          "id": "view-trophy",
+          "text": "XI · 26\n    \n    Рассмотреть кубок",
+          "label": "Рассмотреть кубок"
+        },
+        {
+          "id": "",
+          "text": "‹",
+          "label": "Предыдущий месяц"
+        },
+        {
+          "id": "",
+          "text": "›",
+          "label": "Следующий месяц"
+        },
+        {
+          "id": "",
+          "text": "1",
+          "label": "1 ноября"
+        },
+        {
+          "id": "",
+          "text": "2",
+          "label": "2 ноября"
+        },
+        {
+          "id": "",
+          "text": "3",
+          "label": "3 ноября"
+        },
+        {
+          "id": "",
+          "text": "4",
+          "label": "4 ноября"
+        },
+        {
+          "id": "",
+          "text": "5",
+          "label": "5 ноября"
+        },
+        {
+          "id": "",
+          "text": "6",
+          "label": "6 ноября"
+        },
+        {
+          "id": "",
+          "text": "7",
+          "label": "7 ноября"
+        },
+        {
+          "id": "",
+          "text": "8",
+          "label": "8 ноября"
+        },
+        {
+          "id": "",
+          "text": "9",
+          "label": "9 ноября"
+        },
+        {
+          "id": "",
+          "text": "10",
+          "label": "10 ноября"
+        },
+        {
+          "id": "",
+          "text": "11",
+          "label": "11 ноября"
+        },
+        {
+          "id": "",
+          "text": "12",
+          "label": "12 ноября"
+        },
+        {
+          "id": "",
+          "text": "13",
+          "label": "13 ноября"
+        },
+        {
+          "id": "",
+          "text": "14",
+          "label": "14 ноября"
+        },
+        {
+          "id": "",
+          "text": "15",
+          "label": "15 ноября"
+        },
+        {
+          "id": "",
+          "text": "16",
+          "label": "16 ноября"
+        },
+        {
+          "id": "",
+          "text": "17",
+          "label": "17 ноября"
+        },
+        {
+          "id": "",
+          "text": "18",
+          "label": "18 ноября"
+        },
+        {
+          "id": "",
+          "text": "19",
+          "label": "19 ноября"
+        },
+        {
+          "id": "",
+          "text": "20",
+          "label": "20 ноября"
+        },
+        {
+          "id": "",
+          "text": "21",
+          "label": "21 ноября"
+        },
+        {
+          "id": "",
+          "text": "22",
+          "label": "22 ноября"
+        },
+        {
+          "id": "",
+          "text": "23",
+          "label": "23 ноября"
+        },
+        {
+          "id": "",
+          "text": "24",
+          "label": "24 ноября"
+        },
+        {
+          "id": "",
+          "text": "25",
+          "label": "25 ноября"
+        },
+        {
+          "id": "",
+          "text": "26",
+          "label": "26 ноября"
+        },
+        {
+          "id": "",
+          "text": "27",
+          "label": "27 ноября"
+        },
+        {
+          "id": "",
+          "text": "28",
+          "label": "28 ноября"
+        },
+        {
+          "id": "",
+          "text": "29",
+          "label": "29 ноября"
+        },
+        {
+          "id": "",
+          "text": "30",
+          "label": "30 ноября"
+        },
+        {
+          "id": "start-daily",
+          "text": "Играть",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        },
+        {
+          "id": "",
+          "text": "×",
+          "label": "Закрыть"
+        },
+        {
+          "id": "",
+          "text": "Открыть месяц",
+          "label": null
+        }
+      ],
+      "screenshot": "ru-dark-320-568-trophy.png",
+      "sha256": "ea1574dcac1b74024239581e5bde1a85c682f8cdad283bbc0be541c23daed7b7"
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "home",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "home-play",
+          "text": "Play",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Home",
+          "label": "Home"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Calendar",
+          "label": "Calendar"
+        },
+        {
+          "id": "home-collection",
+          "text": "Collection",
+          "label": "Collection. New award"
+        },
+        {
+          "id": "home-settings",
+          "text": "Settings",
+          "label": "Settings"
+        }
+      ],
+      "screenshot": "en-light-320-568-home.png",
+      "sha256": "685a486f22468de4828159bb3ce56141a6d65361d9aa7b83238ce120812bc6ec"
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "board",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "Home"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Restart"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Settings"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Show exit directions"
+        }
+      ],
+      "screenshot": "en-light-320-568-board.png",
+      "sha256": "b066f7673b62c5018401359f57ffe67ea4c10e12f5ac18c723c0ff5f1b0b16d0"
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "settings",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "Home"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Restart"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Settings"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Show exit directions"
+        },
+        {
+          "id": "close-settings",
+          "text": "",
+          "label": "Close"
+        },
+        {
+          "id": "theme-dark",
+          "text": "Dark",
+          "label": null
+        },
+        {
+          "id": "theme-light",
+          "text": "Light",
+          "label": null
+        },
+        {
+          "id": "setting-sound",
+          "text": "SoundsArrows, mistakes and victories",
+          "label": null
+        },
+        {
+          "id": "setting-vibration",
+          "text": "VibrationBrief feedback for your actions",
+          "label": null
+        },
+        {
+          "id": "preview-sound",
+          "text": "♪Preview sound",
+          "label": null
+        },
+        {
+          "id": "preview-vibration",
+          "text": "Test vibration",
+          "label": null
+        }
+      ],
+      "screenshot": "en-light-320-568-settings.png",
+      "sha256": "9d5ea61e383c70e21e67336a4bc37ea55419fdbaa66707c7aa7e652948dcaded"
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "collection",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Back"
+        },
+        {
+          "id": "collection-current-trophy",
+          "text": "XI · 26",
+          "label": "Inspect trophy"
+        },
+        {
+          "id": "collection-open-month",
+          "text": "Open month",
+          "label": null
+        },
+        {
+          "id": "",
+          "text": "I · 26\n    \n    January0 / 31",
+          "label": "January 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "II · 26\n    \n    February0 / 28",
+          "label": "February 2026: 0 / 28"
+        },
+        {
+          "id": "",
+          "text": "III · 26\n    \n    March0 / 31",
+          "label": "March 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "IV · 26\n    \n    April0 / 30",
+          "label": "April 2026: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "V · 26\n    \n    May0 / 31",
+          "label": "May 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "VI · 26\n    \n    June0 / 30",
+          "label": "June 2026: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "VII · 26\n    \n    July0 / 31",
+          "label": "July 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "VIII · 26\n    \n    August0 / 31",
+          "label": "August 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "IX · 26\n    \n    September0 / 30",
+          "label": "September 2026: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "X · 26\n    \n    October0 / 31",
+          "label": "October 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "XI · 26\n    \n    November0 / 30",
+          "label": "November 2026: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "XII · 26\n    \n    December0 / 31",
+          "label": "December 2026: 0 / 31"
+        },
+        {
+          "id": "home-tab",
+          "text": "Home",
+          "label": "Home"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Calendar",
+          "label": "Calendar"
+        },
+        {
+          "id": "home-collection",
+          "text": "Collection",
+          "label": "Collection"
+        },
+        {
+          "id": "home-settings",
+          "text": "Settings",
+          "label": "Settings"
+        }
+      ],
+      "screenshot": "en-light-320-568-collection.png",
+      "sha256": "c1e9cd00e5dcf18de4be2fd2c0edc397652c250fdb26f8e0f159833410a2c5c6"
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "calendar",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Back"
+        },
+        {
+          "id": "view-trophy",
+          "text": "XI · 26\n    \n    Inspect trophy",
+          "label": "Inspect trophy"
+        },
+        {
+          "id": "",
+          "text": "‹",
+          "label": "Previous month"
+        },
+        {
+          "id": "",
+          "text": "›",
+          "label": "Next month"
+        },
+        {
+          "id": "",
+          "text": "1",
+          "label": "November 1"
+        },
+        {
+          "id": "",
+          "text": "2",
+          "label": "November 2"
+        },
+        {
+          "id": "",
+          "text": "3",
+          "label": "November 3"
+        },
+        {
+          "id": "",
+          "text": "4",
+          "label": "November 4"
+        },
+        {
+          "id": "",
+          "text": "5",
+          "label": "November 5"
+        },
+        {
+          "id": "",
+          "text": "6",
+          "label": "November 6"
+        },
+        {
+          "id": "",
+          "text": "7",
+          "label": "November 7"
+        },
+        {
+          "id": "",
+          "text": "8",
+          "label": "November 8"
+        },
+        {
+          "id": "",
+          "text": "9",
+          "label": "November 9"
+        },
+        {
+          "id": "",
+          "text": "10",
+          "label": "November 10"
+        },
+        {
+          "id": "",
+          "text": "11",
+          "label": "November 11"
+        },
+        {
+          "id": "",
+          "text": "12",
+          "label": "November 12"
+        },
+        {
+          "id": "",
+          "text": "13",
+          "label": "November 13"
+        },
+        {
+          "id": "",
+          "text": "14",
+          "label": "November 14"
+        },
+        {
+          "id": "",
+          "text": "15",
+          "label": "November 15"
+        },
+        {
+          "id": "",
+          "text": "16",
+          "label": "November 16"
+        },
+        {
+          "id": "",
+          "text": "17",
+          "label": "November 17"
+        },
+        {
+          "id": "",
+          "text": "18",
+          "label": "November 18"
+        },
+        {
+          "id": "",
+          "text": "19",
+          "label": "November 19"
+        },
+        {
+          "id": "",
+          "text": "20",
+          "label": "November 20"
+        },
+        {
+          "id": "",
+          "text": "21",
+          "label": "November 21"
+        },
+        {
+          "id": "",
+          "text": "22",
+          "label": "November 22"
+        },
+        {
+          "id": "",
+          "text": "23",
+          "label": "November 23"
+        },
+        {
+          "id": "",
+          "text": "24",
+          "label": "November 24"
+        },
+        {
+          "id": "",
+          "text": "25",
+          "label": "November 25"
+        },
+        {
+          "id": "",
+          "text": "26",
+          "label": "November 26"
+        },
+        {
+          "id": "",
+          "text": "27",
+          "label": "November 27"
+        },
+        {
+          "id": "",
+          "text": "28",
+          "label": "November 28"
+        },
+        {
+          "id": "",
+          "text": "29",
+          "label": "November 29"
+        },
+        {
+          "id": "",
+          "text": "30",
+          "label": "November 30"
+        },
+        {
+          "id": "start-daily",
+          "text": "Play",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Home",
+          "label": "Home"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Calendar",
+          "label": "Calendar"
+        },
+        {
+          "id": "home-collection",
+          "text": "Collection",
+          "label": "Collection"
+        },
+        {
+          "id": "home-settings",
+          "text": "Settings",
+          "label": "Settings"
+        }
+      ],
+      "screenshot": "en-light-320-568-calendar.png",
+      "sha256": "14b6a4a4a3cd5cda42d07acd8a0a3d72ca675a5fb06640dab025661c517ebe8b"
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "trophy",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Back"
+        },
+        {
+          "id": "view-trophy",
+          "text": "XI · 26\n    \n    Inspect trophy",
+          "label": "Inspect trophy"
+        },
+        {
+          "id": "",
+          "text": "‹",
+          "label": "Previous month"
+        },
+        {
+          "id": "",
+          "text": "›",
+          "label": "Next month"
+        },
+        {
+          "id": "",
+          "text": "1",
+          "label": "November 1"
+        },
+        {
+          "id": "",
+          "text": "2",
+          "label": "November 2"
+        },
+        {
+          "id": "",
+          "text": "3",
+          "label": "November 3"
+        },
+        {
+          "id": "",
+          "text": "4",
+          "label": "November 4"
+        },
+        {
+          "id": "",
+          "text": "5",
+          "label": "November 5"
+        },
+        {
+          "id": "",
+          "text": "6",
+          "label": "November 6"
+        },
+        {
+          "id": "",
+          "text": "7",
+          "label": "November 7"
+        },
+        {
+          "id": "",
+          "text": "8",
+          "label": "November 8"
+        },
+        {
+          "id": "",
+          "text": "9",
+          "label": "November 9"
+        },
+        {
+          "id": "",
+          "text": "10",
+          "label": "November 10"
+        },
+        {
+          "id": "",
+          "text": "11",
+          "label": "November 11"
+        },
+        {
+          "id": "",
+          "text": "12",
+          "label": "November 12"
+        },
+        {
+          "id": "",
+          "text": "13",
+          "label": "November 13"
+        },
+        {
+          "id": "",
+          "text": "14",
+          "label": "November 14"
+        },
+        {
+          "id": "",
+          "text": "15",
+          "label": "November 15"
+        },
+        {
+          "id": "",
+          "text": "16",
+          "label": "November 16"
+        },
+        {
+          "id": "",
+          "text": "17",
+          "label": "November 17"
+        },
+        {
+          "id": "",
+          "text": "18",
+          "label": "November 18"
+        },
+        {
+          "id": "",
+          "text": "19",
+          "label": "November 19"
+        },
+        {
+          "id": "",
+          "text": "20",
+          "label": "November 20"
+        },
+        {
+          "id": "",
+          "text": "21",
+          "label": "November 21"
+        },
+        {
+          "id": "",
+          "text": "22",
+          "label": "November 22"
+        },
+        {
+          "id": "",
+          "text": "23",
+          "label": "November 23"
+        },
+        {
+          "id": "",
+          "text": "24",
+          "label": "November 24"
+        },
+        {
+          "id": "",
+          "text": "25",
+          "label": "November 25"
+        },
+        {
+          "id": "",
+          "text": "26",
+          "label": "November 26"
+        },
+        {
+          "id": "",
+          "text": "27",
+          "label": "November 27"
+        },
+        {
+          "id": "",
+          "text": "28",
+          "label": "November 28"
+        },
+        {
+          "id": "",
+          "text": "29",
+          "label": "November 29"
+        },
+        {
+          "id": "",
+          "text": "30",
+          "label": "November 30"
+        },
+        {
+          "id": "start-daily",
+          "text": "Play",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Home",
+          "label": "Home"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Calendar",
+          "label": "Calendar"
+        },
+        {
+          "id": "home-collection",
+          "text": "Collection",
+          "label": "Collection"
+        },
+        {
+          "id": "home-settings",
+          "text": "Settings",
+          "label": "Settings"
+        },
+        {
+          "id": "",
+          "text": "×",
+          "label": "Close"
+        },
+        {
+          "id": "",
+          "text": "Open month",
+          "label": null
+        }
+      ],
+      "screenshot": "en-light-320-568-trophy.png",
+      "sha256": "e44b12eb7a43c28f1f48f5c06ef69701de2de5f2c5c68489c17f5bae2ecbe441"
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "home",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "home-play",
+          "text": "Играть",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция. Новая награда"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        }
+      ],
+      "screenshot": "ru-light-390-844-home.png",
+      "sha256": "05d91d9316d15f2f64ba2684180f78bab4d04e86c39204678ddeb474ab7931d7"
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "board",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "На главную"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Заново"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Настройки"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Показать направления выхода"
+        }
+      ],
+      "screenshot": "ru-light-390-844-board.png",
+      "sha256": "e0bb14a436816e869d84b7d5b705a2715f8ef6d1286f97fbebe302724a3b22cd"
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "settings",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "На главную"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Заново"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Настройки"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Показать направления выхода"
+        },
+        {
+          "id": "close-settings",
+          "text": "",
+          "label": "Закрыть"
+        },
+        {
+          "id": "theme-dark",
+          "text": "Тёмная",
+          "label": null
+        },
+        {
+          "id": "theme-light",
+          "text": "Светлая",
+          "label": null
+        },
+        {
+          "id": "setting-sound",
+          "text": "ЗвукиСтрелки, ошибки и победы",
+          "label": null
+        },
+        {
+          "id": "setting-vibration",
+          "text": "ВибрацияКороткий отклик на действия",
+          "label": null
+        },
+        {
+          "id": "preview-sound",
+          "text": "♪Проверить звук",
+          "label": null
+        },
+        {
+          "id": "preview-vibration",
+          "text": "Вибрация",
+          "label": null
+        }
+      ],
+      "screenshot": "ru-light-390-844-settings.png",
+      "sha256": "56e4df9ff287e2fba93768ef88f8f00f9b116c9fa08ce2e095ecc42c5790d88f"
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "collection",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Назад"
+        },
+        {
+          "id": "collection-current-trophy",
+          "text": "XI · 26",
+          "label": "Рассмотреть кубок"
+        },
+        {
+          "id": "collection-open-month",
+          "text": "Открыть месяц",
+          "label": null
+        },
+        {
+          "id": "",
+          "text": "I · 26\n    \n    январь0 / 31",
+          "label": "январь 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "II · 26\n    \n    февраль0 / 28",
+          "label": "февраль 2026 г.: 0 / 28"
+        },
+        {
+          "id": "",
+          "text": "III · 26\n    \n    март0 / 31",
+          "label": "март 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "IV · 26\n    \n    апрель0 / 30",
+          "label": "апрель 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "V · 26\n    \n    май0 / 31",
+          "label": "май 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "VI · 26\n    \n    июнь0 / 30",
+          "label": "июнь 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "VII · 26\n    \n    июль0 / 31",
+          "label": "июль 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "VIII · 26\n    \n    август0 / 31",
+          "label": "август 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "IX · 26\n    \n    сентябрь0 / 30",
+          "label": "сентябрь 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "X · 26\n    \n    октябрь0 / 31",
+          "label": "октябрь 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "XI · 26\n    \n    ноябрь0 / 30",
+          "label": "ноябрь 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "XII · 26\n    \n    декабрь0 / 31",
+          "label": "декабрь 2026 г.: 0 / 31"
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        }
+      ],
+      "screenshot": "ru-light-390-844-collection.png",
+      "sha256": "fbb586a2fbe390262b8900bd9ef9e46681a2c01545688fca6e9bd26b2747d5b8"
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "calendar",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Назад"
+        },
+        {
+          "id": "view-trophy",
+          "text": "XI · 26\n    \n    Рассмотреть кубок",
+          "label": "Рассмотреть кубок"
+        },
+        {
+          "id": "",
+          "text": "‹",
+          "label": "Предыдущий месяц"
+        },
+        {
+          "id": "",
+          "text": "›",
+          "label": "Следующий месяц"
+        },
+        {
+          "id": "",
+          "text": "1",
+          "label": "1 ноября"
+        },
+        {
+          "id": "",
+          "text": "2",
+          "label": "2 ноября"
+        },
+        {
+          "id": "",
+          "text": "3",
+          "label": "3 ноября"
+        },
+        {
+          "id": "",
+          "text": "4",
+          "label": "4 ноября"
+        },
+        {
+          "id": "",
+          "text": "5",
+          "label": "5 ноября"
+        },
+        {
+          "id": "",
+          "text": "6",
+          "label": "6 ноября"
+        },
+        {
+          "id": "",
+          "text": "7",
+          "label": "7 ноября"
+        },
+        {
+          "id": "",
+          "text": "8",
+          "label": "8 ноября"
+        },
+        {
+          "id": "",
+          "text": "9",
+          "label": "9 ноября"
+        },
+        {
+          "id": "",
+          "text": "10",
+          "label": "10 ноября"
+        },
+        {
+          "id": "",
+          "text": "11",
+          "label": "11 ноября"
+        },
+        {
+          "id": "",
+          "text": "12",
+          "label": "12 ноября"
+        },
+        {
+          "id": "",
+          "text": "13",
+          "label": "13 ноября"
+        },
+        {
+          "id": "",
+          "text": "14",
+          "label": "14 ноября"
+        },
+        {
+          "id": "",
+          "text": "15",
+          "label": "15 ноября"
+        },
+        {
+          "id": "",
+          "text": "16",
+          "label": "16 ноября"
+        },
+        {
+          "id": "",
+          "text": "17",
+          "label": "17 ноября"
+        },
+        {
+          "id": "",
+          "text": "18",
+          "label": "18 ноября"
+        },
+        {
+          "id": "",
+          "text": "19",
+          "label": "19 ноября"
+        },
+        {
+          "id": "",
+          "text": "20",
+          "label": "20 ноября"
+        },
+        {
+          "id": "",
+          "text": "21",
+          "label": "21 ноября"
+        },
+        {
+          "id": "",
+          "text": "22",
+          "label": "22 ноября"
+        },
+        {
+          "id": "",
+          "text": "23",
+          "label": "23 ноября"
+        },
+        {
+          "id": "",
+          "text": "24",
+          "label": "24 ноября"
+        },
+        {
+          "id": "",
+          "text": "25",
+          "label": "25 ноября"
+        },
+        {
+          "id": "",
+          "text": "26",
+          "label": "26 ноября"
+        },
+        {
+          "id": "",
+          "text": "27",
+          "label": "27 ноября"
+        },
+        {
+          "id": "",
+          "text": "28",
+          "label": "28 ноября"
+        },
+        {
+          "id": "",
+          "text": "29",
+          "label": "29 ноября"
+        },
+        {
+          "id": "",
+          "text": "30",
+          "label": "30 ноября"
+        },
+        {
+          "id": "start-daily",
+          "text": "Играть",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        }
+      ],
+      "screenshot": "ru-light-390-844-calendar.png",
+      "sha256": "8777b7eedbc8ec77f17ac14c2d8dc8d714b09582c68b2aa354d9628636b5c0be"
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "trophy",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Назад"
+        },
+        {
+          "id": "view-trophy",
+          "text": "XI · 26\n    \n    Рассмотреть кубок",
+          "label": "Рассмотреть кубок"
+        },
+        {
+          "id": "",
+          "text": "‹",
+          "label": "Предыдущий месяц"
+        },
+        {
+          "id": "",
+          "text": "›",
+          "label": "Следующий месяц"
+        },
+        {
+          "id": "",
+          "text": "1",
+          "label": "1 ноября"
+        },
+        {
+          "id": "",
+          "text": "2",
+          "label": "2 ноября"
+        },
+        {
+          "id": "",
+          "text": "3",
+          "label": "3 ноября"
+        },
+        {
+          "id": "",
+          "text": "4",
+          "label": "4 ноября"
+        },
+        {
+          "id": "",
+          "text": "5",
+          "label": "5 ноября"
+        },
+        {
+          "id": "",
+          "text": "6",
+          "label": "6 ноября"
+        },
+        {
+          "id": "",
+          "text": "7",
+          "label": "7 ноября"
+        },
+        {
+          "id": "",
+          "text": "8",
+          "label": "8 ноября"
+        },
+        {
+          "id": "",
+          "text": "9",
+          "label": "9 ноября"
+        },
+        {
+          "id": "",
+          "text": "10",
+          "label": "10 ноября"
+        },
+        {
+          "id": "",
+          "text": "11",
+          "label": "11 ноября"
+        },
+        {
+          "id": "",
+          "text": "12",
+          "label": "12 ноября"
+        },
+        {
+          "id": "",
+          "text": "13",
+          "label": "13 ноября"
+        },
+        {
+          "id": "",
+          "text": "14",
+          "label": "14 ноября"
+        },
+        {
+          "id": "",
+          "text": "15",
+          "label": "15 ноября"
+        },
+        {
+          "id": "",
+          "text": "16",
+          "label": "16 ноября"
+        },
+        {
+          "id": "",
+          "text": "17",
+          "label": "17 ноября"
+        },
+        {
+          "id": "",
+          "text": "18",
+          "label": "18 ноября"
+        },
+        {
+          "id": "",
+          "text": "19",
+          "label": "19 ноября"
+        },
+        {
+          "id": "",
+          "text": "20",
+          "label": "20 ноября"
+        },
+        {
+          "id": "",
+          "text": "21",
+          "label": "21 ноября"
+        },
+        {
+          "id": "",
+          "text": "22",
+          "label": "22 ноября"
+        },
+        {
+          "id": "",
+          "text": "23",
+          "label": "23 ноября"
+        },
+        {
+          "id": "",
+          "text": "24",
+          "label": "24 ноября"
+        },
+        {
+          "id": "",
+          "text": "25",
+          "label": "25 ноября"
+        },
+        {
+          "id": "",
+          "text": "26",
+          "label": "26 ноября"
+        },
+        {
+          "id": "",
+          "text": "27",
+          "label": "27 ноября"
+        },
+        {
+          "id": "",
+          "text": "28",
+          "label": "28 ноября"
+        },
+        {
+          "id": "",
+          "text": "29",
+          "label": "29 ноября"
+        },
+        {
+          "id": "",
+          "text": "30",
+          "label": "30 ноября"
+        },
+        {
+          "id": "start-daily",
+          "text": "Играть",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        },
+        {
+          "id": "",
+          "text": "×",
+          "label": "Закрыть"
+        },
+        {
+          "id": "",
+          "text": "Открыть месяц",
+          "label": null
+        }
+      ],
+      "screenshot": "ru-light-390-844-trophy.png",
+      "sha256": "de8861e60a1e625fa16129d42abb6fc115add2f7f23db1fd09c9b04055e99318"
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "home",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 430,
+      "height": 932,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "home-play",
+          "text": "Play",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Home",
+          "label": "Home"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Calendar",
+          "label": "Calendar"
+        },
+        {
+          "id": "home-collection",
+          "text": "Collection",
+          "label": "Collection. New award"
+        },
+        {
+          "id": "home-settings",
+          "text": "Settings",
+          "label": "Settings"
+        }
+      ],
+      "screenshot": "en-dark-430-932-home.png",
+      "sha256": "6b4e4207bedab8250459fda396cdf0e97cfd8c9f4085a7f6e0d494b341310ef4"
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "board",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 430,
+      "height": 932,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "Home"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Restart"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Settings"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Show exit directions"
+        }
+      ],
+      "screenshot": "en-dark-430-932-board.png",
+      "sha256": "b8c3fd27fa97ffc1da7ae79e210d5c134b626ce414b94ae52e1c9c609c7e6b02"
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "settings",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 430,
+      "height": 932,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "Home"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Restart"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Settings"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Show exit directions"
+        },
+        {
+          "id": "close-settings",
+          "text": "",
+          "label": "Close"
+        },
+        {
+          "id": "theme-dark",
+          "text": "Dark",
+          "label": null
+        },
+        {
+          "id": "theme-light",
+          "text": "Light",
+          "label": null
+        },
+        {
+          "id": "setting-sound",
+          "text": "SoundsArrows, mistakes and victories",
+          "label": null
+        },
+        {
+          "id": "setting-vibration",
+          "text": "VibrationBrief feedback for your actions",
+          "label": null
+        },
+        {
+          "id": "preview-sound",
+          "text": "♪Preview sound",
+          "label": null
+        },
+        {
+          "id": "preview-vibration",
+          "text": "Test vibration",
+          "label": null
+        }
+      ],
+      "screenshot": "en-dark-430-932-settings.png",
+      "sha256": "361e628a134e87a25e30aa64377501dcc7e3ef05200e457664c47423daccc747"
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "collection",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 430,
+      "height": 932,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Back"
+        },
+        {
+          "id": "collection-current-trophy",
+          "text": "XI · 26",
+          "label": "Inspect trophy"
+        },
+        {
+          "id": "collection-open-month",
+          "text": "Open month",
+          "label": null
+        },
+        {
+          "id": "",
+          "text": "I · 26\n    \n    January0 / 31",
+          "label": "January 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "II · 26\n    \n    February0 / 28",
+          "label": "February 2026: 0 / 28"
+        },
+        {
+          "id": "",
+          "text": "III · 26\n    \n    March0 / 31",
+          "label": "March 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "IV · 26\n    \n    April0 / 30",
+          "label": "April 2026: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "V · 26\n    \n    May0 / 31",
+          "label": "May 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "VI · 26\n    \n    June0 / 30",
+          "label": "June 2026: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "VII · 26\n    \n    July0 / 31",
+          "label": "July 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "VIII · 26\n    \n    August0 / 31",
+          "label": "August 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "IX · 26\n    \n    September0 / 30",
+          "label": "September 2026: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "X · 26\n    \n    October0 / 31",
+          "label": "October 2026: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "XI · 26\n    \n    November0 / 30",
+          "label": "November 2026: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "XII · 26\n    \n    December0 / 31",
+          "label": "December 2026: 0 / 31"
+        },
+        {
+          "id": "home-tab",
+          "text": "Home",
+          "label": "Home"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Calendar",
+          "label": "Calendar"
+        },
+        {
+          "id": "home-collection",
+          "text": "Collection",
+          "label": "Collection"
+        },
+        {
+          "id": "home-settings",
+          "text": "Settings",
+          "label": "Settings"
+        }
+      ],
+      "screenshot": "en-dark-430-932-collection.png",
+      "sha256": "9befedf34bf551b82329ee8e710f54775b87bbe8f0bbc4b55824717958d589f6"
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "calendar",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 430,
+      "height": 932,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Back"
+        },
+        {
+          "id": "view-trophy",
+          "text": "XI · 26\n    \n    Inspect trophy",
+          "label": "Inspect trophy"
+        },
+        {
+          "id": "",
+          "text": "‹",
+          "label": "Previous month"
+        },
+        {
+          "id": "",
+          "text": "›",
+          "label": "Next month"
+        },
+        {
+          "id": "",
+          "text": "1",
+          "label": "November 1"
+        },
+        {
+          "id": "",
+          "text": "2",
+          "label": "November 2"
+        },
+        {
+          "id": "",
+          "text": "3",
+          "label": "November 3"
+        },
+        {
+          "id": "",
+          "text": "4",
+          "label": "November 4"
+        },
+        {
+          "id": "",
+          "text": "5",
+          "label": "November 5"
+        },
+        {
+          "id": "",
+          "text": "6",
+          "label": "November 6"
+        },
+        {
+          "id": "",
+          "text": "7",
+          "label": "November 7"
+        },
+        {
+          "id": "",
+          "text": "8",
+          "label": "November 8"
+        },
+        {
+          "id": "",
+          "text": "9",
+          "label": "November 9"
+        },
+        {
+          "id": "",
+          "text": "10",
+          "label": "November 10"
+        },
+        {
+          "id": "",
+          "text": "11",
+          "label": "November 11"
+        },
+        {
+          "id": "",
+          "text": "12",
+          "label": "November 12"
+        },
+        {
+          "id": "",
+          "text": "13",
+          "label": "November 13"
+        },
+        {
+          "id": "",
+          "text": "14",
+          "label": "November 14"
+        },
+        {
+          "id": "",
+          "text": "15",
+          "label": "November 15"
+        },
+        {
+          "id": "",
+          "text": "16",
+          "label": "November 16"
+        },
+        {
+          "id": "",
+          "text": "17",
+          "label": "November 17"
+        },
+        {
+          "id": "",
+          "text": "18",
+          "label": "November 18"
+        },
+        {
+          "id": "",
+          "text": "19",
+          "label": "November 19"
+        },
+        {
+          "id": "",
+          "text": "20",
+          "label": "November 20"
+        },
+        {
+          "id": "",
+          "text": "21",
+          "label": "November 21"
+        },
+        {
+          "id": "",
+          "text": "22",
+          "label": "November 22"
+        },
+        {
+          "id": "",
+          "text": "23",
+          "label": "November 23"
+        },
+        {
+          "id": "",
+          "text": "24",
+          "label": "November 24"
+        },
+        {
+          "id": "",
+          "text": "25",
+          "label": "November 25"
+        },
+        {
+          "id": "",
+          "text": "26",
+          "label": "November 26"
+        },
+        {
+          "id": "",
+          "text": "27",
+          "label": "November 27"
+        },
+        {
+          "id": "",
+          "text": "28",
+          "label": "November 28"
+        },
+        {
+          "id": "",
+          "text": "29",
+          "label": "November 29"
+        },
+        {
+          "id": "",
+          "text": "30",
+          "label": "November 30"
+        },
+        {
+          "id": "start-daily",
+          "text": "Play",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Home",
+          "label": "Home"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Calendar",
+          "label": "Calendar"
+        },
+        {
+          "id": "home-collection",
+          "text": "Collection",
+          "label": "Collection"
+        },
+        {
+          "id": "home-settings",
+          "text": "Settings",
+          "label": "Settings"
+        }
+      ],
+      "screenshot": "en-dark-430-932-calendar.png",
+      "sha256": "bc8f75ff116e80a028328253c551b08686d07ec55ac23e2323446cdf1bd76db4"
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "trophy",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 430,
+      "height": 932,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Back"
+        },
+        {
+          "id": "view-trophy",
+          "text": "XI · 26\n    \n    Inspect trophy",
+          "label": "Inspect trophy"
+        },
+        {
+          "id": "",
+          "text": "‹",
+          "label": "Previous month"
+        },
+        {
+          "id": "",
+          "text": "›",
+          "label": "Next month"
+        },
+        {
+          "id": "",
+          "text": "1",
+          "label": "November 1"
+        },
+        {
+          "id": "",
+          "text": "2",
+          "label": "November 2"
+        },
+        {
+          "id": "",
+          "text": "3",
+          "label": "November 3"
+        },
+        {
+          "id": "",
+          "text": "4",
+          "label": "November 4"
+        },
+        {
+          "id": "",
+          "text": "5",
+          "label": "November 5"
+        },
+        {
+          "id": "",
+          "text": "6",
+          "label": "November 6"
+        },
+        {
+          "id": "",
+          "text": "7",
+          "label": "November 7"
+        },
+        {
+          "id": "",
+          "text": "8",
+          "label": "November 8"
+        },
+        {
+          "id": "",
+          "text": "9",
+          "label": "November 9"
+        },
+        {
+          "id": "",
+          "text": "10",
+          "label": "November 10"
+        },
+        {
+          "id": "",
+          "text": "11",
+          "label": "November 11"
+        },
+        {
+          "id": "",
+          "text": "12",
+          "label": "November 12"
+        },
+        {
+          "id": "",
+          "text": "13",
+          "label": "November 13"
+        },
+        {
+          "id": "",
+          "text": "14",
+          "label": "November 14"
+        },
+        {
+          "id": "",
+          "text": "15",
+          "label": "November 15"
+        },
+        {
+          "id": "",
+          "text": "16",
+          "label": "November 16"
+        },
+        {
+          "id": "",
+          "text": "17",
+          "label": "November 17"
+        },
+        {
+          "id": "",
+          "text": "18",
+          "label": "November 18"
+        },
+        {
+          "id": "",
+          "text": "19",
+          "label": "November 19"
+        },
+        {
+          "id": "",
+          "text": "20",
+          "label": "November 20"
+        },
+        {
+          "id": "",
+          "text": "21",
+          "label": "November 21"
+        },
+        {
+          "id": "",
+          "text": "22",
+          "label": "November 22"
+        },
+        {
+          "id": "",
+          "text": "23",
+          "label": "November 23"
+        },
+        {
+          "id": "",
+          "text": "24",
+          "label": "November 24"
+        },
+        {
+          "id": "",
+          "text": "25",
+          "label": "November 25"
+        },
+        {
+          "id": "",
+          "text": "26",
+          "label": "November 26"
+        },
+        {
+          "id": "",
+          "text": "27",
+          "label": "November 27"
+        },
+        {
+          "id": "",
+          "text": "28",
+          "label": "November 28"
+        },
+        {
+          "id": "",
+          "text": "29",
+          "label": "November 29"
+        },
+        {
+          "id": "",
+          "text": "30",
+          "label": "November 30"
+        },
+        {
+          "id": "start-daily",
+          "text": "Play",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Home",
+          "label": "Home"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Calendar",
+          "label": "Calendar"
+        },
+        {
+          "id": "home-collection",
+          "text": "Collection",
+          "label": "Collection"
+        },
+        {
+          "id": "home-settings",
+          "text": "Settings",
+          "label": "Settings"
+        },
+        {
+          "id": "",
+          "text": "×",
+          "label": "Close"
+        },
+        {
+          "id": "",
+          "text": "Open month",
+          "label": null
+        }
+      ],
+      "screenshot": "en-dark-430-932-trophy.png",
+      "sha256": "3ad0609be7047930331d67c57878a6cad5e64daf60964c733876b45a52bac998"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "home",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "home-play",
+          "text": "Играть",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция. Новая награда"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        }
+      ],
+      "screenshot": "ru-dark-390-844-true-home.png",
+      "sha256": "ee18c18b0144d9263856f07f339a69f5c42db68cf6be70a4597334c062f3d3c0"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "board",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "На главную"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Заново"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Настройки"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Показать направления выхода"
+        }
+      ],
+      "screenshot": "ru-dark-390-844-true-board.png",
+      "sha256": "19bd75a3e200782e89c6716232338255bf6ccce98c218ca1c2265f76c8fa80d4"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "settings",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "На главную"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Заново"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Настройки"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Показать направления выхода"
+        },
+        {
+          "id": "close-settings",
+          "text": "",
+          "label": "Закрыть"
+        },
+        {
+          "id": "theme-dark",
+          "text": "Тёмная",
+          "label": null
+        },
+        {
+          "id": "theme-light",
+          "text": "Светлая",
+          "label": null
+        },
+        {
+          "id": "setting-sound",
+          "text": "ЗвукиСтрелки, ошибки и победы",
+          "label": null
+        },
+        {
+          "id": "setting-vibration",
+          "text": "ВибрацияКороткий отклик на действия",
+          "label": null
+        },
+        {
+          "id": "preview-sound",
+          "text": "♪Проверить звук",
+          "label": null
+        },
+        {
+          "id": "preview-vibration",
+          "text": "Вибрация",
+          "label": null
+        }
+      ],
+      "screenshot": "ru-dark-390-844-true-settings.png",
+      "sha256": "b71e98b37acbd5070eede80bb391bd945f468e8a5e0e03b6cc02c91318d81961"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "collection",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Назад"
+        },
+        {
+          "id": "collection-current-trophy",
+          "text": "XI · 26",
+          "label": "Рассмотреть кубок"
+        },
+        {
+          "id": "collection-open-month",
+          "text": "Открыть месяц",
+          "label": null
+        },
+        {
+          "id": "",
+          "text": "I · 26\n    \n    январь0 / 31",
+          "label": "январь 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "II · 26\n    \n    февраль0 / 28",
+          "label": "февраль 2026 г.: 0 / 28"
+        },
+        {
+          "id": "",
+          "text": "III · 26\n    \n    март0 / 31",
+          "label": "март 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "IV · 26\n    \n    апрель0 / 30",
+          "label": "апрель 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "V · 26\n    \n    май0 / 31",
+          "label": "май 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "VI · 26\n    \n    июнь0 / 30",
+          "label": "июнь 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "VII · 26\n    \n    июль0 / 31",
+          "label": "июль 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "VIII · 26\n    \n    август0 / 31",
+          "label": "август 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "IX · 26\n    \n    сентябрь0 / 30",
+          "label": "сентябрь 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "X · 26\n    \n    октябрь0 / 31",
+          "label": "октябрь 2026 г.: 0 / 31"
+        },
+        {
+          "id": "",
+          "text": "XI · 26\n    \n    ноябрь0 / 30",
+          "label": "ноябрь 2026 г.: 0 / 30"
+        },
+        {
+          "id": "",
+          "text": "XII · 26\n    \n    декабрь0 / 31",
+          "label": "декабрь 2026 г.: 0 / 31"
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        }
+      ],
+      "screenshot": "ru-dark-390-844-true-collection.png",
+      "sha256": "f3f0bea19a48af0263e080572a0d16b6afcb75201fa594d334401d1441824466"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "calendar",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Назад"
+        },
+        {
+          "id": "view-trophy",
+          "text": "XI · 26\n    \n    Рассмотреть кубок",
+          "label": "Рассмотреть кубок"
+        },
+        {
+          "id": "",
+          "text": "‹",
+          "label": "Предыдущий месяц"
+        },
+        {
+          "id": "",
+          "text": "›",
+          "label": "Следующий месяц"
+        },
+        {
+          "id": "",
+          "text": "1",
+          "label": "1 ноября"
+        },
+        {
+          "id": "",
+          "text": "2",
+          "label": "2 ноября"
+        },
+        {
+          "id": "",
+          "text": "3",
+          "label": "3 ноября"
+        },
+        {
+          "id": "",
+          "text": "4",
+          "label": "4 ноября"
+        },
+        {
+          "id": "",
+          "text": "5",
+          "label": "5 ноября"
+        },
+        {
+          "id": "",
+          "text": "6",
+          "label": "6 ноября"
+        },
+        {
+          "id": "",
+          "text": "7",
+          "label": "7 ноября"
+        },
+        {
+          "id": "",
+          "text": "8",
+          "label": "8 ноября"
+        },
+        {
+          "id": "",
+          "text": "9",
+          "label": "9 ноября"
+        },
+        {
+          "id": "",
+          "text": "10",
+          "label": "10 ноября"
+        },
+        {
+          "id": "",
+          "text": "11",
+          "label": "11 ноября"
+        },
+        {
+          "id": "",
+          "text": "12",
+          "label": "12 ноября"
+        },
+        {
+          "id": "",
+          "text": "13",
+          "label": "13 ноября"
+        },
+        {
+          "id": "",
+          "text": "14",
+          "label": "14 ноября"
+        },
+        {
+          "id": "",
+          "text": "15",
+          "label": "15 ноября"
+        },
+        {
+          "id": "",
+          "text": "16",
+          "label": "16 ноября"
+        },
+        {
+          "id": "",
+          "text": "17",
+          "label": "17 ноября"
+        },
+        {
+          "id": "",
+          "text": "18",
+          "label": "18 ноября"
+        },
+        {
+          "id": "",
+          "text": "19",
+          "label": "19 ноября"
+        },
+        {
+          "id": "",
+          "text": "20",
+          "label": "20 ноября"
+        },
+        {
+          "id": "",
+          "text": "21",
+          "label": "21 ноября"
+        },
+        {
+          "id": "",
+          "text": "22",
+          "label": "22 ноября"
+        },
+        {
+          "id": "",
+          "text": "23",
+          "label": "23 ноября"
+        },
+        {
+          "id": "",
+          "text": "24",
+          "label": "24 ноября"
+        },
+        {
+          "id": "",
+          "text": "25",
+          "label": "25 ноября"
+        },
+        {
+          "id": "",
+          "text": "26",
+          "label": "26 ноября"
+        },
+        {
+          "id": "",
+          "text": "27",
+          "label": "27 ноября"
+        },
+        {
+          "id": "",
+          "text": "28",
+          "label": "28 ноября"
+        },
+        {
+          "id": "",
+          "text": "29",
+          "label": "29 ноября"
+        },
+        {
+          "id": "",
+          "text": "30",
+          "label": "30 ноября"
+        },
+        {
+          "id": "start-daily",
+          "text": "Играть",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        }
+      ],
+      "screenshot": "ru-dark-390-844-true-calendar.png",
+      "sha256": "2e7741cb4cac7571d4be948cf5c26ab0823bebd0fda29a133d12a3a980ec8ac2"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "trophy",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "",
+          "text": "",
+          "label": "Назад"
+        },
+        {
+          "id": "view-trophy",
+          "text": "XI · 26\n    \n    Рассмотреть кубок",
+          "label": "Рассмотреть кубок"
+        },
+        {
+          "id": "",
+          "text": "‹",
+          "label": "Предыдущий месяц"
+        },
+        {
+          "id": "",
+          "text": "›",
+          "label": "Следующий месяц"
+        },
+        {
+          "id": "",
+          "text": "1",
+          "label": "1 ноября"
+        },
+        {
+          "id": "",
+          "text": "2",
+          "label": "2 ноября"
+        },
+        {
+          "id": "",
+          "text": "3",
+          "label": "3 ноября"
+        },
+        {
+          "id": "",
+          "text": "4",
+          "label": "4 ноября"
+        },
+        {
+          "id": "",
+          "text": "5",
+          "label": "5 ноября"
+        },
+        {
+          "id": "",
+          "text": "6",
+          "label": "6 ноября"
+        },
+        {
+          "id": "",
+          "text": "7",
+          "label": "7 ноября"
+        },
+        {
+          "id": "",
+          "text": "8",
+          "label": "8 ноября"
+        },
+        {
+          "id": "",
+          "text": "9",
+          "label": "9 ноября"
+        },
+        {
+          "id": "",
+          "text": "10",
+          "label": "10 ноября"
+        },
+        {
+          "id": "",
+          "text": "11",
+          "label": "11 ноября"
+        },
+        {
+          "id": "",
+          "text": "12",
+          "label": "12 ноября"
+        },
+        {
+          "id": "",
+          "text": "13",
+          "label": "13 ноября"
+        },
+        {
+          "id": "",
+          "text": "14",
+          "label": "14 ноября"
+        },
+        {
+          "id": "",
+          "text": "15",
+          "label": "15 ноября"
+        },
+        {
+          "id": "",
+          "text": "16",
+          "label": "16 ноября"
+        },
+        {
+          "id": "",
+          "text": "17",
+          "label": "17 ноября"
+        },
+        {
+          "id": "",
+          "text": "18",
+          "label": "18 ноября"
+        },
+        {
+          "id": "",
+          "text": "19",
+          "label": "19 ноября"
+        },
+        {
+          "id": "",
+          "text": "20",
+          "label": "20 ноября"
+        },
+        {
+          "id": "",
+          "text": "21",
+          "label": "21 ноября"
+        },
+        {
+          "id": "",
+          "text": "22",
+          "label": "22 ноября"
+        },
+        {
+          "id": "",
+          "text": "23",
+          "label": "23 ноября"
+        },
+        {
+          "id": "",
+          "text": "24",
+          "label": "24 ноября"
+        },
+        {
+          "id": "",
+          "text": "25",
+          "label": "25 ноября"
+        },
+        {
+          "id": "",
+          "text": "26",
+          "label": "26 ноября"
+        },
+        {
+          "id": "",
+          "text": "27",
+          "label": "27 ноября"
+        },
+        {
+          "id": "",
+          "text": "28",
+          "label": "28 ноября"
+        },
+        {
+          "id": "",
+          "text": "29",
+          "label": "29 ноября"
+        },
+        {
+          "id": "",
+          "text": "30",
+          "label": "30 ноября"
+        },
+        {
+          "id": "start-daily",
+          "text": "Играть",
+          "label": null
+        },
+        {
+          "id": "home-tab",
+          "text": "Главная",
+          "label": "Главная"
+        },
+        {
+          "id": "home-calendar",
+          "text": "Календарь",
+          "label": "Календарь"
+        },
+        {
+          "id": "home-collection",
+          "text": "Коллекция",
+          "label": "Коллекция"
+        },
+        {
+          "id": "home-settings",
+          "text": "Настройки",
+          "label": "Настройки"
+        },
+        {
+          "id": "",
+          "text": "×",
+          "label": "Закрыть"
+        },
+        {
+          "id": "",
+          "text": "Открыть месяц",
+          "label": null
+        }
+      ],
+      "screenshot": "ru-dark-390-844-true-trophy.png",
+      "sha256": "742db0af45d2c64fb18305d44e76173ee71980d696ff1ec62004cd582cf49e57"
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "loss",
+      "lang": "ru",
+      "title": "Стрелки",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "На главную"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Заново"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Настройки"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Показать направления выхода"
+        },
+        {
+          "id": "",
+          "text": "Продолжить бесплатно",
+          "label": null
+        },
+        {
+          "id": "",
+          "text": "Заново",
+          "label": null
+        },
+        {
+          "id": "",
+          "text": "На главную",
+          "label": null
+        }
+      ],
+      "screenshot": "ru-dark-320-568-loss.png",
+      "sha256": "7f82688d0997a5f5bda3da0a1401eacdcf3bee7898b9148aea19dc4cdfc5be8e"
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        320,
+        568
+      ],
+      "state": "loss",
+      "lang": "en",
+      "title": "Arrows",
+      "width": 320,
+      "height": 568,
+      "overflow": false,
+      "visible": [
+        {
+          "id": "choose-field",
+          "text": "",
+          "label": "Home"
+        },
+        {
+          "id": "restart",
+          "text": "",
+          "label": "Restart"
+        },
+        {
+          "id": "game-settings",
+          "text": "",
+          "label": "Settings"
+        },
+        {
+          "id": "guides",
+          "text": "#",
+          "label": "Show exit directions"
+        },
+        {
+          "id": "",
+          "text": "Continue for free",
+          "label": null
+        },
+        {
+          "id": "",
+          "text": "Restart",
+          "label": null
+        },
+        {
+          "id": "",
+          "text": "Home",
+          "label": null
+        }
+      ],
+      "screenshot": "en-dark-320-568-loss.png",
+      "sha256": "7483fdf31de404d6a7b9d2ff3f65ece7300e9f90ac9fa9e5a920db61c44c6d86"
+    }
+  ],
+  "errors": []
+}

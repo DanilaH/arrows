@@ -1,0 +1,41 @@
+{
+  "source": "local",
+  "productionGate": "PASS",
+  "nativeLimitBytes": 4194304,
+  "migration": {
+    "legacyBytes": 4187443,
+    "rootBytes": 122,
+    "logicalUnchanged": true,
+    "openedBefore": 54
+  },
+  "formerBlocker": {
+    "requestedCount": 55,
+    "date": "2026-02-24",
+    "opened": true,
+    "rootBytes": 122
+  },
+  "longArchive": {
+    "days": 730,
+    "completed": 727,
+    "partial": 3,
+    "cups": 21,
+    "logicalBytes": 59149769,
+    "rootBytes": 122,
+    "logicalHash": "429e1e6c5f4f0bce5a7481e5860faceb6085a62039de30709ea04885a92cd0ac",
+    "exactReload": true,
+    "receiptDedupPreserved": true,
+    "lifetimeGiftPreserved": true
+  },
+  "writes": {
+    "maxValueBytes": 20625,
+    "warmActionBytes": 96254,
+    "warmActionWrites": 21,
+    "storedBlocks": 7615
+  },
+  "timings": {
+    "coldRichProfileMs": 9666,
+    "warmPresentationAndMoveMs": 95,
+    "totalMs": 172658
+  },
+  "provenance": "Actual730dailyLevel dates.54-field legacy migration and actual openDaily through730dates; separately authored727complete/3partial histories validated by unchanged decoder. Exact native per-value budget in a controlled KV adapter; Node timings are not phone benchmarks. No generator or published field changes."
+}

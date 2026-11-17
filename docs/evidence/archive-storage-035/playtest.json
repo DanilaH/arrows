@@ -1,0 +1,26 @@
+{
+  "source": "44a7da5778ef8abd5f8ff5af23cfdd2e761a83cc",
+  "run": 44063551909,
+  "package": "com.danilah.arrows.playtest",
+  "version": "0.35.0",
+  "code": 50,
+  "bytes": 11016242,
+  "sha256": "1d252fd4a829bfeea41326ee2e17d59b92e3087f3fe289dafcacbb580a6e9b8b",
+  "certificateSha256": "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36",
+  "v2": true,
+  "embeddedWebFiles": 27,
+  "exactLocalDistAndNativeContract": true,
+  "testAds": true,
+  "analytics": "OFF (forced playtest BuildConfig)",
+  "nativeUnit": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "nativeUnitFiles": 7,
+  "phoneInstallUpdate": "NOT RUN",
+  "physicalPerformance": "NOT RUN",
+  "productionSigner": "NOT RUN",
+  "libraryUrl": "https://chatgpt.com/library?file_id=libfile_fde3_f-1bcd423fb070819193bbdeb8da6c7e47_2841ca9da26c8191b7a266fa9b41a810&account_id=personal"
+}

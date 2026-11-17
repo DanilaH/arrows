@@ -24,3 +24,12 @@ test('IndexedDB transaction abort after request success leaves legacy root intac
 test('two browser writers cannot overwrite a migrated root or drop a committed reward',async({page,context})=>{
  await open(page);await page.evaluate(()=>window.archiveReview.seed());await page.evaluate(()=>window.archiveReview.load());const other=await context.newPage();await open(other);await other.evaluate(()=>window.archiveReview.load());expect(await page.evaluate(()=>window.archiveReview.reward())).toBe('applied');expect(await other.evaluate(()=>window.archiveReview.change(true))).toBe('uncertain');const recovered=JSON.parse(await other.evaluate(()=>window.archiveReview.recover()));expect(recovered.receipts).toEqual(['browser-archive-receipt']);expect(await other.evaluate(()=>window.archiveReview.change(true))).toBe('ok');await other.close();
 });
+test('actual game plays, saves victory and advances after archive migration and reload',async({page})=>{
+ await open(page);const seeded=JSON.parse(await page.evaluate(()=>window.archiveReview.seed()));
+ // Enter the unmodified game: its startup must perform the migration itself.
+ await page.goto('/');await expect(page.locator('#game-shell')).toHaveAttribute('data-progress','ready');await page.locator('#home-play:enabled').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-screen','game');await expect(page.locator('.route-snapshot,.board-transition')).toHaveCount(0);
+ for(const [i,arrow]of seeded.campaign.level.arrows.entries()){
+  const camera=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),head=arrow.path.at(-1);await page.mouse.click(camera.x+head.x*camera.scale,camera.y+head.y*camera.scale);await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining',String(seeded.campaign.level.arrows.length-i-1));
+ }
+ await page.reload();await page.locator('#home-play:enabled').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-level','c02');await open(page);const restored=JSON.parse((await page.evaluate(()=>window.archiveReview.load())).raw);expect(restored.wins).toHaveLength(1);expect(restored.daily).toEqual(seeded.daily);expect(restored.freeContinueUsed).toBe(true);expect(restored.index).toBe(1);
+});

@@ -1,3 +1,5 @@
+> Update0.35.0: the capacity blocker documented below is reproduced and resolved by compatible bounded archive storage. CI44063551909 release-audit passes730dates and rich-history recovery; see [ARCHIVE_STORAGE_035.md](ARCHIVE_STORAGE_035.md). This document retains the original0.34.1failure evidence. Live IDs/signer/device/dashboard/money remain separate gates.
+
 # Предрелизный аудит — 0.34.1 / code49
 
 **Статус: BLOCKED_SAVE_CAPACITY. Выпускать в магазин пока рано.** Проверка переводов, метрик и release-пакета проведена; небольшие подтверждённые дефекты исправлены. Обнаружен отдельный блокер долгого прогресса: 55-я открываемая ежедневка превышает нативный лимит сохранения. Старое сохранение остаётся целым, но новая задача не записывается. Получение рекламных ID эту проблему не устраняет.

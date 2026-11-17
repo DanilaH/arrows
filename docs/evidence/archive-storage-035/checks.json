@@ -1,0 +1,50 @@
+{
+  "applicationSource": "44a7da5778ef8abd5f8ff5af23cfdd2e761a83cc",
+  "base": "ee334b8cb8fdc17f88bbc91321bdd87040123adb",
+  "check": {
+    "unit": 253,
+    "files": 31,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "analyticsSchemas": 38,
+    "sync": "PASS"
+  },
+  "browser": {
+    "existingAffected": 38,
+    "newStorage": 6,
+    "actualGameMigrationVictoryNext": 2,
+    "totalDistinctAffectedPassed": 46,
+    "profiles": [
+      "phone",
+      "desktop"
+    ]
+  },
+  "compatibility": {
+    "unchangedRuntimeContentDomainUiFiles": 39,
+    "logicalDecoderUnchanged": true,
+    "logicalSchema": 2,
+    "physicalFormat": 1,
+    "nativeValueLimitUnchanged": 4194304
+  },
+  "capacityProvenance": "capacity-local.json is original output, source label local; same committed application/QA script as applicationSource; later actual-game test changes tests only. Node capped KV, actual730fields; authored completion histories, not physical or organic play.",
+  "earlierFailures": [
+    "Two lost-ack old unit fixtures initially failed because they denied preflight reads before the supposed accepted write. Fault switched to actual post-write boundary; all253PASS.",
+    "First new archive tests exposed a real staged-block cache vs GC flaw. Only current committed/this-operation verified references may be reused; fixed and regression passes.",
+    "Initial browser fixture used freshSave before decoder defaults; exact normalized fixture then passes6/6.",
+    "Capacity script expected reserved instead of applied and compared JSON key ordering after parseReceipt. Fixed assertions; canonical values/array ordering and separate migration/date ordering retain validation."
+  ],
+  "physicalDevice": "NOT RUN",
+  "liveServicesMoneySigner": "NOT RUN",
+  "hostedRun": 44063551909,
+  "hostedStatus": {
+    "capacityAndReleaseWeb": "SUCCESS",
+    "androidDebugPlaytestR8ReleaseCheck": "SUCCESS",
+    "fullWeb": "RUNNING"
+  },
+  "releasecheckVerification": {
+    "artifact": 14318799200,
+    "zipSha256": "485e261a5c5231d97319e028065e2f6d40a060662016acc8cab9a3b31011c017",
+    "officialTools": "PASS",
+    "includesStorageListAfterR8": true
+  }
+}
