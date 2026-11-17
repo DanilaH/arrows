@@ -25,6 +25,29 @@ jobs:
       - run: npm ci --prefer-offline
       - run: npm run check
       - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser -- --workers=2
+      - run: npm run android:sync
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-failures
+          path: test-results/
+  release-audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Restore pinned dependency cache
+        uses: actions/cache/restore@v4
+        with:
+          path: /home/runner/.npm
+          key: node-cache-${{ runner.os }}-x64-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: node-cache-${{ runner.os }}-x64-npm-
+      - run: npm ci --prefer-offline
+      - run: npx playwright install --with-deps chromium
       - name: Audit archive capacity and localized release web
         run: |
           npx vite build --ssr tools/audit/ui-composition-source.ts --outDir .test-output/production-readiness/ssr
@@ -41,13 +64,8 @@ jobs:
             .test-output/save-capacity-audit/
             .test-output/production-readiness/
           retention-days: 7
-      - run: npm run test:browser -- --workers=2
-      - run: npm run android:sync
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: browser-failures
-          path: test-results/
+      - name: Enforce reported production capacity gate
+        run: node -e "const r=require('./.test-output/save-capacity-audit/report.json'); if(r.productionGate!=='PASS')throw Error('Production release blocked by archive save capacity; see audit artifact and readiness report')"
   android:
     env:
       APPMETRICA_DEBUG_API_KEY: ${{ secrets.APPMETRICA_DEBUG_API_KEY }}
