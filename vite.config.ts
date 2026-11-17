@@ -1,11 +1,12 @@
 import { defineConfig } from 'vite';
 import {resolve} from 'node:path';
 
-export default defineConfig({
+export default defineConfig(({mode})=>({
   base: './',
   resolve: { dedupe: ['phaser'] },
   build: {
     target: 'es2022',
-    rolldownOptions:{input:{main:resolve(import.meta.dirname,'index.html'),targetLab:resolve(import.meta.dirname,'target-lab.html'),contentPilot:resolve(import.meta.dirname,'content-pilot.html')}},
+    rolldownOptions:{input:mode==='release'?{main:resolve(import.meta.dirname,'index.html')}:{main:resolve(import.meta.dirname,'index.html'),targetLab:resolve(import.meta.dirname,'target-lab.html'),contentPilot:resolve(import.meta.dirname,'content-pilot.html')}},
   },
-});
+  plugins:[{name:'arrows-build-channel',generateBundle(){this.emitFile({type:'asset',fileName:'arrows-build.json',source:JSON.stringify({schema:1,channel:mode==='release'?'release':'standard'})});}}],
+}));
