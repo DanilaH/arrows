@@ -31,5 +31,6 @@ test('zoomed compact board pans on its short axis and retains the chosen view th
  const zoomed=await camera(page);await page.mouse.move(x,y);await page.mouse.down();await page.mouse.move(x+70,y+90,{steps:8});await page.mouse.up();
  const moved=await camera(page);expect(moved.x-zoomed.x).toBeCloseTo(70,0);expect(moved.y-zoomed.y).toBeCloseTo(90,0);
  expect(await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!).campaign.board,SAVE_KEY)).toEqual(before);
- await page.locator('#choose-field').click();await page.locator('#home-play').click();await expect(page.locator('.board-transition,.route-snapshot')).toHaveCount(0);await expect.poll(()=>camera(page)).toEqual(moved);
+ await page.locator('#choose-field').click();await page.locator('#home-play').click();await expect(page.locator('.board-transition,.route-snapshot')).toHaveCount(0);// Restoring world centre/relative zoom may round a screen coordinate by <1e-12px.
+ await expect.poll(async()=>{const restored=await camera(page);return Math.max(...(['x','y','scale'] as const).map(k=>Math.abs(restored[k]-moved[k])));}).toBeLessThan(1e-6);
 });
