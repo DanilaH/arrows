@@ -221,8 +221,8 @@ describe('authoritative progression writer', () => {
     expect(store.state.receipts).toHaveLength(1); expect(store.uncertain).toBe(false);
   });
   it('gates all mutations if failed-write readback is unavailable, then recovers durable truth', async () => {
-    const { storage } = memory(); let failing = false;
-    const uncertain: StorageAdapter = { ...storage, async getItem(k) { if (failing) throw Error('unreadable'); return storage.getItem(k); }, async setItem(k, v) { await storage.setItem(k, v); if (failing) throw Error('lost response'); } };
+    const { storage } = memory(); let failing = false, written = false;
+    const uncertain: StorageAdapter = { ...storage, async getItem(k) { if (failing && written) throw Error('unreadable'); return storage.getItem(k); }, async setItem(k, v) { await storage.setItem(k, v); written = true; if (failing) throw Error('lost response'); } };
     const store = new ProgressStore(uncertain); await store.load(); const r = receipt(store.board.attemptId); failing = true;
     await expect(store.commitReward(r)).rejects.toThrow(); expect(store.uncertain).toBe(true);
     await expect(store.move(store.board.attemptId, store.board.hint()!)).rejects.toThrow();

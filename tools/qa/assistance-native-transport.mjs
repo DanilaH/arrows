@@ -5,12 +5,12 @@ export function controlledNative({save,settings,preserve=false}) {
   const emit=(plugin,name,value)=>{for(const l of listeners.values())if(l.plugin===plugin&&l.name===name)l.callback(value);};
   const readiness=()=>({configured:true,phase:loadPhase,ready:loadPhase==='ready',preloadId:'controlled-qa',loadedAt:1,expiresInMs:Math.max(0,readyUntil-performance.now()),retryInMs:Math.max(0,retryAt-performance.now()),playtest:true});
   if(!preserve||!localStorage.getItem('arrows.progress.v1'))localStorage.setItem('arrows.progress.v1',JSON.stringify(save));if(settings)localStorage.setItem('arrows.settings.v1',JSON.stringify(settings));
-  const methods={ArrowsStorage:['get','set','remove'],ArrowsAnalytics:['report','flush'],ArrowsAds:['prepareRewarded','prepareInterstitial','status','show','pending','acknowledge','cancelPending'],ArrowsFeedback:['pulse','cancel'],App:['getState','minimizeApp'],SystemBars:['setStyle']};
+  const methods={ArrowsStorage:['get','set','remove','list'],ArrowsAnalytics:['report','flush'],ArrowsAds:['prepareRewarded','prepareInterstitial','status','show','pending','acknowledge','cancelPending'],ArrowsFeedback:['pulse','cancel'],App:['getState','minimizeApp'],SystemBars:['setStyle']};
   window.androidBridge={};window.Capacitor={PluginHeaders:Object.entries(methods).map(([name,names])=>({name,methods:[...names.map(name=>({name,rtype:'promise'})),{name:'addListener',rtype:'callback'},{name:'removeListener',rtype:'promise'}]})),
     nativeCallback(plugin,method,options,callback){const id=String(++serial);listeners.set(id,{plugin,name:options.eventName,callback});return id;},
     async nativePromise(plugin,method,o={}){
       if(method==='removeListener'){listeners.delete(o.callbackId);return;}
-      if(plugin==='ArrowsStorage'){if(method==='get')return{value:localStorage.getItem(o.key)};if(method==='set'){if(o.key==='arrows.progress.v1'&&writeDelay){const delay=writeDelay;writeDelay=0;await new Promise(r=>setTimeout(r,delay));}localStorage.setItem(o.key,o.value);}if(method==='remove')localStorage.removeItem(o.key);return;}
+      if(plugin==='ArrowsStorage'){if(method==='list')return{keys:Object.keys(localStorage).filter(k=>k.startsWith(o.prefix))};if(method==='get')return{value:localStorage.getItem(o.key)};if(method==='set'){if(o.key==='arrows.progress.v1'&&writeDelay){const delay=writeDelay;writeDelay=0;await new Promise(r=>setTimeout(r,delay));}localStorage.setItem(o.key,o.value);}if(method==='remove')localStorage.removeItem(o.key);return;}
       if(plugin==='ArrowsAnalytics'){if(method==='report')events.push({...o,at:Date.now()});return{accepted:false,disabled:true};}
       if(plugin==='ArrowsFeedback'){pulses.push({method,...o,at:performance.now()});return;}
       if(plugin==='App')return{isActive:true};if(plugin==='SystemBars')return;

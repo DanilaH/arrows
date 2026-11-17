@@ -85,6 +85,6 @@ it('M1 write failure emits nothing; restart/exit persist one terminal outcome an
 });
 it('M1 an unknown accepted write restores the terminal milestone without replaying it on reload/next move',async()=>{
  const q=await setup(),id=q.store.board.attemptId,r=await q.earn();await q.store.move(id,q.store.state.campaign.hint!,100);const next=q.store.board.remaining.find(a=>canExit(a,q.store.board.remaining))!;
- const write=vi.spyOn(q.storage,'setItem').mockImplementation(async(k,v)=>{q.rows.set(k,v);throw Error('ack lost');}),read=vi.spyOn(q.storage,'getItem').mockRejectedValue(Error('read unavailable'));await expect(q.store.move(id,next.id,70)).rejects.toThrow();expect(q.store.uncertain).toBe(true);write.mockRestore();read.mockRestore();
+ let accepted=false;const write=vi.spyOn(q.storage,'setItem').mockImplementation(async(k,v)=>{q.rows.set(k,v);accepted=true;throw Error('ack lost');}),read=vi.spyOn(q.storage,'getItem').mockImplementation(async k=>{if(accepted)throw Error('read unavailable');return q.rows.get(k)??null;});await expect(q.store.move(id,next.id,70)).rejects.toThrow();expect(q.store.uncertain).toBe(true);write.mockRestore();read.mockRestore();
  const restored=new ProgressStore(q.storage);await restored.load();expect(restored.state.helpLedger.rights[r]!.followUp).toMatchObject({outcome:'first_move',activeMs:70});const events:SaveChange[]=[];restored.subscribe(e=>events.push(e));await restored.move(id,restored.board.remaining.find(a=>canExit(a,restored.board.remaining))!.id,30);expect(events.flatMap(e=>e.followupFacts??[])).toHaveLength(0);
 });

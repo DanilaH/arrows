@@ -47,4 +47,16 @@ public class ArrowsStoragePlugin extends Plugin {
         try { AtomicFile file = file(call); file.delete(); if (file.getBaseFile().exists()) throw new IOException("Delete failed"); call.resolve(); }
         catch (Exception error) { call.reject("Storage remove failed"); }
     }); }
+    @PluginMethod public void list(PluginCall call) { IO.execute(() -> {
+        try {
+            String prefix=call.getString("prefix", "");
+            if (!"arrows.archive.".equals(prefix)) throw new IllegalArgumentException("Invalid archive prefix");
+            File directory=new File(getContext().getNoBackupFilesDir(),"arrows-state-v1");
+            File[] files=directory.listFiles();
+            if(files==null&&directory.exists())throw new IOException("Archive enumeration failed");
+            JSArray keys=new JSArray();
+            if(files!=null)for(File entry:files){String name=entry.getName();if(name.matches("arrows\\.archive\\.[a-f0-9]{64}\\.json"))keys.put(name.substring(0,name.length()-5));}
+            JSObject result=new JSObject();result.put("keys",keys);call.resolve(result);
+        } catch(Exception error){call.reject("Archive enumeration failed");}
+    }); }
 }

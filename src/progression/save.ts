@@ -1,4 +1,6 @@
-import { JsonStorageRepository, type ReceiptCommitResult, type StorageAdapter } from '@danilah/mini-games-kit/platform';
+import { type ReceiptCommitResult, type StorageAdapter } from '@danilah/mini-games-kit/platform';
+import {ArchiveRepository} from './archiveRepository';
+import {draftSave} from './saveDraft';
 import { campaign, CATALOG_VERSION } from '../content/campaign';
 import { prepareDaily, dailyId, supportsDailyDate, supportsDailyMonth, DAILY_CATALOG_VERSION } from '../content/daily';
 import { localDate, validDate, monthDates } from './calendar';
@@ -156,15 +158,20 @@ export class ProgressStore {
   public error: 'load' | 'write' | 'uncertain' | null = null;
   private tail: Promise<unknown> = Promise.resolve();
   private readonly listeners = new Set<(event: SaveChange) => void>();
-  private readonly repository: JsonStorageRepository<GameSave>;
+  private readonly repository: ArchiveRepository;
+  private indexedState:GameSave|undefined;
+  private attemptDates=new Map<string,string>();
   private alive = true;
   private loadEpoch = 0;
   public constructor(private readonly storage: StorageAdapter, private readonly now: () => Date = () => new Date()) {
-    this.repository = new JsonStorageRepository({ storage, key: SAVE_KEY, createDefault: freshSave, codec: { decode: decodeSave } });
+    this.repository = new ArchiveRepository(storage,SAVE_KEY,decodeSave,freshSave);
   }
   public get board(): Board { const a = this.state.campaign; return new Board(a.level, a.board.id, a.board); }
   public findAttempt(expected: string, state = this.state): { saved: SavedAttempt; mode: 'campaign' | 'daily'; date?: string } | null {
     if (state.campaign.board.id === expected) return { saved: state.campaign, mode: 'campaign' };
+    if(this.indexedState!==this.state){this.attemptDates=new Map(Object.entries(this.state.daily).map(([date,a])=>[a.board.id,date]));this.indexedState=this.state;}
+    const date=this.attemptDates.get(expected);
+    if(date&&state.daily[date]?.board.id===expected)return {saved:state.daily[date]!,mode:'daily',date};
     const entry = Object.entries(state.daily).find(([, a]) => a.board.id === expected);
     return entry ? { saved: entry[1], mode: 'daily', date: entry[0] } : null;
   }
@@ -189,7 +196,7 @@ export class ProgressStore {
     catch {
       let confirmedFailure=false;
       try {
-        const raw = await this.storage.getItem(SAVE_KEY);
+        const raw = await this.repository.readRaw();
         if (raw === JSON.stringify(candidate)) { this.error = null; return; }
         // A failed write may still have committed. Only authoritative readback can settle it.
         if (raw === null && this.state.revision === 0 || raw !== null && JSON.stringify(decodeSave(JSON.parse(raw))) === JSON.stringify(this.state)) {
@@ -202,11 +209,11 @@ export class ProgressStore {
   private update<T>(change: (next: GameSave) => { value: T; event?: SaveChange } | null, requireDurable = false): Promise<T | undefined> {
     return this.queue(async () => {
       if (!this.alive || this.uncertain) throw Error('Save mutation unavailable');
-      const next = structuredClone(this.state), result = change(next); if (!result) return undefined;
+      const draft=draftSave(this.state), next=draft.state, result = change(next); if (!result) return undefined;
       next.revision++;
-      await this.persist(next, requireDurable);
+      const snapshot=draft.finish();await this.persist(snapshot, requireDurable);
       if (!this.alive) throw Error('Disposed save');
-      this.state = next; this.emit(result.event ?? { kind: 'state' }); return result.value;
+      this.state = snapshot; this.emit(result.event ?? { kind: 'state' }); return result.value;
     });
   }
   public async recover(): Promise<void> {
@@ -411,5 +418,5 @@ export class ProgressStore {
     return {value:true,event:{kind:'state',continueFacts:facts,followupFacts}};
   });}
   public flush(): Promise<unknown> { return this.tail; }
-  public destroy(): void { this.alive = false; this.loadEpoch++; this.listeners.clear(); }
+  public destroy(): void { this.alive = false; this.repository.destroy(); this.loadEpoch++; this.listeners.clear(); }
 }

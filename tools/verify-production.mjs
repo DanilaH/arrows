@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 const scripts = (await readdir('dist/assets')).filter(name => name.endsWith('.js'));
-const forbidden = ['nightmare-butterfly', 'hard-flower', '__control-review', 'adFixture', 'test-owned-attempt', 'assistanceFixture', '__assistance-review', 'Test reward transport'];
+const forbidden = ['nightmare-butterfly', 'hard-flower', '__control-review', 'adFixture', 'test-owned-attempt', 'assistanceFixture', '__assistance-review', 'Test reward transport', 'archiveBrowserFixture', '__archive-review', 'archiveReview'];
 if(process.argv.includes('--release')){
   const root=await readdir('dist'),meta=JSON.parse(await readFile('dist/arrows-build.json','utf8'));
   if(meta.channel!=='release'||root.includes('target-lab.html')||root.includes('content-pilot.html'))throw Error('Release includes laboratory entry points or wrong build channel');
