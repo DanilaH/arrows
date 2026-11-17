@@ -8,6 +8,8 @@ Every1700–2200ms one arrow makes a finite860ms,3.7SVG-unit nudge/spring and a 
 
 The existing250ms surface tick checks eligibility; there is no new timer, RAF, physics process or Phaser wake. WAAPI owns at most two finite animations during an idle burst or six during a press, releases them at completion, and retains no filled effect. The controller pauses immediately on activity blockers, Settings, visibility loss or blur. Resume begins one quiet future burst, without catch-up. Reduced motion is static and responds to live preference changes. Teardown cancels every owned effect/listener.
 
+An actual568×320 probe reproduced the decorative mark overlapping the brand heading. At usable heights up to480px the emblem yields its space entirely and stops its effects, preserving initial Play and the compact header. This is short-window defense; Android remains portrait-only. Restore the emblem with one quiet future burst when space returns.
+
 Outgoing inert route snapshots freeze the actually displayed SVG transforms/opacity/dash offset before navigation changes the real root. Main hit geometry stays stable. Existing selected SVG/canvas bridging and manual camera ownership are untouched.
 
 Verify initial/next-unopened/selected/final Home, repeated press/cancel, settings and native background/foreground, route replacement, reduced motion, narrow portrait/large text, both themes/locales, and generic mark geometry. Check the exact signed .playtest: package/cert retained, code48, demo ads and analytics OFF. Provide a genuine current-build GIF and actual audio; distinguish Chromium APK-web from physical phone evidence. No claim of phone FPS/haptic/SDK acceptance.

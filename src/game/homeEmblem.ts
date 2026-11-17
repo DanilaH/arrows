@@ -31,6 +31,7 @@ export function freezeHomeEmblem(source: HTMLElement, snapshot: HTMLElement): vo
  */
 export function createHomeEmblem(root: HTMLElement, canRun: () => boolean) {
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  const cramped=matchMedia('(max-height: 480px)');
   const owned=new Map<Element,Animation>();
   let art: SVGSVGElement|null=null,alive=true,focused=true,enabled=false,nextAt=0,nextArrow=0;
   const stop=(freeze=true):void=>{
@@ -46,7 +47,7 @@ export function createHomeEmblem(root: HTMLElement, canRun: () => boolean) {
     owned.clear();
     if(!freeze)for(const group of art?.querySelectorAll<SVGElement>('.home-emblem-arrow')??[])group.style.transform='';
   };
-  const allowed=():boolean=>alive&&focused&&!document.hidden&&!reduced.matches&&canRun()&&!!art?.isConnected;
+  const allowed=():boolean=>alive&&focused&&!document.hidden&&!reduced.matches&&!cramped.matches&&canRun()&&!!art?.isConnected;
   const animate=(element:SVGElement,frames:Keyframe[],duration:number,delay=0):void=>{
     owned.get(element)?.cancel();
     const animation=element.animate(frames,{duration,delay,easing:'linear',fill:'backwards'});
@@ -102,12 +103,13 @@ export function createHomeEmblem(root: HTMLElement, canRun: () => boolean) {
   document.addEventListener('visibilitychange',visibility);
   window.addEventListener('blur',blur);window.addEventListener('focus',focus);
   reduced.addEventListener('change',preference);
+  cramped.addEventListener('change',preference);
   return {
     update,
     destroy():void{
       alive=false;stop(false);art=null;
       root.removeEventListener('pointerdown',press);document.removeEventListener('visibilitychange',visibility);
-      window.removeEventListener('blur',blur);window.removeEventListener('focus',focus);reduced.removeEventListener('change',preference);
+      window.removeEventListener('blur',blur);window.removeEventListener('focus',focus);reduced.removeEventListener('change',preference);cramped.removeEventListener('change',preference);
     },
   };
 }
