@@ -13,7 +13,8 @@
     "browserAffected": 34,
     "browserStatus": "PASS",
     "sync": "PASS",
-    "signingMaterial": "3fail-closed cases + exact private roundtrip +0600 + no-overwrite PASS"
+    "signingMaterial": "3fail-closed cases + exact private roundtrip +0600 + no-overwrite PASS",
+    "privateKeyProof": "Actual PKCS12 password decryption, RSA4096/SHA256 signature and public certificate verification PASS; not APK signing"
   },
   "icon": {
     "store": {
@@ -35,5 +36,21 @@
   },
   "phone": "NOT RUN",
   "liveProductionIdsSignerApk": "NOT RUN (IDs pending)",
-  "newHostedBuild": "PENDING"
+  "newHostedBuild": {
+    "run": 44071681329,
+    "android": "SUCCESS (debug,21JVM,.playtest,R8releaseCheck,official checks)",
+    "releaseAudit": "SUCCESS (730dates/32release-web states)",
+    "fullBrowser": "RUNNING"
+  },
+  "source": "c74b7d63127b5fdcbf008372e7ca8fecd9ec594f",
+  "earlierQaFailures": [
+    "First affected browser run32PASS/2observer failures: newly seeded saved dark preferences were incorrectly reset by the test init script on each reload. Seed-once correction; final34/34PASS.",
+    "Local jarsigner proof unavailable (JRE has keytool but not jarsigner). Replaced by actual PKCS12 decryption and RSA signature verification using cryptography; no false JAR/APK claim."
+  ],
+  "actualPhone": "NOT RUN",
+  "releasecheckArtifact": {
+    "id": 14323646121,
+    "zipSha256": "b3236e0f8e7dfbec00c6fdd4423f9d652660c53ebe3c092cef3603d114d16204",
+    "downloadedVerified": true
+  }
 }

@@ -1,0 +1,26 @@
+{
+  "source": "c74b7d63127b5fdcbf008372e7ca8fecd9ec594f",
+  "run": 44071681329,
+  "package": "com.danilah.arrows.playtest",
+  "code": 51,
+  "version": "0.36.0",
+  "bytes": 11514017,
+  "sha256": "60ab8b53e3d24b37d3ca539849d87ef590948222a2891a9f1665059f68c89954",
+  "certificateSha256": "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36",
+  "v2": true,
+  "webFilesExact": 28,
+  "actualIconPixelEquality": {
+    "arrows_store_icon.png": "res/drawable-nodpi-v4/arrows_store_icon.png",
+    "arrows_launcher_art.png": "res/drawable-nodpi-v4/arrows_launcher_art.png"
+  },
+  "testAds": true,
+  "analytics": "OFF",
+  "nativeUnit": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "physicalInstallUpdateAndLaunch": "NOT RUN",
+  "download": "https://chatgpt.com/library?file_id=libfile_fde3_f-25c661dc56cc8191bbdaca7ae3611cb2_2841ca9da26c8191b7a266fa9b41a810&account_id=personal"
+}
