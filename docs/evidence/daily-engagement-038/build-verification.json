@@ -1,0 +1,145 @@
+{
+  "version": "0.38.0",
+  "versionCode": 54,
+  "source": "ab71e5cbff3a69a4be16d24ab3291f800ea81587",
+  "run": 44153065029,
+  "package": "com.danilah.arrows.playtest",
+  "bytes": 11530874,
+  "sha256": "4acca17ff96ea8d720f19385f494b71aa68693538117584dd27ba284f89addde",
+  "certificateSha256": "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36",
+  "v2": true,
+  "samePlaytestSigner": true,
+  "portrait": true,
+  "testAds": true,
+  "analyticsOff": true,
+  "actualDexBuildConfigVerified": true,
+  "webFiles": {
+    "index.html": "092cf28ae38fabfa3149697183a9b8489a627d754c6134b6f5e5983d375931d3",
+    "target-lab.html": "0aea42f506d70b4f49fc55ccd12c3cabdee86b4d9d377ebd8ea57f4f492c308a",
+    "arrows-build.json": "2fb387a8d57e3877dcfdbd521908c3ca5525fd703903adb7384d5750f831670e",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "favicon.png": "024683b3da381a3cd952e0db3e566aad355769c451564f0d4299bc4c112ea290",
+    "content-pilot.html": "7ec0114bf5753b71f99c5fe26d759b87aed31b73938756aef83937cf5aeeacb5",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+    "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+    "assets/gestures-Sh-k6Q48.css": "ab3942aedebb3f52beafe332854d0abf91acc118a08eada695c421394ed12519",
+    "assets/web-BPw_vKHZ.js": "402e709a2ff35f461c77b237fa8be2a19670dc3d4c3e43afdc081506bbdd80f7",
+    "assets/contentPilot-JrrfdKDM.css": "d90ddb250320fc90bf098669fff979ff40b965f534393d695c3a34d6dca4ffab",
+    "assets/dailyDense-Vqm9rv7l.js": "703055c749cb9207ac525f271175d6ee77e792f6281f9b22bebd2955c47d4b24",
+    "assets/dailyWorker-CzSU8cF9.js": "d5bccec7c03886e299341ebc7ea268c0ad07e9bdea399381957158a2710b95f9",
+    "assets/targetLab-DIPOQB4j.css": "7dcdedd566063645b3fc4332d3e089c13e0c9c8e07cb998b5910274ff251d047",
+    "assets/contentPilot-BjDSCGRU.js": "17cd699046f064dcd297dfcadf6c9323a1e39ad167aaef37abe61cfc0015711e",
+    "assets/board-CdgtGkmQ.js": "884b082a117269d6905502e5d145c01f17e6750fae07d926262e0119c57a0fd8",
+    "assets/bootstrap-DBPSA_d5.css": "54b9687fe8e86901fee7b3af269972e6b50f536ba01743b56bb5429a9ac534c9",
+    "assets/bootstrap-C7JiKwHG.js": "62cc392256fbe14bfa8e6a883b39486d7e0617c9daf5acb99d5e04bb3cf90061",
+    "assets/targetLab-DNdYTBjg.js": "690d792010cdfd9e63c8f82df553634de1dfff918424989a34bd4dbb8a3a50af",
+    "assets/gestures-CqS7RB-C.js": "a5af9094dd41f3f629db537c58bac436969fff6076b6549a8b481254cf5f893e",
+    "assets/dist-BNQ5r8k5.js": "b7cf9114049363725dac085a36d61794170adb8addafd8dae15f0d0915a4dd37",
+    "assets/main-BfSWtDd2.js": "776431a6f5e623a208a7b87af16f27d357881e3d33db30c47942875d08785531",
+    "assets/dailyDense-DThArHyA.js": "8572768d8355a5aa35db1ee46e6fb30ed115bc37340b4a99a07d542d137b775a"
+  },
+  "analyticsSchemas": 39,
+  "nativeTests": 26,
+  "nativeFailures": 0,
+  "physicalNotificationDelivery": "NOT RUN",
+  "physicalHapticsPerformance": "NOT RUN",
+  "productionServices": "NOT RUN",
+  "capture": {
+    "frames": 284,
+    "durationMs": 14757.514609999998,
+    "moves": 3,
+    "source": "Unmodified signed APK web in Chromium; real pointer/CDP source frames and actual WebAudio output, no overdub. Seeded earned campaign and current dense daily with three remaining; fixed local calendar date. Native reminder/ad/storage responses controlled for web UI capture; no Android permission/alarm/notification delivery or phone claim.",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 1.5,
+    "date": "2026-11-17",
+    "errors": [],
+    "dailyArrows": 208,
+    "reminderRequests": 1,
+    "campaignAttemptPreserved": true,
+    "dailyWinAddedOnce": true
+  },
+  "download": {
+    "apk": "https://chatgpt.com/library?file_id=libfile_fde3_f-de5476313fec81918bfc8726ae7f68df_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+    "gif": "https://chatgpt.com/library?file_id=libfile_fde3_f-e4bd10ea82a48191ba13f4a0ad4427a4_2841ca9da26c8191b7a266fa9b41a810&account_id=personal",
+    "audioVideo": "https://chatgpt.com/library?file_id=libfile_fde3_f-ca1223c0fb808191bf29af6a8b770ae3_2841ca9da26c8191b7a266fa9b41a810&account_id=personal"
+  },
+  "artifactArchiveSha256": {
+    "arrows-playtest": "9905f2ae7ee3c1aff3cd96085d12bc97e95e245cfb62fd758c73d56fc4ec5663",
+    "playtest-verification": "cb9828edad0974296a1ed7883c88fde3f5a60cde69ffce34ff3891f625974710",
+    "native-unit-results": "bc1895ed431a96a92d511df8ff6fea77229ca1852badb5cd56011c1074ece884",
+    "production-readiness-audit": "bf91f44e56b09ac065ad4b0f137efbd38706ddc4cd09208324c70184969327ce"
+  },
+  "captureFiles": {
+    "gif": {
+      "file": "Arrows-0.38.0-daily.gif",
+      "bytes": 2003251,
+      "sha256": "7e6b9891a69f481de1e647573a27a8c65a843598dec08c723ec11d8edb0992d6"
+    },
+    "audioVideo": {
+      "file": "Arrows-0.38.0-daily-audio.mp4",
+      "bytes": 418681,
+      "sha256": "636e547ea99c379857af4b3471712197c8c89eee78c1524c0975607ade9d9664"
+    }
+  },
+  "validationCommits": [
+    "bb723f3b7d045e6724c3ef1c36238b437963d3e3",
+    "ab6de853b389375acf255fee3fead378fc0d8715"
+  ],
+  "hostedArtifactRun": {
+    "id": 44153065029,
+    "android": "success",
+    "releaseAudit": "success",
+    "web": {
+      "passed": 529,
+      "failed": 3,
+      "total": 532,
+      "minutes": 24.0,
+      "conclusion": "failure",
+      "failures": [
+        "old level20 preview minimum on phone",
+        "old level20 preview minimum on desktop",
+        "exact screen-camera float equality on phone"
+      ]
+    }
+  },
+  "correctedChecks": {
+    "units": 263,
+    "browserDailyAndPhone": 28,
+    "browserObserverRepeated": 12,
+    "nativeJVM": 26,
+    "allPassed": true
+  },
+  "hostedTestOnlyRepeat": {
+    "id": 44157690244,
+    "sha": "ab6de853b389375acf255fee3fead378fc0d8715",
+    "status": "in_progress",
+    "conclusion": null
+  },
+  "supplementaryLocalBroad": {
+    "workers": 4,
+    "passed": 524,
+    "failed": 8,
+    "total": 532,
+    "minutes": 16.6,
+    "conclusion": "failure",
+    "overlappedSeparateObserverRepeats": true
+  },
+  "finalFormerlyFailedRepeat": {
+    "workers": 1,
+    "passed": 8,
+    "failed": 0,
+    "minutes": 2.2,
+    "conclusion": "success",
+    "additionalApplicationChanges": false
+  },
+  "knownUnresolvedApplicationDefects": []
+}

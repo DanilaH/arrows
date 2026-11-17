@@ -28,7 +28,7 @@ Existing `daily_open`, resume/start/context/complete/final and cup events retain
 
 ## Checks and limits
 
-See `docs/evidence/daily-engagement-038/ACCEPTANCE.md` for final facts, source hashes, APK, recordings and hosted checks. Initial local check: 262 unit tests, typecheck/build passed; final affected browser / Android / evidence verification is recorded there after execution. Browser bridge scenarios exercise routing/opt-in only and are explicitly not Android delivery proof.
+See `docs/evidence/daily-engagement-038/ACCEPTANCE.md` for final facts, source hashes, APK, recordings and hosted checks. Final local check:263 unit tests, typecheck/build,28 affected browser cases and12 observer repeats PASS; supplementary full524/532 is retained, with all8 failed cases passing the final isolated repeat. Hosted Android26JVM/sync/playtest/R8/official checks and730-date/32-release-state audit PASS. Artifact web529/532, three obsolete test observers corrected and repeated; new hosted test-only repeat still running, aggregate not yet GREEN. Exact evidence and downloads are recorded there. Browser bridge scenarios exercise routing/opt-in only and are explicitly not Android delivery proof.
 
 Phone acceptance: Android 13+ grant/deny/permanent denial/channel off; pre-13 notifications; cold/warm/twice tap; today completed before alarm; midnight/month/year/leap/timezone/clock changes; reboot/update; foreground/advertisement; delayed Doze/OEM delivery; same-certificate update, vibration and large-field frame pacing. NOT RUN unless explicitly recorded as executed.
 

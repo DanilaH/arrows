@@ -1,0 +1,374 @@
+[
+  {
+    "v": {
+      "width": 320,
+      "height": 568
+    },
+    "phase": "immediate",
+    "field": "active",
+    "controls": [
+      {
+        "key": ".home-board",
+        "x": 28.796875,
+        "y": 159.296875,
+        "w": 262.390625,
+        "h": 153.703125,
+        "hit": true,
+        "cover": [
+          "svg",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-play",
+        "x": 40,
+        "y": 335,
+        "w": 240,
+        "h": 52,
+        "hit": true,
+        "cover": [
+          "home-play",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-daily",
+        "x": 35.5,
+        "y": 422,
+        "w": 249,
+        "h": 44,
+        "hit": true,
+        "cover": [
+          "SPAN",
+          "home-daily",
+          "SECTION"
+        ]
+      },
+      {
+        "key": "#meta-nav",
+        "x": 0,
+        "y": 497.3283386230469,
+        "w": 320,
+        "h": 76.00003051757812,
+        "hit": true,
+        "cover": [
+          "home-collection",
+          "DIV",
+          "meta-nav"
+        ]
+      }
+    ]
+  },
+  {
+    "v": {
+      "width": 320,
+      "height": 568
+    },
+    "phase": "settled",
+    "field": "active",
+    "controls": [
+      {
+        "key": ".home-board",
+        "x": 28.796875,
+        "y": 159.296875,
+        "w": 262.390625,
+        "h": 153.703125,
+        "hit": true,
+        "cover": [
+          "svg",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-play",
+        "x": 40,
+        "y": 335,
+        "w": 240,
+        "h": 52,
+        "hit": true,
+        "cover": [
+          "home-play",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-daily",
+        "x": 35.5,
+        "y": 422,
+        "w": 249,
+        "h": 44,
+        "hit": true,
+        "cover": [
+          "SPAN",
+          "home-daily",
+          "SECTION"
+        ]
+      },
+      {
+        "key": "#meta-nav",
+        "x": 0,
+        "y": 492,
+        "w": 320,
+        "h": 76,
+        "hit": true,
+        "cover": [
+          "home-collection",
+          "DIV",
+          "meta-nav"
+        ]
+      }
+    ]
+  },
+  {
+    "v": {
+      "width": 390,
+      "height": 844
+    },
+    "phase": "immediate",
+    "field": "active",
+    "controls": [
+      {
+        "key": ".home-board",
+        "x": 35.09375,
+        "y": 221.484375,
+        "w": 319.796875,
+        "h": 303.828125,
+        "hit": true,
+        "cover": [
+          "svg",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-play",
+        "x": 75,
+        "y": 549.3125,
+        "w": 240,
+        "h": 52,
+        "hit": true,
+        "cover": [
+          "home-play",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-daily",
+        "x": 70.5,
+        "y": 646.3125,
+        "w": 249,
+        "h": 44,
+        "hit": true,
+        "cover": [
+          "SPAN",
+          "home-daily",
+          "SECTION"
+        ]
+      },
+      {
+        "key": "#meta-nav",
+        "x": 0,
+        "y": 768,
+        "w": 390,
+        "h": 76,
+        "hit": true,
+        "cover": [
+          "home-collection",
+          "DIV",
+          "meta-nav"
+        ]
+      }
+    ]
+  },
+  {
+    "v": {
+      "width": 390,
+      "height": 844
+    },
+    "phase": "settled",
+    "field": "active",
+    "controls": [
+      {
+        "key": ".home-board",
+        "x": 35.09375,
+        "y": 221.484375,
+        "w": 319.796875,
+        "h": 303.828125,
+        "hit": true,
+        "cover": [
+          "svg",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-play",
+        "x": 75,
+        "y": 549.3125,
+        "w": 240,
+        "h": 52,
+        "hit": true,
+        "cover": [
+          "home-play",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-daily",
+        "x": 70.5,
+        "y": 646.3125,
+        "w": 249,
+        "h": 44,
+        "hit": true,
+        "cover": [
+          "SPAN",
+          "home-daily",
+          "SECTION"
+        ]
+      },
+      {
+        "key": "#meta-nav",
+        "x": 0,
+        "y": 768,
+        "w": 390,
+        "h": 76,
+        "hit": true,
+        "cover": [
+          "home-collection",
+          "DIV",
+          "meta-nav"
+        ]
+      }
+    ]
+  },
+  {
+    "v": {
+      "width": 844,
+      "height": 390
+    },
+    "phase": "immediate",
+    "field": "active",
+    "controls": [
+      {
+        "key": ".home-board",
+        "x": 212.296875,
+        "y": 84.359375,
+        "w": 185.390625,
+        "h": 140,
+        "hit": true,
+        "cover": [
+          "svg",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-play",
+        "x": 436,
+        "y": 131.359375,
+        "w": 206,
+        "h": 46,
+        "hit": true,
+        "cover": [
+          "home-play",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-daily",
+        "x": 436,
+        "y": 264.21875,
+        "w": 206,
+        "h": 51.78125,
+        "hit": true,
+        "cover": [
+          "SPAN",
+          "home-daily",
+          "SECTION"
+        ]
+      },
+      {
+        "key": "#meta-nav",
+        "x": 0,
+        "y": 334,
+        "w": 844,
+        "h": 56,
+        "hit": true,
+        "cover": [
+          "home-collection",
+          "DIV",
+          "meta-nav"
+        ]
+      }
+    ]
+  },
+  {
+    "v": {
+      "width": 844,
+      "height": 390
+    },
+    "phase": "settled",
+    "field": "active",
+    "controls": [
+      {
+        "key": ".home-board",
+        "x": 212.296875,
+        "y": 84.359375,
+        "w": 185.390625,
+        "h": 140,
+        "hit": true,
+        "cover": [
+          "svg",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-play",
+        "x": 436,
+        "y": 131.359375,
+        "w": 206,
+        "h": 46,
+        "hit": true,
+        "cover": [
+          "home-play",
+          "SECTION",
+          "DIV"
+        ]
+      },
+      {
+        "key": "#home-daily",
+        "x": 436,
+        "y": 264.21875,
+        "w": 206,
+        "h": 51.78125,
+        "hit": true,
+        "cover": [
+          "SPAN",
+          "home-daily",
+          "SECTION"
+        ]
+      },
+      {
+        "key": "#meta-nav",
+        "x": 0,
+        "y": 334,
+        "w": 844,
+        "h": 56,
+        "hit": true,
+        "cover": [
+          "home-collection",
+          "DIV",
+          "meta-nav"
+        ]
+      }
+    ]
+  }
+]
