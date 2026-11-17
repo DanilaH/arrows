@@ -117,7 +117,7 @@ jobs:
           if ./gradlew --no-daemon assembleRelease > release-negative.log 2>&1; then
             echo 'Unexpected production build without live configuration/signing'; exit 1
           fi
-          rg 'Release requires ARROWS_AD_MODE=live' release-negative.log
+          python3 -c "from pathlib import Path; assert 'Release requires ARROWS_AD_MODE=live' in Path('release-negative.log').read_text(); print('Production without live configuration: correctly blocked')"
       - name: Compile isolated optimized release check
         working-directory: native/android
         run: ./gradlew --no-daemon assembleReleaseCheck

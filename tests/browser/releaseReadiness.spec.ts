@@ -22,7 +22,13 @@ test('startup, meaningful first input and explicit re-entry have distinct bounde
  const c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),head=save.campaign.level.arrows[0]!.path.at(-1)!;
  await page.mouse.click(c.x+head.x*c.scale,c.y+head.y*c.scale);await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','2');await expect.poll(()=>events(page,'attempt_context')).toHaveLength(1);
  expect((await events(page,'attempt_context'))[0].params).toMatchObject({attempt:save.campaign.board.id,difficulty:'normal',arrows:3,content_version:3});
- await page.locator('#choose-field').click();await page.locator('#home-play').click();await expect.poll(()=>events(page,'level_resume')).toHaveLength(1);
+ const beforeExit=JSON.parse(await page.evaluate(key=>localStorage.getItem(key)!,SAVE_KEY)).campaign.activeMs;
+ await page.waitForTimeout(1000);await page.evaluate(()=>Reflect.get(window,'assistanceQA').deferProgressWrite(500));
+ await page.locator('#choose-field').click();expect(await events(page,'level_exit')).toHaveLength(0);
+ await expect.poll(()=>events(page,'level_exit')).toHaveLength(1);
+ const afterExit=JSON.parse(await page.evaluate(key=>localStorage.getItem(key)!,SAVE_KEY)).campaign.activeMs;
+ expect(afterExit).toBeGreaterThan(beforeExit+500);expect((await events(page,'level_exit'))[0].params.active_ms).toBe(afterExit);
+ await page.locator('#home-play').click();await expect.poll(()=>events(page,'level_resume')).toHaveLength(1);
  expect(await events(page,'level_start')).toHaveLength(1);expect(await events(page,'attempt_context')).toHaveLength(1);expect(await events(page,'startup_timing')).toHaveLength(1);
  expect(JSON.parse(await page.evaluate(key=>localStorage.getItem(key)!,SAVE_KEY)).campaign.board.id).toBe(save.campaign.board.id);
 });

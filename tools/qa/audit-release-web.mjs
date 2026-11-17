@@ -14,9 +14,13 @@ const names=await readdir(web);assert(!names.includes('target-lab.html')&&!names
 const server=await preview({build:{outDir:web},preview:{host:'127.0.0.1',port:4291,strictPort:true}}),browser=await chromium.launch({headless:true});
 const profiles=[['ru','dark',320,568],['en','light',320,568],['ru','light',390,844],['en','dark',430,932],['ru','dark',390,844,true]];
 const states=[],errors=[];
-async function settle(p){await p.waitForFunction(()=>!document.querySelector('.route-snapshot,.board-transition'));}
+async function settle(p){await p.waitForFunction(()=>!document.querySelector('.route-snapshot,.board-transition')&&document.getAnimations().every(a=>a.playState!=='running'||a.effect?.target?.closest?.('.home-emblem')));}
 async function capture(p,profile,state){
  await settle(p);
+ if(profile[4]){
+  await p.evaluate(()=>{const seen=window.__releaseScaled??=new WeakSet(),sizes=[...document.querySelectorAll('h1,h2,h3,p,small,label,button,summary,select')].filter(el=>!seen.has(el)).map(el=>[el,parseFloat(getComputedStyle(el).fontSize)]);for(const [el,size]of sizes){seen.add(el);el.style.setProperty('font-size',`${size*1.5}px`,'important');}});
+  await p.waitForTimeout(300);await settle(p);
+ }
  const row=await p.evaluate(()=>({lang:document.documentElement.lang,title:document.title,width:innerWidth,height:innerHeight,overflow:document.documentElement.scrollWidth>innerWidth,visible:[...document.querySelectorAll('button')].filter(b=>{const r=b.getBoundingClientRect();return r.width&&r.height&&getComputedStyle(b).visibility!=='hidden';}).map(b=>({id:b.id,text:b.textContent.trim(),label:b.getAttribute('aria-label')}))}));
  assert.equal(row.lang,profile[0]);assert.equal(row.title,profile[0]==='ru'?'Стрелки':'Arrows');assert(!row.overflow);
  const name=profile.join('-')+'-'+state+'.png';await p.screenshot({path:out+'/'+name});const bytes=await readFile(out+'/'+name);
@@ -32,7 +36,6 @@ try{
   const [language,theme,width,height,enlarged]=profile,context=await browser.newContext({viewport:{width,height},locale:language,reducedMotion:enlarged?'reduce':'no-preference'}),p=await context.newPage();p.on('pageerror',e=>errors.push({profile,message:e.message}));
   await p.addInitScript(controlledNative,{save:seed(),settings:{version:1,language,theme,sound:true,vibration:true}});await p.clock.setFixedTime(new Date('2026-11-17T12:00:00+05:00'));
   await p.goto('http://127.0.0.1:4291');await p.locator('#home-play:enabled').waitFor();await p.evaluate(()=>document.querySelector('#qa-recording-source')?.remove());
-  if(enlarged)await p.addStyleTag({content:'h1,h2,h3,p,small,label,button,summary,select{font-size:150%!important}'});
   await capture(p,profile,'home');await p.locator('#home-play').click();await capture(p,profile,'board');
   assert.equal(await p.locator('#difficulty').textContent(),language==='ru'?'Кошмар':'Nightmare');
   await p.locator('#game-settings').click();assert.equal(await p.locator('#settings-testing').count(),0);await capture(p,profile,'settings');await p.locator('#close-settings').click();

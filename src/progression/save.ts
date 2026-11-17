@@ -29,7 +29,7 @@ export interface GameSave {
   freeContinueUsed: boolean;
   helpLedger: HelpLedger;
 }
-export interface SaveChange { kind: 'load' | 'state' | 'move'; result?: MoveResult; attempt?: string; mode?: 'campaign' | 'daily'; date?: string; startedNow?: boolean; helpFacts?:HelpFact[]; continueFacts?:ContinueFact[]; followupFacts?:ContinueFact[]; }
+export interface SaveChange { kind: 'load' | 'state' | 'move'; result?: MoveResult; attempt?: string; mode?: 'campaign' | 'daily'; date?: string; startedNow?: boolean; restarted?:{attempt:string;levelId:string;mode:'campaign'|'daily';activeMs:number};helpFacts?:HelpFact[]; continueFacts?:ContinueFact[]; followupFacts?:ContinueFact[]; }
 export const freshAttempt = (level: Level, id = crypto.randomUUID()): SavedAttempt => ({
   level, board: new Board(level, id).snapshot(), view: null, guides: false, freeUsed: false,
   continuations: 0, hint: null, started: false, activeMs: 0,
@@ -300,7 +300,7 @@ export class ProgressStore {
       const fresh = freshAttempt(old.level);
       next.helpLedger.assignments[fresh.board.id]=next.helpLedger.nextVariant;
       if (target.mode === 'campaign') next.campaign = fresh; else next.daily[target.date!] = fresh;
-      return { value: true,event:{kind:'state',helpFacts,continueFacts:continuations,followupFacts} };
+      return { value: true,event:{kind:'state',helpFacts,continueFacts:continuations,followupFacts,restarted:{attempt:old.board.id,levelId:old.level.id,mode:target.mode,activeMs:old.activeMs}} };
     });
   }
   public next(expected: string): Promise<boolean | undefined> {

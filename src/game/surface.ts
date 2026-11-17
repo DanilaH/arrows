@@ -63,9 +63,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   };
   const takeTime = (): [number, number] => { sample(); const times: [number, number] = [Math.round(pendingTime), Math.round(pendingAdTime)]; pendingTime = 0; pendingAdTime = 0; return times; };
   const run = (task: Promise<unknown>): void => { void task.catch(() => { if (alive) { notice = text.saveFailed; sync(); } }); };
-  const saveView = (): void => {
+  const saveView = (): Promise<void | undefined> | undefined => {
     if (!loaded || meta.screen !== 'game' || control || !alive || progress.uncertain) return;
-    run(progress.presentation(scene.board.attemptId, { view: scene.boardCamera.snapshot(), guides: scene.guides }, ...takeTime()));
+    const write=progress.presentation(scene.board.attemptId, { view: scene.boardCamera.snapshot(), guides: scene.guides }, ...takeTime());
+    run(write);return write;
   };
   const scheduleView = (): void => {
     if (cameraTimer !== undefined) clearTimeout(cameraTimer);
@@ -157,8 +158,11 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     helpOffers.choice('exit');
     if(activeDate && dailyReturnAttempt===scene.board.attemptId && scene.board.complete)meta.queueDailyArrival(activeDate,dailyReturnAttempt);
     dailyReturnAttempt='';
-    assistance=null; motion.cancelRefill(); cancel(); saveView();if(!control)run(progress.recordHelpExit(scene.board.attemptId)); if (cameraTimer !== undefined) clearTimeout(cameraTimer); cameraTimer = undefined;
-    if (!control && active().started) platform.analytics.track('level_exit', { mode: gameMode(), level_id: active().level.id, attempt: active().board.id, active_ms: active().activeMs });
+    assistance=null; motion.cancelRefill(); cancel(); const written=saveView();if(!control)run(progress.recordHelpExit(scene.board.attemptId)); if (cameraTimer !== undefined) clearTimeout(cameraTimer); cameraTimer = undefined;
+    if (!control && active().started) {
+      const attempt=active().board.id,mode=gameMode(),level_id=active().level.id;
+      run((written??Promise.resolve()).then(()=>{const saved=progress.findAttempt(attempt)?.saved;if(alive&&saved)platform.analytics.track('level_exit',{mode,level_id,attempt,active_ms:saved.activeMs});}));
+    }
     pendingTime = 0; pendingAdTime = 0; wasActive = false; freshWinAttempt = '';
   };
   const meta = installMetaSurface(progress, language, {
@@ -261,7 +265,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
       button('confirm-restart', text.restart, () => {
         close(); if (control) loadControl(selectedControl,true);
         else {
-          const a = scene.board, mode = gameMode(),beforeMs=active().activeMs, cueMode=cueQA.next, date=activeDate;run(progress.restart(a.attemptId).then(changed => { if (changed) {cueQA.bindNew(mode === 'daily' ? progress.state.daily[date!]!.board.id : progress.state.campaign.board.id, cueMode);helpOffers.choice('restart','',confirmedChoice,a.attemptId);platform.analytics.track('level_restart', { mode, level_id: a.level.id, attempt: a.attemptId });platform.analytics.track('attempt_final',{event_id:`${a.attemptId}-restart`,attempt:a.attemptId,mode,outcome:'restart',active_ms:beforeMs});} }));
+          const a = scene.board, mode = gameMode(), cueMode=cueQA.next, date=activeDate;run(progress.restart(a.attemptId).then(changed => { if (changed) {cueQA.bindNew(mode === 'daily' ? progress.state.daily[date!]!.board.id : progress.state.campaign.board.id, cueMode);helpOffers.choice('restart','',confirmedChoice,a.attemptId);} }));
         }
       }, true);
       button('cancel', text.cancel, () => close());
@@ -379,6 +383,11 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if (!alive) return;
     if (event.kind === 'load' || event.kind === 'move' && event.result?.kind !== 'ignored' || event.helpFacts?.length || event.continueFacts?.length) errorCue.cancel('accepted-change', false);
     helpOffers.facts(event);
+    if(!control&&event.restarted){
+      const r=event.restarted;
+      platform.analytics.track('level_restart',{mode:r.mode,level_id:r.levelId,attempt:r.attempt});
+      platform.analytics.track('attempt_final',{event_id:`${r.attempt}-restart`,attempt:r.attempt,mode:r.mode,outcome:'restart',active_ms:r.activeMs});
+    }
     if(event.kind==='load'){dailyReturnAttempt='';meta.discardAward();meta.discardArrivals();}
     if (activeDate && !progress.state.daily[activeDate]) { activeDate = null; meta.show('home'); }
     if (progress.error !== lastSaveError) {
