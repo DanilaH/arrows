@@ -1,7 +1,9 @@
+import {existingPreferences} from './helpers/existingPreferences';
 import { test, expect } from '@playwright/test';
 import { campaign } from '../../src/content/campaign';
 
 test('loads the bundled face for RU and EN without a font CDN and keeps narrow controls reachable', async ({page}) => {
+  await existingPreferences(page,'en');
   const fonts:string[]=[];page.on('request',r=>{if(r.resourceType()==='font')fonts.push(r.url());});
   await page.setViewportSize({width:320,height:568});await page.goto('/');await page.locator('#home-play:enabled').waitFor();
   await page.evaluate(()=>document.fonts.ready);

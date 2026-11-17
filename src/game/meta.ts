@@ -72,7 +72,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
   const dateLabel = (key: string): string => key ? shortDate.format(calendarDate(key)) : '—';
   const title = (value: string): string => `<header class="meta-header"><button class="circle" type="button" data-nav="back" aria-label="${text.back}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><h1 id="menu-title" tabindex="-1">${value}</h1><span class="meta-header-spacer"></span></header>`;
   const refreshNav = (): void => {
-    nav.hidden = screen === 'game'; nav.setAttribute('aria-label', text.navLabel);
+    nav.hidden = screen === 'game' || screen === 'home' && themeIntro; nav.setAttribute('aria-label', text.navLabel);
     const unlocked = collectionOpen(progress.state), challenge = challengeOpen(progress.state);
     const newAward = unlocked && (!progress.state.collectionSeen || earnedAwards(progress.state).some(key => !progress.state.seenAwards.includes(key)));
     const items = [
@@ -176,6 +176,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
     const expanded = [...root.querySelectorAll<HTMLDetailsElement>('details[open]')].map(el=>el.dataset.medal || el.id);
     const oldScroll = scrollPort().scrollTop;
     root.classList.toggle('calendar-screen', screen === 'calendar');
+    root.classList.toggle('theme-intro-screen', screen === 'home' && themeIntro);
     root.innerHTML = screen === 'home' ? home() : screen === 'collection' ? collection() : calendar();
     for (const el of root.querySelectorAll<HTMLDetailsElement>('details')) el.open = expanded.includes(el.dataset.medal || el.id);
     refreshNav(); scrollPort().scrollTop = oldScroll;
@@ -312,7 +313,7 @@ export function installMetaSurface(progress: ProgressStore, language: GameLangua
       dayFormat = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', timeZone: 'UTC' });
       shortDate = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', timeZone: 'UTC' }); refresh();
     },
-    ready(): void { ready = true; themeIntro=options.themeIntro?.eligible()??false; refresh(); options.motion.reveal(nav); },
-    destroy(): void {themePreview.destroy();emblem.destroy();cancelDailyWork(); alive = false; pendingDaily=null;pendingUnlocks.clear();closeTrophy(); root.removeEventListener('scroll',scrolled,true);root.removeEventListener('click', click); nav.removeEventListener('click', click); nav.replaceChildren(); nav.hidden=true; root.removeEventListener('change', changeYear); trophyDialog.removeEventListener('click', viewerClick); trophyDialog.removeEventListener('cancel', viewerCancel); trophyDialog.replaceChildren(); root.replaceChildren();root.classList.remove('calendar-screen'); },
+    ready(): void { ready = true; themeIntro=options.themeIntro?.eligible()??false; refresh(); if(!nav.hidden)options.motion.reveal(nav); },
+    destroy(): void {themePreview.destroy();emblem.destroy();cancelDailyWork(); alive = false; pendingDaily=null;pendingUnlocks.clear();closeTrophy(); root.removeEventListener('scroll',scrolled,true);root.removeEventListener('click', click); nav.removeEventListener('click', click); nav.replaceChildren(); nav.hidden=true; root.removeEventListener('change', changeYear); trophyDialog.removeEventListener('click', viewerClick); trophyDialog.removeEventListener('cancel', viewerCancel); trophyDialog.replaceChildren(); root.replaceChildren();root.classList.remove('calendar-screen','theme-intro-screen'); },
   };
 }

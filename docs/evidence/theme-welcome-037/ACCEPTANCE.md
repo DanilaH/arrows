@@ -12,3 +12,5 @@ Base2ed1023, all newer store/archive work retained.
 -Physical phone/install-update/haptic/FPS/live SDK/dashboard/money/production IDs: NOT RUN. No store publication or new signing key.
 
 The recording uses unmodified current APK web in Chromium with clean unseeded storage; one same-choice tap before recording warms the real WebAudio player. Browser audio tee only; no substituted audio or SDK/phone claim. Internal QA source label stays outside the application payload.
+
+Update: full CI44074824413/web134010026914 completed SUCCESS:516/516browser23.5min,256unit/type/build/sync. All three jobs are GREEN. Earlier running checkpoint superseded; shipped runtime unchanged.

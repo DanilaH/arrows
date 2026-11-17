@@ -1,3 +1,4 @@
+import {existingPreferences} from './helpers/existingPreferences';
 import { test, expect } from '@playwright/test';
 
 const ready = async (page: import('@playwright/test').Page) => {
@@ -27,6 +28,7 @@ test('shows finite button and route motion, accepts a quick return and settles',
 });
 
 test('keeps modal ownership through close motion and settles when hidden', async ({ page }) => {
+  await existingPreferences(page,'en');
   await ready(page); await page.locator('#home-settings').click();
   await expect(page.locator('#settings-dialog')).toBeVisible();
   await page.locator('#close-settings').evaluate((e: HTMLButtonElement) => e.click());

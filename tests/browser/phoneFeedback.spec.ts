@@ -1,3 +1,4 @@
+import {existingPreferences} from './helpers/existingPreferences';
 import { test, expect } from '@playwright/test';
 import { freshSave, freshAttempt, SAVE_KEY } from '../../src/progression/save';
 import { campaign } from '../../src/content/campaign';
@@ -25,6 +26,7 @@ for (const index of [0, 8, 9, 18, 19]) test(`keeps destination names and readabl
 });
 
 test('offers independent feedback previews without turning off the other channel',async({page})=>{
+  await existingPreferences(page,'en');
   await page.goto('/');await page.locator('#home-settings:enabled').click();
   await expect(page.locator('#preview-vibration')).toBeEnabled();
   await page.locator('#setting-vibration').click();await expect(page.locator('#preview-vibration')).toBeDisabled();await expect(page.locator('#preview-sound')).toBeEnabled();

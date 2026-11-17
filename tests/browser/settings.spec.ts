@@ -1,3 +1,4 @@
+import {existingPreferences} from './helpers/existingPreferences';
 import { test, expect } from '@playwright/test';
 import { SETTINGS_KEY, defaultSettings } from '../../src/app/settings';
 import { SAVE_KEY, freshSave, freshAttempt } from '../../src/progression/save';
@@ -52,10 +53,11 @@ test('themes collection, calendar and trophy viewer while retaining the future-y
 });
 
 test('keeps choices usable on failed preference writes, exposes retry, and leaves game saves independent', async ({ page }) => {
-  await page.addInitScript(key => {
+  await page.addInitScript(({key,settings}) => {
+    if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(settings));
     const original = Storage.prototype.setItem; let reject = true;
     Storage.prototype.setItem = function(k, value) { if (k === key && reject) { reject = false; throw Error('settings storage unavailable'); } return original.call(this, k, value); };
-  }, SETTINGS_KEY);
+  }, {key:SETTINGS_KEY,settings:defaultSettings('ru')});
   await page.goto('/'); await expect(page.locator('#game-shell')).toHaveAttribute('data-progress', 'ready');
   await page.locator('#home-settings').click(); await page.locator('#theme-light').click(); await expect(page.locator('#retry-settings')).toBeVisible();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light'); await page.locator('#retry-settings').click(); await expect(page.locator('#retry-settings')).not.toBeVisible();
@@ -64,6 +66,7 @@ test('keeps choices usable on failed preference writes, exposes retry, and leave
 });
 
 test('cancels real WebAudio on mute and overlapping lifecycle blockers without replaying stale feedback', async ({ page }) => {
+  await existingPreferences(page,'ru');
   await page.addInitScript(() => {
     const metrics = { starts: 0, active: new Set<number>(), peak: 0 }; Reflect.set(window, '__soundMetrics', metrics);
     const original = AudioContext.prototype.createBufferSource;
@@ -91,6 +94,7 @@ test('cancels real WebAudio on mute and overlapping lifecycle blockers without r
 });
 
 test('keeps settings scrollable at narrow widths, short landscape and enlarged text', async ({ page }) => {
+  await existingPreferences(page,'ru');
   await page.goto('/'); await expect(page.locator('#game-shell')).toHaveAttribute('data-progress', 'ready'); await page.locator('#home-settings').click();
   for (const size of [{ width: 320, height: 640 }, { width: 780, height: 360 }, { width: 390, height: 844 }]) {
     await page.setViewportSize(size); await page.locator('#theme-light').click(); await page.locator('#setting-language').selectOption('en');
@@ -103,5 +107,5 @@ test('keeps settings scrollable at narrow widths, short landscape and enlarged t
 });
 test('fresh launch paints light, then preserves an explicit dark choice across reload',async({page})=>{
  await page.emulateMedia({colorScheme:'dark'});await page.goto('/');await expect(page.locator('#game-shell')).toHaveAttribute('data-status','ready');await expect(page.locator('html')).toHaveAttribute('data-theme','light');expect(await page.locator('body').evaluate(e=>getComputedStyle(e).backgroundColor)).toBe('rgb(243, 244, 250)');
- await page.locator('#home-settings').click();await expect(page.locator('#theme-light')).toHaveAttribute('aria-pressed','true');await page.locator('#theme-dark').click();await expect(page.locator('#settings-save-status')).toContainText('сохран');await page.reload();await expect(page.locator('#game-shell')).toHaveAttribute('data-status','ready');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');expect(await page.locator('body').evaluate(e=>getComputedStyle(e).backgroundColor)).toBe('rgb(30, 30, 44)');
+ await page.locator('#home-play').click();await page.locator('#game-settings').click();await expect(page.locator('#theme-light')).toHaveAttribute('aria-pressed','true');await page.locator('#theme-dark').click();await expect(page.locator('#settings-save-status')).toContainText('сохран');await page.reload();await expect(page.locator('#game-shell')).toHaveAttribute('data-status','ready');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');expect(await page.locator('body').evaluate(e=>getComputedStyle(e).backgroundColor)).toBe('rgb(30, 30, 44)');
 });

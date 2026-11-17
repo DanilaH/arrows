@@ -1,3 +1,4 @@
+import {existingPreferences} from './helpers/existingPreferences';
 import {test, expect, type Page} from '@playwright/test';
 import {campaign} from '../fixtures/campaignV4';
 import {Board} from '../../src/domain/board';
@@ -39,6 +40,7 @@ test('B1 centre hold preserves authored centring and grants exactly its own help
 });
 
 test('early modal close starts from its displayed state and leaves focus usable',async({page})=>{
+  await existingPreferences(page,'en');
   await ready(page);
   for(const delay of [16,35,65,100]){
     const sample=await page.evaluate(async delay=>{

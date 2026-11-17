@@ -1,3 +1,4 @@
+import {existingPreferences} from './helpers/existingPreferences';
 import { test, expect, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { campaign } from '../fixtures/campaignV4';
@@ -218,6 +219,7 @@ test('Q17 real calendar unlock keeps its presentation while first-error cue is s
   const observation=await page.evaluate(()=>Reflect.get(window,'unlockCueObservation'));expect(observation.atInput).toBe(true);expect(observation.firedAt).toBeGreaterThanOrEqual(observation.startedAt+2790);
 });
 test('Q01/Q10 production browser and isolated B1 have no candidate or trace',async({page})=>{
+  await existingPreferences(page,'en');
   await page.goto('/');await page.locator('#home-settings').click();await expect(page.locator('#a1-cue-qa-mode')).toHaveCount(0);expect(await notes(page)).toBeNull();
   await page.goto('/target-lab.html');await page.locator('#lab-options summary').click();await page.locator('#lab-help').selectOption('single');await page.locator('#lab-restart').click();await page.locator('#lab-hint').click();await page.waitForTimeout(700);expect(await notes(page)).toBeNull();expect(await page.locator('.a1-error-cue').count()).toBe(0);
 });
