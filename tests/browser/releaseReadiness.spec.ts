@@ -16,6 +16,9 @@ test('RU difficulty is translated in the actual Home, board and live locale chan
 });
 test('startup, meaningful first input and explicit re-entry have distinct bounded events',async({page})=>{
  const save=await boot(page,'en');await expect.poll(()=>events(page,'startup_timing')).toHaveLength(1);await page.locator('#home-play').click();expect(await events(page,'level_start')).toHaveLength(0);
+ // Observe the settled field before deriving screen coordinates; reading the
+ // pre-layout camera immediately after Home activation aims at the wrong point.
+ await expect(page.locator('.route-snapshot')).toHaveCount(0);await page.waitForTimeout(400);
  const c=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!),head=save.campaign.level.arrows[0]!.path.at(-1)!;
  await page.mouse.click(c.x+head.x*c.scale,c.y+head.y*c.scale);await expect(page.locator('#game-shell')).toHaveAttribute('data-remaining','2');await expect.poll(()=>events(page,'attempt_context')).toHaveLength(1);
  expect((await events(page,'attempt_context'))[0].params).toMatchObject({attempt:save.campaign.board.id,difficulty:'normal',arrows:3,content_version:3});

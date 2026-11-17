@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class AnalyticsContractTest {
     @Test public void everySharedEventAcceptsExactTypesAndRejectsMissingExtraOrWrongFields() throws Exception {
-        JSONObject contract = new JSONObject(Files.readString(Paths.get("src/main/assets/arrows-analytics-contract.json")));
+        JSONObject contract = new JSONObject(new String(Files.readAllBytes(Paths.get("src/main/assets/arrows-analytics-contract.json")), java.nio.charset.StandardCharsets.UTF_8));
         assertEquals(38, contract.length());
         Iterator<String> events = contract.keys();
         while (events.hasNext()) {
@@ -18,7 +18,8 @@ public class AnalyticsContractTest {
             while (keys.hasNext()) { String key = keys.next(), type = fields.getString(key); params.put(key, "string".equals(type) ? "sample" : "number".equals(type) ? 1 : true); }
             assertTrue(event, AnalyticsContract.valid(contract, event, params));
             params.put("unexpected", "value"); assertFalse(event, AnalyticsContract.valid(contract, event, params)); params.remove("unexpected");
-            for (String key : fields.keySet()) {
+            Iterator<String> checks = fields.keys();
+            while (checks.hasNext()) { String key = checks.next();
                 Object original = params.remove(key); assertFalse(event, AnalyticsContract.valid(contract, event, params));
                 params.put(key, JSONObject.NULL); assertFalse(event, AnalyticsContract.valid(contract, event, params));
                 params.put(key, original);
