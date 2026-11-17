@@ -1,5 +1,5 @@
 // Project-owned geometry. One source for browser, Android layers and store export.
-export const colors = { background: '#1e1e2c', top: '#393551', bottom: '#181824' };
+export const colors = { background: '#f3f4fa', top: '#393551', bottom: '#181824' };
 export const arrows = [
   { color: '#f0efff', path: 'M29 55V42H53V28', head: 'M46 31L53 22L60 31Z' },
   { color: '#bcb6ff', path: 'M77 41V53H43V68', head: 'M36 65L43 74L50 65Z' },

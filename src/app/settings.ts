@@ -6,7 +6,7 @@ export type GameTheme = 'dark' | 'light';
 export interface GameSettings { version: 1; theme: GameTheme; language: GameLanguage; sound: boolean; vibration: boolean; }
 export type SettingsStatus = 'loading' | 'saved' | 'saving' | 'error';
 type Preferences = Omit<GameSettings, 'version'>;
-export const defaultSettings = (language?: string): GameSettings => ({ version: 1, theme: 'dark', language: normalizeGameLanguage(language), sound: true, vibration: true });
+export const defaultSettings = (language?: string): GameSettings => ({ version: 1, theme: 'light', language: normalizeGameLanguage(language), sound: true, vibration: true });
 export function decodeSettings(value: unknown): GameSettings {
   const s = value as GameSettings | null;
   if (!s || s.version !== 1 || !['dark', 'light'].includes(s.theme) || !['ru', 'en'].includes(s.language) || typeof s.sound !== 'boolean' || typeof s.vibration !== 'boolean') throw Error('Unsupported preferences');

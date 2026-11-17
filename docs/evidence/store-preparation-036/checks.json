@@ -1,0 +1,39 @@
+{
+  "base": "00a1141570e8d1fc0402166f364cfe92ba0c2a45",
+  "previousCi": {
+    "run": 44063551909,
+    "status": "SUCCESS",
+    "browser": 502,
+    "unit": 253,
+    "jvm": 21
+  },
+  "local": {
+    "check": "PASS",
+    "unit": 254,
+    "browserAffected": 34,
+    "browserStatus": "PASS",
+    "sync": "PASS",
+    "signingMaterial": "3fail-closed cases + exact private roundtrip +0600 + no-overwrite PASS"
+  },
+  "icon": {
+    "store": {
+      "path": "assets/brand/store-icon.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 197501,
+      "sha256": "024683b3da381a3cd952e0db3e566aad355769c451564f0d4299bc4c112ea290"
+    },
+    "foreground": {
+      "path": "assets/brand/launcher-foreground.png",
+      "sha256": "d212c8c486a3e3809739c87619bbbc6367505353a93854c7877149ac971ff0da",
+      "strongAlphaRadiusDp": 31.64737449712116,
+      "safeRadiusDp": 33
+    },
+    "provenance": "Built-in image generation and separate transparent cutout; technical512px export, adaptive bounds computed from actual alpha>=32."
+  },
+  "phone": "NOT RUN",
+  "liveProductionIdsSignerApk": "NOT RUN (IDs pending)",
+  "newHostedBuild": "PENDING"
+}

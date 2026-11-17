@@ -64,3 +64,7 @@ describe('bounded feedback', () => {
     }
   });
 });
+it('starts a fresh profile light while retaining an explicit saved dark preference',async()=>{
+ expect(defaultSettings('ru').theme).toBe('light');const empty=memory(),fresh=new SettingsStore(empty.storage,'ru');await fresh.ready;expect(fresh.state.theme).toBe('light');fresh.destroy();
+ const previous=JSON.stringify({...defaultSettings('en'),theme:'dark'}),old=memory(previous),store=new SettingsStore(old.storage,'ru');await store.ready;expect(store.state.theme).toBe('dark');expect(old.writes).toEqual([]);store.destroy();
+});

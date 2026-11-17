@@ -1,4 +1,4 @@
-:root { color-scheme: dark;
+:root[data-theme="dark"] { color-scheme: dark;
   --bg: #1e1e2c;
   --ink: #b9c0f9;
   --heading: #c8ccff;
@@ -78,7 +78,7 @@ select:focus-visible { outline: 2px solid var(--accent-focus); outline-offset: 3
 .settings-save { border-top: 1px solid var(--border); margin-top: 24px; padding-top: 14px; display: flex; justify-content: center; align-items: center; gap: 10px; min-height: 32px; color: var(--faint); font-size: 11px; text-align: center; line-height: 1.5; }
 #retry-settings { min-height: 36px; padding: 5px 12px; border-radius: 16px; color: var(--ink); background: var(--surface-soft); }
 @media (prefers-reduced-motion: reduce) { .switch-track, .switch-track > i { transition: none; } }
-:root[data-theme="light"] { color-scheme: light;
+:root { color-scheme: light;
   --bg: #f3f4fa;
   --ink: #374468;
   --heading: #29375a;

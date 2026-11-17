@@ -14,6 +14,7 @@ test('acknowledges an icon click even when navigation replaces its original pare
 });
 
 test('changes theme and language live, retaining a partial board and independent preferences across reload', async ({ page }, info) => {
+  await page.addInitScript(({key,value})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(value));},{key:SETTINGS_KEY,value:{...defaultSettings('ru'),theme:'dark'}});
   await page.goto('/'); await expect(page.locator('#game-shell')).toHaveAttribute('data-progress', 'ready');
   await page.locator('#home-play').click(); await page.waitForTimeout(450);
   const id = await page.locator('#game-shell').getAttribute('data-attempt'), camera = JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);
@@ -99,4 +100,8 @@ test('keeps settings scrollable at narrow widths, short landscape and enlarged t
   await page.locator('#settings-dialog').evaluate(root => { for (const el of root.querySelectorAll<HTMLElement>('h2, h3, span, small, strong, select')) el.style.fontSize = `${parseFloat(getComputedStyle(el).fontSize) * 1.25}px`; });
   expect(await page.locator('#settings-dialog').evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
   await page.keyboard.press('Escape'); await expect(page.locator('#home-settings')).toBeFocused();
+});
+test('fresh launch paints light, then preserves an explicit dark choice across reload',async({page})=>{
+ await page.emulateMedia({colorScheme:'dark'});await page.goto('/');await expect(page.locator('#game-shell')).toHaveAttribute('data-status','ready');await expect(page.locator('html')).toHaveAttribute('data-theme','light');expect(await page.locator('body').evaluate(e=>getComputedStyle(e).backgroundColor)).toBe('rgb(243, 244, 250)');
+ await page.locator('#home-settings').click();await expect(page.locator('#theme-light')).toHaveAttribute('aria-pressed','true');await page.locator('#theme-dark').click();await expect(page.locator('#settings-save-status')).toContainText('сохран');await page.reload();await expect(page.locator('#game-shell')).toHaveAttribute('data-status','ready');await expect(page.locator('html')).toHaveAttribute('data-theme','dark');expect(await page.locator('body').evaluate(e=>getComputedStyle(e).backgroundColor)).toBe('rgb(30, 30, 44)');
 });

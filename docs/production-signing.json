@@ -1,0 +1,8 @@
+{
+  "alias": "arrows_release",
+  "algorithm": "RSA4096/SHA256withRSA",
+  "validityDays": 10000,
+  "certificateSha256": "e7cb7061aebc42ca415ee8fbe17235769c6e40af4f1ab46fb17af68c8581bac6",
+  "package": "com.danilah.arrows",
+  "backupBytes": 16174
+}

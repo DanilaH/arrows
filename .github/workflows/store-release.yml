@@ -1,0 +1,70 @@
+name: Store release APK
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: arrows-store-release
+  cancel-in-progress: false
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    env:
+      ARROWS_AD_MODE: live
+      ARROWS_RELEASE_KEYSTORE_BASE64: ${{ secrets.ARROWS_RELEASE_KEYSTORE_BASE64 }}
+      ARROWS_RELEASE_STORE_PASSWORD: ${{ secrets.ARROWS_RELEASE_STORE_PASSWORD }}
+      ARROWS_RELEASE_KEY_ALIAS: ${{ secrets.ARROWS_RELEASE_KEY_ALIAS }}
+      ARROWS_RELEASE_KEY_PASSWORD: ${{ secrets.ARROWS_RELEASE_KEY_PASSWORD }}
+      ARROWS_RELEASE_CERT_SHA256: ${{ secrets.ARROWS_RELEASE_CERT_SHA256 }}
+      APPMETRICA_API_KEY: ${{ secrets.APPMETRICA_API_KEY }}
+      YANDEX_REWARDED_AD_UNIT_ID: ${{ secrets.YANDEX_REWARDED_AD_UNIT_ID }}
+      YANDEX_INTERSTITIAL_AD_UNIT_ID: ${{ secrets.YANDEX_INTERSTITIAL_AD_UNIT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+      - run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - uses: actions/cache/restore@v4
+        with:
+          path: /home/runner/.npm
+          key: node-cache-${{ runner.os }}-x64-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: node-cache-${{ runner.os }}-x64-npm-
+      - run: npm ci --prefer-offline
+      - name: Restore private signing material without logging values
+        run: |
+          export ARROWS_RELEASE_KEYSTORE="$RUNNER_TEMP/arrows-production.keystore"
+          python3 tools/prepare-release-signing.py
+          printf 'ARROWS_RELEASE_KEYSTORE=%s\n' "$ARROWS_RELEASE_KEYSTORE" >> "$GITHUB_ENV"
+      - run: npm run release:config
+      - run: npm run check
+      - run: npm run android:sync:release
+      - run: ./gradlew --no-daemon testDebugUnitTest assembleRelease
+        working-directory: native/android
+      - name: Verify actual production APK
+        run: python3 tools/qa/verify-release-payload.py native/android/app/build/outputs/apk/release/app-release.apk --kind release --out .test-output/store-release-verification
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arrows-store-release
+          path: native/android/app/build/outputs/apk/release/app-release.apk
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arrows-store-release-verification
+          path: |
+            .test-output/store-release-verification/
+            native/android/app/build/outputs/mapping/release/
+            native/android/app/build/test-results/testDebugUnitTest/
+          retention-days: 30
+      - name: Remove temporary private key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/arrows-production.keystore"
