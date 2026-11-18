@@ -17,7 +17,14 @@ def find(tree,labels):
 def wait_node(labels,name):
     deadline=time.monotonic()+45
     while time.monotonic()<deadline:
-        tree=snapshot(name);node=find(tree,labels)
+        try:tree=snapshot(name)
+        except subprocess.CalledProcessError as error:
+            # Android can reclaim the standalone dump process during cold boot;
+            # retry that exact failure within the same bounded readiness wait.
+            if error.returncode not in [137,-9]:raise
+            print('Android reclaimed UI dump process; waiting for cold start',flush=True)
+            time.sleep(1);continue
+        node=find(tree,labels)
         if node is not None:return tree,node
         time.sleep(.5)
     raise AssertionError('Expected production control: '+','.join(sorted(labels)))
