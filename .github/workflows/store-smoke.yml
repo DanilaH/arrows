@@ -1,0 +1,51 @@
+name: Signed store APK smoke
+on:
+  workflow_run:
+    workflows: ['Store release APK']
+    types: [completed]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  installed-release:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+      - uses: actions/download-artifact@v4
+        with:
+          name: arrows-store-release
+          path: .test-output/store-apk
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_2
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot
+          disable-animations: false
+          script: python3 tools/qa/smoke-store-apk.py .test-output/store-apk/app-release.apk
+        env:
+          ARROWS_RELEASE_SOURCE: ${{ github.event.workflow_run.head_sha }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: signed-store-runtime
+          path: .test-output/store-runtime/
+          retention-days: 30
