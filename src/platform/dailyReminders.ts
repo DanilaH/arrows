@@ -2,12 +2,10 @@ import { registerPlugin, type PluginListenerHandle } from '@capacitor/core';
 import type { ProgressStore } from '../progression/save';
 import { reminderProjection } from '../progression/dailyEntry';
 
-export interface ReminderStatus { enabled: boolean; allowed: boolean; offered: boolean; time: string; pending: string }
+export interface ReminderStatus { enabled: boolean; allowed: boolean; requested: boolean; pending: string }
 export interface DailyReminderBridge {
   status(): Promise<ReminderStatus>;
   sync(options: { language: string; snapshot: (NonNullable<ReturnType<typeof reminderProjection>> & { rootHash: string }) | null }): Promise<ReminderStatus>;
-  configure(options: { enabled?: boolean; time?: string }): Promise<ReminderStatus>;
-  markOffered(): Promise<ReminderStatus>;
   request(): Promise<ReminderStatus>;
   openSettings(): Promise<void>;
   consume(options: { nonce: string }): Promise<ReminderStatus>;
@@ -56,9 +54,7 @@ export function createDailyReminders(progress: ProgressStore, language: () => st
   }
   return {
     get available() { return !!native; }, get state() { return state; }, get error() { return error; }, get busy() { return busy; }, sync, refresh,
-    enable(): Promise<void> { return action(async () => { await native!.request(); return native!.configure({ enabled: true }); }); },
-    configure(options: { enabled?: boolean; time?: string }): Promise<void> { return action(() => native!.configure(options)); },
-    offered(): void { if (native) void native.markOffered().then(accepted).catch(() => {}); },
+    requestOnce(): Promise<void> { return state && !state.requested ? action(() => native!.request()) : Promise.resolve(); },
     consume(nonce: string): Promise<void> { return action(() => native!.consume({ nonce })); },
     async openSettings(): Promise<void> { if (native) try { await native.openSettings(); } catch { error = true; changed(); } },
     destroy(): void { alive = false; queued = null; unsubscribe(); void listener?.remove(); window.removeEventListener('focus', resume); document.removeEventListener('visibilitychange', resume); },

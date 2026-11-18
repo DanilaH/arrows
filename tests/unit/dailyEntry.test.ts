@@ -37,8 +37,8 @@ it('does not export an optimistic/failing save as reminder truth; recovers from 
 it('binds reminder data to the captured root and coalesces concurrent commits; optional failure preserves progress',async()=>{
  vi.stubGlobal('window',new EventTarget());vi.stubGlobal('document',Object.assign(new EventTarget(),{hidden:false}));
  const seed=unlocked(),rows=new Map([[SAVE_KEY,JSON.stringify(seed)]]),store=new ProgressStore({async getItem(k){return rows.get(k)??null;},async setItem(k,v){rows.set(k,v);},async removeItem(k){rows.delete(k);}});await store.load();
- const status:ReminderStatus={enabled:true,allowed:true,time:'19:00',offered:true,pending:''},sent:Parameters<DailyReminderBridge['sync']>[0][]=[];
- let reject=true;const bridge:DailyReminderBridge={async status(){return status;},async sync(value){sent.push(value);if(reject)throw Error('optional native service');return status;},async configure(){return status;},async request(){return status;},async markOffered(){return status;},async consume(){return status;},async openSettings(){},async addListener(){return{async remove(){}};}};
+ const status:ReminderStatus={enabled:true,allowed:true,requested:true,pending:''},sent:Parameters<DailyReminderBridge['sync']>[0][]=[];
+ let reject=true;const bridge:DailyReminderBridge={async status(){return status;},async sync(value){sent.push(value);if(reject)throw Error('optional native service');return status;},async request(){return status;},async consume(){return status;},async openSettings(){},async addListener(){return{async remove(){}};}};
  const reminders=createDailyReminders(store,()=> 'en',()=>{},true,bridge);reminders.sync();
  await store.presentation(store.board.attemptId,{guides:true});await store.presentation(store.board.attemptId,{guides:false});reject=false;
  await vi.waitFor(()=>expect(sent.at(-1)?.snapshot?.rootHash).toBeDefined());
@@ -52,4 +52,15 @@ it('keeps the old state/proof pair during an in-flight publication and exposes t
  const moving=store.presentation(store.board.attemptId,{guides:true});await vi.waitFor(()=>expect(written).toBe(true));
  expect(store.state.campaign.guides).toBe(false);expect(store.durableWitness===before).toBe(true);expect(raw===before).toBe(false);
  hold!();await moving;expect(store.state.campaign.guides).toBe(true);expect(store.durableWitness===raw).toBe(true);store.destroy();
+});
+
+it('serializes the automatic permission request and keeps denial separate from the automatic schedule',async()=>{
+ vi.stubGlobal('window',new EventTarget());vi.stubGlobal('document',Object.assign(new EventTarget(),{hidden:false}));
+ const rows=new Map([[SAVE_KEY,JSON.stringify(unlocked())]]),store=new ProgressStore({async getItem(k){return rows.get(k)??null;},async setItem(k,v){rows.set(k,v);},async removeItem(k){rows.delete(k);}});await store.load();
+ let status:ReminderStatus={enabled:true,allowed:false,requested:false,pending:''},requests=0,finish:undefined|(()=>void);
+ const bridge:DailyReminderBridge={async status(){return {...status};},async sync(){return {...status};},async request(){requests++;await new Promise<void>(resolve=>{finish=resolve;});status={...status,requested:true};return {...status};},async consume(){return {...status};},async openSettings(){},async addListener(){return{async remove(){}};}};
+ const reminders=createDailyReminders(store,()=> 'en',()=>{},true,bridge);await reminders.refresh();
+ const first=reminders.requestOnce();await reminders.requestOnce();expect(requests).toBe(1);finish!();await first;
+ expect(reminders.state).toMatchObject({enabled:true,requested:true,allowed:false});await reminders.requestOnce();expect(requests).toBe(1);
+ reminders.destroy();store.destroy();
 });

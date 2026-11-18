@@ -23,9 +23,9 @@ final class DailyReminderEngine {
     private AtomicFile file() { return new AtomicFile(new File(context.getNoBackupFilesDir(),"arrows-reminders-v1.json")); }
     JSONObject read() throws Exception {
         AtomicFile f=file();
-        if(!f.getBaseFile().exists()&&!new File(f.getBaseFile()+".bak").exists()){enabled=false;return new JSONObject().put("version",1).put("enabled",false).put("time","19:00").put("offered",false);}
-        JSONObject s=new JSONObject(new String(f.readFully(),StandardCharsets.UTF_8));
-        if(s.optInt("version")!=1||!DailyReminderPolicy.time(s.optString("time")))throw new IOException("Unreadable reminder preferences"); enabled=s.optBoolean("enabled");return s;
+        if(!f.getBaseFile().exists()&&!new File(f.getBaseFile()+".bak").exists()){enabled=true;return new JSONObject().put("version",2).put("enabled",true).put("requested",false);}
+        JSONObject s=DailyReminderPolicy.upgrade(new JSONObject(new String(f.readFully(),StandardCharsets.UTF_8)));
+        enabled=true;return s;
     }
     void write(JSONObject s) throws Exception {
         byte[] bytes=s.toString().getBytes(StandardCharsets.UTF_8); if(bytes.length>32768)throw new IOException("Reminder state too large");
@@ -51,7 +51,7 @@ final class DailyReminderEngine {
     private PendingIntent alarm(long at) { return PendingIntent.getBroadcast(context,ID,new Intent(context,DailyReminderReceiver.class).setAction(ACTION).putExtra("at",at),PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE); }
     void invalidate() { ((AlarmManager)context.getSystemService(Context.ALARM_SERVICE)).cancel(alarm(0));NotificationManagerCompat.from(context).cancel(ID); }
     void invalidateForProgress() {
-        // Default-off players incur no per-move alarm/notification Binder calls or preference reads.
+        // Cache service state; never read reminder preferences on every move.
         if(enabled==null)try{read();}catch(Exception unreadable){invalidate();return;}
         if(Boolean.TRUE.equals(enabled))invalidate();
     }
@@ -64,7 +64,7 @@ final class DailyReminderEngine {
         if(!s.optBoolean("enabled")||!allowed()||!matches(p)||!DailyReminderPolicy.covers(p,day)){invalidate();s.remove("scheduled");write(s);return;}
         boolean done=DailyReminderPolicy.contains(p.optJSONArray("completed"),day);
         if(done||visible())NotificationManagerCompat.from(context).cancel(ID);
-        long at=DailyReminderPolicy.next(now,s.getString("time"),done||day.compareTo(s.optString("last"))<=0,zone);
+        long at=DailyReminderPolicy.next(now,done,s.optString("last"),zone);
         if(!DailyReminderPolicy.covers(p,DailyReminderPolicy.day(at,zone))){invalidate();s.remove("scheduled");write(s);return;}
         s.put("scheduled",at);write(s);
         ((AlarmManager)context.getSystemService(Context.ALARM_SERVICE)).setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,at,alarm(at));
@@ -72,16 +72,16 @@ final class DailyReminderEngine {
     void deliver(long expected) throws Exception {
         JSONObject s=read(),p=s.optJSONObject("snapshot");long now=System.currentTimeMillis();TimeZone zone=TimeZone.getDefault();String day=DailyReminderPolicy.day(now,zone);
         boolean valid=expected>0&&expected==s.optLong("scheduled")&&day.equals(DailyReminderPolicy.day(expected,zone));
-        if(valid&&s.optBoolean("enabled")&&allowed()&&matches(p)&&DailyReminderPolicy.eligible(p,day,s.optString("last"),now,expected,visible())){
+        if(valid&&s.optBoolean("enabled")&&allowed()&&matches(p)&&DailyReminderPolicy.eligible(p,day,s.optString("last"),now,expected,visible(),zone)){
             String[] message=DailyReminderPolicy.message(p,day,s.optString("language","ru"),s.optJSONArray("recent"));
             JSONArray recent=s.optJSONArray("recent");if(recent==null)recent=new JSONArray();recent.put(message[0]);while(recent.length()>3)recent.remove(0);
             // Claim BEFORE post: a crash may miss one reminder, but never duplicates it.
-            s.put("last",day).put("recent",recent);write(s);
+            s.put("last",DailyReminderPolicy.slot(expected,zone)).put("recent",recent);write(s);
             Intent open=new Intent(context,MainActivity.class).setAction(OPEN).putExtra("dailyNonce",UUID.randomUUID().toString()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent tap=PendingIntent.getActivity(context,ID,open,PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
             NotificationManagerCompat.from(context).notify(ID,new NotificationCompat.Builder(context,CHANNEL).setSmallIcon(com.danilah.arrows.R.drawable.arrows_mark_monochrome)
                 .setContentTitle(message[1]).setContentText(message[2]).setStyle(new NotificationCompat.BigTextStyle().bigText(message[2])).setContentIntent(tap)
-                .setAutoCancel(true).setCategory(NotificationCompat.CATEGORY_REMINDER).build());
+                .setOnlyAlertOnce(true).setAutoCancel(true).setCategory(NotificationCompat.CATEGORY_REMINDER).build());
         }
         reconcile(s);
     }

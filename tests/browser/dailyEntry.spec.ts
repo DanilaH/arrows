@@ -27,8 +27,38 @@ test('daily result shows actual month progress, closest unfinished date and a di
 test('notification entry waits for an external activity and preserves campaign; repeated nonce is consumed once',async({page})=>{
  await boot(page,seed(),true);await page.locator('#home-play').click();await settle(page);const id=await page.locator('#game-shell').getAttribute('data-attempt');await page.evaluate(()=>{const f=Reflect.get(window,'dailyEntryFixture');f.block(true);f.tap('tap-1');});await page.waitForTimeout(450);await expect(page.locator('#game-shell')).toHaveAttribute('data-attempt',id!);await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').block(false));await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','daily');await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').status().pending)).toBe('');expect((await saved(page)).campaign.board.id).toBe(id);await page.waitForTimeout(500);expect(await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').calls.filter((v:{method:string})=>v.method==='consume').length)).toBe(1);
 });
-test('offers reminders after the current daily win only, with opt-in/time/off controls outside Testing',async({page})=>{
- const s=seed();nearly(s,true);await boot(page,s,true);expect(await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').calls.some((v:{method:string})=>v.method==='request'))).toBe(false);await page.locator('#home-daily').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','daily');await last(page);await expect(page.locator('#daily-reminder-offer')).toBeVisible();await page.locator('#daily-reminder-offer').click();await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').status().enabled)).toBe(true);await expect(page.locator('#daily-reminder-offer')).toBeHidden();await page.locator('#game-settings').click();await expect(page.locator('#reminder-settings')).toBeVisible();expect(await page.locator('#settings-testing #reminder-settings').count()).toBe(0);await page.locator('#reminder-time').fill('20:30');await page.locator('#reminder-time').dispatchEvent('change');await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').status().time)).toBe('20:30');await expect(page.locator('#reminder-toggle')).toBeEnabled();await page.locator('#reminder-toggle').click();await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').status().enabled)).toBe(false);
+test('automatically requests notification permission once after daily unlock, with no time or opt-in controls',async({page})=>{
+ const s=seed();nearly(s,true);await boot(page,s,true);
+ await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').status().requested)).toBe(true);
+ expect(await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').calls.filter((v:{method:string})=>v.method==='request').length)).toBe(1);
+ await page.locator('#home-settings').click();await expect(page.locator('#reminder-settings')).toContainText('13:00 and 19:00');
+ await expect(page.locator('#reminder-settings input,#reminder-toggle')).toHaveCount(0);
+ expect(await page.locator('#settings-testing #reminder-settings').count()).toBe(0);
+ await page.getByRole('button',{name:'Android settings',exact:true}).click();
+ expect(await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').calls.some((v:{method:string})=>v.method==='settings'))).toBe(true);
+ await page.locator('#close-settings').click();await page.locator('#home-daily').click();await last(page);
+ await expect(page.locator('#daily-reminder-offer')).toHaveCount(0);await expect(page.locator('#win-cup-progress')).toContainText('1 / 30');
+ await page.reload();await page.locator('#home-daily:enabled').waitFor();await page.waitForTimeout(600);
+ expect(await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').calls.filter((v:{method:string})=>v.method==='request').length)).toBe(0);
+});
+
+test('denied Android permission is respected across reload without another prompt or game blocking',async({page})=>{
+ await page.addInitScript(()=>Reflect.set(window,'reminderPermissionDenied',true));await boot(page,seed(),true);
+ await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').status().requested)).toBe(true);
+ expect(await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').status().allowed)).toBe(false);
+ await page.locator('#home-settings').click();await expect(page.locator('#reminder-settings')).toContainText('blocked in Android');
+ await page.locator('#close-settings').click();await page.locator('#home-play').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-screen','game');
+ await page.reload();await page.locator('#home-play:enabled').waitFor();await page.waitForTimeout(600);
+ expect(await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').calls.filter((v:{method:string})=>v.method==='request').length)).toBe(0);
+});
+
+test('notification permission waits until dailies unlock and external activity returns',async({page})=>{
+ const s=seed();s.index=18;s.campaign=freshAttempt(campaign[18]!);s.wins=s.wins.slice(0,18);nearly(s);await boot(page,s,true);await page.waitForTimeout(600);
+ expect(await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').calls.some((v:{method:string})=>v.method==='request'))).toBe(false);
+ await page.locator('#home-play').click();await last(page);await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').block(true));
+ await page.waitForTimeout(400);expect(await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').calls.some((v:{method:string})=>v.method==='request'))).toBe(false);
+ await page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').block(false));await page.locator('#next').click();
+ await expect.poll(()=>page.evaluate(()=>Reflect.get(window,'dailyEntryFixture').calls.filter((v:{method:string})=>v.method==='request').length)).toBe(1);
 });
 
 test('unmodified production result uses one existing interstitial opportunity and waits for external return before the daily',async({page})=>{
@@ -63,6 +93,6 @@ test('daily shortcuts and the largest result remain visible and hittable in comp
   }),{message:key+' at '+JSON.stringify(page.viewportSize())}).toEqual({usable:true,inBounds:true,hit:true});
  }};
  for(const size of sizes){await page.setViewportSize(size);await check(['#home-play','#home-daily']);}
- await page.setViewportSize(sizes[1]!);await page.locator('#home-daily').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','daily');await last(page);await expect(page.locator('#daily-reminder-offer')).toBeVisible();await page.waitForTimeout(750);
- for(const size of sizes){await page.setViewportSize(size);await page.waitForTimeout(120);await check(['#next','#result-daily','#daily-reminder-offer']);await page.screenshot({path:info.outputPath('daily-result-'+size.width+'x'+size.height+'.png')});}
+ await page.setViewportSize(sizes[1]!);await page.locator('#home-daily').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-mode','daily');await last(page);await expect(page.locator('#daily-reminder-offer')).toHaveCount(0);await page.waitForTimeout(750);
+ for(const size of sizes){await page.setViewportSize(size);await page.waitForTimeout(120);await check(['#next','#result-daily']);await page.screenshot({path:info.outputPath('daily-result-'+size.width+'x'+size.height+'.png')});}
 });

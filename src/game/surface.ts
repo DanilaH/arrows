@@ -43,8 +43,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const loadControl = (index: number, restart=false): void => { const level = reviewFields[index]; if (!level) return; selectedControl = index; const saved=restart?undefined:pilot?.restore(index); scene.loadAttempt(new Board(level, saved?.id??crypto.randomUUID(),saved),null,false,null,false,!!saved);pilot?.save(index,scene.board.snapshot()); };
   let activeDate: string | null = null, calendarDay = localDate();
   const dailyDestination=createDailyEntrySelector();
-  let dailyOrigin: 'calendar'|'home'|'result'|'notification' = 'calendar', dailyEntryBusy=false, dailyEntryRetryAt=0, reminderOfferAttempt='', reminderOfferMarked='';
-  const resultDaily=document.querySelector<HTMLButtonElement>('#result-daily'), cupProgress=document.querySelector<HTMLElement>('#win-cup-progress'), reminderOffer=document.querySelector<HTMLButtonElement>('#daily-reminder-offer');
+  let dailyOrigin: 'calendar'|'home'|'result'|'notification' = 'calendar', dailyEntryBusy=false, dailyEntryRetryAt=0;
+  const resultDaily=document.querySelector<HTMLButtonElement>('#result-daily'), cupProgress=document.querySelector<HTMLElement>('#win-cup-progress');
   const active = () => activeDate ? progress.state.daily[activeDate]! : progress.state.campaign;
   const gameMode = () => activeDate ? 'daily' as const : 'campaign' as const;
   const activeBoard = () => { const a = active(); return new Board(a.level, a.board.id, a.board); };
@@ -374,11 +374,6 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     if(detail.textContent!==result)detail.textContent=result;
     if(resultDaily){const destination=dailyDestination(progress.state);resultDaily.hidden=control||!scene.finished||destination.kind==='locked';resultDaily.disabled=transition.busy||requestingAd||dailyEntryBusy||!progress.available||progress.uncertain;resultDaily.textContent=dailyEntryLabel(destination,language);}
     if(cupProgress){cupProgress.hidden=control||!activeDate||!scene.finished;if(activeDate){const p=dailyCupProgress(progress.state,activeDate),month=new Intl.DateTimeFormat(language,{month:'long',timeZone:'UTC'}).format(new Date(activeDate+'T12:00:00Z'));cupProgress.textContent=language==='ru'?`${month} · ${p.earned?'Кубок получен':`К кубку: ${p.done} / ${p.total}`}`:`${month} · ${p.earned?'Cup earned':`Toward the cup: ${p.done} / ${p.total}`}`;}}
-    if(reminderOffer){
-      const show=!!reminderOfferAttempt&&reminderOfferAttempt===board.attemptId&&scene.finished&&!control&&reminders.available&&!reminders.state?.enabled;
-      reminderOffer.hidden=!show;reminderOffer.disabled=reminders.busy;reminderOffer.textContent=language==='ru'?`Напоминать в ${reminders.state?.time??'19:00'}`:`Remind me at ${reminders.state?.time??'19:00'}`;
-      if(show&&reminderOfferMarked!==board.attemptId){reminderOfferMarked=board.attemptId;reminders.offered();}
-    }
     const step = board.complete ? null : tutorial();
     // Isolated-QA experiment: never participates in tutorial(), Hint or ad clocks.
     const scaleContext = reviewOptions.scaleContext && !control && !board.complete && board.hearts > 0 && !progress.state.tutorials.includes('zoom') && scene.boardCamera.scale < 12 && scene.boardCamera.snapshot().zoom < 1.15;
@@ -475,7 +470,6 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
         if (event.result?.kind === 'removed') {
           if (scene.board.attemptId === moved.board.id) { idleMs = 0; notice = ''; const step = tutorial(); if (step && ['tap', 'turns', 'blockers'].includes(step)) finishTutorial(step); }
           if (event.result.complete) {
-            if(owner.mode==='daily'&&owner.date===localDate()&&reminders.state&&!reminders.state.offered&&!reminders.state.enabled&&progress.available&&!progress.uncertain)reminderOfferAttempt=moved.board.id;
             if (meta.screen === 'game' && scene.board.attemptId === moved.board.id) freshWinAttempt = moved.board.id;
             platform.analytics.track('level_complete', { mode: owner.mode, level_id: moved.level.id, attempt: moved.board.id, active_ms: moved.activeMs, mistakes: moved.board.errors.length, first_clear: true });
             platform.analytics.track('attempt_final',{event_id:`${moved.board.id}-completed`,attempt:moved.board.id,mode:owner.mode,outcome:'completed',active_ms:moved.activeMs});
@@ -545,7 +539,6 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   });
   on(document.querySelector<HTMLElement>('#next')!, 'click', ()=>advanceWin());
   if(resultDaily)on(resultDaily,'click',()=>dailyShortcut('result'));
-  if(reminderOffer)on(reminderOffer,'click',()=>{void reminders.enable();});
   on(hintButton, 'pointerdown', () => errorCue.cancel('hint-press'));
   on(hintButton, 'keydown', () => errorCue.cancel('hint-key'));
   on(hintButton, 'click', () => {
@@ -593,6 +586,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const timer = setInterval(() => {
     sample(); sync();
     drainDailyEntry();
+    // Ask once when dailies become usable, after loading/navigation/external windows settle.
+    if(loaded&&!control&&progress.state.index>=19&&progress.available&&!progress.uncertain&&!progress.error&&!transition.busy&&!requestingAd&&!dailyEntryBusy&&!reminders.error&&!reminders.state?.pending&&!modal&&!document.hidden&&!platform.activity.getBlockReasons().some(r=>r!=='menu'))void reminders.requestOnce();
     if (loaded && !control && meta.screen === 'game' && !platform.activity.isBlocked() && progress.confirmedWins >= 4 && progress.state.adCadence.activeMs + pendingAdTime >= 120000 && performance.now() - lastPreload >= 30000) { lastPreload = performance.now(); void platform.ads.prepareInterstitial(); }
     if (calendarDay !== localDate()) { calendarDay = localDate(); meta.refresh(); reminders.sync(); }
     if (loaded && performance.now() - lastFlush > 15000 && pendingTime > 0) { lastFlush = performance.now(); saveView(); }

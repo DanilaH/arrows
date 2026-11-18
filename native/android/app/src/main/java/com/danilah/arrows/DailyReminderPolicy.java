@@ -15,14 +15,33 @@ final class DailyReminderPolicy {
         try { SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd", Locale.ROOT); f.setTimeZone(TimeZone.getTimeZone("UTC")); f.setLenient(false); return key.equals(f.format(f.parse(key))); }
         catch (Exception e) { return false; }
     }
-    static boolean time(String value) { return value.matches("(?:[01][0-9]|2[0-3]):[0-5][0-9]"); }
-    static long next(long now, String time, boolean skipToday, TimeZone zone) {
-        if (!time(time)) throw new IllegalArgumentException("Invalid time");
+    static JSONObject upgrade(JSONObject s) throws JSONException {
+        if(s.optInt("version")==1){
+            // Old enabled=true followed an OS request. A merely displayed offer did not.
+            s.put("requested",s.optBoolean("enabled"));
+            String last=s.optString("last");if(validDay(last))s.put("last",last+"/19:00");
+            s.remove("time");s.remove("offered");s.put("version",2);
+        }
+        if(s.optInt("version")!=2)throw new IllegalArgumentException("Unknown reminder version");
+        // Product policy is automatic; Android permission/channel is the only opt-out.
+        s.put("enabled",true);return s;
+    }
+    static String slot(long at, TimeZone zone) {
+        SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd/HH:mm",Locale.ROOT);f.setTimeZone(zone);return f.format(new Date(at));
+    }
+    static long next(long now, boolean skipToday, String last, TimeZone zone) {
         Calendar c = Calendar.getInstance(zone, Locale.ROOT); c.setTimeInMillis(now);
-        c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.substring(0, 2))); c.set(Calendar.MINUTE, Integer.parseInt(time.substring(3)));
-        c.set(Calendar.SECOND, 0); c.set(Calendar.MILLISECOND, 0);
-        if (skipToday || c.getTimeInMillis() <= now) { c.add(Calendar.DATE, 1); c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.substring(0, 2))); c.set(Calendar.MINUTE, Integer.parseInt(time.substring(3))); }
-        return c.getTimeInMillis();
+        String today=day(now,zone),lastDay=last.length()>=10?last.substring(0,10):"";
+        if(validDay(lastDay)&&lastDay.compareTo(today)>0)c.set(Integer.parseInt(lastDay.substring(0,4)),Integer.parseInt(lastDay.substring(5,7))-1,Integer.parseInt(lastDay.substring(8,10)),0,0,0);
+        for(int offset=0;offset<3;offset++){
+            for(int hour:new int[]{13,19}){
+                c.set(Calendar.HOUR_OF_DAY,hour);c.set(Calendar.MINUTE,0);c.set(Calendar.SECOND,0);c.set(Calendar.MILLISECOND,0);
+                long at=c.getTimeInMillis();
+                if(at>now&&slot(at,zone).compareTo(last)>0&&(!skipToday||day(at,zone).compareTo(today)>0))return at;
+            }
+            c.add(Calendar.DATE,1);
+        }
+        throw new IllegalStateException("No next reminder slot");
     }
     static boolean contains(JSONArray dates, String day) { if (dates != null) for (int i=0;i<dates.length();i++) if (day.equals(dates.optString(i))) return true; return false; }
     static boolean covers(JSONObject p, String day) {
@@ -31,8 +50,8 @@ final class DailyReminderPolicy {
                 // Beyond the detailed window, only dates AFTER every durable win are provably unfinished.
                 || p.has("lastCompleted") && day.compareTo(p.optString("lastCompleted")) > 0);
     }
-    static boolean eligible(JSONObject p, String day, String last, long now, long scheduled, boolean foreground) {
-        return covers(p,day) && !contains(p.optJSONArray("completed"),day) && day.compareTo(last)>0 && !foreground
+    static boolean eligible(JSONObject p, String day, String last, long now, long scheduled, boolean foreground, TimeZone zone) {
+        return covers(p,day) && day.equals(day(scheduled,zone)) && !contains(p.optJSONArray("completed"),day) && slot(scheduled,zone).compareTo(last)>0 && !foreground
             && now >= scheduled && now - scheduled <= LATE_MS;
     }
     static String[] message(JSONObject p, String day, String language, JSONArray recent) {

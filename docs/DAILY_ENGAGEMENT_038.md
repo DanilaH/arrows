@@ -2,6 +2,8 @@
 
 Owner authorized this package above current 0.37.1, preserving its first-theme Home, portrait policy, archive storage, brand/signing and all content/help/ad rules. No store publication. Runtime kit pin stays `a9325265e87583a4872cf6a158e1e881a0d7508e`.
 
+**2026-11-18:** Reminder opt-in/time/frequency below are historical and superseded by [automatic fixed reminders 0.38.1](DAILY_REMINDERS_0381.md). Entry, progress, storage and tap contracts remain current.
+
 ## Player behavior
 
 - One shared destination on Home, result and notification tap: today unfinished (resume its exact embedded attempt); otherwise nearest earlier unfinished available date, descending through the current month then earlier months; never future. If every available daily is completed, show “New daily tomorrow” and open Calendar. Gate remains campaign index 19 / level 20.
