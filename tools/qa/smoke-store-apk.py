@@ -35,13 +35,14 @@ assert shell('settings','get','global','airplane_mode_on')=='1'
 assert 'Success' in adb('install','-r',str(apk)).decode()
 adb('logcat','-c');shell('am','start','-W','-n',package+'/.MainActivity')
 home,play=wait_node({'Играть','Play'},'home');no_debug(home);screenshot('home')
-settings=find(home,{'Настройки','Settings'});assert settings is not None;tap(settings)
+# Fresh theme-choice Home intentionally has no navigation/settings yet.
+tap(play)
+board,settings=wait_node({'Настройки','Settings'},'board');no_debug(board);screenshot('board');tap(settings)
 tree,close=wait_node({'Закрыть','Close'},'settings');no_debug(tree);screenshot('settings');tap(close)
-home,play=wait_node({'Играть','Play'},'home-return');tap(play)
-tree,_=wait_node({'На главную','Home'},'board');no_debug(tree);screenshot('board')
+tree,_=wait_node({'На главную','Home'},'board-return');no_debug(tree)
 pid=shell('pidof',package);assert re.fullmatch(r'\d+',pid)
 assert 'webview_devtools_remote_'+pid not in shell('cat','/proc/net/unix')
 crashes=adb('logcat','-d','-s','AndroidRuntime:E').decode(errors='replace')
 assert 'FATAL EXCEPTION' not in crashes
-report={'source':os.environ['ARROWS_RELEASE_SOURCE'],'apkSha256':hashlib.sha256(apk.read_bytes()).hexdigest(),'package':package,'androidApi':shell('getprop','ro.build.version.sdk'),'installed':True,'offline':True,'screens':['home','settings','board'],'debugControlsAbsent':True,'webViewDebugSocketAbsent':True,'fatalExceptions':False,'provenance':'Exact production-signed APK installed on Android35 emulator, airplane mode before launch, real Android accessibility/input/screenshots. No WebView debug bridge, injected JS, seeded progress or live ad requests. Physical phone/live fill/dashboard acceptance separate.'}
+report={'source':os.environ['ARROWS_RELEASE_SOURCE'],'qaSource':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'apkSha256':hashlib.sha256(apk.read_bytes()).hexdigest(),'package':package,'androidApi':shell('getprop','ro.build.version.sdk'),'installed':True,'offline':True,'screens':['home','settings','board'],'debugControlsAbsent':True,'webViewDebugSocketAbsent':True,'fatalExceptions':False,'provenance':'Exact production-signed APK installed on Android35 emulator, airplane mode before launch, real Android accessibility/input/screenshots. No WebView debug bridge, injected JS, seeded progress or live ad requests. Physical phone/live fill/dashboard acceptance separate.'}
 (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
