@@ -1,0 +1,336 @@
+{
+  "source": "71cca6020cf67daf0f96486c075fd987a10a2a0f",
+  "apkSha256": "c281cc1225d0540487c8b5b2b1b9f178d37101fa92341f566aefbb849428f6ae",
+  "webPayload": ".test-output/store040/web",
+  "provenance": "Actual release-mode production web in headless Chromium; prepared possible progress and controlled native transport; not a phone or live SDK. Synthetic150% CSS is not Android system-font scaling.",
+  "states": [
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "home",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "board",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "settings",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "collection",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "calendar",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "trophy",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "home",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "board",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "settings",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "collection",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "calendar",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "light",
+        320,
+        568
+      ],
+      "state": "trophy",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "home",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "board",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "settings",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "collection",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "calendar",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "light",
+        390,
+        844
+      ],
+      "state": "trophy",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "home",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "board",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "settings",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "collection",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "calendar",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        430,
+        932
+      ],
+      "state": "trophy",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "home",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "board",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "settings",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "collection",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "calendar",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        390,
+        844,
+        true
+      ],
+      "state": "trophy",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "ru",
+        "dark",
+        320,
+        568
+      ],
+      "state": "loss",
+      "overflow": false
+    },
+    {
+      "profile": [
+        "en",
+        "dark",
+        320,
+        568
+      ],
+      "state": "loss",
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "debugAndLabControlsAbsent": true
+}

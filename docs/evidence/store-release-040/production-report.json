@@ -1,0 +1,18 @@
+{
+  "source": "71cca6020cf67daf0f96486c075fd987a10a2a0f",
+  "qaSource": "af7b03a58f20d877c20fa3ed7790bfcce59f50a6",
+  "apkSha256": "c281cc1225d0540487c8b5b2b1b9f178d37101fa92341f566aefbb849428f6ae",
+  "package": "com.danilah.arrows",
+  "androidApi": "35",
+  "installed": true,
+  "offline": true,
+  "screens": [
+    "home",
+    "settings",
+    "board"
+  ],
+  "debugControlsAbsent": true,
+  "webViewDebugSocketAbsent": true,
+  "fatalExceptions": false,
+  "provenance": "Exact production-signed APK installed on Android35 emulator, airplane mode before launch, real Android accessibility/input/screenshots. No WebView debug bridge, injected JS, seeded progress or live ad requests. Physical phone/live fill/dashboard acceptance separate."
+}

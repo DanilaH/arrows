@@ -1,0 +1,26 @@
+{
+  "source": "71cca6020cf67daf0f96486c075fd987a10a2a0f",
+  "fullCiRun": 44309511291,
+  "fullCi": "SUCCESS",
+  "browser": {
+    "passed": 560,
+    "failed": 0,
+    "minutes": 28.3
+  },
+  "unit": {
+    "passed": 264,
+    "files": 32
+  },
+  "androidJvm": {
+    "passed": 31
+  },
+  "storeReleaseRun": 44309511348,
+  "storeRelease": "SUCCESS",
+  "nativeDemoRun": 44309511169,
+  "nativeDemo": "SUCCESS",
+  "productionUserImageRun": 44314511841,
+  "productionUserImage": "SUCCESS",
+  "kitImpact": "REUSE",
+  "productionRuntimeArtifact": 14432726277,
+  "productionRuntimeArtifactSha256": "a2778944bca84b4e852a970f0c48e60a19c941207e7ec8731758573da00d00b0"
+}

@@ -1,0 +1,16 @@
+{
+  "source": "71cca6020cf67daf0f96486c075fd987a10a2a0f",
+  "workflowRun": 44309511169,
+  "artifact": 14430117010,
+  "artifactSha256": "9f9a233062193f95c214a5932e2969e80a960db953d44c85aee298538e69b3b2",
+  "androidApi": 35,
+  "provenance": "Actual installed debug APK/resources and demo SDK. PNG pixels match signed production APK; no live-service acceptance inferred.",
+  "iconOpaqueRadiusDp": 32.036931813143404,
+  "safeRadiusDp": 33,
+  "sceneTransitions": 6,
+  "nativeFrames": 43,
+  "hiddenFrames": 0,
+  "sameSdkViewAndRequest": true,
+  "instrumentationTests": 2,
+  "failures": 0
+}

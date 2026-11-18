@@ -1,0 +1,16 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "input": "Owner-approved circular concept, exec-77a0fee2-90fa-434e-8e48-106c2ab79a15.png",
+  "foregroundSource": "exec-cbfa3344-0965-4cda-b8e1-1be7b276bfd6.png",
+  "storeSource": "exec-6ffcdda8-60af-495f-856c-6fa23c6c7abd.png",
+  "prompts": {
+    "foreground": "Use case: background-extraction. Asset type: final Android adaptive launcher foreground layer for Arrows. Input image 1 is the APPROVED icon, edit target. Remove ONLY the entire dark violet circular disk/background and all surrounding dark pixels. Preserve precisely the three nested glossy bent arrows, their composition, shape, arrowheads, orientation, colors, ceramic bevels, luminous edge details. Outer white-lavender open bent C with right arrowhead at upper right and open tail at lower right; middle magenta-violet bent U with up arrowhead; inner periwinkle bent C with right arrowhead. No redesign, no rotation, no invented strokes, no circle, no badge, no text. Genuine transparent RGBA background through all openings, negative spaces and corners, no residual dark backplate. Retain clean antialiased arrow edges and a very restrained violet edge glow. Center the glyph in a square transparent canvas with balanced padding, all solid arrow pixels within a centered disk 82 percent of canvas diameter, for later Android technical sizing. Output only the foreground artwork on transparency.",
+    "store": "Use case: precise-object-edit. Asset: final FULL SQUARE store icon for approved Arrows Android puzzle game. The reference is approved; preserve the exact three nested rounded glossy ceramic arrows, their scale, placement, orientation, shape and colors. Make precisely ONE edit: extend the existing dark ink-violet background to cover every edge and corner of the entire square canvas. Remove the circular boundary by seamlessly extending its violet gradient outwards. NO circular disk boundary, NO transparent pixels, NO rounded square mask, no frame, no border, no extra shadow, no text, no new elements. Full-bleed dark purple square. The white lavender arrow still points RIGHT in upper-right, violet middle UP, periwinkle inner RIGHT, all comfortably framed to survive a circular crop. Do not enlarge or redesign the arrows. Preserve the approved premium appearance and clean edges."
+  },
+  "technicalExports": "ImageMagick resize/strip only: store/legacy round512px, transparent foreground1024px. Native gradient and16% inset in tools/brand/generate.mjs. Native measured opaque radius32.0369dp<=33dp.",
+  "files": {
+    "assets/brand/store-icon.png": "f5ef491caeea9eca7ff2dc889063fa442e516e4428ad8353bac8501f49d12fe2",
+    "assets/brand/launcher-round.png": "d8961a2fc4d05b45f55bd75f351e7199ae50bf712d3eb3c2f9235109256ed02d",
+    "assets/brand/launcher-foreground.png": "cecdb017d2d1e92cc20ab3bf608774aab53ab6719981748a4f76bd54f966b208"
+  }
+}

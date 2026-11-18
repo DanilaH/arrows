@@ -1,0 +1,48 @@
+{
+  "source": "71cca6020cf67daf0f96486c075fd987a10a2a0f",
+  "apkSha256": "c281cc1225d0540487c8b5b2b1b9f178d37101fa92341f566aefbb849428f6ae",
+  "bytes": 6408906,
+  "version": "0.40.0",
+  "versionCode": 59,
+  "package": "com.danilah.arrows",
+  "certificateSha256": "e7cb7061aebc42ca415ee8fbe17235769c6e40af4f1ab46fb17af68c8581bac6",
+  "productionSigned": true,
+  "officialV2AndZipalign16k": true,
+  "debuggable": false,
+  "webViewDebugging": false,
+  "liveAdUnitsInDex": 3,
+  "nativeBrandPixelMatches": [
+    "launcher-foreground.png",
+    "launcher-round.png",
+    "store-icon.png"
+  ],
+  "jvm": {
+    "tests": 31,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "webFiles": {
+    "arrows-build.json": "319e55d799457587803ba5e111d4176c77219843c4fd8bec6dc4cc85662e4084",
+    "assets/dailyWorker-CzSU8cF9.js": "d5bccec7c03886e299341ebc7ea268c0ad07e9bdea399381957158a2710b95f9",
+    "assets/main-BjbFI37w.js": "d824dd538e1dc8a7d93b7f035a4c207b07b9c9977c063ba63dfb332c36f30681",
+    "assets/main-KTdjhPmU.css": "44ab469a788ddeb297c0302bd0373235a783b8860c29dc9871faa2c6d3c8731c",
+    "assets/web-B9EYzdp4.js": "c98e2e75b0ad88fa8cbf7fd34d5884541c09ec492725d921afeee96d7e80bcc3",
+    "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+    "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "cordova.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cordova_plugins.js": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "favicon.png": "f5ef491caeea9eca7ff2dc889063fa442e516e4428ad8353bac8501f49d12fe2",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "index.html": "a25f542995b29a01e14b20e93af3ec3aa97534fd4fd9d74fa33435311f2f6db8",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f"
+  },
+  "qaAndLabAbsent": true,
+  "physicalPhone": "NOT RUN",
+  "liveServicesAcceptance": "NOT RUN"
+}
