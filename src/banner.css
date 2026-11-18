@@ -15,9 +15,22 @@
 .has-native-banner #meta-screen { bottom:calc(76px + var(--banner-occupied)); }
 .has-native-banner #meta-screen.theme-intro-screen { bottom:var(--banner-occupied); }
 .has-native-banner .home-layout { min-height:0; }
+.has-native-banner #meta-screen, .has-native-banner .route-snapshot { container-type:size; container-name:banner-meta; }
 .has-native-banner .arrival-notice { bottom:calc(92px + var(--banner-occupied)); }
+@container banner-meta (max-height:440px) {
+  .home-layout[data-field='upcoming'] .home-emblem { display:none; }
+  .home-layout[data-field='upcoming'] .home-current:has(.home-emblem) { padding-bottom:12px; }
+}
 @media (max-height:500px) {
   .has-native-banner #meta-screen { bottom:calc(56px + var(--banner-occupied)); }
   .has-native-banner #meta-screen.theme-intro-screen { bottom:var(--banner-occupied); }
   .has-native-banner .arrival-notice { bottom:calc(64px + var(--banner-occupied)); }
+  .has-native-banner .home-layout[data-field='upcoming'] .home-current { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:auto auto auto; column-gap:20px; row-gap:6px; align-content:center; padding:0; }
+  .has-native-banner .home-layout[data-field='upcoming'] .campaign-heading { grid-column:1; grid-row:1 / 4; align-self:center; }
+  .has-native-banner .home-layout[data-field='upcoming'] #home-play { grid-column:2; grid-row:1; width:100%; margin:0; }
+  .has-native-banner .home-layout[data-field='upcoming'] .home-progress { grid-column:2; grid-row:2; margin:0; }
+  .has-native-banner .home-layout[data-field='upcoming'] #home-daily { grid-column:2; grid-row:3; margin:0; }
+  .has-native-banner .collection-goal-note { display:none; }
+  .has-native-banner .collection-current-art .trophy-rich { height:100px; }
+  .has-native-banner .collection-current { margin-bottom:12px; }
 }

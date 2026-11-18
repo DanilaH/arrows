@@ -199,7 +199,8 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const reminders=createDailyReminders(progress,()=>language,()=>{settingsSurface.refreshExtra();sync();},platform.kind==='android'&&!pilot&&!reviewFields.length);
   const settingsSurface = installSettingsSurface(platform.settings, platform.activity, platform.feedback, () => { cancel(); saveView(); }, motion,()=>{if(pilot)return null;const section = helpOffers.renderQA(), cue = cueQA.render(language, active().board.id); if (section && cue) section.append(cue); return section;},()=>reminderSettings(reminders,language,loaded&&progress.state.index>=19));
   const banner=installBanner({enabled:platform.kind==='android'&&!pilot&&!reviewFields.length,activity:platform.activity,analytics:platform.analytics,
-    visible:()=>loaded&&!control&&progress.available&&!progress.uncertain&&!progress.error&&shell.dataset.status==='ready'&&!modal&&!requestingAd&&!transition.busy&&!motion.routeBusy&&!document.querySelector('dialog[open],#meta-screen.theme-intro-screen')&&(meta.screen!=='game'||!tutorial()),
+    reserve:()=>meta.screen!=='home'||!document.querySelector('#meta-screen.theme-intro-screen'),
+    visible:()=>loaded&&!control&&progress.available&&!progress.uncertain&&!progress.error&&shell.dataset.status==='ready'&&!modal&&!requestingAd&&!transition.busy&&!motion.routeBusy&&!document.querySelector('dialog[open],#meta-screen.theme-intro-screen:not([hidden])')&&(meta.screen!=='game'||!tutorial()),
     layout:()=>{cancel();if(meta.screen==='game'){scene.layout();scheduleView();}},
   });
   let celebratedAttempt = '', pendingAward = false, freshWinAttempt = '', dailyReturnAttempt = '';

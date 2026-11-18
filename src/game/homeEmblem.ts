@@ -47,7 +47,7 @@ export function createHomeEmblem(root: HTMLElement, canRun: () => boolean) {
     owned.clear();
     if(!freeze)for(const group of art?.querySelectorAll<SVGElement>('.home-emblem-arrow')??[])group.style.transform='';
   };
-  const allowed=():boolean=>alive&&focused&&!document.hidden&&!reduced.matches&&!cramped.matches&&canRun()&&!!art?.isConnected;
+  const allowed=():boolean=>alive&&focused&&!document.hidden&&!reduced.matches&&!cramped.matches&&canRun()&&!!art?.isConnected&&art.getClientRects().length>0;
   const animate=(element:SVGElement,frames:Keyframe[],duration:number,delay=0):void=>{
     owned.get(element)?.cancel();
     const animation=element.animate(frames,{duration,delay,easing:'linear',fill:'backwards'});

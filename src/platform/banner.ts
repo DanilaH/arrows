@@ -13,20 +13,20 @@ export interface BannerBridge {
 }
 const rect=(e:Element):BannerRect=>{const r=e.getBoundingClientRect();return{x:r.x,y:r.y,width:r.width,height:r.height};};
 /** Consumer layout and lifecycle around the PINNED kit geometry; never gates core startup. */
-export function installBanner(options:{enabled:boolean;activity:GameplayActivityCoordinator;analytics:Pick<ReturnType<typeof createAnalytics>,'track'>;visible:()=>boolean;layout:()=>void;bridge?:BannerBridge}) {
+export function installBanner(options:{enabled:boolean;activity:GameplayActivityCoordinator;analytics:Pick<ReturnType<typeof createAnalytics>,'track'>;visible:()=>boolean;reserve?:()=>boolean;layout:()=>void;bridge?:BannerBridge}) {
   const native=options.enabled?(options.bridge??(Capacitor.isPluginAvailable('ArrowsBanner')?registerPlugin<BannerBridge>('ArrowsBanner'):null)):null;
   if(!native)return{refresh(){},destroy(){}};
   const html=document.documentElement,shell=document.querySelector<HTMLElement>('#game-shell')!;
   const strip=document.createElement('div'),slot=document.createElement('div');strip.id='banner-strip';strip.setAttribute('aria-hidden','true');slot.id='native-banner-slot';strip.append(slot);shell.append(strip);
   let alive=true,revision=0,running=false,queued=false,frame=0,listener:PluginListenerHandle|undefined,signature='',shown=false;
-  let retry:ReturnType<typeof setTimeout>|undefined,needsLayout=false,pointers=new Set<number>(),policy:boolean|undefined,retryDelay=120;
+  let retry:ReturnType<typeof setTimeout>|undefined,needsLayout=false,pointers=new Set<number>(),policy:string|undefined,retryDelay=120;
   const value=(key:string,next:string):boolean=>{if(html.style.getPropertyValue(key)===next)return false;html.style.setProperty(key,next);return true;};
   const layout=():void=>{needsLayout=true;if(!pointers.size){needsLayout=false;options.layout();}};
   const hide=():void=>{if(shown){shown=false;signature='';void native.apply({revision,visible:false}).catch(()=>{});}};
   const schedule=():void=>{if(!alive)return;queued=true;if(!frame)frame=requestAnimationFrame(()=>{frame=0;void run();});};
   const eligible=():boolean=>options.visible()&&!document.hidden&&!options.activity.getBlockReasons().some(r=>r!=='menu');
   const invalidate=():void=>{if(!alive)return;revision++;if(!eligible())hide();schedule();};
-  const refresh=():void=>{const next=eligible();if(next===policy)return;policy=next;invalidate();};
+  const refresh=():void=>{const next=String(eligible())+':'+String(options.reserve?.()??true);if(next===policy)return;policy=next;invalidate();};
   const run=async():Promise<void>=>{
     if(!alive||running)return;running=true;queued=false;const current=revision;
     try{
@@ -36,14 +36,14 @@ export function installBanner(options:{enabled:boolean;activity:GameplayActivity
       if(safe.kind!=='safe'){hide();return;}
       if(pointers.size){needsLayout=true;hide();return;}
       let changed=false;for(const edge of ['left','top','right','bottom'] as const)changed=value('--native-safe-'+edge,safe.insets[edge]+'px')||changed;
-      if(!measurement.configured){hide();strip.hidden=true;if(value('--banner-occupied','0px')||html.classList.contains('has-native-banner')){html.classList.remove('has-native-banner');changed=true;}if(changed)layout();return;}
+      if(!measurement.configured||options.reserve?.()===false){hide();strip.style.visibility='hidden';if(value('--banner-occupied','0px')||html.classList.contains('has-native-banner')){html.classList.remove('has-native-banner');changed=true;}if(changed)layout();return;}
       const scale=measurement.webView.width/viewport.width;
       // Keep the same neutral reservation through load/no-fill and hidden dialogs.
       const height=Math.ceil((measurement.adHeight+2)/scale);
       const occupied=`calc(${height+8}px + var(--safe-bottom))`;
       changed=value('--banner-height',height+'px')||changed;changed=value('--banner-occupied',occupied)||changed;
       if(!html.classList.contains('has-native-banner')){html.classList.add('has-native-banner');changed=true;}
-      strip.hidden=false;
+      strip.style.visibility='visible';
       if(changed){hide();layout();schedule();return;}
       // Do not move controls while any pointer is held; negotiate again after release.
       if(pointers.size||needsLayout){hide();return;}
