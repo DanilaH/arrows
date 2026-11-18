@@ -1,0 +1,67 @@
+{
+  "source": "7f58981b2001073286700cb954543af9d6d0cdeb",
+  "workflow": 44291763071,
+  "job": 134758464311,
+  "status": "SUCCESS",
+  "artifact": 14422575767,
+  "artifactSha256": "65efd78b7cd12f95f20e677ee8598c90cf128b25c43bec9532dc5ca9dd1d34b3",
+  "device": "Android35/API35 Pixel2 x86_64 emulator,1080x1920, animations enabled",
+  "test": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "seconds": "27.981"
+  },
+  "continuousScenes": {
+    "transitions": 6,
+    "nativePreDrawFrames": 44,
+    "hiddenNativeFrames": 0,
+    "sameSdkView": true,
+    "sameRequest": true,
+    "sameGeneration": true
+  },
+  "actualTutorialMove": true,
+  "seededProgress": false,
+  "substitutedCreative": false,
+  "settingsHideRestore": true,
+  "nativeCreative": "actual Yandex demo banner",
+  "nativeSize": {
+    "width": 1080,
+    "height": 131
+  },
+  "frameSha256": "ef16be4a95b6090f30ad455609037b48acdf79b0fff8bf597af11613550f4620",
+  "capture": {
+    "nativeSourceFrames": 45,
+    "initialPaintPrefixFrames": 8,
+    "clipSourceFrames": 37,
+    "clipStartSeconds": 1.724022,
+    "bannerBand": {
+      "x": 0,
+      "y": 1660,
+      "width": 1080,
+      "height": 130
+    },
+    "afterPaintBandStdMin": 84.42602134134076,
+    "afterPaintBandStdMax": 84.69872107809056,
+    "continuousAfterFirstPaint": true,
+    "provenance": "Actual Android screenrecord. One contiguous clip after initial SDK creative paint; no intermediate frame removal. Native pre-draw test separately covers six transitions with one view/request and zero hidden frames.",
+    "files": {
+      "Arrows-0.39.2-native-scenes.gif": {
+        "bytes": 300583,
+        "sha256": "5bd371782a9dc31fd8de598c3e9790fe6997224da9dae2743824fae43fa7e558"
+      },
+      "Arrows-0.39.2.apk": {
+        "bytes": 11544362,
+        "sha256": "0433e52c06f9bf16055291498b37f40395875c806be878620522ec4d6a474045"
+      },
+      "Arrows-0.39.2-native-scenes.mp4": {
+        "bytes": 241031,
+        "sha256": "075358d61060d3a0b96dc72c872d318c099bcb4c6dce7ac798c92c0a299bb0f2"
+      }
+    },
+    "gifFrames": 76
+  },
+  "physicalPhone": "NOT RUN",
+  "liveFill": "NOT RUN",
+  "performance": "NOT A PHONE PERFORMANCE MEASUREMENT"
+}
