@@ -54,7 +54,7 @@ public class ArrowsBannerPlugin extends Plugin {
     private void changed(){if(!alive||host==null)return;try{String next=capture().toString();if(!next.equals(proof)){proof=next;token="";hide();notifyListeners("bannerEvent",new JSObject().put("phase","geometry"));}}catch(Exception e){hide();}}
     @PluginMethod public void measure(PluginCall call){handler.post(()->{try{
         if(!alive||host==null)throw new IllegalStateException();
-        long rev=call.getLong("revision",-1L);if(rev<revision){call.reject("Stale banner geometry");return;}revision=rev;
+        long rev=BannerPlacementGuard.revision(call.getData().opt("revision"));if(rev<0||rev<revision){call.reject("Stale banner geometry");return;}revision=rev;
         JSONObject vp=call.getObject("viewport"),slot=call.getObject("slot"),g=capture(),web=g.getJSONObject("webView");
         double vw=vp.getDouble("width"),vh=vp.getDouble("height"),x=slot.getDouble("x"),sw=slot.getDouble("width");
         if(!Double.isFinite(vw)||!Double.isFinite(vh)||!Double.isFinite(x)||!Double.isFinite(sw)||vw<=0||vh<=0||sw<=0||x<0||x+sw>vw+.01||web.getInt("width")<=0)throw new IllegalArgumentException();
@@ -65,7 +65,7 @@ public class ArrowsBannerPlugin extends Plugin {
         JSObject result=new JSObject(g.toString());result.put("configured",configured()).put("token",token).put("adHeight",height);call.resolve(result);
     }catch(Exception e){hide();call.reject("Banner geometry unavailable");}});}
     @PluginMethod public void apply(PluginCall call){handler.post(()->{try{
-        long rev=call.getLong("revision",-1L);if(rev<revision){call.resolve(new JSObject().put("accepted",false));return;}revision=rev;
+        long rev=BannerPlacementGuard.revision(call.getData().opt("revision"));if(rev<0||rev<revision){call.resolve(new JSObject().put("accepted",false));return;}revision=rev;
         if(!call.getBoolean("visible",false)){desired=false;hide();call.resolve(new JSObject().put("accepted",true));return;}
         JSONObject r=call.getObject("rect");boolean valid=alive&&configured()&&!token.isEmpty()&&token.equals(call.getString("token",""))&&capture().toString().equals(proof)&&valid(r);
         desired=valid;placement=r;placedToken=token;
@@ -78,7 +78,7 @@ public class ArrowsBannerPlugin extends Plugin {
     }
     private boolean eligible(){return alive&&desired&&foreground&&!fullscreen&&getActivity().hasWindowFocus()&&!keyboard()&&!token.isEmpty()&&token.equals(placedToken);}
     private void event(String phase){event(phase,null);}
-    private void event(String phase,JSONObject extra){if(!alive)return;JSObject e=new JSObject().put("phase",phase).put("requestId",requestId).put("width",width).put("height",height);if(extra!=null)for(java.util.Iterator<String> i=extra.keys();i.hasNext();){String k=i.next();try{e.put(k,extra.get(k));}catch(Exception ignored){}}notifyListeners("bannerEvent",e);}
+    private void event(String phase,JSONObject extra){if(!alive)return;if(BuildConfig.DEBUG)android.util.Log.d("ArrowsBanner",phase+" "+width+"x"+height);JSObject e=new JSObject().put("phase",phase).put("requestId",requestId).put("width",width).put("height",height);if(extra!=null)for(java.util.Iterator<String> i=extra.keys();i.hasNext();){String k=i.next();try{e.put(k,extra.get(k));}catch(Exception ignored){}}notifyListeners("bannerEvent",e);}
     private void hide(){if(banner!=null)banner.setVisibility(View.INVISIBLE);if(displayed){displayed=false;event("hidden");}}
     private void render(){
         if(!eligible()||!sdkReady){hide();return;}
@@ -97,7 +97,7 @@ public class ArrowsBannerPlugin extends Plugin {
             public void onAdLoaded(){handler.post(()->{if(!current())return;handler.removeCallbacks(timeout);timeout=null;loaded=true;
                 owned.measure(View.MeasureSpec.makeMeasureSpec(width,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED));
                 int required=Math.max(height,owned.getMeasuredHeight());if(required>height){height=required;token="";hide();event("geometry");}event("loaded");render();});}
-            public void onAdFailedToLoad(@NonNull AdRequestError error){handler.post(()->{if(current())failed();});}
+            public void onAdFailedToLoad(@NonNull AdRequestError error){handler.post(()->{if(current()){if(BuildConfig.DEBUG)android.util.Log.d("ArrowsBanner","SDK load error code="+error.getCode());failed();}});}
             public void onAdClicked(){handler.post(()->{if(current())event("clicked");});}
             public void onImpression(@Nullable ImpressionData data){handler.post(()->{if(!current())return;try{event("impression",new JSONObject().put("impressionId",UUID.randomUUID().toString()).put("value",ImpressionValue.parse(data==null?null:data.getRawData())));}catch(Exception e){event("impression");}});}
         });

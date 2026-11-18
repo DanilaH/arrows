@@ -30,7 +30,9 @@ export function installBanner(options:{enabled:boolean;activity:GameplayActivity
   const run=async():Promise<void>=>{
     if(!alive||running)return;running=true;queued=false;const current=revision;
     try{
-      const viewport={width:innerWidth,height:innerHeight},measurement=await native.measure({revision:current,viewport,slot:rect(slot)});
+      // WebView rounds innerWidth/innerHeight to integers; DOM edges remain fractional.
+      // The full-size root and slot must use the same CSS layout coordinate space.
+      const bounds=html.getBoundingClientRect(),viewport={width:bounds.width,height:bounds.height},measurement=await native.measure({revision:current,viewport,slot:rect(slot)});
       if(!alive||current!==revision)return;
       const safe=resolveNativeSafeAreaCss({...measurement,viewport});
       if(safe.kind!=='safe'){hide();return;}

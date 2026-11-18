@@ -2,6 +2,13 @@ package com.danilah.arrows;
 import org.junit.Test;
 import static org.junit.Assert.*;
 public class BannerPlacementGuardTest {
+    @Test public void capacitorJsonCountersKeepTheirOrderAcrossIntegerAndLong()throws Exception{
+        org.json.JSONObject data=new org.json.JSONObject("{\"small\":12,\"large\":2147483648,\"fraction\":1.5}");
+        assertEquals(12L,BannerPlacementGuard.revision(data.get("small")));
+        assertEquals(2147483648L,BannerPlacementGuard.revision(data.get("large")));
+        assertEquals(-1L,BannerPlacementGuard.revision(data.get("fraction")));
+        for(Object bad:new Object[]{null,"12",-1,Double.NaN,Double.POSITIVE_INFINITY,9007199254740992d})assertEquals(-1L,BannerPlacementGuard.revision(bad));
+    }
     private boolean valid(double x,double y,double w,double h){return BannerPlacementGuard.valid(x,y,w,h,0,0,1080,2400,1080,2400,0,80,0,130,1080,150);}
     @Test public void currentWholePixelsStayAboveNavigationAndInsideWebView(){
         assertTrue(valid(0,2120,1080,150));assertFalse(valid(0,2121,1080,150));assertFalse(valid(0,75,1080,150));

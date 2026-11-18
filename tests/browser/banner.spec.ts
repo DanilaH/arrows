@@ -80,3 +80,13 @@ test('enlarged short layouts preserve Home and Collection hit targets and stop t
  await enlarge();await usable(page,['#home-play','#home-daily','#home-settings']);await page.locator('#home-collection').click();await enlarge();await usable(page,['#collection-open-month','#collection-current-trophy','#home-settings']);
  await page.locator('#home-tab').click();await enlarge();await page.setViewportSize({width:320,height:568});await expect(page.locator('.home-emblem')).toBeHidden();await expect.poll(()=>page.locator('.home-emblem').evaluate(e=>e.getAnimations({subtree:true}).length)).toBe(0);await usable(page,['#home-play','#home-daily']);
 });
+
+
+test('fractional WebView layout edges use the same viewport for native admission and kit placement',async({page})=>{
+ await page.setViewportSize({width:412,height:660});
+ await page.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{document.documentElement.style.width='calc(100% + .19049px)';document.documentElement.style.height='calc(100% + .19049px)';});});
+ await boot(page,{scale:2.625,adHeight:131,safeInsets:{top:0,bottom:0}});await expect.poll(()=>shown(page)).toBe(true);
+ const result=await page.evaluate(()=>{const q=Reflect.get(window,'assistanceQA').snapshot().banner,measure=q.calls.filter((c:{method:string})=>c.method==='measure').at(-1),apply=q.calls.filter((c:{method:string;visible?:boolean})=>c.method==='apply'&&c.visible).at(-1);return{width:innerWidth,root:document.documentElement.getBoundingClientRect().toJSON(),measure,apply,geometry:q.geometry};});
+ expect(result.root.width).toBeGreaterThan(result.width+.1);expect(result.measure.viewport.width).toBe(result.root.width);expect(result.measure.viewport.height).toBe(result.root.height);
+ expect(result.apply.rect.x+result.apply.rect.width).toBeLessThanOrEqual(result.geometry.webView.width);expect(result.apply.rect.y+result.apply.rect.height).toBeLessThanOrEqual(result.geometry.webView.height);
+});
