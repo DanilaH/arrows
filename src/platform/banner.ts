@@ -24,7 +24,8 @@ export function installBanner(options:{enabled:boolean;activity:GameplayActivity
   const layout=():void=>{needsLayout=true;if(!pointers.size){needsLayout=false;options.layout();}};
   const hide=():void=>{if(shown){shown=false;signature='';void native.apply({revision,visible:false}).catch(()=>{});}};
   const schedule=():void=>{if(!alive)return;queued=true;if(!frame)frame=requestAnimationFrame(()=>{frame=0;void run();});};
-  const eligible=():boolean=>options.visible()&&!document.hidden&&!options.activity.getBlockReasons().some(r=>r!=='menu');
+  // Internal scene/progression holds do not affect the independent, stable ad slot.
+  const eligible=():boolean=>options.visible()&&!document.hidden&&!options.activity.getBlockReasons().some(r=>r!=='menu'&&r!=='ad-transition');
   const invalidate=():void=>{if(!alive)return;revision++;if(!eligible())hide();schedule();};
   const refresh=():void=>{const next=String(eligible())+':'+String(options.reserve?.()??true);if(next===policy)return;policy=next;invalidate();};
   const run=async():Promise<void>=>{
@@ -51,7 +52,7 @@ export function installBanner(options:{enabled:boolean;activity:GameplayActivity
       if(pointers.size||needsLayout){hide();return;}
       const slotRect=rect(slot),placement=resolveNativeBannerPlacement({...measurement,viewport,slot:slotRect});
       if(placement.kind==='reserve'){hide();value('--banner-height',placement.heightCss+'px');value('--banner-occupied',`calc(${placement.heightCss+8}px + var(--safe-bottom))`);layout();schedule();return;}
-      const visible=placement.kind==='place'&&options.visible()&&!document.hidden&&!options.activity.getBlockReasons().some(r=>r!=='menu');
+      const visible=placement.kind==='place'&&eligible();
       const key=JSON.stringify([measurement.token,visible,placement]);if(key===signature)return;
       signature=key;shown=visible;
       const result=await native.apply({revision:current,token:measurement.token,visible,...(placement.kind==='place'?{rect:placement.rect}:{})});
@@ -65,7 +66,7 @@ export function installBanner(options:{enabled:boolean;activity:GameplayActivity
   const observer=new ResizeObserver(invalidate);observer.observe(slot);observer.observe(shell);
   const mutations=new MutationObserver(refresh);mutations.observe(shell,{attributes:true,attributeFilter:['data-status','data-screen','data-mode','data-progress']});
   for(const dialog of document.querySelectorAll('dialog'))mutations.observe(dialog,{attributes:true,attributeFilter:['open']});
-  const removeActivity=options.activity.onBlockedChange(refresh);
+  const removeActivity=options.activity.onBlockReasonsChange(refresh);
   const down=(e:PointerEvent):void=>{pointers.add(e.pointerId);};
   const up=(e:PointerEvent):void=>{pointers.delete(e.pointerId);if(!pointers.size&&needsLayout){needsLayout=false;options.layout();invalidate();}};
   document.addEventListener('pointerdown',down,true);document.addEventListener('pointerup',up,true);document.addEventListener('pointercancel',up,true);

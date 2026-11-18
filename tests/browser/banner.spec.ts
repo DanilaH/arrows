@@ -90,3 +90,26 @@ test('fractional WebView layout edges use the same viewport for native admission
  expect(result.root.width).toBeGreaterThan(result.width+.1);expect(result.measure.viewport.width).toBe(result.root.width);expect(result.measure.viewport.height).toBe(result.root.height);
  expect(result.apply.rect.x+result.apply.rect.width).toBeLessThanOrEqual(result.geometry.webView.width);expect(result.apply.rect.y+result.apply.rect.height).toBeLessThanOrEqual(result.geometry.webView.height);
 });
+
+test('ordinary animated scene changes retain a continuously visible banner without hide calls',async({page})=>{
+ await boot(page);await expect.poll(()=>shown(page)).toBe(true);
+ const start=await page.evaluate(()=>Reflect.get(window,'assistanceQA').snapshot().banner.calls.length);
+ for(const [key,screen] of [['#home-collection','collection'],['#home-calendar','calendar'],['#home-tab','home'],['#home-play','game'],['#choose-field','home']] as const){
+  await page.locator(key).click();await expect(page.locator('#game-shell')).toHaveAttribute('data-screen',screen);await page.waitForTimeout(450);
+  expect(await shown(page)).toBe(true);
+ }
+ const calls=await page.evaluate(start=>Reflect.get(window,'assistanceQA').snapshot().banner.calls.slice(start),start);
+ expect(calls.filter((c:{method:string;visible?:boolean})=>c.method==='apply'&&!c.visible)).toEqual([]);
+});
+
+test('next field without fullscreen advertising retains the banner through the progression hold',async({page})=>{
+ const save=seed(),a=save.campaign,board=new Board(a.level,a.board.id);
+ while(board.remaining.length>1)board.activate(board.hint()!);a.board=board.snapshot();a.started=true;
+ await boot(page,{scale:3,adHeight:150},save);await page.locator('#home-play').click();await page.waitForFunction(()=>!document.querySelector('.route-snapshot,.board-transition'));await page.waitForTimeout(450);
+ const head=board.remaining[0]!.path.at(-1)!,camera=JSON.parse((await page.locator('#game-root').getAttribute('data-camera'))!);await page.mouse.click(camera.x+head.x*camera.scale,camera.y+head.y*camera.scale);
+ await expect(page.locator('#win')).toBeVisible({timeout:15000});await expect.poll(()=>shown(page)).toBe(true);
+ const start=await page.evaluate(()=>Reflect.get(window,'assistanceQA').snapshot().banner.calls.length);
+ await page.locator('#next').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-level',campaign[20]!.id);await page.waitForTimeout(600);
+ const native=await page.evaluate(start=>{const q=Reflect.get(window,'assistanceQA').snapshot();return{request:q.request,calls:q.banner.calls.slice(start),visible:q.banner.visible};},start);
+ expect(native.request).toBeNull();expect(native.visible).toBe(true);expect(native.calls.filter((c:{method:string;visible?:boolean})=>c.method==='apply'&&!c.visible)).toEqual([]);
+});

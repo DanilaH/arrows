@@ -1,3 +1,7 @@
+## 2026-11-18 — stable banner during scene changes0.39.2
+
+Owner asks to stop visible banner flashing when switching scenes. The native banner/root slot already live outside scene snapshots; stop hiding them for routeBusy and ad-transition internal navigation/progression holds. Keep one loaded SDK view/request through ordinary animated Home/Calendar/Collection/game transitions and next-field transitions without fullscreen ads. Real ad loading/show, modal/tutorial/theme welcome, background/focus and invalid native geometry still hide under existing policies. Listen to all blocker-reason changes, not only the aggregate blocked Boolean, to preserve immediate protection when an external blocker joins a menu/navigation hold. Actual fullscreen/reward/cadence/progress semantics stay unchanged. See STABLE_BANNER_0392.md; KIT IMPACT REUSE.
+
 ## 2026-11-18 — fix missing native banner0.39.1
 
 Real Android35 WebView rendered a412.19049CSS-pixel root while innerWidth reported412. The native bounds guard rejected the slot before creating/requesting an SDK banner. Use the full layout root's fractional bounds in the existing kit coordinate contract, rather than weakening containment. Decode native revision numbers from Number because Capacitor getLong drops JSON Integer. Add actual WebView/SDK instrumentation and a fractional viewport browser regression; retain all0.39safe-area/visibility/reservation policy and pins. See ADAPTIVE_BANNER_0391.md. KIT IMPACT REUSE; shared kit unchanged.
