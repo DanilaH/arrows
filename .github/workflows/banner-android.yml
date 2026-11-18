@@ -1,0 +1,61 @@
+name: Banner Android runtime
+on:
+  push:
+    paths:
+      - '.github/workflows/banner-android.yml'
+      - 'native/android/app/src/androidTest/**'
+      - 'native/android/app/src/main/java/com/danilah/arrows/ArrowsBannerPlugin.java'
+      - 'native/android/app/src/main/java/com/danilah/arrows/Banner*.java'
+      - 'src/platform/banner.ts'
+permissions:
+  contents: read
+jobs:
+  native-banner:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - uses: actions/cache/restore@v4
+        with:
+          path: /home/runner/.npm
+          key: node-cache-${{ runner.os }}-x64-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: node-cache-${{ runner.os }}-x64-npm-
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+      - run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - run: npm ci --prefer-offline
+      - run: npm run android:sync
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_2
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot
+          disable-animations: true
+          script: |
+            mkdir -p .test-output/native-banner
+            adb logcat -c
+            cd native/android && ./gradlew --no-daemon connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.danilah.arrows.BannerRuntimeTest; result=$?; cd ../..; adb logcat -d > .test-output/native-banner/logcat.txt; adb exec-out screencap -p > .test-output/native-banner/final.png; adb pull /sdcard/Android/data/com.danilah.arrows/files/native-banner.png .test-output/native-banner/native-banner.png || true; exit $result
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-banner-runtime
+          path: |
+            .test-output/native-banner/
+            native/android/app/build/outputs/androidTest-results/
+            native/android/app/build/reports/androidTests/
+          retention-days: 7
