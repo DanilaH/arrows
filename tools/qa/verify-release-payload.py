@@ -21,7 +21,7 @@ manifest = run('aapt', 'dump', 'badging', a.apk)
 tree = run('aapt', 'dump', 'xmltree', a.apk, 'AndroidManifest.xml')
 package = 'com.danilah.arrows' + ('.releasecheck' if a.kind == 'releasecheck' else '')
 assert f"package: name='{package}'" in manifest
-assert "versionCode='55'" in manifest and "versionName='0.38.1'" in manifest
+assert "versionCode='56'" in manifest and "versionName='0.39.0'" in manifest
 assert 'application-debuggable' not in manifest
 assert 'android.permission.POST_NOTIFICATIONS' in manifest
 assert 'android.permission.RECEIVE_BOOT_COMPLETED' in manifest
@@ -52,21 +52,22 @@ with zipfile.ZipFile(a.apk) as z:
         'ArrowsAnalyticsPlugin':['report','flush','status'],
         'ArrowsStoragePlugin':['get','set','remove','list'],
         'ArrowsFeedbackPlugin':['pulse','cancel'],
+        'ArrowsBannerPlugin':['measure','apply','destroy'],
         'ArrowsDailyPlugin':['status','sync','request','openSettings','consume','notificationPermission'],
         'DailyReminderReceiver':['onReceive'],
     }.items():
         blocks=[b for b in re.split(r'(?=Class #\d+)',output) if re.search(r"Class descriptor\s*:\s*'Lcom/danilah/arrows/"+cls+";'",b)]
         assert blocks, cls
         for method in methods: assert any(re.search(r"name\s*:\s*'"+method+"'",b) for b in blocks), (cls,method)
-    expected={'AD_MODE':'test','REWARDED_AD_UNIT_ID':'demo-rewarded-yandex','INTERSTITIAL_AD_UNIT_ID':'demo-interstitial-yandex','ANALYTICS_API_KEY':''} if a.kind=='releasecheck' else {'AD_MODE':'live','REWARDED_AD_UNIT_ID':os.environ['YANDEX_REWARDED_AD_UNIT_ID'],'INTERSTITIAL_AD_UNIT_ID':os.environ['YANDEX_INTERSTITIAL_AD_UNIT_ID'],'ANALYTICS_API_KEY':os.environ['APPMETRICA_API_KEY']}
+    expected={'AD_MODE':'test','REWARDED_AD_UNIT_ID':'demo-rewarded-yandex','INTERSTITIAL_AD_UNIT_ID':'demo-interstitial-yandex','BANNER_AD_UNIT_ID':'demo-banner-yandex','ANALYTICS_API_KEY':''} if a.kind=='releasecheck' else {'AD_MODE':'live','REWARDED_AD_UNIT_ID':os.environ['YANDEX_REWARDED_AD_UNIT_ID'],'INTERSTITIAL_AD_UNIT_ID':os.environ['YANDEX_INTERSTITIAL_AD_UNIT_ID'],'BANNER_AD_UNIT_ID':os.environ['YANDEX_BANNER_AD_UNIT_ID'],'ANALYTICS_API_KEY':os.environ['APPMETRICA_API_KEY']}
     config=Path('native/android/app/build/generated/source/buildConfig')/('releaseCheck' if a.kind=='releasecheck' else 'release')/'com/danilah/arrows/BuildConfig.java'
     config_text=config.read_text()
     for field,value in expected.items():
         assert f'{field} = {json.dumps(value)};' in config_text, field
-        if field in ['REWARDED_AD_UNIT_ID','INTERSTITIAL_AD_UNIT_ID','ANALYTICS_API_KEY'] and value: assert any(value.encode() in data for data in dex_bytes), field
+        if field in ['REWARDED_AD_UNIT_ID','INTERSTITIAL_AD_UNIT_ID','BANNER_AD_UNIT_ID','ANALYTICS_API_KEY'] and value: assert any(value.encode() in data for data in dex_bytes), field
 mapping=Path('native/android/app/build/outputs/mapping')/('releaseCheck' if a.kind=='releasecheck' else 'release')/'mapping.txt'
 assert mapping.is_file() and mapping.stat().st_size>1000
 for name,body in [('signing.txt',sign),('badging.txt',manifest),('manifest-tree.txt',tree),('alignment.txt',alignment)]: (a.out/name).write_text(body)
-report={'kind':a.kind,'package':package,'version':'0.38.1','versionCode':55,'bytes':a.apk.stat().st_size,'sha256':hashlib.sha256(a.apk.read_bytes()).hexdigest(),'certificateSha256':cert,'v2':True,'debuggable':False,'zipalign16k':True,'shrunkMapping':{'bytes':mapping.stat().st_size,'sha256':hashlib.sha256(mapping.read_bytes()).hexdigest()},'webPayload':files,'contractSha256':hashlib.sha256(Path('src/platform/analytics-contract.json').read_bytes()).hexdigest(),'source':os.environ.get('GITHUB_SHA','local'),'physicalRuntime':'NOT RUN','services':'NOT RUN','productionSigner':a.kind=='release'}
+report={'kind':a.kind,'package':package,'version':'0.39.0','versionCode':56,'bytes':a.apk.stat().st_size,'sha256':hashlib.sha256(a.apk.read_bytes()).hexdigest(),'certificateSha256':cert,'v2':True,'debuggable':False,'zipalign16k':True,'shrunkMapping':{'bytes':mapping.stat().st_size,'sha256':hashlib.sha256(mapping.read_bytes()).hexdigest()},'webPayload':files,'contractSha256':hashlib.sha256(Path('src/platform/analytics-contract.json').read_bytes()).hexdigest(),'source':os.environ.get('GITHUB_SHA','local'),'physicalRuntime':'NOT RUN','services':'NOT RUN','productionSigner':a.kind=='release'}
 (a.out/'verification.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps({k:v for k,v in report.items() if k!='webPayload'},indent=2))

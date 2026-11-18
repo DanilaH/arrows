@@ -8,7 +8,7 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
 .play-icon { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
 /* A compact HUD with unchanged 44px touch targets. */
-#game-header { width: 100%; max-width: 480px; margin: 0 auto; padding: calc(8px + env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) 0 max(14px, env(safe-area-inset-left)); }
+#game-header { width: 100%; max-width: 480px; margin: 0 auto; padding: calc(8px + var(--safe-top)) max(14px, var(--safe-right)) 0 max(14px, var(--safe-left)); }
 .top-row { min-height: 44px; }
 .top-actions { gap: 0; width: 88px; flex-shrink: 0; }
 .top-spacer { width: 88px; flex-shrink: 0; }
@@ -50,19 +50,19 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
 .board-actions > #hint { margin-right: 0; min-width: 0; }
 .board-actions > #guides { flex: none; }
 #game-dialog[data-kind='cascade'] {
-  --cascade-room: calc(100dvh - max(24px,env(safe-area-inset-top)) - max(24px,env(safe-area-inset-bottom)));
-  inset: max(24px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));
+  --cascade-room: calc(100dvh - max(24px,var(--safe-top)) - max(24px,var(--safe-bottom)));
+  inset: max(24px,var(--safe-top)) max(20px,var(--safe-right)) max(24px,var(--safe-bottom)) max(20px,var(--safe-left));
   max-height: var(--cascade-room); overflow: hidden;
 }
 #game-dialog[data-kind='cascade'] #dialog-content { max-height: calc(var(--cascade-room) - 48px); }
 #game-dialog[data-kind='cascade'] h2, #game-dialog[data-kind='cascade'] button { flex: none; }
 #game-dialog[data-kind='cascade'] p { overflow-y: auto; min-height: 0; flex: 1 1 auto; overscroll-behavior: contain; }
 .help-qa p { color: var(--secondary); font-size: 11px; line-height: 1.5; }
-#save-status { top: calc(70px + env(safe-area-inset-top)); }
+#save-status { top: calc(70px + var(--safe-top)); }
 
 /* The navigation is outside transitioning/scrolling screen content. */
-#meta-screen { inset: 0 0 calc(76px + env(safe-area-inset-bottom)); padding: max(20px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) 18px max(20px,env(safe-area-inset-left)); }
-#meta-nav { position: absolute; inset: auto 0 0; height: calc(76px + env(safe-area-inset-bottom)); padding: 3px max(10px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left)); background: var(--bg); z-index: 9; }
+#meta-screen { inset: 0 0 calc(76px + var(--content-safe-bottom)); padding: max(20px,var(--safe-top)) max(20px,var(--safe-right)) 18px max(20px,var(--safe-left)); }
+#meta-nav { position: absolute; inset: auto 0 0; height: calc(76px + var(--content-safe-bottom)); padding: 3px max(10px,var(--safe-right)) calc(7px + var(--content-safe-bottom)) max(10px,var(--safe-left)); background: var(--bg); z-index: 9; }
 .nav-items { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); max-width: 560px; height: 100%; margin: auto; }
 .nav-items button { transition: none; position: relative; min-width: 0; min-height: 56px; padding: 9px 2px 3px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: transparent; color: var(--muted); border-radius: 13px; font-size: 10px; line-height: 1.2; }
 .nav-items button[aria-current='page'] { color: var(--accent-soft); }
@@ -194,10 +194,10 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
 /* Like Settings, the trophy keeps its close/open actions outside its details.
    The artwork yields space first on short screens. */
 #trophy-viewer {
-  --trophy-top: max(14px,env(safe-area-inset-top));
-  --trophy-bottom: max(14px,env(safe-area-inset-bottom));
-  --trophy-left: max(14px,env(safe-area-inset-left));
-  --trophy-right: max(14px,env(safe-area-inset-right));
+  --trophy-top: max(14px,var(--safe-top));
+  --trophy-bottom: max(14px,var(--safe-bottom));
+  --trophy-left: max(14px,var(--safe-left));
+  --trophy-right: max(14px,var(--safe-right));
   inset: var(--trophy-top) var(--trophy-right) var(--trophy-bottom) var(--trophy-left);
   width: min(390px,calc(100% - var(--trophy-left) - var(--trophy-right)));
   max-width: none; max-height: calc(100% - var(--trophy-top) - var(--trophy-bottom));
@@ -215,10 +215,10 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
 /* One surface per dialog. */
 #settings-dialog, #game-dialog, #trophy-viewer { border: 0; box-shadow: 0 16px 48px #090c262b; background: var(--surface); border-radius: 24px; }
 #settings-dialog {
-  --settings-top: max(14px,env(safe-area-inset-top));
-  --settings-bottom: max(14px,env(safe-area-inset-bottom));
-  --settings-left: max(14px,env(safe-area-inset-left));
-  --settings-right: max(14px,env(safe-area-inset-right));
+  --settings-top: max(14px,var(--safe-top));
+  --settings-bottom: max(14px,var(--safe-bottom));
+  --settings-left: max(14px,var(--safe-left));
+  --settings-right: max(14px,var(--safe-right));
   inset: var(--settings-top) var(--settings-right) var(--settings-bottom) var(--settings-left);
   width: min(380px,calc(100% - var(--settings-left) - var(--settings-right)));
   max-width: none; max-height: calc(100% - var(--settings-top) - var(--settings-bottom));
@@ -283,13 +283,13 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
   #game-header { padding-left: 8px; padding-right: 8px; }
 }
 @media (max-height: 500px) {
-  #game-header { padding-top: calc(4px + env(safe-area-inset-top)); }
+  #game-header { padding-top: calc(4px + var(--safe-top)); }
   #app-status { min-height: 3.2em; }
-  #game-footer { padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
-  #meta-nav { height: calc(56px + env(safe-area-inset-bottom)); padding-top: 0; padding-bottom: env(safe-area-inset-bottom); }
+  #game-footer { padding-bottom: calc(8px + var(--content-safe-bottom)); }
+  #meta-nav { height: calc(56px + var(--content-safe-bottom)); padding-top: 0; padding-bottom: var(--content-safe-bottom); }
   .nav-items button { min-height: 50px; gap: 3px; padding-top: 5px; }
   .nav-icon, .nav-icon svg { width: 21px; height: 21px; }
-  #meta-screen { bottom: calc(56px + env(safe-area-inset-bottom)); padding-top: max(12px,env(safe-area-inset-top)); }
+  #meta-screen { bottom: calc(56px + var(--content-safe-bottom)); padding-top: max(12px,var(--safe-top)); }
   .home-layout { min-height: 0; max-width: 660px; }
   .home-heading { padding-top: 0; flex-direction: row; gap: 20px; }
   .home-heading h1 { font-size: 25px; }
@@ -339,14 +339,14 @@ button { transition: background-color 140ms ease, color 140ms ease, border-color
 #game-shell[data-state='complete'] #restart { visibility: hidden; }
 
 /* A single quiet arrival cue; these elements never reserve layout space or take input. */
-.arrival-notice { position: fixed; left: 16px; right: 16px; bottom: calc(92px + env(safe-area-inset-bottom)); z-index: 12; text-align: center; color: var(--accent-soft); font-size: 12px; line-height: 18px; pointer-events: none; opacity: 0; width: fit-content; max-width: calc(100% - 32px); margin: auto; padding: 4px 10px; background: var(--bg); border-radius: 20px; }
+.arrival-notice { position: fixed; left: 16px; right: 16px; bottom: calc(92px + var(--safe-bottom)); z-index: 12; text-align: center; color: var(--accent-soft); font-size: 12px; line-height: 18px; pointer-events: none; opacity: 0; width: fit-content; max-width: calc(100% - 32px); margin: auto; padding: 4px 10px; background: var(--bg); border-radius: 20px; }
 .arrival-halo { position: fixed; z-index: 12; border: 1.3px solid var(--accent-soft); border-radius: 50%; pointer-events: none; opacity: 0; }
 .cup-arrival-halo { border-color: var(--gold); }
 .day-progress-token { position: fixed; z-index: 12; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-soft); pointer-events: none; opacity: 0; }
 .month-progress { width: 112px; max-width: 80%; height: 3px; margin: 8px auto; background: var(--progress-bg); border-radius: 3px; overflow: hidden; }
 .month-progress > span { display: block; height: 100%; background: var(--accent-soft); transform-origin: left; }
 .month-count > span { display: inline-block; }
-@media (max-height: 500px) { .arrival-notice { bottom: calc(64px + env(safe-area-inset-bottom)); font-size: 11px; } .month-progress { width: 82px; margin: 6px auto; } }
+@media (max-height: 500px) { .arrival-notice { bottom: calc(64px + var(--safe-bottom)); font-size: 11px; } .month-progress { width: 82px; margin: 6px auto; } }
 
 @media (prefers-reduced-motion: reduce) { .medal summary .medal-chevron { transition: none; } }
 
@@ -399,14 +399,14 @@ button, summary { position: relative; isolation: isolate; }
 /* Primary text keeps its contrast during press; the face shows an inset ring. */
 .primary > .ui-press-feedback { background: transparent; box-shadow: inset 0 0 0 3px currentColor; }
 
-.game-unlock { position: absolute; z-index: 7; top: calc(82px + env(safe-area-inset-top)); left: 16px; right: 16px; width: fit-content; max-width: calc(100% - 32px); margin: auto; display: flex; gap: 12px; align-items: center; padding: 12px 16px; border-radius: 22px; background: var(--surface); box-shadow: 0 8px 25px #00000014; pointer-events: none; }
+.game-unlock { position: absolute; z-index: 7; top: calc(82px + var(--safe-top)); left: 16px; right: 16px; width: fit-content; max-width: calc(100% - 32px); margin: auto; display: flex; gap: 12px; align-items: center; padding: 12px 16px; border-radius: 22px; background: var(--surface); box-shadow: 0 8px 25px #00000014; pointer-events: none; }
 .game-unlock strong, .game-unlock small { display: block; }
 .game-unlock strong { color: var(--heading); font-size: 14px; font-weight: 900; line-height: 1.3; }
 .game-unlock small { color: var(--secondary); font-size: 10px; max-width: 240px; margin-top: 4px; line-height: 1.35; }
 .unlock-emblem { width: 38px; height: 38px; position: relative; display: grid; place-items: center; flex: 0 0 38px; color: var(--gold); }
 .unlock-emblem svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .unlock-emblem i { position: absolute; inset: -4px; border: 1px solid currentColor; border-radius: 50%; opacity: 0; }
-@media (max-height:500px) { .game-unlock { top: calc(64px + env(safe-area-inset-top)); padding: 8px 12px; } .game-unlock small { display:none; } }
+@media (max-height:500px) { .game-unlock { top: calc(64px + var(--safe-top)); padding: 8px 12px; } .game-unlock small { display:none; } }
 
 /* First visit stays on the real Home surface: live colors, one Play action. */
 .home-layout[data-theme-intro='true'] .home-current:has(.home-emblem) { padding-bottom: clamp(16px,5dvh,40px); }
@@ -418,7 +418,7 @@ button, summary { position: relative; isolation: isolate; }
 .welcome-themes svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 22px; }
 @media(max-height:560px) { .home-layout[data-theme-intro='true'] .home-emblem { margin-bottom: 10px; width: 80px; height: 80px; } .welcome-themes { margin-top: 14px; } }
 
-#meta-screen.theme-intro-screen { bottom: 0; padding-bottom: max(20px,env(safe-area-inset-bottom)); }
+#meta-screen.theme-intro-screen { bottom: 0; padding-bottom: max(20px,var(--content-safe-bottom)); }
 
 /* Extra daily actions retain readable lines in short web windows; native stays portrait. */
 @media (max-height: 500px) and (min-aspect-ratio: 13/10) {

@@ -50,6 +50,7 @@ public class ArrowsAdsPlugin extends Plugin {
                 YandexAds.initialize(getContext(),()->handler.post(()->{
                     if(destroyed)return;
                     interLoader=new InterstitialAdLoader(getContext());rewardLoader=new RewardedAdLoader(getContext());ready=true;
+                    ArrowsBannerPlugin.sdkReady();
                     event("rewarded","initialized");if(rewardDemand&&!background)loadRewarded();
                 }));
             }catch(RuntimeException error){initializationFailed=true;event("rewarded","init_error");}
@@ -146,7 +147,7 @@ public class ArrowsAdsPlugin extends Plugin {
                     public void onAdShown(){shown(s);}public void onAdFailedToShow(@NonNull AdError error){if(session==s){event(s,"show_error");finish(s,"error");}}
                     public void onAdDismissed(){if(session==s){event(s,"dismiss");finish(s,"dismissed");}}public void onAdClicked(){}
                     public void onAdImpression(@Nullable ImpressionData data){impression(s,data);}
-                });s.invoked=true;event(s,"invoke");interstitial.show(getActivity());
+                });s.invoked=true;ArrowsBannerPlugin.fullscreen(true);event(s,"invoke");interstitial.show(getActivity());
             }else{event(s,"request");if(rewarded!=null)displayRewarded(s);else loadRewarded();}
         }catch(RuntimeException error){event(s,"show_error");finish(s,"error");}
     });}
@@ -171,7 +172,7 @@ public class ArrowsAdsPlugin extends Plugin {
                 }catch(Exception error){event(s,"receipt_pending");}
             }
         });
-        s.invoked=true;event(s,"invoke");try{s.rewardAd.show(getActivity());}catch(RuntimeException error){rewardCache.showFailed(SystemClock.elapsedRealtime());event(s,"show_error");finish(s,"error");}
+        s.invoked=true;ArrowsBannerPlugin.fullscreen(true);event(s,"invoke");try{s.rewardAd.show(getActivity());}catch(RuntimeException error){rewardCache.showFailed(SystemClock.elapsedRealtime());event(s,"show_error");finish(s,"error");}
     }
     @PluginMethod public void pending(PluginCall call){handler.post(()->{try{JSObject result=new JSObject();result.put("receipts",journal.pending());call.resolve(result);}catch(Exception error){call.reject("Earned receipt storage unavailable");}});}
     @PluginMethod public void acknowledge(PluginCall call){handler.post(()->{try{journal.acknowledge(call.getString("id",""));call.resolve();}catch(Exception error){call.reject("Earned receipt acknowledgement failed");}});}
@@ -179,6 +180,7 @@ public class ArrowsAdsPlugin extends Plugin {
     private void resolve(PluginCall call,boolean shown,String outcome){JSObject r=new JSObject();r.put("shown",shown);r.put("outcome",outcome);call.resolve(r);}
     private void finish(Session s,String outcome){
         if(session!=s)return;session=null;
+        ArrowsBannerPlugin.fullscreen(false);
         if(outcome.equals("cancelled")||outcome.equals("unavailable"))event(s,outcome);
         if(s.rewardAd!=null){s.rewardAd.setAdEventListener(null);s.rewardAd=null;}
         if(!s.invoked&&s.kind.equals("rewarded")&&rewardCache.phase(SystemClock.elapsedRealtime()).equals("loading"))cancelRewardLoad();

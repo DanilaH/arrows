@@ -39,4 +39,5 @@ export interface AnalyticsPayloads {
   assistance_followup: { event_id: string; entitlement_id: string; attempt: string; outcome: string; active_ms: number };
   analytics_health: { sequence: number; accepted: number; disabled: number; failed: number; dropped: number; unconfirmed: number; overflow: number; invalid: number; sync_failure: number; async_failure: number; native_rejected: number; flush_failure: number; outstanding: number; diagnostics_failed: number; diagnostics_deferred: number; transport_id: string; boundary: string; delivery: string };
   daily_entry: { date: string; attempt: string; source: string };
+  banner_event: { phase: string; request_id: string; width_px: number; height_px: number };
 }

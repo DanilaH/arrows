@@ -13,6 +13,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(ArrowsFeedbackPlugin.class);
         registerPlugin(ArrowsStoragePlugin.class);
         registerPlugin(ArrowsDailyPlugin.class);
+        registerPlugin(ArrowsBannerPlugin.class);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
     }

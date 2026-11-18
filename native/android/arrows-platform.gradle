@@ -4,9 +4,10 @@ def playtestBuild = project.findProperty('arrowsPlaytest') == 'true'
 def adMode = playtestBuild ? 'test' : System.getenv('ARROWS_AD_MODE') ?: 'test'
 if (!(adMode in ['disabled', 'test', 'live'])) throw new GradleException('Invalid ARROWS_AD_MODE')
 def interstitialId = adMode == 'test' ? 'demo-interstitial-yandex' : adMode == 'live' ? System.getenv('YANDEX_INTERSTITIAL_AD_UNIT_ID') ?: '' : ''
+def bannerId = adMode == 'test' ? 'demo-banner-yandex' : adMode == 'live' ? System.getenv('YANDEX_BANNER_AD_UNIT_ID') ?: '' : ''
 def rewardedId = adMode == 'test' ? 'demo-rewarded-yandex' : adMode == 'live' ? System.getenv('YANDEX_REWARDED_AD_UNIT_ID') ?: '' : ''
 def analyticsKey = playtestBuild ? '' : (adMode == 'live' ? System.getenv('APPMETRICA_API_KEY') : System.getenv('APPMETRICA_DEBUG_API_KEY')) ?: ''
-if (adMode == 'live' && (!interstitialId || !rewardedId || !analyticsKey || interstitialId.startsWith('demo-') || rewardedId.startsWith('demo-')))
+if (adMode == 'live' && (!interstitialId || !rewardedId || !bannerId || !analyticsKey || interstitialId.startsWith('demo-') || rewardedId.startsWith('demo-') || bannerId.startsWith('demo-')))
     throw new GradleException('Live SDK configuration is incomplete or uses demo ad units')
 android {
     buildFeatures { buildConfig true }
@@ -14,6 +15,7 @@ android {
         buildConfigField 'String', 'AD_MODE', configString(adMode)
         buildConfigField 'String', 'INTERSTITIAL_AD_UNIT_ID', configString(interstitialId)
         buildConfigField 'String', 'REWARDED_AD_UNIT_ID', configString(rewardedId)
+        buildConfigField 'String', 'BANNER_AD_UNIT_ID', configString(bannerId)
         buildConfigField 'String', 'ANALYTICS_API_KEY', configString(analyticsKey)
     }
 }

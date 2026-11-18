@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class AnalyticsContractTest {
     @Test public void everySharedEventAcceptsExactTypesAndRejectsMissingExtraOrWrongFields() throws Exception {
         JSONObject contract = new JSONObject(new String(Files.readAllBytes(Paths.get("src/main/assets/arrows-analytics-contract.json")), java.nio.charset.StandardCharsets.UTF_8));
-        assertEquals(39, contract.length());
+        assertEquals(40, contract.length());
         Iterator<String> events = contract.keys();
         while (events.hasNext()) {
             String event = events.next(); JSONObject fields = contract.getJSONObject(event), params = new JSONObject();

@@ -6,6 +6,7 @@ import '../style.css';
 import '../themes.css';
 import '../themePreview.css';
 import '../polish.css';
+import '../banner.css';
 import { copy, normalizeGameLanguage } from './language';
 import { applyTheme } from './theme';
 import { createPlatformRuntime } from './platform';

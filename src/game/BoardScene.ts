@@ -267,7 +267,8 @@ export class BoardScene extends Phaser.Scene {
     const header=document.querySelector<HTMLElement>('#game-header'), footer=document.querySelector<HTMLElement>('#game-footer');
     // Layout bounds exclude transient HUD transforms during a menu transition.
     const top=header?header.offsetTop+header.offsetHeight:92, bottom=footer?footer.offsetTop:this.heightCss-100;
-    return { x: 0, y: top + 28, width: this.widthCss, height: Math.max(100, bottom - top - 36) };
+    const safe=getComputedStyle(document.documentElement),left=parseFloat(safe.getPropertyValue('--native-safe-left'))||0,right=parseFloat(safe.getPropertyValue('--native-safe-right'))||0;
+    return { x: left, y: top + 28, width: Math.max(1,this.widthCss-left-right), height: Math.max(document.documentElement.classList.contains('has-native-banner')?1:100, bottom - top - 36) };
   }
   public layout(reset = false): void {
     const ratio = 1 / this.scale.zoom;

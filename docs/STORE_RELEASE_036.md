@@ -24,6 +24,7 @@ RuStore требует512×512PNG/JPG до3MB и соответствие ико
 | `ARROWS_RELEASE_KEY_PASSWORD` | Содержимое txt; пароль ключа, для этого PKCS12 совпадает с store password |
 | `ARROWS_RELEASE_CERT_SHA256` | Отпечаток из txt; публичная копия закреплена в production-signing.json |
 | `APPMETRICA_API_KEY` | API key Android-приложения AppMetrica, UUID |
+| `YANDEX_BANNER_AD_UNIT_ID` | Отдельный ID баннерного блока РСЯ; подключён в0.39.0 |
 | `YANDEX_REWARDED_AD_UNIT_ID` | ID rewarded-блока РСЯ, вида R-M-число-число |
 | `YANDEX_INTERSTITIAL_AD_UNIT_ID` | Другой ID interstitial-блока РСЯ |
 

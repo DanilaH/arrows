@@ -1,0 +1,23 @@
+/* Native inverse-safe feedback shares the existing CSS viewport coordinate space. */
+:root {
+  --safe-left: max(env(safe-area-inset-left),var(--native-safe-left,0px));
+  --safe-top: max(env(safe-area-inset-top),var(--native-safe-top,0px));
+  --safe-right: max(env(safe-area-inset-right),var(--native-safe-right,0px));
+  --safe-bottom: max(env(safe-area-inset-bottom),var(--native-safe-bottom,0px));
+  --content-safe-bottom: var(--safe-bottom);
+  --banner-occupied: 0px;
+}
+.has-native-banner { --content-safe-bottom: 0px; }
+#banner-strip { position:absolute; left:0; right:0; bottom:0; height:var(--banner-occupied); background:var(--bg); z-index:14; }
+#native-banner-slot { position:absolute; left:var(--safe-left); right:var(--safe-right); bottom:var(--safe-bottom); height:var(--banner-height,0px); }
+#game-footer { bottom:var(--banner-occupied); }
+#meta-nav { bottom:var(--banner-occupied); }
+.has-native-banner #meta-screen { bottom:calc(76px + var(--banner-occupied)); }
+.has-native-banner #meta-screen.theme-intro-screen { bottom:var(--banner-occupied); }
+.has-native-banner .home-layout { min-height:0; }
+.has-native-banner .arrival-notice { bottom:calc(92px + var(--banner-occupied)); }
+@media (max-height:500px) {
+  .has-native-banner #meta-screen { bottom:calc(56px + var(--banner-occupied)); }
+  .has-native-banner #meta-screen.theme-intro-screen { bottom:var(--banner-occupied); }
+  .has-native-banner .arrival-notice { bottom:calc(64px + var(--banner-occupied)); }
+}

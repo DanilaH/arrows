@@ -21,6 +21,7 @@ import type {GameReviewOptions} from '../pilot/review';
 import {createDailyEntrySelector,dailyEntryLabel,dailyCupProgress} from '../progression/dailyEntry';
 import {createDailyReminders} from '../platform/dailyReminders';
 import {reminderSettings} from './reminderSettings';
+import {installBanner} from '../platform/banner';
 
 type Platform = ReturnType<typeof createPlatformRuntime>;
 export function installGameSurface(scene: BoardScene, platform: Platform, language: GameLanguage, reviewFields: readonly Level[] = [], reviewOptions: GameReviewOptions = {}) {
@@ -197,6 +198,10 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   });
   const reminders=createDailyReminders(progress,()=>language,()=>{settingsSurface.refreshExtra();sync();},platform.kind==='android'&&!pilot&&!reviewFields.length);
   const settingsSurface = installSettingsSurface(platform.settings, platform.activity, platform.feedback, () => { cancel(); saveView(); }, motion,()=>{if(pilot)return null;const section = helpOffers.renderQA(), cue = cueQA.render(language, active().board.id); if (section && cue) section.append(cue); return section;},()=>reminderSettings(reminders,language,loaded&&progress.state.index>=19));
+  const banner=installBanner({enabled:platform.kind==='android'&&!pilot&&!reviewFields.length,activity:platform.activity,analytics:platform.analytics,
+    visible:()=>loaded&&!control&&progress.available&&!progress.uncertain&&!progress.error&&shell.dataset.status==='ready'&&!modal&&!requestingAd&&!transition.busy&&!motion.routeBusy&&!document.querySelector('dialog[open],#meta-screen.theme-intro-screen')&&(meta.screen!=='game'||!tutorial()),
+    layout:()=>{cancel();if(meta.screen==='game'){scene.layout();scheduleView();}},
+  });
   let celebratedAttempt = '', pendingAward = false, freshWinAttempt = '', dailyReturnAttempt = '';
   const backToMenu = (): void => { if (requestingAd || transition.busy) return;if(pilot){open('controls');return;} if (activeDate && !control) meta.show('calendar', activeDate); else meta.show('home'); close(); sync(); };
   let rewardIntent = 0, lastPreload = -Infinity, pendingRewardKey = '';
@@ -586,6 +591,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
   const timer = setInterval(() => {
     sample(); sync();
     drainDailyEntry();
+    banner.refresh();
     // Ask once when dailies become usable, after loading/navigation/external windows settle.
     if(loaded&&!control&&progress.state.index>=19&&progress.available&&!progress.uncertain&&!progress.error&&!transition.busy&&!requestingAd&&!dailyEntryBusy&&!reminders.error&&!reminders.state?.pending&&!modal&&!document.hidden&&!platform.activity.getBlockReasons().some(r=>r!=='menu'))void reminders.requestOnce();
     if (loaded && !control && meta.screen === 'game' && !platform.activity.isBlocked() && progress.confirmedWins >= 4 && progress.state.adCadence.activeMs + pendingAdTime >= 120000 && performance.now() - lastPreload >= 30000) { lastPreload = performance.now(); void platform.ads.prepareInterstitial(); }
@@ -626,7 +632,7 @@ export function installGameSurface(scene: BoardScene, platform: Platform, langua
     onBack(): boolean { if (requestingAd || platform.ads.state.phase !== 'idle') { cancelAd(); return true; } if (transition.busy) return true; if (settingsSurface.close()) return true; if (meta.closeTrophy()) return true; if (modal) { if (modal === 'lost') backToMenu(); else close(); sync(); return true; } if (meta.screen === 'home') return false; if (meta.screen === 'game') backToMenu(); else meta.back(); return true; }, cancel,
     destroy(): void {
       saveView(); alive = false; assistance=null; cancel(); clearInterval(timer); clearTimeout(slowLoad); if (cameraTimer !== undefined) clearTimeout(cameraTimer);
-      reminders.destroy();for (const remove of listeners.reverse()) remove();cueQA.destroy();helpOffers.destroy();platform.ads.setRewardedDemand(false); transition.destroy(); adSurface.destroy(); settingsSurface.destroy(); meta.destroy(); motion.destroy(); platform.activity.setBlocked('menu', false);
+      banner.destroy();reminders.destroy();for (const remove of listeners.reverse()) remove();cueQA.destroy();helpOffers.destroy();platform.ads.setRewardedDemand(false); transition.destroy(); adSurface.destroy(); settingsSurface.destroy(); meta.destroy(); motion.destroy(); platform.activity.setBlocked('menu', false);
       dialog.close(); platform.activity.setBlocked('dialog', false); platform.activity.setBlocked('save-load', false); content.replaceChildren();
       // The final accepted write is allowed to settle; no later receipt can mutate a disposed store.
       void progress.flush().finally(() => progress.destroy());
