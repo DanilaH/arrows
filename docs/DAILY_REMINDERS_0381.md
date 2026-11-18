@@ -12,7 +12,7 @@ Owner correction on 2026-11-18 supersedes the optional/editable reminder policy 
 
 ## Verification
 
-Local typecheck/build and 263 pre-existing unit cases initially PASS. Added automatic-request serialization/denial coverage and targeted browser/native policy coverage; final counts/build evidence are recorded in HANDOFF/evidence after completion. Initial local browser launch could not start because the expected Playwright binary was absent; rerun uses the installed Chromium, not a game failure.
+Final local typecheck/build/264 unit cases,20 affected browser scenarios and8 localized settings/font/viewport states PASS. Android CI27JVM, compatible same-certificate .playtest build and optimized release-check with official payload/signature/DEX checks PASS. Genuine 292-frame/13.32s current-APK-web GIF and actual game-audio video saved. Full hosted web/release-audit jobs remain running; aggregate status is not GREEN. Exact source/artifact hashes, saved downloads and provenance: [acceptance](evidence/fixed-reminders-0381/ACCEPTANCE.md).
 
 Physical Android permission UI, AlarmManager delivery/Doze/OEM restrictions, reboot and tap acceptance remain NOT RUN unless executed on a named device. No notification-delivery claim follows from browser mocks or JVM scheduling tests.
 

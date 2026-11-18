@@ -1,0 +1,37 @@
+{
+  "source": "2f550199f031512ca5b61eb2b59427b80e6de2f2",
+  "version": "0.38.1",
+  "versionCode": 55,
+  "apk": {
+    "version": "0.38.1",
+    "versionCode": 55,
+    "source": "2f550199f031512ca5b61eb2b59427b80e6de2f2",
+    "run": 44269599659,
+    "apkSha256": "247b8c75b3c7da19e848e60121ece5d753363b117ec995248c97ba8c951efe03",
+    "apkBytes": 11530918,
+    "certificateSha256": "533aa2ff18337e3b3630c1363e7fe49f98e6b21371ce715689d2cbbf2e45ea36",
+    "v2": true,
+    "jvmTests": 27,
+    "nativeContractSha256": "95b04d6225adfef43bf4b2fe2685722c8bf5c7412e04fec09b9334cd3a54d812",
+    "physicalNotifications": "NOT RUN",
+    "testAds": true,
+    "analytics": "OFF"
+  },
+  "capture": {
+    "frames": 292,
+    "durationMs": 13324.214483,
+    "moves": 3,
+    "source": "Unmodified signed APK web in Chromium; real pointer/CDP source frames and actual WebAudio output, no overdub. Seeded earned campaign and current dense daily with three remaining; fixed local calendar date. Native reminder/ad/storage responses controlled for web UI capture; no Android permission/alarm/notification delivery or phone claim.",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 1.5,
+    "date": "2026-11-18",
+    "errors": [],
+    "dailyArrows": 280,
+    "reminderRequests": 1,
+    "campaignAttemptPreserved": true,
+    "dailyWinAddedOnce": true
+  }
+}

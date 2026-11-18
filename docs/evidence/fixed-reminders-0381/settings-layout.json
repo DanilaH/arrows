@@ -1,0 +1,106 @@
+[
+  {
+    "width": 320,
+    "language": "ru",
+    "fontScale": 1,
+    "copy": "Дэйлик каждый деньОколо 13:00 и 19:00 по времени телефона, пока сегодняшний дэйлик не пройден.Уведомления разрешены. Время доставки может немного сдвигаться.Настройки Android",
+    "inputs": 0,
+    "overflow": false,
+    "button": {
+      "height": 44,
+      "inBounds": true,
+      "hit": true
+    }
+  },
+  {
+    "width": 320,
+    "language": "ru",
+    "fontScale": 1.5,
+    "copy": "Дэйлик каждый деньОколо 13:00 и 19:00 по времени телефона, пока сегодняшний дэйлик не пройден.Уведомления разрешены. Время доставки может немного сдвигаться.Настройки Android",
+    "inputs": 0,
+    "overflow": false,
+    "button": {
+      "height": 44,
+      "inBounds": true,
+      "hit": true
+    }
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "fontScale": 1,
+    "copy": "Daily reminderAround 13:00 and 19:00 in your phone’s time zone, until today’s daily is completed.Notifications are allowed. Delivery time may vary.Android settings",
+    "inputs": 0,
+    "overflow": false,
+    "button": {
+      "height": 44,
+      "inBounds": true,
+      "hit": true
+    }
+  },
+  {
+    "width": 320,
+    "language": "en",
+    "fontScale": 1.5,
+    "copy": "Daily reminderAround 13:00 and 19:00 in your phone’s time zone, until today’s daily is completed.Notifications are allowed. Delivery time may vary.Android settings",
+    "inputs": 0,
+    "overflow": false,
+    "button": {
+      "height": 44,
+      "inBounds": true,
+      "hit": true
+    }
+  },
+  {
+    "width": 390,
+    "language": "ru",
+    "fontScale": 1,
+    "copy": "Дэйлик каждый деньОколо 13:00 и 19:00 по времени телефона, пока сегодняшний дэйлик не пройден.Уведомления разрешены. Время доставки может немного сдвигаться.Настройки Android",
+    "inputs": 0,
+    "overflow": false,
+    "button": {
+      "height": 44,
+      "inBounds": true,
+      "hit": true
+    }
+  },
+  {
+    "width": 390,
+    "language": "ru",
+    "fontScale": 1.5,
+    "copy": "Дэйлик каждый деньОколо 13:00 и 19:00 по времени телефона, пока сегодняшний дэйлик не пройден.Уведомления разрешены. Время доставки может немного сдвигаться.Настройки Android",
+    "inputs": 0,
+    "overflow": false,
+    "button": {
+      "height": 44,
+      "inBounds": true,
+      "hit": true
+    }
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "fontScale": 1,
+    "copy": "Daily reminderAround 13:00 and 19:00 in your phone’s time zone, until today’s daily is completed.Notifications are allowed. Delivery time may vary.Android settings",
+    "inputs": 0,
+    "overflow": false,
+    "button": {
+      "height": 44,
+      "inBounds": true,
+      "hit": true
+    }
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "fontScale": 1.5,
+    "copy": "Daily reminderAround 13:00 and 19:00 in your phone’s time zone, until today’s daily is completed.Notifications are allowed. Delivery time may vary.Android settings",
+    "inputs": 0,
+    "overflow": false,
+    "button": {
+      "height": 44,
+      "inBounds": true,
+      "hit": true
+    }
+  }
+]
