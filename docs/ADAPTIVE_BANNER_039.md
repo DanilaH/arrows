@@ -17,7 +17,7 @@ Owner authorized adding the missing banner on 2026-11-18 and supplied the reposi
 
 `banner_event` separates native request/load/error/shown/hidden/click/impression from geometry negotiation. SDK ILRD is forwarded through existing `ad_impression_value` with format banner; missing value stays unknown. No fake impression, revenue, fullscreen opportunity or help attribution. Generated40-event TS/native contract stays exact.
 
-Local checks:264 unit cases/typecheck/build PASS;72 affected browser cases and14 expanded banner cases initially PASS. An additional12-state actual payload UI/font sweep identified the short-window issues described above; corrected12-state sweep PASS. Final first-welcome coverage and layout reruns are recorded in delivery evidence. Additional coverage, native build/signature and exact APK/capture evidence are recorded when complete. Browser native responses are controlled and do not prove an actual SDK creative or physical safe-area placement.
+Final264 unit/type/build/sync,80 related browser+2 short-window regressions,12 actual-APK meta states,30JVM/same-certificate APK/R8/official checks and730-date/32-release-state audit PASS.295-frame13.31s actual APK-web GIF/actual-audio video saved; native creative is not rendered in Chromium. Latest full web CI remains running; aggregate is not GREEN. Exact source/artifact hashes, final downloads and provenance: [acceptance](evidence/adaptive-banner-039/ACCEPTANCE.md).
 
 Native phone acceptance remains separate: actual demo/live fill, gesture/three-button navigation, cutout, background and SDK/external return, real creative/control non-overlap, installation/update and performance. No phone emulator/device is claimed unless recorded.
 

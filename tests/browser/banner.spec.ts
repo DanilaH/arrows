@@ -73,3 +73,10 @@ test('first theme choice keeps its full viewport, then reserves space in gamepla
  const bounds=await page.locator('#meta-screen').boundingBox();expect(bounds!.y+bounds!.height).toBeCloseTo(page.viewportSize()!.height,0);
  await page.locator('#home-play').click();await expect(page.locator('#game-shell')).toHaveAttribute('data-screen','game');await expect(page.locator('html')).toHaveClass(/has-native-banner/);expect(await shown(page)).toBe(false);
 });
+
+test('enlarged short layouts preserve Home and Collection hit targets and stop the cramped decorative emblem',async({page})=>{
+ await page.setViewportSize({width:844,height:390});await boot(page);await expect.poll(()=>shown(page)).toBe(true);
+ const enlarge=()=>page.evaluate(()=>{const seen:WeakSet<Element>=Reflect.get(window,'bannerLargeCopy')??new WeakSet();Reflect.set(window,'bannerLargeCopy',seen);for(const el of document.querySelectorAll<HTMLElement>('h1,h2,h3,p,small,label,button,summary,select'))if(!seen.has(el)){seen.add(el);el.style.setProperty('font-size',parseFloat(getComputedStyle(el).fontSize)*1.5+'px','important');}});
+ await enlarge();await usable(page,['#home-play','#home-daily','#home-settings']);await page.locator('#home-collection').click();await enlarge();await usable(page,['#collection-open-month','#collection-current-trophy','#home-settings']);
+ await page.locator('#home-tab').click();await enlarge();await page.setViewportSize({width:320,height:568});await expect(page.locator('.home-emblem')).toBeHidden();await expect.poll(()=>page.locator('.home-emblem').evaluate(e=>e.getAnimations({subtree:true}).length)).toBe(0);await usable(page,['#home-play','#home-daily']);
+});

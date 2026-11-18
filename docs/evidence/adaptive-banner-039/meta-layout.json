@@ -1,0 +1,684 @@
+{
+  "states": [
+    {
+      "profile": {
+        "width": 320,
+        "height": 568,
+        "language": "ru",
+        "theme": "light",
+        "large": false
+      },
+      "name": "home",
+      "result": [
+        {
+          "key": "#home-play",
+          "rect": {
+            "x": 40,
+            "y": 215.84375,
+            "width": 240,
+            "height": 52,
+            "top": 215.84375,
+            "right": 280,
+            "bottom": 267.84375,
+            "left": 40
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-daily",
+          "rect": {
+            "x": 21,
+            "y": 302.84375,
+            "width": 278,
+            "height": 44,
+            "top": 302.84375,
+            "right": 299,
+            "bottom": 346.84375,
+            "left": 21
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 235,
+            "y": 408,
+            "width": 75,
+            "height": 66,
+            "top": 408,
+            "right": 310,
+            "bottom": 474,
+            "left": 235
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-ru-light-320x568-home.png"
+    },
+    {
+      "profile": {
+        "width": 320,
+        "height": 568,
+        "language": "ru",
+        "theme": "light",
+        "large": false
+      },
+      "name": "calendar",
+      "result": [
+        {
+          "key": "#start-daily",
+          "rect": {
+            "x": 199,
+            "y": 341,
+            "width": 107,
+            "height": 46,
+            "top": 341,
+            "right": 306,
+            "bottom": 387,
+            "left": 199
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 235,
+            "y": 408,
+            "width": 75,
+            "height": 66,
+            "top": 408,
+            "right": 310,
+            "bottom": 474,
+            "left": 235
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-ru-light-320x568-calendar.png"
+    },
+    {
+      "profile": {
+        "width": 320,
+        "height": 568,
+        "language": "ru",
+        "theme": "light",
+        "large": false
+      },
+      "name": "collection",
+      "result": [
+        {
+          "key": "#collection-open-month",
+          "rect": {
+            "x": 142,
+            "y": 250.265625,
+            "width": 150,
+            "height": 44,
+            "top": 250.265625,
+            "right": 292,
+            "bottom": 294.265625,
+            "left": 142
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#collection-current-trophy",
+          "rect": {
+            "x": 14,
+            "y": 134.625,
+            "width": 112,
+            "height": 152,
+            "top": 134.625,
+            "right": 126,
+            "bottom": 286.625,
+            "left": 14
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 235,
+            "y": 408,
+            "width": 75,
+            "height": 66,
+            "top": 408,
+            "right": 310,
+            "bottom": 474,
+            "left": 235
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-ru-light-320x568-collection.png"
+    },
+    {
+      "profile": {
+        "width": 320,
+        "height": 568,
+        "language": "ru",
+        "theme": "dark",
+        "large": true
+      },
+      "name": "home",
+      "result": [
+        {
+          "key": "#home-play",
+          "rect": {
+            "x": 40,
+            "y": 226.03125,
+            "width": 240,
+            "height": 52.5,
+            "top": 226.03125,
+            "right": 280,
+            "bottom": 278.53125,
+            "left": 40
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-daily",
+          "rect": {
+            "x": 14,
+            "y": 321.53125,
+            "width": 292,
+            "height": 53.46875,
+            "top": 321.53125,
+            "right": 306,
+            "bottom": 375,
+            "left": 14
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 235,
+            "y": 408,
+            "width": 75,
+            "height": 66,
+            "top": 408,
+            "right": 310,
+            "bottom": 474,
+            "left": 235
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-ru-dark-320x568-home.png"
+    },
+    {
+      "profile": {
+        "width": 320,
+        "height": 568,
+        "language": "ru",
+        "theme": "dark",
+        "large": true
+      },
+      "name": "calendar",
+      "result": [
+        {
+          "key": "#start-daily",
+          "rect": {
+            "x": 156,
+            "y": 337.5,
+            "width": 150,
+            "height": 49,
+            "top": 337.5,
+            "right": 306,
+            "bottom": 386.5,
+            "left": 156
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 235,
+            "y": 408,
+            "width": 75,
+            "height": 66,
+            "top": 408,
+            "right": 310,
+            "bottom": 474,
+            "left": 235
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-ru-dark-320x568-calendar.png"
+    },
+    {
+      "profile": {
+        "width": 320,
+        "height": 568,
+        "language": "ru",
+        "theme": "dark",
+        "large": true
+      },
+      "name": "collection",
+      "result": [
+        {
+          "key": "#collection-open-month",
+          "rect": {
+            "x": 142,
+            "y": 250.265625,
+            "width": 150,
+            "height": 44,
+            "top": 250.265625,
+            "right": 292,
+            "bottom": 294.265625,
+            "left": 142
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#collection-current-trophy",
+          "rect": {
+            "x": 14,
+            "y": 134.625,
+            "width": 112,
+            "height": 152,
+            "top": 134.625,
+            "right": 126,
+            "bottom": 286.625,
+            "left": 14
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 235,
+            "y": 408,
+            "width": 75,
+            "height": 66,
+            "top": 408,
+            "right": 310,
+            "bottom": 474,
+            "left": 235
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-ru-dark-320x568-collection.png"
+    },
+    {
+      "profile": {
+        "width": 390,
+        "height": 844,
+        "language": "en",
+        "theme": "light",
+        "large": true
+      },
+      "name": "home",
+      "result": [
+        {
+          "key": "#home-play",
+          "rect": {
+            "x": 75,
+            "y": 405.6875,
+            "width": 240,
+            "height": 59.046875,
+            "top": 405.6875,
+            "right": 315,
+            "bottom": 464.734375,
+            "left": 75
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-daily",
+          "rect": {
+            "x": 53.5,
+            "y": 517.734375,
+            "width": 283,
+            "height": 44,
+            "top": 517.734375,
+            "right": 336.5,
+            "bottom": 561.734375,
+            "left": 53.5
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 287.5,
+            "y": 684,
+            "width": 92.5,
+            "height": 66,
+            "top": 684,
+            "right": 380,
+            "bottom": 750,
+            "left": 287.5
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-en-light-390x844-home.png"
+    },
+    {
+      "profile": {
+        "width": 390,
+        "height": 844,
+        "language": "en",
+        "theme": "light",
+        "large": true
+      },
+      "name": "calendar",
+      "result": [
+        {
+          "key": "#start-daily",
+          "rect": {
+            "x": 262.1875,
+            "y": 525.5,
+            "width": 107.8125,
+            "height": 49,
+            "top": 525.5,
+            "right": 370,
+            "bottom": 574.5,
+            "left": 262.1875
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 287.5,
+            "y": 684,
+            "width": 92.5,
+            "height": 66,
+            "top": 684,
+            "right": 380,
+            "bottom": 750,
+            "left": 287.5
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-en-light-390x844-calendar.png"
+    },
+    {
+      "profile": {
+        "width": 390,
+        "height": 844,
+        "language": "en",
+        "theme": "light",
+        "large": true
+      },
+      "name": "collection",
+      "result": [
+        {
+          "key": "#collection-open-month",
+          "rect": {
+            "x": 148,
+            "y": 250.265625,
+            "width": 128,
+            "height": 44,
+            "top": 250.265625,
+            "right": 276,
+            "bottom": 294.265625,
+            "left": 148
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#collection-current-trophy",
+          "rect": {
+            "x": 20,
+            "y": 134.625,
+            "width": 112,
+            "height": 152,
+            "top": 134.625,
+            "right": 132,
+            "bottom": 286.625,
+            "left": 20
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 287.5,
+            "y": 684,
+            "width": 92.5,
+            "height": 66,
+            "top": 684,
+            "right": 380,
+            "bottom": 750,
+            "left": 287.5
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-en-light-390x844-collection.png"
+    },
+    {
+      "profile": {
+        "width": 844,
+        "height": 390,
+        "language": "ru",
+        "theme": "light",
+        "large": true
+      },
+      "name": "home",
+      "result": [
+        {
+          "key": "#home-play",
+          "rect": {
+            "x": 432,
+            "y": 72.75,
+            "width": 210,
+            "height": 55,
+            "top": 72.75,
+            "right": 642,
+            "bottom": 127.75,
+            "left": 432
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-daily",
+          "rect": {
+            "x": 432,
+            "y": 148.859375,
+            "width": 210,
+            "height": 94.03125,
+            "top": 148.859375,
+            "right": 642,
+            "bottom": 242.890625,
+            "left": 432
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 562,
+            "y": 247,
+            "width": 140,
+            "height": 56,
+            "top": 247,
+            "right": 702,
+            "bottom": 303,
+            "left": 562
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-ru-light-844x390-home.png"
+    },
+    {
+      "profile": {
+        "width": 844,
+        "height": 390,
+        "language": "ru",
+        "theme": "light",
+        "large": true
+      },
+      "name": "calendar",
+      "result": [
+        {
+          "key": "#start-daily",
+          "rect": {
+            "x": 552,
+            "y": 179.5,
+            "width": 150,
+            "height": 49,
+            "top": 179.5,
+            "right": 702,
+            "bottom": 228.5,
+            "left": 552
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 562,
+            "y": 247,
+            "width": 140,
+            "height": 56,
+            "top": 247,
+            "right": 702,
+            "bottom": 303,
+            "left": 562
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-ru-light-844x390-calendar.png"
+    },
+    {
+      "profile": {
+        "width": 844,
+        "height": 390,
+        "language": "ru",
+        "theme": "light",
+        "large": true
+      },
+      "name": "collection",
+      "result": [
+        {
+          "key": "#collection-open-month",
+          "rect": {
+            "x": 270,
+            "y": 196.390625,
+            "width": 150,
+            "height": 44,
+            "top": 196.390625,
+            "right": 420,
+            "bottom": 240.390625,
+            "left": 270
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#collection-current-trophy",
+          "rect": {
+            "x": 142,
+            "y": 128.6875,
+            "width": 112,
+            "height": 100,
+            "top": 128.6875,
+            "right": 254,
+            "bottom": 228.6875,
+            "left": 142
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        },
+        {
+          "key": "#home-settings",
+          "rect": {
+            "x": 562,
+            "y": 247,
+            "width": 140,
+            "height": 56,
+            "top": 247,
+            "right": 702,
+            "bottom": 303,
+            "left": 562
+          },
+          "height": true,
+          "clear": true,
+          "hit": true
+        }
+      ],
+      "errors": [],
+      "shot": ".test-output/banner039/meta-ru-light-844x390-collection.png"
+    }
+  ]
+}

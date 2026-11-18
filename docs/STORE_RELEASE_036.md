@@ -28,7 +28,7 @@ RuStore требует512×512PNG/JPG до3MB и соответствие ико
 | `YANDEX_REWARDED_AD_UNIT_ID` | ID rewarded-блока РСЯ, вида R-M-число-число |
 | `YANDEX_INTERSTITIAL_AD_UNIT_ID` | Другой ID interstitial-блока РСЯ |
 
-В текущем продукте два рекламных формата; баннер не интегрирован и отдельного BANNER secret нет. `ARROWS_AD_MODE=live` и временный `ARROWS_RELEASE_KEYSTORE` задаются workflow автоматически, создавать их секретами не нужно. Debug key опционален и не участвует в production; .playtest принудительно сохраняет тестовую рекламу и выключенную аналитику.
+С0.39.0 в продукте три рекламных формата: адаптивный баннер, interstitial и rewarded. Для баннера workflow использует отдельный `YANDEX_BANNER_AD_UNIT_ID`; владелец сообщил, что этот repository secret добавлен. Значения не извлекаем в исходники или журналы. `ARROWS_AD_MODE=live` и временный `ARROWS_RELEASE_KEYSTORE` задаются workflow автоматически, создавать их секретами не нужно. Debug key опционален и не участвует в production; .playtest принудительно сохраняет тестовую рекламу и выключенную аналитику.
 
 Публичный SHA256 сертификата: `e7cb7061aebc42ca415ee8fbe17235769c6e40af4f1ab46fb17af68c8581bac6`, alias `arrows_release`, RSA4096/SHA256withRSA,10000дней. Это первый production signer, отдельный от .playtest. Сохранить приватный архив резервной копией: дальнейшие store-обновления подписываются тем же ключом. Ключ/пароли/Base64 не находятся в Git; публичный pin не является приватным ключом.
 

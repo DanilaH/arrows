@@ -1,0 +1,39 @@
+{
+  "kind": "releasecheck",
+  "package": "com.danilah.arrows.releasecheck",
+  "version": "0.39.0",
+  "versionCode": 56,
+  "bytes": 5922974,
+  "sha256": "b1c585096a2f21c009325529f8a2f730d378ecc41855f383c1afea101174fdda",
+  "certificateSha256": "ced7dd68d27192b856962e240b9a27f8fe9ca51e191888e05c0b58af5e0309bb",
+  "v2": true,
+  "debuggable": false,
+  "zipalign16k": true,
+  "shrunkMapping": {
+    "bytes": 21924553,
+    "sha256": "c06d753aea3c493694c52daa69f2520685fe2b8fc172b4745840184434b587bc"
+  },
+  "webPayload": {
+    "arrows-build.json": "319e55d799457587803ba5e111d4176c77219843c4fd8bec6dc4cc85662e4084",
+    "brand-mark.svg": "a72ec2bfe6cfa2cc80b0713f0a70fbd8dc340885c8a67193b75cc2115ec0a3b7",
+    "favicon.png": "024683b3da381a3cd952e0db3e566aad355769c451564f0d4299bc4c112ea290",
+    "index.html": "6394a95598149006f3221866f9908ff351dfc976548edc944c2e14ba9ba7f9db",
+    "favicon.svg": "c7ef36024a08c077109fc2578f226bd9399dbc1b1bb91efa41151d87b35c3626",
+    "ui/daily-v1.webp": "ac3da5d20c7d6d13583b5e436e09928c26725d869b0252f169207f7f6e5d2c4f",
+    "ui/collection-v1.webp": "66bdf5f733d6fc53a3d264afe1f9c0906fd902bf05c0eca66d4623bb7412b917",
+    "audio/KENNEY-INTERFACE-CC0.txt": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9",
+    "audio/KENNEY-UI-CC0.txt": "d3727df992b579b2330c14f8326246ab9e3524731d54739b1066ed85adda7af0",
+    "assets/dailyWorker-CzSU8cF9.js": "d5bccec7c03886e299341ebc7ea268c0ad07e9bdea399381957158a2710b95f9",
+    "assets/main-CZR21nR3.js": "a6c863dde37ed99cbcacb864b982084390e920e1ac343a08acb6fb8384944f0b",
+    "assets/main-KTdjhPmU.css": "44ab469a788ddeb297c0302bd0373235a783b8860c29dc9871faa2c6d3c8731c",
+    "assets/web-eKuScEJ6.js": "a8dd0c69c9b56dd6cf78370a5b446e1645fe5bf9a54086ddb50f679b3d710024",
+    "fonts/nunito-variable.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "fonts/README.txt": "a01151268c6ac981792ea31a68a7989d459abcf65e80c943d6fbb0614d4b7ec6",
+    "fonts/Nunito-OFL.txt": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21"
+  },
+  "contractSha256": "337ea0129503a2f6c2dfc15b127ec4186be4c663d5885eaf1c911298d852ec64",
+  "source": "0a60e621e65cb08753236829ebb8eed9e809ac9a",
+  "physicalRuntime": "NOT RUN",
+  "services": "NOT RUN",
+  "productionSigner": false
+}

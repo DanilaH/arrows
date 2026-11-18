@@ -17,6 +17,8 @@ try{
  context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1.5,isMobile:true,hasTouch:true,locale:'ru-RU',timezoneId:'Asia/Yekaterinburg'});
  await context.addInitScript(controlledNative,{save:seed.save,settings:seed.settings,reminders:{},banner:{scale:3,adHeight:150,safeInsets:{top:72,bottom:84}}});
  const p=await context.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.clock.setFixedTime(new Date(seed.date+'T12:00:00Z'));await p.goto('http://127.0.0.1:'+port);await p.locator('#home-daily:enabled').waitFor();await p.evaluate(()=>document.fonts.ready);
+ // Wait for the optional initial reservation before choosing warm-up coordinates.
+ await p.waitForFunction(()=>assistanceQA.snapshot().banner.visible);await sleep(200);
  // Warm the actual WebAudio player with real UI presses before recording.
  await click(p,'#home-settings');await p.locator('#settings-dialog[open]').waitFor();await sleep(400);await click(p,'#close-settings');await p.locator('#settings-dialog').waitFor({state:'hidden'});await sleep(500);await p.evaluate(()=>assistanceQA.startAudio());
  const dir=root+'/record-'+manifest.source.slice(0,7);await mkdir(dir,{recursive:true});const cdp=await context.newCDPSession(p),frames=[],start=performance.now();let recording=true;frames.push({at:0,data:await p.screenshot({type:'jpeg',quality:94,scale:'css'})});
