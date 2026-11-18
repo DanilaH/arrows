@@ -50,7 +50,7 @@ jobs:
           script: |
             mkdir -p .test-output/native-banner
             adb logcat -c
-            cd native/android && ./gradlew --no-daemon :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.danilah.arrows.BannerRuntimeTest; result=$?; cd ../..; adb logcat -d > .test-output/native-banner/logcat.txt; adb exec-out screencap -p > .test-output/native-banner/final.png; adb pull /sdcard/Pictures/ArrowsQA/native-banner.png .test-output/native-banner/native-banner.png || true; adb pull /sdcard/Movies/ArrowsQA/banner-scenes.mp4 .test-output/native-banner/banner-scenes.mp4 || true; exit $result
+            cd native/android && ./gradlew --no-daemon :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.danilah.arrows.BannerRuntimeTest,com.danilah.arrows.LauncherIconTest; result=$?; cd ../..; adb logcat -d > .test-output/native-banner/logcat.txt; adb exec-out screencap -p > .test-output/native-banner/final.png; adb pull /sdcard/Pictures/ArrowsQA/native-banner.png .test-output/native-banner/native-banner.png || true; adb pull /sdcard/Pictures/ArrowsQA/launcher-icons.png .test-output/native-banner/launcher-icons.png || true; adb pull /sdcard/Movies/ArrowsQA/banner-scenes.mp4 .test-output/native-banner/banner-scenes.mp4 || true; exit $result
       - uses: actions/upload-artifact@v4
         if: always()
         with:

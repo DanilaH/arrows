@@ -15,13 +15,15 @@ def run(name, *args):
 sign = run('apksigner', 'verify', '--verbose', '--print-certs', a.apk)
 cert = re.search(r'Signer #1 certificate SHA-256 digest: ([a-fA-F0-9:]+)', sign)[1].replace(':','').lower()
 assert 'Verified using v2 scheme (APK Signature Scheme v2): true' in sign
-if a.kind == 'release': assert cert == os.environ['ARROWS_RELEASE_CERT_SHA256'].lower()
+if a.kind == 'release':
+    assert cert == os.environ['ARROWS_RELEASE_CERT_SHA256'].lower()
+    assert cert == json.loads(Path('docs/production-signing.json').read_text())['certificateSha256']
 alignment = run('zipalign', '-c', '-P', '16', '4', a.apk)
 manifest = run('aapt', 'dump', 'badging', a.apk)
 tree = run('aapt', 'dump', 'xmltree', a.apk, 'AndroidManifest.xml')
 package = 'com.danilah.arrows' + ('.releasecheck' if a.kind == 'releasecheck' else '')
 assert f"package: name='{package}'" in manifest
-assert "versionCode='58'" in manifest and "versionName='0.39.2'" in manifest
+assert "versionCode='59'" in manifest and "versionName='0.40.0'" in manifest
 assert 'application-debuggable' not in manifest
 assert 'android.permission.POST_NOTIFICATIONS' in manifest
 assert 'android.permission.RECEIVE_BOOT_COMPLETED' in manifest
@@ -30,9 +32,13 @@ assert 'android.permission.USE_EXACT_ALARM' not in manifest
 assert re.search(r'android:screenOrientation[^\n]*\(type 0x10\)0x1(?:\s|$)', tree)
 files = {}
 with zipfile.ZipFile(a.apk) as z:
+    bridge=json.loads(z.read('assets/capacitor.config.json'))
+    assert bridge['android']['webContentsDebuggingEnabled'] is False
+    assert bridge['loggingBehavior']=='debug'
     public = {n.removeprefix('assets/public/'): n for n in z.namelist() if n.startswith('assets/public/') and not n.endswith('/')}
     assert 'target-lab.html' not in public and 'content-pilot.html' not in public
     assert json.loads(z.read(public['arrows-build.json']))['channel'] == 'release'
+    assert b'debug-root' not in z.read(public['index.html'])
     assert z.read('assets/arrows-analytics-contract.json') == Path('src/platform/analytics-contract.json').read_bytes()
     for path in Path('dist').rglob('*'):
         if path.is_file():
@@ -65,9 +71,10 @@ with zipfile.ZipFile(a.apk) as z:
     for field,value in expected.items():
         assert f'{field} = {json.dumps(value)};' in config_text, field
         if field in ['REWARDED_AD_UNIT_ID','INTERSTITIAL_AD_UNIT_ID','BANNER_AD_UNIT_ID','ANALYTICS_API_KEY'] and value: assert any(value.encode() in data for data in dex_bytes), field
+    assert re.search(r'boolean DEBUG = false;', config_text)
 mapping=Path('native/android/app/build/outputs/mapping')/('releaseCheck' if a.kind=='releasecheck' else 'release')/'mapping.txt'
 assert mapping.is_file() and mapping.stat().st_size>1000
 for name,body in [('signing.txt',sign),('badging.txt',manifest),('manifest-tree.txt',tree),('alignment.txt',alignment)]: (a.out/name).write_text(body)
-report={'kind':a.kind,'package':package,'version':'0.39.2','versionCode':58,'bytes':a.apk.stat().st_size,'sha256':hashlib.sha256(a.apk.read_bytes()).hexdigest(),'certificateSha256':cert,'v2':True,'debuggable':False,'zipalign16k':True,'shrunkMapping':{'bytes':mapping.stat().st_size,'sha256':hashlib.sha256(mapping.read_bytes()).hexdigest()},'webPayload':files,'contractSha256':hashlib.sha256(Path('src/platform/analytics-contract.json').read_bytes()).hexdigest(),'source':os.environ.get('GITHUB_SHA','local'),'physicalRuntime':'NOT RUN','services':'NOT RUN','productionSigner':a.kind=='release'}
+report={'kind':a.kind,'package':package,'version':'0.40.0','versionCode':59,'bytes':a.apk.stat().st_size,'sha256':hashlib.sha256(a.apk.read_bytes()).hexdigest(),'certificateSha256':cert,'v2':True,'debuggable':False,'zipalign16k':True,'shrunkMapping':{'bytes':mapping.stat().st_size,'sha256':hashlib.sha256(mapping.read_bytes()).hexdigest()},'webPayload':files,'contractSha256':hashlib.sha256(Path('src/platform/analytics-contract.json').read_bytes()).hexdigest(),'source':os.environ.get('GITHUB_SHA','local'),'physicalRuntime':'NOT RUN','services':'NOT RUN','productionSigner':a.kind=='release'}
 (a.out/'verification.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps({k:v for k,v in report.items() if k!='webPayload'},indent=2))

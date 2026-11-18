@@ -38,7 +38,11 @@ try{
   await p.goto('http://127.0.0.1:4291');await p.locator('#home-play:enabled').waitFor();await p.evaluate(()=>document.querySelector('#qa-recording-source')?.remove());
   await capture(p,profile,'home');await p.locator('#home-play').click();await capture(p,profile,'board');
   assert.equal(await p.locator('#difficulty').textContent(),language==='ru'?'Кошмар':'Nightmare');
-  await p.locator('#game-settings').click();assert.equal(await p.locator('#settings-testing').count(),0);await capture(p,profile,'settings');await p.locator('#close-settings').click();
+  await p.locator('#game-settings').click();
+  // The transport deliberately claims playtest=true: the release build must
+  // exclude these tools independently of native flags or old local QA notes.
+  assert.equal(await p.locator('#settings-testing,#help-qa,#a1-cue-qa-mode,#target-lab-open,#content-pilot-open,#debug-root').count(),0);
+  await capture(p,profile,'settings');await p.locator('#close-settings').click();
   await p.locator('#choose-field').click();await p.locator('#home-collection').click();await capture(p,profile,'collection');
   await p.locator('#home-calendar').click();await capture(p,profile,'calendar');
   const play=await p.locator('#start-daily').boundingBox(),nav=await p.locator('#meta-nav').boundingBox();assert(play.height>=44&&play.y+play.height<=nav.y+1);

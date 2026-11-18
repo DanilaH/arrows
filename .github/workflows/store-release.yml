@@ -1,6 +1,9 @@
 name: Store release APK
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/store-release.json']
 permissions:
   contents: read
 concurrency:
@@ -23,6 +26,9 @@ jobs:
       YANDEX_INTERSTITIAL_AD_UNIT_ID: ${{ secrets.YANDEX_INTERSTITIAL_AD_UNIT_ID }}
     steps:
       - uses: actions/checkout@v4
+      - name: Check explicit store build request
+        run: |
+          node -e "const fs=require('fs'),r=JSON.parse(fs.readFileSync('.github/store-release.json')),p=require('./package.json');if(r.version!==p.version||r.package!=='com.danilah.arrows'||r.publish!==false)throw Error('Store build request mismatch')"
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
@@ -48,6 +54,14 @@ jobs:
           printf 'ARROWS_RELEASE_KEYSTORE=%s\n' "$ARROWS_RELEASE_KEYSTORE" >> "$GITHUB_ENV"
       - run: npm run release:config
       - run: npm run check
+      - run: npx playwright install --with-deps chromium
+      - name: Verify release-only interface and archive capacity
+        run: |
+          npx vite build --ssr tools/audit/ui-composition-source.ts --outDir .test-output/production-readiness/ssr
+          node tools/qa/audit-save-growth.mjs
+          npx vite build --mode release --outDir .test-output/release-web
+          node tools/qa/audit-release-web.mjs
+          node -e "const r=require('./.test-output/save-capacity-audit/report.json');if(r.productionGate!=='PASS')throw Error('Archive capacity gate failed')"
       - run: npm run android:sync:release
       - run: ./gradlew --no-daemon testDebugUnitTest assembleRelease
         working-directory: native/android
@@ -65,6 +79,8 @@ jobs:
             .test-output/store-release-verification/
             native/android/app/build/outputs/mapping/release/
             native/android/app/build/test-results/testDebugUnitTest/
+            .test-output/production-readiness/matrix.json
+            .test-output/save-capacity-audit/report.json
           retention-days: 30
       - name: Remove temporary private key
         if: always()

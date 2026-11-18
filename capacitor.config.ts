@@ -5,7 +5,8 @@ const config: CapacitorConfig = {
   appName: 'Стрелки',
   webDir: 'dist',
   backgroundColor: '#f3f4fa',
-  android: { path: 'native/android' },
+  android: { path: 'native/android', webContentsDebuggingEnabled: false },
+  loggingBehavior: 'debug',
   plugins: { SystemBars: { style: 'LIGHT', insetsHandling: 'css', initialViewportFitValueHint: 'cover' } },
 };
 
