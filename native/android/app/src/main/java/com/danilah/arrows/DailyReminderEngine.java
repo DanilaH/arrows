@@ -23,16 +23,19 @@ final class DailyReminderEngine {
     private AtomicFile file() { return new AtomicFile(new File(context.getNoBackupFilesDir(),"arrows-reminders-v1.json")); }
     JSONObject read() throws Exception {
         AtomicFile f=file();
-        if(!f.getBaseFile().exists()&&!new File(f.getBaseFile()+".bak").exists()){enabled=true;return new JSONObject().put("version",2).put("enabled",true).put("requested",false);}
+        if(!f.getBaseFile().exists()&&!new File(f.getBaseFile()+".bak").exists()){enabled=false;return new JSONObject().put("version",2).put("enabled",true).put("requested",false);}
         JSONObject s=DailyReminderPolicy.upgrade(new JSONObject(new String(f.readFully(),StandardCharsets.UTF_8)));
-        enabled=true;return s;
+        cacheActive(s);return s;
     }
     void write(JSONObject s) throws Exception {
         byte[] bytes=s.toString().getBytes(StandardCharsets.UTF_8); if(bytes.length>32768)throw new IOException("Reminder state too large");
         AtomicFile f=file(); FileOutputStream out=null;
         try {out=f.startWrite();out.write(bytes);f.finishWrite(out);out=null;if(!Arrays.equals(bytes,f.readFully()))throw new IOException("Reminder write unverified");}
         finally {if(out!=null)f.failWrite(out);}
-        enabled=s.optBoolean("enabled");
+        cacheActive(s);
+    }
+    private void cacheActive(JSONObject s) {
+        JSONObject p=s.optJSONObject("snapshot");enabled=s.optBoolean("requested")&&p!=null&&p.optBoolean("unlocked")&&allowed();
     }
     void channel() {
         if(Build.VERSION.SDK_INT>=26)((NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(

@@ -17,7 +17,7 @@ export function createDailyReminders(progress: ProgressStore, language: () => st
   let alive = true, state: ReminderStatus | null = null, error = false, busy = false;
   let listener: PluginListenerHandle | undefined, publishing = false;
   let queued: { raw: string; snapshot: NonNullable<ReturnType<typeof reminderProjection>>; language: string } | null = null;
-  const accepted = (value: ReminderStatus): void => { if (alive) { const activated=value.enabled&&!state?.enabled;state = value; error = false; if(activated)sync();changed(); } };
+  const accepted = (value: ReminderStatus): void => { if (alive) { const activated=value.allowed&&value.requested&&!(state?.allowed&&state.requested);state = value; error = false; if(activated)sync();changed(); } };
   const action = async (work: () => Promise<ReminderStatus>): Promise<void> => {
     if (!native || busy || !alive) return;
     busy = true; changed();
@@ -40,7 +40,7 @@ export function createDailyReminders(progress: ProgressStore, language: () => st
     } } finally { publishing = false; }
   };
   const sync = (): void => {
-    if (!native || !alive || !state?.enabled) return;
+    if (!native || !alive || !state?.requested || !state.allowed || progress.state.index < 19) return;
     // Capture proof and state together BEFORE hashing/awaiting; never pair a new root with old wins.
     const raw = progress.durableWitness, snapshot = reminderProjection(progress.state);
     if (typeof raw !== 'string' || !snapshot) { queued = null; void native.sync({ language: language(), snapshot: null }).then(accepted).catch(() => {}); return; }

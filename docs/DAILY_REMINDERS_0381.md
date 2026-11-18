@@ -7,6 +7,7 @@ Owner correction on 2026-11-18 supersedes the optional/editable reminder policy 
 - Completing today's daily cancels the outstanding alarm/visible reminder and skips the remaining slot. Recheck the root-bound durable projection, permission, foreground and finite lateness at delivery. No archive-based reminders after today's completion.
 - Preserve local calendar behavior across midnight/year/DST/timezone changes. Backwards clock changes do not replay a claimed slot. Native version 1 reminder state migrates to version 2 without changing progress/snapshot/pending tap; old per-day claims conservatively count as the evening slot. Previously enabled players retain the recorded permission request. Remove obsolete custom time/opt-in fields. Android denied/off channel stays off.
 - Settings only explains the fixed schedule and current Android permission, with an Android settings link/retry for capability errors. Browser and isolated review/pilot remain free of simulated production notifications.
+- Before unlock or with denied permission, committed moves do not hash/export projections or make per-move alarm/notification system calls. Grant/settings return activates projection publication.
 - Shared daily destination, exact campaign return, cup counts, stale/cold/warm tap handling, content/save schema/earned rights, advertising cadence, signing and runtime pins remain unchanged.
 
 ## Verification
