@@ -46,6 +46,7 @@ public class BannerRuntimeTest {
         assertEquals(expression,"true",js(expression));
     }
     @Test public void ordinaryHomeLoadsAndShowsNativeDemoBanner()throws Exception{
+        assertEquals("Runtime test must use demo ads","test",BuildConfig.AD_MODE);
         Intent intent=new Intent(instrumentation.getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity=(MainActivity)instrumentation.startActivitySync(intent);
         try{
@@ -62,7 +63,17 @@ public class BannerRuntimeTest {
             }while(SystemClock.elapsedRealtime()<deadline);
             assertTrue("Native banner never shown: "+state,state.getBoolean("displayed"));
             assertTrue("Native banner visible in hierarchy",state.getBoolean("bannerShown"));
-            instrumentation.getUiAutomation().takeScreenshot().compress(android.graphics.Bitmap.CompressFormat.PNG,100,new java.io.FileOutputStream(new java.io.File(instrumentation.getTargetContext().getExternalFilesDir(null),"native-banner.png")));
+            instrumentation.waitForIdleSync();SystemClock.sleep(1000);
+            // Persist the native frame through Gradle's test-app uninstall on this disposable emulator.
+            android.content.ContentValues values=new android.content.ContentValues();
+            values.put(android.provider.MediaStore.Images.Media.DISPLAY_NAME,"native-banner.png");
+            values.put(android.provider.MediaStore.Images.Media.MIME_TYPE,"image/png");
+            values.put(android.provider.MediaStore.Images.Media.RELATIVE_PATH,"Pictures/ArrowsQA");
+            android.net.Uri uri=activity.getContentResolver().insert(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
+            assertNotNull(uri);
+            try(java.io.OutputStream output=activity.getContentResolver().openOutputStream(uri)){
+                assertTrue(instrumentation.getUiAutomation().takeScreenshot().compress(android.graphics.Bitmap.CompressFormat.PNG,100,output));
+            }
         }finally{instrumentation.runOnMainSync(()->activity.finish());}
     }
 }

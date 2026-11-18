@@ -49,7 +49,7 @@ jobs:
           script: |
             mkdir -p .test-output/native-banner
             adb logcat -c
-            cd native/android && ./gradlew --no-daemon connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.danilah.arrows.BannerRuntimeTest; result=$?; cd ../..; adb logcat -d > .test-output/native-banner/logcat.txt; adb exec-out screencap -p > .test-output/native-banner/final.png; adb pull /sdcard/Android/data/com.danilah.arrows/files/native-banner.png .test-output/native-banner/native-banner.png || true; exit $result
+            cd native/android && ./gradlew --no-daemon :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.danilah.arrows.BannerRuntimeTest; result=$?; cd ../..; adb logcat -d > .test-output/native-banner/logcat.txt; adb exec-out screencap -p > .test-output/native-banner/final.png; adb pull /sdcard/Pictures/ArrowsQA/native-banner.png .test-output/native-banner/native-banner.png || true; exit $result
       - uses: actions/upload-artifact@v4
         if: always()
         with:
