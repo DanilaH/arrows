@@ -37,6 +37,10 @@ def no_debug(tree):
     for marker in ['assistance playtest','тестирование помощи','copy startup json','startup diagnostics','first-error accent','локальная qa','лаборатория','laboratory']:
         assert marker not in text,marker
 
+# AOSP userdebug images force WebView inspection on and ignore an app's false
+# setting. Use the Play Store user image to test production behavior instead.
+assert shell('getprop','ro.build.type')=='user'
+assert shell('getprop','ro.debuggable')=='0'
 shell('cmd','connectivity','airplane-mode','enable');shell('svc','wifi','disable');shell('svc','data','disable')
 assert shell('settings','get','global','airplane_mode_on')=='1'
 assert 'Success' in adb('install','-r',str(apk)).decode()

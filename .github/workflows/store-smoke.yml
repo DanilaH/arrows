@@ -1,7 +1,7 @@
 name: Signed store APK smoke
 on:
   workflow_run:
-    workflows: ['Store release APK']
+    workflows: ['Store release APK', 'CI']
     types: [completed]
 permissions:
   contents: read
@@ -22,12 +22,28 @@ jobs:
       - uses: android-actions/setup-android@v3
         with:
           packages: platform-tools
+      - name: Select the production artifact for this exact source
+        id: release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            let run = context.payload.workflow_run;
+            if (run.name !== 'Store release APK') {
+              const result = await github.rest.actions.listWorkflowRuns({
+                owner: context.repo.owner, repo: context.repo.repo,
+                workflow_id: 'store-release.yml', branch: 'main', status: 'success', per_page: 30
+              });
+              run = result.data.workflow_runs.find(candidate => candidate.head_sha === run.head_sha);
+            }
+            if (!run || run.conclusion !== 'success') throw new Error('No signed store build for this exact source');
+            core.setOutput('run', run.id);
+            core.setOutput('source', run.head_sha);
       - uses: actions/download-artifact@v4
         with:
           name: arrows-store-release
           path: .test-output/store-apk
           github-token: ${{ github.token }}
-          run-id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ steps.release.outputs.run }}
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -36,13 +52,15 @@ jobs:
       - uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 35
+          target: google_apis_playstore
           arch: x86_64
+          ram-size: 3072M
           profile: pixel_2
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot
           disable-animations: false
           script: python3 tools/qa/smoke-store-apk.py .test-output/store-apk/app-release.apk
         env:
-          ARROWS_RELEASE_SOURCE: ${{ github.event.workflow_run.head_sha }}
+          ARROWS_RELEASE_SOURCE: ${{ steps.release.outputs.source }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
