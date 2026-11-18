@@ -6,11 +6,13 @@ from pathlib import Path
 
 apk=Path(sys.argv[1]);out=Path('.test-output/store-runtime');out.mkdir(parents=True,exist_ok=True)
 package='com.danilah.arrows'
+class UiNotReady(Exception):pass
 def adb(*args):return subprocess.check_output(['adb',*args],stderr=subprocess.STDOUT)
 def shell(*args):return adb('shell',*args).decode(errors='replace').strip()
 def snapshot(name):
     shell('uiautomator','dump','/sdcard/arrows-window.xml')
     raw=adb('exec-out','cat','/sdcard/arrows-window.xml');(out/(name+'.xml')).write_bytes(raw)
+    if not raw.lstrip().startswith(b'<?xml'):raise UiNotReady('Android has not published its hierarchy yet')
     return ET.fromstring(raw)
 def find(tree,labels):
     return next((n for n in tree.iter('node') if any(n.get(k,'').strip() in labels for k in ['text','content-desc']) and n.get('enabled')=='true'),None)
@@ -18,6 +20,8 @@ def wait_node(labels,name):
     deadline=time.monotonic()+45
     while time.monotonic()<deadline:
         try:tree=snapshot(name)
+        except UiNotReady:
+            time.sleep(1);continue
         except subprocess.CalledProcessError as error:
             # Android can reclaim the standalone dump process during cold boot;
             # retry that exact failure within the same bounded readiness wait.
