@@ -1,0 +1,33 @@
+{
+  "applicationSource": "dcae105c29cf6498f4a37461e9567427598418d9",
+  "qaSource": "4f4d34f255e993a34026f98cb1cd026eaaae7bf2",
+  "workflow": 44288670259,
+  "job": 134747858855,
+  "aggregateJob": "SUCCESS",
+  "artifact": 14420316960,
+  "archiveSha256": "9687917f6a9467a793678ac14bac6e8b9d82998e34ea7a9ba26313f836920fea",
+  "device": "Android35 x86_64 Pixel2 emulator,1080x1920, three-button navigation",
+  "transport": "real WebView + Capacitor + Yandex Mobile Ads8.6.0",
+  "demoUnit": true,
+  "appTest": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "seconds": "13.75"
+  },
+  "phases": [
+    "11-18 10:51:07.771  2291  2291 D ArrowsBanner: request 1080x131",
+    "11-18 10:51:11.016  2291  2291 D ArrowsBanner: loaded 1080x131",
+    "11-18 10:51:11.017  2291  2291 D ArrowsBanner: shown 1080x131"
+  ],
+  "nativeViewShown": true,
+  "nativeSize": {
+    "width": 1080,
+    "height": 131
+  },
+  "sdkAnalyzerSuccess": true,
+  "nativeFrameSha256": "e7a108670d01d2ab1c5a2bccf2d550661e3be7794d14f788cde01ae336fff761",
+  "frameReviewed": "Actual demo creative visible below navigation, above Android buttons; no critical control overlap in this state",
+  "physicalPhone": "NOT RUN",
+  "liveFill": "NOT RUN"
+}
